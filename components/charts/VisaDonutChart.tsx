@@ -1,0 +1,51 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import {
+  Cell,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip
+} from "recharts";
+import { visaDistributionData } from "@/lib/data/mockData";
+
+const colors = ["#0f766e", "#3157a4", "#b45309", "#be123c", "#64748b", "#7c3aed"];
+
+export function VisaDonutChart({
+  data = visaDistributionData
+}: {
+  data?: typeof visaDistributionData;
+}) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div className="flex h-full items-center justify-center text-sm text-muted">차트 준비 중</div>;
+  }
+
+  return (
+    <ResponsiveContainer width="100%" height="100%">
+      <PieChart>
+        <Pie
+          data={data}
+          dataKey="value"
+          nameKey="name"
+          cx="50%"
+          cy="50%"
+          innerRadius={68}
+          outerRadius={108}
+          paddingAngle={2}
+        >
+          {data.map((entry, index) => (
+            <Cell fill={colors[index % colors.length]} key={entry.name} />
+          ))}
+        </Pie>
+        <Tooltip formatter={(value) => [`${Number(value ?? 0)}%`, "비중"]} />
+      </PieChart>
+    </ResponsiveContainer>
+  );
+}
