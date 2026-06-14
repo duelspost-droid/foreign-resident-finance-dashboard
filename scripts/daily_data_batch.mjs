@@ -4,6 +4,7 @@ import { join } from "node:path";
 
 const root = process.cwd();
 const logDir = join(root, "data", "logs");
+const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 
 async function ensureLogDir() {
   await mkdir(logDir, { recursive: true });
@@ -14,7 +15,7 @@ function run(command, args) {
     const startedAt = new Date().toISOString();
     const child = spawn(command, args, {
       cwd: root,
-      shell: command === "cmd",
+      shell: process.platform === "win32" && command === npmCommand,
       env: process.env
     });
     let stdout = "";
@@ -47,8 +48,8 @@ async function main() {
   const steps = [
     ["node", ["scripts/fetch_public_data.mjs"]],
     ["node", ["scripts/build_real_data.mjs"]],
-    ["cmd", ["/c", "npm run typecheck"]],
-    ["cmd", ["/c", "npm run build"]]
+    [npmCommand, ["run", "typecheck"]],
+    [npmCommand, ["run", "build"]]
   ];
 
   const results = [];
