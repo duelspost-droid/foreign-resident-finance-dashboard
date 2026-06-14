@@ -1,4 +1,107 @@
 {
   "type": "FeatureCollection",
-  "features": []
+  "features": [
+    {
+      "type": "Feature",
+      "id": "11",
+      "properties": { "code": "11", "name": "서울특별시", "name_en": "Seoul" },
+      "geometry": { "type": "Point", "coordinates": [126.977, 37.566] }
+    },
+    {
+      "type": "Feature",
+      "id": "26",
+      "properties": { "code": "26", "name": "부산광역시", "name_en": "Busan" },
+      "geometry": { "type": "Point", "coordinates": [129.075, 35.180] }
+    },
+    {
+      "type": "Feature",
+      "id": "27",
+      "properties": { "code": "27", "name": "대구광역시", "name_en": "Daegu" },
+      "geometry": { "type": "Point", "coordinates": [128.601, 35.872] }
+    },
+    {
+      "type": "Feature",
+      "id": "28",
+      "properties": { "code": "28", "name": "인천광역시", "name_en": "Incheon" },
+      "geometry": { "type": "Point", "coordinates": [126.705, 37.456] }
+    },
+    {
+      "type": "Feature",
+      "id": "29",
+      "properties": { "code": "29", "name": "광주광역시", "name_en": "Gwangju" },
+      "geometry": { "type": "Point", "coordinates": [126.851, 35.160] }
+    },
+    {
+      "type": "Feature",
+      "id": "30",
+      "properties": { "code": "30", "name": "대전광역시", "name_en": "Daejeon" },
+      "geometry": { "type": "Point", "coordinates": [127.385, 36.351] }
+    },
+    {
+      "type": "Feature",
+      "id": "31",
+      "properties": { "code": "31", "name": "울산광역시", "name_en": "Ulsan" },
+      "geometry": { "type": "Point", "coordinates": [129.311, 35.538] }
+    },
+    {
+      "type": "Feature",
+      "id": "36",
+      "properties": { "code": "36", "name": "세종특별자치시", "name_en": "Sejong" },
+      "geometry": { "type": "Point", "coordinates": [127.289, 36.480] }
+    },
+    {
+      "type": "Feature",
+      "id": "41",
+      "properties": { "code": "41", "name": "경기도", "name_en": "Gyeonggi" },
+      "geometry": { "type": "Point", "coordinates": [127.190, 37.491] }
+    },
+    {
+      "type": "Feature",
+      "id": "42",
+      "properties": { "code": "42", "name": "강원특별자치도", "name_en": "Gangwon" },
+      "geometry": { "type": "Point", "coordinates": [128.155, 37.882] }
+    },
+    {
+      "type": "Feature",
+      "id": "43",
+      "properties": { "code": "43", "name": "충청북도", "name_en": "Chungbuk" },
+      "geometry": { "type": "Point", "coordinates": [127.729, 36.629] }
+    },
+    {
+      "type": "Feature",
+      "id": "44",
+      "properties": { "code": "44", "name": "충청남도", "name_en": "Chungnam" },
+      "geometry": { "type": "Point", "coordinates": [126.673, 36.547] }
+    },
+    {
+      "type": "Feature",
+      "id": "45",
+      "properties": { "code": "45", "name": "전북특별자치도", "name_en": "Jeonbuk" },
+      "geometry": { "type": "Point", "coordinates": [127.108, 35.820] }
+    },
+    {
+      "type": "Feature",
+      "id": "46",
+      "properties": { "code": "46", "name": "전라남도", "name_en": "Jeonnam" },
+      "geometry": { "type": "Point", "coordinates": [126.991, 34.816] }
+    },
+    {
+      "type": "Feature",
+      "id": "47",
+      "properties": { "code": "47", "name": "경상북도", "name_en": "Gyeongbuk" },
+      "geometry": { "type": "Point", "coordinates": [128.889, 36.575] }
+    },
+    {
+      "type": "Feature",
+      "id": "48",
+      "properties": { "code": "48", "name": "경상남도", "name_en": "Gyeongnam" },
+      "geometry": { "type": "Point", "coordinates": [128.692, 35.238] }
+    },
+    {
+      "type": "Feature",
+      "id": "50",
+      "properties": { "code": "50", "name": "제주특별자치도", "name_en": "Jeju" },
+      "geometry": { "type": "Point", "coordinates": [126.543, 33.500] }
+    }
+  ]
 }
