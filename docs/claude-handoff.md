@@ -25,9 +25,17 @@
 
 ## 추천 다음 작업
 
-1. 의존성 설치와 빌드 검증
-2. package 버전 호환성 조정
-3. 실제 지도 데이터 연결
-4. Supabase 조회 함수 추가
-5. 공공 데이터 수집 스크립트 구현
-6. GitHub 원격 저장소에 push
+1. git 상태 확인 후 `tsconfig.tsbuildinfo` 추적 제거와 `.gitignore` 변경을 커밋 amend 또는 새 커밋으로 정리
+2. 실제 지도 데이터 연결
+3. Supabase 조회 함수 추가
+4. 공공 데이터 수집 스크립트 구현
+5. GitHub 원격 저장소에 push
+
+## 검증 완료
+
+- `npm install`: 성공
+- `npm run typecheck`: 성공
+- `npm run build`: 성공
+- `npm run dev -- -p 3000`: 실행 성공
+- 주요 라우트: HTTP 200 확인
+- 인앱 브라우저: Windows 권한 오류로 연결 실패

@@ -36,3 +36,26 @@ npm run typecheck
 npm run build
 npm run dev
 ```
+
+### 검증 결과
+
+- `npm install`: 성공
+- `npm audit --omit=dev`: PostCSS 관련 moderate 경고 확인
+- 조치: `postcss`를 `^8.5.10`으로 올리고 `overrides` 추가, `recharts`를 `^3.0.0`으로 갱신
+- 재설치 후 취약점: 0개
+- `npm run typecheck`: 성공
+- `npm run build`: 성공
+- `npm run dev -- -p 3000`: 백그라운드 실행 성공
+- `http://localhost:3000`: 200 OK
+- 주요 라우트 8개: 모두 200 OK
+
+### 브라우저 검증 제한
+
+인앱 브라우저 연결은 Windows 권한 오류 `CreateProcessAsUserW failed: 5`로 두 차례 실패했다. 대신 HTTP 응답과 Next 빌드 결과로 라우트 정상 동작을 확인했다.
+
+### Git 상태 메모
+
+- 로컬 git 저장소 생성 완료
+- 첫 커밋 생성: `62ed518 Initial foreign resident finance dashboard MVP`
+- 이후 생성 캐시 `tsconfig.tsbuildinfo`를 추적 대상에서 제거하려고 `.gitignore`에 `*.tsbuildinfo`를 추가하고 `git rm --cached tsconfig.tsbuildinfo`까지 수행함
+- 추가 git add/amend 단계는 승인 시스템 크레딧 부족으로 중단됨

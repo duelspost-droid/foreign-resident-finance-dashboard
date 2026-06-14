@@ -37,22 +37,19 @@
 
 ## 이어서 할 일
 
-1. `npm install` 실행 후 `npm run typecheck`, `npm run build` 검증
-2. Recharts/Next 버전 호환 문제가 있으면 package 버전 조정
-3. 실제 지도는 `public/data/korea_regions.geojson`에 행정구역 GeoJSON을 넣고 `components/charts/RegionMap.tsx`를 교체
-4. Supabase 연결 시 `lib/data/supabaseClient.ts` 기반 조회 함수 추가
-5. 공공 API 또는 XLSX 수집은 `scripts/`의 TODO 스텁에서 구현
-6. GitHub 원격 저장소가 정해지면 README의 GitHub 명령 순서대로 push
+1. git 상태 확인 후 `tsconfig.tsbuildinfo` 추적 제거와 `.gitignore` 변경을 커밋 amend 또는 새 커밋으로 정리
+2. 실제 지도는 `public/data/korea_regions.geojson`에 행정구역 GeoJSON을 넣고 `components/charts/RegionMap.tsx`를 교체
+3. Supabase 연결 시 `lib/data/supabaseClient.ts` 기반 조회 함수 추가
+4. 공공 API 또는 XLSX 수집은 `scripts/`의 TODO 스텁에서 구현
+5. GitHub 원격 저장소가 정해지면 README의 GitHub 명령 순서대로 push
 
 ## 검증 기준
 
-- `npm run dev` 실행 가능
-- TypeScript 오류 없음
-- 주요 페이지 라우팅 정상
-- 샘플 데이터 기반 차트 표시
-- 필터 UI 존재
-- 랭킹 테이블 존재
-- 금융 기회 점수 계산 표시
-- 추천 액션 문구 표시
-- 데이터 소스 페이지 존재
-- 컴플라이언스 페이지 존재
+- `npm install`: 성공
+- `npm audit --omit=dev`: 취약점 0개로 정리
+- `npm run typecheck`: 성공
+- `npm run build`: 성공
+- `npm run dev -- -p 3000`: 실행 성공
+- 주요 페이지 라우팅: HTTP 200 확인
+- 인앱 브라우저 검증: Windows 권한 오류로 실패
+- 샘플 데이터 기반 차트, 필터 UI, 랭킹 테이블, 점수 계산, 추천 액션, 데이터 소스, 컴플라이언스 페이지 구현 완료
