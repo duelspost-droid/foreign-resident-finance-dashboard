@@ -18,8 +18,13 @@ import {
   generateRegionInsight,
   generateUniversityCampaign
 } from "./insights";
+import {
+  realDataSummary,
+  realForeignResidentStatus,
+  realRegionData
+} from "./generated/realData";
 
-export const sampleRegionData: ForeignResidentRegionMonth[] = [
+const fallbackRegionData: ForeignResidentRegionMonth[] = [
   {
     id: "r1",
     baseMonth: "2025-12-01",
@@ -134,7 +139,25 @@ export const sampleRegionData: ForeignResidentRegionMonth[] = [
   }
 ];
 
-export const sampleResidentStatus: ForeignResidentStatus[] = [
+export const sampleRegionData: ForeignResidentRegionMonth[] =
+  realDataSummary.regionRowCount > 0
+    ? realRegionData.map((row) => ({
+        id: row.id,
+        baseMonth: row.baseMonth,
+        sido: row.sido,
+        sigungu: row.sigungu,
+        nationality: row.nationality,
+        gender: row.gender,
+        residentCount: row.residentCount,
+        longTermCount: row.longTermCount,
+        shortTermCount: row.shortTermCount,
+        yoyChangeRate: row.yoyChangeRate,
+        momChangeRate: row.momChangeRate,
+        sourceName: row.sourceName
+      }))
+    : fallbackRegionData;
+
+const fallbackResidentStatus: ForeignResidentStatus[] = [
   {
     id: "s1",
     baseYear: 2025,
@@ -216,6 +239,22 @@ export const sampleResidentStatus: ForeignResidentStatus[] = [
     financialNeedTags: ["환전", "선불카드", "간편결제"]
   }
 ];
+
+export const sampleResidentStatus: ForeignResidentStatus[] =
+  realDataSummary.statusRowCount > 0
+    ? realForeignResidentStatus.map((row) => ({
+        id: row.id,
+        baseYear: row.baseYear,
+        nationality: row.nationality,
+        visaCode: row.visaCode,
+        visaName: row.visaName,
+        segmentType: row.segmentType as ForeignResidentSegment,
+        residentCount: row.residentCount,
+        financialNeedTags: [...row.financialNeedTags],
+        sourceName: row.sourceName,
+        sourceUrl: row.sourceUrl
+      }))
+    : fallbackResidentStatus;
 
 export const sampleUniversityData: ForeignStudentUniversity[] = [
   {
