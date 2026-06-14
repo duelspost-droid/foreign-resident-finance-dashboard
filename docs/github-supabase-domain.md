@@ -96,3 +96,33 @@ npm run supabase:load
 ## Notes
 
 The service role key must only be stored in GitHub Actions secrets or a local `.env` file. Do not commit it.
+
+## Current Status - 2026-06-14
+
+- GitHub repository is public: `https://github.com/duelspost-droid/foreign-resident-finance-dashboard`
+- GitHub Pages source is configured as GitHub Actions.
+- Custom domain is registered in GitHub Pages: `data.jbax.co.kr`
+- Latest successful Pages workflow run: `27502507989`
+- GitHub Pages currently reports: `http://data.jbax.co.kr/`
+- HTTPS enforcement is not enabled yet because DNS and certificate verification are not complete.
+- DNS lookup for `data.jbax.co.kr` currently returns no record.
+- Required DNS record remains:
+
+```text
+Type: CNAME
+Name: data
+Value: duelspost-droid.github.io
+TTL: Auto
+Proxy: DNS only, if using Cloudflare
+```
+
+- Supabase GitHub Actions secrets are not configured yet.
+- Add these repository secrets when the Supabase project is ready:
+
+```text
+SUPABASE_URL
+SUPABASE_SERVICE_ROLE_KEY
+```
+
+- Public data fetch now has retry and cached raw CSV fallback for GitHub Actions.
+- Tracked raw CSV cache files live under `data/raw/*.csv`.
