@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readdir, writeFile } from "node:fs/promises";
 import { createWriteStream } from "node:fs";
 import { dirname, join } from "node:path";
 import { Readable } from "node:stream";
@@ -13,17 +13,44 @@ async function ensureDir(path) {
   await mkdir(path, { recursive: true });
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 function todayStamp() {
   return new Date().toISOString().slice(0, 10);
 }
 
-async function fetchText(url) {
-  const res = await fetch(url, {
-    headers: {
-      "User-Agent":
-        "foreign-resident-finance-dashboard/0.1 data collector"
+async function fetchWithRetry(url, options = {}, attempts = 3) {
+  let lastError;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 30000);
+    try {
+      const res = await fetch(url, {
+        ...options,
+        signal: controller.signal,
+        headers: {
+          "User-Agent":
+            "foreign-resident-finance-dashboard/0.1 data collector",
+          ...(options.headers ?? {})
+        }
+      });
+      clearTimeout(timeout);
+      return res;
+    } catch (error) {
+      clearTimeout(timeout);
+      lastError = error;
+      if (attempt < attempts) {
+        await sleep(1500 * attempt);
+      }
     }
-  });
+  }
+  throw lastError;
+}
+
+async function fetchText(url) {
+  const res = await fetchWithRetry(url);
 
   if (!res.ok) {
     throw new Error(`GET ${url} failed: ${res.status} ${res.statusText}`);
@@ -60,7 +87,7 @@ async function getFileMeta(source) {
   metaUrl.searchParams.set("publicDataDetailPk", detailPk);
   metaUrl.searchParams.set("dataSetFileDetailInfo", "1");
 
-  const res = await fetch(metaUrl);
+  const res = await fetchWithRetry(metaUrl);
   if (!res.ok) {
     return {
       source,
@@ -122,11 +149,9 @@ async function downloadFile(meta) {
 
   for (const url of urls) {
     try {
-      const res = await fetch(url, {
+      const res = await fetchWithRetry(url, {
         redirect: "follow",
         headers: {
-          "User-Agent":
-            "foreign-resident-finance-dashboard/0.1 data collector",
           Referer: meta.detailUrl
         }
       });
@@ -161,6 +186,14 @@ async function downloadFile(meta) {
     attempts,
     reason: "All candidate download URLs failed"
   };
+}
+
+async function findCachedRaw(source) {
+  const files = await readdir(rawDir).catch(() => []);
+  return files
+    .filter((file) => file.startsWith(source.outputBaseName))
+    .sort()
+    .at(-1) ?? null;
 }
 
 async function discoverDataGoKr() {
@@ -199,7 +232,18 @@ async function main() {
   };
 
   for (const source of publicDataSources) {
-    const meta = await getFileMeta(source);
+    let meta;
+    try {
+      meta = await getFileMeta(source);
+    } catch (error) {
+      catalog.sources.push({
+        source,
+        status: "metadata_failed_using_cached_raw",
+        cachedRawFile: await findCachedRaw(source),
+        reason: error.message
+      });
+      continue;
+    }
     const metaPath = join(catalogDir, `${source.id}.metadata.json`);
     await ensureDir(dirname(metaPath));
     await writeFile(metaPath, JSON.stringify(meta, null, 2), "utf8");

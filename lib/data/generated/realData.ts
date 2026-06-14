@@ -9407,7 +9407,7 @@ export const realRegionData = [
 ] as const;
 
 export const realDataSummary = {
-  "generatedAt": "2026-06-14T14:42:52.197Z",
+  "generatedAt": "2026-06-14T14:45:59.501Z",
   "statusRowCount": 400,
   "regionRowCount": 200,
   "sourceFiles": {
