@@ -11,12 +11,14 @@
     "next:dev": "next dev",
     "build": "vinext build",
     "next:build": "next build",
+    "pages:build": "next build",
     "start": "vinext start",
     "typecheck": "tsc --noEmit",
     "data:fetch": "node scripts/fetch_public_data.mjs",
     "data:build": "node scripts/build_real_data.mjs",
     "data:all": "node scripts/daily_data_batch.mjs",
-    "batch:daily": "node scripts/daily_data_batch.mjs"
+    "batch:daily": "node scripts/daily_data_batch.mjs",
+    "supabase:load": "node scripts/load_supabase.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",
