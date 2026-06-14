@@ -39,3 +39,12 @@
 - `npm run dev -- -p 3000`: 실행 성공
 - 주요 라우트: HTTP 200 확인
 - 인앱 브라우저: Windows 권한 오류로 연결 실패
+
+## 배포 완료
+
+- Sites URL: `https://foreign-resident-finance.workspace-276930.chatgpt-team.site`
+- project_id: `appgprj_6a2e1124e3a8819196ead14256439e4f`
+- version: 1
+- deployment_id: `appgdep_6a2e11b6eac481918556b47c88d8b803`
+- source commit: `b09ad63745962c38e486aaeb12c14bbcb71efffb`
+- access_mode: `custom`

@@ -27,6 +27,12 @@
 - 데이터 출처: `lib/data/dataSources.ts`
 - Supabase 스키마: `supabase/schema.sql`
 - Supabase 샘플 seed: `supabase/seed.sql`
+- Sites 프로덕션 배포 완료
+  - URL: `https://foreign-resident-finance.workspace-276930.chatgpt-team.site`
+  - project_id: `appgprj_6a2e1124e3a8819196ead14256439e4f`
+  - version: 1
+  - deployed commit: `b09ad63745962c38e486aaeb12c14bbcb71efffb`
+  - access_mode: `custom`
 
 ## 중요한 제약
 
@@ -42,6 +48,7 @@
 3. Supabase 연결 시 `lib/data/supabaseClient.ts` 기반 조회 함수 추가
 4. 공공 API 또는 XLSX 수집은 `scripts/`의 TODO 스텁에서 구현
 5. GitHub 원격 저장소가 정해지면 README의 GitHub 명령 순서대로 push
+6. 다른 사용자가 접속해야 하면 Sites 접근 설정을 `workspace_all`로 변경할지 사용자에게 확인
 
 ## 검증 기준
 

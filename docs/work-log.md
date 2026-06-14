@@ -59,3 +59,33 @@ npm run dev
 - 첫 커밋 생성: `62ed518 Initial foreign resident finance dashboard MVP`
 - 이후 생성 캐시 `tsconfig.tsbuildinfo`를 추적 대상에서 제거하려고 `.gitignore`에 `*.tsbuildinfo`를 추가하고 `git rm --cached tsconfig.tsbuildinfo`까지 수행함
 - 추가 git add/amend 단계는 승인 시스템 크레딧 부족으로 중단됨
+
+## 2026-06-14 배포 작업
+
+### 요청
+
+사용자가 "홈페이지에 올려줘"라고 요청해 Sites 프로덕션 배포를 진행.
+
+### 작업 내용
+
+- Sites 호스팅 지침 확인
+- `.openai/hosting.json` 생성
+- Sites 프로젝트 생성
+  - project_id: `appgprj_6a2e1124e3a8819196ead14256439e4f`
+  - slug: `foreign-resident-finance`
+- 기존 Next 앱을 Sites 호환 vinext 빌드로 전환
+- `vite.config.ts`, `build/sites-vite-plugin.ts`, `worker/index.ts` 추가
+- `npm install`, `npm run typecheck`, `npm run build` 성공
+- 소스 저장소에 커밋 `b09ad63745962c38e486aaeb12c14bbcb71efffb` 푸시
+- Sites 버전 1 저장 및 프로덕션 배포 성공
+
+### 배포 결과
+
+- URL: `https://foreign-resident-finance.workspace-276930.chatgpt-team.site`
+- deployment_id: `appgdep_6a2e11b6eac481918556b47c88d8b803`
+- version_id: `appgprj_6a2e1124e3a8819196ead14256439e4f~appgver_6e03f6d098988191be5f346c4428b454`
+- access_mode: `custom`
+
+### 확인 사항
+
+직접 HTTP 요청은 OpenAI/Cloudflare 로그인 챌린지에 걸렸다. Sites 상태는 `succeeded`이며 현재 접근 정책상 소유자 계정만 허용되어 있다. 다른 사용자에게 공유하려면 접근 모드를 `workspace_all`로 변경할지 확인해야 한다.

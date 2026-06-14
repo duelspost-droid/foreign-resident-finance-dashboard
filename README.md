@@ -38,6 +38,14 @@ npm run dev
 
 브라우저에서 `http://localhost:3000`을 엽니다.
 
+## 배포 URL
+
+Sites 프로덕션 URL:
+
+https://foreign-resident-finance.workspace-276930.chatgpt-team.site
+
+현재 접근 설정은 Sites `custom` 모드이며, 사이트 소유자 계정에 허용되어 있습니다.
+
 ## 검증 명령
 
 ```bash
