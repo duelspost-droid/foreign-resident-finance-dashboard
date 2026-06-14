@@ -89,3 +89,49 @@ npm run dev
 ### 확인 사항
 
 직접 HTTP 요청은 OpenAI/Cloudflare 로그인 챌린지에 걸렸다. Sites 상태는 `succeeded`이며 현재 접근 정책상 소유자 계정만 허용되어 있다. 다른 사용자에게 공유하려면 접근 모드를 `workspace_all`로 변경할지 확인해야 한다.
+
+## 2026-06-14 실제 데이터/매일 배치 작업
+
+### 요청
+
+사용자가 실제 데이터를 가져오고, 이 자료들을 매일 배치로 올릴 수 있게 해달라고 요청.
+
+### 구현
+
+- `scripts/data_sources.mjs`: 공공데이터포털 수집 대상과 탐색 쿼리 정의
+- `scripts/fetch_public_data.mjs`: 공공데이터포털 파일형 데이터 메타 추출 및 CSV 다운로드
+- `scripts/build_real_data.mjs`: EUC-KR/UTF-8 자동 판별, CSV 파싱, 앱 import용 `realData.ts` 생성
+- `scripts/daily_data_batch.mjs`: 다운로드, 정제, 타입체크, vinext 빌드 일괄 실행
+- `scripts/register_windows_daily_task.ps1`: Windows 작업 스케줄러 등록
+- `docs/daily-batch.md`: 운영 문서
+- `lib/data/mockData.ts`: 생성된 실제 데이터가 있으면 실제 데이터를 우선 사용하고, 없으면 기존 샘플 데이터 fallback
+
+### 수집 성공 데이터
+
+- 법무부 체류외국인 국적 및 체류자격별 현황 2024
+- 법무부 외국인체류데이터 2024
+- 법무부 연도별 외국인 유학생 체류 현황 2024
+
+### 검증 결과
+
+- `npm run data:all`: 성공
+- 실제 체류자격 데이터 정제 행 수: 400
+- 전국/국적 요약 행 수: 200
+- `npm run typecheck`: 성공
+- `npm run build`: 성공
+- Windows 작업 스케줄러 등록 성공
+  - Task name: `ForeignResidentFinanceDailyBatch`
+  - Schedule: daily 03:30
+
+### 배포
+
+- commit: `e209f057ce63d365f1457b22816cf9c473e1b8a2`
+- Sites version: 2
+- deployment_id: `appgdep_6a2e6ba4801481919d377119fdf57e78`
+- URL: `https://foreign-resident-finance.workspace-276930.chatgpt-team.site`
+
+### 남은 사항
+
+- 매일 배치는 로컬 머신에서 데이터 다운로드와 빌드 검증까지 수행한다.
+- Sites 재배포까지 완전 자동화하려면 장기 배포 credential 또는 GitHub Actions/외부 CI가 필요하다.
+- 행안부/교육부/대학알리미 후보 데이터셋은 매일 탐색 카탈로그에 남기며, 다운로드 가능한 dataset id/detail pk가 확정되면 `publicDataSources`에 추가한다.

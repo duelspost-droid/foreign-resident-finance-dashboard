@@ -30,9 +30,13 @@
 - Sites 프로덕션 배포 완료
   - URL: `https://foreign-resident-finance.workspace-276930.chatgpt-team.site`
   - project_id: `appgprj_6a2e1124e3a8819196ead14256439e4f`
-  - version: 1
-  - deployed commit: `b09ad63745962c38e486aaeb12c14bbcb71efffb`
+  - latest deployed version: 2
+  - deployed commit: `e209f057ce63d365f1457b22816cf9c473e1b8a2`
   - access_mode: `custom`
+- Daily public data batch registered in Windows Task Scheduler
+  - Task name: `ForeignResidentFinanceDailyBatch`
+  - Schedule: daily 03:30
+  - Command: `npm run batch:daily`
 
 ## 중요한 제약
 
@@ -49,6 +53,7 @@
 4. 공공 API 또는 XLSX 수집은 `scripts/`의 TODO 스텁에서 구현
 5. GitHub 원격 저장소가 정해지면 README의 GitHub 명령 순서대로 push
 6. 다른 사용자가 접속해야 하면 Sites 접근 설정을 `workspace_all`로 변경할지 사용자에게 확인
+7. Sites 자동 재배포까지 완전 자동화하려면 장기 실행 가능한 배포 credential 또는 GitHub Actions/외부 CI가 필요
 
 ## 검증 기준
 
@@ -60,3 +65,4 @@
 - 주요 페이지 라우팅: HTTP 200 확인
 - 인앱 브라우저 검증: Windows 권한 오류로 실패
 - 샘플 데이터 기반 차트, 필터 UI, 랭킹 테이블, 점수 계산, 추천 액션, 데이터 소스, 컴플라이언스 페이지 구현 완료
+- `npm run data:all`: 성공, 법무부 실제 CSV 3종 다운로드, 체류자격 데이터 400행 정제

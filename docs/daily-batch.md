@@ -33,6 +33,8 @@ npm run data:all
 - 법무부 외국인체류데이터
 - 법무부 연도별 외국인 유학생 체류 현황
 
+2026-06-14 검증 기준으로 위 3종 CSV 다운로드는 성공했다. 체류자격 데이터는 400행으로 정제되며, 앱은 생성된 `lib/data/generated/realData.ts`를 우선 사용한다.
+
 행정안전부, 교육부, 대학알리미는 `scripts/data_sources.mjs`의 `discoveryQueries`로 후보 데이터셋을 매일 탐색한다. 실제 다운로드 가능한 dataset id와 detail pk가 확정되면 `publicDataSources`에 추가한다.
 
 ## API 키
