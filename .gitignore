@@ -12,7 +12,9 @@ yarn-error.log*
 coverage
 *.tsbuildinfo
 .wrangler
-data/raw
+data/raw/*
+!data/raw/
+!data/raw/*.csv
 data/processed
 data/catalog
 data/logs
