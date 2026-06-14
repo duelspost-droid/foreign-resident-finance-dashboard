@@ -9209,7 +9209,7 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
 ];
 
 export const realDataSummary = {
-  "generatedAt": "2026-06-14T14:57:15.768Z",
+  "generatedAt": "2026-06-14T15:05:18.895Z",
   "statusRowCount": 400,
   "regionRowCount": 200,
   "sourceFiles": {
