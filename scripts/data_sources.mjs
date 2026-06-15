@@ -85,7 +85,10 @@ export const publicDataSources = [
       jsonVD: "Y",
       prdSe: "Y",
       startPrdDe: "2020",
-      endPrdDe: "2024"
+      endPrdDe: "2024",
+      itmId: "ALL",
+      objL1: "ALL",
+      objL2: "ALL"
     },
     targetTable: "foreign_resident_region_month",
     outputBaseName: "kosis_registered_foreigner_by_region",
@@ -110,9 +113,11 @@ export const publicDataSources = [
     title: "지자체 외국인주민 현황(시군구)",
     category: "외국인 직접 통계",
     apiKeyEnv: "DATA_GO_KR_SERVICE_KEY",
-    // 활용신청 후 data.go.kr 오퍼레이션 목록에서 정확한 경로 확인 필요.
-    // 1741000 = 행정안전부. 실제 응답이 오면 items 경로·필드명을 responseMapping에 반영.
-    endpoint: "https://apis.data.go.kr/1741000/StatisticsForeignResident/getStatisticsForeignResidentInfo",
+    // data.go.kr 오퍼레이션 목록에서 정확한 경로 확인 필요. 아래는 후보 2개.
+    // 실제 응답 확인 후 verified=true 로 변경한다.
+    // 후보1: /1741000/StatisticsForeignResident/getForeignResidentInfo
+    // 후보2: /1741000/YearFrgnInfo/getYearFrgnInfoList
+    endpoint: "https://apis.data.go.kr/1741000/StatisticsForeignResident/getForeignResidentInfo",
     params: { type: "json", numOfRows: "1000", pageNo: "1", searchYear: "2024" },
     pagination: { pageParam: "pageNo", rowsParam: "numOfRows", rows: 1000, maxPages: 50 },
     targetTable: "foreign_resident_region_month",
