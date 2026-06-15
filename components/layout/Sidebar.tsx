@@ -9,6 +9,7 @@ import {
   FileText,
   Flag,
   GraduationCap,
+  Landmark,
   LayoutDashboard,
   Map,
   PieChart
@@ -17,6 +18,7 @@ import clsx from "clsx";
 
 const navigation = [
   { href: "/", label: "개요", icon: LayoutDashboard },
+  { href: "/financial-insights", label: "금융 인사이트", icon: Landmark },
   { href: "/regions", label: "지역 분석", icon: Map },
   { href: "/nationalities", label: "국적 분석", icon: Flag },
   { href: "/universities", label: "대학/유학생", icon: GraduationCap },
