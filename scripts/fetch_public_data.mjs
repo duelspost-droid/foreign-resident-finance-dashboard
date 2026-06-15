@@ -273,7 +273,7 @@ async function collectKosisSource(source) {
   for (const [k, v] of Object.entries(source.params ?? {})) url.searchParams.set(k, v);
   // statisticsParameterData.do 용 objL* 파라미터는 source.params에 있을 때만 전송된다.
 
-  const safeUrl = url.toString().replace(apiKey, maskKey(apiKey));
+  const safeUrl = url.toString().replace(encodeURIComponent(apiKey), maskKey(apiKey)).replace(apiKey, maskKey(apiKey));
   const attempts = [];
 
   try {

@@ -66,6 +66,84 @@ export const publicDataSources = [
     notes: "유학(D-2)·연수(D-4) 체류 추세."
   },
 
+  // ── 고용노동부 (파일 다운로드, 인증키 불필요) ──────────────────────────────────────
+  {
+    id: "mol_foreign_worker_employment_2024",
+    type: "file",
+    datasetId: "15137198",
+    detailPk: null,
+    provider: "고용노동부",
+    title: "외국인 고용 현황",
+    category: "외국인 직접 통계",
+    baseDate: "2024-12-31",
+    targetTable: "foreign_resident_status",
+    outputBaseName: "mol_foreign_worker_employment_2024",
+    sourceUrl: "https://www.data.go.kr/data/15137198/fileData.do",
+    updateCycle: "연",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "고용허가제(E-9·H-2) 외국인 고용 집계. 급여계좌·이체 수요 추정 보조."
+  },
+  {
+    id: "mol_foreign_worker_employment2_2024",
+    type: "file",
+    datasetId: "15137115",
+    detailPk: null,
+    provider: "고용노동부",
+    title: "외국인 취업자 현황",
+    category: "외국인 직접 통계",
+    baseDate: "2024-12-31",
+    targetTable: "foreign_resident_status",
+    outputBaseName: "mol_foreign_worker_employment2_2024",
+    sourceUrl: "https://www.data.go.kr/data/15137115/fileData.do",
+    updateCycle: "연",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "외국인 취업자 세부 통계. 발굴 자동화로 식별됨."
+  },
+
+  // ── 여성가족부 / 다문화가족 (파일 다운로드, 인증키 불필요) ────────────────────────
+  {
+    id: "mogef_multicultural_family_2024",
+    type: "file",
+    datasetId: "15054868",
+    detailPk: null,
+    provider: "여성가족부",
+    title: "다문화가족 현황",
+    category: "외국인 직접 통계",
+    baseDate: "2024-12-31",
+    targetTable: "foreign_resident_status",
+    outputBaseName: "mogef_multicultural_family_2024",
+    sourceUrl: "https://www.data.go.kr/data/15054868/fileData.do",
+    updateCycle: "연",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "결혼이민자·다문화가구 집계. 금융 상품 수요 보조 지표."
+  },
+
+  // ── 법무부 추가 (파일 다운로드, 인증키 불필요) ────────────────────────────────────
+  {
+    id: "moj_immigration_monthly_2024",
+    type: "file",
+    datasetId: "3069975",
+    detailPk: null,
+    provider: "법무부",
+    title: "출입국 외국인 통계월보",
+    category: "외국인 직접 통계",
+    baseDate: "2024-12-31",
+    targetTable: "foreign_resident_region_month",
+    outputBaseName: "moj_immigration_monthly_2024",
+    sourceUrl: "https://www.data.go.kr/data/3069975/fileData.do",
+    updateCycle: "월",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "법무부 출입국 월별 통계. 발굴 자동화로 식별됨."
+  },
+
   // ── KOSIS 국가통계포털 오픈API (KOSIS_API_KEY 필요) ────────────────────────────
   // KOSIS statisticsData.do (simpler than statisticsParameterData.do — no objL* needed)
   //   ?method=getList&apiKey=...&orgId=...&tblId=...&prdSe=Y&startPrdDe=2020&endPrdDe=2024&format=json&jsonVD=Y
