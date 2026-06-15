@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-15T23:00:07.345Z",
+  "generatedAt": "2026-06-15T23:30:33.682Z",
   "candidates": [
     {
       "dataset_id": "15047604",
@@ -208,6 +208,28 @@
       "url": "https://www.data.go.kr/data/15149906/openapi.do",
       "priority": "mid",
       "rationale": "체류자격·국적·지역 추가 통계 발굴",
+      "status": "pending"
+    },
+    {
+      "dataset_id": "15137198",
+      "kind": "fileData",
+      "provider": "고용노동부",
+      "title": null,
+      "keyword": "외국인 고용 취업",
+      "url": "https://www.data.go.kr/data/15137198/fileData.do",
+      "priority": "mid",
+      "rationale": "E-9/E-7 등 취업 외국인 규모(급여계좌 수요)",
+      "status": "pending"
+    },
+    {
+      "dataset_id": "15137115",
+      "kind": "fileData",
+      "provider": "고용노동부",
+      "title": null,
+      "keyword": "외국인 고용 취업",
+      "url": "https://www.data.go.kr/data/15137115/fileData.do",
+      "priority": "mid",
+      "rationale": "E-9/E-7 등 취업 외국인 규모(급여계좌 수요)",
       "status": "pending"
     },
     {
