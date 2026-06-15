@@ -238,14 +238,17 @@ async function collectOpenApiSource(source) {
 }
 
 function extractItems(body) {
-  // data.go.kr 표준 응답: response.body.items.item / body.items / data
+  // KOSIS statisticsData.do: 배열 직접 반환
+  // data.go.kr 표준: response.body.items.item / body.items / data
   const candidates = [
+    Array.isArray(body) ? body : null,
     body?.response?.body?.items?.item,
     body?.response?.body?.items,
     body?.body?.items?.item,
+    body?.items?.item,
     body?.items,
     body?.data,
-    Array.isArray(body) ? body : null
+    body?.result
   ];
   for (const c of candidates) {
     if (Array.isArray(c)) return c;
@@ -263,10 +266,12 @@ async function collectKosisSource(source) {
   }
 
   const url = new URL(source.endpoint);
+  // statisticsData.do 공통 파라미터
   url.searchParams.set("apiKey", apiKey);
   url.searchParams.set("orgId", source.orgId);
   url.searchParams.set("tblId", source.tblId);
   for (const [k, v] of Object.entries(source.params ?? {})) url.searchParams.set(k, v);
+  // statisticsParameterData.do 용 objL* 파라미터는 source.params에 있을 때만 전송된다.
 
   const safeUrl = url.toString().replace(apiKey, maskKey(apiKey));
   const attempts = [];

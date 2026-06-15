@@ -67,10 +67,8 @@ export const publicDataSources = [
   },
 
   // ── KOSIS 국가통계포털 오픈API (KOSIS_API_KEY 필요) ────────────────────────────
-  // KOSIS OpenAPI 구조: https://kosis.kr/openapi/Param/statisticsParameterData.do
-  //   method=getList, apiKey, orgId, tblId, prdSe, startPrdDe, endPrdDe,
-  //   itmId, objL1, format=json, jsonVD=Y
-  // orgId/tblId 는 KOSIS 통계목록에서 확정한다. 미확정 항목은 verified=false.
+  // KOSIS statisticsData.do (simpler than statisticsParameterData.do — no objL* needed)
+  //   ?method=getList&apiKey=...&orgId=...&tblId=...&prdSe=Y&startPrdDe=2020&endPrdDe=2024&format=json&jsonVD=Y
   {
     id: "kosis_registered_foreigner_by_region",
     type: "kosis",
@@ -78,7 +76,7 @@ export const publicDataSources = [
     title: "시도별 외국인주민 현황",
     category: "외국인 직접 통계",
     apiKeyEnv: "KOSIS_API_KEY",
-    endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
+    endpoint: "https://kosis.kr/openapi/statisticsData.do",
     orgId: "110",
     tblId: "TX_11025_A000_A",
     params: {
@@ -86,51 +84,22 @@ export const publicDataSources = [
       format: "json",
       jsonVD: "Y",
       prdSe: "Y",
-      newEstPrdCnt: "5",
-      objL1: "ALL",
-      itmId: "ALL"
+      startPrdDe: "2020",
+      endPrdDe: "2024"
     },
     targetTable: "foreign_resident_region_month",
     outputBaseName: "kosis_registered_foreigner_by_region",
-    // KOSIS 표준 응답 필드: PRD_DE(기간), C1_NM(분류1), C2_NM(분류2), DT(값), UNIT_NM(단위)
-    // 운영 환경에서 실제 응답을 보고 region/value 필드를 확정한다.
     responseMapping: { period: "PRD_DE", region: "C1_NM", value: "DT" },
     sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=110&tblId=TX_11025_A000_A",
     updateCycle: "연",
     license: "KOSIS 이용약관",
     personalDataSafe: true,
     verified: false,
-    notes: "행안부 외국인주민(KOSIS) 실재 통계표 orgId=110/tblId=TX_11025_A000_A 확인. 첫 응답으로 필드 확정."
+    notes: "행안부 시도별 외국인주민. statisticsData.do 사용(objL 파라미터 불필요). 첫 응답으로 필드명 확정."
   },
-  {
-    id: "kosis_foreigner_by_nationality",
-    type: "kosis",
-    provider: "KOSIS(법무부 출입국통계)",
-    title: "국적·지역별 체류외국인",
-    category: "외국인 직접 통계",
-    apiKeyEnv: "KOSIS_API_KEY",
-    endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
-    orgId: "111",
-    tblId: "DT_1B040A1",
-    params: {
-      method: "getList",
-      format: "json",
-      jsonVD: "Y",
-      prdSe: "Y",
-      newEstPrdCnt: "5",
-      objL1: "ALL",
-      itmId: "ALL"
-    },
-    targetTable: "foreign_resident_status",
-    outputBaseName: "kosis_foreigner_by_nationality",
-    responseMapping: { period: "PRD_DE", nationality: "C1_NM", segment: "C2_NM", value: "DT" },
-    sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=111&tblId=DT_1B040A1",
-    updateCycle: "연",
-    license: "KOSIS 이용약관",
-    personalDataSafe: true,
-    verified: false,
-    notes: "국적별 체류외국인. tblId 운영 환경에서 확정 필요."
-  },
+  // 법무부 KOSIS 테이블 — CSV 파일(moj_*)로 이미 수집하므로 중복 방지를 위해 비활성화.
+  // 국적별 집계 트렌드가 필요하면 orgId=111 정확한 tblId 확인 후 재활성화 한다.
+  // { id: "kosis_foreigner_by_nationality", type: "kosis", orgId: "111", tblId: "DT_1B040A1", ... },
 
   // ── data.go.kr REST 오픈API (DATA_GO_KR_SERVICE_KEY 필요) ─────────────────────
   // 구조: https://apis.data.go.kr/{org}/{api}/{op}?serviceKey=...&type=json&pageNo=&numOfRows=
@@ -141,8 +110,10 @@ export const publicDataSources = [
     title: "지자체 외국인주민 현황(시군구)",
     category: "외국인 직접 통계",
     apiKeyEnv: "DATA_GO_KR_SERVICE_KEY",
-    endpoint: "https://apis.data.go.kr/1741000/StatisticsForeignResident/getForeignResidentList",
-    params: { type: "json", numOfRows: "1000", pageNo: "1" },
+    // 활용신청 후 data.go.kr 오퍼레이션 목록에서 정확한 경로 확인 필요.
+    // 1741000 = 행정안전부. 실제 응답이 오면 items 경로·필드명을 responseMapping에 반영.
+    endpoint: "https://apis.data.go.kr/1741000/StatisticsForeignResident/getStatisticsForeignResidentInfo",
+    params: { type: "json", numOfRows: "1000", pageNo: "1", searchYear: "2024" },
     pagination: { pageParam: "pageNo", rowsParam: "numOfRows", rows: 1000, maxPages: 50 },
     targetTable: "foreign_resident_region_month",
     outputBaseName: "mois_foreign_resident_by_region_api",
