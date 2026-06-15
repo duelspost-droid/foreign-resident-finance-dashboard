@@ -20,7 +20,8 @@
     "batch:daily": "node scripts/daily_data_batch.mjs",
     "supabase:load": "node scripts/load_supabase.mjs",
     "supabase:check": "node scripts/check_supabase.mjs",
-    "candidates:sync": "node scripts/sync_candidates.mjs"
+    "candidates:sync": "node scripts/sync_candidates.mjs",
+    "data:freshness": "node scripts/check_data_freshness.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",

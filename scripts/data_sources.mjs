@@ -8,6 +8,13 @@
 //
 // 인증키가 없으면 해당 소스는 수집을 건너뛰되, 이력(lineage)에는 "skipped_no_key" 로 기록한다.
 // verified=false 인 endpoint/tblId 는 운영 환경에서 실제 응답으로 확정해야 한다.
+//
+// ── 동적 연도 설정 ───────────────────────────────────────────────────────────────
+// KOSIS/OpenAPI 파라미터에 연도를 하드코딩하지 않는다.
+// CY(현재 연도)를 종료 연도로, KOSIS_RECENT_PERIODS(최근 N기) 방식으로 항상 최신 자료를 요청한다.
+const CY = String(new Date().getFullYear());           // "2025"
+const PY = String(new Date().getFullYear() - 1);       // "2024" — OpenAPI 일부는 전년도까지만 발행
+const KOSIS_RECENT = "10";                             // KOSIS newEstPrdCnt: 최근 10기(연/분기/월)
 
 export const publicDataSources = [
   // ── 법무부 / 출입국·외국인정책본부 (파일 다운로드, 인증키 불필요) ──────────────
@@ -222,10 +229,122 @@ export const publicDataSources = [
     verified: false,
     notes: "교육부 대학·국적별 유학생. 유학생 금융 수요 세분화(발굴 자동화)."
   },
+  {
+    id: "moe_foreign_student_univ_type",
+    type: "file",
+    datasetId: "15050055",
+    detailPk: null,
+    provider: "교육부",
+    title: "외국인 유학생 현황(대학유형별·학위과정별)",
+    category: "외국인 직접 통계",
+    baseDate: "2024-12-31",
+    targetTable: "foreign_student_university",
+    outputBaseName: "moe_foreign_student_univ_type",
+    sourceUrl: "https://www.data.go.kr/data/15050055/fileData.do",
+    updateCycle: "연",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "대학유형(4년제/전문대/대학원)×학위과정별 외국인 유학생. 학생 세그먼트 상품 설계 보조."
+  },
+  {
+    id: "moe_foreign_student_region",
+    type: "file",
+    datasetId: "15100039",
+    detailPk: null,
+    provider: "교육부",
+    title: "외국인 유학생 현황(지역별)",
+    category: "외국인 직접 통계",
+    baseDate: "2024-12-31",
+    targetTable: "foreign_student_university",
+    outputBaseName: "moe_foreign_student_region",
+    sourceUrl: "https://www.data.go.kr/data/15100039/fileData.do",
+    updateCycle: "연",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "시도별 외국인 유학생 분포. 지점·캠퍼스 연계 전략 지역 우선순위 산출."
+  },
+  {
+    id: "moe_foreign_student_latest",
+    type: "file",
+    datasetId: "15149964",
+    detailPk: null,
+    provider: "교육부",
+    title: "외국인 유학생 현황(최신)",
+    category: "외국인 직접 통계",
+    baseDate: "2024-12-31",
+    targetTable: "foreign_student_university",
+    outputBaseName: "moe_foreign_student_latest",
+    sourceUrl: "https://www.data.go.kr/data/15149964/fileData.do",
+    updateCycle: "연",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "교육부 최신 유학생 통계(발굴 자동화 식별). 2024년 이후 업데이트 반영."
+  },
+
+  // ── 대학알리미 (파일 다운로드, 인증키 불필요) ─────────────────────────────────────
+  {
+    id: "academyinfo_foreign_student_count",
+    type: "file",
+    datasetId: "3069982",
+    detailPk: null,
+    provider: "교육부(대학알리미)",
+    title: "고등교육기관 외국인유학생 수",
+    category: "외국인 직접 통계",
+    baseDate: "2024-12-31",
+    targetTable: "foreign_student_university",
+    outputBaseName: "academyinfo_foreign_student_count",
+    sourceUrl: "https://www.data.go.kr/data/3069982/fileData.do",
+    updateCycle: "연",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "대학알리미 대학별 외국인유학생 수. 캠퍼스별 수요 세분화 핵심 소스."
+  },
+  {
+    id: "academyinfo_university_stats",
+    type: "file",
+    datasetId: "3050000",
+    detailPk: null,
+    provider: "교육부(대학알리미)",
+    title: "고등교육기관 기본현황",
+    category: "외국인 직접 통계",
+    baseDate: "2024-12-31",
+    targetTable: "foreign_student_university",
+    outputBaseName: "academyinfo_university_stats",
+    sourceUrl: "https://www.data.go.kr/data/3050000/fileData.do",
+    updateCycle: "연",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "대학알리미 고등교육기관 기본정보(위치·유형). 대학 외국인 유학생 지도 구축 보조."
+  },
+
+  // ── 국민연금공단 (파일 다운로드, 인증키 불필요) ────────────────────────────────────
+  {
+    id: "nps_foreigner_subscriber",
+    type: "file",
+    datasetId: "15005710",
+    detailPk: null,
+    provider: "국민연금공단",
+    title: "외국인 국민연금 가입자 현황",
+    category: "외국인 경제·금융 보조",
+    baseDate: "2024-12-31",
+    targetTable: "foreign_resident_status",
+    outputBaseName: "nps_foreigner_subscriber",
+    sourceUrl: "https://www.data.go.kr/data/15005710/fileData.do",
+    updateCycle: "연",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "국적별 사업장·지역 가입 외국인 연금 가입자. 정규 취업 외국인(급여계좌·적금) 규모 직접 측정."
+  },
 
   // ── KOSIS 국가통계포털 오픈API (KOSIS_API_KEY 필요) ────────────────────────────
-  // KOSIS statisticsData.do (simpler than statisticsParameterData.do — no objL* needed)
-  //   ?method=getList&apiKey=...&orgId=...&tblId=...&prdSe=Y&startPrdDe=2020&endPrdDe=2024&format=json&jsonVD=Y
+  // statisticsData.do: newEstPrdCnt=KOSIS_RECENT → 항상 최근 N기 자동 반환(연도 하드코딩 불필요).
+  // statisticsParameterData.do: endPrdDe=CY → 현재 연도까지 요청(미발행 연도는 KOSIS가 무시).
   {
     id: "kosis_registered_foreigner_by_region",
     type: "kosis",
@@ -241,8 +360,7 @@ export const publicDataSources = [
       format: "json",
       jsonVD: "Y",
       prdSe: "Y",
-      startPrdDe: "2020",
-      endPrdDe: "2024",
+      newEstPrdCnt: KOSIS_RECENT,   // 최근 N기 — 연도 하드코딩 없음
       itmId: "ALL",
       objL1: "ALL",
       objL2: "ALL"
@@ -255,7 +373,7 @@ export const publicDataSources = [
     license: "KOSIS 이용약관",
     personalDataSafe: true,
     verified: false,
-    notes: "행안부 시도별 외국인주민. 2단계 호출: getMeta(ITM)로 itmId 조회 후 statisticsParameterData.do. 첫 성공 응답으로 필드명 확정."
+    notes: "행안부 시도별 외국인주민. newEstPrdCnt로 최신 N기 자동 수집. 첫 성공 응답으로 필드명 확정."
   },
   {
     id: "kosis_foreign_resident_by_eupmyeondong",
@@ -267,7 +385,7 @@ export const publicDataSources = [
     endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
     orgId: "110",
     tblId: "DT_110025_A033_A",
-    params: { prdSe: "Y", startPrdDe: "2020", endPrdDe: "2024" },
+    params: { prdSe: "Y", startPrdDe: "2020", endPrdDe: CY },
     targetTable: "foreign_resident_region_month",
     outputBaseName: "kosis_foreign_resident_by_eupmyeondong",
     responseMapping: { period: "PRD_DE", region: "C1_NM", value: "DT" },
@@ -276,7 +394,7 @@ export const publicDataSources = [
     license: "KOSIS 이용약관",
     personalDataSafe: true,
     verified: false,
-    notes: "행안부 읍면동 단위 외국인주민(지역 세분화). 웹 조사로 정정(국적X→지역). 2단계 호출."
+    notes: "행안부 읍면동 단위 외국인주민. endPrdDe=CY로 매년 자동 갱신."
   },
   {
     id: "kosis_registered_foreigner_sigungu_visa",
@@ -288,7 +406,7 @@ export const publicDataSources = [
     endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
     orgId: "111",
     tblId: "DT_1B040A11",
-    params: { prdSe: "Y", startPrdDe: "2020", endPrdDe: "2024" },
+    params: { prdSe: "Y", startPrdDe: "2020", endPrdDe: CY },
     targetTable: "foreign_resident_region_month",
     outputBaseName: "kosis_registered_foreigner_sigungu_visa",
     responseMapping: { period: "PRD_DE", region: "C1_NM", value: "DT" },
@@ -297,7 +415,7 @@ export const publicDataSources = [
     license: "KOSIS 이용약관",
     personalDataSafe: true,
     verified: false,
-    notes: "법무부 시군구×체류자격 등록외국인. 지점 전략 핵심 지표. 2단계 호출."
+    notes: "법무부 시군구×체류자격 등록외국인. endPrdDe=CY 동적 갱신."
   },
   {
     id: "kosis_foreigner_economic_activity",
@@ -309,7 +427,7 @@ export const publicDataSources = [
     endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
     orgId: "101",
     tblId: "DT_2FA002F",
-    params: { prdSe: "Y", startPrdDe: "2018", endPrdDe: "2024" },
+    params: { prdSe: "Y", startPrdDe: "2018", endPrdDe: CY },
     targetTable: "foreign_resident_status",
     outputBaseName: "kosis_foreigner_economic_activity",
     responseMapping: { period: "PRD_DE", segment: "C1_NM", value: "DT" },
@@ -320,9 +438,128 @@ export const publicDataSources = [
     verified: false,
     notes: "통계청 이민자 체류실태·고용조사. 취업/소득 = 급여계좌·신용 수요 직결. 2단계 호출."
   },
+  {
+    id: "kosis_foreign_student_univ_type",
+    type: "kosis",
+    provider: "KOSIS(교육부 교육통계)",
+    title: "대학유형별 외국인 유학생 현황",
+    category: "외국인 직접 통계",
+    apiKeyEnv: "KOSIS_API_KEY",
+    endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
+    orgId: "334",
+    tblId: "DT_334N_C0007",
+    params: { prdSe: "Y", startPrdDe: "2018", endPrdDe: CY },
+    targetTable: "foreign_student_university",
+    outputBaseName: "kosis_foreign_student_univ_type",
+    responseMapping: { period: "PRD_DE", category: "C1_NM", value: "DT" },
+    sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=334&tblId=DT_334N_C0007",
+    updateCycle: "연",
+    license: "KOSIS 이용약관",
+    personalDataSafe: true,
+    verified: false,
+    notes: "한국교육개발원(KEDI) KOSS 교육통계. 대학유형별·국적별 유학생 추세. 2단계 호출."
+  },
+  {
+    id: "kosis_foreign_student_nationality",
+    type: "kosis",
+    provider: "KOSIS(교육부 교육통계)",
+    title: "국적별 외국인 유학생 현황",
+    category: "외국인 직접 통계",
+    apiKeyEnv: "KOSIS_API_KEY",
+    endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
+    orgId: "334",
+    tblId: "DT_334N_C0008",
+    params: { prdSe: "Y", startPrdDe: "2018", endPrdDe: CY },
+    targetTable: "foreign_student_university",
+    outputBaseName: "kosis_foreign_student_nationality",
+    responseMapping: { period: "PRD_DE", nationality: "C1_NM", value: "DT" },
+    sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=334&tblId=DT_334N_C0008",
+    updateCycle: "연",
+    license: "KOSIS 이용약관",
+    personalDataSafe: true,
+    verified: false,
+    notes: "KEDI 국적별 유학생 시계열. 중국·베트남·우즈베키스탄 등 주요 국적 학생 금융 수요 추정."
+  },
   // 법무부 KOSIS 테이블 — CSV 파일(moj_*)로 이미 수집하므로 중복 방지를 위해 비활성화.
   // 국적별 집계 트렌드가 필요하면 orgId=111 정확한 tblId 확인 후 재활성화 한다.
   // { id: "kosis_foreigner_by_nationality", type: "kosis", orgId: "111", tblId: "DT_1B040A1", ... },
+
+  // ── 한국은행 ECOS 오픈API (ECOS_API_KEY 필요) ─────────────────────────────────
+  // 발급: https://ecos.bok.or.kr/api/#/DevGuide/apiKey
+  // 형식: StatisticSearch/{key}/json/kr/{start}/{end}/{statCode}/{prdCycle}/{startDate}/{endDate}
+  {
+    id: "ecos_bop_transfer_income",
+    type: "ecos",
+    provider: "한국은행(ECOS)",
+    title: "국제수지 이전소득수지 (개인 해외송금 대리지표)",
+    category: "외국인 경제·금융 보조",
+    apiKeyEnv: "ECOS_API_KEY",
+    endpoint: "https://ecos.bok.or.kr/api/StatisticSearch",
+    params: {
+      statCode: "021Y205",   // 국제수지 서비스수지·이전소득수지 — 운영 환경에서 정확한 코드 확인 필요
+      prdCycle: "A",         // 연간(Annual)
+      startDate: "2018",
+      endDate: CY,
+      rowsPerPage: 1000
+    },
+    targetTable: "finance_segment_aggregate",
+    outputBaseName: "ecos_bop_transfer_income",
+    sourceUrl: "https://ecos.bok.or.kr/#/StatisticsByTheme",
+    updateCycle: "연/분기",
+    license: "한국은행 데이터 이용약관",
+    personalDataSafe: true,
+    verified: false,
+    notes: "외국인 본국송금 거시지표. statCode 운영 환경에서 확정 필요. ECOS_API_KEY GitHub Secret 등록 필요."
+  },
+  {
+    id: "ecos_foreigner_fx_remittance",
+    type: "ecos",
+    provider: "한국은행(ECOS)",
+    title: "거주자 및 비거주자 외국환 거래(개인 송금)",
+    category: "외국인 경제·금융 보조",
+    apiKeyEnv: "ECOS_API_KEY",
+    endpoint: "https://ecos.bok.or.kr/api/StatisticSearch",
+    params: {
+      statCode: "036Y001",   // 국민소득계정 대리 — 운영 환경에서 정확한 송금 통계 코드 확인
+      prdCycle: "A",
+      startDate: "2018",
+      endDate: CY,
+      rowsPerPage: 1000
+    },
+    targetTable: "finance_segment_aggregate",
+    outputBaseName: "ecos_foreigner_fx_remittance",
+    sourceUrl: "https://ecos.bok.or.kr/#/StatisticsByTheme",
+    updateCycle: "연",
+    license: "한국은행 데이터 이용약관",
+    personalDataSafe: true,
+    verified: false,
+    notes: "외국인 송금·환전 거래 거시지표 후보. ECOS statCode 확인 후 verified=true 전환."
+  },
+
+  // ── 서울시 열린데이터광장 오픈API (SEOUL_OPENAPI_KEY 필요) ──────────────────────
+  // 발급: https://data.seoul.go.kr/dataList/OA-14979/S/1/datasetView.do (회원가입 후)
+  // 형식: https://openapi.seoul.go.kr:8088/{key}/json/{서비스명}/{시작}/{끝}/
+  {
+    id: "seoul_foreigner_population",
+    type: "seoul",
+    provider: "서울특별시(열린데이터광장)",
+    title: "서울시 외국인 주민 현황(자치구별·국적별)",
+    category: "외국인 직접 통계",
+    apiKeyEnv: "SEOUL_OPENAPI_KEY",
+    endpoint: "https://openapi.seoul.go.kr:8088",
+    params: {
+      serviceName: "SPOP_FOREIGNER_STTUS",  // 운영 환경에서 실제 서비스명 확인 필요
+      rowsPerPage: 1000
+    },
+    targetTable: "foreign_resident_region_month",
+    outputBaseName: "seoul_foreigner_population",
+    sourceUrl: "https://data.seoul.go.kr/dataList/OA-14979/S/1/datasetView.do",
+    updateCycle: "월",
+    license: "서울시 공공데이터 이용허락",
+    personalDataSafe: true,
+    verified: false,
+    notes: "서울 25개 자치구×국적별 외국인 월별 통계. serviceName 실제 값 확인 필요. SEOUL_OPENAPI_KEY GitHub Secret 등록 필요."
+  },
 
   // ── data.go.kr REST 오픈API (DATA_GO_KR_SERVICE_KEY 필요) ─────────────────────
   // 구조: https://apis.data.go.kr/{org}/{api}/{op}?serviceKey=...&type=json&pageNo=&numOfRows=
@@ -338,7 +575,9 @@ export const publicDataSources = [
     // 후보1: /1741000/StatisticsForeignResident/getForeignResidentInfo
     // 후보2: /1741000/YearFrgnInfo/getYearFrgnInfoList
     endpoint: "https://apis.data.go.kr/1741000/StatisticsForeignResident/getForeignResidentInfo",
-    params: { type: "json", numOfRows: "1000", pageNo: "1", searchYear: "2024" },
+    // searchYear: PY 사용 — 행안부 연간 집계는 당해년도 완성 전까지 전년도까지만 제공.
+    // PY(전년도)로 설정하면 매년 자동으로 최신 완성 연도를 가져온다.
+    params: { type: "json", numOfRows: "1000", pageNo: "1", searchYear: PY },
     pagination: { pageParam: "pageNo", rowsParam: "numOfRows", rows: 1000, maxPages: 50 },
     targetTable: "foreign_resident_region_month",
     outputBaseName: "mois_foreign_resident_by_region_api",
@@ -431,5 +670,35 @@ export const discoveryQueries = [
     provider: "통계청",
     keyword: "이민자 체류실태 고용조사",
     purpose: "외국인 취업·소득·경제활동(신용·대출 수요 분석)"
+  },
+  {
+    id: "kedi_foreign_student",
+    provider: "한국교육개발원",
+    keyword: "외국인유학생 대학알리미",
+    purpose: "대학별 외국인 유학생 수·국적·학위과정(캠퍼스 전략)"
+  },
+  {
+    id: "foreign_student_degree",
+    provider: "교육부",
+    keyword: "외국인 학위과정 유학생",
+    purpose: "학위/비학위 구분 외국인 학생 금융 체류 기간 추정"
+  },
+  {
+    id: "moe_language_training",
+    provider: "교육부",
+    keyword: "어학연수 외국인 D-4",
+    purpose: "어학연수(D-4) 비자 외국인 규모(단기 금융 수요)"
+  },
+  {
+    id: "workhnet_foreign_job",
+    provider: "한국고용정보원",
+    keyword: "외국인 근로자 취업 워크넷",
+    purpose: "외국인 취업 현황·업종별 분포(급여계좌 타겟 업종)"
+  },
+  {
+    id: "mois_foreigner_settlement",
+    provider: "행정안전부",
+    keyword: "외국인 정착 지원 사회통합",
+    purpose: "사회통합프로그램 외국인 참여자(장기거주 의향·정주 금융 수요)"
   }
 ];
