@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-15T10:46:36.949Z",
+  "generatedAt": "2026-06-15T13:50:36.271Z",
   "candidates": [
     {
       "dataset_id": "15047604",
@@ -101,39 +101,6 @@
       "status": "pending"
     },
     {
-      "dataset_id": "15050055",
-      "kind": "fileData",
-      "provider": "교육부",
-      "title": null,
-      "keyword": "외국인 유학생 현황",
-      "url": "https://www.data.go.kr/data/15050055/fileData.do",
-      "priority": "mid",
-      "rationale": "대학·국적·과정별 유학생 금융 수요",
-      "status": "pending"
-    },
-    {
-      "dataset_id": "15100039",
-      "kind": "fileData",
-      "provider": "교육부",
-      "title": null,
-      "keyword": "외국인 유학생 현황",
-      "url": "https://www.data.go.kr/data/15100039/fileData.do",
-      "priority": "mid",
-      "rationale": "대학·국적·과정별 유학생 금융 수요",
-      "status": "pending"
-    },
-    {
-      "dataset_id": "15149964",
-      "kind": "fileData",
-      "provider": "교육부",
-      "title": null,
-      "keyword": "외국인 유학생 현황",
-      "url": "https://www.data.go.kr/data/15149964/fileData.do",
-      "priority": "mid",
-      "rationale": "대학·국적·과정별 유학생 금융 수요",
-      "status": "pending"
-    },
-    {
       "dataset_id": "15057888",
       "kind": "openapi",
       "provider": "교육부",
@@ -175,28 +142,6 @@
       "url": "https://www.data.go.kr/data/15058982/openapi.do",
       "priority": "mid",
       "rationale": "대학·국적·과정별 유학생 금융 수요",
-      "status": "pending"
-    },
-    {
-      "dataset_id": "3069982",
-      "kind": "fileData",
-      "provider": "대학알리미",
-      "title": null,
-      "keyword": "외국인유학생수",
-      "url": "https://www.data.go.kr/data/3069982/fileData.do",
-      "priority": "mid",
-      "rationale": "대학별 외국인 유학생 총량 검증",
-      "status": "pending"
-    },
-    {
-      "dataset_id": "3050000",
-      "kind": "fileData",
-      "provider": "대학알리미",
-      "title": null,
-      "keyword": "외국인유학생수",
-      "url": "https://www.data.go.kr/data/3050000/fileData.do",
-      "priority": "mid",
-      "rationale": "대학별 외국인 유학생 총량 검증",
       "status": "pending"
     },
     {
@@ -549,6 +494,127 @@
       "url": "https://www.data.go.kr/data/15054816/fileData.do",
       "priority": "mid",
       "rationale": "외국인 취업·소득·경제활동(신용·대출 수요 분석)",
+      "status": "pending"
+    },
+    {
+      "dataset_id": "15060430",
+      "kind": "fileData",
+      "provider": "한국교육개발원",
+      "title": null,
+      "keyword": "외국인유학생 대학알리미",
+      "url": "https://www.data.go.kr/data/15060430/fileData.do",
+      "priority": "mid",
+      "rationale": "대학별 외국인 유학생 수·국적·학위과정(캠퍼스 전략)",
+      "status": "pending"
+    },
+    {
+      "dataset_id": "15158678",
+      "kind": "openapi",
+      "provider": "한국교육개발원",
+      "title": null,
+      "keyword": "외국인유학생 대학알리미",
+      "url": "https://www.data.go.kr/data/15158678/openapi.do",
+      "priority": "mid",
+      "rationale": "대학별 외국인 유학생 수·국적·학위과정(캠퍼스 전략)",
+      "status": "pending"
+    },
+    {
+      "dataset_id": "15158684",
+      "kind": "openapi",
+      "provider": "한국교육개발원",
+      "title": null,
+      "keyword": "외국인유학생 대학알리미",
+      "url": "https://www.data.go.kr/data/15158684/openapi.do",
+      "priority": "mid",
+      "rationale": "대학별 외국인 유학생 수·국적·학위과정(캠퍼스 전략)",
+      "status": "pending"
+    },
+    {
+      "dataset_id": "15033729",
+      "kind": "fileData",
+      "provider": "교육부",
+      "title": null,
+      "keyword": "외국인 학위과정 유학생",
+      "url": "https://www.data.go.kr/data/15033729/fileData.do",
+      "priority": "mid",
+      "rationale": "학위/비학위 구분 외국인 학생 금융 체류 기간 추정",
+      "status": "pending"
+    },
+    {
+      "dataset_id": "15070981",
+      "kind": "fileData",
+      "provider": "교육부",
+      "title": null,
+      "keyword": "외국인 학위과정 유학생",
+      "url": "https://www.data.go.kr/data/15070981/fileData.do",
+      "priority": "mid",
+      "rationale": "학위/비학위 구분 외국인 학생 금융 체류 기간 추정",
+      "status": "pending"
+    },
+    {
+      "dataset_id": "15100006",
+      "kind": "fileData",
+      "provider": "교육부",
+      "title": null,
+      "keyword": "어학연수 외국인 D-4",
+      "url": "https://www.data.go.kr/data/15100006/fileData.do",
+      "priority": "mid",
+      "rationale": "어학연수(D-4) 비자 외국인 규모(단기 금융 수요)",
+      "status": "pending"
+    },
+    {
+      "dataset_id": "15100004",
+      "kind": "fileData",
+      "provider": "교육부",
+      "title": null,
+      "keyword": "어학연수 외국인 D-4",
+      "url": "https://www.data.go.kr/data/15100004/fileData.do",
+      "priority": "mid",
+      "rationale": "어학연수(D-4) 비자 외국인 규모(단기 금융 수요)",
+      "status": "pending"
+    },
+    {
+      "dataset_id": "15055033",
+      "kind": "fileData",
+      "provider": "행정안전부",
+      "title": null,
+      "keyword": "외국인 정착 지원 사회통합",
+      "url": "https://www.data.go.kr/data/15055033/fileData.do",
+      "priority": "mid",
+      "rationale": "사회통합프로그램 외국인 참여자(장기거주 의향·정주 금융 수요)",
+      "status": "pending"
+    },
+    {
+      "dataset_id": "15151656",
+      "kind": "fileData",
+      "provider": "행정안전부",
+      "title": null,
+      "keyword": "외국인 정착 지원 사회통합",
+      "url": "https://www.data.go.kr/data/15151656/fileData.do",
+      "priority": "mid",
+      "rationale": "사회통합프로그램 외국인 참여자(장기거주 의향·정주 금융 수요)",
+      "status": "pending"
+    },
+    {
+      "dataset_id": "15129723",
+      "kind": "fileData",
+      "provider": "행정안전부",
+      "title": null,
+      "keyword": "외국인 정착 지원 사회통합",
+      "url": "https://www.data.go.kr/data/15129723/fileData.do",
+      "priority": "mid",
+      "rationale": "사회통합프로그램 외국인 참여자(장기거주 의향·정주 금융 수요)",
+      "status": "pending"
+    },
+    {
+      "dataset_id": "15057553",
+      "kind": "openapi",
+      "provider": "행정안전부",
+      "title": null,
+      "keyword": "외국인 정착 지원 사회통합",
+      "url": "https://www.data.go.kr/data/15057553/openapi.do",
+      "priority": "mid",
+      "rationale": "사회통합프로그램 외국인 참여자(장기거주 의향·정주 금융 수요)",
       "status": "pending"
     }
   ]
