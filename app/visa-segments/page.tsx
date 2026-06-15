@@ -5,7 +5,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Panel } from "@/components/ui/Panel";
 import { StatTile } from "@/components/ui/StatTile";
 import { segmentRecommendationMap } from "@/lib/data/insights";
-import { hasRealVisaData, sampleResidentStatus } from "@/lib/data/mockData";
+import { hasRealVisaData, sampleResidentStatus, stayVisaTypes } from "@/lib/data/mockData";
 import type {
   ForeignResidentSegment,
   ForeignResidentStatus
@@ -271,6 +271,51 @@ export default function VisaSegmentsPage() {
           </span>
         </div>
       </Panel>
+
+      {hasRealVisaData && stayVisaTypes.length > 0 && (
+        <Panel
+          title="체류자격별 인원 (실데이터)"
+          subtitle="법무부 외국인체류데이터(2024) · 장기체류 비자타입별 인원 · 상위 20개"
+          right={<span className="eyebrow">{stayVisaTypes.length}종</span>}
+          bodyClassName="p-4 pt-3"
+        >
+          <div className="space-y-2">
+            {stayVisaTypes.map((v, i) => {
+              const max = stayVisaTypes[0]?.count ?? 1;
+              const pct = Math.max(3, Math.round((v.count / max) * 100));
+              const segColors: Record<string, string> = {
+                "비전문취업 근로자": "#0f766e",
+                "재외동포": "#3157a4",
+                "유학생": "#b45309",
+                "결혼이민": "#be123c",
+                "어학연수생": "#7c3aed",
+                "전문인력": "#0369a1",
+                "단기체류": "#64748b",
+                "기타": "#94a3b8"
+              };
+              const barColor = segColors[v.segment] ?? "#94a3b8";
+              return (
+                <div key={v.visaCode} className="flex items-center gap-3">
+                  <span className="w-5 shrink-0 text-right text-xs font-bold text-muted">{i + 1}</span>
+                  <span className="w-14 shrink-0 text-[11px] font-mono font-bold" style={{ color: barColor }}>
+                    {v.visaCode}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <div className="mb-1 flex items-center justify-between gap-2 text-xs">
+                      <span className="truncate text-ink">{v.visaName}</span>
+                      <span className="shrink-0 font-mono text-muted">{formatNumber(v.count)}명</span>
+                    </div>
+                    <div className="barlist-track">
+                      <div className="barlist-fill" style={{ width: `${pct}%`, background: barColor }} />
+                    </div>
+                  </div>
+                  <span className="w-20 shrink-0 text-right text-[11px] text-muted">{v.segment}</span>
+                </div>
+              );
+            })}
+          </div>
+        </Panel>
+      )}
 
       <Panel
         subtitle={hasRealVisaData ? "법무부 외국인체류데이터(2024) 장기체류 비자타입별 집계 · 개인 추론 금지" : "개인 추론이 아닌 집계 단위 분류 가설로만 사용합니다."}

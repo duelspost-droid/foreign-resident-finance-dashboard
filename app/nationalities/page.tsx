@@ -100,12 +100,12 @@ export default function NationalitiesPage() {
 
       <div className="stat-grid">
         <StatTile
-          label="분석 국적 수"
-          value={nationalityDistributionData.length}
+          label={hasRealNationalityData ? "집계 국적 수" : "분석 국적 수"}
+          value={hasRealNationalityData ? 205 : nationalityDistributionData.length}
           unit="개국"
           icon={<Flag size={18} />}
           accent="#0f766e"
-          sub="국적별 분포 데이터 기준"
+          sub={hasRealNationalityData ? "법무부 국적별 현황 실데이터" : "국적별 분포 데이터 기준"}
         />
         <StatTile
           label="1위 국적"
@@ -116,12 +116,12 @@ export default function NationalitiesPage() {
           sub={`${formatNumber(topNationality.residents)}명`}
         />
         <StatTile
-          label="상위 6개국 거주자 합계"
+          label="상위 15개국 합계"
           value={formatNumber(topSixTotal)}
           unit="명"
           icon={<Users size={18} />}
           accent="#b45309"
-          sub="국적별 분포 상위 6개국 합산"
+          sub={hasRealNationalityData ? "전체 체류외국인의 상위 15개국" : "국적별 분포 상위 6개국 합산"}
         />
         <StatTile
           label="세그먼트 수"
