@@ -67,11 +67,13 @@ function maskKey(value) {
   return `${value.slice(0, 4)}…${value.slice(-4)}`;
 }
 
-async function fetchWithRetry(url, options = {}, attempts = 3) {
+const FETCH_TIMEOUT_MS = Number(process.env.FETCH_TIMEOUT_MS ?? 15000);
+
+async function fetchWithRetry(url, options = {}, attempts = 2) {
   let lastError;
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 30000);
+    const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
     try {
       const res = await fetch(url, {
         ...options,
@@ -88,7 +90,7 @@ async function fetchWithRetry(url, options = {}, attempts = 3) {
       clearTimeout(timeout);
       lastError = error;
       if (attempt < attempts) {
-        await sleep(1500 * attempt);
+        await sleep(1000 * attempt);
       }
     }
   }
@@ -329,14 +331,17 @@ async function collectOpenApiSource(source) {
 }
 
 function extractItems(body) {
-  // data.go.kr 표준 응답: response.body.items.item / body.items / data
+  // KOSIS statisticsData.do: 배열 직접 반환
+  // data.go.kr 표준: response.body.items.item / body.items / data
   const candidates = [
+    Array.isArray(body) ? body : null,
     body?.response?.body?.items?.item,
     body?.response?.body?.items,
     body?.body?.items?.item,
+    body?.items?.item,
     body?.items,
     body?.data,
-    Array.isArray(body) ? body : null
+    body?.result
   ];
   for (const c of candidates) {
     if (Array.isArray(c)) return c;
@@ -346,6 +351,50 @@ function extractItems(body) {
 }
 
 // ── KOSIS 오픈API 수집 ──────────────────────────────────────────────────────────
+//
+// KOSIS 데이터 조회는 테이블별 분류코드(itmId, objL*)를 요구한다. `ALL` 만으로는
+// "필수요청변수값이 누락되었습니다" 오류가 발생하므로 2단계로 호출한다:
+//   1) getMeta(type=ITM) 로 실제 itmId 코드 조회
+//   2) statisticsParameterData.do 에 itmId + objL*=ALL 을 넣어 데이터 조회
+// getMeta 가 실패하면 source.params 의 itmId(또는 ALL)로 폴백한다.
+
+const KOSIS_META_ENDPOINT = "https://kosis.kr/openapi/statisticsData.do";
+const KOSIS_DATA_ENDPOINT = "https://kosis.kr/openapi/Param/statisticsParameterData.do";
+
+function maskUrl(url, apiKey) {
+  return url
+    .toString()
+    .replace(encodeURIComponent(apiKey), maskKey(apiKey))
+    .replace(apiKey, maskKey(apiKey));
+}
+
+// getMeta(type=ITM) 로 itmId 목록을 가져온다. "+"로 join 한 문자열 반환(없으면 null).
+async function fetchKosisItmIds(source, apiKey, attempts) {
+  const url = new URL(KOSIS_META_ENDPOINT);
+  url.searchParams.set("method", "getMeta");
+  url.searchParams.set("type", "ITM");
+  url.searchParams.set("apiKey", apiKey);
+  url.searchParams.set("orgId", source.orgId);
+  url.searchParams.set("tblId", source.tblId);
+  url.searchParams.set("format", "json");
+  const safeUrl = maskUrl(url, apiKey);
+  try {
+    const res = await fetchWithRetry(url);
+    attempts.push({ step: "getMeta(ITM)", url: safeUrl, status: res.status });
+    if (!res.ok) return null;
+    const body = JSON.parse(await res.text());
+    if (body?.err || body?.errMsg) {
+      attempts.push({ step: "getMeta(ITM)", error: body.errMsg ?? body.err });
+      return null;
+    }
+    const rows = Array.isArray(body) ? body : extractItems(body);
+    const ids = [...new Set(rows.map((r) => r.ITM_ID ?? r.itmId).filter(Boolean))];
+    return ids.length > 0 ? ids.slice(0, 50).join("+") : null;
+  } catch (error) {
+    attempts.push({ step: "getMeta(ITM)", error: error.message });
+    return null;
+  }
+}
 
 // KOSIS metaData.do(method=periodData)로 해당 테이블의 최신 발행 기간을 조회한다.
 // 성공 시 가장 최근 PRD_DE 문자열 반환, 실패 시 null.
@@ -378,61 +427,79 @@ async function collectKosisSource(source) {
     return { status: "skipped_no_key", reason: `${source.apiKeyEnv} not set`, requestUrls: [source.endpoint] };
   }
 
-  // endPrdDe 파라미터가 있으면 KOSIS metaData.do로 실제 최신 기간을 조회해 덮어쓴다.
-  // 이렇게 하면 KOSIS에 아직 올라오지 않은 미래 연도를 요청하는 오류를 방지한다.
-  const params = { ...source.params };
-  if (params.endPrdDe) {
-    const latestPeriod = await getKosisLatestPeriod(apiKey, source.orgId, source.tblId);
-    if (latestPeriod) {
-      // metaData 기준 최신 기간을 endPrdDe로 설정
-      params.endPrdDe = latestPeriod;
-    }
-    // 실패해도 기존 CY 값(현재 연도)을 그대로 사용 — KOSIS가 없는 기간은 조용히 무시
+  const attempts = [];
+  const requestUrls = [];
+
+  // 1단계: 실제 itmId 코드 조회 (실패 시 params.itmId 또는 ALL 폴백)
+  const metaItmId = await fetchKosisItmIds(source, apiKey, attempts);
+  const itmId = metaItmId ?? source.params?.itmId ?? "ALL";
+
+  // 종료 기간 동적 결정: metaData.do(periodData)로 실제 최신 발행 기간을 조회한다.
+  // 조회 실패 시 source.params.endPrdDe(=CY) 또는 현재 연도로 폴백 — 미발행 미래 연도 요청 오류 방지.
+  const latestPeriod = await getKosisLatestPeriod(apiKey, source.orgId, source.tblId);
+
+  // 2단계: statisticsParameterData.do 로 데이터 조회
+  const dataUrl = new URL(source.dataEndpoint ?? KOSIS_DATA_ENDPOINT);
+  dataUrl.searchParams.set("method", "getList");
+  dataUrl.searchParams.set("apiKey", apiKey);
+  dataUrl.searchParams.set("orgId", source.orgId);
+  dataUrl.searchParams.set("tblId", source.tblId);
+  dataUrl.searchParams.set("itmId", itmId);
+  // 분류 레벨: objL1~objL8 을 ALL/빈값으로. source.params 가 있으면 우선.
+  dataUrl.searchParams.set("objL1", source.params?.objL1 ?? "ALL");
+  dataUrl.searchParams.set("objL2", source.params?.objL2 ?? "");
+  dataUrl.searchParams.set("objL3", source.params?.objL3 ?? "");
+  dataUrl.searchParams.set("format", "json");
+  dataUrl.searchParams.set("jsonVD", "Y");
+  dataUrl.searchParams.set("prdSe", source.params?.prdSe ?? "Y");
+
+  // 기간: newEstPrdCnt(최근 N기)가 지정되면 우선 사용(연도 하드코딩 없음).
+  // 아니면 startPrdDe + 동적 endPrdDe(최신 발행 기간).
+  if (source.params?.newEstPrdCnt) {
+    dataUrl.searchParams.set("newEstPrdCnt", String(source.params.newEstPrdCnt));
+  } else {
+    const fallbackEnd = source.params?.endPrdDe ?? String(new Date().getFullYear());
+    dataUrl.searchParams.set("startPrdDe", source.params?.startPrdDe ?? "2020");
+    dataUrl.searchParams.set("endPrdDe", latestPeriod ?? fallbackEnd);
   }
 
-  const url = new URL(source.endpoint);
-  url.searchParams.set("apiKey", apiKey);
-  url.searchParams.set("orgId", source.orgId);
-  url.searchParams.set("tblId", source.tblId);
-  for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
-
-  const safeUrl = url.toString().replace(apiKey, maskKey(apiKey));
-  const attempts = [];
+  const safeDataUrl = maskUrl(dataUrl, apiKey);
+  requestUrls.push(safeDataUrl);
 
   try {
-    const res = await fetchWithRetry(url);
-    attempts.push({ url: safeUrl, status: res.status });
+    const res = await fetchWithRetry(dataUrl);
+    attempts.push({ step: "statisticsParameterData", url: safeDataUrl, status: res.status });
     if (!res.ok) {
-      return { status: "request_failed", requestUrls: [safeUrl], attempts, reason: `${res.status} ${res.statusText}` };
+      return { status: "request_failed", requestUrls, attempts, reason: `${res.status} ${res.statusText}` };
     }
     const text = await res.text();
     let body;
     try {
       body = JSON.parse(text);
     } catch {
-      return { status: "non_json_response", requestUrls: [safeUrl], attempts, reason: text.slice(0, 200) };
+      return { status: "non_json_response", requestUrls, attempts, reason: text.slice(0, 200) };
     }
-    // KOSIS 오류 응답: { err: "...", errMsg: "..." }
     if (body?.err || body?.errMsg) {
-      return { status: "api_error", requestUrls: [safeUrl], attempts, reason: body.errMsg ?? body.err };
+      return { status: "api_error", requestUrls, attempts, reason: body.errMsg ?? body.err };
     }
     const items = Array.isArray(body) ? body : extractItems(body);
     if (items.length === 0) {
-      return { status: "no_data", requestUrls: [safeUrl], attempts, reason: "0 rows" };
+      return { status: "no_data", requestUrls, attempts, reason: "0 rows" };
     }
     const fileName = `${source.outputBaseName}_${todayStamp()}.json`;
     await writeFile(join(rawDir, fileName), JSON.stringify(items, null, 2), "utf8");
-    // 수집 성공 시 실제로 사용한 endPrdDe(=최신 기간)를 기록
+    // itmId 출처와 실제 사용한 최신 기간을 함께 기록
     return {
       status: "downloaded",
       rowCount: items.length,
       savedFile: fileName,
-      requestUrls: [safeUrl],
+      requestUrls,
       attempts,
-      detectedLatestPeriod: params.endPrdDe ?? null
+      itmIdSource: metaItmId ? "getMeta" : "fallback",
+      detectedLatestPeriod: latestPeriod ?? null
     };
   } catch (error) {
-    return { status: "request_failed", requestUrls: [safeUrl], attempts, reason: error.message };
+    return { status: "request_failed", requestUrls, attempts, reason: error.message };
   }
 }
 
@@ -566,9 +633,50 @@ const COLLECTORS = {
   seoul: collectSeoulDataSource
 };
 
+// 관리자 승인 큐(approved_candidates.json)에서 승인된 후보를 동적 소스 설정으로 변환.
+// 관리자 페이지에서 승인 → 다음 배치에서 자동 수집되는 경로.
+async function loadApprovedCandidateSources() {
+  const path = join(root, "data", "registry", "approved_candidates.json");
+  let payload;
+  try {
+    payload = JSON.parse(await (await import("node:fs/promises")).readFile(path, "utf8"));
+  } catch {
+    return [];
+  }
+  const kindToType = { fileData: "file", openapi: "openapi", kosis: "kosis", ecos: "ecos" };
+  return (payload.approved ?? []).map((c) => {
+    const type = kindToType[c.kind] ?? "file";
+    return {
+      id: `approved_${c.kind}_${c.dataset_id}`,
+      type,
+      datasetId: type === "file" || type === "openapi" ? String(c.dataset_id) : undefined,
+      tblId: type === "kosis" ? String(c.dataset_id) : undefined,
+      provider: c.provider ?? "승인 후보",
+      title: c.title ?? `승인 데이터셋 ${c.dataset_id}`,
+      category: "관리자 승인 등록",
+      apiKeyEnv: type === "openapi" ? "DATA_GO_KR_SERVICE_KEY" : type === "kosis" ? "KOSIS_API_KEY" : undefined,
+      endpoint: type === "openapi" ? c.url : undefined,
+      targetTable: c.target_table ?? null,
+      outputBaseName: `approved_${c.kind}_${c.dataset_id}`,
+      sourceUrl: c.url ?? null,
+      updateCycle: "—",
+      license: "공공데이터 이용허락",
+      personalDataSafe: true,
+      verified: false,
+      notes: `관리자 승인 등록(${c.decided_by ?? "admin"}). 키워드: ${c.keyword ?? "-"}`
+    };
+  });
+}
+
 async function main() {
   await ensureDir(rawDir);
   await ensureDir(catalogDir);
+
+  const approvedSources = await loadApprovedCandidateSources();
+  if (approvedSources.length > 0) {
+    console.log(`[main] 관리자 승인 후보 ${approvedSources.length}건 동적 수집 포함`);
+  }
+  const allSources = [...publicDataSources, ...approvedSources];
 
   const catalog = {
     generatedAt: new Date().toISOString(),
@@ -582,7 +690,8 @@ async function main() {
     discovery: await discoverDataGoKr()
   };
 
-  const tasks = publicDataSources.map((source) => async () => {
+  // 승인된 후보를 포함한 전체 소스를 동시성 제한 병렬로 수집.
+  const tasks = allSources.map((source) => async () => {
     const collector = COLLECTORS[source.type];
     const registry = {
       id: source.id,

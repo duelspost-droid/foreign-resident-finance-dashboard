@@ -60,12 +60,7 @@ export const regionStrategy = sampleOpportunityRows
   }));
 
 // ── 국적별 상위 분포 (실데이터 갱신 시 자동 변경) ───────────────────────────────
-export const topNationalities = nationalityDistributionData.slice(0, 6).map((d) => ({
-  ...d,
-  remittanceCountry: REMITTANCE_COUNTRY[d.nationality] ?? d.nationality,
-  financialNeed: NAT_FINANCIAL_NEED[d.nationality] ?? "기본 계좌"
-}));
-
+// 참조 테이블은 topNationalities 평가 전에 선언되어야 한다(모듈 로드 시 .map 즉시 실행 → TDZ 방지).
 const REMITTANCE_COUNTRY: Record<string, string> = {
   중국: "중국(공상·농업은행)",
   우즈베키스탄: "우즈벡(NBU·Uzpromstroybank)",
@@ -84,6 +79,12 @@ const NAT_FINANCIAL_NEED: Record<string, string> = {
   러시아: "전문인력 급여 + 신용카드",
   필리핀: "결혼이민 가계금융 + 본국 송금"
 };
+
+export const topNationalities = nationalityDistributionData.slice(0, 6).map((d) => ({
+  ...d,
+  remittanceCountry: REMITTANCE_COUNTRY[d.nationality] ?? d.nationality,
+  financialNeed: NAT_FINANCIAL_NEED[d.nationality] ?? "기본 계좌"
+}));
 
 // ── 비자 세그먼트별 추정 인원 (sampleResidentStatus 집계) ───────────────────────
 export const visaSegmentSummary = (() => {

@@ -41,6 +41,8 @@ jobs:
         run: npm ci
 
       - name: Fetch and build data
+        timeout-minutes: 8
+        continue-on-error: true
         run: npm run data:all
 
       - name: Commit generated data if changed
@@ -51,6 +53,8 @@ jobs:
             lib/data/generated/realData.ts
             lib/data/generated/dataLineage.ts
             data/catalog/latest_fetch_catalog.json
+            data/registry/approved_candidates.json
+            data/registry/pending_candidates.json
 
       - name: Load Supabase data
         if: ${{ env.SUPABASE_URL != '' && env.SUPABASE_SERVICE_ROLE_KEY != '' }}
@@ -59,6 +63,9 @@ jobs:
       - name: Build static site
         env:
           NEXT_OUTPUT: export
+          # 관리자 승인 페이지(브라우저)용. anon 키만 노출(service_role 금지).
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: npm run pages:build
 
       - name: Setup Pages

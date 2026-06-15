@@ -334,7 +334,12 @@ async function buildLineage() {
     keyword: d.keyword,
     purpose: d.purpose,
     status: d.status,
-    foundCount: d.foundCount ?? (d.links?.length ?? 0)
+    foundCount: d.foundCount ?? (d.links?.length ?? 0),
+    links: (d.links ?? []).map((l) => ({
+      datasetId: l.datasetId,
+      kind: l.kind,
+      url: l.url
+    }))
   }));
 
   // 각 소스를 정확히 하나의 버킷으로 분류 (상호배타적).
@@ -366,9 +371,11 @@ async function buildLineage() {
     `  verified: boolean | null;\n  notes: string | null;\n  fetchedAt: string | null;\n` +
     `  status: string;\n  rowCount: number | null;\n  savedFile: string | null;\n` +
     `  requestUrls: string[];\n  reason: string | null;\n};\n\n` +
+    `export type DataLineageDiscoveryLink = {\n` +
+    `  datasetId: string;\n  kind: string;\n  url: string;\n};\n\n` +
     `export type DataLineageDiscovery = {\n` +
     `  id: string;\n  provider: string;\n  keyword: string;\n  purpose: string;\n` +
-    `  status: string;\n  foundCount: number;\n};\n\n` +
+    `  status: string;\n  foundCount: number;\n  links: DataLineageDiscoveryLink[];\n};\n\n` +
     `export type DataLineage = {\n` +
     `  generatedAt: string;\n` +
     `  keysPresent: { DATA_GO_KR_SERVICE_KEY: boolean; KOSIS_API_KEY: boolean };\n` +
