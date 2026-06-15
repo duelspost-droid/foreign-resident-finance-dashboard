@@ -385,7 +385,8 @@ export const publicDataSources = [
     endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
     orgId: "110",
     tblId: "DT_110025_A033_A",
-    params: { prdSe: "Y", startPrdDe: "2020", endPrdDe: CY },
+    // objL2=ALL 필요: 이 표는 2단계 분류(지역×유형)라 objL2 미지정 시 "objL 누락" 오류.
+    params: { prdSe: "Y", startPrdDe: "2020", endPrdDe: CY, objL1: "ALL", objL2: "ALL" },
     targetTable: "foreign_resident_region_month",
     outputBaseName: "kosis_foreign_resident_by_eupmyeondong",
     responseMapping: { period: "PRD_DE", region: "C1_NM", value: "DT" },
@@ -406,7 +407,8 @@ export const publicDataSources = [
     endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
     orgId: "111",
     tblId: "DT_1B040A11",
-    params: { prdSe: "Y", startPrdDe: "2020", endPrdDe: CY },
+    // objL2=ALL 필요: 시군구(objL1)×체류자격(objL2) 2단계 분류.
+    params: { prdSe: "Y", startPrdDe: "2020", endPrdDe: CY, objL1: "ALL", objL2: "ALL" },
     targetTable: "foreign_resident_region_month",
     outputBaseName: "kosis_registered_foreigner_sigungu_visa",
     responseMapping: { period: "PRD_DE", region: "C1_NM", value: "DT" },
@@ -438,48 +440,11 @@ export const publicDataSources = [
     verified: false,
     notes: "통계청 이민자 체류실태·고용조사. 취업/소득 = 급여계좌·신용 수요 직결. 2단계 호출."
   },
-  {
-    id: "kosis_foreign_student_univ_type",
-    type: "kosis",
-    provider: "KOSIS(교육부 교육통계)",
-    title: "대학유형별 외국인 유학생 현황",
-    category: "외국인 직접 통계",
-    apiKeyEnv: "KOSIS_API_KEY",
-    endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
-    orgId: "334",
-    tblId: "DT_334N_C0007",
-    params: { prdSe: "Y", startPrdDe: "2018", endPrdDe: CY },
-    targetTable: "foreign_student_university",
-    outputBaseName: "kosis_foreign_student_univ_type",
-    responseMapping: { period: "PRD_DE", category: "C1_NM", value: "DT" },
-    sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=334&tblId=DT_334N_C0007",
-    updateCycle: "연",
-    license: "KOSIS 이용약관",
-    personalDataSafe: true,
-    verified: false,
-    notes: "한국교육개발원(KEDI) KOSS 교육통계. 대학유형별·국적별 유학생 추세. 2단계 호출."
-  },
-  {
-    id: "kosis_foreign_student_nationality",
-    type: "kosis",
-    provider: "KOSIS(교육부 교육통계)",
-    title: "국적별 외국인 유학생 현황",
-    category: "외국인 직접 통계",
-    apiKeyEnv: "KOSIS_API_KEY",
-    endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
-    orgId: "334",
-    tblId: "DT_334N_C0008",
-    params: { prdSe: "Y", startPrdDe: "2018", endPrdDe: CY },
-    targetTable: "foreign_student_university",
-    outputBaseName: "kosis_foreign_student_nationality",
-    responseMapping: { period: "PRD_DE", nationality: "C1_NM", value: "DT" },
-    sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=334&tblId=DT_334N_C0008",
-    updateCycle: "연",
-    license: "KOSIS 이용약관",
-    personalDataSafe: true,
-    verified: false,
-    notes: "KEDI 국적별 유학생 시계열. 중국·베트남·우즈베키스탄 등 주요 국적 학생 금융 수요 추정."
-  },
+  // 비활성화: orgId=334 DT_334N_C0007(대학유형별)·DT_334N_C0008(국적별) 은
+  // KOSIS에 존재하지 않는 tblId("해당 통계표가 존재하지 않습니다")로 확인됨.
+  // 유학생 국적/유형 데이터는 교육부 파일 소스(moe_foreign_student_region 등)로 대체 수집한다.
+  // 정확한 KEDI tblId 확인 시 재활성화. responseMapping 은 그대로 재사용 가능.
+
   // 법무부 KOSIS 테이블 — CSV 파일(moj_*)로 이미 수집하므로 중복 방지를 위해 비활성화.
   // 국적별 집계 트렌드가 필요하면 orgId=111 정확한 tblId 확인 후 재활성화 한다.
   // { id: "kosis_foreigner_by_nationality", type: "kosis", orgId: "111", tblId: "DT_1B040A1", ... },

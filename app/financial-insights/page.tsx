@@ -6,7 +6,6 @@ import {
   CreditCard,
   Database,
   GraduationCap,
-  Landmark,
   MapPin,
   RefreshCw,
   Send,
@@ -21,6 +20,7 @@ import {
   regionStrategy,
   topNationalities
 } from "@/lib/data/financialInsightsData";
+import { PageHero } from "@/components/ui/PageHero";
 import { formatNumber } from "@/lib/utils/format";
 
 // ── 유스케이스 카드 (전략 큐레이션 = 정적 콘텐츠) ─────────────────────────────
@@ -213,25 +213,13 @@ function FreshnessTag() {
 
 export default function FinancialInsightsPage() {
   return (
-    <div className="min-h-screen bg-slate-50 p-6 space-y-8">
-      {/* ── 페이지 헤더 ─────────────────────────────────────────── */}
-      <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-        <div className="flex items-start gap-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-teal-700 text-white">
-            <Landmark size={24} />
-          </div>
-          <div className="flex-1">
-            <h1 className="text-xl font-bold text-slate-900">금융회사 활용 인사이트</h1>
-            <p className="mt-1 text-sm text-slate-600">
-              외국인 체류·경제활동 공공 통계를 은행·캐피탈 비즈니스 전략에 활용하는 방법을
-              분석합니다. 시장 KPI와 지역 순위는 수집 배치 완료 시 자동 갱신됩니다.
-            </p>
-          </div>
-        </div>
-        <div className="mt-4">
-          <FreshnessTag />
-        </div>
-      </div>
+    <div className="space-y-7 pb-14">
+      <PageHero
+        kicker="금융 인사이트"
+        title="금융회사 활용 인사이트"
+        description="외국인 체류·경제활동 공공 통계를 은행·캐피탈 비즈니스 전략에 활용하는 방법을 분석합니다. 시장 KPI와 지역 순위는 수집 배치 완료 시 자동 갱신됩니다."
+      />
+      <FreshnessTag />
 
       {/* ── 시장 규모 KPI ──────────────────────────────────────── */}
       <section>
