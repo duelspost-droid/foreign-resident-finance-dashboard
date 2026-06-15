@@ -5,7 +5,12 @@ import { ScoreRadarChart } from "@/components/charts/ScoreRadarChart";
 import { PageHero } from "@/components/ui/PageHero";
 import { Panel } from "@/components/ui/Panel";
 import { StatTile } from "@/components/ui/StatTile";
-import { sampleOpportunityRows } from "@/lib/data/mockData";
+import {
+  hasRealRegionResidents,
+  regionResidents,
+  regionResidentSummary,
+  sampleOpportunityRows
+} from "@/lib/data/mockData";
 import { formatNumber, formatPercent, formatScore } from "@/lib/utils/format";
 
 // 점수 구간별 브랜드 컬러 — 랭킹 원형 배지와 타일 색상에 공통 사용.
@@ -140,6 +145,34 @@ export default function RegionsPage() {
           })}
         </div>
       </Panel>
+
+      {hasRealRegionResidents ? (
+        <Panel
+          title="시군구별 외국인주민 TOP (실데이터)"
+          subtitle={`행정안전부 지자체 외국인주민 현황${regionResidentSummary.latestYear ? ` · ${regionResidentSummary.latestYear}년` : ""} · 전체 ${formatNumber(regionResidentSummary.regionCount)}개 시군구`}
+          bodyClassName="p-5 pt-3"
+        >
+          <div className="grid gap-2.5 md:grid-cols-2">
+            {regionResidents.slice(0, 12).map((r, i) => {
+              const max = regionResidents[0]?.count || 1;
+              return (
+                <div key={`${r.sido}-${r.sigungu}`} className="flex items-center gap-3">
+                  <span className="w-5 shrink-0 text-right text-xs font-bold text-muted">{i + 1}</span>
+                  <div className="min-w-0 flex-1">
+                    <div className="mb-1 flex items-center justify-between gap-2 text-xs">
+                      <span className="truncate font-semibold text-ink">{r.sido} {r.sigungu}</span>
+                      <span className="shrink-0 font-mono text-muted">{formatNumber(r.count)}명</span>
+                    </div>
+                    <div className="barlist-track">
+                      <div className="barlist-fill" style={{ width: `${Math.max(4, Math.round((r.count / max) * 100))}%`, background: "#3157a4" }} />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </Panel>
+      ) : null}
 
       <div className="two-column">
         <Panel

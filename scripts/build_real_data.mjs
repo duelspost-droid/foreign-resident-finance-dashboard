@@ -227,6 +227,68 @@ function summarizeStudents(studentRows) {
   };
 }
 
+// 대학알리미 대학별 외국인유학생수 CSV → 대학별 집계(최신연도, 상위 30).
+// 기대 컬럼(dataSources 큐레이션): 기준연도, 대학명, 캠퍼스, 외국인유학생수, 전체학생수.
+function transformAcademyUniversities(rows) {
+  const yearOf = (r) => toNumber(firstValue(r, ["기준연도", "학년도", "연도", "년도", "년"]));
+  const years = rows.map(yearOf).filter((y) => y >= 2000 && y <= 2100);
+  const latestYear = years.length ? Math.max(...years) : null;
+  const agg = new Map();
+  for (const r of rows) {
+    if (latestYear && yearOf(r) && yearOf(r) !== latestYear) continue;
+    const uni = String(firstValue(r, ["대학명", "학교명", "기관명", "대학"])).trim();
+    if (!uni || /합계|소계|총계|전체/.test(uni)) continue;
+    const campus = String(firstValue(r, ["캠퍼스", "분교"])).trim();
+    const foreign = toNumber(firstValue(r, ["외국인유학생수", "외국인유학생", "유학생수", "유학생", "외국인학생"]));
+    const total = toNumber(firstValue(r, ["전체학생수", "재학생수", "총학생수"]));
+    const key = uni + (campus ? `||${campus}` : "");
+    const cur = agg.get(key) ?? { university: uni, campus, foreignStudents: 0, totalStudents: 0 };
+    cur.foreignStudents += foreign;
+    cur.totalStudents += total;
+    agg.set(key, cur);
+  }
+  const list = [...agg.values()].filter((u) => u.foreignStudents > 0);
+  list.sort((a, b) => b.foreignStudents - a.foreignStudents);
+  return {
+    latestYear,
+    universities: list.slice(0, 30).map((u, i) => ({
+      rank: i + 1,
+      university: u.university,
+      campus: u.campus || null,
+      foreignStudents: u.foreignStudents,
+      foreignShare: u.totalStudents > 0 ? Number(((u.foreignStudents / u.totalStudents) * 100).toFixed(1)) : null
+    })),
+    universityCount: list.length,
+    totalForeignStudents: list.reduce((s, u) => s + u.foreignStudents, 0)
+  };
+}
+
+// 행안부 시군구 외국인주민 현황 CSV → 시군구별 집계(최신연도, 상위 N).
+// 기대 컬럼: 기준연도, 시도, 시군구, 외국인주민수, ...
+function transformRegionResidents(rows) {
+  const yearOf = (r) => toNumber(firstValue(r, ["기준연도", "연도", "년도", "년"]));
+  const years = rows.map(yearOf).filter((y) => y >= 2000 && y <= 2100);
+  const latestYear = years.length ? Math.max(...years) : null;
+  const out = [];
+  for (const r of rows) {
+    if (latestYear && yearOf(r) && yearOf(r) !== latestYear) continue;
+    const sido = String(firstValue(r, ["시도", "시·도", "행정구역"])).trim();
+    const sigungu = String(firstValue(r, ["시군구", "시·군·구"])).trim();
+    const count = toNumber(firstValue(r, ["외국인주민수", "외국인주민", "외국인수", "총계", "계"]));
+    // 시군구 단위 행만 사용(시도 합계·전국 합계 행 제외)해 중복/혼선 방지.
+    if (!sido || !sigungu || count <= 0) continue;
+    if (/합계|소계|총계|전국|계$/.test(sigungu) || sigungu === sido) continue;
+    out.push({ sido, sigungu, count });
+  }
+  out.sort((a, b) => b.count - a.count);
+  return {
+    latestYear,
+    regions: out.slice(0, 50),
+    regionCount: out.length,
+    totalResidents: out.reduce((s, r) => s + r.count, 0)
+  };
+}
+
 async function readLatestRaw(prefix) {
   const files = await readdir(rawDir).catch(() => []);
   const target = files
@@ -467,6 +529,20 @@ async function main() {
     studentSummary = agg.summary;
   }
 
+  // 대학알리미 대학별 외국인유학생수 → 대학별 랭킹.
+  const academyRaw = await readLatestRaw("academyinfo_foreign_student_count");
+  let universityRanking = { latestYear: null, universities: [], universityCount: 0, totalForeignStudents: 0 };
+  if (academyRaw) {
+    universityRanking = transformAcademyUniversities(parseCsv(academyRaw.text));
+  }
+
+  // 행안부 시군구 외국인주민 현황 → 시군구별 분포.
+  const moisRaw = await readLatestRaw("mois_foreign_resident_region_file");
+  let regionResidents = { latestYear: null, regions: [], regionCount: 0, totalResidents: 0 };
+  if (moisRaw) {
+    regionResidents = transformRegionResidents(parseCsv(moisRaw.text));
+  }
+
   // API(KOSIS/openapi) 보조 데이터. 키 없으면 빈 배열. MOJ 1차 데이터와 분리 유지.
   const { apiStatus, apiRegion, parsedFiles } = await buildApiSources();
 
@@ -484,6 +560,22 @@ async function main() {
     `export const realForeignStudentByYear: readonly RealStudentYear[] = ${JSON.stringify(studentByYear, null, 2)};\n\n` +
     `export const realForeignStudentByVisa: readonly RealStudentVisa[] = ${JSON.stringify(studentByVisa, null, 2)};\n\n` +
     `export const realStudentSummary = ${JSON.stringify(studentSummary, null, 2)} as const;\n\n` +
+    `// 대학알리미 대학별 외국인유학생수 — 대학/유학생 페이지가 사용.\n` +
+    `export type RealUniversity = { rank: number; university: string; campus: string | null; foreignStudents: number; foreignShare: number | null };\n` +
+    `export const realUniversityRanking: readonly RealUniversity[] = ${JSON.stringify(universityRanking.universities, null, 2)};\n\n` +
+    `export const realUniversitySummary = ${JSON.stringify({
+      latestYear: universityRanking.latestYear,
+      universityCount: universityRanking.universityCount,
+      totalForeignStudents: universityRanking.totalForeignStudents
+    }, null, 2)} as const;\n\n` +
+    `// 행안부 시군구 외국인주민 현황 — 지역 분석 페이지가 사용.\n` +
+    `export type RealRegionResident = { sido: string; sigungu: string; count: number };\n` +
+    `export const realRegionResidents: readonly RealRegionResident[] = ${JSON.stringify(regionResidents.regions, null, 2)};\n\n` +
+    `export const realRegionResidentSummary = ${JSON.stringify({
+      latestYear: regionResidents.latestYear,
+      regionCount: regionResidents.regionCount,
+      totalResidents: regionResidents.totalResidents
+    }, null, 2)} as const;\n\n` +
     `export const realDataSummary = ${JSON.stringify({
       generatedAt: new Date().toISOString(),
       statusRowCount: statusRows.length,
@@ -491,8 +583,15 @@ async function main() {
       apiStatusRowCount: apiStatus.length,
       apiRegionRowCount: apiRegion.length,
       studentYearCount: studentByYear.length,
+      universityCount: universityRanking.universityCount,
+      regionResidentCount: regionResidents.regionCount,
       apiParsedFiles: parsedFiles,
-      sourceFiles: { status: statusRaw?.path ?? null, student: studentRaw?.path ?? null }
+      sourceFiles: {
+        status: statusRaw?.path ?? null,
+        student: studentRaw?.path ?? null,
+        academy: academyRaw?.path ?? null,
+        mois: moisRaw?.path ?? null
+      }
     }, null, 2)} as const;\n`;
 
   await writeFile(

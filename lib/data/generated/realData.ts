@@ -9330,16 +9330,40 @@ export const realStudentSummary = {
   "yoy": -24.7
 } as const;
 
+// 대학알리미 대학별 외국인유학생수 — 대학/유학생 페이지가 사용.
+export type RealUniversity = { rank: number; university: string; campus: string | null; foreignStudents: number; foreignShare: number | null };
+export const realUniversityRanking: readonly RealUniversity[] = [];
+
+export const realUniversitySummary = {
+  "latestYear": null,
+  "universityCount": 0,
+  "totalForeignStudents": 0
+} as const;
+
+// 행안부 시군구 외국인주민 현황 — 지역 분석 페이지가 사용.
+export type RealRegionResident = { sido: string; sigungu: string; count: number };
+export const realRegionResidents: readonly RealRegionResident[] = [];
+
+export const realRegionResidentSummary = {
+  "latestYear": null,
+  "regionCount": 0,
+  "totalResidents": 0
+} as const;
+
 export const realDataSummary = {
-  "generatedAt": "2026-06-15T15:04:26.192Z",
+  "generatedAt": "2026-06-15T15:14:03.956Z",
   "statusRowCount": 400,
   "regionRowCount": 200,
   "apiStatusRowCount": 0,
   "apiRegionRowCount": 0,
   "studentYearCount": 14,
+  "universityCount": 0,
+  "regionResidentCount": 0,
   "apiParsedFiles": [],
   "sourceFiles": {
-    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-14.csv",
-    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-14.csv"
+    "status": "/home/user/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-14.csv",
+    "student": "/home/user/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-14.csv",
+    "academy": null,
+    "mois": null
   }
 } as const;
