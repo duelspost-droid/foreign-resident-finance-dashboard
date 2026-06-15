@@ -401,13 +401,14 @@ async function fetchKosisItmIds(source, apiKey, attempts) {
     const res = await fetchWithRetry(url);
     attempts.push({ step: "getMeta(ITM)", url: safeUrl, status: res.status });
     if (!res.ok) return null;
-    const body = JSON.parse(await res.text());
+    const rawText = (await res.text()).replace(/^﻿/, "");
+    const body = JSON.parse(rawText);
     if (body?.err || body?.errMsg) {
       attempts.push({ step: "getMeta(ITM)", error: body.errMsg ?? body.err });
       return null;
     }
     const rows = Array.isArray(body) ? body : extractItems(body);
-    const ids = [...new Set(rows.map((r) => r.ITM_ID ?? r.itmId).filter(Boolean))];
+    const ids = [...new Set(rows.map((r) => r.ITM_ID ?? r.itmId ?? r.itm_id).filter(Boolean))];
     return ids.length > 0 ? ids.slice(0, 50).join("+") : null;
   } catch (error) {
     attempts.push({ step: "getMeta(ITM)", error: error.message });
@@ -457,8 +458,8 @@ async function collectKosisSource(source) {
   // 조회 실패 시 source.params.endPrdDe(=CY) 또는 현재 연도로 폴백 — 미발행 미래 연도 요청 오류 방지.
   const latestPeriod = await getKosisLatestPeriod(apiKey, source.orgId, source.tblId);
 
-  // 2단계: statisticsParameterData.do 로 데이터 조회
-  const dataUrl = new URL(source.dataEndpoint ?? KOSIS_DATA_ENDPOINT);
+  // 2단계: 데이터 조회. source.endpoint(소스별 오버라이드) → 기본값 statisticsParameterData.do
+  const dataUrl = new URL(source.dataEndpoint ?? source.endpoint ?? KOSIS_DATA_ENDPOINT);
   dataUrl.searchParams.set("method", "getList");
   dataUrl.searchParams.set("apiKey", apiKey);
   dataUrl.searchParams.set("orgId", source.orgId);

@@ -360,8 +360,8 @@ export const publicDataSources = [
     endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
     orgId: "110",
     tblId: "DT_110025_A033_A",
-    // objL2=ALL 필요: 이 표는 2단계 분류(지역×유형)라 objL2 미지정 시 "objL 누락" 오류.
-    params: { prdSe: "Y", startPrdDe: "2020", endPrdDe: CY, objL1: "ALL", objL2: "ALL" },
+    // 40,000셀 제한으로 연도 1개 요청(최근 연도만). endPrdDe=CY 로 매년 갱신.
+    params: { prdSe: "Y", startPrdDe: CY, endPrdDe: CY, objL1: "ALL", objL2: "ALL" },
     targetTable: "foreign_resident_region_month",
     outputBaseName: "kosis_foreign_resident_by_eupmyeondong",
     responseMapping: { period: "PRD_DE", region: "C1_NM", value: "DT" },
