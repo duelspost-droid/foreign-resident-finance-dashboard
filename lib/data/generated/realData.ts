@@ -7421,7 +7421,7 @@ export const realRegionResidentSummary = {
 } as const;
 
 export const realDataSummary = {
-  "generatedAt": "2026-06-15T21:30:41.608Z",
+  "generatedAt": "2026-06-15T21:41:12.359Z",
   "statusRowCount": 205,
   "nationalityCount": 205,
   "visaSegmentCount": 8,
@@ -7431,18 +7431,12 @@ export const realDataSummary = {
   "studentYearCount": 14,
   "universityCount": 0,
   "regionResidentCount": 0,
-  "apiParsedFiles": [
-    {
-      "source": "kosis_foreigner_economic_activity",
-      "file": "kosis_foreigner_economic_activity_2026-06-15.json",
-      "produced": 0
-    }
-  ],
+  "apiParsedFiles": [],
   "sourceFiles": {
-    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-15.csv",
-    "stay": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-06-15.csv",
-    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-15.csv",
-    "academy": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/academyinfo_foreign_student_count_2026-06-15.csv",
-    "mois": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/mois_foreign_resident_region_file_2026-06-15.csv"
+    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-14.csv",
+    "stay": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-06-14.csv",
+    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-14.csv",
+    "academy": null,
+    "mois": null
   }
 } as const;
