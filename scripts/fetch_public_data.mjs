@@ -65,20 +65,45 @@ async function fetchText(url) {
 
 // ── 파일데이터(data.go.kr fileData) 수집 ────────────────────────────────────────
 
+// 파일 다운로드 페이지에서 모든 리소스를 파싱하여 가장 최신 연도 파일을 선택한다.
+// fn_fileDataDown(datasetId, detailPk, ?, type, filename) 형태.
+// 파일명 또는 페이지 내 연도 힌트 텍스트에서 연도를 추출해 내림차순 정렬.
 function extractDetailPk(html) {
-  const match = html.match(
-    /fn_fileDataDown\('([^']+)'\s*,\s*'([^']+)'\s*,\s*'([^']*)'\s*,\s*'([^']+)'\s*,\s*'([^']+)'\)/
-  );
-  return match?.[2] ?? null;
+  const RE = /fn_fileDataDown\('([^']+)'\s*,\s*'([^']+)'\s*,\s*'([^']*)'\s*,\s*'([^']+)'\s*,\s*'([^']+)'\)/g;
+  const entries = [...html.matchAll(RE)].map((m) => {
+    const detailPk = m[2];
+    const fileName = m[5] ?? "";
+    // 연도 힌트: 파일명 안의 4자리 숫자(2010~2099), 없으면 0
+    const yearMatch = fileName.match(/20([1-9]\d)/);
+    const year = yearMatch ? Number(yearMatch[0]) : 0;
+    return { detailPk, fileName, year };
+  });
+  if (entries.length === 0) return null;
+  // 가장 최신 연도 파일을 우선 선택 (같은 연도면 목록 순 마지막 → 최신 업로드)
+  entries.sort((a, b) => b.year - a.year || 0);
+  return entries[0].detailPk;
+}
+
+// 어떤 리소스들이 있는지 카탈로그에 남기기 위해 전체 목록도 반환한다.
+function extractAllResources(html) {
+  const RE = /fn_fileDataDown\('([^']+)'\s*,\s*'([^']+)'\s*,\s*'([^']*)'\s*,\s*'([^']+)'\s*,\s*'([^']+)'\)/g;
+  return [...html.matchAll(RE)].map((m) => ({
+    detailPk: m[2],
+    fileName: m[5] ?? "",
+    year: Number((m[5] ?? "").match(/20([1-9]\d)/)?.[0] ?? 0)
+  }));
 }
 
 async function getFileMeta(source) {
   const detailUrl = `https://www.data.go.kr/data/${source.datasetId}/fileData.do`;
   const html = await fetchText(detailUrl);
+
+  // 전체 리소스 목록 파싱 — 다년도 파일 중 최신 선택
+  const allResources = extractAllResources(html);
   const detailPk = source.detailPk ?? extractDetailPk(html);
 
   if (!detailPk) {
-    return { source, detailUrl, status: "metadata_missing", reason: "publicDataDetailPk not found" };
+    return { source, detailUrl, status: "metadata_missing", reason: "publicDataDetailPk not found", allResources };
   }
 
   const metaUrl = new URL("https://www.data.go.kr/tcs/dss/selectFileDataDownload.do");
@@ -97,6 +122,7 @@ async function getFileMeta(source) {
     source,
     detailUrl,
     detailPk,
+    allResources,          // 페이지 내 전체 리소스(다년도 파일 확인용)
     status: meta.status ? "metadata_ok" : "metadata_not_confirmed",
     atchFileId: meta.atchFileId ?? fileInfo.atchFileId ?? null,
     fileDetailSn: meta.fileDetailSn ?? fileInfo.fileDetailSn ?? "1",
@@ -256,17 +282,54 @@ function extractItems(body) {
 
 // ── KOSIS 오픈API 수집 ──────────────────────────────────────────────────────────
 
+// KOSIS metaData.do(method=periodData)로 해당 테이블의 최신 발행 기간을 조회한다.
+// 성공 시 가장 최근 PRD_DE 문자열 반환, 실패 시 null.
+async function getKosisLatestPeriod(apiKey, orgId, tblId) {
+  try {
+    const url = new URL("https://kosis.kr/openapi/metaData.do");
+    url.searchParams.set("method", "periodData");
+    url.searchParams.set("apiKey", apiKey);
+    url.searchParams.set("orgId", orgId);
+    url.searchParams.set("tblId", tblId);
+    url.searchParams.set("format", "json");
+    const res = await fetchWithRetry(url, {}, 2);
+    if (!res.ok) return null;
+    const body = await res.json().catch(() => null);
+    if (!Array.isArray(body) || body.length === 0) return null;
+    // PRD_DE 내림차순 정렬 후 첫 번째 기간 반환
+    const sorted = body
+      .map((r) => r.PRD_DE ?? r.prd_de ?? "")
+      .filter(Boolean)
+      .sort((a, b) => b.localeCompare(a));
+    return sorted[0] ?? null;
+  } catch {
+    return null;
+  }
+}
+
 async function collectKosisSource(source) {
   const apiKey = process.env[source.apiKeyEnv];
   if (!apiKey) {
     return { status: "skipped_no_key", reason: `${source.apiKeyEnv} not set`, requestUrls: [source.endpoint] };
   }
 
+  // endPrdDe 파라미터가 있으면 KOSIS metaData.do로 실제 최신 기간을 조회해 덮어쓴다.
+  // 이렇게 하면 KOSIS에 아직 올라오지 않은 미래 연도를 요청하는 오류를 방지한다.
+  const params = { ...source.params };
+  if (params.endPrdDe) {
+    const latestPeriod = await getKosisLatestPeriod(apiKey, source.orgId, source.tblId);
+    if (latestPeriod) {
+      // metaData 기준 최신 기간을 endPrdDe로 설정
+      params.endPrdDe = latestPeriod;
+    }
+    // 실패해도 기존 CY 값(현재 연도)을 그대로 사용 — KOSIS가 없는 기간은 조용히 무시
+  }
+
   const url = new URL(source.endpoint);
   url.searchParams.set("apiKey", apiKey);
   url.searchParams.set("orgId", source.orgId);
   url.searchParams.set("tblId", source.tblId);
-  for (const [k, v] of Object.entries(source.params ?? {})) url.searchParams.set(k, v);
+  for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
 
   const safeUrl = url.toString().replace(apiKey, maskKey(apiKey));
   const attempts = [];
@@ -294,7 +357,15 @@ async function collectKosisSource(source) {
     }
     const fileName = `${source.outputBaseName}_${todayStamp()}.json`;
     await writeFile(join(rawDir, fileName), JSON.stringify(items, null, 2), "utf8");
-    return { status: "downloaded", rowCount: items.length, savedFile: fileName, requestUrls: [safeUrl], attempts };
+    // 수집 성공 시 실제로 사용한 endPrdDe(=최신 기간)를 기록
+    return {
+      status: "downloaded",
+      rowCount: items.length,
+      savedFile: fileName,
+      requestUrls: [safeUrl],
+      attempts,
+      detectedLatestPeriod: params.endPrdDe ?? null
+    };
   } catch (error) {
     return { status: "request_failed", requestUrls: [safeUrl], attempts, reason: error.message };
   }

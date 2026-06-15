@@ -8,6 +8,13 @@
 //
 // 인증키가 없으면 해당 소스는 수집을 건너뛰되, 이력(lineage)에는 "skipped_no_key" 로 기록한다.
 // verified=false 인 endpoint/tblId 는 운영 환경에서 실제 응답으로 확정해야 한다.
+//
+// ── 동적 연도 설정 ───────────────────────────────────────────────────────────────
+// KOSIS/OpenAPI 파라미터에 연도를 하드코딩하지 않는다.
+// CY(현재 연도)를 종료 연도로, KOSIS_RECENT_PERIODS(최근 N기) 방식으로 항상 최신 자료를 요청한다.
+const CY = String(new Date().getFullYear());           // "2025"
+const PY = String(new Date().getFullYear() - 1);       // "2024" — OpenAPI 일부는 전년도까지만 발행
+const KOSIS_RECENT = "10";                             // KOSIS newEstPrdCnt: 최근 10기(연/분기/월)
 
 export const publicDataSources = [
   // ── 법무부 / 출입국·외국인정책본부 (파일 다운로드, 인증키 불필요) ──────────────
@@ -336,8 +343,8 @@ export const publicDataSources = [
   },
 
   // ── KOSIS 국가통계포털 오픈API (KOSIS_API_KEY 필요) ────────────────────────────
-  // KOSIS statisticsData.do (simpler than statisticsParameterData.do — no objL* needed)
-  //   ?method=getList&apiKey=...&orgId=...&tblId=...&prdSe=Y&startPrdDe=2020&endPrdDe=2024&format=json&jsonVD=Y
+  // statisticsData.do: newEstPrdCnt=KOSIS_RECENT → 항상 최근 N기 자동 반환(연도 하드코딩 불필요).
+  // statisticsParameterData.do: endPrdDe=CY → 현재 연도까지 요청(미발행 연도는 KOSIS가 무시).
   {
     id: "kosis_registered_foreigner_by_region",
     type: "kosis",
@@ -353,8 +360,7 @@ export const publicDataSources = [
       format: "json",
       jsonVD: "Y",
       prdSe: "Y",
-      startPrdDe: "2020",
-      endPrdDe: "2024",
+      newEstPrdCnt: KOSIS_RECENT,   // 최근 N기 — 연도 하드코딩 없음
       itmId: "ALL",
       objL1: "ALL",
       objL2: "ALL"
@@ -367,7 +373,7 @@ export const publicDataSources = [
     license: "KOSIS 이용약관",
     personalDataSafe: true,
     verified: false,
-    notes: "행안부 시도별 외국인주민. 2단계 호출: getMeta(ITM)로 itmId 조회 후 statisticsParameterData.do. 첫 성공 응답으로 필드명 확정."
+    notes: "행안부 시도별 외국인주민. newEstPrdCnt로 최신 N기 자동 수집. 첫 성공 응답으로 필드명 확정."
   },
   {
     id: "kosis_foreign_resident_by_eupmyeondong",
@@ -379,7 +385,7 @@ export const publicDataSources = [
     endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
     orgId: "110",
     tblId: "DT_110025_A033_A",
-    params: { prdSe: "Y", startPrdDe: "2020", endPrdDe: "2024" },
+    params: { prdSe: "Y", startPrdDe: "2020", endPrdDe: CY },
     targetTable: "foreign_resident_region_month",
     outputBaseName: "kosis_foreign_resident_by_eupmyeondong",
     responseMapping: { period: "PRD_DE", region: "C1_NM", value: "DT" },
@@ -388,7 +394,7 @@ export const publicDataSources = [
     license: "KOSIS 이용약관",
     personalDataSafe: true,
     verified: false,
-    notes: "행안부 읍면동 단위 외국인주민(지역 세분화). 웹 조사로 정정(국적X→지역). 2단계 호출."
+    notes: "행안부 읍면동 단위 외국인주민. endPrdDe=CY로 매년 자동 갱신."
   },
   {
     id: "kosis_registered_foreigner_sigungu_visa",
@@ -400,7 +406,7 @@ export const publicDataSources = [
     endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
     orgId: "111",
     tblId: "DT_1B040A11",
-    params: { prdSe: "Y", startPrdDe: "2020", endPrdDe: "2024" },
+    params: { prdSe: "Y", startPrdDe: "2020", endPrdDe: CY },
     targetTable: "foreign_resident_region_month",
     outputBaseName: "kosis_registered_foreigner_sigungu_visa",
     responseMapping: { period: "PRD_DE", region: "C1_NM", value: "DT" },
@@ -409,7 +415,7 @@ export const publicDataSources = [
     license: "KOSIS 이용약관",
     personalDataSafe: true,
     verified: false,
-    notes: "법무부 시군구×체류자격 등록외국인. 지점 전략 핵심 지표. 2단계 호출."
+    notes: "법무부 시군구×체류자격 등록외국인. endPrdDe=CY 동적 갱신."
   },
   {
     id: "kosis_foreigner_economic_activity",
@@ -421,7 +427,7 @@ export const publicDataSources = [
     endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
     orgId: "101",
     tblId: "DT_2FA002F",
-    params: { prdSe: "Y", startPrdDe: "2018", endPrdDe: "2024" },
+    params: { prdSe: "Y", startPrdDe: "2018", endPrdDe: CY },
     targetTable: "foreign_resident_status",
     outputBaseName: "kosis_foreigner_economic_activity",
     responseMapping: { period: "PRD_DE", segment: "C1_NM", value: "DT" },
@@ -442,7 +448,7 @@ export const publicDataSources = [
     endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
     orgId: "334",
     tblId: "DT_334N_C0007",
-    params: { prdSe: "Y", startPrdDe: "2018", endPrdDe: "2024" },
+    params: { prdSe: "Y", startPrdDe: "2018", endPrdDe: CY },
     targetTable: "foreign_student_university",
     outputBaseName: "kosis_foreign_student_univ_type",
     responseMapping: { period: "PRD_DE", category: "C1_NM", value: "DT" },
@@ -463,7 +469,7 @@ export const publicDataSources = [
     endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
     orgId: "334",
     tblId: "DT_334N_C0008",
-    params: { prdSe: "Y", startPrdDe: "2018", endPrdDe: "2024" },
+    params: { prdSe: "Y", startPrdDe: "2018", endPrdDe: CY },
     targetTable: "foreign_student_university",
     outputBaseName: "kosis_foreign_student_nationality",
     responseMapping: { period: "PRD_DE", nationality: "C1_NM", value: "DT" },
@@ -492,7 +498,9 @@ export const publicDataSources = [
     // 후보1: /1741000/StatisticsForeignResident/getForeignResidentInfo
     // 후보2: /1741000/YearFrgnInfo/getYearFrgnInfoList
     endpoint: "https://apis.data.go.kr/1741000/StatisticsForeignResident/getForeignResidentInfo",
-    params: { type: "json", numOfRows: "1000", pageNo: "1", searchYear: "2024" },
+    // searchYear: PY 사용 — 행안부 연간 집계는 당해년도 완성 전까지 전년도까지만 제공.
+    // PY(전년도)로 설정하면 매년 자동으로 최신 완성 연도를 가져온다.
+    params: { type: "json", numOfRows: "1000", pageNo: "1", searchYear: PY },
     pagination: { pageParam: "pageNo", rowsParam: "numOfRows", rows: 1000, maxPages: 50 },
     targetTable: "foreign_resident_region_month",
     outputBaseName: "mois_foreign_resident_by_region_api",
