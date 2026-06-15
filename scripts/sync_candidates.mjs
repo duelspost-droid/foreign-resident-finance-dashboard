@@ -14,9 +14,17 @@ const root = process.cwd();
 const catalogPath = join(root, "data", "catalog", "latest_fetch_catalog.json");
 const registryDir = join(root, "data", "registry");
 
-const supabaseUrl = process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
+// 공개 안전 기본값(URL + publishable 키). source_candidates 는 RLS 가 공개 쓰기를 허용하므로
+// service_role 없이도 후보 큐 적재가 가능하다. service_role 이 있으면 그것을 우선 사용.
+const PUBLIC_URL = "https://nrdapzgtibbusvoaceuh.supabase.co";
+const PUBLIC_ANON_KEY = "sb_publishable_DckNy92c8WFGYWNPRsEjag_q-JQs9km";
+
+const supabaseUrl =
+  process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL ?? PUBLIC_URL;
 const serviceRoleKey =
-  process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  process.env.SUPABASE_SERVICE_ROLE_KEY ??
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
+  PUBLIC_ANON_KEY;
 
 async function readJson(path, fallback = null) {
   try {

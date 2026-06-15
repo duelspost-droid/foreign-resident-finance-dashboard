@@ -2,10 +2,11 @@ import { createClient } from "@supabase/supabase-js";
 import type { ForeignResidentRegionMonth, ForeignResidentStatus } from "@/lib/types/foreignResident";
 import type { FinanceSegmentAggregate } from "@/lib/types/finance";
 import type { ForeignStudentUniversity } from "@/lib/types/university";
+import { SUPABASE_PUBLIC_ANON_KEY, SUPABASE_PUBLIC_URL } from "./supabaseConfig";
 
 export function createBrowserSupabaseClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const url = SUPABASE_PUBLIC_URL;
+  const anonKey = SUPABASE_PUBLIC_ANON_KEY;
 
   if (!url || !anonKey) {
     return null;
