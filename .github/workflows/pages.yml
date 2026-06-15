@@ -23,6 +23,8 @@ jobs:
     env:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+      KOSIS_API_KEY: ${{ secrets.KOSIS_API_KEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -43,7 +45,10 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Update daily public data"
-          file_pattern: "lib/data/generated/realData.ts"
+          file_pattern: >-
+            lib/data/generated/realData.ts
+            lib/data/generated/dataLineage.ts
+            data/catalog/latest_fetch_catalog.json
 
       - name: Load Supabase data
         if: ${{ env.SUPABASE_URL != '' && env.SUPABASE_SERVICE_ROLE_KEY != '' }}

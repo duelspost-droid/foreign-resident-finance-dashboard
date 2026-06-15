@@ -1,0 +1,194 @@
+{
+  "generatedAt": "2026-06-15T07:59:48.450Z",
+  "keysPresent": {
+    "DATA_GO_KR_SERVICE_KEY": false,
+    "KOSIS_API_KEY": false
+  },
+  "sources": [
+    {
+      "id": "moj_foreign_resident_status_2024",
+      "type": "file",
+      "provider": "법무부",
+      "title": "체류외국인 국적 및 체류자격별 현황",
+      "category": "외국인 직접 통계",
+      "targetTable": "foreign_resident_status",
+      "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do",
+      "updateCycle": "연/분기",
+      "license": "공공데이터 이용허락(제1유형)",
+      "personalDataSafe": true,
+      "verified": true,
+      "notes": "국적×체류자격 집계. 세그먼트 산출의 1차 소스.",
+      "fetchedAt": "2026-06-15T07:59:48.970Z",
+      "result": {
+        "status": "metadata_failed_using_cached_raw",
+        "cachedRawFile": "moj_foreign_resident_status_2024_2026-06-14.csv",
+        "reason": "GET https://www.data.go.kr/data/3045188/fileData.do failed: 403 Forbidden",
+        "requestUrls": [
+          "https://www.data.go.kr/data/3045188/fileData.do"
+        ]
+      }
+    },
+    {
+      "id": "moj_foreign_stay_data_2024",
+      "type": "file",
+      "provider": "법무부",
+      "title": "외국인체류데이터",
+      "category": "외국인 직접 통계",
+      "targetTable": "foreign_resident_region_month",
+      "sourceUrl": "https://www.data.go.kr/data/3069963/fileData.do",
+      "updateCycle": "연/분기",
+      "license": "공공데이터 이용허락(제1유형)",
+      "personalDataSafe": true,
+      "verified": true,
+      "notes": "지역 단위 체류 현황.",
+      "fetchedAt": "2026-06-15T07:59:48.974Z",
+      "result": {
+        "status": "metadata_failed_using_cached_raw",
+        "cachedRawFile": "moj_foreign_stay_data_2024_2026-06-14.csv",
+        "reason": "GET https://www.data.go.kr/data/3069963/fileData.do failed: 403 Forbidden",
+        "requestUrls": [
+          "https://www.data.go.kr/data/3069963/fileData.do"
+        ]
+      }
+    },
+    {
+      "id": "moj_foreign_student_stay_2024",
+      "type": "file",
+      "provider": "법무부",
+      "title": "연도별 외국인 유학생 체류 현황",
+      "category": "외국인 직접 통계",
+      "targetTable": "foreign_student_university",
+      "sourceUrl": "https://www.data.go.kr/data/15100038/fileData.do",
+      "updateCycle": "연",
+      "license": "공공데이터 이용허락(제1유형)",
+      "personalDataSafe": true,
+      "verified": true,
+      "notes": "유학(D-2)·연수(D-4) 체류 추세.",
+      "fetchedAt": "2026-06-15T07:59:48.978Z",
+      "result": {
+        "status": "metadata_failed_using_cached_raw",
+        "cachedRawFile": "moj_foreign_student_stay_2024_2026-06-14.csv",
+        "reason": "GET https://www.data.go.kr/data/15100038/fileData.do failed: 403 Forbidden",
+        "requestUrls": [
+          "https://www.data.go.kr/data/15100038/fileData.do"
+        ]
+      }
+    },
+    {
+      "id": "kosis_registered_foreigner_by_region",
+      "type": "kosis",
+      "provider": "KOSIS(법무부 출입국통계)",
+      "title": "시도별 등록외국인 현황",
+      "category": "외국인 직접 통계",
+      "targetTable": "foreign_resident_region_month",
+      "sourceUrl": "https://kosis.kr/statHtml/statHtml.do?orgId=111&tblId=DT_1B040A3",
+      "updateCycle": "연",
+      "license": "KOSIS 이용약관",
+      "personalDataSafe": true,
+      "verified": false,
+      "notes": "시도별 등록외국인. orgId/tblId 운영 환경에서 응답으로 확정 필요.",
+      "fetchedAt": "2026-06-15T07:59:48.979Z",
+      "result": {
+        "status": "skipped_no_key",
+        "reason": "KOSIS_API_KEY not set",
+        "requestUrls": [
+          "https://kosis.kr/openapi/Param/statisticsParameterData.do"
+        ]
+      }
+    },
+    {
+      "id": "kosis_foreigner_by_nationality",
+      "type": "kosis",
+      "provider": "KOSIS(법무부 출입국통계)",
+      "title": "국적·지역별 체류외국인",
+      "category": "외국인 직접 통계",
+      "targetTable": "foreign_resident_status",
+      "sourceUrl": "https://kosis.kr/statHtml/statHtml.do?orgId=111&tblId=DT_1B040A1",
+      "updateCycle": "연",
+      "license": "KOSIS 이용약관",
+      "personalDataSafe": true,
+      "verified": false,
+      "notes": "국적별 체류외국인. tblId 운영 환경에서 확정 필요.",
+      "fetchedAt": "2026-06-15T07:59:48.979Z",
+      "result": {
+        "status": "skipped_no_key",
+        "reason": "KOSIS_API_KEY not set",
+        "requestUrls": [
+          "https://kosis.kr/openapi/Param/statisticsParameterData.do"
+        ]
+      }
+    },
+    {
+      "id": "mois_foreign_resident_by_region_api",
+      "type": "openapi",
+      "provider": "행정안전부",
+      "title": "지자체 외국인주민 현황(시군구)",
+      "category": "외국인 직접 통계",
+      "targetTable": "foreign_resident_region_month",
+      "sourceUrl": "https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=외국인주민",
+      "updateCycle": "연",
+      "license": "공공데이터 이용허락(제1유형)",
+      "personalDataSafe": true,
+      "verified": false,
+      "notes": "행안부 외국인주민 시군구 집계. endpoint 경로 운영 환경에서 확정 필요.",
+      "fetchedAt": "2026-06-15T07:59:48.979Z",
+      "result": {
+        "status": "skipped_no_key",
+        "reason": "DATA_GO_KR_SERVICE_KEY not set",
+        "requestUrls": [
+          "https://apis.data.go.kr/1741000/StatisticsForeignResident/getForeignResidentList"
+        ]
+      }
+    }
+  ],
+  "discovery": [
+    {
+      "id": "mois_foreign_residents",
+      "provider": "행정안전부",
+      "keyword": "외국인주민 현황",
+      "purpose": "시군구 단위 장기거주 외국인주민 규모",
+      "status": "failed",
+      "error": "GET https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%99%B8%EA%B5%AD%EC%9D%B8%EC%A3%BC%EB%AF%BC%20%ED%98%84%ED%99%A9 failed: 403 Forbidden"
+    },
+    {
+      "id": "moe_foreign_students",
+      "provider": "교육부",
+      "keyword": "외국인 유학생 현황",
+      "purpose": "대학·국적·과정별 유학생 금융 수요",
+      "status": "failed",
+      "error": "GET https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%99%B8%EA%B5%AD%EC%9D%B8%20%EC%9C%A0%ED%95%99%EC%83%9D%20%ED%98%84%ED%99%A9 failed: 403 Forbidden"
+    },
+    {
+      "id": "academyinfo_foreign_students",
+      "provider": "대학알리미",
+      "keyword": "외국인유학생수",
+      "purpose": "대학별 외국인 유학생 총량 검증",
+      "status": "failed",
+      "error": "GET https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%99%B8%EA%B5%AD%EC%9D%B8%EC%9C%A0%ED%95%99%EC%83%9D%EC%88%98 failed: 403 Forbidden"
+    },
+    {
+      "id": "moj_immigration_stats",
+      "provider": "법무부",
+      "keyword": "출입국 외국인 체류",
+      "purpose": "체류자격·국적·지역 추가 통계 발굴",
+      "status": "failed",
+      "error": "GET https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%B6%9C%EC%9E%85%EA%B5%AD%20%EC%99%B8%EA%B5%AD%EC%9D%B8%20%EC%B2%B4%EB%A5%98 failed: 403 Forbidden"
+    },
+    {
+      "id": "mol_foreign_worker",
+      "provider": "고용노동부",
+      "keyword": "외국인 고용 취업",
+      "purpose": "E-9/E-7 등 취업 외국인 규모(급여계좌 수요)",
+      "status": "failed",
+      "error": "GET https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EC%99%B8%EA%B5%AD%EC%9D%B8%20%EA%B3%A0%EC%9A%A9%20%EC%B7%A8%EC%97%85 failed: 403 Forbidden"
+    },
+    {
+      "id": "nia_multicultural",
+      "provider": "통계청/여성가족부",
+      "keyword": "다문화 가구 외국인",
+      "purpose": "결혼이민·다문화 가구 금융 수요 보조 지표",
+      "status": "failed",
+      "error": "GET https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=%EB%8B%A4%EB%AC%B8%ED%99%94%20%EA%B0%80%EA%B5%AC%20%EC%99%B8%EA%B5%AD%EC%9D%B8 failed: 403 Forbidden"
+    }
+  ]
+}

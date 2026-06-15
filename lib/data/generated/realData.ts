@@ -9209,10 +9209,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
 ];
 
 export const realDataSummary = {
-  "generatedAt": "2026-06-14T20:06:35.221Z",
+  "generatedAt": "2026-06-15T08:03:02.374Z",
   "statusRowCount": 400,
   "regionRowCount": 200,
   "sourceFiles": {
-    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-14.csv"
+    "status": "/home/user/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-14.csv"
   }
 } as const;

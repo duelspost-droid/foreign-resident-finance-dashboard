@@ -91,6 +91,40 @@ Supabase용 SQL은 `supabase/schema.sql`, 샘플 seed는 `supabase/seed.sql`에 
 
 추천 문구 생성 로직은 `lib/data/insights.ts`에 있습니다.
 
+## 공개 데이터 수집 (외국인 통계)
+
+외국인 관련 공개 통계를 자동 수집하고 출처·이력을 모두 기록합니다.
+
+| 구분 | 수집 방식 | 인증키 | 비고 |
+| --- | --- | --- | --- |
+| 법무부 체류외국인·유학생 | data.go.kr 파일 다운로드 | 불필요 | 현재 동작 (CSV 3종) |
+| KOSIS 등록외국인·국적별 | KOSIS 오픈API | `KOSIS_API_KEY` | orgId/tblId 응답으로 확정 |
+| 행안부 외국인주민(시군구) | data.go.kr REST 오픈API | `DATA_GO_KR_SERVICE_KEY` | endpoint 응답으로 확정 |
+
+수집 명령:
+
+```bash
+npm run data:fetch   # 출처 수집 (raw + data/catalog/ 이력 기록)
+npm run data:build   # 정제 + lib/data/generated/{realData,dataLineage}.ts 생성
+npm run data:all     # fetch → build → typecheck → build 일괄 (일배치)
+```
+
+- 수집 출처 정의: `scripts/data_sources.mjs`
+- 수집 이력(성공·실패·요청 URL·행수)은 `data/catalog/latest_fetch_catalog.json` 과
+  `lib/data/generated/dataLineage.ts` 에 기록되며, git 커밋 이력으로 일자별 보존됩니다.
+- `/data-sources` 페이지에서 수집 이력과 출처별 상세를 확인할 수 있습니다.
+
+### API 키 설정
+
+1. data.go.kr 인증키: 로그인 → 마이페이지 → 인증키 발급 (Decoding 키 권장)
+2. KOSIS 인증키: https://kosis.kr/openapi → 활용신청
+3. 로컬은 `.env.local`, CI는 GitHub Actions Secret 에 `DATA_GO_KR_SERVICE_KEY`,
+   `KOSIS_API_KEY` 를 등록합니다. 키가 없으면 해당 소스는 수집을 건너뛰고
+   이력에 `skipped_no_key` 로 기록합니다 (빌드는 정상 진행).
+
+> 개인정보 보호: 모든 소스는 집계값만 사용하며, 외국인등록번호·여권번호 등 개인 식별
+> 항목은 수집·표시하지 않습니다 (CLAUDE.md 제약 준수).
+
 ## Supabase 연동 계획
 
 1. Supabase 프로젝트를 만든다.

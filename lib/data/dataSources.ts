@@ -55,6 +55,24 @@ export const dataSources: DataSourceItem[] = [
     sourceUrl: "https://www.academyinfo.go.kr"
   },
   {
+    name: "시도별 등록외국인 현황 (KOSIS API)",
+    provider: "KOSIS(법무부 출입국통계)",
+    refreshCycle: "연간",
+    keyColumns: ["기준연도", "시도", "국적", "체류자격", "등록외국인수"],
+    usage: "KOSIS 오픈API로 시도·국적 단위 등록외국인 시계열을 자동 수집",
+    limitation: "KOSIS_API_KEY 필요. orgId/tblId는 운영 환경 응답으로 확정",
+    sourceUrl: "https://kosis.kr/openapi"
+  },
+  {
+    name: "지자체 외국인주민 현황 (data.go.kr API)",
+    provider: "행정안전부",
+    refreshCycle: "연간",
+    keyColumns: ["기준연도", "시도", "시군구", "외국인주민수"],
+    usage: "REST 오픈API로 시군구 외국인주민 집계를 자동 수집·검증",
+    limitation: "DATA_GO_KR_SERVICE_KEY 필요. endpoint 경로는 운영 환경에서 확정",
+    sourceUrl: "https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=외국인주민"
+  },
+  {
     name: "내부 금융 집계 데이터",
     provider: "금융기관 내부 집계",
     refreshCycle: "월간 배치 권장",

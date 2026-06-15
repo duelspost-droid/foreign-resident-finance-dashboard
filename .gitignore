@@ -16,5 +16,7 @@ data/raw/*
 !data/raw/
 !data/raw/*.csv
 data/processed
-data/catalog
+data/catalog/*
+!data/catalog/
+!data/catalog/latest_fetch_catalog.json
 data/logs
