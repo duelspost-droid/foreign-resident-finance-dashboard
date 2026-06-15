@@ -253,5 +253,23 @@ export const discoveryQueries = [
     provider: "통계청/여성가족부",
     keyword: "다문화 가구 외국인",
     purpose: "결혼이민·다문화 가구 금융 수요 보조 지표"
+  },
+  {
+    id: "bok_remittance",
+    provider: "한국은행",
+    keyword: "국제수지 이전소득 송금",
+    purpose: "개인 해외송금·이전소득수지 거시지표(외국인 본국송금 대리지표)"
+  },
+  {
+    id: "fsc_bank_stats",
+    provider: "금융위원회",
+    keyword: "금융통계 국내은행",
+    purpose: "지역 은행 인프라·금융 접근성 보조 지표"
+  },
+  {
+    id: "foreign_exchange_remittance",
+    provider: "공통",
+    keyword: "외국인 송금 환전",
+    purpose: "외국인 대상 송금·환전 서비스 직접 통계 발굴"
   }
 ];

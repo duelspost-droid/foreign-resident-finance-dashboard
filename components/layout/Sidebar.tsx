@@ -6,6 +6,7 @@ import {
   BarChart3,
   Building2,
   Database,
+  DatabaseZap,
   FileText,
   Flag,
   GraduationCap,
@@ -23,6 +24,7 @@ const navigation = [
   { href: "/visa-segments", label: "체류자격 분석", icon: PieChart },
   { href: "/opportunity-scores", label: "금융 기회 점수", icon: BarChart3 },
   { href: "/data-sources", label: "데이터 소스", icon: Database },
+  { href: "/data-pipeline", label: "수집 파이프라인", icon: DatabaseZap },
   { href: "/compliance", label: "컴플라이언스", icon: FileText }
 ];
 

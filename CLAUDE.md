@@ -11,6 +11,23 @@
 
 ## 작업 이력 (세션별, 최신순)
 
+### 2026-06-15 세션 (이어서) — 출처 조사 + 수집기 메뉴 분리
+사용자 지시: "어디서 더 많은 정보를 가져와야할지 면밀하게 찾아봐" / "수집기가 정보 가져오는건 별도 메뉴로 분리해서 관리".
+
+완료:
+1. **신규 데이터 출처 조사** → `docs/data-sources-research.md` 작성
+   - ★최우선: 한국은행 ECOS OpenAPI(국제수지·개인송금, 키 별도 발급 필요), 금융위 금융공공데이터(국내은행 통계, 기존 키)
+   - KOSIS 실패 원인 규명: `statisticsData.do`+`ALL` 대신 `getMeta`로 itmId/objL 코드 조회 후 `statisticsParameterData.do` 2단계 호출 필요. 신규 테이블 DT_110025_A033_A(국적별 등록외국인) 발견
+   - data.go.kr 발굴 후보 file/openapi 수십 개 목록화(미등록)
+2. **발굴 키워드 확장** (`scripts/data_sources.mjs` discoveryQueries): 한국은행 송금/금융위 은행통계/외국인 환전 3종 추가
+3. **수집기 메뉴 분리**: `/data-sources`에서 파이프라인 관리 부분을 신규 `/data-pipeline`(수집 파이프라인)로 이동
+   - `app/data-pipeline/page.tsx`: 배치 실행 상태 바, 수집 요약 카드, lineage 테이블, 출처별 상세(요청 URL/오류), 발굴 후보
+   - `app/data-sources/page.tsx`: 출처 정의·한계 큐레이션만 유지 + 파이프라인 바로가기 카드
+   - `components/layout/Sidebar.tsx`: "수집 파이프라인"(DatabaseZap) 메뉴 추가
+   - typecheck/build 통과, `/data-pipeline` 라우트 정상 등록
+
+다음 작업 후보: docs/data-sources-research.md "다음 작업 권장 순서" 참고 (file 후보 일괄 등록 → KOSIS 2단계 호출 → ECOS collector 신규).
+
 ### 2026-06-15 세션 (claude-sonnet, session_012cb25b)
 사용자 지시: "외국인 정보 모든정보를 api 등을 통해서라도 전부 가져오자" /
 "홈페이지 디자인이 난해하다 … 분석가 관점에서 쉽게 확인할수 있도록 도표나 통계를 넣어 디자인 확 변경" /
