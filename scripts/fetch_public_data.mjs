@@ -1,9 +1,14 @@
-import { mkdir, readdir, writeFile } from "node:fs/promises";
+import { execFile } from "node:child_process";
+import { mkdir, readdir, rename, unlink, writeFile } from "node:fs/promises";
 import { createWriteStream } from "node:fs";
-import { dirname, join } from "node:path";
+import { join } from "node:path";
 import { Readable } from "node:stream";
 import { pipeline } from "node:stream/promises";
+import { promisify } from "node:util";
 import { publicDataSources, discoveryQueries } from "./data_sources.mjs";
+
+const execFileAsync = promisify(execFile);
+const COLLECT_CONCURRENCY = Number(process.env.COLLECT_CONCURRENCY ?? "4");
 
 const root = process.cwd();
 const rawDir = join(root, "data", "raw");
@@ -15,6 +20,41 @@ async function ensureDir(path) {
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// 한국 정부 파일은 종종 EUC-KR/CP949 인코딩. UTF-8 BOM이 있으면 utf-8,
+// 없으면 EUC-KR 2바이트 쌍(0xA1~0xFE) 수 vs UTF-8 멀티바이트 시퀀스 수를 비교해 판단.
+function detectEncoding(buf) {
+  if (buf[0] === 0xEF && buf[1] === 0xBB && buf[2] === 0xBF) return "utf-8";
+  const sample = buf.slice(0, 4096);
+  let eucKrPairs = 0;
+  let validUtf8 = 0;
+  for (let i = 0; i < sample.length - 1; i++) {
+    const b = sample[i];
+    if (b >= 0xA1 && b <= 0xFE && sample[i + 1] >= 0xA1 && sample[i + 1] <= 0xFE) {
+      eucKrPairs++; i++;
+    } else if ((b & 0xE0) === 0xC0 && (sample[i + 1] & 0xC0) === 0x80) {
+      validUtf8++; i++;
+    } else if (i + 2 < sample.length && (b & 0xF0) === 0xE0 &&
+               (sample[i + 1] & 0xC0) === 0x80 && (sample[i + 2] & 0xC0) === 0x80) {
+      validUtf8++; i += 2;
+    }
+  }
+  return (eucKrPairs > validUtf8 && eucKrPairs > 3) ? "euc-kr" : "utf-8";
+}
+
+// ZIP 파일 압축 해제 후 내부 CSV/XLSX 파일 경로를 반환. 실패 시 null.
+async function extractZip(zipPath) {
+  const extractDir = zipPath + "_ext";
+  try {
+    await execFileAsync("unzip", ["-o", "-q", zipPath, "-d", extractDir]);
+    const allFiles = await readdir(extractDir, { recursive: true });
+    const dataFiles = allFiles.filter((f) => /\.(csv|xlsx|xls)$/i.test(f)).sort();
+    if (dataFiles.length === 0) return null;
+    return join(extractDir, dataFiles[0]);
+  } catch {
+    return null;
+  }
 }
 
 function todayStamp() {
@@ -167,10 +207,35 @@ async function downloadFile(meta) {
         const text = await res.text();
         if (text.includes("로그인") || text.includes("에러")) continue;
         await writeFile(target, text, "utf8");
-      } else {
-        await pipeline(Readable.fromWeb(res.body), createWriteStream(target));
+        return { ok: true, path: target, fileName, url, attempts };
       }
-      return { ok: true, path: target, fileName, url, attempts };
+
+      // 전체 버퍼로 수신 — ZIP 감지 및 인코딩 변환에 필요.
+      const buf = Buffer.from(await res.arrayBuffer());
+
+      // ZIP 감지 (magic bytes: PK\x03\x04)
+      if (buf[0] === 0x50 && buf[1] === 0x4B) {
+        const zipPath = target.replace(/\.[^.]+$/, ".zip");
+        await writeFile(zipPath, buf);
+        const innerFile = await extractZip(zipPath);
+        if (innerFile) {
+          await rename(innerFile, target);
+          await unlink(zipPath).catch(() => {});
+          return { ok: true, path: target, fileName, url, attempts, extractedFromZip: true };
+        }
+        // 압축 해제 실패 시 ZIP 자체를 저장
+        const zipName = fileName.replace(/\.[^.]+$/, ".zip");
+        await rename(zipPath, join(rawDir, zipName)).catch(() => {});
+        continue;
+      }
+
+      // EUC-KR / UTF-8 감지 후 UTF-8로 정규화
+      const encoding = detectEncoding(buf);
+      const text = encoding === "euc-kr"
+        ? new TextDecoder("euc-kr").decode(buf)
+        : buf.toString("utf8");
+      await writeFile(target, text, "utf8");
+      return { ok: true, path: target, fileName, url, attempts, encoding };
     } catch (error) {
       attempts.push({ url, error: error.message });
     }
@@ -371,11 +436,109 @@ async function collectKosisSource(source) {
   }
 }
 
+// ── 한국은행 ECOS 오픈API 수집 ────────────────────────────────────────────────────
+// URL 형식: https://ecos.bok.or.kr/api/StatisticSearch/{key}/json/kr/{start}/{end}/{statCode}/{prdCycle}/{startDate}/{endDate}
+// RESULT.CODE "INFO-000" = 성공, 그 외 = 오류.
+async function collectEcosSource(source) {
+  const apiKey = process.env[source.apiKeyEnv];
+  if (!apiKey) {
+    return { status: "skipped_no_key", reason: `${source.apiKeyEnv} not set`, requestUrls: [] };
+  }
+  const { statCode, prdCycle = "A", startDate, endDate, rowsPerPage = 1000 } = source.params;
+  const safeKey = maskKey(apiKey);
+  const collected = [];
+  const requestUrls = [];
+  let start = 1;
+
+  while (true) {
+    const end = start + rowsPerPage - 1;
+    const url = `https://ecos.bok.or.kr/api/StatisticSearch/${apiKey}/json/kr/${start}/${end}/${statCode}/${prdCycle}/${startDate}/${endDate}`;
+    requestUrls.push(url.replace(apiKey, safeKey));
+    try {
+      const res = await fetchWithRetry(url);
+      if (!res.ok) break;
+      const body = await res.json().catch(() => null);
+      if (body?.RESULT?.CODE && body.RESULT.CODE !== "INFO-000") {
+        return { status: "api_error", requestUrls, reason: body.RESULT.MESSAGE ?? body.RESULT.CODE };
+      }
+      const rows = body?.StatisticSearch?.row;
+      if (!Array.isArray(rows) || rows.length === 0) break;
+      collected.push(...rows);
+      if (rows.length < rowsPerPage) break;
+      start += rowsPerPage;
+    } catch (error) {
+      return { status: "request_failed", requestUrls, reason: error.message };
+    }
+  }
+
+  if (collected.length === 0) return { status: "no_data", requestUrls, reason: "0 rows" };
+  const fileName = `${source.outputBaseName}_${todayStamp()}.json`;
+  await writeFile(join(rawDir, fileName), JSON.stringify(collected, null, 2), "utf8");
+  return { status: "downloaded", rowCount: collected.length, savedFile: fileName, requestUrls };
+}
+
+// ── 서울시 열린데이터광장 오픈API 수집 ─────────────────────────────────────────────
+// URL 형식: https://openapi.seoul.go.kr:8088/{key}/json/{serviceName}/{start}/{end}/
+// 응답: { [serviceName]: { list_total_count: N, RESULT: {...}, row: [...] } }
+async function collectSeoulDataSource(source) {
+  const apiKey = process.env[source.apiKeyEnv];
+  if (!apiKey) {
+    return { status: "skipped_no_key", reason: `${source.apiKeyEnv} not set`, requestUrls: [] };
+  }
+  const { serviceName, rowsPerPage = 1000 } = source.params;
+  const safeKey = maskKey(apiKey);
+  const collected = [];
+  const requestUrls = [];
+  let start = 1;
+
+  while (true) {
+    const end = start + rowsPerPage - 1;
+    const url = `https://openapi.seoul.go.kr:8088/${apiKey}/json/${serviceName}/${start}/${end}/`;
+    requestUrls.push(url.replace(apiKey, safeKey));
+    try {
+      const res = await fetchWithRetry(url);
+      if (!res.ok) break;
+      const body = await res.json().catch(() => null);
+      const svcBody = body?.[serviceName];
+      if (svcBody?.RESULT?.CODE && svcBody.RESULT.CODE !== "INFO-000") {
+        return { status: "api_error", requestUrls, reason: svcBody.RESULT.MESSAGE ?? svcBody.RESULT.CODE };
+      }
+      const rows = svcBody?.row;
+      if (!Array.isArray(rows) || rows.length === 0) break;
+      collected.push(...rows);
+      if (rows.length < rowsPerPage) break;
+      start += rowsPerPage;
+    } catch (error) {
+      return { status: "request_failed", requestUrls, reason: error.message };
+    }
+  }
+
+  if (collected.length === 0) return { status: "no_data", requestUrls, reason: "0 rows" };
+  const fileName = `${source.outputBaseName}_${todayStamp()}.json`;
+  await writeFile(join(rawDir, fileName), JSON.stringify(collected, null, 2), "utf8");
+  return { status: "downloaded", rowCount: collected.length, savedFile: fileName, requestUrls };
+}
+
 // ── 공통 ────────────────────────────────────────────────────────────────────────
 
 async function findCachedRaw(source) {
   const files = await readdir(rawDir).catch(() => []);
   return files.filter((file) => file.startsWith(source.outputBaseName)).sort().at(-1) ?? null;
+}
+
+// concurrency 수만큼 tasks(thunk 배열)를 병렬 실행. 결과 순서는 입력 순서와 동일.
+async function runConcurrent(tasks, concurrency) {
+  const results = new Array(tasks.length);
+  let idx = 0;
+  async function worker() {
+    while (idx < tasks.length) {
+      const i = idx++;
+      try { results[i] = await tasks[i](); }
+      catch (err) { results[i] = { error: err.message }; }
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(concurrency, tasks.length) }, worker));
+  return results;
 }
 
 async function discoverDataGoKr() {
@@ -398,7 +561,9 @@ async function discoverDataGoKr() {
 const COLLECTORS = {
   file: collectFileSource,
   openapi: collectOpenApiSource,
-  kosis: collectKosisSource
+  kosis: collectKosisSource,
+  ecos: collectEcosSource,
+  seoul: collectSeoulDataSource
 };
 
 async function main() {
@@ -409,13 +574,15 @@ async function main() {
     generatedAt: new Date().toISOString(),
     keysPresent: {
       DATA_GO_KR_SERVICE_KEY: Boolean(process.env.DATA_GO_KR_SERVICE_KEY),
-      KOSIS_API_KEY: Boolean(process.env.KOSIS_API_KEY)
+      KOSIS_API_KEY: Boolean(process.env.KOSIS_API_KEY),
+      ECOS_API_KEY: Boolean(process.env.ECOS_API_KEY),
+      SEOUL_OPENAPI_KEY: Boolean(process.env.SEOUL_OPENAPI_KEY)
     },
     sources: [],
     discovery: await discoverDataGoKr()
   };
 
-  for (const source of publicDataSources) {
+  const tasks = publicDataSources.map((source) => async () => {
     const collector = COLLECTORS[source.type];
     const registry = {
       id: source.id,
@@ -431,21 +598,19 @@ async function main() {
       verified: source.verified,
       notes: source.notes
     };
-
-    if (!collector) {
-      catalog.sources.push({ ...registry, result: { status: "unknown_type" } });
-      continue;
-    }
-
+    if (!collector) return { ...registry, result: { status: "unknown_type" } };
     let result;
     try {
       result = await collector(source);
     } catch (error) {
       result = { status: "collector_error", reason: error.message };
     }
-    catalog.sources.push({ ...registry, fetchedAt: new Date().toISOString(), result });
+    const entry = { ...registry, fetchedAt: new Date().toISOString(), result };
     console.log(`[${source.id}] ${result.status}${result.rowCount ? ` (${result.rowCount} rows)` : ""}`);
-  }
+    return entry;
+  });
+
+  catalog.sources = await runConcurrent(tasks, COLLECT_CONCURRENCY);
 
   const catalogPath = join(catalogDir, `fetch_catalog_${todayStamp()}.json`);
   await writeFile(catalogPath, JSON.stringify(catalog, null, 2), "utf8");

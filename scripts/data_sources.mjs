@@ -484,6 +484,83 @@ export const publicDataSources = [
   // 국적별 집계 트렌드가 필요하면 orgId=111 정확한 tblId 확인 후 재활성화 한다.
   // { id: "kosis_foreigner_by_nationality", type: "kosis", orgId: "111", tblId: "DT_1B040A1", ... },
 
+  // ── 한국은행 ECOS 오픈API (ECOS_API_KEY 필요) ─────────────────────────────────
+  // 발급: https://ecos.bok.or.kr/api/#/DevGuide/apiKey
+  // 형식: StatisticSearch/{key}/json/kr/{start}/{end}/{statCode}/{prdCycle}/{startDate}/{endDate}
+  {
+    id: "ecos_bop_transfer_income",
+    type: "ecos",
+    provider: "한국은행(ECOS)",
+    title: "국제수지 이전소득수지 (개인 해외송금 대리지표)",
+    category: "외국인 경제·금융 보조",
+    apiKeyEnv: "ECOS_API_KEY",
+    endpoint: "https://ecos.bok.or.kr/api/StatisticSearch",
+    params: {
+      statCode: "021Y205",   // 국제수지 서비스수지·이전소득수지 — 운영 환경에서 정확한 코드 확인 필요
+      prdCycle: "A",         // 연간(Annual)
+      startDate: "2018",
+      endDate: CY,
+      rowsPerPage: 1000
+    },
+    targetTable: "finance_segment_aggregate",
+    outputBaseName: "ecos_bop_transfer_income",
+    sourceUrl: "https://ecos.bok.or.kr/#/StatisticsByTheme",
+    updateCycle: "연/분기",
+    license: "한국은행 데이터 이용약관",
+    personalDataSafe: true,
+    verified: false,
+    notes: "외국인 본국송금 거시지표. statCode 운영 환경에서 확정 필요. ECOS_API_KEY GitHub Secret 등록 필요."
+  },
+  {
+    id: "ecos_foreigner_fx_remittance",
+    type: "ecos",
+    provider: "한국은행(ECOS)",
+    title: "거주자 및 비거주자 외국환 거래(개인 송금)",
+    category: "외국인 경제·금융 보조",
+    apiKeyEnv: "ECOS_API_KEY",
+    endpoint: "https://ecos.bok.or.kr/api/StatisticSearch",
+    params: {
+      statCode: "036Y001",   // 국민소득계정 대리 — 운영 환경에서 정확한 송금 통계 코드 확인
+      prdCycle: "A",
+      startDate: "2018",
+      endDate: CY,
+      rowsPerPage: 1000
+    },
+    targetTable: "finance_segment_aggregate",
+    outputBaseName: "ecos_foreigner_fx_remittance",
+    sourceUrl: "https://ecos.bok.or.kr/#/StatisticsByTheme",
+    updateCycle: "연",
+    license: "한국은행 데이터 이용약관",
+    personalDataSafe: true,
+    verified: false,
+    notes: "외국인 송금·환전 거래 거시지표 후보. ECOS statCode 확인 후 verified=true 전환."
+  },
+
+  // ── 서울시 열린데이터광장 오픈API (SEOUL_OPENAPI_KEY 필요) ──────────────────────
+  // 발급: https://data.seoul.go.kr/dataList/OA-14979/S/1/datasetView.do (회원가입 후)
+  // 형식: https://openapi.seoul.go.kr:8088/{key}/json/{서비스명}/{시작}/{끝}/
+  {
+    id: "seoul_foreigner_population",
+    type: "seoul",
+    provider: "서울특별시(열린데이터광장)",
+    title: "서울시 외국인 주민 현황(자치구별·국적별)",
+    category: "외국인 직접 통계",
+    apiKeyEnv: "SEOUL_OPENAPI_KEY",
+    endpoint: "https://openapi.seoul.go.kr:8088",
+    params: {
+      serviceName: "SPOP_FOREIGNER_STTUS",  // 운영 환경에서 실제 서비스명 확인 필요
+      rowsPerPage: 1000
+    },
+    targetTable: "foreign_resident_region_month",
+    outputBaseName: "seoul_foreigner_population",
+    sourceUrl: "https://data.seoul.go.kr/dataList/OA-14979/S/1/datasetView.do",
+    updateCycle: "월",
+    license: "서울시 공공데이터 이용허락",
+    personalDataSafe: true,
+    verified: false,
+    notes: "서울 25개 자치구×국적별 외국인 월별 통계. serviceName 실제 값 확인 필요. SEOUL_OPENAPI_KEY GitHub Secret 등록 필요."
+  },
+
   // ── data.go.kr REST 오픈API (DATA_GO_KR_SERVICE_KEY 필요) ─────────────────────
   // 구조: https://apis.data.go.kr/{org}/{api}/{op}?serviceKey=...&type=json&pageNo=&numOfRows=
   {
