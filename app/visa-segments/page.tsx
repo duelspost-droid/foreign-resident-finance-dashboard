@@ -5,7 +5,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Panel } from "@/components/ui/Panel";
 import { StatTile } from "@/components/ui/StatTile";
 import { segmentRecommendationMap } from "@/lib/data/insights";
-import { sampleResidentStatus } from "@/lib/data/mockData";
+import { hasRealVisaData, sampleResidentStatus } from "@/lib/data/mockData";
 import type {
   ForeignResidentSegment,
   ForeignResidentStatus
@@ -118,7 +118,7 @@ export default function VisaSegmentsPage() {
           accent="#b45309"
           icon={<Wallet size={18} />}
           label="총 분석 인원"
-          sub="sampleResidentStatus 합계"
+          sub={hasRealVisaData ? "법무부 외국인체류데이터(2024) 실데이터" : "샘플 합계"}
           unit="명"
           value={formatNumber(totalAnalyzed)}
         />
@@ -273,8 +273,9 @@ export default function VisaSegmentsPage() {
       </Panel>
 
       <Panel
-        subtitle="개인 추론이 아닌 집계 단위 분류 가설로만 사용합니다. 대표 체류자격·주요 국적은 세그먼트 내 최대 인원 행 기준입니다."
+        subtitle={hasRealVisaData ? "법무부 외국인체류데이터(2024) 장기체류 비자타입별 집계 · 개인 추론 금지" : "개인 추론이 아닌 집계 단위 분류 가설로만 사용합니다."}
         title="세그먼트별 체류자격 매핑"
+        right={hasRealVisaData ? <span className="chip chip-up">실데이터 연동</span> : undefined}
       >
         <DataTable
           columns={columns}

@@ -97,16 +97,16 @@ export default function DashboardPage() {
   const kpis = [
     {
       label: "총 체류외국인",
-      value: 2_459_883,
+      value: kpiSummary.totalResidents > 0 ? kpiSummary.totalResidents : 2_459_883,
       unit: "명",
       trend: "+4.2% YoY",
       icon: Users,
       bg: "#0f766e",
-      sub: "법무부 체류통계 기준"
+      sub: kpiSummary.totalResidents > 0 ? "법무부 국적별 현황(2024) · 실데이터" : "법무부 체류통계 기준"
     },
     {
       label: "등록외국인",
-      value: 1_320_540,
+      value: kpiSummary.registeredResidents > 0 ? kpiSummary.registeredResidents : 1_320_540,
       unit: "명",
       trend: "+3.8% YoY",
       icon: Banknote,
@@ -115,9 +115,9 @@ export default function DashboardPage() {
     },
     {
       label: "외국인 유학생",
-      value: 173_490,
+      value: kpiSummary.foreignStudents > 0 ? kpiSummary.foreignStudents : 173_490,
       unit: "명",
-      trend: "+12.3% YoY",
+      trend: kpiSummary.foreignStudents > 0 ? `${realDataSummary.studentYearCount}개년 실데이터` : "+12.3% YoY",
       icon: GraduationCap,
       bg: "#b45309",
       sub: "D-2/D-4 체류 기준"

@@ -23,12 +23,15 @@ import {
   realForeignResidentStatus,
   realForeignStudentByVisa,
   realForeignStudentByYear,
+  realNationalityDistribution,
   realRegionData,
   realRegionResidents,
   realRegionResidentSummary,
+  realStayVisaTypes,
   realStudentSummary,
   realUniversityRanking,
-  realUniversitySummary
+  realUniversitySummary,
+  realVisaDistribution
 } from "./generated/realData";
 
 const fallbackRegionData: ForeignResidentRegionMonth[] = [
@@ -247,21 +250,36 @@ const fallbackResidentStatus: ForeignResidentStatus[] = [
   }
 ];
 
+// 체류자격별 데이터가 있으면 비자타입별(장기체류) 레코드를 사용 — 세그먼트 분류가 정확.
+// 없으면 국적별 집계(realForeignResidentStatus), 최종 폴백은 샘플 데이터.
 export const sampleResidentStatus: ForeignResidentStatus[] =
-  realDataSummary.statusRowCount > 0
-    ? realForeignResidentStatus.map((row) => ({
-        id: row.id,
-        baseYear: row.baseYear,
-        nationality: row.nationality,
-        visaCode: row.visaCode,
-        visaName: row.visaName,
-        segmentType: row.segmentType as ForeignResidentSegment,
-        residentCount: row.residentCount,
-        financialNeedTags: [...row.financialNeedTags],
-        sourceName: row.sourceName,
-        sourceUrl: row.sourceUrl
+  realStayVisaTypes.length > 0
+    ? realStayVisaTypes.map((v, i) => ({
+        id: `real-visa-${i + 1}`,
+        baseYear: 2024,
+        nationality: "전체",
+        visaCode: v.visaCode,
+        visaName: v.visaName,
+        segmentType: v.segment as ForeignResidentSegment,
+        residentCount: v.count,
+        financialNeedTags: [],
+        sourceName: "법무부 외국인체류데이터",
+        sourceUrl: "https://www.data.go.kr/data/3069963/fileData.do"
       }))
-    : fallbackResidentStatus;
+    : realDataSummary.statusRowCount > 0
+      ? realForeignResidentStatus.map((row) => ({
+          id: row.id,
+          baseYear: row.baseYear,
+          nationality: row.nationality,
+          visaCode: row.visaCode,
+          visaName: row.visaName,
+          segmentType: row.segmentType as ForeignResidentSegment,
+          residentCount: row.residentCount,
+          financialNeedTags: [...row.financialNeedTags],
+          sourceName: row.sourceName,
+          sourceUrl: row.sourceUrl
+        }))
+      : fallbackResidentStatus;
 
 export const sampleUniversityData: ForeignStudentUniversity[] = [
   {
@@ -567,7 +585,7 @@ export const monthlyTrendData = [
   { month: "2025-12", 중국: 28500, 베트남: 9800, 우즈베키스탄: 14200, 몽골: 7600 }
 ];
 
-export const nationalityDistributionData = [
+const MOCK_NATIONALITY_DIST = [
   { nationality: "중국", residents: 28500, share: 31 },
   { nationality: "우즈베키스탄", residents: 14200, share: 15 },
   { nationality: "베트남", residents: 9800, share: 11 },
@@ -576,10 +594,14 @@ export const nationalityDistributionData = [
   { nationality: "필리핀", residents: 4200, share: 5 }
 ];
 
-export const visaDistributionData: {
-  name: ForeignResidentSegment;
-  value: number;
-}[] = [
+export const nationalityDistributionData =
+  realNationalityDistribution.length > 0
+    ? realNationalityDistribution.slice(0, 15).map((r) => ({ nationality: r.nationality, residents: r.residents, share: r.share }))
+    : MOCK_NATIONALITY_DIST;
+
+export const hasRealNationalityData = realNationalityDistribution.length > 0;
+
+const MOCK_VISA_DIST: { name: ForeignResidentSegment; value: number }[] = [
   { name: "비전문취업 근로자", value: 36 },
   { name: "유학생", value: 22 },
   { name: "재외동포", value: 18 },
@@ -587,6 +609,14 @@ export const visaDistributionData: {
   { name: "결혼이민", value: 8 },
   { name: "기타", value: 7 }
 ];
+
+export const visaDistributionData: { name: ForeignResidentSegment; value: number }[] =
+  realVisaDistribution.length > 0
+    ? (realVisaDistribution.map((v) => ({ name: v.name as ForeignResidentSegment, value: v.value })))
+    : MOCK_VISA_DIST;
+
+export const hasRealVisaData = realVisaDistribution.length > 0;
+export const stayVisaTypes = realStayVisaTypes;
 
 export const scoreRadarData = [
   {
@@ -638,8 +668,13 @@ export const regionResidents = realRegionResidents;
 export const regionResidentSummary = realRegionResidentSummary;
 export const hasRealRegionResidents = realRegionResidents.length > 0;
 
+// 전체 체류외국인 합계 — 국적 분포 실데이터가 있으면 이를 우선 사용.
+const totalFromRealNationality = realNationalityDistribution.reduce((s, r) => s + r.residents, 0);
+
 export const kpiSummary = {
-  totalResidents: sampleRegionData.reduce((sum, row) => sum + row.residentCount, 0),
+  totalResidents: totalFromRealNationality > 0
+    ? totalFromRealNationality
+    : sampleRegionData.reduce((sum, row) => sum + row.residentCount, 0),
   registeredResidents: sampleRegionData.reduce(
     (sum, row) => sum + (row.longTermCount ?? 0),
     0
