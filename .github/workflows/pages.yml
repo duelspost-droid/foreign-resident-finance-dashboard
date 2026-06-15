@@ -6,7 +6,8 @@ on:
       - main
   workflow_dispatch:
   schedule:
-    - cron: "30 18 * * *"
+    - cron: "0 2 * * *"    # 11:00 KST — morning window (Korean gov servers accessible)
+    - cron: "30 18 * * *"  # 03:30 KST — nightly backup run
 
 permissions:
   contents: write
