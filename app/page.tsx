@@ -532,8 +532,8 @@ export default function DashboardPage() {
                 {[...healthInsuranceData].sort((a, b) => b.total - a.total).slice(0, 5).map((h) => {
                   const max = [...healthInsuranceData].sort((a, b) => b.total - a.total)[0]?.total ?? 1;
                   return (
-                    <div key={h.nationality} className="flex items-center gap-2 text-xs">
-                      <span className="w-20 shrink-0 truncate text-ink">{h.nationality}</span>
+                    <div key={h.region} className="flex items-center gap-2 text-xs">
+                      <span className="w-20 shrink-0 truncate text-ink">{h.region}</span>
                       <div className="h-2 flex-1 overflow-hidden rounded-full" style={{ background: "#f1f5f9" }}>
                         <div className="h-2 rounded-full" style={{ width: `${Math.round((h.total / max) * 100)}%`, background: "#3157a4" }} />
                       </div>
@@ -552,8 +552,8 @@ export default function DashboardPage() {
                 {[...multiculturalFamilyData].sort((a, b) => b.total - a.total).slice(0, 5).map((m, i) => {
                   const max = [...multiculturalFamilyData].sort((a, b) => b.total - a.total)[0]?.total ?? 1;
                   return (
-                    <div key={`${m.type}-${i}`} className="flex items-center gap-2 text-xs">
-                      <span className="w-24 shrink-0 truncate text-ink">{m.type}</span>
+                    <div key={`${m.region}-${i}`} className="flex items-center gap-2 text-xs">
+                      <span className="w-24 shrink-0 truncate text-ink">{m.region}</span>
                       <div className="h-2 flex-1 overflow-hidden rounded-full" style={{ background: "#f1f5f9" }}>
                         <div className="h-2 rounded-full" style={{ width: `${Math.round((m.total / max) * 100)}%`, background: "#be123c" }} />
                       </div>

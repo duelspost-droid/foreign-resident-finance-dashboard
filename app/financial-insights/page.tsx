@@ -578,8 +578,8 @@ export default function FinancialInsightsPage() {
               </div>
               <div className="space-y-2">
                 {sorted.slice(0, 15).map((row) => (
-                  <div key={row.nationality} className="flex items-center gap-3">
-                    <span className="w-24 shrink-0 truncate text-xs text-ink">{row.nationality}</span>
+                  <div key={row.region} className="flex items-center gap-3">
+                    <span className="w-24 shrink-0 truncate text-xs text-ink">{row.region}</span>
                     <div className="flex flex-1 items-center gap-1">
                       <div
                         className="h-2 rounded-l"
@@ -617,8 +617,8 @@ export default function FinancialInsightsPage() {
               </p>
               <div className="space-y-2">
                 {sorted.map((row, i) => (
-                  <div key={`${row.type}-${i}`} className="flex items-center gap-3">
-                    <span className="w-32 shrink-0 truncate text-xs text-ink">{row.type}</span>
+                  <div key={`${row.region}-${i}`} className="flex items-center gap-3">
+                    <span className="w-32 shrink-0 truncate text-xs text-ink">{row.region}</span>
                     <div className="flex flex-1 items-center gap-2">
                       <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100">
                         <div
