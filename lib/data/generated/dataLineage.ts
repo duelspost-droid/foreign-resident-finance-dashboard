@@ -40,7 +40,7 @@ export type DataLineageDiscovery = {
 
 export type DataLineage = {
   generatedAt: string;
-  keysPresent: { DATA_GO_KR_SERVICE_KEY: boolean; KOSIS_API_KEY: boolean };
+  keysPresent: Record<string, boolean>;
   totals: { sources: number; downloaded: number; cached: number; skippedNoKey: number; failed: number };
   sources: DataLineageSource[];
   discovery: DataLineageDiscovery[];
