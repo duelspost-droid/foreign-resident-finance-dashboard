@@ -58,6 +58,7 @@ jobs:
             data/catalog/latest_fetch_catalog.json
             data/registry/approved_candidates.json
             data/registry/pending_candidates.json
+            data/raw/*.csv
 
       - name: Load Supabase data
         if: ${{ env.SUPABASE_URL != '' && env.SUPABASE_SERVICE_ROLE_KEY != '' }}

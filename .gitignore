@@ -15,6 +15,8 @@ coverage
 data/raw/*
 !data/raw/
 !data/raw/*.csv
+# 대용량 원본(304k행)은 캐시 커밋에서 제외 — 대학 파서는 moe_foreign_student_latest 사용.
+data/raw/academyinfo_foreign_student_count*.csv
 data/processed
 data/catalog/*
 !data/catalog/
