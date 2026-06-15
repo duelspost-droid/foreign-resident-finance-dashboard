@@ -6093,6 +6093,10 @@ export const realApiStatusData: readonly ForeignResidentStatus[] = [];
 
 export const realApiRegionData: readonly ForeignResidentRegionMonth[] = [];
 
+// KOSIS 경제활동인구(취업자·실업자 등) — nationality 없는 집계 시계열.
+export type RealEconActivity = { period: string; category: string; value: number; sourceId: string; provider: string; title: string };
+export const realEconActivity: readonly RealEconActivity[] = [];
+
 // 국적 분포 + 비자/세그먼트 분포 — 국적·체류자격 페이지가 사용.
 export type RealNationalityDist = { nationality: string; residents: number; share: number };
 export type RealVisaSegment = { name: string; value: number };
@@ -7400,8 +7404,8 @@ export const realStudentSummary = {
   "yoy": -24.7
 } as const;
 
-// 대학알리미 대학별 외국인유학생수 — 대학/유학생 페이지가 사용.
-export type RealUniversity = { rank: number; university: string; campus: string | null; foreignStudents: number; foreignShare: number | null };
+// 대학별 외국인유학생수 — 대학/유학생 페이지가 사용 (교육부 1차, 대학알리미 폴백).
+export type RealUniversity = { rank: number; university: string; campus: string | null; sido?: string | null; foreignStudents: number; foreignShare: number | null };
 export const realUniversityRanking: readonly RealUniversity[] = [];
 
 export const realUniversitySummary = {
@@ -7420,10 +7424,36 @@ export const realRegionResidentSummary = {
   "totalResidents": 0
 } as const;
 
+// 행안부 국적×연령대 현황 — 국적 분석 페이지가 사용.
+export type RealNationalityAge = { nationality: string; ageGroup: string; count: number };
+export const realNationalityByAge: readonly RealNationalityAge[] = [];
+
+export const realNationalityAgeGroups: readonly string[] = [];
+
+export const realNationalityAgeTotals: readonly { nationality: string; total: number }[] = [];
+
+// 국민건강보험공단 외국인 건강보험 적용인구 — 소득·취업형태 보조 지표.
+export type RealHealthInsurance = { nationality: string; workplace: number; regional: number; total: number };
+export const realHealthInsurance: readonly RealHealthInsurance[] = [];
+
+// 여성가족부 다문화가족 현황.
+export type RealMulticulturalFamily = { type: string; total: number; year: number | null };
+export const realMulticulturalFamily: readonly RealMulticulturalFamily[] = [];
+
+export const realMulticulturalFamilySummary = {
+  "totalCount": 0,
+  "latestYear": null
+} as const;
+
+// 대학알리미 고등교육기관 기본현황 (위치·유형 보조).
+export type RealUniversityStat = { name: string; type: string; region: string };
+export const realUniversityStats: readonly RealUniversityStat[] = [];
+
 export const realDataSummary = {
-  "generatedAt": "2026-06-15T21:41:12.359Z",
+  "generatedAt": "2026-06-15T21:30:41.608Z",
   "statusRowCount": 205,
   "nationalityCount": 205,
+  "nationalitySource": "annual",
   "visaSegmentCount": 8,
   "regionRowCount": 200,
   "apiStatusRowCount": 0,
@@ -7431,12 +7461,19 @@ export const realDataSummary = {
   "studentYearCount": 14,
   "universityCount": 0,
   "regionResidentCount": 0,
-  "apiParsedFiles": [],
+  "nationalityByAgeCount": 0,
+  "apiParsedFiles": [
+    {
+      "source": "kosis_foreigner_economic_activity",
+      "file": "kosis_foreigner_economic_activity_2026-06-15.json",
+      "produced": 0
+    }
+  ],
   "sourceFiles": {
-    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-14.csv",
-    "stay": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-06-14.csv",
-    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-14.csv",
-    "academy": null,
-    "mois": null
+    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-15.csv",
+    "stay": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-06-15.csv",
+    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-15.csv",
+    "moeStudent": null,
+    "mois": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/mois_foreign_resident_region_file_2026-06-15.csv"
   }
 } as const;

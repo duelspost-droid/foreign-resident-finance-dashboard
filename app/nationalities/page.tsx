@@ -8,9 +8,13 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Panel } from "@/components/ui/Panel";
 import { StatTile } from "@/components/ui/StatTile";
 import {
+  hasNationalityByAge,
   hasRealNationalityData,
   hasRealVisaData,
   kpiSummary,
+  nationalityAgeGroups,
+  nationalityAgeTotals,
+  nationalityByAge,
   nationalityDistributionData,
   sampleResidentStatus,
   visaDistributionData
@@ -190,6 +194,49 @@ export default function NationalitiesPage() {
           <TrendLineChart />
         </div>
       </Panel>
+
+      {hasNationalityByAge && (
+        <Panel
+          title="국적별 연령대 분포"
+          subtitle="행안부 외국인주민 국적×연령대 현황 · 상위 10개 국적의 연령구조 비교"
+          right={<span className="eyebrow">실데이터 · {nationalityAgeTotals.length}개 국적</span>}
+        >
+          <div className="space-y-3">
+            {nationalityAgeTotals.slice(0, 10).map(({ nationality, total }) => {
+              const ageRow = nationalityAgeGroups.map((ag) => {
+                const item = nationalityByAge.find(
+                  (i) => i.nationality === nationality && i.ageGroup === ag
+                );
+                return { ageGroup: ag, count: item?.count ?? 0 };
+              });
+              const maxCount = Math.max(...ageRow.map((a) => a.count), 1);
+              return (
+                <div key={nationality} className="border-b border-line pb-3 last:border-0 last:pb-0">
+                  <div className="mb-1.5 flex items-center justify-between text-xs">
+                    <span className="font-semibold text-ink">{nationality}</span>
+                    <span className="font-mono text-muted">{formatNumber(total)}명</span>
+                  </div>
+                  <div className="flex items-end gap-0.5">
+                    {ageRow.map(({ ageGroup, count }) => (
+                      <div key={ageGroup} className="flex flex-1 flex-col items-center gap-0.5">
+                        <div
+                          className="w-full rounded-t-sm"
+                          style={{
+                            height: Math.max(2, Math.round((count / maxCount) * 40)),
+                            background: "#0f766e",
+                            opacity: count > 0 ? 0.7 + (count / maxCount) * 0.3 : 0.1
+                          }}
+                        />
+                        <span className="text-[9px] leading-none text-muted">{ageGroup.replace("세", "")}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </Panel>
+      )}
 
       <Panel
         title="체류자격별 인원 및 금융 니즈"

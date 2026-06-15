@@ -285,6 +285,7 @@ async function collectFileSource(source) {
     status: download.ok ? "downloaded" : "download_failed",
     rowCount: meta.rowCount || null,
     savedFile: download.ok ? download.fileName : null,
+    headerLine: download.ok ? (download.headerLine ?? null) : null,
     requestUrls: download.attempts.map((a) => a.url).filter(Boolean),
     download
   };
