@@ -41,9 +41,12 @@ jobs:
         run: npm ci
 
       - name: Fetch and build data
-        timeout-minutes: 8
+        # data:ci = fetch + sync_candidates + build_real_data only.
+        # (The full typecheck/build that data:all also runs is redundant here —
+        #  the dedicated "Build static site" step below builds once.)
+        timeout-minutes: 15
         continue-on-error: true
-        run: npm run data:all
+        run: npm run data:ci
 
       - name: Commit generated data if changed
         uses: stefanzweifel/git-auto-commit-action@v7

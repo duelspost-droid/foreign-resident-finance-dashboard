@@ -17,6 +17,7 @@
     "data:fetch": "node scripts/fetch_public_data.mjs",
     "data:build": "node scripts/build_real_data.mjs",
     "data:all": "node scripts/daily_data_batch.mjs",
+    "data:ci": "node scripts/fetch_public_data.mjs && node scripts/sync_candidates.mjs && node scripts/build_real_data.mjs",
     "batch:daily": "node scripts/daily_data_batch.mjs",
     "supabase:load": "node scripts/load_supabase.mjs",
     "supabase:check": "node scripts/check_supabase.mjs",
