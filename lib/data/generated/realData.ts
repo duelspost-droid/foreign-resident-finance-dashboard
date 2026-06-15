@@ -9208,10 +9208,18 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
   }
 ];
 
+// API(KOSIS/data.go.kr) 수집 보조 데이터. 1차(MOJ) 집계와 분리해 제공한다.
+export const realApiStatusData: readonly ForeignResidentStatus[] = [];
+
+export const realApiRegionData: readonly ForeignResidentRegionMonth[] = [];
+
 export const realDataSummary = {
-  "generatedAt": "2026-06-15T08:03:02.374Z",
+  "generatedAt": "2026-06-15T08:08:27.949Z",
   "statusRowCount": 400,
   "regionRowCount": 200,
+  "apiStatusRowCount": 0,
+  "apiRegionRowCount": 0,
+  "apiParsedFiles": [],
   "sourceFiles": {
     "status": "/home/user/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-14.csv"
   }

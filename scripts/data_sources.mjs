@@ -92,6 +92,9 @@ export const publicDataSources = [
     },
     targetTable: "foreign_resident_region_month",
     outputBaseName: "kosis_registered_foreigner_by_region",
+    // KOSIS 표준 응답 필드: PRD_DE(기간), C1_NM(분류1), C2_NM(분류2), DT(값), UNIT_NM(단위)
+    // 운영 환경에서 실제 응답을 보고 region/value 필드를 확정한다.
+    responseMapping: { period: "PRD_DE", region: "C1_NM", value: "DT" },
     sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=111&tblId=DT_1B040A3",
     updateCycle: "연",
     license: "KOSIS 이용약관",
@@ -120,6 +123,7 @@ export const publicDataSources = [
     },
     targetTable: "foreign_resident_status",
     outputBaseName: "kosis_foreigner_by_nationality",
+    responseMapping: { period: "PRD_DE", nationality: "C1_NM", segment: "C2_NM", value: "DT" },
     sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=111&tblId=DT_1B040A1",
     updateCycle: "연",
     license: "KOSIS 이용약관",
@@ -142,6 +146,13 @@ export const publicDataSources = [
     pagination: { pageParam: "pageNo", rowsParam: "numOfRows", rows: 1000, maxPages: 50 },
     targetTable: "foreign_resident_region_month",
     outputBaseName: "mois_foreign_resident_by_region_api",
+    // 후보 필드명(한/영) — 실제 응답으로 확정. 일치하는 첫 키를 사용한다.
+    responseMapping: {
+      sido: ["시도", "sido", "ctprvnNm", "sidoNm"],
+      sigungu: ["시군구", "sigungu", "signguNm", "sigunguNm"],
+      value: ["외국인주민수", "외국인수", "frgnrCnt", "cnt", "popltnCnt"],
+      period: ["기준연도", "year", "baseYear", "stdrYy"]
+    },
     sourceUrl: "https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=외국인주민",
     updateCycle: "연",
     license: "공공데이터 이용허락(제1유형)",
