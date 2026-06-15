@@ -9331,21 +9331,15 @@ export const realStudentSummary = {
 } as const;
 
 export const realDataSummary = {
-  "generatedAt": "2026-06-15T14:18:40.405Z",
+  "generatedAt": "2026-06-15T15:04:26.192Z",
   "statusRowCount": 400,
   "regionRowCount": 200,
   "apiStatusRowCount": 0,
   "apiRegionRowCount": 0,
   "studentYearCount": 14,
-  "apiParsedFiles": [
-    {
-      "source": "kosis_foreigner_economic_activity",
-      "file": "kosis_foreigner_economic_activity_2026-06-15.json",
-      "produced": 0
-    }
-  ],
+  "apiParsedFiles": [],
   "sourceFiles": {
-    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-15.csv",
-    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-15.csv"
+    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-14.csv",
+    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-14.csv"
   }
 } as const;
