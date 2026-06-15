@@ -24,7 +24,11 @@ import {
   realForeignStudentByVisa,
   realForeignStudentByYear,
   realRegionData,
-  realStudentSummary
+  realRegionResidents,
+  realRegionResidentSummary,
+  realStudentSummary,
+  realUniversityRanking,
+  realUniversitySummary
 } from "./generated/realData";
 
 const fallbackRegionData: ForeignResidentRegionMonth[] = [
@@ -623,6 +627,16 @@ export const foreignStudentByYear = realForeignStudentByYear;
 export const foreignStudentByVisa = realForeignStudentByVisa;
 export const foreignStudentSummary = realStudentSummary;
 export const hasRealStudentData = realStudentSummary.hasData;
+
+// 대학알리미 대학별 외국인유학생수 (수집 성공 시 채워짐).
+export const universityRanking = realUniversityRanking;
+export const universitySummary = realUniversitySummary;
+export const hasRealUniversityData = realUniversityRanking.length > 0;
+
+// 행안부 시군구 외국인주민 (수집 성공 시 채워짐).
+export const regionResidents = realRegionResidents;
+export const regionResidentSummary = realRegionResidentSummary;
+export const hasRealRegionResidents = realRegionResidents.length > 0;
 
 export const kpiSummary = {
   totalResidents: sampleRegionData.reduce((sum, row) => sum + row.residentCount, 0),

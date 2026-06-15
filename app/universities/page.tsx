@@ -5,7 +5,10 @@ import {
   foreignStudentByYear,
   foreignStudentSummary,
   hasRealStudentData,
-  sampleUniversityOpportunities
+  hasRealUniversityData,
+  sampleUniversityOpportunities,
+  universityRanking,
+  universitySummary
 } from "@/lib/data/mockData";
 import { realDataSummary } from "@/lib/data/generated/realData";
 import { formatNumber, formatScore } from "@/lib/utils/format";
@@ -154,14 +157,60 @@ export default function UniversitiesPage() {
             </div>
           </section>
 
-          {/* 대학별 데이터 안내 */}
-          <section className="surface p-5">
-            <h3 className="surface-title mb-1">대학·캠퍼스별 세분화 (예정)</h3>
-            <p className="text-sm leading-6 text-muted">
-              대학별·캠퍼스별 유학생 수는 <strong>대학알리미(고등교육기관 외국인유학생 수)</strong> 소스 연동 시 추가됩니다.
-              현재 수집 파이프라인에 등록되어 있으며, 소스 구조 검증 후 캠퍼스 단위 랭킹으로 제공할 예정입니다.
-            </p>
-          </section>
+          {/* 대학별 랭킹 (대학알리미 수집 성공 시) */}
+          {hasRealUniversityData ? (
+            <section className="surface">
+              <div className="surface-header pb-3">
+                <div>
+                  <h3 className="surface-title">대학별 외국인 유학생 TOP 30</h3>
+                  <p className="surface-subtitle">
+                    대학알리미 고등교육기관 외국인유학생수
+                    {universitySummary.latestYear ? ` · ${universitySummary.latestYear}년` : ""} · 전체 {formatNumber(universitySummary.universityCount)}개교 집계
+                  </p>
+                </div>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[560px] text-sm">
+                  <thead>
+                    <tr style={{ background: "#f8fafc", borderBottom: "2px solid #e2e8f0" }}>
+                      <th className="px-4 py-2.5 text-left text-xs font-bold text-muted">#</th>
+                      <th className="px-4 py-2.5 text-left text-xs font-bold text-muted">대학 (캠퍼스)</th>
+                      <th className="px-4 py-2.5 text-right text-xs font-bold text-muted">외국인 유학생</th>
+                      <th className="px-4 py-2.5 text-right text-xs font-bold text-muted">유학생 비중</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {universityRanking.map((u) => {
+                      const max = universityRanking[0]?.foreignStudents || 1;
+                      return (
+                        <tr key={`${u.university}-${u.campus ?? ""}`} style={{ borderBottom: "1px solid #f1f5f9" }}>
+                          <td className="px-4 py-2.5 font-bold text-muted">{u.rank}</td>
+                          <td className="px-4 py-2.5">
+                            <div className="font-semibold text-ink">{u.university}</div>
+                            {u.campus ? <div className="text-xs text-muted">{u.campus}</div> : null}
+                            <div className="mt-1 h-1.5 w-full max-w-[220px] overflow-hidden rounded-full" style={{ background: "#eef2f7" }}>
+                              <div className="h-full rounded-full" style={{ width: `${Math.round((u.foreignStudents / max) * 100)}%`, background: "#0f766e" }} />
+                            </div>
+                          </td>
+                          <td className="px-4 py-2.5 text-right font-mono font-bold text-ink">{formatNumber(u.foreignStudents)}</td>
+                          <td className="px-4 py-2.5 text-right text-muted">{u.foreignShare != null ? `${u.foreignShare}%` : "—"}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          ) : (
+            <section className="surface p-5">
+              <h3 className="surface-title mb-1">대학·캠퍼스별 세분화 (수집 대기)</h3>
+              <p className="text-sm leading-6 text-muted">
+                대학별·캠퍼스별 유학생 수는 <strong>대학알리미(고등교육기관 외국인유학생 수)</strong> 소스가
+                정상 수집되면 자동으로 TOP 30 랭킹이 표시됩니다. 파서는 연동 완료 상태이며, 공공데이터포털 응답이
+                안정화되는 즉시 채워집니다.
+              </p>
+            </section>
+          )}
         </>
       ) : (
         // 실데이터 미수집 시 폴백: 샘플 대학 랭킹

@@ -27,6 +27,8 @@ const SURFACED: Record<string, string> = {
   moj_foreign_resident_status_2024: "국적·체류자격·기회점수",
   moj_foreign_stay_data_2024: "지역 분석",
   moj_foreign_student_stay_2024: "대학/유학생",
+  academyinfo_foreign_student_count: "대학별 랭킹",
+  mois_foreign_resident_region_file: "시군구 외국인주민",
   kosis_foreigner_economic_activity: "체류자격(보조)"
 };
 
