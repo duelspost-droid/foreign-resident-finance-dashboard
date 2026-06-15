@@ -39,6 +39,8 @@ jobs:
         run: npm ci
 
       - name: Fetch and build data
+        timeout-minutes: 8
+        continue-on-error: true
         run: npm run data:all
 
       - name: Commit generated data if changed

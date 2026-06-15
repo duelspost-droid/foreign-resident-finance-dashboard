@@ -27,11 +27,13 @@ function maskKey(value) {
   return `${value.slice(0, 4)}…${value.slice(-4)}`;
 }
 
-async function fetchWithRetry(url, options = {}, attempts = 3) {
+const FETCH_TIMEOUT_MS = Number(process.env.FETCH_TIMEOUT_MS ?? 15000);
+
+async function fetchWithRetry(url, options = {}, attempts = 2) {
   let lastError;
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 30000);
+    const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
     try {
       const res = await fetch(url, {
         ...options,
@@ -48,7 +50,7 @@ async function fetchWithRetry(url, options = {}, attempts = 3) {
       clearTimeout(timeout);
       lastError = error;
       if (attempt < attempts) {
-        await sleep(1500 * attempt);
+        await sleep(1000 * attempt);
       }
     }
   }
