@@ -21,6 +21,15 @@ const AMBER = "#b45309";
 const BERRY = "#be123c";
 const SLATE = "#64748b";
 
+// 수집 소스가 현재 어느 대시보드 화면에 반영되는지 매핑(투명한 커버리지 표시용).
+// 매핑이 없으면 "수집만 / 미연동"으로 표시한다.
+const SURFACED: Record<string, string> = {
+  moj_foreign_resident_status_2024: "국적·체류자격·기회점수",
+  moj_foreign_stay_data_2024: "지역 분석",
+  moj_foreign_student_stay_2024: "대학/유학생",
+  kosis_foreigner_economic_activity: "체류자격(보조)"
+};
+
 // 출처 정의 테이블 컬럼 — 데이터명/제공기관/갱신주기/주요 컬럼(태그)/한계
 const columns: DataTableColumn<DataSourceItem>[] = [
   {
@@ -65,7 +74,13 @@ export default function DataSourcesPage() {
   const stackTotal = segments.reduce((sum, s) => sum + s.value, 0) || 1;
   const successRate = Math.round((totals.downloaded / stackTotal) * 100);
 
-  const liveSources = dataLineage.sources.slice(0, 10);
+  // 커버리지: 수집된 모든 소스를 상태순으로 정렬하고, 대시보드 반영 여부를 표시.
+  const statusRank = (s: string) =>
+    s === "downloaded" ? 0 : s === "skipped_no_key" ? 2 : 1;
+  const allSources = [...dataLineage.sources].sort(
+    (a, b) => statusRank(a.status) - statusRank(b.status) || (b.rowCount ?? 0) - (a.rowCount ?? 0)
+  );
+  const surfacedCount = dataLineage.sources.filter((s) => SURFACED[s.id]).length;
 
   return (
     <div className="space-y-7 pb-14">
@@ -185,37 +200,68 @@ export default function DataSourcesPage() {
       </Panel>
 
       <Panel
-        title="실시간 수집 상태"
-        subtitle="자동 배치 라인리지 상위 10개 출처"
-        right={<span className="eyebrow">Lineage</span>}
+        title="수집 데이터 커버리지"
+        subtitle={`수집된 ${totals.sources}개 출처 전체 · 현재 대시보드 반영 ${surfacedCount}종 · 나머지는 수집·검증 단계`}
+        right={<span className="eyebrow">{allSources.length} sources</span>}
       >
-        <ul className="space-y-2">
-          {liveSources.map((source) => {
-            const badge = statusStyle(source.status);
-            return (
-              <li
-                key={source.id}
-                className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 transition hover:border-slate-300"
-              >
-                <div className="flex min-w-0 items-center gap-3">
-                  <span
-                    className="inline-flex shrink-0 items-center rounded-full px-2.5 py-1 text-[11px] font-bold text-white"
-                    style={{ background: badge.color }}
-                  >
-                    {badge.label}
-                  </span>
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-ink">{source.title}</p>
-                    <p className="truncate text-xs text-muted">{source.provider}</p>
-                  </div>
-                </div>
-                <span className="shrink-0 font-mono text-xs text-muted">
-                  {source.rowCount != null ? `${source.rowCount.toLocaleString()} 행` : "—"}
-                </span>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[720px] text-sm">
+            <thead>
+              <tr style={{ background: "#f8fafc", borderBottom: "2px solid #e2e8f0" }}>
+                <th className="px-3 py-2.5 text-left text-xs font-bold text-muted">상태</th>
+                <th className="px-3 py-2.5 text-left text-xs font-bold text-muted">데이터 / 제공기관</th>
+                <th className="px-3 py-2.5 text-right text-xs font-bold text-muted">행수</th>
+                <th className="px-3 py-2.5 text-left text-xs font-bold text-muted">대시보드 반영</th>
+              </tr>
+            </thead>
+            <tbody>
+              {allSources.map((source) => {
+                const badge = statusStyle(source.status);
+                const surfaced = SURFACED[source.id];
+                return (
+                  <tr key={source.id} style={{ borderBottom: "1px solid #f1f5f9" }}>
+                    <td className="px-3 py-2.5">
+                      <span
+                        className="inline-flex shrink-0 items-center rounded-full px-2.5 py-1 text-[11px] font-bold text-white"
+                        style={{ background: badge.color }}
+                      >
+                        {badge.label}
+                      </span>
+                    </td>
+                    <td className="px-3 py-2.5">
+                      <p className="font-semibold text-ink">{source.title}</p>
+                      <p className="text-xs text-muted">{source.provider}</p>
+                    </td>
+                    <td className="px-3 py-2.5 text-right font-mono text-xs text-slate-700">
+                      {source.rowCount != null ? source.rowCount.toLocaleString() : "—"}
+                    </td>
+                    <td className="px-3 py-2.5">
+                      {surfaced ? (
+                        <span
+                          className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-bold"
+                          style={{ background: "#ecfdf5", color: "#059669" }}
+                        >
+                          ✓ {surfaced}
+                        </span>
+                      ) : (
+                        <span
+                          className="inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-medium"
+                          style={{ background: "#f1f5f9", color: SLATE }}
+                        >
+                          수집만 (미연동)
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        <p className="px-1 pt-4 text-xs leading-6 text-muted">
+          ※ &lsquo;수집만(미연동)&rsquo;은 자동 수집은 되지만 아직 화면에 반영되지 않은 출처입니다.
+          대학알리미(대학별 유학생)·시군구 외국인주민 등 대용량 파일은 컬럼 구조 검증 후 단계적으로 연동됩니다.
+        </p>
       </Panel>
     </div>
   );
