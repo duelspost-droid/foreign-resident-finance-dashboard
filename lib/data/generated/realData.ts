@@ -7436,6 +7436,7 @@ export const realDataSummary = {
   "generatedAt": "2026-06-15T21:30:41.608Z",
   "statusRowCount": 205,
   "nationalityCount": 205,
+  "nationalitySource": "annual",
   "visaSegmentCount": 8,
   "regionRowCount": 200,
   "apiStatusRowCount": 0,

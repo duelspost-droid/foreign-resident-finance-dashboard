@@ -775,6 +775,19 @@ async function main() {
     studentSummary = agg.summary;
   }
 
+  // 법무부 출입국 통계월보 (동일 wide 포맷, 가장 최근 월 기준) — 더 최신이면 nationalityDistribution 보완.
+  const monthlyRaw = await readLatestRaw("moj_immigration_monthly_2024");
+  let monthlyNationalityDist = [];
+  if (monthlyRaw) {
+    const parsed = parseCsv(monthlyRaw.text);
+    const agg = aggregateStatusWide(parsed, "법무부 출입국 외국인 통계월보", "https://www.data.go.kr/data/3069975/fileData.do");
+    monthlyNationalityDist = agg.nationals;
+  }
+  // 월보 합계가 연간 현황보다 크면(더 최신) 월보 우선 사용.
+  const monthlyTotal = monthlyNationalityDist.reduce((s, r) => s + r.residents, 0);
+  const annualTotal = nationalityDistribution.reduce((s, r) => s + r.residents, 0);
+  const finalNationalityDist = monthlyTotal > annualTotal ? monthlyNationalityDist : nationalityDistribution;
+
   // 교육부 최신 유학생 현황(moe) → 대학별 랭킹 1차 소스.
   const moeStudentRaw = await readLatestRaw("moe_foreign_student_latest");
   let universityRanking = { latestYear: null, universities: [], universityCount: 0, totalForeignStudents: 0 };
@@ -818,7 +831,7 @@ async function main() {
     `export type RealNationalityDist = { nationality: string; residents: number; share: number };\n` +
     `export type RealVisaSegment = { name: string; value: number };\n` +
     `export type RealVisaType = { visaCode: string; visaName: string; count: number; segment: string };\n` +
-    `export const realNationalityDistribution: readonly RealNationalityDist[] = ${JSON.stringify(nationalityDistribution, null, 2)};\n\n` +
+    `export const realNationalityDistribution: readonly RealNationalityDist[] = ${JSON.stringify(finalNationalityDist, null, 2)};\n\n` +
     `export const realVisaDistribution: readonly RealVisaSegment[] = ${JSON.stringify(visaDistribution, null, 2)};\n\n` +
     `export const realStayVisaTypes: readonly RealVisaType[] = ${JSON.stringify(stayVisaTypes, null, 2)};\n\n` +
     `// 외국인 유학생 체류현황(법무부). 연도×체류자격 집계 — 대학/유학생 페이지가 사용.\n` +
@@ -851,7 +864,8 @@ async function main() {
     `export const realDataSummary = ${JSON.stringify({
       generatedAt: new Date().toISOString(),
       statusRowCount: statusRows.length,
-      nationalityCount: nationalityDistribution.length,
+      nationalityCount: finalNationalityDist.length,
+      nationalitySource: monthlyTotal > annualTotal ? "monthly" : "annual",
       visaSegmentCount: visaDistribution.length,
       regionRowCount: regionRows.length,
       apiStatusRowCount: apiStatus.length,
@@ -867,7 +881,8 @@ async function main() {
         stay: stayRaw?.path ?? null,
         student: studentRaw?.path ?? null,
         moeStudent: moeStudentRaw?.path ?? null,
-        mois: moisRaw?.path ?? null
+        mois: moisRaw?.path ?? null,
+        monthly: monthlyRaw?.path ?? null
       }
     }, null, 2)} as const;\n`;
 
@@ -890,7 +905,7 @@ async function main() {
       {
         ok: true,
         statusRowCount: statusRows.length,
-        nationalityCount: nationalityDistribution.length,
+        nationalityCount: finalNationalityDist.length,
         visaSegmentCount: visaDistribution.length,
         regionRowCount: regionRows.length,
         apiStatusRowCount: apiStatus.length,
