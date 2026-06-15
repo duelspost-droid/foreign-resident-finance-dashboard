@@ -16,6 +16,15 @@ const CY = String(new Date().getFullYear());           // "2025"
 const PY = String(new Date().getFullYear() - 1);       // "2024" — OpenAPI 일부는 전년도까지만 발행
 const KOSIS_RECENT = "10";                             // KOSIS newEstPrdCnt: 최근 10기(연/분기/월)
 
+// ── 일별/월별 동적 기간 (ECOS prdCycle=D/M 용) ───────────────────────────────────
+// 환율 등 일별 시계열은 YYYYMMDD, 국제수지 등 월별 시계열은 YYYYMM 형식을 사용한다.
+const _now = new Date();
+const _pad = (n) => String(n).padStart(2, "0");
+const TODAY_YMD = `${_now.getFullYear()}${_pad(_now.getMonth() + 1)}${_pad(_now.getDate())}`;  // 오늘 (일별 종료)
+const TODAY_YM = `${_now.getFullYear()}${_pad(_now.getMonth() + 1)}`;                          // 이번 달 (월별 종료)
+const DAILY_START_YMD = `${_now.getFullYear() - 2}0101`;   // 최근 2년 일별 시작
+const MONTHLY_START_YM = `${_now.getFullYear() - 5}01`;    // 최근 5년 월별 시작
+
 export const publicDataSources = [
   // ── 법무부 / 출입국·외국인정책본부 (파일 다운로드, 인증키 불필요) ──────────────
   {
@@ -501,6 +510,102 @@ export const publicDataSources = [
     notes: "외국인 송금·환전 거래 거시지표 후보. ECOS statCode 확인 후 verified=true 전환."
   },
 
+  // ── 한국은행 ECOS 일별/월별 시계열 (ECOS_API_KEY 필요) ─────────────────────────
+  // 외국인 송금·환전·외화예금 수요는 환율·국제수지와 직접 연동된다.
+  // statCode 는 ECOS 공개 통계표 코드(운영 환경에서 응답으로 최종 확정).
+  {
+    id: "ecos_exchange_rate_daily",
+    type: "ecos",
+    provider: "한국은행(ECOS)",
+    title: "주요국 통화의 대원화 환율(일별)",
+    category: "외국인 경제·금융 보조",
+    apiKeyEnv: "ECOS_API_KEY",
+    endpoint: "https://ecos.bok.or.kr/api/StatisticSearch",
+    params: {
+      statCode: "731Y001",        // 주요국 통화의 대원화 환율
+      prdCycle: "D",              // 일별(Daily)
+      startDate: DAILY_START_YMD, // 최근 2년 (YYYYMMDD)
+      endDate: TODAY_YMD,
+      rowsPerPage: 1000
+    },
+    targetTable: "finance_segment_aggregate",
+    outputBaseName: "ecos_exchange_rate_daily",
+    sourceUrl: "https://ecos.bok.or.kr/#/StatisticsByTheme",
+    updateCycle: "일",
+    license: "한국은행 데이터 이용약관",
+    personalDataSafe: true,
+    verified: false,
+    notes: "원/달러·엔·유로·위안 일별 환율. 환율 급등락 시 외국인 본국송금·환전 수요가 급증 → 송금/환전 캠페인 타이밍 인사이트. ECOS_API_KEY GitHub Secret 등록 필요."
+  },
+  {
+    id: "ecos_bop_transfer_monthly",
+    type: "ecos",
+    provider: "한국은행(ECOS)",
+    title: "국제수지 이전소득수지(월별)",
+    category: "외국인 경제·금융 보조",
+    apiKeyEnv: "ECOS_API_KEY",
+    endpoint: "https://ecos.bok.or.kr/api/StatisticSearch",
+    params: {
+      statCode: "301Y017",         // 국제수지(이전소득수지 세부) — 운영 환경에서 확정
+      prdCycle: "M",               // 월별(Monthly)
+      startDate: MONTHLY_START_YM, // 최근 5년 (YYYYMM)
+      endDate: TODAY_YM,
+      rowsPerPage: 1000
+    },
+    targetTable: "finance_segment_aggregate",
+    outputBaseName: "ecos_bop_transfer_monthly",
+    sourceUrl: "https://ecos.bok.or.kr/#/StatisticsByTheme",
+    updateCycle: "월",
+    license: "한국은행 데이터 이용약관",
+    personalDataSafe: true,
+    verified: false,
+    notes: "이전소득수지(개인이전 포함) 월별 흐름. 외국인 본국송금 거시 추세 월별 추적. statCode 운영환경 확정 필요."
+  },
+  {
+    id: "ecos_resident_fx_deposit_monthly",
+    type: "ecos",
+    provider: "한국은행(ECOS)",
+    title: "거주자 외화예금 현황(월별)",
+    category: "외국인 경제·금융 보조",
+    apiKeyEnv: "ECOS_API_KEY",
+    endpoint: "https://ecos.bok.or.kr/api/StatisticSearch",
+    params: {
+      statCode: "104Y014",         // 거주자외화예금 — 운영 환경에서 확정
+      prdCycle: "M",
+      startDate: MONTHLY_START_YM,
+      endDate: TODAY_YM,
+      rowsPerPage: 1000
+    },
+    targetTable: "finance_segment_aggregate",
+    outputBaseName: "ecos_resident_fx_deposit_monthly",
+    sourceUrl: "https://ecos.bok.or.kr/#/StatisticsByTheme",
+    updateCycle: "월",
+    license: "한국은행 데이터 이용약관",
+    personalDataSafe: true,
+    verified: false,
+    notes: "거주자 외화예금 잔액 월별. 외국인 외화 보유·예금 상품 수요 대리지표. statCode 운영환경 확정 필요."
+  },
+
+  // ── 고용노동부 고용허가제(EPS) 외국인근로자 월별 도입현황 (파일, 인증키 불필요) ──
+  {
+    id: "mol_eps_monthly_introduction",
+    type: "file",
+    datasetId: "15032256",
+    detailPk: null,
+    provider: "고용노동부",
+    title: "고용허가제 외국인근로자 도입 현황(월별)",
+    category: "외국인 직접 통계",
+    baseDate: "2024-12-31",
+    targetTable: "foreign_resident_status",
+    outputBaseName: "mol_eps_monthly_introduction",
+    sourceUrl: "https://www.data.go.kr/data/15032256/fileData.do",
+    updateCycle: "월",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "E-9 고용허가제 월별 도입 인원(국가·업종별). 신규 입국 근로자 급여계좌·송금 수요 선행지표(월 단위). 발굴 후보 검증 필요."
+  },
+
   // ── 서울시 열린데이터광장 오픈API (SEOUL_OPENAPI_KEY 필요) ──────────────────────
   // 발급: https://data.seoul.go.kr/dataList/OA-14979/S/1/datasetView.do (회원가입 후)
   // 형식: https://openapi.seoul.go.kr:8088/{key}/json/{서비스명}/{시작}/{끝}/
@@ -665,5 +770,36 @@ export const discoveryQueries = [
     provider: "행정안전부",
     keyword: "외국인 정착 지원 사회통합",
     purpose: "사회통합프로그램 외국인 참여자(장기거주 의향·정주 금융 수요)"
+  },
+  // ── 일별/월별 갱신 데이터 발굴 ───────────────────────────────────────────────
+  {
+    id: "moj_immigration_daily",
+    provider: "법무부",
+    keyword: "출입국자 일별 현황",
+    purpose: "공항·항만별 외국인 일별 입출국(단기 체류·관광 흐름, 환전 수요 선행지표)"
+  },
+  {
+    id: "moj_foreign_resident_monthly",
+    provider: "법무부",
+    keyword: "체류외국인 월별 통계",
+    purpose: "월별 체류외국인 총계·국적별 추이(시장 규모 월 단위 모니터링)"
+  },
+  {
+    id: "eps_worker_monthly",
+    provider: "고용노동부",
+    keyword: "고용허가제 외국인근로자 도입 월별",
+    purpose: "E-9 월별 신규 도입 인원(급여계좌·송금 수요 선행지표)"
+  },
+  {
+    id: "bok_exchange_rate",
+    provider: "한국은행",
+    keyword: "환율 원화 일별",
+    purpose: "원/달러·위안·동 일별 환율(외국인 송금·환전 타이밍)"
+  },
+  {
+    id: "tour_foreign_visitor_monthly",
+    provider: "한국관광공사",
+    keyword: "외래관광객 입국 월별 국적별",
+    purpose: "월별 국적별 외국인 입국(단기 외국인 금융·환전 수요 규모)"
   }
 ];

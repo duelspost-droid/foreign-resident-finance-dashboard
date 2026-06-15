@@ -936,7 +936,7 @@ async function main() {
     `export const realMulticulturalFamilySummary = ${JSON.stringify({ totalCount: multiculturalFamily.totalCount, latestYear: multiculturalFamily.latestYear }, null, 2)} as const;\n\n` +
     `// 대학알리미 고등교육기관 기본현황 (위치·유형 보조).\n` +
     `export type RealUniversityStat = { name: string; type: string; region: string };\n` +
-    `export const realUniversityStats: readonly RealUniversityStat[] = ${JSON.stringify(universityStats.slice(0, 200), null, 2)};\n\n`
+    `export const realUniversityStats: readonly RealUniversityStat[] = ${JSON.stringify(universityStats.slice(0, 200), null, 2)};\n\n` +
     `export const realDataSummary = ${JSON.stringify({
       generatedAt: new Date().toISOString(),
       statusRowCount: statusRows.length,
