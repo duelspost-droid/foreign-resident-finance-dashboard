@@ -9,6 +9,43 @@
 - 스택: Next.js 16 App Router, TypeScript, Tailwind CSS, Recharts, Supabase (옵션)
 - 목적: 개인 단위 정보가 아닌 집계 통계로 외국인 금융 시장 기회를 분석하는 B2B 대시보드
 
+## 작업 이력 (세션별, 최신순)
+
+### 2026-06-15 세션 (claude-sonnet, session_012cb25b)
+사용자 지시: "외국인 정보 모든정보를 api 등을 통해서라도 전부 가져오자" /
+"홈페이지 디자인이 난해하다 … 분석가 관점에서 쉽게 확인할수 있도록 도표나 통계를 넣어 디자인 확 변경" /
+"작업기록 모두 저장해서 다른 PC에서 이어서 작업 가능하게".
+
+완료한 것:
+1. **홈페이지 전면 재디자인** (`app/page.tsx`) — 커밋 `4acb9c5`
+   - 다크 KPI 스트립(총 체류외국인/등록외국인/유학생/평균 기회점수, YoY 표기)
+   - 3열 그리드: ① 지역별 기회점수 순위(점수 바) ② 국적 분포(가로 막대 + Recharts 막대) + 체류자격 세그먼트(범례 + 도넛) ③ 월별 추세선 + 자동 인사이트
+   - 하단 기회점수 상세 테이블(`RankingTable`)
+   - 인라인 컴포넌트 `ScorePill`, `ScoreBar`, `SectionHeader` (page.tsx 내부 정의)
+   - 미연결 `FilterBar` 홈에서 제거
+   - `app/dashboard/page.tsx` 는 `export { default } from "../page"` 라서 같이 변경됨
+2. **KOSIS 키 마스킹 버그 수정** (`scripts/fetch_public_data.mjs` 276행) — `encodeURIComponent(apiKey)` 치환 추가. 이전엔 base64 키가 카탈로그에 평문 노출됨.
+3. **신규 파일 소스 4종 추가** (`scripts/data_sources.mjs`) — 고용노동부 15137198·15137115, 여성가족부 15054868, 법무부 월보 3069975 (모두 verified:false).
+4. **CI run #10 결과 분석**: 일시적 네트워크 장애로 전 소스 "fetch failed"(법무부 CSV 포함) → cached raw 사용. 단, 행안부 openapi `getForeignResidentInfo` 는 HTTP 200(0행) 반환 — 이전 `getStatisticsForeignResidentInfo` HTTP 500 대비 진전. KOSIS 는 network fail 로 파라미터 검증 불가.
+5. 커밋 `4acb9c5` 푸시 완료 → CI run #11 트리거됨(결과 미확인).
+
+다음 세션에서 **가장 먼저 할 것**: CI run #11(또는 최신) 의 `data/catalog/latest_fetch_catalog.json` 확인 →
+- KOSIS `itmId/objL` 파라미터로 `필수요청변수값 누락` 해결됐는지
+- 행안부 openapi 가 행 반환하는지(여전히 0행이면 발굴 후보 openapi 15057877/15108065 시도)
+- 신규 파일 소스 4종 다운로드 성공 여부
+
+확인 명령:
+```bash
+git pull origin main
+git show HEAD:data/catalog/latest_fetch_catalog.json | python3 -c "
+import json,sys
+cat=json.load(sys.stdin)
+for s in cat['sources']:
+    r=s.get('result',{}); st=r.get('status','?')
+    print(('✅' if st in('downloaded','cached') else '❌'), st, s['provider'], s['title'], r.get('rowCount',''), r.get('reason',''))
+"
+```
+
 ## 현재 구현 상태 (2026-06-15 기준)
 
 ### 완료된 항목
@@ -16,6 +53,7 @@
   - `/` · `/dashboard` · `/regions` · `/nationalities` · `/universities`
   - `/visa-segments` · `/opportunity-scores` · `/data-sources` · `/compliance`
 - 좌측 사이드바 + 상단 헤더
+- `app/page.tsx`: 분석가용 홈 대시보드 (다크 KPI 스트립 + 3열 도표 그리드 + 상세 테이블) — 2026-06-15 재디자인
 - `components/charts/RegionMap.tsx`: SVG 버블맵 (선형 메르카토르 투영, 17개 시도 거품 크기=인구, 색상=점수)
 - `public/data/korea_regions.geojson`: 17개 시도 중심점 GeoJSON (Point 형식)
 - `lib/data/supabaseClient.ts`: `fetchRegionData`, `fetchForeignResidentStatus`, `fetchFinanceSegments`, `fetchUniversityData` (Supabase 없을 때 null 반환, graceful fallback)
@@ -37,11 +75,14 @@
 | 법무부 외국인체류데이터 (3069963) | 380행 | ✅ downloaded |
 | 법무부 연도별 외국인 유학생 (15100038) | 42행 | ✅ downloaded |
 
+> 참고: 법무부 CSV 3종은 정상 동작하나 CI run #10 에서는 일시적 네트워크 장애로
+> 전 소스 fetch failed → cached raw 로 폴백됨. run #11 이상에서 재확인 필요.
+
 **미해결 (API 조회 실패 중)**
-| 소스 | 오류 | 시도 중인 수정 |
+| 소스 | 최근 오류 | 시도 중인 수정 |
 |------|------|----------------|
-| KOSIS 행안부 시도별 외국인주민 (TX_11025_A000_A) | `필수요청변수값이 누락되었습니다.` | `itmId=ALL, objL1=ALL, objL2=ALL` 추가 (CI run #10 테스트 중) |
-| 행안부 openapi (1741000/StatisticsForeignResident) | HTTP 500 | operation: `getForeignResidentInfo` 으로 변경 (CI run #10 테스트 중) |
+| KOSIS 행안부 시도별 외국인주민 (TX_11025_A000_A) | `필수요청변수값이 누락` → run #10 은 network fail 로 미검증 | `itmId=ALL, objL1=ALL, objL2=ALL` 추가됨 (run #11 에서 검증) |
+| 행안부 openapi (1741000/StatisticsForeignResident) | HTTP 200·0행 (run #10) — 이전 HTTP 500 보다 진전 | operation `getForeignResidentInfo`. 0행 지속 시 발굴 후보 15057877/15108065 시도 |
 
 **새로 추가된 (미검증)**
 | 소스 | datasetId | 상태 |
