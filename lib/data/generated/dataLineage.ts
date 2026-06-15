@@ -40,17 +40,17 @@ export type DataLineage = {
 };
 
 export const dataLineage: DataLineage = {
-  "generatedAt": "2026-06-15T08:52:15.638Z",
+  "generatedAt": "2026-06-15T09:14:32.141Z",
   "keysPresent": {
     "DATA_GO_KR_SERVICE_KEY": true,
     "KOSIS_API_KEY": true
   },
   "totals": {
-    "sources": 5,
+    "sources": 9,
     "downloaded": 0,
     "cached": 3,
     "skippedNoKey": 0,
-    "failed": 2
+    "failed": 6
   },
   "sources": [
     {
@@ -66,7 +66,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "국적×체류자격 집계. 세그먼트 산출의 1차 소스.",
-      "fetchedAt": "2026-06-15T08:56:27.587Z",
+      "fetchedAt": "2026-06-15T09:18:44.072Z",
       "status": "metadata_failed_using_cached_raw",
       "rowCount": null,
       "savedFile": "moj_foreign_resident_status_2024_2026-06-14.csv",
@@ -88,7 +88,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "지역 단위 체류 현황.",
-      "fetchedAt": "2026-06-15T08:57:03.575Z",
+      "fetchedAt": "2026-06-15T09:19:20.055Z",
       "status": "metadata_failed_using_cached_raw",
       "rowCount": null,
       "savedFile": "moj_foreign_stay_data_2024_2026-06-14.csv",
@@ -110,12 +110,100 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "유학(D-2)·연수(D-4) 체류 추세.",
-      "fetchedAt": "2026-06-15T08:57:39.560Z",
+      "fetchedAt": "2026-06-15T09:19:56.038Z",
       "status": "metadata_failed_using_cached_raw",
       "rowCount": null,
       "savedFile": "moj_foreign_student_stay_2024_2026-06-14.csv",
       "requestUrls": [
         "https://www.data.go.kr/data/15100038/fileData.do"
+      ],
+      "reason": "fetch failed"
+    },
+    {
+      "id": "mol_foreign_worker_employment_2024",
+      "provider": "고용노동부",
+      "title": "외국인 고용 현황",
+      "category": "외국인 직접 통계",
+      "type": "file",
+      "targetTable": "foreign_resident_status",
+      "sourceUrl": "https://www.data.go.kr/data/15137198/fileData.do",
+      "license": "공공데이터 이용허락(제1유형)",
+      "updateCycle": "연",
+      "personalDataSafe": true,
+      "verified": false,
+      "notes": "고용허가제(E-9·H-2) 외국인 고용 집계. 급여계좌·이체 수요 추정 보조.",
+      "fetchedAt": "2026-06-15T09:20:32.018Z",
+      "status": "metadata_failed",
+      "rowCount": null,
+      "savedFile": null,
+      "requestUrls": [
+        "https://www.data.go.kr/data/15137198/fileData.do"
+      ],
+      "reason": "fetch failed"
+    },
+    {
+      "id": "mol_foreign_worker_employment2_2024",
+      "provider": "고용노동부",
+      "title": "외국인 취업자 현황",
+      "category": "외국인 직접 통계",
+      "type": "file",
+      "targetTable": "foreign_resident_status",
+      "sourceUrl": "https://www.data.go.kr/data/15137115/fileData.do",
+      "license": "공공데이터 이용허락(제1유형)",
+      "updateCycle": "연",
+      "personalDataSafe": true,
+      "verified": false,
+      "notes": "외국인 취업자 세부 통계. 발굴 자동화로 식별됨.",
+      "fetchedAt": "2026-06-15T09:21:08.003Z",
+      "status": "metadata_failed",
+      "rowCount": null,
+      "savedFile": null,
+      "requestUrls": [
+        "https://www.data.go.kr/data/15137115/fileData.do"
+      ],
+      "reason": "fetch failed"
+    },
+    {
+      "id": "mogef_multicultural_family_2024",
+      "provider": "여성가족부",
+      "title": "다문화가족 현황",
+      "category": "외국인 직접 통계",
+      "type": "file",
+      "targetTable": "foreign_resident_status",
+      "sourceUrl": "https://www.data.go.kr/data/15054868/fileData.do",
+      "license": "공공데이터 이용허락(제1유형)",
+      "updateCycle": "연",
+      "personalDataSafe": true,
+      "verified": false,
+      "notes": "결혼이민자·다문화가구 집계. 금융 상품 수요 보조 지표.",
+      "fetchedAt": "2026-06-15T09:21:43.986Z",
+      "status": "metadata_failed",
+      "rowCount": null,
+      "savedFile": null,
+      "requestUrls": [
+        "https://www.data.go.kr/data/15054868/fileData.do"
+      ],
+      "reason": "fetch failed"
+    },
+    {
+      "id": "moj_immigration_monthly_2024",
+      "provider": "법무부",
+      "title": "출입국 외국인 통계월보",
+      "category": "외국인 직접 통계",
+      "type": "file",
+      "targetTable": "foreign_resident_region_month",
+      "sourceUrl": "https://www.data.go.kr/data/3069975/fileData.do",
+      "license": "공공데이터 이용허락(제1유형)",
+      "updateCycle": "월",
+      "personalDataSafe": true,
+      "verified": false,
+      "notes": "법무부 출입국 월별 통계. 발굴 자동화로 식별됨.",
+      "fetchedAt": "2026-06-15T09:22:19.969Z",
+      "status": "metadata_failed",
+      "rowCount": null,
+      "savedFile": null,
+      "requestUrls": [
+        "https://www.data.go.kr/data/3069975/fileData.do"
       ],
       "reason": "fetch failed"
     },
@@ -132,12 +220,12 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 시도별 외국인주민. statisticsData.do 사용(objL 파라미터 불필요). 첫 응답으로 필드명 확정.",
-      "fetchedAt": "2026-06-15T08:58:15.540Z",
+      "fetchedAt": "2026-06-15T09:22:55.953Z",
       "status": "request_failed",
       "rowCount": null,
       "savedFile": null,
       "requestUrls": [
-        "https://kosis.kr/openapi/statisticsData.do?apiKey=MzQ1OGI2MWEyZjY0NDljZWI4MTZhNDI4NmYwNWZhODM%3D&orgId=110&tblId=TX_11025_A000_A&method=getList&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2020&endPrdDe=2024&itmId=ALL&objL1=ALL&objL2=ALL"
+        "https://kosis.kr/openapi/statisticsData.do?apiKey=MzQ1…ODM=&orgId=110&tblId=TX_11025_A000_A&method=getList&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2020&endPrdDe=2024&itmId=ALL&objL1=ALL&objL2=ALL"
       ],
       "reason": "fetch failed"
     },
@@ -154,7 +242,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 외국인주민 시군구 집계. endpoint 경로 운영 환경에서 확정 필요.",
-      "fetchedAt": "2026-06-15T08:58:16.333Z",
+      "fetchedAt": "2026-06-15T09:22:58.125Z",
       "status": "no_data",
       "rowCount": null,
       "savedFile": null,
