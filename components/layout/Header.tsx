@@ -1,37 +1,43 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { CalendarDays, ShieldCheck } from "lucide-react";
+import { CalendarDays } from "lucide-react";
 
-const pageNames: Record<string, string> = {
-  "/": "개요",
-  "/dashboard": "개요",
-  "/regions": "지역 분석",
-  "/nationalities": "국적 분석",
-  "/universities": "대학/유학생 분석",
-  "/visa-segments": "체류자격 분석",
-  "/opportunity-scores": "금융 기회 점수",
-  "/data-sources": "데이터 소스",
-  "/compliance": "개인정보/컴플라이언스"
+const pageNames: Record<string, { title: string; sub: string }> = {
+  "/":                    { title: "대시보드",     sub: "핵심 지표 한눈에 보기" },
+  "/financial-insights":  { title: "금융 인사이트", sub: "경제·보험·다문화 데이터 분석" },
+  "/regions":             { title: "지역 분석",    sub: "시도별 외국인 분포 및 기회 점수" },
+  "/nationalities":       { title: "국적 분석",    sub: "국적·연령별 체류 현황" },
+  "/universities":        { title: "대학/유학생",  sub: "대학별 외국인 유학생 현황" },
+  "/data-pipeline":       { title: "데이터 관리",  sub: "수집 파이프라인 및 발굴 현황" },
+  "/admin":               { title: "관리자",       sub: "신규 데이터 소스 승인" },
 };
 
 export function Header() {
   const pathname = usePathname();
-  const title = pageNames[pathname] ?? "대시보드";
+  const page = pageNames[pathname] ?? { title: pathname.split("/").at(-1) ?? "페이지", sub: "" };
 
   return (
-    <header className="sticky top-0 z-20 flex min-h-16 items-center justify-between gap-4 border-b border-slate-200 bg-white/95 px-5 backdrop-blur">
-      <div>
-        <p className="text-xs font-semibold text-teal-700">국내거주 외국인 금융 인사이트</p>
-        <h1 className="text-base font-bold text-ink">{title}</h1>
+    <header className="sticky top-0 z-20 flex min-h-14 items-center justify-between gap-4 border-b border-slate-100 bg-white/90 px-6 backdrop-blur-sm">
+      {/* 페이지 제목 */}
+      <div className="flex items-baseline gap-3">
+        <h1 className="text-[15px] font-bold text-slate-900">{page.title}</h1>
+        {page.sub && (
+          <>
+            <span className="text-slate-300">/</span>
+            <span className="hidden text-xs text-slate-400 sm:block">{page.sub}</span>
+          </>
+        )}
       </div>
-      <div className="flex items-center gap-2 text-xs text-slate-600">
-        <span className="hidden items-center gap-1 rounded-md border border-slate-200 px-2 py-1 sm:flex">
-          <CalendarDays aria-hidden size={14} />
-          기준월 2025.12
+
+      {/* 우측 배지 */}
+      <div className="flex items-center gap-2">
+        <span className="hidden items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] font-medium text-slate-500 sm:flex">
+          <CalendarDays size={12} aria-hidden />
+          기준 2025.12
         </span>
-        <span className="flex items-center gap-1 rounded-md border border-teal-200 bg-teal-50 px-2 py-1 text-teal-800">
-          <ShieldCheck aria-hidden size={14} />
+        <span className="flex items-center gap-1.5 rounded-full border border-teal-200 bg-teal-50 px-3 py-1 text-[11px] font-medium text-teal-700">
+          <span className="h-1.5 w-1.5 rounded-full bg-teal-500" />
           집계 데이터
         </span>
       </div>

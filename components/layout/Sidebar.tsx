@@ -3,14 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  Building2,
   DatabaseZap,
   Flag,
   GraduationCap,
   Landmark,
   LayoutDashboard,
   Map,
-  ShieldCheck
+  ShieldCheck,
+  TrendingUp,
 } from "lucide-react";
 import clsx from "clsx";
 
@@ -20,6 +20,9 @@ const navigation = [
   { href: "/regions", label: "지역 분석", icon: Map },
   { href: "/nationalities", label: "국적 분석", icon: Flag },
   { href: "/universities", label: "대학/유학생", icon: GraduationCap },
+];
+
+const system = [
   { href: "/data-pipeline", label: "데이터 관리", icon: DatabaseZap },
   { href: "/admin", label: "관리자", icon: ShieldCheck },
 ];
@@ -27,45 +30,90 @@ const navigation = [
 export function Sidebar() {
   const pathname = usePathname();
 
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
   return (
-    <aside className="border-r border-slate-200 bg-white px-4 py-5 lg:min-h-screen">
-      <Link href="/" className="flex items-center gap-3 rounded-md px-2 py-2">
-        <span className="flex h-10 w-10 items-center justify-center rounded-md bg-teal-700 text-white">
-          <Building2 aria-hidden size={22} />
+    <aside className="flex flex-col border-r border-white/5 bg-[#0d1117] px-3 py-4 lg:min-h-screen">
+      {/* 로고 */}
+      <Link href="/" className="mb-6 flex items-center gap-3 rounded-xl px-3 py-2.5 transition hover:bg-white/5">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-teal-400 to-cyan-600 shadow-lg shadow-teal-900/40">
+          <TrendingUp size={18} className="text-white" aria-hidden />
         </span>
         <span className="min-w-0">
-          <span className="block text-sm font-bold text-ink">Foreign Resident</span>
-          <span className="block text-xs text-muted">Finance Intelligence</span>
+          <span className="block text-[13px] font-bold leading-tight text-white">외국인 금융</span>
+          <span className="block text-[11px] leading-tight text-white/40">Finance Intelligence</span>
         </span>
       </Link>
 
-      <nav className="mt-6 grid gap-1" aria-label="주요 메뉴">
+      {/* 메인 메뉴 */}
+      <div className="mb-1 px-3 pb-1 text-[10px] font-semibold uppercase tracking-widest text-white/25">
+        분석
+      </div>
+      <nav className="grid gap-0.5" aria-label="분석 메뉴">
         {navigation.map((item) => {
           const Icon = item.icon;
-          const active =
-            item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
-
+          const active = isActive(item.href);
           return (
             <Link
-              href={item.href}
               key={item.href}
+              href={item.href}
               className={clsx(
-                "flex min-h-10 items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition",
+                "group flex min-h-9 items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all",
                 active
-                  ? "bg-slate-900 text-white"
-                  : "text-slate-700 hover:bg-slate-100 hover:text-slate-950"
+                  ? "bg-white/10 text-white shadow-inner"
+                  : "text-white/50 hover:bg-white/5 hover:text-white/80"
               )}
             >
-              <Icon aria-hidden size={18} />
+              <Icon
+                aria-hidden
+                size={16}
+                className={clsx("shrink-0 transition-colors", active ? "text-teal-400" : "text-white/30 group-hover:text-white/50")}
+              />
+              <span>{item.label}</span>
+              {active && (
+                <span className="ml-auto h-1.5 w-1.5 rounded-full bg-teal-400" />
+              )}
+            </Link>
+          );
+        })}
+      </nav>
+
+      {/* 시스템 메뉴 */}
+      <div className="mb-1 mt-5 px-3 pb-1 text-[10px] font-semibold uppercase tracking-widest text-white/25">
+        시스템
+      </div>
+      <nav className="grid gap-0.5" aria-label="시스템 메뉴">
+        {system.map((item) => {
+          const Icon = item.icon;
+          const active = isActive(item.href);
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={clsx(
+                "group flex min-h-9 items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all",
+                active
+                  ? "bg-white/10 text-white"
+                  : "text-white/50 hover:bg-white/5 hover:text-white/80"
+              )}
+            >
+              <Icon
+                aria-hidden
+                size={16}
+                className={clsx("shrink-0 transition-colors", active ? "text-teal-400" : "text-white/30 group-hover:text-white/50")}
+              />
               <span>{item.label}</span>
             </Link>
           );
         })}
       </nav>
 
-      <div className="mt-8 rounded-md border border-amber-200 bg-amber-50 p-3 text-xs leading-6 text-amber-950">
-        개인 단위 외국인 정보는 수집하지 않습니다. 모든 수치는 공개 통계 또는 집계
-        데이터 기준입니다.
+      {/* 하단 면책 */}
+      <div className="mt-auto px-3 pt-6">
+        <p className="text-[10px] leading-relaxed text-white/20">
+          집계 통계만 사용 · 개인식별정보 없음
+        </p>
       </div>
     </aside>
   );
