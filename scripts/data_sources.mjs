@@ -144,6 +144,47 @@ export const publicDataSources = [
     notes: "법무부 출입국 월별 통계. 발굴 자동화로 식별됨."
   },
 
+  // ── 행정안전부 외국인주민 (파일 다운로드, 인증키 불필요) ─────────────────────────
+  // data.go.kr 자동 발굴(discovery)로 식별된 후보. 다운로드 성공 시 verified=true 로 전환.
+  {
+    id: "mois_foreign_resident_region_file",
+    type: "file",
+    datasetId: "3079542",
+    detailPk: null,
+    provider: "행정안전부",
+    title: "지방자치단체 외국인주민 현황",
+    category: "외국인 직접 통계",
+    baseDate: "2024-12-31",
+    targetTable: "foreign_resident_region_month",
+    outputBaseName: "mois_foreign_resident_region_file",
+    sourceUrl: "https://www.data.go.kr/data/3079542/fileData.do",
+    updateCycle: "연",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "행안부 시군구 단위 외국인주민. openapi 대체용 파일 수집(발굴 자동화)."
+  },
+
+  // ── 교육부 외국인 유학생 (파일 다운로드, 인증키 불필요) ──────────────────────────
+  {
+    id: "moe_foreign_student_by_nationality",
+    type: "file",
+    datasetId: "15050054",
+    detailPk: null,
+    provider: "교육부",
+    title: "외국인 유학생 현황(국적별)",
+    category: "외국인 직접 통계",
+    baseDate: "2024-12-31",
+    targetTable: "foreign_student_university",
+    outputBaseName: "moe_foreign_student_by_nationality",
+    sourceUrl: "https://www.data.go.kr/data/15050054/fileData.do",
+    updateCycle: "연",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "교육부 대학·국적별 유학생. 유학생 금융 수요 세분화(발굴 자동화)."
+  },
+
   // ── KOSIS 국가통계포털 오픈API (KOSIS_API_KEY 필요) ────────────────────────────
   // KOSIS statisticsData.do (simpler than statisticsParameterData.do — no objL* needed)
   //   ?method=getList&apiKey=...&orgId=...&tblId=...&prdSe=Y&startPrdDe=2020&endPrdDe=2024&format=json&jsonVD=Y
@@ -176,7 +217,32 @@ export const publicDataSources = [
     license: "KOSIS 이용약관",
     personalDataSafe: true,
     verified: false,
-    notes: "행안부 시도별 외국인주민. statisticsData.do 사용(objL 파라미터 불필요). 첫 응답으로 필드명 확정."
+    notes: "행안부 시도별 외국인주민. 2단계 호출: getMeta(ITM)로 itmId 조회 후 statisticsParameterData.do. 첫 성공 응답으로 필드명 확정."
+  },
+  {
+    id: "kosis_registered_foreigner_by_nationality",
+    type: "kosis",
+    provider: "KOSIS(법무부 출입국)",
+    title: "국적별 등록외국인 현황",
+    category: "외국인 직접 통계",
+    apiKeyEnv: "KOSIS_API_KEY",
+    endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
+    orgId: "110",
+    tblId: "DT_110025_A033_A",
+    params: {
+      prdSe: "Y",
+      startPrdDe: "2020",
+      endPrdDe: "2024"
+    },
+    targetTable: "foreign_resident_status",
+    outputBaseName: "kosis_registered_foreigner_by_nationality",
+    responseMapping: { period: "PRD_DE", nationality: "C1_NM", value: "DT" },
+    sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=110&tblId=DT_110025_A033_A",
+    updateCycle: "연",
+    license: "KOSIS 이용약관",
+    personalDataSafe: true,
+    verified: false,
+    notes: "법무부 출입국 국적별 등록외국인. 웹 조사로 식별된 신규 테이블. 2단계 호출."
   },
   // 법무부 KOSIS 테이블 — CSV 파일(moj_*)로 이미 수집하므로 중복 방지를 위해 비활성화.
   // 국적별 집계 트렌드가 필요하면 orgId=111 정확한 tblId 확인 후 재활성화 한다.

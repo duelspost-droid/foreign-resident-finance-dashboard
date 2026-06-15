@@ -258,6 +258,50 @@ function extractItems(body) {
 }
 
 // ── KOSIS 오픈API 수집 ──────────────────────────────────────────────────────────
+//
+// KOSIS 데이터 조회는 테이블별 분류코드(itmId, objL*)를 요구한다. `ALL` 만으로는
+// "필수요청변수값이 누락되었습니다" 오류가 발생하므로 2단계로 호출한다:
+//   1) getMeta(type=ITM) 로 실제 itmId 코드 조회
+//   2) statisticsParameterData.do 에 itmId + objL*=ALL 을 넣어 데이터 조회
+// getMeta 가 실패하면 source.params 의 itmId(또는 ALL)로 폴백한다.
+
+const KOSIS_META_ENDPOINT = "https://kosis.kr/openapi/statisticsData.do";
+const KOSIS_DATA_ENDPOINT = "https://kosis.kr/openapi/Param/statisticsParameterData.do";
+
+function maskUrl(url, apiKey) {
+  return url
+    .toString()
+    .replace(encodeURIComponent(apiKey), maskKey(apiKey))
+    .replace(apiKey, maskKey(apiKey));
+}
+
+// getMeta(type=ITM) 로 itmId 목록을 가져온다. "+"로 join 한 문자열 반환(없으면 null).
+async function fetchKosisItmIds(source, apiKey, attempts) {
+  const url = new URL(KOSIS_META_ENDPOINT);
+  url.searchParams.set("method", "getMeta");
+  url.searchParams.set("type", "ITM");
+  url.searchParams.set("apiKey", apiKey);
+  url.searchParams.set("orgId", source.orgId);
+  url.searchParams.set("tblId", source.tblId);
+  url.searchParams.set("format", "json");
+  const safeUrl = maskUrl(url, apiKey);
+  try {
+    const res = await fetchWithRetry(url);
+    attempts.push({ step: "getMeta(ITM)", url: safeUrl, status: res.status });
+    if (!res.ok) return null;
+    const body = JSON.parse(await res.text());
+    if (body?.err || body?.errMsg) {
+      attempts.push({ step: "getMeta(ITM)", error: body.errMsg ?? body.err });
+      return null;
+    }
+    const rows = Array.isArray(body) ? body : extractItems(body);
+    const ids = [...new Set(rows.map((r) => r.ITM_ID ?? r.itmId).filter(Boolean))];
+    return ids.length > 0 ? ids.slice(0, 50).join("+") : null;
+  } catch (error) {
+    attempts.push({ step: "getMeta(ITM)", error: error.message });
+    return null;
+  }
+}
 
 async function collectKosisSource(source) {
   const apiKey = process.env[source.apiKeyEnv];
@@ -265,43 +309,65 @@ async function collectKosisSource(source) {
     return { status: "skipped_no_key", reason: `${source.apiKeyEnv} not set`, requestUrls: [source.endpoint] };
   }
 
-  const url = new URL(source.endpoint);
-  // statisticsData.do 공통 파라미터
-  url.searchParams.set("apiKey", apiKey);
-  url.searchParams.set("orgId", source.orgId);
-  url.searchParams.set("tblId", source.tblId);
-  for (const [k, v] of Object.entries(source.params ?? {})) url.searchParams.set(k, v);
-  // statisticsParameterData.do 용 objL* 파라미터는 source.params에 있을 때만 전송된다.
-
-  const safeUrl = url.toString().replace(encodeURIComponent(apiKey), maskKey(apiKey)).replace(apiKey, maskKey(apiKey));
   const attempts = [];
+  const requestUrls = [];
+
+  // 1단계: 실제 itmId 코드 조회 (실패 시 params.itmId 또는 ALL 폴백)
+  const metaItmId = await fetchKosisItmIds(source, apiKey, attempts);
+  const itmId = metaItmId ?? source.params?.itmId ?? "ALL";
+
+  // 2단계: statisticsParameterData.do 로 데이터 조회
+  const dataUrl = new URL(source.dataEndpoint ?? KOSIS_DATA_ENDPOINT);
+  dataUrl.searchParams.set("method", "getList");
+  dataUrl.searchParams.set("apiKey", apiKey);
+  dataUrl.searchParams.set("orgId", source.orgId);
+  dataUrl.searchParams.set("tblId", source.tblId);
+  dataUrl.searchParams.set("itmId", itmId);
+  // 분류 레벨: objL1~objL8 을 ALL/빈값으로. source.params 가 있으면 우선.
+  dataUrl.searchParams.set("objL1", source.params?.objL1 ?? "ALL");
+  dataUrl.searchParams.set("objL2", source.params?.objL2 ?? "");
+  dataUrl.searchParams.set("objL3", source.params?.objL3 ?? "");
+  dataUrl.searchParams.set("format", "json");
+  dataUrl.searchParams.set("jsonVD", "Y");
+  dataUrl.searchParams.set("prdSe", source.params?.prdSe ?? "Y");
+  dataUrl.searchParams.set("startPrdDe", source.params?.startPrdDe ?? "2020");
+  dataUrl.searchParams.set("endPrdDe", source.params?.endPrdDe ?? "2024");
+
+  const safeDataUrl = maskUrl(dataUrl, apiKey);
+  requestUrls.push(safeDataUrl);
 
   try {
-    const res = await fetchWithRetry(url);
-    attempts.push({ url: safeUrl, status: res.status });
+    const res = await fetchWithRetry(dataUrl);
+    attempts.push({ step: "statisticsParameterData", url: safeDataUrl, status: res.status });
     if (!res.ok) {
-      return { status: "request_failed", requestUrls: [safeUrl], attempts, reason: `${res.status} ${res.statusText}` };
+      return { status: "request_failed", requestUrls, attempts, reason: `${res.status} ${res.statusText}` };
     }
     const text = await res.text();
     let body;
     try {
       body = JSON.parse(text);
     } catch {
-      return { status: "non_json_response", requestUrls: [safeUrl], attempts, reason: text.slice(0, 200) };
+      return { status: "non_json_response", requestUrls, attempts, reason: text.slice(0, 200) };
     }
-    // KOSIS 오류 응답: { err: "...", errMsg: "..." }
     if (body?.err || body?.errMsg) {
-      return { status: "api_error", requestUrls: [safeUrl], attempts, reason: body.errMsg ?? body.err };
+      return { status: "api_error", requestUrls, attempts, reason: body.errMsg ?? body.err };
     }
     const items = Array.isArray(body) ? body : extractItems(body);
     if (items.length === 0) {
-      return { status: "no_data", requestUrls: [safeUrl], attempts, reason: "0 rows" };
+      return { status: "no_data", requestUrls, attempts, reason: "0 rows" };
     }
     const fileName = `${source.outputBaseName}_${todayStamp()}.json`;
     await writeFile(join(rawDir, fileName), JSON.stringify(items, null, 2), "utf8");
-    return { status: "downloaded", rowCount: items.length, savedFile: fileName, requestUrls: [safeUrl], attempts };
+    return {
+      status: "downloaded",
+      rowCount: items.length,
+      savedFile: fileName,
+      requestUrls,
+      attempts,
+      itmIdSource: metaItmId ? "getMeta" : "fallback"
+    };
   } catch (error) {
-    return { status: "request_failed", requestUrls: [safeUrl], attempts, reason: error.message };
+    return { status: "request_failed", requestUrls, attempts, reason: error.message };
   }
 }
 
