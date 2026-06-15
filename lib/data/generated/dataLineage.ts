@@ -40,17 +40,17 @@ export type DataLineage = {
 };
 
 export const dataLineage: DataLineage = {
-  "generatedAt": "2026-06-15T08:44:59.400Z",
+  "generatedAt": "2026-06-15T08:50:13.956Z",
   "keysPresent": {
     "DATA_GO_KR_SERVICE_KEY": true,
     "KOSIS_API_KEY": true
   },
   "totals": {
-    "sources": 6,
+    "sources": 5,
     "downloaded": 3,
     "cached": 0,
     "skippedNoKey": 0,
-    "failed": 3
+    "failed": 2
   },
   "sources": [
     {
@@ -66,7 +66,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "국적×체류자격 집계. 세그먼트 산출의 1차 소스.",
-      "fetchedAt": "2026-06-15T08:45:17.699Z",
+      "fetchedAt": "2026-06-15T08:50:27.753Z",
       "status": "downloaded",
       "rowCount": 400,
       "savedFile": "moj_foreign_resident_status_2024_2026-06-15.csv",
@@ -88,7 +88,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "지역 단위 체류 현황.",
-      "fetchedAt": "2026-06-15T08:45:21.264Z",
+      "fetchedAt": "2026-06-15T08:50:29.860Z",
       "status": "downloaded",
       "rowCount": 380,
       "savedFile": "moj_foreign_stay_data_2024_2026-06-15.csv",
@@ -110,7 +110,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "유학(D-2)·연수(D-4) 체류 추세.",
-      "fetchedAt": "2026-06-15T08:45:24.218Z",
+      "fetchedAt": "2026-06-15T08:50:31.696Z",
       "status": "downloaded",
       "rowCount": 42,
       "savedFile": "moj_foreign_student_stay_2024_2026-06-15.csv",
@@ -131,37 +131,15 @@ export const dataLineage: DataLineage = {
       "updateCycle": "연",
       "personalDataSafe": true,
       "verified": false,
-      "notes": "행안부 외국인주민(KOSIS) 실재 통계표 orgId=110/tblId=TX_11025_A000_A 확인. 첫 응답으로 필드 확정.",
-      "fetchedAt": "2026-06-15T08:45:25.601Z",
+      "notes": "행안부 시도별 외국인주민. statisticsData.do 사용(objL 파라미터 불필요). 첫 응답으로 필드명 확정.",
+      "fetchedAt": "2026-06-15T08:50:32.737Z",
       "status": "api_error",
       "rowCount": null,
       "savedFile": null,
       "requestUrls": [
-        "https://kosis.kr/openapi/Param/statisticsParameterData.do?apiKey=MzQ1OGI2MWEyZjY0NDljZWI4MTZhNDI4NmYwNWZhODM%3D&orgId=110&tblId=TX_11025_A000_A&method=getList&format=json&jsonVD=Y&prdSe=Y&newEstPrdCnt=5&objL1=ALL&itmId=ALL"
+        "https://kosis.kr/openapi/statisticsData.do?apiKey=MzQ1OGI2MWEyZjY0NDljZWI4MTZhNDI4NmYwNWZhODM%3D&orgId=110&tblId=TX_11025_A000_A&method=getList&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2020&endPrdDe=2024"
       ],
-      "reason": "필수요청변수값이 누락되었습니다. (objL)"
-    },
-    {
-      "id": "kosis_foreigner_by_nationality",
-      "provider": "KOSIS(법무부 출입국통계)",
-      "title": "국적·지역별 체류외국인",
-      "category": "외국인 직접 통계",
-      "type": "kosis",
-      "targetTable": "foreign_resident_status",
-      "sourceUrl": "https://kosis.kr/statHtml/statHtml.do?orgId=111&tblId=DT_1B040A1",
-      "license": "KOSIS 이용약관",
-      "updateCycle": "연",
-      "personalDataSafe": true,
-      "verified": false,
-      "notes": "국적별 체류외국인. tblId 운영 환경에서 확정 필요.",
-      "fetchedAt": "2026-06-15T08:45:27.026Z",
-      "status": "api_error",
-      "rowCount": null,
-      "savedFile": null,
-      "requestUrls": [
-        "https://kosis.kr/openapi/Param/statisticsParameterData.do?apiKey=MzQ1OGI2MWEyZjY0NDljZWI4MTZhNDI4NmYwNWZhODM%3D&orgId=111&tblId=DT_1B040A1&method=getList&format=json&jsonVD=Y&prdSe=Y&newEstPrdCnt=5&objL1=ALL&itmId=ALL"
-      ],
-      "reason": "해당 통계표가 존재하지 않습니다."
+      "reason": "필수요청변수값이 누락되었습니다."
     },
     {
       "id": "mois_foreign_resident_by_region_api",
@@ -176,12 +154,12 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 외국인주민 시군구 집계. endpoint 경로 운영 환경에서 확정 필요.",
-      "fetchedAt": "2026-06-15T08:45:28.161Z",
+      "fetchedAt": "2026-06-15T08:50:34.843Z",
       "status": "no_data",
       "rowCount": null,
       "savedFile": null,
       "requestUrls": [
-        "https://apis.data.go.kr/1741000/StatisticsForeignResident/getForeignResidentList?serviceKey=3811…ce88&type=json&numOfRows=1000&pageNo=1"
+        "https://apis.data.go.kr/1741000/StatisticsForeignResident/getStatisticsForeignResidentInfo?serviceKey=3811…ce88&type=json&numOfRows=1000&pageNo=1&searchYear=2024"
       ],
       "reason": "0 rows (verify endpoint/params)"
     }

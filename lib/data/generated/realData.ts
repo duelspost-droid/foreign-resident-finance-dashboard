@@ -9214,7 +9214,7 @@ export const realApiStatusData: readonly ForeignResidentStatus[] = [];
 export const realApiRegionData: readonly ForeignResidentRegionMonth[] = [];
 
 export const realDataSummary = {
-  "generatedAt": "2026-06-15T08:45:28.223Z",
+  "generatedAt": "2026-06-15T08:50:34.905Z",
   "statusRowCount": 400,
   "regionRowCount": 200,
   "apiStatusRowCount": 0,
