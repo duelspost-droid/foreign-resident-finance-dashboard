@@ -7450,7 +7450,7 @@ export type RealUniversityStat = { name: string; type: string; region: string };
 export const realUniversityStats: readonly RealUniversityStat[] = [];
 
 export const realDataSummary = {
-  "generatedAt": "2026-06-15T22:24:37.313Z",
+  "generatedAt": "2026-06-15T22:40:28.232Z",
   "statusRowCount": 205,
   "nationalityCount": 205,
   "nationalitySource": "annual",
