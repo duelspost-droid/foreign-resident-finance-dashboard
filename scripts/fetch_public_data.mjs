@@ -1,5 +1,5 @@
 import { execFile } from "node:child_process";
-import { mkdir, readdir, rename, unlink, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, rename, unlink, writeFile } from "node:fs/promises";
 import { createWriteStream } from "node:fs";
 import { join } from "node:path";
 import { Readable } from "node:stream";
@@ -190,6 +190,20 @@ function candidateDownloadUrls(meta) {
   return urls;
 }
 
+// 저장된 CSV의 헤더(첫 줄)를 읽어 카탈로그에 기록한다. 다운로드된 파일의 컬럼 구조를
+// 파악해 build_real_data 파서를 정확히 작성하기 위한 진단 정보.
+async function peekHeader(path) {
+  try {
+    const buf = await readFile(path);
+    const enc = detectEncoding(buf);
+    const slice = buf.subarray(0, 4096);
+    const text = enc === "euc-kr" ? new TextDecoder("euc-kr").decode(slice) : slice.toString("utf8");
+    return text.replace(/^﻿/, "").split(/\r?\n/, 1)[0].slice(0, 600);
+  } catch {
+    return null;
+  }
+}
+
 async function downloadFile(meta) {
   const stamp = todayStamp();
   const extension = meta.extension || "csv";
@@ -209,7 +223,7 @@ async function downloadFile(meta) {
         const text = await res.text();
         if (text.includes("로그인") || text.includes("에러")) continue;
         await writeFile(target, text, "utf8");
-        return { ok: true, path: target, fileName, url, attempts };
+        return { ok: true, path: target, fileName, url, attempts, headerLine: await peekHeader(target) };
       }
 
       // 전체 버퍼로 수신 — ZIP 감지 및 인코딩 변환에 필요.
@@ -223,7 +237,7 @@ async function downloadFile(meta) {
         if (innerFile) {
           await rename(innerFile, target);
           await unlink(zipPath).catch(() => {});
-          return { ok: true, path: target, fileName, url, attempts, extractedFromZip: true };
+          return { ok: true, path: target, fileName, url, attempts, extractedFromZip: true, headerLine: await peekHeader(target) };
         }
         // 압축 해제 실패 시 ZIP 자체를 저장
         const zipName = fileName.replace(/\.[^.]+$/, ".zip");
@@ -237,7 +251,7 @@ async function downloadFile(meta) {
         ? new TextDecoder("euc-kr").decode(buf)
         : buf.toString("utf8");
       await writeFile(target, text, "utf8");
-      return { ok: true, path: target, fileName, url, attempts, encoding };
+      return { ok: true, path: target, fileName, url, attempts, encoding, headerLine: await peekHeader(target) };
     } catch (error) {
       attempts.push({ url, error: error.message });
     }
@@ -445,10 +459,13 @@ async function collectKosisSource(source) {
   dataUrl.searchParams.set("orgId", source.orgId);
   dataUrl.searchParams.set("tblId", source.tblId);
   dataUrl.searchParams.set("itmId", itmId);
-  // 분류 레벨: objL1~objL8 을 ALL/빈값으로. source.params 가 있으면 우선.
+  // 분류 레벨(objL): 빈 값을 보내면 KOSIS가 "필수요청변수값 누락(objL)" 오류를 낸다.
+  // objL1은 기본 ALL, objL2~objL8은 source.params에 명시된 비어있지 않은 값만 전송한다.
   dataUrl.searchParams.set("objL1", source.params?.objL1 ?? "ALL");
-  dataUrl.searchParams.set("objL2", source.params?.objL2 ?? "");
-  dataUrl.searchParams.set("objL3", source.params?.objL3 ?? "");
+  for (let lvl = 2; lvl <= 8; lvl += 1) {
+    const v = source.params?.[`objL${lvl}`];
+    if (v != null && v !== "") dataUrl.searchParams.set(`objL${lvl}`, v);
+  }
   dataUrl.searchParams.set("format", "json");
   dataUrl.searchParams.set("jsonVD", "Y");
   dataUrl.searchParams.set("prdSe", source.params?.prdSe ?? "Y");
