@@ -327,20 +327,40 @@ function summarizeStudents(studentRows) {
   };
 }
 
+// 파서 결과가 비어있을 때 실제 컬럼명을 로그 출력 (다음 런에서 파서 수정 확인용).
+function logColumnDiag(label, rows) {
+  if (!rows.length) return;
+  const cols = Object.keys(rows[0]).filter((k) => k !== "__rowNumber");
+  console.error(`[DIAG] ${label} columns (${rows.length} rows):`, cols.slice(0, 20).join(" | "));
+  const sample = rows[0];
+  const vals = cols.slice(0, 10).map((c) => `${c}=${String(sample[c]).slice(0, 30)}`);
+  console.error(`[DIAG] ${label} row[0]:`, vals.join(", "));
+}
+
 // 대학알리미 대학별 외국인유학생수 CSV → 대학별 집계(최신연도, 상위 30).
-// 기대 컬럼(dataSources 큐레이션): 기준연도, 대학명, 캠퍼스, 외국인유학생수, 전체학생수.
+// 실제 컬럼이 성별,국적명,체류자격,학교명 처럼 count 컬럼이 없으면 행 수를 학생 수로 추정.
 function transformAcademyUniversities(rows) {
+  if (!rows.length) return { latestYear: null, universities: [], universityCount: 0, totalForeignStudents: 0 };
+  logColumnDiag("academyinfo", rows);
+
+  const headers = Object.keys(rows[0]).filter((k) => k !== "__rowNumber");
+  const hasCountCol = headers.some((h) =>
+    ["외국인유학생수", "유학생수", "외국인학생수", "외국인재학생수"].some((c) => h.includes(c))
+  );
+
   const yearOf = (r) => toNumber(firstValue(r, ["기준연도", "학년도", "연도", "년도", "년"]));
   const years = rows.map(yearOf).filter((y) => y >= 2000 && y <= 2100);
   const latestYear = years.length ? Math.max(...years) : null;
   const agg = new Map();
   for (const r of rows) {
     if (latestYear && yearOf(r) && yearOf(r) !== latestYear) continue;
-    const uni = String(firstValue(r, ["대학명", "학교명", "기관명", "대학"])).trim();
+    const uni = String(firstValue(r, ["대학명", "학교명", "기관명", "대학", "학교"])).trim();
     if (!uni || /합계|소계|총계|전체/.test(uni)) continue;
-    const campus = String(firstValue(r, ["캠퍼스", "분교"])).trim();
-    const foreign = toNumber(firstValue(r, ["외국인유학생수", "외국인유학생", "유학생수", "유학생", "외국인학생"]));
-    const total = toNumber(firstValue(r, ["전체학생수", "재학생수", "총학생수"]));
+    const campus = String(firstValue(r, ["캠퍼스", "분교", "캠퍼스명"])).trim();
+    const foreign = hasCountCol
+      ? toNumber(firstValue(r, ["외국인유학생수", "외국인유학생", "유학생수", "유학생", "외국인학생수", "외국인학생", "외국인재학생수"]))
+      : 1;
+    const total = hasCountCol ? toNumber(firstValue(r, ["전체학생수", "재학생수", "총학생수", "재적학생수", "전체재학생수"])) : 0;
     const key = uni + (campus ? `||${campus}` : "");
     const cur = agg.get(key) ?? { university: uni, campus, foreignStudents: 0, totalStudents: 0 };
     cur.foreignStudents += foreign;
@@ -348,6 +368,9 @@ function transformAcademyUniversities(rows) {
     agg.set(key, cur);
   }
   const list = [...agg.values()].filter((u) => u.foreignStudents > 0);
+  if (!list.length) {
+    console.error("[DIAG] academyinfo: no records matched. yearOf sample:", years.slice(0, 5));
+  }
   list.sort((a, b) => b.foreignStudents - a.foreignStudents);
   return {
     latestYear,
@@ -355,6 +378,7 @@ function transformAcademyUniversities(rows) {
       rank: i + 1,
       university: u.university,
       campus: u.campus || null,
+      sido: null,
       foreignStudents: u.foreignStudents,
       foreignShare: u.totalStudents > 0 ? Number(((u.foreignStudents / u.totalStudents) * 100).toFixed(1)) : null
     })),
@@ -366,19 +390,25 @@ function transformAcademyUniversities(rows) {
 // 행안부 시군구 외국인주민 현황 CSV → 시군구별 집계(최신연도, 상위 N).
 // 기대 컬럼: 기준연도, 시도, 시군구, 외국인주민수, ...
 function transformRegionResidents(rows) {
-  const yearOf = (r) => toNumber(firstValue(r, ["기준연도", "연도", "년도", "년"]));
+  if (!rows.length) return { latestYear: null, regions: [], regionCount: 0, totalResidents: 0 };
+  logColumnDiag("mois_region", rows);
+
+  const yearOf = (r) => toNumber(firstValue(r, ["기준연도", "연도", "년도", "년", "기준년도"]));
   const years = rows.map(yearOf).filter((y) => y >= 2000 && y <= 2100);
   const latestYear = years.length ? Math.max(...years) : null;
   const out = [];
   for (const r of rows) {
     if (latestYear && yearOf(r) && yearOf(r) !== latestYear) continue;
-    const sido = String(firstValue(r, ["시도", "시·도", "행정구역"])).trim();
-    const sigungu = String(firstValue(r, ["시군구", "시·군·구"])).trim();
-    const count = toNumber(firstValue(r, ["외국인주민수", "외국인주민", "외국인수", "총계", "계"]));
+    const sido = String(firstValue(r, ["시도", "시·도", "행정구역", "시도명"])).trim();
+    const sigungu = String(firstValue(r, ["시군구", "시·군·구", "시군구명"])).trim();
+    const count = toNumber(firstValue(r, ["외국인주민수", "외국인주민", "외국인수", "총계", "계", "합계", "외국인주민수(계)"]));
     // 시군구 단위 행만 사용(시도 합계·전국 합계 행 제외)해 중복/혼선 방지.
     if (!sido || !sigungu || count <= 0) continue;
     if (/합계|소계|총계|전국|계$/.test(sigungu) || sigungu === sido) continue;
     out.push({ sido, sigungu, count });
+  }
+  if (!out.length) {
+    console.error("[DIAG] mois_region: no records matched. years:", years.slice(0, 5));
   }
   out.sort((a, b) => b.count - a.count);
   return {
@@ -387,6 +417,84 @@ function transformRegionResidents(rows) {
     regionCount: out.length,
     totalResidents: out.reduce((s, r) => s + r.count, 0)
   };
+}
+
+// 교육부 외국인 유학생 현황(최신) CSV: 시도,설립구분,학교명,연도,남,여,계
+function transformMoeStudentsBySchool(rows) {
+  if (!rows.length) return { latestYear: null, universities: [], universityCount: 0, totalForeignStudents: 0 };
+
+  const yearOf = (r) => toNumber(firstValue(r, ["연도", "학년도", "기준연도", "년도"]));
+  const years = rows.map(yearOf).filter((y) => y >= 2000 && y <= 2100);
+  const latestYear = years.length ? Math.max(...years) : null;
+
+  const agg = new Map();
+  for (const r of rows) {
+    const yr = yearOf(r);
+    if (latestYear && yr && yr !== latestYear) continue;
+    const uni = String(firstValue(r, ["학교명", "대학명", "기관명"])).trim();
+    if (!uni || /합계|소계|총계|전체/.test(uni)) continue;
+    const sido = String(firstValue(r, ["시도", "지역", "시·도"])).trim();
+    const total = toNumber(firstValue(r, ["계", "합계", "총계"]));
+    const male = toNumber(firstValue(r, ["남", "남자", "남학생"]));
+    const female = toNumber(firstValue(r, ["여", "여자", "여학생"]));
+    const count = total || male + female;
+
+    const cur = agg.get(uni) ?? { university: uni, sido, foreignStudents: 0 };
+    cur.foreignStudents += count;
+    agg.set(uni, cur);
+  }
+
+  const list = [...agg.values()].filter((u) => u.foreignStudents > 0);
+  list.sort((a, b) => b.foreignStudents - a.foreignStudents);
+  return {
+    latestYear,
+    universities: list.slice(0, 30).map((u, i) => ({
+      rank: i + 1,
+      university: u.university,
+      campus: null,
+      sido: u.sido || null,
+      foreignStudents: u.foreignStudents,
+      foreignShare: null
+    })),
+    universityCount: list.length,
+    totalForeignStudents: list.reduce((s, u) => s + u.foreignStudents, 0)
+  };
+}
+
+// 행안부 국적×연령대 현황 CSV: 국적,연령대,값,데이터기준일자
+function transformNationalityByAge(rows) {
+  if (!rows.length) return { ageGroups: [], nationalities: [], items: [] };
+
+  const natAgeMap = new Map();
+  const ageGroupSet = new Set();
+
+  for (const r of rows) {
+    const nationality = String(firstValue(r, ["국적", "국가", "국적명"])).trim();
+    const ageGroup = String(firstValue(r, ["연령대", "연령", "나이"])).trim();
+    const value = toNumber(firstValue(r, ["값", "인원", "수", "계", "합계"]));
+    if (!nationality || !ageGroup || value <= 0) continue;
+    const key = `${nationality}||${ageGroup}`;
+    natAgeMap.set(key, (natAgeMap.get(key) ?? 0) + value);
+    ageGroupSet.add(ageGroup);
+  }
+
+  const ageGroups = [...ageGroupSet].sort();
+
+  const natTotals = new Map();
+  for (const [key, count] of natAgeMap.entries()) {
+    const nat = key.split("||")[0];
+    natTotals.set(nat, (natTotals.get(nat) ?? 0) + count);
+  }
+  const nationalities = [...natTotals.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([nationality, total]) => ({ nationality, total }));
+
+  const items = [...natAgeMap.entries()].map(([key, count]) => {
+    const [nationality, ageGroup] = key.split("||");
+    return { nationality, ageGroup, count };
+  });
+
+  return { ageGroups, nationalities, items };
 }
 
 async function readLatestRaw(prefix) {
@@ -649,18 +757,29 @@ async function main() {
     studentSummary = agg.summary;
   }
 
-  // 대학알리미 대학별 외국인유학생수 → 대학별 랭킹.
-  const academyRaw = await readLatestRaw("academyinfo_foreign_student_count");
+  // 교육부 최신 유학생 현황(moe) → 대학별 랭킹 1차 소스.
+  const moeStudentRaw = await readLatestRaw("moe_foreign_student_latest");
   let universityRanking = { latestYear: null, universities: [], universityCount: 0, totalForeignStudents: 0 };
-  if (academyRaw) {
-    universityRanking = transformAcademyUniversities(parseCsv(academyRaw.text));
+  if (moeStudentRaw) {
+    const moeResult = transformMoeStudentsBySchool(parseCsv(moeStudentRaw.text));
+    if (moeResult.universities.length > 0) universityRanking = moeResult;
+  }
+  // 대학알리미 → 폴백 (MOE 데이터 없을 때만 사용).
+  if (universityRanking.universities.length === 0) {
+    const academyRaw = await readLatestRaw("academyinfo_foreign_student_count");
+    if (academyRaw) {
+      universityRanking = transformAcademyUniversities(parseCsv(academyRaw.text));
+    }
   }
 
-  // 행안부 시군구 외국인주민 현황 → 시군구별 분포.
+  // 행안부 국적×연령 현황(국적,연령대,값,데이터기준일자) → 국적별 연령 분포.
   const moisRaw = await readLatestRaw("mois_foreign_resident_region_file");
   let regionResidents = { latestYear: null, regions: [], regionCount: 0, totalResidents: 0 };
+  let nationalityByAge = { ageGroups: [], nationalities: [], items: [] };
   if (moisRaw) {
-    regionResidents = transformRegionResidents(parseCsv(moisRaw.text));
+    const moisParsed = parseCsv(moisRaw.text);
+    regionResidents = transformRegionResidents(moisParsed);
+    nationalityByAge = transformNationalityByAge(moisParsed);
   }
 
   // API(KOSIS/openapi) 보조 데이터. 키 없으면 빈 배열. MOJ 1차 데이터와 분리 유지.
@@ -687,8 +806,8 @@ async function main() {
     `export const realForeignStudentByYear: readonly RealStudentYear[] = ${JSON.stringify(studentByYear, null, 2)};\n\n` +
     `export const realForeignStudentByVisa: readonly RealStudentVisa[] = ${JSON.stringify(studentByVisa, null, 2)};\n\n` +
     `export const realStudentSummary = ${JSON.stringify(studentSummary, null, 2)} as const;\n\n` +
-    `// 대학알리미 대학별 외국인유학생수 — 대학/유학생 페이지가 사용.\n` +
-    `export type RealUniversity = { rank: number; university: string; campus: string | null; foreignStudents: number; foreignShare: number | null };\n` +
+    `// 대학별 외국인유학생수 — 대학/유학생 페이지가 사용 (교육부 1차, 대학알리미 폴백).\n` +
+    `export type RealUniversity = { rank: number; university: string; campus: string | null; sido?: string | null; foreignStudents: number; foreignShare: number | null };\n` +
     `export const realUniversityRanking: readonly RealUniversity[] = ${JSON.stringify(universityRanking.universities, null, 2)};\n\n` +
     `export const realUniversitySummary = ${JSON.stringify({
       latestYear: universityRanking.latestYear,
@@ -703,6 +822,11 @@ async function main() {
       regionCount: regionResidents.regionCount,
       totalResidents: regionResidents.totalResidents
     }, null, 2)} as const;\n\n` +
+    `// 행안부 국적×연령대 현황 — 국적 분석 페이지가 사용.\n` +
+    `export type RealNationalityAge = { nationality: string; ageGroup: string; count: number };\n` +
+    `export const realNationalityByAge: readonly RealNationalityAge[] = ${JSON.stringify(nationalityByAge.items, null, 2)};\n\n` +
+    `export const realNationalityAgeGroups: readonly string[] = ${JSON.stringify(nationalityByAge.ageGroups, null, 2)};\n\n` +
+    `export const realNationalityAgeTotals: readonly { nationality: string; total: number }[] = ${JSON.stringify(nationalityByAge.nationalities, null, 2)};\n\n` +
     `export const realDataSummary = ${JSON.stringify({
       generatedAt: new Date().toISOString(),
       statusRowCount: statusRows.length,
@@ -714,12 +838,13 @@ async function main() {
       studentYearCount: studentByYear.length,
       universityCount: universityRanking.universityCount,
       regionResidentCount: regionResidents.regionCount,
+      nationalityByAgeCount: nationalityByAge.items.length,
       apiParsedFiles: parsedFiles,
       sourceFiles: {
         status: statusRaw?.path ?? null,
         stay: stayRaw?.path ?? null,
         student: studentRaw?.path ?? null,
-        academy: academyRaw?.path ?? null,
+        moeStudent: moeStudentRaw?.path ?? null,
         mois: moisRaw?.path ?? null
       }
     }, null, 2)} as const;\n`;
@@ -748,6 +873,8 @@ async function main() {
         regionRowCount: regionRows.length,
         apiStatusRowCount: apiStatus.length,
         apiRegionRowCount: apiRegion.length,
+        universityCount: universityRanking.universityCount,
+        nationalityByAgeCount: nationalityByAge.items.length,
         lineage: lineageTotals
       },
       null,

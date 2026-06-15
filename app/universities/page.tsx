@@ -183,11 +183,12 @@ export default function UniversitiesPage() {
                     {universityRanking.map((u) => {
                       const max = universityRanking[0]?.foreignStudents || 1;
                       return (
-                        <tr key={`${u.university}-${u.campus ?? ""}`} style={{ borderBottom: "1px solid #f1f5f9" }}>
+                        <tr key={`${u.university}-${u.campus ?? u.sido ?? ""}`} style={{ borderBottom: "1px solid #f1f5f9" }}>
                           <td className="px-4 py-2.5 font-bold text-muted">{u.rank}</td>
                           <td className="px-4 py-2.5">
                             <div className="font-semibold text-ink">{u.university}</div>
                             {u.campus ? <div className="text-xs text-muted">{u.campus}</div> : null}
+                            {u.sido && !u.campus ? <div className="text-xs text-muted">{u.sido}</div> : null}
                             <div className="mt-1 h-1.5 w-full max-w-[220px] overflow-hidden rounded-full" style={{ background: "#eef2f7" }}>
                               <div className="h-full rounded-full" style={{ width: `${Math.round((u.foreignStudents / max) * 100)}%`, background: "#0f766e" }} />
                             </div>

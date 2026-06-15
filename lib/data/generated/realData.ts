@@ -7400,8 +7400,8 @@ export const realStudentSummary = {
   "yoy": -24.7
 } as const;
 
-// 대학알리미 대학별 외국인유학생수 — 대학/유학생 페이지가 사용.
-export type RealUniversity = { rank: number; university: string; campus: string | null; foreignStudents: number; foreignShare: number | null };
+// 대학별 외국인유학생수 — 대학/유학생 페이지가 사용 (교육부 1차, 대학알리미 폴백).
+export type RealUniversity = { rank: number; university: string; campus: string | null; sido?: string | null; foreignStudents: number; foreignShare: number | null };
 export const realUniversityRanking: readonly RealUniversity[] = [];
 
 export const realUniversitySummary = {
@@ -7420,6 +7420,14 @@ export const realRegionResidentSummary = {
   "totalResidents": 0
 } as const;
 
+// 행안부 국적×연령대 현황 — 국적 분석 페이지가 사용.
+export type RealNationalityAge = { nationality: string; ageGroup: string; count: number };
+export const realNationalityByAge: readonly RealNationalityAge[] = [];
+
+export const realNationalityAgeGroups: readonly string[] = [];
+
+export const realNationalityAgeTotals: readonly { nationality: string; total: number }[] = [];
+
 export const realDataSummary = {
   "generatedAt": "2026-06-15T21:30:41.608Z",
   "statusRowCount": 205,
@@ -7431,6 +7439,7 @@ export const realDataSummary = {
   "studentYearCount": 14,
   "universityCount": 0,
   "regionResidentCount": 0,
+  "nationalityByAgeCount": 0,
   "apiParsedFiles": [
     {
       "source": "kosis_foreigner_economic_activity",
@@ -7442,7 +7451,7 @@ export const realDataSummary = {
     "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-15.csv",
     "stay": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-06-15.csv",
     "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-15.csv",
-    "academy": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/academyinfo_foreign_student_count_2026-06-15.csv",
+    "moeStudent": null,
     "mois": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/mois_foreign_resident_region_file_2026-06-15.csv"
   }
 } as const;
