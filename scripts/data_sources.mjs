@@ -124,6 +124,44 @@ export const publicDataSources = [
     notes: "결혼이민자·다문화가구 집계. 금융 상품 수요 보조 지표."
   },
 
+  // ── 국민건강보험공단 / 국민연금 (파일·API, 외국인 가입자 = 소득·지불능력 지표) ────
+  {
+    id: "nhis_foreigner_premium_2023",
+    type: "file",
+    datasetId: "15138933",
+    detailPk: null,
+    provider: "국민건강보험공단",
+    title: "내·외국인 건강보험료 부과 및 급여 현황",
+    category: "외국인 경제·금융 보조",
+    baseDate: "2023-12-31",
+    targetTable: "finance_segment_aggregate",
+    outputBaseName: "nhis_foreigner_premium_2023",
+    sourceUrl: "https://www.data.go.kr/data/15138933/fileData.do",
+    updateCycle: "연",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "국적별 보험료 부과액·급여비. 외국인 소득수준·지불능력 대리지표(금융 세그먼트 보조)."
+  },
+  {
+    id: "nhis_foreigner_coverage_2022",
+    type: "file",
+    datasetId: "15095076",
+    detailPk: null,
+    provider: "국민건강보험공단",
+    title: "재외국민 및 외국인 건강보험 적용인구",
+    category: "외국인 직접 통계",
+    baseDate: "2022-12-31",
+    targetTable: "foreign_resident_status",
+    outputBaseName: "nhis_foreigner_coverage_2022",
+    sourceUrl: "https://www.data.go.kr/data/15095076/fileData.do",
+    updateCycle: "연",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "외국인 직장/지역 가입자 구분. 취업형태(급여계좌 수요) 보조 지표."
+  },
+
   // ── 법무부 추가 (파일 다운로드, 인증키 불필요) ────────────────────────────────────
   {
     id: "moj_immigration_monthly_2024",
@@ -220,29 +258,67 @@ export const publicDataSources = [
     notes: "행안부 시도별 외국인주민. 2단계 호출: getMeta(ITM)로 itmId 조회 후 statisticsParameterData.do. 첫 성공 응답으로 필드명 확정."
   },
   {
-    id: "kosis_registered_foreigner_by_nationality",
+    id: "kosis_foreign_resident_by_eupmyeondong",
     type: "kosis",
-    provider: "KOSIS(법무부 출입국)",
-    title: "국적별 등록외국인 현황",
+    provider: "KOSIS(행정안전부 외국인주민)",
+    title: "읍면동별 유형 및 지역별 외국인주민 현황",
     category: "외국인 직접 통계",
     apiKeyEnv: "KOSIS_API_KEY",
     endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
     orgId: "110",
     tblId: "DT_110025_A033_A",
-    params: {
-      prdSe: "Y",
-      startPrdDe: "2020",
-      endPrdDe: "2024"
-    },
-    targetTable: "foreign_resident_status",
-    outputBaseName: "kosis_registered_foreigner_by_nationality",
-    responseMapping: { period: "PRD_DE", nationality: "C1_NM", value: "DT" },
+    params: { prdSe: "Y", startPrdDe: "2020", endPrdDe: "2024" },
+    targetTable: "foreign_resident_region_month",
+    outputBaseName: "kosis_foreign_resident_by_eupmyeondong",
+    responseMapping: { period: "PRD_DE", region: "C1_NM", value: "DT" },
     sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=110&tblId=DT_110025_A033_A",
     updateCycle: "연",
     license: "KOSIS 이용약관",
     personalDataSafe: true,
     verified: false,
-    notes: "법무부 출입국 국적별 등록외국인. 웹 조사로 식별된 신규 테이블. 2단계 호출."
+    notes: "행안부 읍면동 단위 외국인주민(지역 세분화). 웹 조사로 정정(국적X→지역). 2단계 호출."
+  },
+  {
+    id: "kosis_registered_foreigner_sigungu_visa",
+    type: "kosis",
+    provider: "KOSIS(법무부 출입국)",
+    title: "시군구별 및 체류자격별 등록외국인 현황",
+    category: "외국인 직접 통계",
+    apiKeyEnv: "KOSIS_API_KEY",
+    endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
+    orgId: "111",
+    tblId: "DT_1B040A11",
+    params: { prdSe: "Y", startPrdDe: "2020", endPrdDe: "2024" },
+    targetTable: "foreign_resident_region_month",
+    outputBaseName: "kosis_registered_foreigner_sigungu_visa",
+    responseMapping: { period: "PRD_DE", region: "C1_NM", value: "DT" },
+    sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=111&tblId=DT_1B040A11",
+    updateCycle: "분기/연",
+    license: "KOSIS 이용약관",
+    personalDataSafe: true,
+    verified: false,
+    notes: "법무부 시군구×체류자격 등록외국인. 지점 전략 핵심 지표. 2단계 호출."
+  },
+  {
+    id: "kosis_foreigner_economic_activity",
+    type: "kosis",
+    provider: "KOSIS(통계청 이민자체류실태조사)",
+    title: "체류자격별 경제활동인구(외국인)",
+    category: "외국인 경제·금융 보조",
+    apiKeyEnv: "KOSIS_API_KEY",
+    endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
+    orgId: "101",
+    tblId: "DT_2FA002F",
+    params: { prdSe: "Y", startPrdDe: "2018", endPrdDe: "2024" },
+    targetTable: "foreign_resident_status",
+    outputBaseName: "kosis_foreigner_economic_activity",
+    responseMapping: { period: "PRD_DE", segment: "C1_NM", value: "DT" },
+    sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=101&tblId=DT_2FA002F",
+    updateCycle: "연",
+    license: "KOSIS 이용약관",
+    personalDataSafe: true,
+    verified: false,
+    notes: "통계청 이민자 체류실태·고용조사. 취업/소득 = 급여계좌·신용 수요 직결. 2단계 호출."
   },
   // 법무부 KOSIS 테이블 — CSV 파일(moj_*)로 이미 수집하므로 중복 방지를 위해 비활성화.
   // 국적별 집계 트렌드가 필요하면 orgId=111 정확한 tblId 확인 후 재활성화 한다.
@@ -337,5 +413,23 @@ export const discoveryQueries = [
     provider: "공통",
     keyword: "외국인 송금 환전",
     purpose: "외국인 대상 송금·환전 서비스 직접 통계 발굴"
+  },
+  {
+    id: "nhis_foreigner_insurance",
+    provider: "국민건강보험공단",
+    keyword: "외국인 건강보험 가입",
+    purpose: "외국인 직장/지역 가입자·보험료(소득·지불능력 대리지표)"
+  },
+  {
+    id: "nps_foreigner_pension",
+    provider: "국민연금공단",
+    keyword: "외국인 국민연금 가입",
+    purpose: "사업장 가입 외국인 규모(정규 취업·급여계좌 수요)"
+  },
+  {
+    id: "immigrant_employment_survey",
+    provider: "통계청",
+    keyword: "이민자 체류실태 고용조사",
+    purpose: "외국인 취업·소득·경제활동(신용·대출 수요 분석)"
   }
 ];
