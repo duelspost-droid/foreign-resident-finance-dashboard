@@ -9213,20 +9213,133 @@ export const realApiStatusData: readonly ForeignResidentStatus[] = [];
 
 export const realApiRegionData: readonly ForeignResidentRegionMonth[] = [];
 
+// 외국인 유학생 체류현황(법무부). 연도×체류자격 집계 — 대학/유학생 페이지가 사용.
+export type RealStudentYear = { year: number; total: number; degree: number; language: number };
+export type RealStudentVisa = { visaRaw: string; course: string; count: number };
+export const realForeignStudentByYear: readonly RealStudentYear[] = [
+  {
+    "year": 2011,
+    "total": 88468,
+    "degree": 68039,
+    "language": 20429
+  },
+  {
+    "year": 2012,
+    "total": 84711,
+    "degree": 64030,
+    "language": 20681
+  },
+  {
+    "year": 2013,
+    "total": 81847,
+    "degree": 60466,
+    "language": 21381
+  },
+  {
+    "year": 2014,
+    "total": 86410,
+    "degree": 61257,
+    "language": 25153
+  },
+  {
+    "year": 2015,
+    "total": 96357,
+    "degree": 66334,
+    "language": 30023
+  },
+  {
+    "year": 2016,
+    "total": 115927,
+    "degree": 76040,
+    "language": 39887
+  },
+  {
+    "year": 2017,
+    "total": 135087,
+    "degree": 86875,
+    "language": 48212
+  },
+  {
+    "year": 2018,
+    "total": 160671,
+    "degree": 102690,
+    "language": 57981
+  },
+  {
+    "year": 2019,
+    "total": 180131,
+    "degree": 118254,
+    "language": 61877
+  },
+  {
+    "year": 2020,
+    "total": 153361,
+    "degree": 101810,
+    "language": 51551
+  },
+  {
+    "year": 2021,
+    "total": 163697,
+    "degree": 111176,
+    "language": 52521
+  },
+  {
+    "year": 2022,
+    "total": 197234,
+    "degree": 134062,
+    "language": 63172
+  },
+  {
+    "year": 2023,
+    "total": 226507,
+    "degree": 152094,
+    "language": 74413
+  },
+  {
+    "year": 2024,
+    "total": 170512,
+    "degree": 85256,
+    "language": 85256
+  }
+];
+
+export const realForeignStudentByVisa: readonly RealStudentVisa[] = [
+  {
+    "visaRaw": "유학D2",
+    "course": "학위과정(D-2)",
+    "count": 85256
+  },
+  {
+    "visaRaw": "한국어연수D41",
+    "course": "어학연수(D-4)",
+    "count": 85173
+  },
+  {
+    "visaRaw": "외국어연수D47",
+    "course": "어학연수(D-4)",
+    "count": 83
+  }
+];
+
+export const realStudentSummary = {
+  "hasData": true,
+  "latestYear": 2024,
+  "total": 170512,
+  "degree": 85256,
+  "language": 85256,
+  "yoy": -24.7
+} as const;
+
 export const realDataSummary = {
-  "generatedAt": "2026-06-15T13:50:36.327Z",
+  "generatedAt": "2026-06-15T14:12:46.288Z",
   "statusRowCount": 400,
   "regionRowCount": 200,
   "apiStatusRowCount": 0,
   "apiRegionRowCount": 0,
-  "apiParsedFiles": [
-    {
-      "source": "kosis_foreigner_economic_activity",
-      "file": "kosis_foreigner_economic_activity_2026-06-15.json",
-      "produced": 0
-    }
-  ],
+  "studentYearCount": 14,
+  "apiParsedFiles": [],
   "sourceFiles": {
-    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-15.csv"
+    "status": "/home/user/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-14.csv",
+    "student": "/home/user/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-14.csv"
   }
 } as const;

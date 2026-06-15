@@ -21,7 +21,10 @@ import {
 import {
   realDataSummary,
   realForeignResidentStatus,
-  realRegionData
+  realForeignStudentByVisa,
+  realForeignStudentByYear,
+  realRegionData,
+  realStudentSummary
 } from "./generated/realData";
 
 const fallbackRegionData: ForeignResidentRegionMonth[] = [
@@ -614,6 +617,13 @@ export const scoreRadarData = [
   }
 ];
 
+// 외국인 유학생 실데이터(법무부 연도별 유학생 체류현황) — 대학/유학생 페이지가 사용.
+// 수집 데이터가 있으면 실데이터, 없으면 샘플 대학 합계로 폴백한다.
+export const foreignStudentByYear = realForeignStudentByYear;
+export const foreignStudentByVisa = realForeignStudentByVisa;
+export const foreignStudentSummary = realStudentSummary;
+export const hasRealStudentData = realStudentSummary.hasData;
+
 export const kpiSummary = {
   totalResidents: sampleRegionData.reduce((sum, row) => sum + row.residentCount, 0),
   registeredResidents: sampleRegionData.reduce(
@@ -621,7 +631,9 @@ export const kpiSummary = {
     0
   ),
   foreignLocalResidents: 2450000,
-  foreignStudents: sampleUniversityData.reduce((sum, row) => sum + row.studentCount, 0),
+  foreignStudents: realStudentSummary.hasData
+    ? realStudentSummary.total
+    : sampleUniversityData.reduce((sum, row) => sum + row.studentCount, 0),
   averageOpportunityScore:
     sampleOpportunityRows.reduce(
       (sum, row) => sum + row.overallOpportunityScore,

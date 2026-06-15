@@ -172,6 +172,61 @@ function summarizeStatus(statusRows) {
     .sort((a, b) => b.residentCount - a.residentCount);
 }
 
+// 법무부 연도별 외국인 유학생 체류현황 CSV: 연도 × 체류자격 × 인원.
+// 컬럼 예: 연도 / 체류자격(유학D2·한국어연수D41·외국어연수D47) / 외국인 유학생 수.
+function transformStudentStay(rows) {
+  return rows
+    .map((row) => {
+      const year = toNumber(firstValue(row, ["년", "연도", "year"]));
+      const visaRaw = String(firstValue(row, ["구분", "체류자격", "자격"])).trim();
+      const count = toNumber(firstValue(row, ["외국인유학생", "유학생", "인원", "학생"]));
+      // 학위과정(D-2) vs 어학연수(D-4) 2분류
+      const isLanguage = visaRaw.includes("연수") || /D[-\s]?4/i.test(visaRaw);
+      const course = isLanguage ? "어학연수(D-4)" : "학위과정(D-2)";
+      return { year, visaRaw, course, count };
+    })
+    .filter((r) => r.year >= 2000 && r.year <= 2100 && r.visaRaw);
+}
+
+// 유학생 시계열을 연도별 합계·체류자격별 구성·최신연도 요약으로 집계.
+function summarizeStudents(studentRows) {
+  const byYear = new Map();
+  for (const r of studentRows) {
+    const cur = byYear.get(r.year) ?? { year: r.year, total: 0, degree: 0, language: 0 };
+    cur.total += r.count;
+    if (r.course.startsWith("어학")) cur.language += r.count;
+    else cur.degree += r.count;
+    byYear.set(r.year, cur);
+  }
+  const yearSeries = [...byYear.values()].sort((a, b) => a.year - b.year);
+  const latest = yearSeries.at(-1) ?? null;
+  const prev = yearSeries.at(-2) ?? null;
+  const latestYear = latest?.year ?? null;
+
+  const byVisa = studentRows
+    .filter((r) => r.year === latestYear)
+    .map((r) => ({ visaRaw: r.visaRaw, course: r.course, count: r.count }))
+    .sort((a, b) => b.count - a.count);
+
+  const yoy =
+    latest && prev && prev.total > 0
+      ? Number((((latest.total - prev.total) / prev.total) * 100).toFixed(1))
+      : 0;
+
+  return {
+    yearSeries,
+    byVisa,
+    summary: {
+      hasData: yearSeries.length > 0,
+      latestYear,
+      total: latest?.total ?? 0,
+      degree: latest?.degree ?? 0,
+      language: latest?.language ?? 0,
+      yoy
+    }
+  };
+}
+
 async function readLatestRaw(prefix) {
   const files = await readdir(rawDir).catch(() => []);
   const target = files
@@ -399,6 +454,19 @@ async function main() {
 
   const regionRows = summarizeStatus(statusRows).slice(0, 200);
 
+  // 유학생 체류현황(법무부 연도별 외국인 유학생). 연도×체류자격 집계.
+  const studentRaw = await readLatestRaw("moj_foreign_student_stay");
+  let studentByYear = [];
+  let studentByVisa = [];
+  let studentSummary = { hasData: false, latestYear: null, total: 0, degree: 0, language: 0, yoy: 0 };
+  if (studentRaw) {
+    const studentRows = transformStudentStay(parseCsv(studentRaw.text));
+    const agg = summarizeStudents(studentRows);
+    studentByYear = agg.yearSeries;
+    studentByVisa = agg.byVisa;
+    studentSummary = agg.summary;
+  }
+
   // API(KOSIS/openapi) 보조 데이터. 키 없으면 빈 배열. MOJ 1차 데이터와 분리 유지.
   const { apiStatus, apiRegion, parsedFiles } = await buildApiSources();
 
@@ -410,14 +478,21 @@ async function main() {
     `// API(KOSIS/data.go.kr) 수집 보조 데이터. 1차(MOJ) 집계와 분리해 제공한다.\n` +
     `export const realApiStatusData: readonly ForeignResidentStatus[] = ${JSON.stringify(apiStatus, null, 2)};\n\n` +
     `export const realApiRegionData: readonly ForeignResidentRegionMonth[] = ${JSON.stringify(apiRegion, null, 2)};\n\n` +
+    `// 외국인 유학생 체류현황(법무부). 연도×체류자격 집계 — 대학/유학생 페이지가 사용.\n` +
+    `export type RealStudentYear = { year: number; total: number; degree: number; language: number };\n` +
+    `export type RealStudentVisa = { visaRaw: string; course: string; count: number };\n` +
+    `export const realForeignStudentByYear: readonly RealStudentYear[] = ${JSON.stringify(studentByYear, null, 2)};\n\n` +
+    `export const realForeignStudentByVisa: readonly RealStudentVisa[] = ${JSON.stringify(studentByVisa, null, 2)};\n\n` +
+    `export const realStudentSummary = ${JSON.stringify(studentSummary, null, 2)} as const;\n\n` +
     `export const realDataSummary = ${JSON.stringify({
       generatedAt: new Date().toISOString(),
       statusRowCount: statusRows.length,
       regionRowCount: regionRows.length,
       apiStatusRowCount: apiStatus.length,
       apiRegionRowCount: apiRegion.length,
+      studentYearCount: studentByYear.length,
       apiParsedFiles: parsedFiles,
-      sourceFiles: { status: statusRaw?.path ?? null }
+      sourceFiles: { status: statusRaw?.path ?? null, student: studentRaw?.path ?? null }
     }, null, 2)} as const;\n`;
 
   await writeFile(
