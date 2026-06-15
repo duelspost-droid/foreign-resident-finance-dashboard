@@ -24,6 +24,9 @@ import {
   realForeignResidentStatus,
   realForeignStudentByVisa,
   realForeignStudentByYear,
+  realHealthInsurance,
+  realMulticulturalFamily,
+  realMulticulturalFamilySummary,
   realNationalityByAge,
   realNationalityAgeGroups,
   realNationalityAgeTotals,
@@ -35,6 +38,7 @@ import {
   realStudentSummary,
   realUniversityRanking,
   realUniversitySummary,
+  realUniversityStats,
   realVisaDistribution
 } from "./generated/realData";
 
@@ -681,6 +685,19 @@ export const hasNationalityByAge = realNationalityByAge.length > 0;
 // KOSIS 경제활동인구 (수집 성공 시 채워짐).
 export const econActivityData = realEconActivity;
 export const hasEconActivity = realEconActivity.length > 0;
+
+// 건강보험 외국인 적용인구 (수집 성공 시 채워짐).
+export const healthInsuranceData = realHealthInsurance;
+export const hasHealthInsurance = realHealthInsurance.length > 0;
+
+// 다문화가족 현황 (수집 성공 시 채워짐).
+export const multiculturalFamilyData = realMulticulturalFamily;
+export const multiculturalFamilySummary = realMulticulturalFamilySummary;
+export const hasMulticulturalFamily = realMulticulturalFamily.length > 0;
+
+// 대학알리미 기본현황 (위치·유형 보조, 수집 성공 시 채워짐).
+export const universityStats = realUniversityStats;
+export const hasUniversityStats = realUniversityStats.length > 0;
 
 // 전체 체류외국인 합계 — 국적 분포 실데이터가 있으면 이를 우선 사용.
 const totalFromRealNationality = realNationalityDistribution.reduce((s, r) => s + r.residents, 0);

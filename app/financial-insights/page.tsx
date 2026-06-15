@@ -20,7 +20,15 @@ import {
   regionStrategy,
   topNationalities
 } from "@/lib/data/financialInsightsData";
-import { econActivityData, hasEconActivity } from "@/lib/data/mockData";
+import {
+  econActivityData,
+  hasEconActivity,
+  hasHealthInsurance,
+  hasMulticulturalFamily,
+  healthInsuranceData,
+  multiculturalFamilyData,
+  multiculturalFamilySummary
+} from "@/lib/data/mockData";
 import { PageHero } from "@/components/ui/PageHero";
 import { formatNumber } from "@/lib/utils/format";
 
@@ -544,6 +552,85 @@ export default function FinancialInsightsPage() {
                   수집 기간: {periods.at(-1)}~{periods[0]}년 · 연도별 데이터 {periods.length}개
                 </p>
               )}
+            </div>
+          </section>
+        );
+      })()}
+
+      {/* ── 건강보험 외국인 적용인구 (수집 시 표시) ─────────────── */}
+      {hasHealthInsurance && (() => {
+        const sorted = [...healthInsuranceData].sort((a, b) => b.total - a.total);
+        const maxTotal = sorted[0]?.total || 1;
+        const grandTotal = sorted.reduce((s, r) => s + r.total, 0);
+        const workplaceTotal = sorted.reduce((s, r) => s + r.workplace, 0);
+        const regionalTotal = sorted.reduce((s, r) => s + r.regional, 0);
+        return (
+          <section>
+            <div className="mb-3 flex items-center gap-2">
+              <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">외국인 건강보험 적용인구</h2>
+              <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">국민건강보험공단 · 2022</span>
+            </div>
+            <div className="surface p-5">
+              <div className="mb-4 grid grid-cols-3 gap-4 text-center">
+                <div><p className="text-lg font-black text-ink">{grandTotal.toLocaleString()}</p><p className="text-xs text-muted">전체 적용인원</p></div>
+                <div><p className="text-lg font-black" style={{ color: "#0f766e" }}>{workplaceTotal.toLocaleString()}</p><p className="text-xs text-muted">직장가입</p></div>
+                <div><p className="text-lg font-black" style={{ color: "#3157a4" }}>{regionalTotal.toLocaleString()}</p><p className="text-xs text-muted">지역가입</p></div>
+              </div>
+              <div className="space-y-2">
+                {sorted.slice(0, 15).map((row) => (
+                  <div key={row.nationality} className="flex items-center gap-3">
+                    <span className="w-24 shrink-0 truncate text-xs text-ink">{row.nationality}</span>
+                    <div className="flex flex-1 items-center gap-1">
+                      <div
+                        className="h-2 rounded-l"
+                        style={{ width: `${Math.round((row.workplace / maxTotal) * 50)}%`, background: "#0f766e", minWidth: row.workplace > 0 ? 2 : 0 }}
+                      />
+                      <div
+                        className="h-2 rounded-r"
+                        style={{ width: `${Math.round((row.regional / maxTotal) * 50)}%`, background: "#3157a4", minWidth: row.regional > 0 ? 2 : 0 }}
+                      />
+                    </div>
+                    <span className="w-16 shrink-0 text-right font-mono text-xs text-muted">{row.total.toLocaleString()}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })()}
+
+      {/* ── 다문화가족 현황 (수집 시 표시) ──────────────────────── */}
+      {hasMulticulturalFamily && (() => {
+        const sorted = [...multiculturalFamilyData].sort((a, b) => b.total - a.total);
+        const maxTotal = sorted[0]?.total || 1;
+        return (
+          <section>
+            <div className="mb-3 flex items-center gap-2">
+              <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">다문화가족 현황</h2>
+              <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">
+                여성가족부{multiculturalFamilySummary.latestYear ? ` · ${multiculturalFamilySummary.latestYear}` : ""}
+              </span>
+            </div>
+            <div className="surface p-5">
+              <p className="mb-3 text-xs text-muted">
+                총 다문화가족 {multiculturalFamilySummary.totalCount.toLocaleString()}명 · 결혼이민자·귀화자 가족의 금융 서비스 수요 기반
+              </p>
+              <div className="space-y-2">
+                {sorted.map((row, i) => (
+                  <div key={`${row.type}-${i}`} className="flex items-center gap-3">
+                    <span className="w-32 shrink-0 truncate text-xs text-ink">{row.type}</span>
+                    <div className="flex flex-1 items-center gap-2">
+                      <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100">
+                        <div
+                          className="h-full rounded-full"
+                          style={{ width: `${Math.round((row.total / maxTotal) * 100)}%`, background: "#be123c" }}
+                        />
+                      </div>
+                      <span className="w-20 shrink-0 text-right font-mono text-xs text-muted">{row.total.toLocaleString()}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
         );

@@ -497,6 +497,60 @@ function transformNationalityByAge(rows) {
   return { ageGroups, nationalities, items };
 }
 
+// 국민건강보험공단 외국인 건강보험 적용인구 CSV: 국적,직장가입(계/남/여),지역가입(계/남/여),...
+function transformHealthInsurance(rows) {
+  if (!rows.length) return [];
+  logColumnDiag("nhis_coverage", rows);
+  return rows
+    .map((r) => {
+      const nationality = String(firstValue(r, ["국적", "국가", "국적명"])).trim();
+      const workplace = toNumber(firstValue(r, ["직장가입(계)", "직장가입계", "직장계", "직장가입", "직장"]));
+      const regional = toNumber(firstValue(r, ["지역가입(계)", "지역가입계", "지역계", "지역가입", "지역"]));
+      const total = toNumber(firstValue(r, ["합계", "계", "총계", "인원"])) || workplace + regional;
+      return { nationality, workplace, regional, total };
+    })
+    .filter((r) => r.nationality && r.total > 0);
+}
+
+// 여성가족부 다문화가족 현황 CSV: 시도(또는 연도), 유형, 합계, 남, 여, ...
+function transformMulticulturalFamily(rows) {
+  if (!rows.length) return { items: [], totalCount: 0 };
+  logColumnDiag("mogef_multicultural", rows);
+
+  const yearOf = (r) => toNumber(firstValue(r, ["연도", "년도", "년", "기준연도"]));
+  const years = rows.map(yearOf).filter((y) => y >= 2000 && y <= 2100);
+  const latestYear = years.length ? Math.max(...years) : null;
+
+  const items = rows
+    .filter((r) => !latestYear || yearOf(r) === latestYear)
+    .map((r) => {
+      const type = String(firstValue(r, ["유형", "구분", "시도", "지역", "가족유형"])).trim();
+      const total = toNumber(firstValue(r, ["합계", "계", "총계", "인원수", "인원"]));
+      return { type, total, year: latestYear };
+    })
+    .filter((r) => r.type && r.total > 0);
+
+  return {
+    items,
+    totalCount: items.reduce((s, r) => s + r.total, 0),
+    latestYear
+  };
+}
+
+// 대학알리미 고등교육기관 기본현황 CSV: 번호,상태,상호명,대표자명,기관구분,지역,주소,...
+function transformUniversityStats(rows) {
+  if (!rows.length) return [];
+  logColumnDiag("academyinfo_stats", rows);
+  return rows
+    .map((r) => {
+      const name = String(firstValue(r, ["상호명", "대학명", "학교명", "기관명"])).trim();
+      const type = String(firstValue(r, ["기관구분", "학교구분", "구분"])).trim();
+      const region = String(firstValue(r, ["지역", "시도", "소재지", "주소지"])).trim();
+      return { name, type, region };
+    })
+    .filter((r) => r.name);
+}
+
 async function readLatestRaw(prefix) {
   const files = await readdir(rawDir).catch(() => []);
   const target = files
@@ -813,6 +867,18 @@ async function main() {
     nationalityByAge = transformNationalityByAge(moisParsed);
   }
 
+  // 국민건강보험공단 외국인 건강보험 적용인구.
+  const nhisRaw = await readLatestRaw("nhis_foreigner_coverage_2022");
+  const healthInsurance = nhisRaw ? transformHealthInsurance(parseCsv(nhisRaw.text)) : [];
+
+  // 여성가족부 다문화가족 현황.
+  const mogefRaw = await readLatestRaw("mogef_multicultural_family_2024");
+  const multiculturalFamily = mogefRaw ? transformMulticulturalFamily(parseCsv(mogefRaw.text)) : { items: [], totalCount: 0, latestYear: null };
+
+  // 대학알리미 고등교육기관 기본현황 (위치·유형 보조).
+  const uniStatsRaw = await readLatestRaw("academyinfo_university_stats");
+  const universityStats = uniStatsRaw ? transformUniversityStats(parseCsv(uniStatsRaw.text)) : [];
+
   // API(KOSIS/openapi) 보조 데이터. 키 없으면 빈 배열. MOJ 1차 데이터와 분리 유지.
   const { apiStatus, apiRegion, apiEconActivity, parsedFiles } = await buildApiSources();
 
@@ -861,6 +927,16 @@ async function main() {
     `export const realNationalityByAge: readonly RealNationalityAge[] = ${JSON.stringify(nationalityByAge.items, null, 2)};\n\n` +
     `export const realNationalityAgeGroups: readonly string[] = ${JSON.stringify(nationalityByAge.ageGroups, null, 2)};\n\n` +
     `export const realNationalityAgeTotals: readonly { nationality: string; total: number }[] = ${JSON.stringify(nationalityByAge.nationalities, null, 2)};\n\n` +
+    `// 국민건강보험공단 외국인 건강보험 적용인구 — 소득·취업형태 보조 지표.\n` +
+    `export type RealHealthInsurance = { nationality: string; workplace: number; regional: number; total: number };\n` +
+    `export const realHealthInsurance: readonly RealHealthInsurance[] = ${JSON.stringify(healthInsurance, null, 2)};\n\n` +
+    `// 여성가족부 다문화가족 현황.\n` +
+    `export type RealMulticulturalFamily = { type: string; total: number; year: number | null };\n` +
+    `export const realMulticulturalFamily: readonly RealMulticulturalFamily[] = ${JSON.stringify(multiculturalFamily.items, null, 2)};\n\n` +
+    `export const realMulticulturalFamilySummary = ${JSON.stringify({ totalCount: multiculturalFamily.totalCount, latestYear: multiculturalFamily.latestYear }, null, 2)} as const;\n\n` +
+    `// 대학알리미 고등교육기관 기본현황 (위치·유형 보조).\n` +
+    `export type RealUniversityStat = { name: string; type: string; region: string };\n` +
+    `export const realUniversityStats: readonly RealUniversityStat[] = ${JSON.stringify(universityStats.slice(0, 200), null, 2)};\n\n`
     `export const realDataSummary = ${JSON.stringify({
       generatedAt: new Date().toISOString(),
       statusRowCount: statusRows.length,
@@ -875,6 +951,9 @@ async function main() {
       universityCount: universityRanking.universityCount,
       regionResidentCount: regionResidents.regionCount,
       nationalityByAgeCount: nationalityByAge.items.length,
+      healthInsuranceCount: healthInsurance.length,
+      multiculturalFamilyCount: multiculturalFamily.items.length,
+      universityStatsCount: universityStats.length,
       apiParsedFiles: parsedFiles,
       sourceFiles: {
         status: statusRaw?.path ?? null,

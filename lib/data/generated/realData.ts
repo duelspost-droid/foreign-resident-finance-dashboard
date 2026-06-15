@@ -7432,6 +7432,23 @@ export const realNationalityAgeGroups: readonly string[] = [];
 
 export const realNationalityAgeTotals: readonly { nationality: string; total: number }[] = [];
 
+// 국민건강보험공단 외국인 건강보험 적용인구 — 소득·취업형태 보조 지표.
+export type RealHealthInsurance = { nationality: string; workplace: number; regional: number; total: number };
+export const realHealthInsurance: readonly RealHealthInsurance[] = [];
+
+// 여성가족부 다문화가족 현황.
+export type RealMulticulturalFamily = { type: string; total: number; year: number | null };
+export const realMulticulturalFamily: readonly RealMulticulturalFamily[] = [];
+
+export const realMulticulturalFamilySummary = {
+  "totalCount": 0,
+  "latestYear": null
+} as const;
+
+// 대학알리미 고등교육기관 기본현황 (위치·유형 보조).
+export type RealUniversityStat = { name: string; type: string; region: string };
+export const realUniversityStats: readonly RealUniversityStat[] = [];
+
 export const realDataSummary = {
   "generatedAt": "2026-06-15T21:30:41.608Z",
   "statusRowCount": 205,
