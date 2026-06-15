@@ -9214,13 +9214,13 @@ export const realApiStatusData: readonly ForeignResidentStatus[] = [];
 export const realApiRegionData: readonly ForeignResidentRegionMonth[] = [];
 
 export const realDataSummary = {
-  "generatedAt": "2026-06-15T09:51:31.608Z",
+  "generatedAt": "2026-06-15T10:19:20.705Z",
   "statusRowCount": 400,
   "regionRowCount": 200,
   "apiStatusRowCount": 0,
   "apiRegionRowCount": 0,
   "apiParsedFiles": [],
   "sourceFiles": {
-    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-15.csv"
+    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-14.csv"
   }
 } as const;
