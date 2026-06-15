@@ -378,7 +378,7 @@ async function buildLineage() {
     `  status: string;\n  foundCount: number;\n  links: DataLineageDiscoveryLink[];\n};\n\n` +
     `export type DataLineage = {\n` +
     `  generatedAt: string;\n` +
-    `  keysPresent: { DATA_GO_KR_SERVICE_KEY: boolean; KOSIS_API_KEY: boolean };\n` +
+    `  keysPresent: Record<string, boolean>;\n` +
     `  totals: { sources: number; downloaded: number; cached: number; skippedNoKey: number; failed: number };\n` +
     `  sources: DataLineageSource[];\n  discovery: DataLineageDiscovery[];\n};\n\n` +
     `export const dataLineage: DataLineage = ${JSON.stringify(lineage, null, 2)};\n`;
