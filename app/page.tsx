@@ -185,7 +185,7 @@ export default function DashboardPage() {
 
       <PageHero
         kicker="MVP 대시보드"
-        title="국내거주 외국인 금융 인사이트 대시보드"
+        title="외국인 금융 인사이트"
         description="공개 통계와 내부 금융 집계 데이터를 개인이 아닌 지역·국적·체류자격·대학 단위로 결합해 금융 상품 기획·마케팅·지점 전략을 검토하는 분석 화면입니다."
       />
 
