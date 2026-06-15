@@ -6095,7 +6095,3432 @@ export const realApiRegionData: readonly ForeignResidentRegionMonth[] = [];
 
 // KOSIS 경제활동인구(취업자·실업자 등) — nationality 없는 집계 시계열.
 export type RealEconActivity = { period: string; category: string; value: number; sourceId: string; provider: string; title: string };
-export const realEconActivity: readonly RealEconActivity[] = [];
+export const realEconActivity: readonly RealEconActivity[] = [
+  {
+    "period": "2018",
+    "category": "계",
+    "value": 1300.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "계",
+    "value": 1322.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "계",
+    "value": 1331.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "계",
+    "value": 1331.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "계",
+    "value": 1301.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "계",
+    "value": 1430.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "계",
+    "value": 1560.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "계",
+    "value": 1692.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "계",
+    "value": 929.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "계",
+    "value": 913.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "계",
+    "value": 917.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "계",
+    "value": 909.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "계",
+    "value": 879.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "계",
+    "value": 975.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "계",
+    "value": 1071.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "계",
+    "value": 1185.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "계",
+    "value": 884.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "계",
+    "value": 863.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "계",
+    "value": 847.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "계",
+    "value": 855.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "계",
+    "value": 843,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "계",
+    "value": 922.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "계",
+    "value": 1010,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "계",
+    "value": 1109.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "계",
+    "value": 371.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "계",
+    "value": 409,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "계",
+    "value": 414.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "계",
+    "value": 422.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "계",
+    "value": 422.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "계",
+    "value": 455.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "계",
+    "value": 489.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "계",
+    "value": 507.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "계",
+    "value": 71.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "계",
+    "value": 69.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "계",
+    "value": 68.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "계",
+    "value": 68.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "계",
+    "value": 67.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "계",
+    "value": 68.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "계",
+    "value": 68.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "계",
+    "value": 70,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "계",
+    "value": 68,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "계",
+    "value": 65.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "계",
+    "value": 63.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "계",
+    "value": 64.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "계",
+    "value": 64.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "계",
+    "value": 64.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "계",
+    "value": 64.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "계",
+    "value": 65.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "비전문취업(E-9)",
+    "value": 262.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "비전문취업(E-9)",
+    "value": 261.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "비전문취업(E-9)",
+    "value": 252.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "비전문취업(E-9)",
+    "value": 216.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "비전문취업(E-9)",
+    "value": 209.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "비전문취업(E-9)",
+    "value": 269.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "비전문취업(E-9)",
+    "value": 303.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "비전문취업(E-9)",
+    "value": 320.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "비전문취업(E-9)",
+    "value": 262.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "비전문취업(E-9)",
+    "value": 261,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "비전문취업(E-9)",
+    "value": 251.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "비전문취업(E-9)",
+    "value": 216.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "비전문취업(E-9)",
+    "value": 209.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "비전문취업(E-9)",
+    "value": 269.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "비전문취업(E-9)",
+    "value": 303.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "비전문취업(E-9)",
+    "value": 320.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "비전문취업(E-9)",
+    "value": 262.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "비전문취업(E-9)",
+    "value": 260.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "비전문취업(E-9)",
+    "value": 251.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "비전문취업(E-9)",
+    "value": 216,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "비전문취업(E-9)",
+    "value": 209.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "비전문취업(E-9)",
+    "value": 268.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "비전문취업(E-9)",
+    "value": 302.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "비전문취업(E-9)",
+    "value": 320.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "비전문취업(E-9)",
+    "value": 0.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "비전문취업(E-9)",
+    "value": 0.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "비전문취업(E-9)",
+    "value": 0.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "비전문취업(E-9)",
+    "value": 0.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "비전문취업(E-9)",
+    "value": 0.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "비전문취업(E-9)",
+    "value": 100,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "비전문취업(E-9)",
+    "value": 99.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "비전문취업(E-9)",
+    "value": 99.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "비전문취업(E-9)",
+    "value": 99.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "비전문취업(E-9)",
+    "value": 99.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "비전문취업(E-9)",
+    "value": 100,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "비전문취업(E-9)",
+    "value": 100,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "비전문취업(E-9)",
+    "value": 100,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "비전문취업(E-9)",
+    "value": 99.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "비전문취업(E-9)",
+    "value": 99.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "비전문취업(E-9)",
+    "value": 99.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "비전문취업(E-9)",
+    "value": 99.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "비전문취업(E-9)",
+    "value": 99.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "비전문취업(E-9)",
+    "value": 99.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "비전문취업(E-9)",
+    "value": 99.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "비전문취업(E-9)",
+    "value": 99.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "방문취업(H-2)",
+    "value": 209.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "방문취업(H-2)",
+    "value": 200.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "방문취업(H-2)",
+    "value": 160.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "방문취업(H-2)",
+    "value": 122.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "방문취업(H-2)",
+    "value": 96.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "방문취업(H-2)",
+    "value": 87,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "방문취업(H-2)",
+    "value": 82.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "방문취업(H-2)",
+    "value": 73,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "방문취업(H-2)",
+    "value": 179.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "방문취업(H-2)",
+    "value": 168.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "방문취업(H-2)",
+    "value": 132.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "방문취업(H-2)",
+    "value": 101.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "방문취업(H-2)",
+    "value": 75.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "방문취업(H-2)",
+    "value": 67.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "방문취업(H-2)",
+    "value": 66.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "방문취업(H-2)",
+    "value": 59,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "방문취업(H-2)",
+    "value": 170.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "방문취업(H-2)",
+    "value": 158.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "방문취업(H-2)",
+    "value": 117.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "방문취업(H-2)",
+    "value": 93.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "방문취업(H-2)",
+    "value": 71.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "방문취업(H-2)",
+    "value": 63.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "방문취업(H-2)",
+    "value": 61.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "방문취업(H-2)",
+    "value": 54.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "방문취업(H-2)",
+    "value": 29.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "방문취업(H-2)",
+    "value": 31.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "방문취업(H-2)",
+    "value": 28.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "방문취업(H-2)",
+    "value": 21.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "방문취업(H-2)",
+    "value": 21.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "방문취업(H-2)",
+    "value": 19.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "방문취업(H-2)",
+    "value": 16.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "방문취업(H-2)",
+    "value": 13.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "방문취업(H-2)",
+    "value": 85.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "방문취업(H-2)",
+    "value": 84.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "방문취업(H-2)",
+    "value": 82.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "방문취업(H-2)",
+    "value": 82.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "방문취업(H-2)",
+    "value": 77.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "방문취업(H-2)",
+    "value": 77.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "방문취업(H-2)",
+    "value": 80,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "방문취업(H-2)",
+    "value": 80.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "방문취업(H-2)",
+    "value": 81.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "방문취업(H-2)",
+    "value": 78.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "방문취업(H-2)",
+    "value": 73,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "방문취업(H-2)",
+    "value": 76.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "방문취업(H-2)",
+    "value": 74.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "방문취업(H-2)",
+    "value": 72.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "방문취업(H-2)",
+    "value": 74.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "방문취업(H-2)",
+    "value": 74.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "전문인력(E-1~E-7)",
+    "value": 37.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "전문인력(E-1~E-7)",
+    "value": 38.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "전문인력(E-1~E-7)",
+    "value": 39.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "전문인력(E-1~E-7)",
+    "value": 40,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "전문인력(E-1~E-7)",
+    "value": 41.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "전문인력(E-1~E-7)",
+    "value": 46.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "전문인력(E-1~E-7)",
+    "value": 65.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "전문인력(E-1~E-7)",
+    "value": 82.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "전문인력(E-1~E-7)",
+    "value": 36.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "전문인력(E-1~E-7)",
+    "value": 38.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "전문인력(E-1~E-7)",
+    "value": 38.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "전문인력(E-1~E-7)",
+    "value": 39.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "전문인력(E-1~E-7)",
+    "value": 41.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "전문인력(E-1~E-7)",
+    "value": 46.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "전문인력(E-1~E-7)",
+    "value": 65.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "전문인력(E-1~E-7)",
+    "value": 81.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "전문인력(E-1~E-7)",
+    "value": 36.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "전문인력(E-1~E-7)",
+    "value": 38.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "전문인력(E-1~E-7)",
+    "value": 38.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "전문인력(E-1~E-7)",
+    "value": 39.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "전문인력(E-1~E-7)",
+    "value": 40.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "전문인력(E-1~E-7)",
+    "value": 46.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "전문인력(E-1~E-7)",
+    "value": 64.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "전문인력(E-1~E-7)",
+    "value": 81.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "전문인력(E-1~E-7)",
+    "value": 0.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "전문인력(E-1~E-7)",
+    "value": 0.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "전문인력(E-1~E-7)",
+    "value": 0.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "전문인력(E-1~E-7)",
+    "value": 0.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "전문인력(E-1~E-7)",
+    "value": 0.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "전문인력(E-1~E-7)",
+    "value": 0.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "전문인력(E-1~E-7)",
+    "value": 0.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "전문인력(E-1~E-7)",
+    "value": 99.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "전문인력(E-1~E-7)",
+    "value": 99.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "전문인력(E-1~E-7)",
+    "value": 97.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "전문인력(E-1~E-7)",
+    "value": 98.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "전문인력(E-1~E-7)",
+    "value": 98.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "전문인력(E-1~E-7)",
+    "value": 100,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "전문인력(E-1~E-7)",
+    "value": 99.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "전문인력(E-1~E-7)",
+    "value": 99.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "전문인력(E-1~E-7)",
+    "value": 98.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "전문인력(E-1~E-7)",
+    "value": 99.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "전문인력(E-1~E-7)",
+    "value": 97.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "전문인력(E-1~E-7)",
+    "value": 98.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "전문인력(E-1~E-7)",
+    "value": 97.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "전문인력(E-1~E-7)",
+    "value": 100,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "전문인력(E-1~E-7)",
+    "value": 99.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "전문인력(E-1~E-7)",
+    "value": 99.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 121.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 143.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 137,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 143.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 162.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 187.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 199.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 236.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 25.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 29.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 36.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 40,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 35,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 40.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 40.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 68.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 19.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 23,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 27.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 34.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 28.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 33.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 32.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 55.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 96.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 113.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 100.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 103.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 127.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 147.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 159.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 168,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 20.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 20.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 26.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 27.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 21.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 21.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 20.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 28.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 16.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 16.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 19.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 23.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 17.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 17.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 16.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 23.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "재외동포(F-4)",
+    "value": 306.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "재외동포(F-4)",
+    "value": 312.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "재외동포(F-4)",
+    "value": 335.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "재외동포(F-4)",
+    "value": 380,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "재외동포(F-4)",
+    "value": 374.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "재외동포(F-4)",
+    "value": 386.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "재외동포(F-4)",
+    "value": 402.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "재외동포(F-4)",
+    "value": 409.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "재외동포(F-4)",
+    "value": 211.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "재외동포(F-4)",
+    "value": 210.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "재외동포(F-4)",
+    "value": 227.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "재외동포(F-4)",
+    "value": 254.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "재외동포(F-4)",
+    "value": 256.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "재외동포(F-4)",
+    "value": 264.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "재외동포(F-4)",
+    "value": 273.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "재외동포(F-4)",
+    "value": 273,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "재외동포(F-4)",
+    "value": 199.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "재외동포(F-4)",
+    "value": 194.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "재외동포(F-4)",
+    "value": 205.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "재외동포(F-4)",
+    "value": 236.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "재외동포(F-4)",
+    "value": 245.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "재외동포(F-4)",
+    "value": 249.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "재외동포(F-4)",
+    "value": 258.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "재외동포(F-4)",
+    "value": 253.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "재외동포(F-4)",
+    "value": 95,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "재외동포(F-4)",
+    "value": 101.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "재외동포(F-4)",
+    "value": 108.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "재외동포(F-4)",
+    "value": 125.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "재외동포(F-4)",
+    "value": 117.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "재외동포(F-4)",
+    "value": 122,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "재외동포(F-4)",
+    "value": 128.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "재외동포(F-4)",
+    "value": 136.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "재외동포(F-4)",
+    "value": 69,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "재외동포(F-4)",
+    "value": 67.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "재외동포(F-4)",
+    "value": 67.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "재외동포(F-4)",
+    "value": 66.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "재외동포(F-4)",
+    "value": 68.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "재외동포(F-4)",
+    "value": 68.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "재외동포(F-4)",
+    "value": 68,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "재외동포(F-4)",
+    "value": 66.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "재외동포(F-4)",
+    "value": 64.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "재외동포(F-4)",
+    "value": 62.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "재외동포(F-4)",
+    "value": 61.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "재외동포(F-4)",
+    "value": 62.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "재외동포(F-4)",
+    "value": 65.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "재외동포(F-4)",
+    "value": 64.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "재외동포(F-4)",
+    "value": 64.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "재외동포(F-4)",
+    "value": 61.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "영주(F-5)",
+    "value": 104,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "영주(F-5)",
+    "value": 103.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "영주(F-5)",
+    "value": 114.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "영주(F-5)",
+    "value": 128.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "영주(F-5)",
+    "value": 129.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "영주(F-5)",
+    "value": 130.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "영주(F-5)",
+    "value": 141.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "영주(F-5)",
+    "value": 162.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "영주(F-5)",
+    "value": 83,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "영주(F-5)",
+    "value": 81.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "영주(F-5)",
+    "value": 86.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "영주(F-5)",
+    "value": 96.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "영주(F-5)",
+    "value": 99.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "영주(F-5)",
+    "value": 102.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "영주(F-5)",
+    "value": 110.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "영주(F-5)",
+    "value": 130.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "영주(F-5)",
+    "value": 78.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "영주(F-5)",
+    "value": 76.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "영주(F-5)",
+    "value": 79.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "영주(F-5)",
+    "value": 89.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "영주(F-5)",
+    "value": 95.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "영주(F-5)",
+    "value": 97.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "영주(F-5)",
+    "value": 105.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "영주(F-5)",
+    "value": 123.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "영주(F-5)",
+    "value": 21.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "영주(F-5)",
+    "value": 22,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "영주(F-5)",
+    "value": 28.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "영주(F-5)",
+    "value": 32.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "영주(F-5)",
+    "value": 30.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "영주(F-5)",
+    "value": 28.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "영주(F-5)",
+    "value": 30.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "영주(F-5)",
+    "value": 32.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "영주(F-5)",
+    "value": 79.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "영주(F-5)",
+    "value": 78.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "영주(F-5)",
+    "value": 75.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "영주(F-5)",
+    "value": 75,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "영주(F-5)",
+    "value": 76.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "영주(F-5)",
+    "value": 78.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "영주(F-5)",
+    "value": 78.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "영주(F-5)",
+    "value": 80,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "영주(F-5)",
+    "value": 75.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "영주(F-5)",
+    "value": 73.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "영주(F-5)",
+    "value": 69.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "영주(F-5)",
+    "value": 69.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "영주(F-5)",
+    "value": 73.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "영주(F-5)",
+    "value": 74.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "영주(F-5)",
+    "value": 74.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "영주(F-5)",
+    "value": 75.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 108.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 109.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 121.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 127,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 122.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 120.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 122,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 127.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 63,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 59.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 67.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 69.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 72.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 74.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 75.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 83,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 60.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 56.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 61.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 64.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 67.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 70.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 71.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 77.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 45.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 50.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 54.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 57.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 50.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 45.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 46.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 44.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 58,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 54.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 55.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 54.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 59.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 61.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 62,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 64.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 55.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 51.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 50.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 50.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 55.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 58.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 58.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 60.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "기타",
+    "value": 150.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "기타",
+    "value": 153,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "기타",
+    "value": 170.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "기타",
+    "value": 173.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "기타",
+    "value": 165,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "기타",
+    "value": 203.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "기타",
+    "value": 243.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "기타",
+    "value": 279.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "기타",
+    "value": 67.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "기타",
+    "value": 63.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "기타",
+    "value": 76.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "기타",
+    "value": 92.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "기타",
+    "value": 90.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "기타",
+    "value": 110.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "기타",
+    "value": 136.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "기타",
+    "value": 169.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "기타",
+    "value": 57.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "기타",
+    "value": 55.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "기타",
+    "value": 66.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "기타",
+    "value": 81.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "기타",
+    "value": 83.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "기타",
+    "value": 94,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "기타",
+    "value": 114.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "기타",
+    "value": 143.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "기타",
+    "value": 83.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "기타",
+    "value": 89.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "기타",
+    "value": 93.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "기타",
+    "value": 81.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "기타",
+    "value": 74.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "기타",
+    "value": 92.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "기타",
+    "value": 107.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "기타",
+    "value": 110.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "기타",
+    "value": 44.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "기타",
+    "value": 41.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "기타",
+    "value": 45.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "기타",
+    "value": 53.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "기타",
+    "value": 55,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "기타",
+    "value": 54.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "기타",
+    "value": 55.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "기타",
+    "value": 60.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "기타",
+    "value": 38.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "기타",
+    "value": 36.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "기타",
+    "value": 39.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "기타",
+    "value": 47.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "기타",
+    "value": 50.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "기타",
+    "value": 46.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "기타",
+    "value": 46.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "기타",
+    "value": 51.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  }
+];
 
 // 국적 분포 + 비자/세그먼트 분포 — 국적·체류자격 페이지가 사용.
 export type RealNationalityDist = { nationality: string; residents: number; share: number };
@@ -7406,12 +10831,21 @@ export const realStudentSummary = {
 
 // 대학별 외국인유학생수 — 대학/유학생 페이지가 사용 (교육부 1차, 대학알리미 폴백).
 export type RealUniversity = { rank: number; university: string; campus: string | null; sido?: string | null; foreignStudents: number; foreignShare: number | null };
-export const realUniversityRanking: readonly RealUniversity[] = [];
+export const realUniversityRanking: readonly RealUniversity[] = [
+  {
+    "rank": 1,
+    "university": "세종미래고등학교",
+    "campus": null,
+    "sido": "세종시",
+    "foreignStudents": 1,
+    "foreignShare": null
+  }
+];
 
 export const realUniversitySummary = {
-  "latestYear": null,
-  "universityCount": 0,
-  "totalForeignStudents": 0
+  "latestYear": 2025,
+  "universityCount": 1,
+  "totalForeignStudents": 1
 } as const;
 
 // 행안부 시군구 외국인주민 현황 — 지역 분석 페이지가 사용.
@@ -7426,11 +10860,3315 @@ export const realRegionResidentSummary = {
 
 // 행안부 국적×연령대 현황 — 국적 분석 페이지가 사용.
 export type RealNationalityAge = { nationality: string; ageGroup: string; count: number };
-export const realNationalityByAge: readonly RealNationalityAge[] = [];
+export const realNationalityByAge: readonly RealNationalityAge[] = [
+  {
+    "nationality": "가나",
+    "ageGroup": "35-39세",
+    "count": 1
+  },
+  {
+    "nationality": "가나",
+    "ageGroup": "55-59세",
+    "count": 1
+  },
+  {
+    "nationality": "감비아",
+    "ageGroup": "30-34세",
+    "count": 1
+  },
+  {
+    "nationality": "그리스",
+    "ageGroup": "05-09세",
+    "count": 3
+  },
+  {
+    "nationality": "그리스",
+    "ageGroup": "10-14세",
+    "count": 1
+  },
+  {
+    "nationality": "그리스",
+    "ageGroup": "20-24세",
+    "count": 2
+  },
+  {
+    "nationality": "그리스",
+    "ageGroup": "25-29세",
+    "count": 10
+  },
+  {
+    "nationality": "그리스",
+    "ageGroup": "30-34세",
+    "count": 3
+  },
+  {
+    "nationality": "그리스",
+    "ageGroup": "35-39세",
+    "count": 6
+  },
+  {
+    "nationality": "그리스",
+    "ageGroup": "40-44세",
+    "count": 9
+  },
+  {
+    "nationality": "그리스",
+    "ageGroup": "45-49세",
+    "count": 4
+  },
+  {
+    "nationality": "그리스",
+    "ageGroup": "50-54세",
+    "count": 2
+  },
+  {
+    "nationality": "그리스",
+    "ageGroup": "55-59세",
+    "count": 2
+  },
+  {
+    "nationality": "그리스",
+    "ageGroup": "60-64세",
+    "count": 4
+  },
+  {
+    "nationality": "그리스",
+    "ageGroup": "70-74세",
+    "count": 2
+  },
+  {
+    "nationality": "그리스",
+    "ageGroup": "75-79세",
+    "count": 1
+  },
+  {
+    "nationality": "그리스",
+    "ageGroup": "80-84세",
+    "count": 1
+  },
+  {
+    "nationality": "나이지리아",
+    "ageGroup": "35-39세",
+    "count": 1
+  },
+  {
+    "nationality": "남아프리카공화국",
+    "ageGroup": "25-29세",
+    "count": 13
+  },
+  {
+    "nationality": "남아프리카공화국",
+    "ageGroup": "30-34세",
+    "count": 14
+  },
+  {
+    "nationality": "남아프리카공화국",
+    "ageGroup": "35-39세",
+    "count": 6
+  },
+  {
+    "nationality": "남아프리카공화국",
+    "ageGroup": "40-44세",
+    "count": 6
+  },
+  {
+    "nationality": "남아프리카공화국",
+    "ageGroup": "50-54세",
+    "count": 1
+  },
+  {
+    "nationality": "남아프리카공화국",
+    "ageGroup": "55-59세",
+    "count": 4
+  },
+  {
+    "nationality": "남아프리카공화국",
+    "ageGroup": "60-64세",
+    "count": 1
+  },
+  {
+    "nationality": "남아프리카공화국",
+    "ageGroup": "65-69세",
+    "count": 1
+  },
+  {
+    "nationality": "네덜란드",
+    "ageGroup": "40-44세",
+    "count": 3
+  },
+  {
+    "nationality": "네덜란드",
+    "ageGroup": "65-69세",
+    "count": 1
+  },
+  {
+    "nationality": "네덜란드",
+    "ageGroup": "70-74세",
+    "count": 1
+  },
+  {
+    "nationality": "네덜란드",
+    "ageGroup": "75-79세",
+    "count": 1
+  },
+  {
+    "nationality": "네덜란드",
+    "ageGroup": "80-84세",
+    "count": 1
+  },
+  {
+    "nationality": "네팔",
+    "ageGroup": "0-4세",
+    "count": 8
+  },
+  {
+    "nationality": "네팔",
+    "ageGroup": "05-09세",
+    "count": 2
+  },
+  {
+    "nationality": "네팔",
+    "ageGroup": "10-14세",
+    "count": 2
+  },
+  {
+    "nationality": "네팔",
+    "ageGroup": "20-24세",
+    "count": 130
+  },
+  {
+    "nationality": "네팔",
+    "ageGroup": "25-29세",
+    "count": 282
+  },
+  {
+    "nationality": "네팔",
+    "ageGroup": "30-34세",
+    "count": 406
+  },
+  {
+    "nationality": "네팔",
+    "ageGroup": "35-39세",
+    "count": 488
+  },
+  {
+    "nationality": "네팔",
+    "ageGroup": "40-44세",
+    "count": 175
+  },
+  {
+    "nationality": "네팔",
+    "ageGroup": "45-49세",
+    "count": 22
+  },
+  {
+    "nationality": "네팔",
+    "ageGroup": "50-54세",
+    "count": 2
+  },
+  {
+    "nationality": "노르웨이",
+    "ageGroup": "25-29세",
+    "count": 1
+  },
+  {
+    "nationality": "노르웨이",
+    "ageGroup": "30-34세",
+    "count": 2
+  },
+  {
+    "nationality": "노르웨이",
+    "ageGroup": "35-39세",
+    "count": 2
+  },
+  {
+    "nationality": "노르웨이",
+    "ageGroup": "45-49세",
+    "count": 3
+  },
+  {
+    "nationality": "노르웨이",
+    "ageGroup": "50-54세",
+    "count": 2
+  },
+  {
+    "nationality": "노르웨이",
+    "ageGroup": "60-64세",
+    "count": 6
+  },
+  {
+    "nationality": "노르웨이",
+    "ageGroup": "70-74세",
+    "count": 1
+  },
+  {
+    "nationality": "노르웨이",
+    "ageGroup": "90-95세",
+    "count": 1
+  },
+  {
+    "nationality": "뉴질랜드",
+    "ageGroup": "35-39세",
+    "count": 1
+  },
+  {
+    "nationality": "뉴질랜드",
+    "ageGroup": "45-49세",
+    "count": 1
+  },
+  {
+    "nationality": "뉴질랜드",
+    "ageGroup": "50-54세",
+    "count": 3
+  },
+  {
+    "nationality": "뉴질랜드",
+    "ageGroup": "55-59세",
+    "count": 1
+  },
+  {
+    "nationality": "뉴질랜드",
+    "ageGroup": "65-69세",
+    "count": 1
+  },
+  {
+    "nationality": "도미니카공화국",
+    "ageGroup": "40-44세",
+    "count": 1
+  },
+  {
+    "nationality": "도미니카공화국",
+    "ageGroup": "50-54세",
+    "count": 1
+  },
+  {
+    "nationality": "독일",
+    "ageGroup": "40-44세",
+    "count": 1
+  },
+  {
+    "nationality": "독일",
+    "ageGroup": "55-59세",
+    "count": 1
+  },
+  {
+    "nationality": "독일",
+    "ageGroup": "90-94세",
+    "count": 1
+  },
+  {
+    "nationality": "라오스",
+    "ageGroup": "20-24세",
+    "count": 1
+  },
+  {
+    "nationality": "라오스",
+    "ageGroup": "25-29세",
+    "count": 2
+  },
+  {
+    "nationality": "라오스",
+    "ageGroup": "30-34세",
+    "count": 1
+  },
+  {
+    "nationality": "라오스",
+    "ageGroup": "40-44세",
+    "count": 1
+  },
+  {
+    "nationality": "라이베리아",
+    "ageGroup": "25-29세",
+    "count": 1
+  },
+  {
+    "nationality": "라이베리아",
+    "ageGroup": "30-34세",
+    "count": 5
+  },
+  {
+    "nationality": "라이베리아",
+    "ageGroup": "35-39세",
+    "count": 2
+  },
+  {
+    "nationality": "라이베리아",
+    "ageGroup": "40-44세",
+    "count": 2
+  },
+  {
+    "nationality": "라이베리아",
+    "ageGroup": "45-49세",
+    "count": 5
+  },
+  {
+    "nationality": "라트비아",
+    "ageGroup": "40-44세",
+    "count": 1
+  },
+  {
+    "nationality": "라트비아",
+    "ageGroup": "50-54세",
+    "count": 2
+  },
+  {
+    "nationality": "러시아(연방)",
+    "ageGroup": "0-4세",
+    "count": 11
+  },
+  {
+    "nationality": "러시아(연방)",
+    "ageGroup": "05-09세",
+    "count": 11
+  },
+  {
+    "nationality": "러시아(연방)",
+    "ageGroup": "10-14세",
+    "count": 14
+  },
+  {
+    "nationality": "러시아(연방)",
+    "ageGroup": "15-19세",
+    "count": 7
+  },
+  {
+    "nationality": "러시아(연방)",
+    "ageGroup": "20-24세",
+    "count": 25
+  },
+  {
+    "nationality": "러시아(연방)",
+    "ageGroup": "25-29세",
+    "count": 53
+  },
+  {
+    "nationality": "러시아(연방)",
+    "ageGroup": "30-34세",
+    "count": 46
+  },
+  {
+    "nationality": "러시아(연방)",
+    "ageGroup": "35-39세",
+    "count": 37
+  },
+  {
+    "nationality": "러시아(연방)",
+    "ageGroup": "40-44세",
+    "count": 43
+  },
+  {
+    "nationality": "러시아(연방)",
+    "ageGroup": "45-49세",
+    "count": 18
+  },
+  {
+    "nationality": "러시아(연방)",
+    "ageGroup": "50-54세",
+    "count": 16
+  },
+  {
+    "nationality": "러시아(연방)",
+    "ageGroup": "55-59세",
+    "count": 4
+  },
+  {
+    "nationality": "러시아(연방)",
+    "ageGroup": "60-64세",
+    "count": 2
+  },
+  {
+    "nationality": "러시아(연방)",
+    "ageGroup": "65-69세",
+    "count": 1
+  },
+  {
+    "nationality": "러시아(연방)",
+    "ageGroup": "75-79세",
+    "count": 1
+  },
+  {
+    "nationality": "루마니아",
+    "ageGroup": "15-19세",
+    "count": 1
+  },
+  {
+    "nationality": "루마니아",
+    "ageGroup": "30-34세",
+    "count": 3
+  },
+  {
+    "nationality": "루마니아",
+    "ageGroup": "45-49세",
+    "count": 2
+  },
+  {
+    "nationality": "루마니아",
+    "ageGroup": "50-54세",
+    "count": 1
+  },
+  {
+    "nationality": "루마니아",
+    "ageGroup": "55-59세",
+    "count": 6
+  },
+  {
+    "nationality": "루마니아",
+    "ageGroup": "65-69세",
+    "count": 1
+  },
+  {
+    "nationality": "루마니아",
+    "ageGroup": "70-74세",
+    "count": 1
+  },
+  {
+    "nationality": "르완다",
+    "ageGroup": "25-29세",
+    "count": 9
+  },
+  {
+    "nationality": "르완다",
+    "ageGroup": "30-34세",
+    "count": 14
+  },
+  {
+    "nationality": "르완다",
+    "ageGroup": "35-39세",
+    "count": 27
+  },
+  {
+    "nationality": "르완다",
+    "ageGroup": "40-44세",
+    "count": 13
+  },
+  {
+    "nationality": "르완다",
+    "ageGroup": "45-49세",
+    "count": 7
+  },
+  {
+    "nationality": "르완다",
+    "ageGroup": "50-54세",
+    "count": 3
+  },
+  {
+    "nationality": "르완다",
+    "ageGroup": "55-59세",
+    "count": 1
+  },
+  {
+    "nationality": "리비아",
+    "ageGroup": "25-29세",
+    "count": 7
+  },
+  {
+    "nationality": "리비아",
+    "ageGroup": "30-34세",
+    "count": 4
+  },
+  {
+    "nationality": "리비아",
+    "ageGroup": "35-39세",
+    "count": 1
+  },
+  {
+    "nationality": "리비아",
+    "ageGroup": "40-44세",
+    "count": 2
+  },
+  {
+    "nationality": "말레이시아",
+    "ageGroup": "0-4세",
+    "count": 17
+  },
+  {
+    "nationality": "말레이시아",
+    "ageGroup": "05-09세",
+    "count": 31
+  },
+  {
+    "nationality": "말레이시아",
+    "ageGroup": "10-14세",
+    "count": 30
+  },
+  {
+    "nationality": "말레이시아",
+    "ageGroup": "15-19세",
+    "count": 4
+  },
+  {
+    "nationality": "말레이시아",
+    "ageGroup": "25-29세",
+    "count": 16
+  },
+  {
+    "nationality": "말레이시아",
+    "ageGroup": "30-34세",
+    "count": 15
+  },
+  {
+    "nationality": "말레이시아",
+    "ageGroup": "35-39세",
+    "count": 48
+  },
+  {
+    "nationality": "말레이시아",
+    "ageGroup": "40-44세",
+    "count": 44
+  },
+  {
+    "nationality": "말레이시아",
+    "ageGroup": "45-49세",
+    "count": 27
+  },
+  {
+    "nationality": "말레이시아",
+    "ageGroup": "50-54세",
+    "count": 13
+  },
+  {
+    "nationality": "말레이시아",
+    "ageGroup": "55-59세",
+    "count": 5
+  },
+  {
+    "nationality": "말레이시아",
+    "ageGroup": "60-64세",
+    "count": 4
+  },
+  {
+    "nationality": "말레이시아",
+    "ageGroup": "65-69세",
+    "count": 1
+  },
+  {
+    "nationality": "말리",
+    "ageGroup": "20-24세",
+    "count": 1
+  },
+  {
+    "nationality": "말리",
+    "ageGroup": "25-29세",
+    "count": 3
+  },
+  {
+    "nationality": "말리",
+    "ageGroup": "30-34세",
+    "count": 7
+  },
+  {
+    "nationality": "말리",
+    "ageGroup": "35-39세",
+    "count": 2
+  },
+  {
+    "nationality": "말리",
+    "ageGroup": "40-44세",
+    "count": 3
+  },
+  {
+    "nationality": "멕시코",
+    "ageGroup": "30-34세",
+    "count": 1
+  },
+  {
+    "nationality": "멕시코",
+    "ageGroup": "40-44세",
+    "count": 1
+  },
+  {
+    "nationality": "모로코",
+    "ageGroup": "20-24세",
+    "count": 1
+  },
+  {
+    "nationality": "모로코",
+    "ageGroup": "25-29세",
+    "count": 9
+  },
+  {
+    "nationality": "모로코",
+    "ageGroup": "30-34세",
+    "count": 10
+  },
+  {
+    "nationality": "모로코",
+    "ageGroup": "35-39세",
+    "count": 2
+  },
+  {
+    "nationality": "모로코",
+    "ageGroup": "40-44세",
+    "count": 2
+  },
+  {
+    "nationality": "모잠비크",
+    "ageGroup": "15-19세",
+    "count": 1
+  },
+  {
+    "nationality": "모잠비크",
+    "ageGroup": "35-39세",
+    "count": 1
+  },
+  {
+    "nationality": "모잠비크",
+    "ageGroup": "40-44세",
+    "count": 1
+  },
+  {
+    "nationality": "몽골",
+    "ageGroup": "05-09세",
+    "count": 5
+  },
+  {
+    "nationality": "몽골",
+    "ageGroup": "10-14세",
+    "count": 2
+  },
+  {
+    "nationality": "몽골",
+    "ageGroup": "15-19세",
+    "count": 1
+  },
+  {
+    "nationality": "몽골",
+    "ageGroup": "20-24세",
+    "count": 6
+  },
+  {
+    "nationality": "몽골",
+    "ageGroup": "25-29세",
+    "count": 6
+  },
+  {
+    "nationality": "몽골",
+    "ageGroup": "30-34세",
+    "count": 3
+  },
+  {
+    "nationality": "몽골",
+    "ageGroup": "35-39세",
+    "count": 8
+  },
+  {
+    "nationality": "몽골",
+    "ageGroup": "40-44세",
+    "count": 8
+  },
+  {
+    "nationality": "몽골",
+    "ageGroup": "45-49세",
+    "count": 2
+  },
+  {
+    "nationality": "몽골",
+    "ageGroup": "50-54세",
+    "count": 2
+  },
+  {
+    "nationality": "미국",
+    "ageGroup": "05-09세",
+    "count": 3
+  },
+  {
+    "nationality": "미국",
+    "ageGroup": "10-14세",
+    "count": 7
+  },
+  {
+    "nationality": "미국",
+    "ageGroup": "15-19세",
+    "count": 1
+  },
+  {
+    "nationality": "미국",
+    "ageGroup": "20-24세",
+    "count": 4
+  },
+  {
+    "nationality": "미국",
+    "ageGroup": "25-29세",
+    "count": 9
+  },
+  {
+    "nationality": "미국",
+    "ageGroup": "30-34세",
+    "count": 6
+  },
+  {
+    "nationality": "미국",
+    "ageGroup": "35-39세",
+    "count": 10
+  },
+  {
+    "nationality": "미국",
+    "ageGroup": "40-44세",
+    "count": 9
+  },
+  {
+    "nationality": "미국",
+    "ageGroup": "45-49세",
+    "count": 6
+  },
+  {
+    "nationality": "미국",
+    "ageGroup": "50-54세",
+    "count": 10
+  },
+  {
+    "nationality": "미국",
+    "ageGroup": "55-59세",
+    "count": 8
+  },
+  {
+    "nationality": "미국",
+    "ageGroup": "60-64세",
+    "count": 9
+  },
+  {
+    "nationality": "미국",
+    "ageGroup": "65-69세",
+    "count": 9
+  },
+  {
+    "nationality": "미국",
+    "ageGroup": "70-74세",
+    "count": 1
+  },
+  {
+    "nationality": "미국",
+    "ageGroup": "75-79세",
+    "count": 2
+  },
+  {
+    "nationality": "미국",
+    "ageGroup": "80-84세",
+    "count": 1
+  },
+  {
+    "nationality": "미얀마",
+    "ageGroup": "0-4세",
+    "count": 3
+  },
+  {
+    "nationality": "미얀마",
+    "ageGroup": "05-09세",
+    "count": 1
+  },
+  {
+    "nationality": "미얀마",
+    "ageGroup": "20-24세",
+    "count": 27
+  },
+  {
+    "nationality": "미얀마",
+    "ageGroup": "25-29세",
+    "count": 120
+  },
+  {
+    "nationality": "미얀마",
+    "ageGroup": "30-34세",
+    "count": 263
+  },
+  {
+    "nationality": "미얀마",
+    "ageGroup": "35-39세",
+    "count": 288
+  },
+  {
+    "nationality": "미얀마",
+    "ageGroup": "40-44세",
+    "count": 134
+  },
+  {
+    "nationality": "미얀마",
+    "ageGroup": "45-49세",
+    "count": 15
+  },
+  {
+    "nationality": "미얀마",
+    "ageGroup": "50-54세",
+    "count": 1
+  },
+  {
+    "nationality": "미얀마",
+    "ageGroup": "55-59세",
+    "count": 2
+  },
+  {
+    "nationality": "방글라데시",
+    "ageGroup": "0-4세",
+    "count": 4
+  },
+  {
+    "nationality": "방글라데시",
+    "ageGroup": "05-09세",
+    "count": 4
+  },
+  {
+    "nationality": "방글라데시",
+    "ageGroup": "10-14세",
+    "count": 3
+  },
+  {
+    "nationality": "방글라데시",
+    "ageGroup": "20-24세",
+    "count": 70
+  },
+  {
+    "nationality": "방글라데시",
+    "ageGroup": "25-29세",
+    "count": 82
+  },
+  {
+    "nationality": "방글라데시",
+    "ageGroup": "30-34세",
+    "count": 57
+  },
+  {
+    "nationality": "방글라데시",
+    "ageGroup": "35-39세",
+    "count": 38
+  },
+  {
+    "nationality": "방글라데시",
+    "ageGroup": "40-44세",
+    "count": 30
+  },
+  {
+    "nationality": "방글라데시",
+    "ageGroup": "45-49세",
+    "count": 1
+  },
+  {
+    "nationality": "방글라데시",
+    "ageGroup": "50-54세",
+    "count": 1
+  },
+  {
+    "nationality": "베네수엘라",
+    "ageGroup": "40-44세",
+    "count": 1
+  },
+  {
+    "nationality": "베네수엘라",
+    "ageGroup": "55-59세",
+    "count": 1
+  },
+  {
+    "nationality": "베트남",
+    "ageGroup": "0-4세",
+    "count": 33
+  },
+  {
+    "nationality": "베트남",
+    "ageGroup": "05-09세",
+    "count": 38
+  },
+  {
+    "nationality": "베트남",
+    "ageGroup": "10-14세",
+    "count": 14
+  },
+  {
+    "nationality": "베트남",
+    "ageGroup": "15-19세",
+    "count": 55
+  },
+  {
+    "nationality": "베트남",
+    "ageGroup": "20-24세",
+    "count": 422
+  },
+  {
+    "nationality": "베트남",
+    "ageGroup": "25-29세",
+    "count": 636
+  },
+  {
+    "nationality": "베트남",
+    "ageGroup": "30-34세",
+    "count": 990
+  },
+  {
+    "nationality": "베트남",
+    "ageGroup": "35-39세",
+    "count": 1057
+  },
+  {
+    "nationality": "베트남",
+    "ageGroup": "40-44세",
+    "count": 529
+  },
+  {
+    "nationality": "베트남",
+    "ageGroup": "45-49세",
+    "count": 121
+  },
+  {
+    "nationality": "베트남",
+    "ageGroup": "50-54세",
+    "count": 49
+  },
+  {
+    "nationality": "베트남",
+    "ageGroup": "55-59세",
+    "count": 57
+  },
+  {
+    "nationality": "베트남",
+    "ageGroup": "60-64세",
+    "count": 33
+  },
+  {
+    "nationality": "베트남",
+    "ageGroup": "65-69세",
+    "count": 10
+  },
+  {
+    "nationality": "베트남",
+    "ageGroup": "70-74세",
+    "count": 3
+  },
+  {
+    "nationality": "벨기에",
+    "ageGroup": "30-34세",
+    "count": 1
+  },
+  {
+    "nationality": "벨기에",
+    "ageGroup": "55-59세",
+    "count": 1
+  },
+  {
+    "nationality": "벨기에",
+    "ageGroup": "65-69세",
+    "count": 1
+  },
+  {
+    "nationality": "벨라루스",
+    "ageGroup": "30-34세",
+    "count": 1
+  },
+  {
+    "nationality": "부룬디",
+    "ageGroup": "0-4세",
+    "count": 1
+  },
+  {
+    "nationality": "부룬디",
+    "ageGroup": "05-09세",
+    "count": 1
+  },
+  {
+    "nationality": "부룬디",
+    "ageGroup": "25-29세",
+    "count": 2
+  },
+  {
+    "nationality": "부룬디",
+    "ageGroup": "30-34세",
+    "count": 3
+  },
+  {
+    "nationality": "부룬디",
+    "ageGroup": "35-39세",
+    "count": 2
+  },
+  {
+    "nationality": "부룬디",
+    "ageGroup": "45-49세",
+    "count": 1
+  },
+  {
+    "nationality": "불가리아",
+    "ageGroup": "30-34세",
+    "count": 1
+  },
+  {
+    "nationality": "불가리아",
+    "ageGroup": "45-49세",
+    "count": 2
+  },
+  {
+    "nationality": "브라질",
+    "ageGroup": "10-14세",
+    "count": 2
+  },
+  {
+    "nationality": "브라질",
+    "ageGroup": "15-19세",
+    "count": 1
+  },
+  {
+    "nationality": "브라질",
+    "ageGroup": "30-34세",
+    "count": 2
+  },
+  {
+    "nationality": "브라질",
+    "ageGroup": "40-44세",
+    "count": 3
+  },
+  {
+    "nationality": "브라질",
+    "ageGroup": "45-49세",
+    "count": 5
+  },
+  {
+    "nationality": "세네갈",
+    "ageGroup": "35-39세",
+    "count": 2
+  },
+  {
+    "nationality": "세네갈",
+    "ageGroup": "40-44세",
+    "count": 1
+  },
+  {
+    "nationality": "스리랑카",
+    "ageGroup": "0-4세",
+    "count": 19
+  },
+  {
+    "nationality": "스리랑카",
+    "ageGroup": "05-09세",
+    "count": 26
+  },
+  {
+    "nationality": "스리랑카",
+    "ageGroup": "10-14세",
+    "count": 25
+  },
+  {
+    "nationality": "스리랑카",
+    "ageGroup": "15-19세",
+    "count": 10
+  },
+  {
+    "nationality": "스리랑카",
+    "ageGroup": "20-24세",
+    "count": 46
+  },
+  {
+    "nationality": "스리랑카",
+    "ageGroup": "25-29세",
+    "count": 145
+  },
+  {
+    "nationality": "스리랑카",
+    "ageGroup": "30-34세",
+    "count": 225
+  },
+  {
+    "nationality": "스리랑카",
+    "ageGroup": "35-39세",
+    "count": 274
+  },
+  {
+    "nationality": "스리랑카",
+    "ageGroup": "40-44세",
+    "count": 258
+  },
+  {
+    "nationality": "스리랑카",
+    "ageGroup": "45-49세",
+    "count": 120
+  },
+  {
+    "nationality": "스리랑카",
+    "ageGroup": "50-54세",
+    "count": 10
+  },
+  {
+    "nationality": "스리랑카",
+    "ageGroup": "55-59세",
+    "count": 2
+  },
+  {
+    "nationality": "스웨덴",
+    "ageGroup": "25-29세",
+    "count": 1
+  },
+  {
+    "nationality": "스웨덴",
+    "ageGroup": "80-84세",
+    "count": 1
+  },
+  {
+    "nationality": "스위스",
+    "ageGroup": "50-54세",
+    "count": 1
+  },
+  {
+    "nationality": "스페인",
+    "ageGroup": "40-44세",
+    "count": 1
+  },
+  {
+    "nationality": "시리아",
+    "ageGroup": "40-44세",
+    "count": 1
+  },
+  {
+    "nationality": "싱가포르",
+    "ageGroup": "45-49세",
+    "count": 4
+  },
+  {
+    "nationality": "싱가포르",
+    "ageGroup": "55-59세",
+    "count": 2
+  },
+  {
+    "nationality": "아이티",
+    "ageGroup": "0-4세",
+    "count": 1
+  },
+  {
+    "nationality": "아이티",
+    "ageGroup": "25-29세",
+    "count": 9
+  },
+  {
+    "nationality": "아이티",
+    "ageGroup": "30-34세",
+    "count": 11
+  },
+  {
+    "nationality": "아이티",
+    "ageGroup": "35-39세",
+    "count": 5
+  },
+  {
+    "nationality": "아이티",
+    "ageGroup": "40-44세",
+    "count": 5
+  },
+  {
+    "nationality": "아이티",
+    "ageGroup": "45-49세",
+    "count": 2
+  },
+  {
+    "nationality": "아일랜드",
+    "ageGroup": "35-39세",
+    "count": 2
+  },
+  {
+    "nationality": "아일랜드",
+    "ageGroup": "40-44세",
+    "count": 2
+  },
+  {
+    "nationality": "아일랜드",
+    "ageGroup": "50-54세",
+    "count": 1
+  },
+  {
+    "nationality": "알제리",
+    "ageGroup": "25-29세",
+    "count": 1
+  },
+  {
+    "nationality": "알제리",
+    "ageGroup": "30-34세",
+    "count": 1
+  },
+  {
+    "nationality": "알제리",
+    "ageGroup": "35-39세",
+    "count": 3
+  },
+  {
+    "nationality": "알제리",
+    "ageGroup": "40-44세",
+    "count": 1
+  },
+  {
+    "nationality": "알제리",
+    "ageGroup": "45-49세",
+    "count": 1
+  },
+  {
+    "nationality": "에스토니아",
+    "ageGroup": "40-44세",
+    "count": 1
+  },
+  {
+    "nationality": "에콰도르",
+    "ageGroup": "55-59세",
+    "count": 1
+  },
+  {
+    "nationality": "에콰도르",
+    "ageGroup": "70-74세",
+    "count": 1
+  },
+  {
+    "nationality": "에티오피아",
+    "ageGroup": "30-34세",
+    "count": 1
+  },
+  {
+    "nationality": "에티오피아",
+    "ageGroup": "50-54세",
+    "count": 1
+  },
+  {
+    "nationality": "영국",
+    "ageGroup": "05-09세",
+    "count": 1
+  },
+  {
+    "nationality": "영국",
+    "ageGroup": "10-14세",
+    "count": 1
+  },
+  {
+    "nationality": "영국",
+    "ageGroup": "20-24세",
+    "count": 1
+  },
+  {
+    "nationality": "영국",
+    "ageGroup": "25-29세",
+    "count": 4
+  },
+  {
+    "nationality": "영국",
+    "ageGroup": "30-34세",
+    "count": 8
+  },
+  {
+    "nationality": "영국",
+    "ageGroup": "35-39세",
+    "count": 4
+  },
+  {
+    "nationality": "영국",
+    "ageGroup": "40-44세",
+    "count": 7
+  },
+  {
+    "nationality": "영국",
+    "ageGroup": "45-49세",
+    "count": 5
+  },
+  {
+    "nationality": "영국",
+    "ageGroup": "50-54세",
+    "count": 6
+  },
+  {
+    "nationality": "영국",
+    "ageGroup": "55-59세",
+    "count": 12
+  },
+  {
+    "nationality": "영국",
+    "ageGroup": "60-64세",
+    "count": 9
+  },
+  {
+    "nationality": "영국",
+    "ageGroup": "65-69세",
+    "count": 9
+  },
+  {
+    "nationality": "영국",
+    "ageGroup": "70-74세",
+    "count": 6
+  },
+  {
+    "nationality": "영국",
+    "ageGroup": "75-79세",
+    "count": 2
+  },
+  {
+    "nationality": "영국",
+    "ageGroup": "85-89세",
+    "count": 1
+  },
+  {
+    "nationality": "예멘공화국",
+    "ageGroup": "0-4세",
+    "count": 2
+  },
+  {
+    "nationality": "예멘공화국",
+    "ageGroup": "05-09세",
+    "count": 3
+  },
+  {
+    "nationality": "예멘공화국",
+    "ageGroup": "25-29세",
+    "count": 1
+  },
+  {
+    "nationality": "예멘공화국",
+    "ageGroup": "30-34세",
+    "count": 4
+  },
+  {
+    "nationality": "예멘공화국",
+    "ageGroup": "35-39세",
+    "count": 5
+  },
+  {
+    "nationality": "예멘공화국",
+    "ageGroup": "40-44세",
+    "count": 3
+  },
+  {
+    "nationality": "예멘공화국",
+    "ageGroup": "45-49세",
+    "count": 1
+  },
+  {
+    "nationality": "오스트레일리아",
+    "ageGroup": "05-09세",
+    "count": 1
+  },
+  {
+    "nationality": "오스트레일리아",
+    "ageGroup": "10-14세",
+    "count": 4
+  },
+  {
+    "nationality": "오스트레일리아",
+    "ageGroup": "30-34세",
+    "count": 1
+  },
+  {
+    "nationality": "오스트레일리아",
+    "ageGroup": "35-39세",
+    "count": 3
+  },
+  {
+    "nationality": "오스트레일리아",
+    "ageGroup": "40-44세",
+    "count": 3
+  },
+  {
+    "nationality": "오스트레일리아",
+    "ageGroup": "45-49세",
+    "count": 1
+  },
+  {
+    "nationality": "오스트레일리아",
+    "ageGroup": "50-54세",
+    "count": 2
+  },
+  {
+    "nationality": "오스트레일리아",
+    "ageGroup": "55-59세",
+    "count": 4
+  },
+  {
+    "nationality": "오스트레일리아",
+    "ageGroup": "60-64세",
+    "count": 2
+  },
+  {
+    "nationality": "오스트레일리아",
+    "ageGroup": "65-69세",
+    "count": 2
+  },
+  {
+    "nationality": "오스트레일리아",
+    "ageGroup": "75-79세",
+    "count": 1
+  },
+  {
+    "nationality": "우간다",
+    "ageGroup": "50-54세",
+    "count": 1
+  },
+  {
+    "nationality": "우즈베키스탄",
+    "ageGroup": "0-4세",
+    "count": 154
+  },
+  {
+    "nationality": "우즈베키스탄",
+    "ageGroup": "05-09세",
+    "count": 88
+  },
+  {
+    "nationality": "우즈베키스탄",
+    "ageGroup": "10-14세",
+    "count": 16
+  },
+  {
+    "nationality": "우즈베키스탄",
+    "ageGroup": "15-19세",
+    "count": 14
+  },
+  {
+    "nationality": "우즈베키스탄",
+    "ageGroup": "20-24세",
+    "count": 108
+  },
+  {
+    "nationality": "우즈베키스탄",
+    "ageGroup": "25-29세",
+    "count": 276
+  },
+  {
+    "nationality": "우즈베키스탄",
+    "ageGroup": "30-34세",
+    "count": 407
+  },
+  {
+    "nationality": "우즈베키스탄",
+    "ageGroup": "35-39세",
+    "count": 300
+  },
+  {
+    "nationality": "우즈베키스탄",
+    "ageGroup": "40-44세",
+    "count": 206
+  },
+  {
+    "nationality": "우즈베키스탄",
+    "ageGroup": "45-49세",
+    "count": 63
+  },
+  {
+    "nationality": "우즈베키스탄",
+    "ageGroup": "50-54세",
+    "count": 20
+  },
+  {
+    "nationality": "우즈베키스탄",
+    "ageGroup": "55-59세",
+    "count": 8
+  },
+  {
+    "nationality": "우즈베키스탄",
+    "ageGroup": "60-64세",
+    "count": 3
+  },
+  {
+    "nationality": "우즈베키스탄",
+    "ageGroup": "65-69세",
+    "count": 1
+  },
+  {
+    "nationality": "우크라이나",
+    "ageGroup": "05-09세",
+    "count": 1
+  },
+  {
+    "nationality": "우크라이나",
+    "ageGroup": "10-14세",
+    "count": 2
+  },
+  {
+    "nationality": "우크라이나",
+    "ageGroup": "15-19세",
+    "count": 2
+  },
+  {
+    "nationality": "우크라이나",
+    "ageGroup": "25-29세",
+    "count": 2
+  },
+  {
+    "nationality": "우크라이나",
+    "ageGroup": "35-39세",
+    "count": 2
+  },
+  {
+    "nationality": "우크라이나",
+    "ageGroup": "40-44세",
+    "count": 1
+  },
+  {
+    "nationality": "우크라이나",
+    "ageGroup": "45-49세",
+    "count": 2
+  },
+  {
+    "nationality": "우크라이나",
+    "ageGroup": "50-54세",
+    "count": 2
+  },
+  {
+    "nationality": "우크라이나",
+    "ageGroup": "55-59세",
+    "count": 1
+  },
+  {
+    "nationality": "우크라이나",
+    "ageGroup": "70-74세",
+    "count": 1
+  },
+  {
+    "nationality": "이라크",
+    "ageGroup": "25-29세",
+    "count": 1
+  },
+  {
+    "nationality": "이란",
+    "ageGroup": "15-19세",
+    "count": 2
+  },
+  {
+    "nationality": "이란",
+    "ageGroup": "40-44세",
+    "count": 1
+  },
+  {
+    "nationality": "이란",
+    "ageGroup": "55-59세",
+    "count": 3
+  },
+  {
+    "nationality": "이집트",
+    "ageGroup": "05-09세",
+    "count": 1
+  },
+  {
+    "nationality": "이집트",
+    "ageGroup": "10-14세",
+    "count": 1
+  },
+  {
+    "nationality": "이집트",
+    "ageGroup": "15-19세",
+    "count": 2
+  },
+  {
+    "nationality": "이집트",
+    "ageGroup": "25-29세",
+    "count": 1
+  },
+  {
+    "nationality": "이집트",
+    "ageGroup": "30-34세",
+    "count": 2
+  },
+  {
+    "nationality": "이집트",
+    "ageGroup": "35-39세",
+    "count": 3
+  },
+  {
+    "nationality": "이집트",
+    "ageGroup": "40-44세",
+    "count": 1
+  },
+  {
+    "nationality": "이집트",
+    "ageGroup": "45-49세",
+    "count": 2
+  },
+  {
+    "nationality": "이집트",
+    "ageGroup": "50-54세",
+    "count": 1
+  },
+  {
+    "nationality": "이집트",
+    "ageGroup": "55-59세",
+    "count": 1
+  },
+  {
+    "nationality": "이탈리아",
+    "ageGroup": "0-4세",
+    "count": 1
+  },
+  {
+    "nationality": "이탈리아",
+    "ageGroup": "05-09세",
+    "count": 3
+  },
+  {
+    "nationality": "이탈리아",
+    "ageGroup": "10-14세",
+    "count": 1
+  },
+  {
+    "nationality": "이탈리아",
+    "ageGroup": "30-34세",
+    "count": 4
+  },
+  {
+    "nationality": "이탈리아",
+    "ageGroup": "35-39세",
+    "count": 4
+  },
+  {
+    "nationality": "이탈리아",
+    "ageGroup": "40-44세",
+    "count": 6
+  },
+  {
+    "nationality": "이탈리아",
+    "ageGroup": "45-49세",
+    "count": 4
+  },
+  {
+    "nationality": "이탈리아",
+    "ageGroup": "50-54세",
+    "count": 6
+  },
+  {
+    "nationality": "이탈리아",
+    "ageGroup": "55-59세",
+    "count": 4
+  },
+  {
+    "nationality": "이탈리아",
+    "ageGroup": "70-74세",
+    "count": 1
+  },
+  {
+    "nationality": "인도",
+    "ageGroup": "0-4세",
+    "count": 9
+  },
+  {
+    "nationality": "인도",
+    "ageGroup": "05-09세",
+    "count": 10
+  },
+  {
+    "nationality": "인도",
+    "ageGroup": "10-14세",
+    "count": 16
+  },
+  {
+    "nationality": "인도",
+    "ageGroup": "15-19세",
+    "count": 17
+  },
+  {
+    "nationality": "인도",
+    "ageGroup": "20-24세",
+    "count": 2
+  },
+  {
+    "nationality": "인도",
+    "ageGroup": "25-29세",
+    "count": 26
+  },
+  {
+    "nationality": "인도",
+    "ageGroup": "30-34세",
+    "count": 36
+  },
+  {
+    "nationality": "인도",
+    "ageGroup": "35-39세",
+    "count": 48
+  },
+  {
+    "nationality": "인도",
+    "ageGroup": "40-44세",
+    "count": 40
+  },
+  {
+    "nationality": "인도",
+    "ageGroup": "45-49세",
+    "count": 43
+  },
+  {
+    "nationality": "인도",
+    "ageGroup": "50-54세",
+    "count": 18
+  },
+  {
+    "nationality": "인도",
+    "ageGroup": "55-59세",
+    "count": 6
+  },
+  {
+    "nationality": "인도",
+    "ageGroup": "70-74세",
+    "count": 2
+  },
+  {
+    "nationality": "인도",
+    "ageGroup": "75-79세",
+    "count": 1
+  },
+  {
+    "nationality": "인도네시아",
+    "ageGroup": "0-4세",
+    "count": 9
+  },
+  {
+    "nationality": "인도네시아",
+    "ageGroup": "05-09세",
+    "count": 8
+  },
+  {
+    "nationality": "인도네시아",
+    "ageGroup": "10-14세",
+    "count": 2
+  },
+  {
+    "nationality": "인도네시아",
+    "ageGroup": "20-24세",
+    "count": 278
+  },
+  {
+    "nationality": "인도네시아",
+    "ageGroup": "25-29세",
+    "count": 662
+  },
+  {
+    "nationality": "인도네시아",
+    "ageGroup": "30-34세",
+    "count": 566
+  },
+  {
+    "nationality": "인도네시아",
+    "ageGroup": "35-39세",
+    "count": 463
+  },
+  {
+    "nationality": "인도네시아",
+    "ageGroup": "40-44세",
+    "count": 206
+  },
+  {
+    "nationality": "인도네시아",
+    "ageGroup": "45-49세",
+    "count": 58
+  },
+  {
+    "nationality": "인도네시아",
+    "ageGroup": "50-54세",
+    "count": 15
+  },
+  {
+    "nationality": "인도네시아",
+    "ageGroup": "55-59세",
+    "count": 3
+  },
+  {
+    "nationality": "인도네시아",
+    "ageGroup": "60-64세",
+    "count": 1
+  },
+  {
+    "nationality": "일본",
+    "ageGroup": "0-4세",
+    "count": 4
+  },
+  {
+    "nationality": "일본",
+    "ageGroup": "05-09세",
+    "count": 7
+  },
+  {
+    "nationality": "일본",
+    "ageGroup": "10-14세",
+    "count": 3
+  },
+  {
+    "nationality": "일본",
+    "ageGroup": "20-24세",
+    "count": 1
+  },
+  {
+    "nationality": "일본",
+    "ageGroup": "25-29세",
+    "count": 25
+  },
+  {
+    "nationality": "일본",
+    "ageGroup": "30-34세",
+    "count": 24
+  },
+  {
+    "nationality": "일본",
+    "ageGroup": "35-39세",
+    "count": 11
+  },
+  {
+    "nationality": "일본",
+    "ageGroup": "40-44세",
+    "count": 16
+  },
+  {
+    "nationality": "일본",
+    "ageGroup": "45-49세",
+    "count": 12
+  },
+  {
+    "nationality": "일본",
+    "ageGroup": "50-54세",
+    "count": 10
+  },
+  {
+    "nationality": "일본",
+    "ageGroup": "55-59세",
+    "count": 11
+  },
+  {
+    "nationality": "일본",
+    "ageGroup": "60-64세",
+    "count": 10
+  },
+  {
+    "nationality": "일본",
+    "ageGroup": "65-69세",
+    "count": 2
+  },
+  {
+    "nationality": "일본",
+    "ageGroup": "70-74세",
+    "count": 2
+  },
+  {
+    "nationality": "일본",
+    "ageGroup": "75-79세",
+    "count": 2
+  },
+  {
+    "nationality": "중국",
+    "ageGroup": "0-4세",
+    "count": 4
+  },
+  {
+    "nationality": "중국",
+    "ageGroup": "05-09세",
+    "count": 28
+  },
+  {
+    "nationality": "중국",
+    "ageGroup": "10-14세",
+    "count": 17
+  },
+  {
+    "nationality": "중국",
+    "ageGroup": "15-19세",
+    "count": 12
+  },
+  {
+    "nationality": "중국",
+    "ageGroup": "20-24세",
+    "count": 5
+  },
+  {
+    "nationality": "중국",
+    "ageGroup": "25-29세",
+    "count": 6
+  },
+  {
+    "nationality": "중국",
+    "ageGroup": "30-34세",
+    "count": 12
+  },
+  {
+    "nationality": "중국",
+    "ageGroup": "35-39세",
+    "count": 42
+  },
+  {
+    "nationality": "중국",
+    "ageGroup": "40-44세",
+    "count": 52
+  },
+  {
+    "nationality": "중국",
+    "ageGroup": "45-49세",
+    "count": 56
+  },
+  {
+    "nationality": "중국",
+    "ageGroup": "50-54세",
+    "count": 53
+  },
+  {
+    "nationality": "중국",
+    "ageGroup": "55-59세",
+    "count": 45
+  },
+  {
+    "nationality": "중국",
+    "ageGroup": "60-64세",
+    "count": 15
+  },
+  {
+    "nationality": "중국",
+    "ageGroup": "65-69세",
+    "count": 5
+  },
+  {
+    "nationality": "중국",
+    "ageGroup": "70-74세",
+    "count": 3
+  },
+  {
+    "nationality": "중국",
+    "ageGroup": "75-79세",
+    "count": 3
+  },
+  {
+    "nationality": "지부티",
+    "ageGroup": "05-09세",
+    "count": 1
+  },
+  {
+    "nationality": "지부티",
+    "ageGroup": "10-14세",
+    "count": 1
+  },
+  {
+    "nationality": "지부티",
+    "ageGroup": "30-34세",
+    "count": 1
+  },
+  {
+    "nationality": "카메룬",
+    "ageGroup": "30-34세",
+    "count": 2
+  },
+  {
+    "nationality": "카자흐스탄",
+    "ageGroup": "0-4세",
+    "count": 3
+  },
+  {
+    "nationality": "카자흐스탄",
+    "ageGroup": "05-09세",
+    "count": 15
+  },
+  {
+    "nationality": "카자흐스탄",
+    "ageGroup": "10-14세",
+    "count": 13
+  },
+  {
+    "nationality": "카자흐스탄",
+    "ageGroup": "15-19세",
+    "count": 9
+  },
+  {
+    "nationality": "카자흐스탄",
+    "ageGroup": "20-24세",
+    "count": 13
+  },
+  {
+    "nationality": "카자흐스탄",
+    "ageGroup": "25-29세",
+    "count": 31
+  },
+  {
+    "nationality": "카자흐스탄",
+    "ageGroup": "30-34세",
+    "count": 23
+  },
+  {
+    "nationality": "카자흐스탄",
+    "ageGroup": "35-39세",
+    "count": 9
+  },
+  {
+    "nationality": "카자흐스탄",
+    "ageGroup": "40-44세",
+    "count": 12
+  },
+  {
+    "nationality": "카자흐스탄",
+    "ageGroup": "45-49세",
+    "count": 5
+  },
+  {
+    "nationality": "카자흐스탄",
+    "ageGroup": "50-54세",
+    "count": 1
+  },
+  {
+    "nationality": "카자흐스탄",
+    "ageGroup": "55-59세",
+    "count": 1
+  },
+  {
+    "nationality": "카타르",
+    "ageGroup": "30-34세",
+    "count": 2
+  },
+  {
+    "nationality": "캄보디아",
+    "ageGroup": "20-24세",
+    "count": 61
+  },
+  {
+    "nationality": "캄보디아",
+    "ageGroup": "25-29세",
+    "count": 77
+  },
+  {
+    "nationality": "캄보디아",
+    "ageGroup": "30-34세",
+    "count": 82
+  },
+  {
+    "nationality": "캄보디아",
+    "ageGroup": "35-39세",
+    "count": 74
+  },
+  {
+    "nationality": "캄보디아",
+    "ageGroup": "40-44세",
+    "count": 25
+  },
+  {
+    "nationality": "캄보디아",
+    "ageGroup": "45-49세",
+    "count": 4
+  },
+  {
+    "nationality": "캄보디아",
+    "ageGroup": "55-59세",
+    "count": 2
+  },
+  {
+    "nationality": "캄보디아",
+    "ageGroup": "60-64세",
+    "count": 2
+  },
+  {
+    "nationality": "캐나다",
+    "ageGroup": "10-14세",
+    "count": 2
+  },
+  {
+    "nationality": "캐나다",
+    "ageGroup": "15-19세",
+    "count": 1
+  },
+  {
+    "nationality": "캐나다",
+    "ageGroup": "35-39세",
+    "count": 1
+  },
+  {
+    "nationality": "캐나다",
+    "ageGroup": "40-44세",
+    "count": 3
+  },
+  {
+    "nationality": "캐나다",
+    "ageGroup": "45-49세",
+    "count": 7
+  },
+  {
+    "nationality": "캐나다",
+    "ageGroup": "50-54세",
+    "count": 4
+  },
+  {
+    "nationality": "캐나다",
+    "ageGroup": "55-59세",
+    "count": 1
+  },
+  {
+    "nationality": "캐나다",
+    "ageGroup": "60-64세",
+    "count": 2
+  },
+  {
+    "nationality": "캐나다",
+    "ageGroup": "65-69세",
+    "count": 3
+  },
+  {
+    "nationality": "캐나다",
+    "ageGroup": "70-74세",
+    "count": 3
+  },
+  {
+    "nationality": "케냐",
+    "ageGroup": "30-34세",
+    "count": 1
+  },
+  {
+    "nationality": "코트디부아르",
+    "ageGroup": "25-29세",
+    "count": 1
+  },
+  {
+    "nationality": "콜롬비아",
+    "ageGroup": "15-19세",
+    "count": 1
+  },
+  {
+    "nationality": "콜롬비아",
+    "ageGroup": "35-39세",
+    "count": 1
+  },
+  {
+    "nationality": "콜롬비아",
+    "ageGroup": "50-54세",
+    "count": 1
+  },
+  {
+    "nationality": "크로아티아",
+    "ageGroup": "15-19세",
+    "count": 1
+  },
+  {
+    "nationality": "크로아티아",
+    "ageGroup": "20-24세",
+    "count": 1
+  },
+  {
+    "nationality": "크로아티아",
+    "ageGroup": "45-49세",
+    "count": 2
+  },
+  {
+    "nationality": "크로아티아",
+    "ageGroup": "50-54세",
+    "count": 2
+  },
+  {
+    "nationality": "크로아티아",
+    "ageGroup": "55-59세",
+    "count": 3
+  },
+  {
+    "nationality": "크로아티아",
+    "ageGroup": "60-64세",
+    "count": 1
+  },
+  {
+    "nationality": "키르기즈",
+    "ageGroup": "0-4세",
+    "count": 2
+  },
+  {
+    "nationality": "키르기즈",
+    "ageGroup": "20-24세",
+    "count": 2
+  },
+  {
+    "nationality": "키르기즈",
+    "ageGroup": "25-29세",
+    "count": 5
+  },
+  {
+    "nationality": "키르기즈",
+    "ageGroup": "30-34세",
+    "count": 8
+  },
+  {
+    "nationality": "키르기즈",
+    "ageGroup": "35-39세",
+    "count": 8
+  },
+  {
+    "nationality": "키르기즈",
+    "ageGroup": "40-44세",
+    "count": 1
+  },
+  {
+    "nationality": "키르기즈",
+    "ageGroup": "45-49세",
+    "count": 4
+  },
+  {
+    "nationality": "키르기즈",
+    "ageGroup": "55-59세",
+    "count": 1
+  },
+  {
+    "nationality": "타이",
+    "ageGroup": "10-14세",
+    "count": 1
+  },
+  {
+    "nationality": "타이",
+    "ageGroup": "15-19세",
+    "count": 1
+  },
+  {
+    "nationality": "타이",
+    "ageGroup": "20-24세",
+    "count": 11
+  },
+  {
+    "nationality": "타이",
+    "ageGroup": "25-29세",
+    "count": 86
+  },
+  {
+    "nationality": "타이",
+    "ageGroup": "30-34세",
+    "count": 156
+  },
+  {
+    "nationality": "타이",
+    "ageGroup": "35-39세",
+    "count": 155
+  },
+  {
+    "nationality": "타이",
+    "ageGroup": "40-44세",
+    "count": 136
+  },
+  {
+    "nationality": "타이",
+    "ageGroup": "45-49세",
+    "count": 98
+  },
+  {
+    "nationality": "타이",
+    "ageGroup": "50-54세",
+    "count": 73
+  },
+  {
+    "nationality": "타이",
+    "ageGroup": "55-59세",
+    "count": 7
+  },
+  {
+    "nationality": "타이",
+    "ageGroup": "65-69세",
+    "count": 1
+  },
+  {
+    "nationality": "타이",
+    "ageGroup": "75-79세",
+    "count": 1
+  },
+  {
+    "nationality": "타이완",
+    "ageGroup": "10-14세",
+    "count": 1
+  },
+  {
+    "nationality": "타이완",
+    "ageGroup": "20-24세",
+    "count": 1
+  },
+  {
+    "nationality": "타이완",
+    "ageGroup": "25-29세",
+    "count": 8
+  },
+  {
+    "nationality": "타이완",
+    "ageGroup": "30-34세",
+    "count": 4
+  },
+  {
+    "nationality": "타이완",
+    "ageGroup": "35-39세",
+    "count": 8
+  },
+  {
+    "nationality": "타이완",
+    "ageGroup": "40-44세",
+    "count": 3
+  },
+  {
+    "nationality": "타이완",
+    "ageGroup": "45-49세",
+    "count": 5
+  },
+  {
+    "nationality": "타이완",
+    "ageGroup": "50-54세",
+    "count": 1
+  },
+  {
+    "nationality": "타이완",
+    "ageGroup": "55-59세",
+    "count": 3
+  },
+  {
+    "nationality": "타이완",
+    "ageGroup": "60-64세",
+    "count": 2
+  },
+  {
+    "nationality": "타이완",
+    "ageGroup": "70-74세",
+    "count": 1
+  },
+  {
+    "nationality": "타이완",
+    "ageGroup": "75-79세",
+    "count": 1
+  },
+  {
+    "nationality": "타지키스탄",
+    "ageGroup": "0-4세",
+    "count": 3
+  },
+  {
+    "nationality": "타지키스탄",
+    "ageGroup": "05-09세",
+    "count": 1
+  },
+  {
+    "nationality": "타지키스탄",
+    "ageGroup": "20-24세",
+    "count": 2
+  },
+  {
+    "nationality": "타지키스탄",
+    "ageGroup": "25-29세",
+    "count": 3
+  },
+  {
+    "nationality": "타지키스탄",
+    "ageGroup": "30-34세",
+    "count": 1
+  },
+  {
+    "nationality": "타지키스탄",
+    "ageGroup": "35-39세",
+    "count": 5
+  },
+  {
+    "nationality": "타지키스탄",
+    "ageGroup": "40-44세",
+    "count": 3
+  },
+  {
+    "nationality": "탄자니아",
+    "ageGroup": "0-4세",
+    "count": 1
+  },
+  {
+    "nationality": "탄자니아",
+    "ageGroup": "20-24세",
+    "count": 6
+  },
+  {
+    "nationality": "탄자니아",
+    "ageGroup": "25-29세",
+    "count": 7
+  },
+  {
+    "nationality": "탄자니아",
+    "ageGroup": "30-34세",
+    "count": 18
+  },
+  {
+    "nationality": "탄자니아",
+    "ageGroup": "35-39세",
+    "count": 12
+  },
+  {
+    "nationality": "탄자니아",
+    "ageGroup": "40-44세",
+    "count": 14
+  },
+  {
+    "nationality": "탄자니아",
+    "ageGroup": "45-49세",
+    "count": 15
+  },
+  {
+    "nationality": "탄자니아",
+    "ageGroup": "50-54세",
+    "count": 6
+  },
+  {
+    "nationality": "탄자니아",
+    "ageGroup": "55-59세",
+    "count": 1
+  },
+  {
+    "nationality": "탄자니아",
+    "ageGroup": "60-64세",
+    "count": 1
+  },
+  {
+    "nationality": "투르크메니스탄",
+    "ageGroup": "10-14세",
+    "count": 2
+  },
+  {
+    "nationality": "투르크메니스탄",
+    "ageGroup": "20-24세",
+    "count": 1
+  },
+  {
+    "nationality": "투르크메니스탄",
+    "ageGroup": "25-29세",
+    "count": 1
+  },
+  {
+    "nationality": "투르크메니스탄",
+    "ageGroup": "30-34세",
+    "count": 4
+  },
+  {
+    "nationality": "투르크메니스탄",
+    "ageGroup": "35-39세",
+    "count": 2
+  },
+  {
+    "nationality": "투르크메니스탄",
+    "ageGroup": "45-49세",
+    "count": 1
+  },
+  {
+    "nationality": "투르크메니스탄",
+    "ageGroup": "50-54세",
+    "count": 1
+  },
+  {
+    "nationality": "튀니지",
+    "ageGroup": "20-24세",
+    "count": 1
+  },
+  {
+    "nationality": "튀니지",
+    "ageGroup": "25-29세",
+    "count": 3
+  },
+  {
+    "nationality": "튀니지",
+    "ageGroup": "30-34세",
+    "count": 4
+  },
+  {
+    "nationality": "튀니지",
+    "ageGroup": "35-39세",
+    "count": 3
+  },
+  {
+    "nationality": "튀니지",
+    "ageGroup": "55-59세",
+    "count": 1
+  },
+  {
+    "nationality": "튀르키예",
+    "ageGroup": "20-24세",
+    "count": 7
+  },
+  {
+    "nationality": "튀르키예",
+    "ageGroup": "25-29세",
+    "count": 16
+  },
+  {
+    "nationality": "튀르키예",
+    "ageGroup": "30-34세",
+    "count": 13
+  },
+  {
+    "nationality": "튀르키예",
+    "ageGroup": "35-39세",
+    "count": 8
+  },
+  {
+    "nationality": "튀르키예",
+    "ageGroup": "40-44세",
+    "count": 14
+  },
+  {
+    "nationality": "튀르키예",
+    "ageGroup": "45-49세",
+    "count": 8
+  },
+  {
+    "nationality": "튀르키예",
+    "ageGroup": "50-54세",
+    "count": 5
+  },
+  {
+    "nationality": "튀르키예",
+    "ageGroup": "55-59세",
+    "count": 1
+  },
+  {
+    "nationality": "튀르키예",
+    "ageGroup": "60-64세",
+    "count": 1
+  },
+  {
+    "nationality": "티모르민주공화국",
+    "ageGroup": "20-24세",
+    "count": 10
+  },
+  {
+    "nationality": "티모르민주공화국",
+    "ageGroup": "25-29세",
+    "count": 47
+  },
+  {
+    "nationality": "티모르민주공화국",
+    "ageGroup": "30-34세",
+    "count": 53
+  },
+  {
+    "nationality": "티모르민주공화국",
+    "ageGroup": "35-39세",
+    "count": 26
+  },
+  {
+    "nationality": "티모르민주공화국",
+    "ageGroup": "40-44세",
+    "count": 14
+  },
+  {
+    "nationality": "티모르민주공화국",
+    "ageGroup": "45-49세",
+    "count": 2
+  },
+  {
+    "nationality": "티모르민주공화국",
+    "ageGroup": "50-54세",
+    "count": 1
+  },
+  {
+    "nationality": "파키스탄",
+    "ageGroup": "0-4세",
+    "count": 10
+  },
+  {
+    "nationality": "파키스탄",
+    "ageGroup": "05-09세",
+    "count": 5
+  },
+  {
+    "nationality": "파키스탄",
+    "ageGroup": "10-14세",
+    "count": 3
+  },
+  {
+    "nationality": "파키스탄",
+    "ageGroup": "20-24세",
+    "count": 5
+  },
+  {
+    "nationality": "파키스탄",
+    "ageGroup": "25-29세",
+    "count": 12
+  },
+  {
+    "nationality": "파키스탄",
+    "ageGroup": "30-34세",
+    "count": 20
+  },
+  {
+    "nationality": "파키스탄",
+    "ageGroup": "35-39세",
+    "count": 20
+  },
+  {
+    "nationality": "파키스탄",
+    "ageGroup": "40-44세",
+    "count": 9
+  },
+  {
+    "nationality": "파키스탄",
+    "ageGroup": "50-54세",
+    "count": 1
+  },
+  {
+    "nationality": "폴란드",
+    "ageGroup": "05-09세",
+    "count": 1
+  },
+  {
+    "nationality": "폴란드",
+    "ageGroup": "10-14세",
+    "count": 1
+  },
+  {
+    "nationality": "폴란드",
+    "ageGroup": "40-44세",
+    "count": 2
+  },
+  {
+    "nationality": "폴란드",
+    "ageGroup": "45-49세",
+    "count": 1
+  },
+  {
+    "nationality": "폴란드",
+    "ageGroup": "65-69세",
+    "count": 1
+  },
+  {
+    "nationality": "폴란드",
+    "ageGroup": "80-84세",
+    "count": 1
+  },
+  {
+    "nationality": "프랑스",
+    "ageGroup": "0-4세",
+    "count": 4
+  },
+  {
+    "nationality": "프랑스",
+    "ageGroup": "05-09세",
+    "count": 9
+  },
+  {
+    "nationality": "프랑스",
+    "ageGroup": "10-14세",
+    "count": 4
+  },
+  {
+    "nationality": "프랑스",
+    "ageGroup": "25-29세",
+    "count": 15
+  },
+  {
+    "nationality": "프랑스",
+    "ageGroup": "30-34세",
+    "count": 17
+  },
+  {
+    "nationality": "프랑스",
+    "ageGroup": "35-39세",
+    "count": 20
+  },
+  {
+    "nationality": "프랑스",
+    "ageGroup": "40-44세",
+    "count": 17
+  },
+  {
+    "nationality": "프랑스",
+    "ageGroup": "45-49세",
+    "count": 10
+  },
+  {
+    "nationality": "프랑스",
+    "ageGroup": "50-54세",
+    "count": 5
+  },
+  {
+    "nationality": "프랑스",
+    "ageGroup": "55-59세",
+    "count": 5
+  },
+  {
+    "nationality": "프랑스",
+    "ageGroup": "60-64세",
+    "count": 2
+  },
+  {
+    "nationality": "프랑스",
+    "ageGroup": "75-79세",
+    "count": 2
+  },
+  {
+    "nationality": "핀란드",
+    "ageGroup": "30-34세",
+    "count": 1
+  },
+  {
+    "nationality": "핀란드",
+    "ageGroup": "55-59세",
+    "count": 1
+  },
+  {
+    "nationality": "핀란드",
+    "ageGroup": "70-74세",
+    "count": 1
+  },
+  {
+    "nationality": "필리핀",
+    "ageGroup": "05-09세",
+    "count": 4
+  },
+  {
+    "nationality": "필리핀",
+    "ageGroup": "10-14세",
+    "count": 2
+  },
+  {
+    "nationality": "필리핀",
+    "ageGroup": "15-19세",
+    "count": 3
+  },
+  {
+    "nationality": "필리핀",
+    "ageGroup": "20-24세",
+    "count": 5
+  },
+  {
+    "nationality": "필리핀",
+    "ageGroup": "25-29세",
+    "count": 46
+  },
+  {
+    "nationality": "필리핀",
+    "ageGroup": "30-34세",
+    "count": 89
+  },
+  {
+    "nationality": "필리핀",
+    "ageGroup": "35-39세",
+    "count": 104
+  },
+  {
+    "nationality": "필리핀",
+    "ageGroup": "40-44세",
+    "count": 70
+  },
+  {
+    "nationality": "필리핀",
+    "ageGroup": "45-49세",
+    "count": 36
+  },
+  {
+    "nationality": "필리핀",
+    "ageGroup": "50-54세",
+    "count": 17
+  },
+  {
+    "nationality": "필리핀",
+    "ageGroup": "55-59세",
+    "count": 9
+  },
+  {
+    "nationality": "필리핀",
+    "ageGroup": "60-64세",
+    "count": 1
+  },
+  {
+    "nationality": "한국계러시아인",
+    "ageGroup": "0-4세",
+    "count": 4
+  },
+  {
+    "nationality": "한국계러시아인",
+    "ageGroup": "05-09세",
+    "count": 3
+  },
+  {
+    "nationality": "한국계러시아인",
+    "ageGroup": "10-14세",
+    "count": 2
+  },
+  {
+    "nationality": "한국계러시아인",
+    "ageGroup": "15-19세",
+    "count": 1
+  },
+  {
+    "nationality": "한국계러시아인",
+    "ageGroup": "25-29세",
+    "count": 1
+  },
+  {
+    "nationality": "한국계러시아인",
+    "ageGroup": "30-34세",
+    "count": 1
+  },
+  {
+    "nationality": "한국계러시아인",
+    "ageGroup": "35-39세",
+    "count": 1
+  },
+  {
+    "nationality": "한국계러시아인",
+    "ageGroup": "40-44세",
+    "count": 1
+  },
+  {
+    "nationality": "한국계러시아인",
+    "ageGroup": "45-49세",
+    "count": 1
+  },
+  {
+    "nationality": "한국계러시아인",
+    "ageGroup": "50-54세",
+    "count": 1
+  },
+  {
+    "nationality": "한국계러시아인",
+    "ageGroup": "55-59세",
+    "count": 1
+  },
+  {
+    "nationality": "한국계러시아인",
+    "ageGroup": "60-64세",
+    "count": 2
+  },
+  {
+    "nationality": "한국계중국인",
+    "ageGroup": "0-4세",
+    "count": 1
+  },
+  {
+    "nationality": "한국계중국인",
+    "ageGroup": "05-09세",
+    "count": 11
+  },
+  {
+    "nationality": "한국계중국인",
+    "ageGroup": "10-14세",
+    "count": 7
+  },
+  {
+    "nationality": "한국계중국인",
+    "ageGroup": "15-19세",
+    "count": 1
+  },
+  {
+    "nationality": "한국계중국인",
+    "ageGroup": "20-24세",
+    "count": 4
+  },
+  {
+    "nationality": "한국계중국인",
+    "ageGroup": "25-29세",
+    "count": 2
+  },
+  {
+    "nationality": "한국계중국인",
+    "ageGroup": "30-34세",
+    "count": 12
+  },
+  {
+    "nationality": "한국계중국인",
+    "ageGroup": "35-39세",
+    "count": 29
+  },
+  {
+    "nationality": "한국계중국인",
+    "ageGroup": "40-44세",
+    "count": 43
+  },
+  {
+    "nationality": "한국계중국인",
+    "ageGroup": "45-49세",
+    "count": 51
+  },
+  {
+    "nationality": "한국계중국인",
+    "ageGroup": "50-54세",
+    "count": 66
+  },
+  {
+    "nationality": "한국계중국인",
+    "ageGroup": "55-59세",
+    "count": 96
+  },
+  {
+    "nationality": "한국계중국인",
+    "ageGroup": "60-64세",
+    "count": 74
+  },
+  {
+    "nationality": "한국계중국인",
+    "ageGroup": "65-69세",
+    "count": 20
+  },
+  {
+    "nationality": "한국계중국인",
+    "ageGroup": "70-74세",
+    "count": 9
+  },
+  {
+    "nationality": "헝가리",
+    "ageGroup": "40-44세",
+    "count": 1
+  },
+  {
+    "nationality": "홍콩",
+    "ageGroup": "45-49세",
+    "count": 1
+  },
+  {
+    "nationality": "홍콩",
+    "ageGroup": "50-54세",
+    "count": 1
+  }
+];
 
-export const realNationalityAgeGroups: readonly string[] = [];
+export const realNationalityAgeGroups: readonly string[] = [
+  "0-4세",
+  "05-09세",
+  "10-14세",
+  "15-19세",
+  "20-24세",
+  "25-29세",
+  "30-34세",
+  "35-39세",
+  "40-44세",
+  "45-49세",
+  "50-54세",
+  "55-59세",
+  "60-64세",
+  "65-69세",
+  "70-74세",
+  "75-79세",
+  "80-84세",
+  "85-89세",
+  "90-94세",
+  "90-95세"
+];
 
-export const realNationalityAgeTotals: readonly { nationality: string; total: number }[] = [];
+export const realNationalityAgeTotals: readonly { nationality: string; total: number }[] = [
+  {
+    "nationality": "베트남",
+    "total": 4047
+  },
+  {
+    "nationality": "인도네시아",
+    "total": 2271
+  },
+  {
+    "nationality": "우즈베키스탄",
+    "total": 1664
+  },
+  {
+    "nationality": "네팔",
+    "total": 1517
+  },
+  {
+    "nationality": "스리랑카",
+    "total": 1160
+  },
+  {
+    "nationality": "미얀마",
+    "total": 854
+  },
+  {
+    "nationality": "타이",
+    "total": 726
+  },
+  {
+    "nationality": "한국계중국인",
+    "total": 426
+  },
+  {
+    "nationality": "필리핀",
+    "total": 386
+  },
+  {
+    "nationality": "중국",
+    "total": 358
+  },
+  {
+    "nationality": "캄보디아",
+    "total": 327
+  },
+  {
+    "nationality": "방글라데시",
+    "total": 290
+  },
+  {
+    "nationality": "러시아(연방)",
+    "total": 289
+  },
+  {
+    "nationality": "인도",
+    "total": 274
+  },
+  {
+    "nationality": "말레이시아",
+    "total": 255
+  },
+  {
+    "nationality": "티모르민주공화국",
+    "total": 153
+  },
+  {
+    "nationality": "일본",
+    "total": 140
+  },
+  {
+    "nationality": "카자흐스탄",
+    "total": 135
+  },
+  {
+    "nationality": "프랑스",
+    "total": 110
+  },
+  {
+    "nationality": "미국",
+    "total": 95
+  },
+  {
+    "nationality": "파키스탄",
+    "total": 85
+  },
+  {
+    "nationality": "탄자니아",
+    "total": 81
+  },
+  {
+    "nationality": "영국",
+    "total": 76
+  },
+  {
+    "nationality": "르완다",
+    "total": 74
+  },
+  {
+    "nationality": "튀르키예",
+    "total": 73
+  },
+  {
+    "nationality": "그리스",
+    "total": 50
+  },
+  {
+    "nationality": "남아프리카공화국",
+    "total": 46
+  },
+  {
+    "nationality": "몽골",
+    "total": 43
+  },
+  {
+    "nationality": "타이완",
+    "total": 38
+  },
+  {
+    "nationality": "이탈리아",
+    "total": 34
+  },
+  {
+    "nationality": "아이티",
+    "total": 33
+  },
+  {
+    "nationality": "키르기즈",
+    "total": 31
+  },
+  {
+    "nationality": "캐나다",
+    "total": 27
+  },
+  {
+    "nationality": "모로코",
+    "total": 24
+  },
+  {
+    "nationality": "오스트레일리아",
+    "total": 24
+  },
+  {
+    "nationality": "예멘공화국",
+    "total": 19
+  },
+  {
+    "nationality": "한국계러시아인",
+    "total": 19
+  },
+  {
+    "nationality": "노르웨이",
+    "total": 18
+  },
+  {
+    "nationality": "타지키스탄",
+    "total": 18
+  },
+  {
+    "nationality": "말리",
+    "total": 16
+  },
+  {
+    "nationality": "우크라이나",
+    "total": 16
+  },
+  {
+    "nationality": "라이베리아",
+    "total": 15
+  },
+  {
+    "nationality": "루마니아",
+    "total": 15
+  },
+  {
+    "nationality": "이집트",
+    "total": 15
+  },
+  {
+    "nationality": "리비아",
+    "total": 14
+  },
+  {
+    "nationality": "브라질",
+    "total": 13
+  },
+  {
+    "nationality": "투르크메니스탄",
+    "total": 12
+  },
+  {
+    "nationality": "튀니지",
+    "total": 12
+  },
+  {
+    "nationality": "부룬디",
+    "total": 10
+  },
+  {
+    "nationality": "크로아티아",
+    "total": 10
+  },
+  {
+    "nationality": "네덜란드",
+    "total": 7
+  },
+  {
+    "nationality": "뉴질랜드",
+    "total": 7
+  },
+  {
+    "nationality": "알제리",
+    "total": 7
+  },
+  {
+    "nationality": "폴란드",
+    "total": 7
+  },
+  {
+    "nationality": "싱가포르",
+    "total": 6
+  },
+  {
+    "nationality": "이란",
+    "total": 6
+  },
+  {
+    "nationality": "라오스",
+    "total": 5
+  },
+  {
+    "nationality": "아일랜드",
+    "total": 5
+  },
+  {
+    "nationality": "독일",
+    "total": 3
+  },
+  {
+    "nationality": "라트비아",
+    "total": 3
+  },
+  {
+    "nationality": "모잠비크",
+    "total": 3
+  },
+  {
+    "nationality": "벨기에",
+    "total": 3
+  },
+  {
+    "nationality": "불가리아",
+    "total": 3
+  },
+  {
+    "nationality": "세네갈",
+    "total": 3
+  },
+  {
+    "nationality": "지부티",
+    "total": 3
+  },
+  {
+    "nationality": "콜롬비아",
+    "total": 3
+  },
+  {
+    "nationality": "핀란드",
+    "total": 3
+  },
+  {
+    "nationality": "가나",
+    "total": 2
+  },
+  {
+    "nationality": "도미니카공화국",
+    "total": 2
+  },
+  {
+    "nationality": "멕시코",
+    "total": 2
+  },
+  {
+    "nationality": "베네수엘라",
+    "total": 2
+  },
+  {
+    "nationality": "스웨덴",
+    "total": 2
+  },
+  {
+    "nationality": "에콰도르",
+    "total": 2
+  },
+  {
+    "nationality": "에티오피아",
+    "total": 2
+  },
+  {
+    "nationality": "카메룬",
+    "total": 2
+  },
+  {
+    "nationality": "카타르",
+    "total": 2
+  },
+  {
+    "nationality": "홍콩",
+    "total": 2
+  },
+  {
+    "nationality": "감비아",
+    "total": 1
+  },
+  {
+    "nationality": "나이지리아",
+    "total": 1
+  },
+  {
+    "nationality": "벨라루스",
+    "total": 1
+  },
+  {
+    "nationality": "스위스",
+    "total": 1
+  },
+  {
+    "nationality": "스페인",
+    "total": 1
+  },
+  {
+    "nationality": "시리아",
+    "total": 1
+  },
+  {
+    "nationality": "에스토니아",
+    "total": 1
+  },
+  {
+    "nationality": "우간다",
+    "total": 1
+  },
+  {
+    "nationality": "이라크",
+    "total": 1
+  },
+  {
+    "nationality": "케냐",
+    "total": 1
+  },
+  {
+    "nationality": "코트디부아르",
+    "total": 1
+  },
+  {
+    "nationality": "헝가리",
+    "total": 1
+  }
+];
 
 // 국민건강보험공단 외국인 건강보험 적용인구 — 소득·취업형태 보조 지표.
 export type RealHealthInsurance = { nationality: string; workplace: number; regional: number; total: number };
@@ -7447,10 +14185,1011 @@ export const realMulticulturalFamilySummary = {
 
 // 대학알리미 고등교육기관 기본현황 (위치·유형 보조).
 export type RealUniversityStat = { name: string; type: string; region: string };
-export const realUniversityStats: readonly RealUniversityStat[] = [];
+export const realUniversityStats: readonly RealUniversityStat[] = [
+  {
+    "name": "스타팍스(주)",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "삼성플러스관광주식회사 ㈜",
+    "type": "",
+    "region": "대구"
+  },
+  {
+    "name": "㈜유에스여행",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "(주)프라자이십일",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "한나라관광(주)",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 아시안메이트",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "㈜ 이부커스코리아",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "㈜한몽파트너스",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사고려의료관광개발",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "하베스트에듀주식회사",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "민가",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "㈜엠디마케팅",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "(주)달라이몽골투어",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "주식회사비에이치인터내셔널",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사포르튜나",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "비엠케이",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "주식회사 엠제이루스코",
+    "type": "",
+    "region": "광주"
+  },
+  {
+    "name": "폴리테스트코리아 ㈜",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "주식회사 오픈베이",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 아메디스",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "메디엔인터내셔날",
+    "type": "",
+    "region": "인천"
+  },
+  {
+    "name": "㈜글로벌그룹",
+    "type": "",
+    "region": "경남"
+  },
+  {
+    "name": "주식회사 비티메디",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "㈜ 한진관광",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 비에프생명과학",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 리싼",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "(주)뷰츠고",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 리브어게인",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 와납스",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "마운틴코리아㈜",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "주식회사 아이에이치피",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "코비",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "메디오루스",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "리타루스(LITARUS)",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "씨유코리아(C U KOREA)",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "이디비 ㈜",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "주식회사 메디호스피탈컨설팅",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 인테여행사",
+    "type": "",
+    "region": "대구"
+  },
+  {
+    "name": "㈜ 엠아이지2013(MIG2013 Co., Ltd)",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "글로리 메디컬 앤 투어",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "세윤 메디컬 투어",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "아리마 트레이딩(Irma trading)",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "(주)겔리온에스에이치",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "(주)제이피인터내쇼날",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 테무",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 골든투어코리아디엠씨",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "탑 코리아",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "아리스타쉬핑 주식회사",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "조이풀(JOYFUL)",
+    "type": "",
+    "region": "인천"
+  },
+  {
+    "name": "휴람",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "주식회사 메디컬애비뉴",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "롯데관광 주식회사",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "드림무역",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "주식회사 메디컬코리아서비스",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 유로이스트",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "신아투어",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 우리원헬스케어",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "㈜ 이에이치엘바이오",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "글러벌 엠엔케이",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "비씨커뮤니케이션즈",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "(주) 365mc",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "비앤에이치케어",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "건인약품㈜",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "㈜인큐밸류",
+    "type": "",
+    "region": "제주"
+  },
+  {
+    "name": "트리퍼스트글로벌주식회사",
+    "type": "",
+    "region": "경남"
+  },
+  {
+    "name": "아이니",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "㈜ 미스터케어(Mr. Care. Co.,Ltd)",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "유니메디코리아",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "메디케어",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "주식회사큐어스빅토리아",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "서울유니",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "㈜ 뷰파트너스",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "메디버스",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "소비코리아",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "㈜코리아링스",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 리나스 트래블",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "케이지엘",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "메디원(Medione)",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 케이이엔에스",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "주식회사 나이스메디",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 디암홀딩스",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "메디칸 ㈜",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "(주)클린업네트워크",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "리진",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "베라코(VERAKO)컴퍼니",
+    "type": "",
+    "region": "대구"
+  },
+  {
+    "name": "주식회사 엑스와이글로벌(XY GLOBAL CO., LTD)",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "누오바 비타(Nuova Vita)",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "주식회사 에버케어에스앤씨",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "㈜ 모바일이 지배하는 세상",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "샤이코리아 ㈜",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "㈜ 에스에이엠투어",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "비케이 한중 컨설팅",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "카디오메드 주식회사",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "나타샤메디컬트래블",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 베컨",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "합자회사 케이월드투어",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 하이메디",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 케이바이오",
+    "type": "",
+    "region": "인천"
+  },
+  {
+    "name": "리나메드",
+    "type": "",
+    "region": "인천"
+  },
+  {
+    "name": "캐치메이뉘(Catch Meinv)",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 코리아뷰티나비",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "㈜ 옴니허브",
+    "type": "",
+    "region": "대구"
+  },
+  {
+    "name": "㈜부산티엔씨",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "주식회사 포에버앤제이",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "코리아 메디칼 투어리즘",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "하킴트래블코리아",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "(주) 큐큐국제여행사",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "GMS(지엠에스)",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "㈜썬웨이엠앤티",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "매드앤프로",
+    "type": "",
+    "region": "인천"
+  },
+  {
+    "name": "코리아메디치(Korea Medici)",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "뷰티게이트㈜",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "네오 미래(NEO MIRAE)",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "스마트 메디 코리아",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 와조아",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "웨이메이주식회사(WEIMEI INC.)",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "에스피에스투어(주)",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "신세기앤컴퍼니 주식회사",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "안심국제 주식회사",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 도도인터내셔널",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 상준메디컬투어",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "㈜ 금룡여행사",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "얄라코리아",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 플라잉닥터스",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 닥파인더코리아",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 헤드코리아",
+    "type": "",
+    "region": "충북"
+  },
+  {
+    "name": "(주)마이스구루",
+    "type": "",
+    "region": "경북"
+  },
+  {
+    "name": "(주)신백수",
+    "type": "",
+    "region": "충북"
+  },
+  {
+    "name": "하이수아이(Hisuay)",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "중천코리아",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 보보월드",
+    "type": "",
+    "region": "광주"
+  },
+  {
+    "name": "아이엔네트웍스",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "리리",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 서울리거",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 케이에스에스티",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "사단법인 한국국제의료협회",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "메디카",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "주식회사 유비메디",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "골든나비스",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "주식회사 국제의료문화교류협의회",
+    "type": "",
+    "region": "대구"
+  },
+  {
+    "name": "㈜광림컨설팅",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 서울가이드코리아",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "HPS (에이치피에스)",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "㈜ 리인터내셔날",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "㈜ 비엠모스트 (BM Most)",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "닥터투어 주식회사",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 산비타(Sanvita CO.,LTD)",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "주식회사 삼하",
+    "type": "",
+    "region": "강원"
+  },
+  {
+    "name": "메디코퍼",
+    "type": "",
+    "region": "인천"
+  },
+  {
+    "name": "센스메디컬",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "㈜메디에베뉴",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 비앤에이치코리아 (B&H KOREA)",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "아리나의료관광",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "주식회사 한세로",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "다성VIP여행사",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 굿메디코리아(GOOD MEDI KOREA INC.)",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "㈜ 와이케이비에이치",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 케이지에이치",
+    "type": "",
+    "region": "광주"
+  },
+  {
+    "name": "디자인 레모",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "㈜명학국제여행사",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "YN-와이엔",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 엔케이",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "주식회사 동하",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "㈜ 디지털브랜딩",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 글로벌닥터스",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "(주)유앤알컴퍼니",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "한중건강관리협회",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "아랑",
+    "type": "",
+    "region": "대구"
+  },
+  {
+    "name": "메디안",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "주식회사 뉴평화관광여행사",
+    "type": "",
+    "region": "대구"
+  },
+  {
+    "name": "메디타 투어 앤 트레이드(MEDITA TOUR & TRADE)",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "주식회사 글로벌엠이엠",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "코에코테크트레이딩㈜",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 엘에이치브리지",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "비비코리아써저리 주식회사",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "디엑스앤브이엑스 주식회사",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "㈜코리아마린서비스",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "주식회사 에이에이치코리아",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 지아난",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 중국미업",
+    "type": "",
+    "region": "강원"
+  },
+  {
+    "name": "주식회사 제이제트그룹",
+    "type": "",
+    "region": "인천"
+  },
+  {
+    "name": "인터코리아팔공신휴",
+    "type": "",
+    "region": "대구"
+  },
+  {
+    "name": "티엠글로벌",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "㈜잠언코리아",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "주식회사 이후엘티에스",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 나모",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "㈜파마존",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 코리",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "(주)에이치플러스건축사사무소",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 글로벌국제",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 야베스케이",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "주식회사 아이메이그룹",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "주식회사 케이지문화교류센터",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "로메디 주식회사",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "메디칼라인",
+    "type": "",
+    "region": "경기"
+  },
+  {
+    "name": "주식회사 신라투어",
+    "type": "",
+    "region": "부산"
+  },
+  {
+    "name": "주식회사 담비",
+    "type": "",
+    "region": "대구"
+  },
+  {
+    "name": "하나뷰티 코리아(Hana Beauty Korea)",
+    "type": "",
+    "region": "강원"
+  },
+  {
+    "name": "코리아헬스케어서비스 주식회사",
+    "type": "",
+    "region": "서울"
+  },
+  {
+    "name": "에스제이씨엔씨(SJ C&C)",
+    "type": "",
+    "region": "대구"
+  }
+];
 
 export const realDataSummary = {
-  "generatedAt": "2026-06-15T22:40:28.232Z",
+  "generatedAt": "2026-06-15T22:52:41.904Z",
   "statusRowCount": 205,
   "nationalityCount": 205,
   "nationalitySource": "annual",
@@ -7458,21 +15197,27 @@ export const realDataSummary = {
   "regionRowCount": 200,
   "apiStatusRowCount": 0,
   "apiRegionRowCount": 0,
-  "apiEconActivityCount": 0,
+  "apiEconActivityCount": 428,
   "studentYearCount": 14,
-  "universityCount": 0,
+  "universityCount": 1,
   "regionResidentCount": 0,
-  "nationalityByAgeCount": 0,
+  "nationalityByAgeCount": 585,
   "healthInsuranceCount": 0,
   "multiculturalFamilyCount": 0,
-  "universityStatsCount": 0,
-  "apiParsedFiles": [],
+  "universityStatsCount": 6363,
+  "apiParsedFiles": [
+    {
+      "source": "kosis_foreigner_economic_activity",
+      "file": "kosis_foreigner_economic_activity_2026-06-15.json",
+      "produced": 428
+    }
+  ],
   "sourceFiles": {
-    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-14.csv",
-    "stay": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-06-14.csv",
-    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-14.csv",
-    "moeStudent": null,
-    "mois": null,
-    "monthly": null
+    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-15.csv",
+    "stay": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-06-15.csv",
+    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-15.csv",
+    "moeStudent": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moe_foreign_student_latest_2026-06-15.csv",
+    "mois": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/mois_foreign_resident_region_file_2026-06-15.csv",
+    "monthly": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_immigration_monthly_2024_2026-06-15.csv"
   }
 } as const;

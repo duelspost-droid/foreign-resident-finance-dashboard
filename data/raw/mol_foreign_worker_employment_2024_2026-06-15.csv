@@ -1,0 +1,30 @@
+자격유형코드(LICENSETYPE_CODE),자격유형명(LICENSETYPE_NAME),자격유형영어명(LICENSETYPE_ENG)
+1701,기계,Mechanic
+1702,금속,Metal
+1703,"화공,요업","Chemical, Ceramic"
+1704,전기,Electic
+1705,전자,Electronic
+1706,통신,Telecommunications
+1707,조선,Ship buidling
+1708,항공,Aeronautic
+1709,토목,Civil Engineering
+1710,건축,Architecture
+1711,섬유,Textile and Fabric
+1712,광업자원,Mining resources
+1713,정보처리,Information Processing
+1714,국토개발,Land development
+1715,농림,Agriculture and Forestry
+1716,해양,Oceanic
+1717,"산업디자인,공예","Industrial design, craft"
+1718,에너지,Energy
+1719,안전관리,Safety control
+1720,환경,Environment
+1721,산업응용,Industrial application
+1722,"교통,운전",Transportation (incl.Machine & vehicle operating)
+1723,서비스,Service
+1724,"의료,보건","Medical, Health"
+1725,"교육,사회복지","Education, Social welfare"
+1726,"전문,일반사무",Office (professional and general)
+1727,무관,No Relation
+20201,본국,해당없음
+20202,국내,해당없음
