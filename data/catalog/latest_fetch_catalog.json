@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-15T14:55:16.432Z",
+  "generatedAt": "2026-06-15T15:28:36.677Z",
   "keysPresent": {
     "DATA_GO_KR_SERVICE_KEY": true,
     "KOSIS_API_KEY": true,
@@ -20,7 +20,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "국적×체류자격 집계. 세그먼트 산출의 1차 소스.",
-      "fetchedAt": "2026-06-15T15:01:52.207Z",
+      "fetchedAt": "2026-06-15T15:35:21.517Z",
       "result": {
         "status": "metadata_failed_using_cached_raw",
         "cachedRawFile": "moj_foreign_resident_status_2024_2026-06-14.csv",
@@ -43,7 +43,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "지역 단위 체류 현황.",
-      "fetchedAt": "2026-06-15T15:01:52.209Z",
+      "fetchedAt": "2026-06-15T15:35:21.518Z",
       "result": {
         "status": "metadata_failed_using_cached_raw",
         "cachedRawFile": "moj_foreign_stay_data_2024_2026-06-14.csv",
@@ -66,7 +66,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "유학(D-2)·연수(D-4) 체류 추세.",
-      "fetchedAt": "2026-06-15T15:01:52.209Z",
+      "fetchedAt": "2026-06-15T15:35:21.519Z",
       "result": {
         "status": "metadata_failed_using_cached_raw",
         "cachedRawFile": "moj_foreign_student_stay_2024_2026-06-14.csv",
@@ -89,7 +89,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "고용허가제(E-9·H-2) 외국인 고용 집계. 급여계좌·이체 수요 추정 보조.",
-      "fetchedAt": "2026-06-15T15:01:52.209Z",
+      "fetchedAt": "2026-06-15T15:35:21.520Z",
       "result": {
         "status": "metadata_failed",
         "cachedRawFile": null,
@@ -112,7 +112,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "외국인 취업자 세부 통계. 발굴 자동화로 식별됨.",
-      "fetchedAt": "2026-06-15T15:02:14.196Z",
+      "fetchedAt": "2026-06-15T15:35:44.006Z",
       "result": {
         "status": "metadata_failed",
         "cachedRawFile": null,
@@ -135,7 +135,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "결혼이민자·다문화가구 집계. 금융 상품 수요 보조 지표.",
-      "fetchedAt": "2026-06-15T15:02:14.197Z",
+      "fetchedAt": "2026-06-15T15:35:44.007Z",
       "result": {
         "status": "metadata_failed",
         "cachedRawFile": null,
@@ -158,7 +158,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "국적별 보험료 부과액·급여비. 외국인 소득수준·지불능력 대리지표(금융 세그먼트 보조).",
-      "fetchedAt": "2026-06-15T15:02:14.197Z",
+      "fetchedAt": "2026-06-15T15:35:44.007Z",
       "result": {
         "status": "metadata_failed",
         "cachedRawFile": null,
@@ -181,7 +181,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "외국인 직장/지역 가입자 구분. 취업형태(급여계좌 수요) 보조 지표.",
-      "fetchedAt": "2026-06-15T15:02:14.198Z",
+      "fetchedAt": "2026-06-15T15:35:44.008Z",
       "result": {
         "status": "metadata_failed",
         "cachedRawFile": null,
@@ -204,7 +204,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "법무부 출입국 월별 통계. 발굴 자동화로 식별됨.",
-      "fetchedAt": "2026-06-15T15:02:36.181Z",
+      "fetchedAt": "2026-06-15T15:36:06.497Z",
       "result": {
         "status": "metadata_failed",
         "cachedRawFile": null,
@@ -227,7 +227,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 시군구 단위 외국인주민. openapi 대체용 파일 수집(발굴 자동화).",
-      "fetchedAt": "2026-06-15T15:02:36.182Z",
+      "fetchedAt": "2026-06-15T15:36:06.498Z",
       "result": {
         "status": "metadata_failed",
         "cachedRawFile": null,
@@ -250,7 +250,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "교육부 대학·국적별 유학생. 유학생 금융 수요 세분화(발굴 자동화).",
-      "fetchedAt": "2026-06-15T15:02:36.183Z",
+      "fetchedAt": "2026-06-15T15:36:06.499Z",
       "result": {
         "status": "metadata_failed",
         "cachedRawFile": null,
@@ -273,7 +273,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "대학유형(4년제/전문대/대학원)×학위과정별 외국인 유학생. 학생 세그먼트 상품 설계 보조.",
-      "fetchedAt": "2026-06-15T15:02:36.183Z",
+      "fetchedAt": "2026-06-15T15:36:06.500Z",
       "result": {
         "status": "metadata_failed",
         "cachedRawFile": null,
@@ -296,7 +296,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "시도별 외국인 유학생 분포. 지점·캠퍼스 연계 전략 지역 우선순위 산출.",
-      "fetchedAt": "2026-06-15T15:02:58.168Z",
+      "fetchedAt": "2026-06-15T15:36:28.988Z",
       "result": {
         "status": "metadata_failed",
         "cachedRawFile": null,
@@ -319,7 +319,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "교육부 최신 유학생 통계(발굴 자동화 식별). 2024년 이후 업데이트 반영.",
-      "fetchedAt": "2026-06-15T15:02:58.169Z",
+      "fetchedAt": "2026-06-15T15:36:28.990Z",
       "result": {
         "status": "metadata_failed",
         "cachedRawFile": null,
@@ -342,7 +342,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "대학알리미 대학별 외국인유학생 수. 캠퍼스별 수요 세분화 핵심 소스.",
-      "fetchedAt": "2026-06-15T15:02:58.170Z",
+      "fetchedAt": "2026-06-15T15:36:28.992Z",
       "result": {
         "status": "metadata_failed",
         "cachedRawFile": null,
@@ -365,7 +365,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "대학알리미 고등교육기관 기본정보(위치·유형). 대학 외국인 유학생 지도 구축 보조.",
-      "fetchedAt": "2026-06-15T15:02:58.170Z",
+      "fetchedAt": "2026-06-15T15:36:28.993Z",
       "result": {
         "status": "metadata_failed",
         "cachedRawFile": null,
@@ -388,7 +388,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "국적별 사업장·지역 가입 외국인 연금 가입자. 정규 취업 외국인(급여계좌·적금) 규모 직접 측정.",
-      "fetchedAt": "2026-06-15T15:03:20.157Z",
+      "fetchedAt": "2026-06-15T15:36:51.483Z",
       "result": {
         "status": "metadata_failed",
         "cachedRawFile": null,
@@ -411,7 +411,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 시도별 외국인주민. newEstPrdCnt로 최신 N기 자동 수집. 첫 성공 응답으로 필드명 확정.",
-      "fetchedAt": "2026-06-15T15:04:04.123Z",
+      "fetchedAt": "2026-06-15T15:37:36.459Z",
       "result": {
         "status": "request_failed",
         "requestUrls": [
@@ -439,7 +439,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 읍면동 단위 외국인주민. endPrdDe=CY로 매년 자동 갱신.",
-      "fetchedAt": "2026-06-15T15:04:04.124Z",
+      "fetchedAt": "2026-06-15T15:37:36.461Z",
       "result": {
         "status": "request_failed",
         "requestUrls": [
@@ -467,7 +467,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "법무부 시군구×체류자격 등록외국인. endPrdDe=CY 동적 갱신.",
-      "fetchedAt": "2026-06-15T15:04:04.124Z",
+      "fetchedAt": "2026-06-15T15:37:36.462Z",
       "result": {
         "status": "request_failed",
         "requestUrls": [
@@ -495,7 +495,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "통계청 이민자 체류실태·고용조사. 취업/소득 = 급여계좌·신용 수요 직결. 2단계 호출.",
-      "fetchedAt": "2026-06-15T15:04:26.110Z",
+      "fetchedAt": "2026-06-15T15:37:58.948Z",
       "result": {
         "status": "request_failed",
         "requestUrls": [
@@ -523,7 +523,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "외국인 본국송금 거시지표. statCode 운영 환경에서 확정 필요. ECOS_API_KEY GitHub Secret 등록 필요.",
-      "fetchedAt": "2026-06-15T15:04:04.123Z",
+      "fetchedAt": "2026-06-15T15:37:36.459Z",
       "result": {
         "status": "skipped_no_key",
         "reason": "ECOS_API_KEY not set",
@@ -543,7 +543,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "외국인 송금·환전 거래 거시지표 후보. ECOS statCode 확인 후 verified=true 전환.",
-      "fetchedAt": "2026-06-15T15:04:04.123Z",
+      "fetchedAt": "2026-06-15T15:37:36.459Z",
       "result": {
         "status": "skipped_no_key",
         "reason": "ECOS_API_KEY not set",
@@ -563,7 +563,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "서울 25개 자치구×국적별 외국인 월별 통계. serviceName 실제 값 확인 필요. SEOUL_OPENAPI_KEY GitHub Secret 등록 필요.",
-      "fetchedAt": "2026-06-15T15:04:04.123Z",
+      "fetchedAt": "2026-06-15T15:37:36.459Z",
       "result": {
         "status": "skipped_no_key",
         "reason": "SEOUL_OPENAPI_KEY not set",
@@ -583,7 +583,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 외국인주민 시군구 집계. endpoint 경로 운영 환경에서 확정 필요.",
-      "fetchedAt": "2026-06-15T15:04:04.976Z",
+      "fetchedAt": "2026-06-15T15:37:37.726Z",
       "result": {
         "status": "no_data",
         "requestUrls": [

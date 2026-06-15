@@ -9351,7 +9351,7 @@ export const realRegionResidentSummary = {
 } as const;
 
 export const realDataSummary = {
-  "generatedAt": "2026-06-15T15:14:03.956Z",
+  "generatedAt": "2026-06-15T15:37:59.083Z",
   "statusRowCount": 400,
   "regionRowCount": 200,
   "apiStatusRowCount": 0,
@@ -9361,8 +9361,8 @@ export const realDataSummary = {
   "regionResidentCount": 0,
   "apiParsedFiles": [],
   "sourceFiles": {
-    "status": "/home/user/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-14.csv",
-    "student": "/home/user/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-14.csv",
+    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-14.csv",
+    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-14.csv",
     "academy": null,
     "mois": null
   }
