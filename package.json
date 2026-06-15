@@ -18,7 +18,9 @@
     "data:build": "node scripts/build_real_data.mjs",
     "data:all": "node scripts/daily_data_batch.mjs",
     "batch:daily": "node scripts/daily_data_batch.mjs",
-    "supabase:load": "node scripts/load_supabase.mjs"
+    "supabase:load": "node scripts/load_supabase.mjs",
+    "supabase:check": "node scripts/check_supabase.mjs",
+    "candidates:sync": "node scripts/sync_candidates.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",
