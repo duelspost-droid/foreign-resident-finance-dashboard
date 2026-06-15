@@ -20,6 +20,7 @@ import {
 } from "./insights";
 import {
   realDataSummary,
+  realEconActivity,
   realForeignResidentStatus,
   realForeignStudentByVisa,
   realForeignStudentByYear,
@@ -676,6 +677,10 @@ export const nationalityByAge = realNationalityByAge;
 export const nationalityAgeGroups = realNationalityAgeGroups;
 export const nationalityAgeTotals = realNationalityAgeTotals;
 export const hasNationalityByAge = realNationalityByAge.length > 0;
+
+// KOSIS 경제활동인구 (수집 성공 시 채워짐).
+export const econActivityData = realEconActivity;
+export const hasEconActivity = realEconActivity.length > 0;
 
 // 전체 체류외국인 합계 — 국적 분포 실데이터가 있으면 이를 우선 사용.
 const totalFromRealNationality = realNationalityDistribution.reduce((s, r) => s + r.residents, 0);

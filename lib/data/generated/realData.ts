@@ -6093,6 +6093,10 @@ export const realApiStatusData: readonly ForeignResidentStatus[] = [];
 
 export const realApiRegionData: readonly ForeignResidentRegionMonth[] = [];
 
+// KOSIS 경제활동인구(취업자·실업자 등) — nationality 없는 집계 시계열.
+export type RealEconActivity = { period: string; category: string; value: number; sourceId: string; provider: string; title: string };
+export const realEconActivity: readonly RealEconActivity[] = [];
+
 // 국적 분포 + 비자/세그먼트 분포 — 국적·체류자격 페이지가 사용.
 export type RealNationalityDist = { nationality: string; residents: number; share: number };
 export type RealVisaSegment = { name: string; value: number };

@@ -20,6 +20,7 @@ import {
   regionStrategy,
   topNationalities
 } from "@/lib/data/financialInsightsData";
+import { econActivityData, hasEconActivity } from "@/lib/data/mockData";
 import { PageHero } from "@/components/ui/PageHero";
 import { formatNumber } from "@/lib/utils/format";
 
@@ -503,6 +504,50 @@ export default function FinancialInsightsPage() {
           ))}
         </div>
       </section>
+
+      {/* ── 외국인 경제활동인구 (KOSIS 수집 시 표시) ──────────── */}
+      {hasEconActivity && (() => {
+        const periods = [...new Set(econActivityData.map((r) => r.period))].sort().reverse();
+        const latestPeriod = periods[0] ?? "";
+        const latestRows = econActivityData.filter((r) => r.period === latestPeriod);
+        const maxVal = Math.max(...latestRows.map((r) => r.value), 1);
+        return (
+          <section>
+            <div className="mb-3 flex items-center gap-2">
+              <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">외국인 경제활동인구</h2>
+              <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">
+                KOSIS · {latestPeriod}년
+              </span>
+            </div>
+            <div className="surface p-5">
+              <p className="mb-4 text-xs text-muted">{latestRows[0]?.provider} {latestRows[0]?.title} · 체류자격별 취업·경제활동 분포</p>
+              <div className="space-y-2.5">
+                {latestRows.sort((a, b) => b.value - a.value).map((row, i) => (
+                  <div key={`${row.period}-${row.category}-${i}`} className="flex items-center gap-3">
+                    <span className="w-36 shrink-0 truncate text-xs text-ink" title={row.category}>{row.category}</span>
+                    <div className="flex flex-1 items-center gap-2">
+                      <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-slate-100">
+                        <div
+                          className="h-full rounded-full bg-teal-600"
+                          style={{ width: `${Math.round((row.value / maxVal) * 100)}%` }}
+                        />
+                      </div>
+                      <span className="w-20 shrink-0 text-right font-mono text-xs text-muted">
+                        {row.value.toLocaleString()}명
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {periods.length > 1 && (
+                <p className="mt-3 text-[11px] text-muted">
+                  수집 기간: {periods.at(-1)}~{periods[0]}년 · 연도별 데이터 {periods.length}개
+                </p>
+              )}
+            </div>
+          </section>
+        );
+      })()}
 
       {/* ── 컴플라이언스 주의사항 ────────────────────────────────── */}
       <section>
