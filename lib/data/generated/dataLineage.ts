@@ -47,17 +47,19 @@ export type DataLineage = {
 };
 
 export const dataLineage: DataLineage = {
-  "generatedAt": "2026-06-15T10:40:13.922Z",
+  "generatedAt": "2026-06-15T13:49:56.915Z",
   "keysPresent": {
     "DATA_GO_KR_SERVICE_KEY": true,
-    "KOSIS_API_KEY": true
+    "KOSIS_API_KEY": true,
+    "ECOS_API_KEY": false,
+    "SEOUL_OPENAPI_KEY": false
   },
   "totals": {
-    "sources": 16,
-    "downloaded": 11,
+    "sources": 27,
+    "downloaded": 15,
     "cached": 0,
-    "skippedNoKey": 0,
-    "failed": 5
+    "skippedNoKey": 3,
+    "failed": 9
   },
   "sources": [
     {
@@ -73,7 +75,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "국적×체류자격 집계. 세그먼트 산출의 1차 소스.",
-      "fetchedAt": "2026-06-15T10:40:41.814Z",
+      "fetchedAt": "2026-06-15T13:50:27.030Z",
       "status": "downloaded",
       "rowCount": 400,
       "savedFile": "moj_foreign_resident_status_2024_2026-06-15.csv",
@@ -95,7 +97,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "지역 단위 체류 현황.",
-      "fetchedAt": "2026-06-15T10:40:44.348Z",
+      "fetchedAt": "2026-06-15T13:50:27.486Z",
       "status": "downloaded",
       "rowCount": 380,
       "savedFile": "moj_foreign_stay_data_2024_2026-06-15.csv",
@@ -117,7 +119,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "유학(D-2)·연수(D-4) 체류 추세.",
-      "fetchedAt": "2026-06-15T10:40:46.316Z",
+      "fetchedAt": "2026-06-15T13:50:27.426Z",
       "status": "downloaded",
       "rowCount": 42,
       "savedFile": "moj_foreign_student_stay_2024_2026-06-15.csv",
@@ -139,7 +141,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "고용허가제(E-9·H-2) 외국인 고용 집계. 급여계좌·이체 수요 추정 보조.",
-      "fetchedAt": "2026-06-15T10:40:49.079Z",
+      "fetchedAt": "2026-06-15T13:50:28.289Z",
       "status": "downloaded",
       "rowCount": 1,
       "savedFile": "mol_foreign_worker_employment_2024_2026-06-15.csv",
@@ -161,7 +163,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "외국인 취업자 세부 통계. 발굴 자동화로 식별됨.",
-      "fetchedAt": "2026-06-15T10:40:50.630Z",
+      "fetchedAt": "2026-06-15T13:50:28.455Z",
       "status": "downloaded",
       "rowCount": 1,
       "savedFile": "mol_foreign_worker_employment2_2024_2026-06-15.csv",
@@ -183,7 +185,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "결혼이민자·다문화가구 집계. 금융 상품 수요 보조 지표.",
-      "fetchedAt": "2026-06-15T10:40:52.761Z",
+      "fetchedAt": "2026-06-15T13:50:28.741Z",
       "status": "downloaded",
       "rowCount": 16,
       "savedFile": "mogef_multicultural_family_2024_2026-06-15.csv",
@@ -205,7 +207,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "국적별 보험료 부과액·급여비. 외국인 소득수준·지불능력 대리지표(금융 세그먼트 보조).",
-      "fetchedAt": "2026-06-15T10:40:54.836Z",
+      "fetchedAt": "2026-06-15T13:50:28.793Z",
       "status": "downloaded",
       "rowCount": 1,
       "savedFile": "nhis_foreigner_premium_2023_2026-06-15.xlsx",
@@ -227,7 +229,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "외국인 직장/지역 가입자 구분. 취업형태(급여계좌 수요) 보조 지표.",
-      "fetchedAt": "2026-06-15T10:40:57.265Z",
+      "fetchedAt": "2026-06-15T13:50:29.967Z",
       "status": "downloaded",
       "rowCount": 17,
       "savedFile": "nhis_foreigner_coverage_2022_2026-06-15.csv",
@@ -249,7 +251,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "법무부 출입국 월별 통계. 발굴 자동화로 식별됨.",
-      "fetchedAt": "2026-06-15T10:40:59.634Z",
+      "fetchedAt": "2026-06-15T13:50:30.795Z",
       "status": "downloaded",
       "rowCount": 400,
       "savedFile": "moj_immigration_monthly_2024_2026-06-15.csv",
@@ -271,7 +273,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 시군구 단위 외국인주민. openapi 대체용 파일 수집(발굴 자동화).",
-      "fetchedAt": "2026-06-15T10:41:02.702Z",
+      "fetchedAt": "2026-06-15T13:50:30.255Z",
       "status": "downloaded",
       "rowCount": 1692,
       "savedFile": "mois_foreign_resident_region_file_2026-06-15.csv",
@@ -293,12 +295,144 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "교육부 대학·국적별 유학생. 유학생 금융 수요 세분화(발굴 자동화).",
-      "fetchedAt": "2026-06-15T10:41:04.207Z",
+      "fetchedAt": "2026-06-15T13:50:29.728Z",
       "status": "metadata_without_file",
       "rowCount": null,
       "savedFile": null,
       "requestUrls": [
         "https://www.data.go.kr/data/15050054/fileData.do"
+      ],
+      "reason": null
+    },
+    {
+      "id": "moe_foreign_student_univ_type",
+      "provider": "교육부",
+      "title": "외국인 유학생 현황(대학유형별·학위과정별)",
+      "category": "외국인 직접 통계",
+      "type": "file",
+      "targetTable": "foreign_student_university",
+      "sourceUrl": "https://www.data.go.kr/data/15050055/fileData.do",
+      "license": "공공데이터 이용허락(제1유형)",
+      "updateCycle": "연",
+      "personalDataSafe": true,
+      "verified": false,
+      "notes": "대학유형(4년제/전문대/대학원)×학위과정별 외국인 유학생. 학생 세그먼트 상품 설계 보조.",
+      "fetchedAt": "2026-06-15T13:50:30.655Z",
+      "status": "metadata_without_file",
+      "rowCount": null,
+      "savedFile": null,
+      "requestUrls": [
+        "https://www.data.go.kr/data/15050055/fileData.do"
+      ],
+      "reason": null
+    },
+    {
+      "id": "moe_foreign_student_region",
+      "provider": "교육부",
+      "title": "외국인 유학생 현황(지역별)",
+      "category": "외국인 직접 통계",
+      "type": "file",
+      "targetTable": "foreign_student_university",
+      "sourceUrl": "https://www.data.go.kr/data/15100039/fileData.do",
+      "license": "공공데이터 이용허락(제1유형)",
+      "updateCycle": "연",
+      "personalDataSafe": true,
+      "verified": false,
+      "notes": "시도별 외국인 유학생 분포. 지점·캠퍼스 연계 전략 지역 우선순위 산출.",
+      "fetchedAt": "2026-06-15T13:50:32.027Z",
+      "status": "downloaded",
+      "rowCount": 17486,
+      "savedFile": "moe_foreign_student_region_2026-06-15.csv",
+      "requestUrls": [
+        "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003645680&fileDetailSn=1"
+      ],
+      "reason": null
+    },
+    {
+      "id": "moe_foreign_student_latest",
+      "provider": "교육부",
+      "title": "외국인 유학생 현황(최신)",
+      "category": "외국인 직접 통계",
+      "type": "file",
+      "targetTable": "foreign_student_university",
+      "sourceUrl": "https://www.data.go.kr/data/15149964/fileData.do",
+      "license": "공공데이터 이용허락(제1유형)",
+      "updateCycle": "연",
+      "personalDataSafe": true,
+      "verified": false,
+      "notes": "교육부 최신 유학생 통계(발굴 자동화 식별). 2024년 이후 업데이트 반영.",
+      "fetchedAt": "2026-06-15T13:50:31.589Z",
+      "status": "downloaded",
+      "rowCount": 65,
+      "savedFile": "moe_foreign_student_latest_2026-06-15.csv",
+      "requestUrls": [
+        "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003254817&fileDetailSn=1"
+      ],
+      "reason": null
+    },
+    {
+      "id": "academyinfo_foreign_student_count",
+      "provider": "교육부(대학알리미)",
+      "title": "고등교육기관 외국인유학생 수",
+      "category": "외국인 직접 통계",
+      "type": "file",
+      "targetTable": "foreign_student_university",
+      "sourceUrl": "https://www.data.go.kr/data/3069982/fileData.do",
+      "license": "공공데이터 이용허락(제1유형)",
+      "updateCycle": "연",
+      "personalDataSafe": true,
+      "verified": false,
+      "notes": "대학알리미 대학별 외국인유학생 수. 캠퍼스별 수요 세분화 핵심 소스.",
+      "fetchedAt": "2026-06-15T13:50:34.499Z",
+      "status": "downloaded",
+      "rowCount": 304360,
+      "savedFile": "academyinfo_foreign_student_count_2026-06-15.csv",
+      "requestUrls": [
+        "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003578044&fileDetailSn=1"
+      ],
+      "reason": null
+    },
+    {
+      "id": "academyinfo_university_stats",
+      "provider": "교육부(대학알리미)",
+      "title": "고등교육기관 기본현황",
+      "category": "외국인 직접 통계",
+      "type": "file",
+      "targetTable": "foreign_student_university",
+      "sourceUrl": "https://www.data.go.kr/data/3050000/fileData.do",
+      "license": "공공데이터 이용허락(제1유형)",
+      "updateCycle": "연",
+      "personalDataSafe": true,
+      "verified": false,
+      "notes": "대학알리미 고등교육기관 기본정보(위치·유형). 대학 외국인 유학생 지도 구축 보조.",
+      "fetchedAt": "2026-06-15T13:50:33.471Z",
+      "status": "downloaded",
+      "rowCount": 6364,
+      "savedFile": "academyinfo_university_stats_2026-06-15.csv",
+      "requestUrls": [
+        "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003220926&fileDetailSn=1"
+      ],
+      "reason": null
+    },
+    {
+      "id": "nps_foreigner_subscriber",
+      "provider": "국민연금공단",
+      "title": "외국인 국민연금 가입자 현황",
+      "category": "외국인 경제·금융 보조",
+      "type": "file",
+      "targetTable": "foreign_resident_status",
+      "sourceUrl": "https://www.data.go.kr/data/15005710/fileData.do",
+      "license": "공공데이터 이용허락(제1유형)",
+      "updateCycle": "연",
+      "personalDataSafe": true,
+      "verified": false,
+      "notes": "국적별 사업장·지역 가입 외국인 연금 가입자. 정규 취업 외국인(급여계좌·적금) 규모 직접 측정.",
+      "fetchedAt": "2026-06-15T13:50:31.784Z",
+      "status": "metadata_without_file",
+      "rowCount": null,
+      "savedFile": null,
+      "requestUrls": [
+        "https://www.data.go.kr/data/15005710/fileData.do"
       ],
       "reason": null
     },
@@ -314,13 +448,13 @@ export const dataLineage: DataLineage = {
       "updateCycle": "연",
       "personalDataSafe": true,
       "verified": false,
-      "notes": "행안부 시도별 외국인주민. 2단계 호출: getMeta(ITM)로 itmId 조회 후 statisticsParameterData.do. 첫 성공 응답으로 필드명 확정.",
-      "fetchedAt": "2026-06-15T10:41:06.496Z",
+      "notes": "행안부 시도별 외국인주민. newEstPrdCnt로 최신 N기 자동 수집. 첫 성공 응답으로 필드명 확정.",
+      "fetchedAt": "2026-06-15T13:50:34.310Z",
       "status": "api_error",
       "rowCount": null,
       "savedFile": null,
       "requestUrls": [
-        "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=110&tblId=TX_11025_A000_A&itmId=ALL&objL1=ALL&objL2=ALL&objL3=&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2020&endPrdDe=2024"
+        "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=110&tblId=TX_11025_A000_A&itmId=ALL&objL1=ALL&objL2=ALL&objL3=&format=json&jsonVD=Y&prdSe=Y&newEstPrdCnt=10"
       ],
       "reason": "필수요청변수값이 누락되었습니다. (objL)"
     },
@@ -336,13 +470,13 @@ export const dataLineage: DataLineage = {
       "updateCycle": "연",
       "personalDataSafe": true,
       "verified": false,
-      "notes": "행안부 읍면동 단위 외국인주민(지역 세분화). 웹 조사로 정정(국적X→지역). 2단계 호출.",
-      "fetchedAt": "2026-06-15T10:41:19.850Z",
+      "notes": "행안부 읍면동 단위 외국인주민. endPrdDe=CY로 매년 자동 갱신.",
+      "fetchedAt": "2026-06-15T13:50:35.740Z",
       "status": "api_error",
       "rowCount": null,
       "savedFile": null,
       "requestUrls": [
-        "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=110&tblId=DT_110025_A033_A&itmId=ALL&objL1=ALL&objL2=&objL3=&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2020&endPrdDe=2024"
+        "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=110&tblId=DT_110025_A033_A&itmId=ALL&objL1=ALL&objL2=&objL3=&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2020&endPrdDe=2026"
       ],
       "reason": "필수요청변수값이 누락되었습니다. (objL)"
     },
@@ -358,13 +492,13 @@ export const dataLineage: DataLineage = {
       "updateCycle": "분기/연",
       "personalDataSafe": true,
       "verified": false,
-      "notes": "법무부 시군구×체류자격 등록외국인. 지점 전략 핵심 지표. 2단계 호출.",
-      "fetchedAt": "2026-06-15T10:41:22.423Z",
+      "notes": "법무부 시군구×체류자격 등록외국인. endPrdDe=CY 동적 갱신.",
+      "fetchedAt": "2026-06-15T13:50:34.622Z",
       "status": "api_error",
       "rowCount": null,
       "savedFile": null,
       "requestUrls": [
-        "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=111&tblId=DT_1B040A11&itmId=ALL&objL1=ALL&objL2=&objL3=&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2020&endPrdDe=2024"
+        "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=111&tblId=DT_1B040A11&itmId=ALL&objL1=ALL&objL2=&objL3=&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2020&endPrdDe=2026"
       ],
       "reason": "필수요청변수값이 누락되었습니다. (objL)"
     },
@@ -381,14 +515,118 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "통계청 이민자 체류실태·고용조사. 취업/소득 = 급여계좌·신용 수요 직결. 2단계 호출.",
-      "fetchedAt": "2026-06-15T10:41:24.001Z",
+      "fetchedAt": "2026-06-15T13:50:36.196Z",
       "status": "downloaded",
-      "rowCount": 376,
+      "rowCount": 429,
       "savedFile": "kosis_foreigner_economic_activity_2026-06-15.json",
       "requestUrls": [
-        "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=101&tblId=DT_2FA002F&itmId=ALL&objL1=ALL&objL2=&objL3=&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2018&endPrdDe=2024"
+        "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=101&tblId=DT_2FA002F&itmId=ALL&objL1=ALL&objL2=&objL3=&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2018&endPrdDe=2026"
       ],
       "reason": null
+    },
+    {
+      "id": "kosis_foreign_student_univ_type",
+      "provider": "KOSIS(교육부 교육통계)",
+      "title": "대학유형별 외국인 유학생 현황",
+      "category": "외국인 직접 통계",
+      "type": "kosis",
+      "targetTable": "foreign_student_university",
+      "sourceUrl": "https://kosis.kr/statHtml/statHtml.do?orgId=334&tblId=DT_334N_C0007",
+      "license": "KOSIS 이용약관",
+      "updateCycle": "연",
+      "personalDataSafe": true,
+      "verified": false,
+      "notes": "한국교육개발원(KEDI) KOSS 교육통계. 대학유형별·국적별 유학생 추세. 2단계 호출.",
+      "fetchedAt": "2026-06-15T13:50:35.097Z",
+      "status": "api_error",
+      "rowCount": null,
+      "savedFile": null,
+      "requestUrls": [
+        "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=334&tblId=DT_334N_C0007&itmId=ALL&objL1=ALL&objL2=&objL3=&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2018&endPrdDe=2026"
+      ],
+      "reason": "해당 통계표가 존재하지 않습니다."
+    },
+    {
+      "id": "kosis_foreign_student_nationality",
+      "provider": "KOSIS(교육부 교육통계)",
+      "title": "국적별 외국인 유학생 현황",
+      "category": "외국인 직접 통계",
+      "type": "kosis",
+      "targetTable": "foreign_student_university",
+      "sourceUrl": "https://kosis.kr/statHtml/statHtml.do?orgId=334&tblId=DT_334N_C0008",
+      "license": "KOSIS 이용약관",
+      "updateCycle": "연",
+      "personalDataSafe": true,
+      "verified": false,
+      "notes": "KEDI 국적별 유학생 시계열. 중국·베트남·우즈베키스탄 등 주요 국적 학생 금융 수요 추정.",
+      "fetchedAt": "2026-06-15T13:50:35.220Z",
+      "status": "api_error",
+      "rowCount": null,
+      "savedFile": null,
+      "requestUrls": [
+        "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=334&tblId=DT_334N_C0008&itmId=ALL&objL1=ALL&objL2=&objL3=&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2018&endPrdDe=2026"
+      ],
+      "reason": "해당 통계표가 존재하지 않습니다."
+    },
+    {
+      "id": "ecos_bop_transfer_income",
+      "provider": "한국은행(ECOS)",
+      "title": "국제수지 이전소득수지 (개인 해외송금 대리지표)",
+      "category": "외국인 경제·금융 보조",
+      "type": "ecos",
+      "targetTable": "finance_segment_aggregate",
+      "sourceUrl": "https://ecos.bok.or.kr/#/StatisticsByTheme",
+      "license": "한국은행 데이터 이용약관",
+      "updateCycle": "연/분기",
+      "personalDataSafe": true,
+      "verified": false,
+      "notes": "외국인 본국송금 거시지표. statCode 운영 환경에서 확정 필요. ECOS_API_KEY GitHub Secret 등록 필요.",
+      "fetchedAt": "2026-06-15T13:50:35.097Z",
+      "status": "skipped_no_key",
+      "rowCount": null,
+      "savedFile": null,
+      "requestUrls": [],
+      "reason": "ECOS_API_KEY not set"
+    },
+    {
+      "id": "ecos_foreigner_fx_remittance",
+      "provider": "한국은행(ECOS)",
+      "title": "거주자 및 비거주자 외국환 거래(개인 송금)",
+      "category": "외국인 경제·금융 보조",
+      "type": "ecos",
+      "targetTable": "finance_segment_aggregate",
+      "sourceUrl": "https://ecos.bok.or.kr/#/StatisticsByTheme",
+      "license": "한국은행 데이터 이용약관",
+      "updateCycle": "연",
+      "personalDataSafe": true,
+      "verified": false,
+      "notes": "외국인 송금·환전 거래 거시지표 후보. ECOS statCode 확인 후 verified=true 전환.",
+      "fetchedAt": "2026-06-15T13:50:35.097Z",
+      "status": "skipped_no_key",
+      "rowCount": null,
+      "savedFile": null,
+      "requestUrls": [],
+      "reason": "ECOS_API_KEY not set"
+    },
+    {
+      "id": "seoul_foreigner_population",
+      "provider": "서울특별시(열린데이터광장)",
+      "title": "서울시 외국인 주민 현황(자치구별·국적별)",
+      "category": "외국인 직접 통계",
+      "type": "seoul",
+      "targetTable": "foreign_resident_region_month",
+      "sourceUrl": "https://data.seoul.go.kr/dataList/OA-14979/S/1/datasetView.do",
+      "license": "서울시 공공데이터 이용허락",
+      "updateCycle": "월",
+      "personalDataSafe": true,
+      "verified": false,
+      "notes": "서울 25개 자치구×국적별 외국인 월별 통계. serviceName 실제 값 확인 필요. SEOUL_OPENAPI_KEY GitHub Secret 등록 필요.",
+      "fetchedAt": "2026-06-15T13:50:35.097Z",
+      "status": "skipped_no_key",
+      "rowCount": null,
+      "savedFile": null,
+      "requestUrls": [],
+      "reason": "SEOUL_OPENAPI_KEY not set"
     },
     {
       "id": "mois_foreign_resident_by_region_api",
@@ -403,12 +641,12 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 외국인주민 시군구 집계. endpoint 경로 운영 환경에서 확정 필요.",
-      "fetchedAt": "2026-06-15T10:41:25.084Z",
+      "fetchedAt": "2026-06-15T13:50:36.059Z",
       "status": "no_data",
       "rowCount": null,
       "savedFile": null,
       "requestUrls": [
-        "https://apis.data.go.kr/1741000/StatisticsForeignResident/getForeignResidentInfo?serviceKey=3811…ce88&type=json&numOfRows=1000&pageNo=1&searchYear=2024"
+        "https://apis.data.go.kr/1741000/StatisticsForeignResident/getForeignResidentInfo?serviceKey=3811…ce88&type=json&numOfRows=1000&pageNo=1&searchYear=2025"
       ],
       "reason": "0 rows (verify endpoint/params)"
     }
@@ -874,6 +1112,200 @@ export const dataLineage: DataLineage = {
           "datasetId": "15054816",
           "kind": "fileData",
           "url": "https://www.data.go.kr/data/15054816/fileData.do"
+        }
+      ]
+    },
+    {
+      "id": "kedi_foreign_student",
+      "provider": "한국교육개발원",
+      "keyword": "외국인유학생 대학알리미",
+      "purpose": "대학별 외국인 유학생 수·국적·학위과정(캠퍼스 전략)",
+      "status": "ok",
+      "foundCount": 10,
+      "links": [
+        {
+          "datasetId": "15050054",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15050054/fileData.do"
+        },
+        {
+          "datasetId": "3069982",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3069982/fileData.do"
+        },
+        {
+          "datasetId": "15050055",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15050055/fileData.do"
+        },
+        {
+          "datasetId": "15060430",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15060430/fileData.do"
+        },
+        {
+          "datasetId": "15106908",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15106908/fileData.do"
+        },
+        {
+          "datasetId": "15057888",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15057888/openapi.do"
+        },
+        {
+          "datasetId": "15057333",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15057333/openapi.do"
+        },
+        {
+          "datasetId": "15158678",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15158678/openapi.do"
+        },
+        {
+          "datasetId": "15158684",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15158684/openapi.do"
+        },
+        {
+          "datasetId": "15058233",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15058233/openapi.do"
+        }
+      ]
+    },
+    {
+      "id": "foreign_student_degree",
+      "provider": "교육부",
+      "keyword": "외국인 학위과정 유학생",
+      "purpose": "학위/비학위 구분 외국인 학생 금융 체류 기간 추정",
+      "status": "ok",
+      "foundCount": 7,
+      "links": [
+        {
+          "datasetId": "15050054",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15050054/fileData.do"
+        },
+        {
+          "datasetId": "15100039",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15100039/fileData.do"
+        },
+        {
+          "datasetId": "15050055",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15050055/fileData.do"
+        },
+        {
+          "datasetId": "15033729",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15033729/fileData.do"
+        },
+        {
+          "datasetId": "15070981",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15070981/fileData.do"
+        },
+        {
+          "datasetId": "15057333",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15057333/openapi.do"
+        },
+        {
+          "datasetId": "15058982",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15058982/openapi.do"
+        }
+      ]
+    },
+    {
+      "id": "moe_language_training",
+      "provider": "교육부",
+      "keyword": "어학연수 외국인 D-4",
+      "purpose": "어학연수(D-4) 비자 외국인 규모(단기 금융 수요)",
+      "status": "ok",
+      "foundCount": 5,
+      "links": [
+        {
+          "datasetId": "15100039",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15100039/fileData.do"
+        },
+        {
+          "datasetId": "15100038",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15100038/fileData.do"
+        },
+        {
+          "datasetId": "15100006",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15100006/fileData.do"
+        },
+        {
+          "datasetId": "15100004",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15100004/fileData.do"
+        },
+        {
+          "datasetId": "15106908",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15106908/fileData.do"
+        }
+      ]
+    },
+    {
+      "id": "workhnet_foreign_job",
+      "provider": "한국고용정보원",
+      "keyword": "외국인 근로자 취업 워크넷",
+      "purpose": "외국인 취업 현황·업종별 분포(급여계좌 타겟 업종)",
+      "status": "ok",
+      "foundCount": 0,
+      "links": []
+    },
+    {
+      "id": "mois_foreigner_settlement",
+      "provider": "행정안전부",
+      "keyword": "외국인 정착 지원 사회통합",
+      "purpose": "사회통합프로그램 외국인 참여자(장기거주 의향·정주 금융 수요)",
+      "status": "ok",
+      "foundCount": 7,
+      "links": [
+        {
+          "datasetId": "15055033",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15055033/fileData.do"
+        },
+        {
+          "datasetId": "15047603",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15047603/fileData.do"
+        },
+        {
+          "datasetId": "3035864",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3035864/fileData.do"
+        },
+        {
+          "datasetId": "15151656",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15151656/fileData.do"
+        },
+        {
+          "datasetId": "15129723",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15129723/fileData.do"
+        },
+        {
+          "datasetId": "15057877",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15057877/openapi.do"
+        },
+        {
+          "datasetId": "15057553",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15057553/openapi.do"
         }
       ]
     }
