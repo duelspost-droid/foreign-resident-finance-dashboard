@@ -379,11 +379,11 @@ export const publicDataSources = [
     title: "시군구별 및 체류자격별 등록외국인 현황",
     category: "외국인 직접 통계",
     apiKeyEnv: "KOSIS_API_KEY",
-    endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
+    // Param 엔드포인트는 itmId=ALL 시 objL 누락 오류 → statisticsData.do 로 전환.
+    endpoint: "https://kosis.kr/openapi/statisticsData.do",
     orgId: "111",
     tblId: "DT_1B040A11",
-    // objL2=ALL 필요: 시군구(objL1)×체류자격(objL2) 2단계 분류.
-    params: { prdSe: "Y", startPrdDe: "2020", endPrdDe: CY, objL1: "ALL", objL2: "ALL" },
+    params: { prdSe: "Y", newEstPrdCnt: KOSIS_RECENT, itmId: "ALL", objL1: "ALL", objL2: "ALL" },
     targetTable: "foreign_resident_region_month",
     outputBaseName: "kosis_registered_foreigner_sigungu_visa",
     responseMapping: { period: "PRD_DE", region: "C1_NM", value: "DT" },

@@ -416,6 +416,34 @@ async function fetchKosisItmIds(source, apiKey, attempts) {
   }
 }
 
+// getMeta(type=OBJ, lv=N) 로 objL{N} 분류 코드 목록을 가져온다. "+"로 join(없으면 null).
+// statisticsParameterData.do 는 itmId=ALL 일 때 구조를 못 찾아 "objL 누락" 오류를 낸다.
+// 실제 OBJ 코드를 직접 조회해 objL 파라미터로 전달하면 이 오류를 우회할 수 있다.
+async function fetchKosisObjIds(source, level, apiKey) {
+  const url = new URL(KOSIS_META_ENDPOINT);
+  url.searchParams.set("method", "getMeta");
+  url.searchParams.set("type", "OBJ");
+  url.searchParams.set("lv", String(level));
+  url.searchParams.set("apiKey", apiKey);
+  url.searchParams.set("orgId", source.orgId);
+  url.searchParams.set("tblId", source.tblId);
+  url.searchParams.set("format", "json");
+  try {
+    const res = await fetchWithRetry(url, {}, 2);
+    if (!res.ok) return null;
+    const rawText = (await res.text()).replace(/^﻿/, "");
+    const body = JSON.parse(rawText);
+    if (body?.err || body?.errMsg) return null;
+    const rows = Array.isArray(body) ? body : extractItems(body);
+    const ids = [...new Set(
+      rows.map((r) => r.OBJ_ID ?? r.obj_id ?? r.CLASS_ID ?? r.classId).filter(Boolean)
+    )];
+    return ids.length > 0 ? ids.slice(0, 100).join("+") : null;
+  } catch {
+    return null;
+  }
+}
+
 // KOSIS metaData.do(method=periodData)로 해당 테이블의 최신 발행 기간을 조회한다.
 // 성공 시 가장 최근 PRD_DE 문자열 반환, 실패 시 null.
 async function getKosisLatestPeriod(apiKey, orgId, tblId) {
@@ -454,8 +482,21 @@ async function collectKosisSource(source) {
   const metaItmId = await fetchKosisItmIds(source, apiKey, attempts);
   const itmId = metaItmId ?? source.params?.itmId ?? "ALL";
 
+  // 1-b: objL 분류 코드 조회 (getMeta type=OBJ). statisticsParameterData.do 는
+  // itmId=ALL일 때 구조를 못 찾아 "objL 누락" 오류를 낸다.
+  // 실제 OBJ 코드를 사용하면 이 오류를 우회할 수 있다.
+  const useParamEndpoint = (source.endpoint ?? KOSIS_DATA_ENDPOINT).includes("statisticsParameterData");
+  const objCodes = {};
+  if (useParamEndpoint) {
+    for (let lvl = 1; lvl <= 4; lvl += 1) {
+      const sourceHasLevel = lvl === 1 || source.params?.[`objL${lvl}`] != null;
+      if (!sourceHasLevel) break;
+      const codes = await fetchKosisObjIds(source, lvl, apiKey);
+      if (codes) objCodes[`objL${lvl}`] = codes;
+    }
+  }
+
   // 종료 기간 동적 결정: metaData.do(periodData)로 실제 최신 발행 기간을 조회한다.
-  // 조회 실패 시 source.params.endPrdDe(=CY) 또는 현재 연도로 폴백 — 미발행 미래 연도 요청 오류 방지.
   const latestPeriod = await getKosisLatestPeriod(apiKey, source.orgId, source.tblId);
 
   // 2단계: 데이터 조회. source.endpoint(소스별 오버라이드) → 기본값 statisticsParameterData.do
@@ -465,11 +506,11 @@ async function collectKosisSource(source) {
   dataUrl.searchParams.set("orgId", source.orgId);
   dataUrl.searchParams.set("tblId", source.tblId);
   dataUrl.searchParams.set("itmId", itmId);
-  // 분류 레벨(objL): 빈 값을 보내면 KOSIS가 "필수요청변수값 누락(objL)" 오류를 낸다.
-  // objL1은 기본 ALL, objL2~objL8은 source.params에 명시된 비어있지 않은 값만 전송한다.
-  dataUrl.searchParams.set("objL1", source.params?.objL1 ?? "ALL");
+
+  // objL: 실제 코드(objCodes) 우선 → source.params → "ALL"
+  dataUrl.searchParams.set("objL1", objCodes.objL1 ?? source.params?.objL1 ?? "ALL");
   for (let lvl = 2; lvl <= 8; lvl += 1) {
-    const v = source.params?.[`objL${lvl}`];
+    const v = objCodes[`objL${lvl}`] ?? source.params?.[`objL${lvl}`];
     if (v != null && v !== "") dataUrl.searchParams.set(`objL${lvl}`, v);
   }
   dataUrl.searchParams.set("format", "json");
@@ -477,7 +518,6 @@ async function collectKosisSource(source) {
   dataUrl.searchParams.set("prdSe", source.params?.prdSe ?? "Y");
 
   // 기간: newEstPrdCnt(최근 N기)가 지정되면 우선 사용(연도 하드코딩 없음).
-  // 아니면 startPrdDe + 동적 endPrdDe(최신 발행 기간).
   if (source.params?.newEstPrdCnt) {
     dataUrl.searchParams.set("newEstPrdCnt", String(source.params.newEstPrdCnt));
   } else {
@@ -491,7 +531,7 @@ async function collectKosisSource(source) {
 
   try {
     const res = await fetchWithRetry(dataUrl);
-    attempts.push({ step: "statisticsParameterData", url: safeDataUrl, status: res.status });
+    attempts.push({ step: "statisticsData", url: safeDataUrl, status: res.status });
     if (!res.ok) {
       return { status: "request_failed", requestUrls, attempts, reason: `${res.status} ${res.statusText}` };
     }
