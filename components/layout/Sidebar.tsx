@@ -3,33 +3,25 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  BarChart3,
   Building2,
-  Database,
   DatabaseZap,
-  FileText,
   Flag,
   GraduationCap,
   Landmark,
   LayoutDashboard,
   Map,
-  PieChart,
   ShieldCheck
 } from "lucide-react";
 import clsx from "clsx";
 
 const navigation = [
-  { href: "/", label: "개요", icon: LayoutDashboard },
+  { href: "/", label: "대시보드", icon: LayoutDashboard },
   { href: "/financial-insights", label: "금융 인사이트", icon: Landmark },
   { href: "/regions", label: "지역 분석", icon: Map },
   { href: "/nationalities", label: "국적 분석", icon: Flag },
   { href: "/universities", label: "대학/유학생", icon: GraduationCap },
-  { href: "/visa-segments", label: "체류자격 분석", icon: PieChart },
-  { href: "/opportunity-scores", label: "금융 기회 점수", icon: BarChart3 },
-  { href: "/data-sources", label: "데이터 소스", icon: Database },
-  { href: "/data-pipeline", label: "수집 파이프라인", icon: DatabaseZap },
-  { href: "/admin", label: "관리자 승인", icon: ShieldCheck },
-  { href: "/compliance", label: "컴플라이언스", icon: FileText }
+  { href: "/data-pipeline", label: "데이터 관리", icon: DatabaseZap },
+  { href: "/admin", label: "관리자", icon: ShieldCheck },
 ];
 
 export function Sidebar() {
