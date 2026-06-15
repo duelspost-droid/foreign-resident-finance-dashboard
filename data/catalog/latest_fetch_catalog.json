@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-15T10:36:03.217Z",
+  "generatedAt": "2026-06-15T10:40:13.922Z",
   "keysPresent": {
     "DATA_GO_KR_SERVICE_KEY": true,
     "KOSIS_API_KEY": true
@@ -18,7 +18,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "국적×체류자격 집계. 세그먼트 산출의 1차 소스.",
-      "fetchedAt": "2026-06-15T10:36:26.942Z",
+      "fetchedAt": "2026-06-15T10:40:41.814Z",
       "result": {
         "status": "downloaded",
         "rowCount": 400,
@@ -54,7 +54,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "지역 단위 체류 현황.",
-      "fetchedAt": "2026-06-15T10:36:29.108Z",
+      "fetchedAt": "2026-06-15T10:40:44.348Z",
       "result": {
         "status": "downloaded",
         "rowCount": 380,
@@ -90,7 +90,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "유학(D-2)·연수(D-4) 체류 추세.",
-      "fetchedAt": "2026-06-15T10:36:30.869Z",
+      "fetchedAt": "2026-06-15T10:40:46.316Z",
       "result": {
         "status": "downloaded",
         "rowCount": 42,
@@ -126,7 +126,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "고용허가제(E-9·H-2) 외국인 고용 집계. 급여계좌·이체 수요 추정 보조.",
-      "fetchedAt": "2026-06-15T10:36:33.201Z",
+      "fetchedAt": "2026-06-15T10:40:49.079Z",
       "result": {
         "status": "downloaded",
         "rowCount": 1,
@@ -162,7 +162,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "외국인 취업자 세부 통계. 발굴 자동화로 식별됨.",
-      "fetchedAt": "2026-06-15T10:36:34.637Z",
+      "fetchedAt": "2026-06-15T10:40:50.630Z",
       "result": {
         "status": "downloaded",
         "rowCount": 1,
@@ -198,7 +198,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "결혼이민자·다문화가구 집계. 금융 상품 수요 보조 지표.",
-      "fetchedAt": "2026-06-15T10:36:36.580Z",
+      "fetchedAt": "2026-06-15T10:40:52.761Z",
       "result": {
         "status": "downloaded",
         "rowCount": 16,
@@ -234,7 +234,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "국적별 보험료 부과액·급여비. 외국인 소득수준·지불능력 대리지표(금융 세그먼트 보조).",
-      "fetchedAt": "2026-06-15T10:36:38.469Z",
+      "fetchedAt": "2026-06-15T10:40:54.836Z",
       "result": {
         "status": "downloaded",
         "rowCount": 1,
@@ -270,7 +270,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "외국인 직장/지역 가입자 구분. 취업형태(급여계좌 수요) 보조 지표.",
-      "fetchedAt": "2026-06-15T10:36:40.681Z",
+      "fetchedAt": "2026-06-15T10:40:57.265Z",
       "result": {
         "status": "downloaded",
         "rowCount": 17,
@@ -306,7 +306,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "법무부 출입국 월별 통계. 발굴 자동화로 식별됨.",
-      "fetchedAt": "2026-06-15T10:36:43.225Z",
+      "fetchedAt": "2026-06-15T10:40:59.634Z",
       "result": {
         "status": "downloaded",
         "rowCount": 400,
@@ -342,7 +342,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 시군구 단위 외국인주민. openapi 대체용 파일 수집(발굴 자동화).",
-      "fetchedAt": "2026-06-15T10:36:45.445Z",
+      "fetchedAt": "2026-06-15T10:41:02.702Z",
       "result": {
         "status": "downloaded",
         "rowCount": 1692,
@@ -378,7 +378,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "교육부 대학·국적별 유학생. 유학생 금융 수요 세분화(발굴 자동화).",
-      "fetchedAt": "2026-06-15T10:36:46.615Z",
+      "fetchedAt": "2026-06-15T10:41:04.207Z",
       "result": {
         "status": "metadata_without_file",
         "cachedRawFile": null,
@@ -423,7 +423,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 시도별 외국인주민. 2단계 호출: getMeta(ITM)로 itmId 조회 후 statisticsParameterData.do. 첫 성공 응답으로 필드명 확정.",
-      "fetchedAt": "2026-06-15T10:36:48.957Z",
+      "fetchedAt": "2026-06-15T10:41:06.496Z",
       "result": {
         "status": "api_error",
         "requestUrls": [
@@ -461,7 +461,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 읍면동 단위 외국인주민(지역 세분화). 웹 조사로 정정(국적X→지역). 2단계 호출.",
-      "fetchedAt": "2026-06-15T10:36:57.395Z",
+      "fetchedAt": "2026-06-15T10:41:19.850Z",
       "result": {
         "status": "api_error",
         "requestUrls": [
@@ -499,7 +499,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "법무부 시군구×체류자격 등록외국인. 지점 전략 핵심 지표. 2단계 호출.",
-      "fetchedAt": "2026-06-15T10:36:59.659Z",
+      "fetchedAt": "2026-06-15T10:41:22.423Z",
       "result": {
         "status": "api_error",
         "requestUrls": [
@@ -537,7 +537,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "통계청 이민자 체류실태·고용조사. 취업/소득 = 급여계좌·신용 수요 직결. 2단계 호출.",
-      "fetchedAt": "2026-06-15T10:37:01.095Z",
+      "fetchedAt": "2026-06-15T10:41:24.001Z",
       "result": {
         "status": "downloaded",
         "rowCount": 376,
@@ -577,7 +577,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 외국인주민 시군구 집계. endpoint 경로 운영 환경에서 확정 필요.",
-      "fetchedAt": "2026-06-15T10:37:02.604Z",
+      "fetchedAt": "2026-06-15T10:41:25.084Z",
       "result": {
         "status": "no_data",
         "requestUrls": [
