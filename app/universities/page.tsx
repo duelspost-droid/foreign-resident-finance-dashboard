@@ -1,4 +1,5 @@
 import { GraduationCap, Languages, TrendingUp, Users } from "lucide-react";
+import { PageHero } from "@/components/ui/PageHero";
 import {
   foreignStudentByVisa,
   foreignStudentByYear,
@@ -33,14 +34,11 @@ export default function UniversitiesPage() {
 
   return (
     <div className="space-y-7 pb-14">
-      <section className="page-header">
-        <p className="page-kicker">대학/유학생 분석</p>
-        <h2 className="page-title">외국인 유학생 금융 수요 분석</h2>
-        <p className="page-description">
-          법무부 연도별 외국인 유학생 체류현황(학위과정 D-2 · 어학연수 D-4)을 기반으로 유학생
-          규모 추이와 체류자격 구성을 분석해 신학기 계좌·체크카드·해외송금 캠페인 시점을 찾습니다.
-        </p>
-      </section>
+      <PageHero
+        kicker="대학/유학생 분석"
+        title="외국인 유학생 금융 수요 분석"
+        description="법무부 연도별 외국인 유학생 체류현황(학위과정 D-2 · 어학연수 D-4)을 기반으로 유학생 규모 추이와 체류자격 구성을 분석해 신학기 계좌·체크카드·해외송금 캠페인 시점을 찾습니다."
+      />
 
       {/* 데이터 신선도 배너 */}
       <div

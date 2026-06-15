@@ -1,18 +1,60 @@
-import { FilterBar } from "@/components/layout/FilterBar";
+import { Flag, Globe, Layers, Users } from "lucide-react";
 import { NationalityBarChart } from "@/components/charts/NationalityBarChart";
 import { TrendLineChart } from "@/components/charts/TrendLineChart";
 import { VisaDonutChart } from "@/components/charts/VisaDonutChart";
 import { DataTable, type DataTableColumn } from "@/components/tables/DataTable";
+import { BarList } from "@/components/ui/BarList";
+import { PageHero } from "@/components/ui/PageHero";
+import { Panel } from "@/components/ui/Panel";
+import { StatTile } from "@/components/ui/StatTile";
 import {
   nationalityDistributionData,
-  sampleResidentStatus
+  sampleResidentStatus,
+  visaDistributionData
 } from "@/lib/data/mockData";
 import type { ForeignResidentStatus } from "@/lib/types/foreignResident";
 import { formatNumber } from "@/lib/utils/format";
 
+// 국적별 분포 BarList 항목 — 라벨/거주자 수/비중 서브라벨.
+const distributionItems = nationalityDistributionData.map((row) => ({
+  label: row.nationality,
+  value: row.residents,
+  display: formatNumber(row.residents),
+  sublabel: `${row.share}%`
+}));
+
+// 체류자격 도넛 차트와 동일한 팔레트(레전드용).
+const donutColors = ["#0f766e", "#3157a4", "#b45309", "#be123c", "#64748b", "#7c3aed"];
+const donutLegend = visaDistributionData.map((segment, index) => ({
+  name: segment.name,
+  value: segment.value,
+  color: donutColors[index % donutColors.length]
+}));
+
+const topSixTotal = nationalityDistributionData
+  .slice(0, 6)
+  .reduce((sum, row) => sum + row.residents, 0);
+
+const distinctSegments = new Set(
+  sampleResidentStatus.map((row) => row.segmentType)
+).size;
+
+const topNationality = nationalityDistributionData[0];
+
 const statusColumns: DataTableColumn<ForeignResidentStatus>[] = [
-  { header: "국적", accessor: (row) => row.nationality },
-  { header: "체류자격", accessor: (row) => `${row.visaCode} ${row.visaName}` },
+  {
+    header: "국적",
+    accessor: (row) => <span className="font-semibold text-ink">{row.nationality}</span>
+  },
+  {
+    header: "체류자격",
+    accessor: (row) => (
+      <span className="flex items-center gap-2">
+        <span className="chip chip-neutral font-mono">{row.visaCode}</span>
+        <span className="text-muted">{row.visaName}</span>
+      </span>
+    )
+  },
   { header: "세그먼트", accessor: (row) => row.segmentType },
   {
     header: "인원",
@@ -35,78 +77,121 @@ const statusColumns: DataTableColumn<ForeignResidentStatus>[] = [
 
 export default function NationalitiesPage() {
   return (
-    <>
-      <section className="page-header">
-        <p className="page-kicker">국적 분석</p>
-        <h2 className="page-title">국적별 체류 구조와 금융 니즈</h2>
-        <p className="page-description">
-          국적별 거주지역, 체류자격, 월별 증가 추세를 비교하고 계좌개설, 송금, 체크카드,
-          자산관리 같은 니즈 태그를 확인합니다.
-        </p>
-      </section>
-
-      <FilterBar
-        filters={[
-          { label: "국적", options: ["중국", "베트남", "우즈베키스탄", "몽골", "전체"] },
-          { label: "기준연도", options: ["2025", "2024", "2023"] },
-          { label: "시도", options: ["전체", "서울특별시", "경기도", "충청남도"] },
-          { label: "세그먼트", options: ["전체", "유학생", "비전문취업 근로자", "재외동포"] }
-        ]}
+    <div className="space-y-7 pb-14">
+      <PageHero
+        kicker="국적 분석"
+        title="국적별 체류 구조와 금융 니즈"
+        description="국적별 거주 규모와 체류자격 구성, 월별 증가 추세를 비교하고 계좌개설·송금·체크카드·자산관리 같은 니즈 태그를 한눈에 확인합니다."
+        right={
+          <span className="eyebrow">상위 {nationalityDistributionData.length}개국 · 집계 통계</span>
+        }
       />
 
-      <section className="two-column">
-        <div className="surface">
-          <div className="surface-header">
-            <div>
-              <h3 className="surface-title">국적별 지역 분포</h3>
-              <p className="surface-subtitle">상위 국적의 샘플 거주자 수</p>
-            </div>
-          </div>
+      <div className="stat-grid">
+        <StatTile
+          label="분석 국적 수"
+          value={nationalityDistributionData.length}
+          unit="개국"
+          icon={<Flag size={18} />}
+          accent="#0f766e"
+          sub="국적별 분포 데이터 기준"
+        />
+        <StatTile
+          label="1위 국적"
+          value={topNationality.nationality}
+          icon={<Globe size={18} />}
+          accent="#3157a4"
+          trend={{ label: `점유 ${topNationality.share}%`, dir: "up" }}
+          sub={`${formatNumber(topNationality.residents)}명`}
+        />
+        <StatTile
+          label="상위 6개국 거주자 합계"
+          value={formatNumber(topSixTotal)}
+          unit="명"
+          icon={<Users size={18} />}
+          accent="#b45309"
+          sub="국적별 분포 상위 6개국 합산"
+        />
+        <StatTile
+          label="세그먼트 수"
+          value={distinctSegments}
+          unit="종"
+          icon={<Layers size={18} />}
+          accent="#be123c"
+          sub="체류자격 기반 세그먼트 가설"
+        />
+      </div>
+
+      <Panel
+        title="국적별 분포"
+        subtitle="상위 국적의 샘플 거주자 수와 점유율"
+        right={<span className="eyebrow">단위 · 명</span>}
+      >
+        <BarList items={distributionItems} unit="명" />
+      </Panel>
+
+      <div className="two-column">
+        <Panel
+          title="국적별 분포 차트"
+          subtitle="거주 규모 상위 국적 비교"
+          bodyClassName="p-0"
+        >
           <div className="chart-box">
             <NationalityBarChart data={nationalityDistributionData} />
           </div>
-        </div>
+        </Panel>
 
-        <div className="surface">
-          <div className="surface-header">
-            <div>
-              <h3 className="surface-title">체류자격 분포</h3>
-              <p className="surface-subtitle">세그먼트 비중 샘플</p>
-            </div>
-          </div>
+        <Panel
+          title="체류자격 구성"
+          subtitle="세그먼트별 비중 샘플"
+          bodyClassName="p-0"
+        >
           <div className="chart-box">
             <VisaDonutChart />
           </div>
-        </div>
-      </section>
-
-      <section className="surface mt-4">
-        <div className="surface-header">
-          <div>
-            <h3 className="surface-title">월별 증가 추세</h3>
-            <p className="surface-subtitle">국적별 체류외국인 월별 추세</p>
+          <div className="border-t border-line px-5 py-4">
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
+              {donutLegend.map((segment) => (
+                <li className="flex items-center justify-between gap-2" key={segment.name}>
+                  <span className="flex min-w-0 items-center gap-2">
+                    <span
+                      className="h-2.5 w-2.5 shrink-0 rounded-full"
+                      style={{ background: segment.color }}
+                    />
+                    <span className="truncate text-ink">{segment.name}</span>
+                  </span>
+                  <span className="shrink-0 font-mono font-semibold text-muted">
+                    {segment.value}%
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
+        </Panel>
+      </div>
+
+      <Panel
+        title="월별 증가 추세"
+        subtitle="주요 국적 체류외국인 월별 추세"
+        bodyClassName="p-0"
+      >
         <div className="chart-box">
           <TrendLineChart />
         </div>
-      </section>
+      </Panel>
 
-      <section className="surface mt-4">
-        <div className="surface-header">
-          <div>
-            <h3 className="surface-title">국적별 체류자격과 금융 니즈 태그</h3>
-            <p className="surface-subtitle">체류자격은 금융행동의 직접 증거가 아닌 세그먼트 가설입니다.</p>
-          </div>
-        </div>
-        <div className="p-2">
-          <DataTable
-            columns={statusColumns}
-            rowKey={(row) => row.id}
-            rows={sampleResidentStatus}
-          />
-        </div>
-      </section>
-    </>
+      <Panel
+        title="국적별 체류자격과 금융 니즈"
+        subtitle="체류자격은 금융행동의 직접 증거가 아닌 세그먼트 가설입니다."
+        right={<span className="chip chip-neutral">가설 기반 해석</span>}
+        bodyClassName="p-2"
+      >
+        <DataTable
+          columns={statusColumns}
+          rowKey={(row) => row.id}
+          rows={sampleResidentStatus}
+        />
+      </Panel>
+    </div>
   );
 }
