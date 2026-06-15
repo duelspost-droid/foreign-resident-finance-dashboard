@@ -74,13 +74,13 @@ export const publicDataSources = [
   {
     id: "kosis_registered_foreigner_by_region",
     type: "kosis",
-    provider: "KOSIS(법무부 출입국통계)",
-    title: "시도별 등록외국인 현황",
+    provider: "KOSIS(행정안전부 외국인주민)",
+    title: "시도별 외국인주민 현황",
     category: "외국인 직접 통계",
     apiKeyEnv: "KOSIS_API_KEY",
     endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
-    orgId: "111",
-    tblId: "DT_1B040A3",
+    orgId: "110",
+    tblId: "TX_11025_A000_A",
     params: {
       method: "getList",
       format: "json",
@@ -95,12 +95,12 @@ export const publicDataSources = [
     // KOSIS 표준 응답 필드: PRD_DE(기간), C1_NM(분류1), C2_NM(분류2), DT(값), UNIT_NM(단위)
     // 운영 환경에서 실제 응답을 보고 region/value 필드를 확정한다.
     responseMapping: { period: "PRD_DE", region: "C1_NM", value: "DT" },
-    sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=111&tblId=DT_1B040A3",
+    sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=110&tblId=TX_11025_A000_A",
     updateCycle: "연",
     license: "KOSIS 이용약관",
     personalDataSafe: true,
     verified: false,
-    notes: "시도별 등록외국인. orgId/tblId 운영 환경에서 응답으로 확정 필요."
+    notes: "행안부 외국인주민(KOSIS) 실재 통계표 orgId=110/tblId=TX_11025_A000_A 확인. 첫 응답으로 필드 확정."
   },
   {
     id: "kosis_foreigner_by_nationality",
