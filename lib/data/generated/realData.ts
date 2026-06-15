@@ -7421,7 +7421,7 @@ export const realRegionResidentSummary = {
 } as const;
 
 export const realDataSummary = {
-  "generatedAt": "2026-06-15T21:28:05.718Z",
+  "generatedAt": "2026-06-15T21:30:41.608Z",
   "statusRowCount": 205,
   "nationalityCount": 205,
   "visaSegmentCount": 8,
