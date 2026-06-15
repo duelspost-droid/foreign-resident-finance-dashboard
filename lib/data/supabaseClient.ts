@@ -14,6 +14,89 @@ export function createBrowserSupabaseClient() {
   return createClient(url, anonKey);
 }
 
+export type SourceCandidate = {
+  id: number;
+  datasetId: string;
+  kind: string;
+  provider: string | null;
+  title: string | null;
+  keyword: string | null;
+  url: string | null;
+  targetTable: string | null;
+  status: "pending" | "approved" | "rejected";
+  priority: string | null;
+  rationale: string | null;
+  discoveredAt: string | null;
+  decidedAt: string | null;
+  decidedBy: string | null;
+  notes: string | null;
+};
+
+function mapCandidate(row: Record<string, unknown>): SourceCandidate {
+  return {
+    id: Number(row.id),
+    datasetId: String(row.dataset_id),
+    kind: String(row.kind),
+    provider: (row.provider as string) ?? null,
+    title: (row.title as string) ?? null,
+    keyword: (row.keyword as string) ?? null,
+    url: (row.url as string) ?? null,
+    targetTable: (row.target_table as string) ?? null,
+    status: (row.status as SourceCandidate["status"]) ?? "pending",
+    priority: (row.priority as string) ?? null,
+    rationale: (row.rationale as string) ?? null,
+    discoveredAt: (row.discovered_at as string) ?? null,
+    decidedAt: (row.decided_at as string) ?? null,
+    decidedBy: (row.decided_by as string) ?? null,
+    notes: (row.notes as string) ?? null,
+  };
+}
+
+// 후보 목록 조회. Supabase 미연결 시 null 반환(관리자 페이지에서 fallback 처리).
+export async function fetchSourceCandidates(): Promise<SourceCandidate[] | null> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return null;
+
+  const { data, error } = await client
+    .from("source_candidates")
+    .select("*")
+    .order("status", { ascending: true })
+    .order("discovered_at", { ascending: false });
+
+  if (error) {
+    console.error("fetchSourceCandidates error:", error.message);
+    return null;
+  }
+  return data.map(mapCandidate);
+}
+
+// 관리자 승인/거부 처리. 성공 시 true.
+export async function updateCandidateStatus(
+  id: number,
+  status: "approved" | "rejected",
+  options: { targetTable?: string; decidedBy?: string; notes?: string } = {}
+): Promise<boolean> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return false;
+
+  const { error } = await client
+    .from("source_candidates")
+    .update({
+      status,
+      target_table: options.targetTable ?? null,
+      decided_by: options.decidedBy ?? "admin",
+      decided_at: new Date().toISOString(),
+      notes: options.notes ?? null,
+    })
+    .eq("id", id);
+
+  if (error) {
+    console.error("updateCandidateStatus error:", error.message);
+    return false;
+  }
+  return true;
+}
+
 export type RegionFilter = {
   baseMonth?: string;
   sido?: string;

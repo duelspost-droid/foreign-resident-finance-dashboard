@@ -403,9 +403,50 @@ const COLLECTORS = {
   kosis: collectKosisSource
 };
 
+// 관리자 승인 큐(approved_candidates.json)에서 승인된 후보를 동적 소스 설정으로 변환.
+// 관리자 페이지에서 승인 → 다음 배치에서 자동 수집되는 경로.
+async function loadApprovedCandidateSources() {
+  const path = join(root, "data", "registry", "approved_candidates.json");
+  let payload;
+  try {
+    payload = JSON.parse(await (await import("node:fs/promises")).readFile(path, "utf8"));
+  } catch {
+    return [];
+  }
+  const kindToType = { fileData: "file", openapi: "openapi", kosis: "kosis", ecos: "ecos" };
+  return (payload.approved ?? []).map((c) => {
+    const type = kindToType[c.kind] ?? "file";
+    return {
+      id: `approved_${c.kind}_${c.dataset_id}`,
+      type,
+      datasetId: type === "file" || type === "openapi" ? String(c.dataset_id) : undefined,
+      tblId: type === "kosis" ? String(c.dataset_id) : undefined,
+      provider: c.provider ?? "승인 후보",
+      title: c.title ?? `승인 데이터셋 ${c.dataset_id}`,
+      category: "관리자 승인 등록",
+      apiKeyEnv: type === "openapi" ? "DATA_GO_KR_SERVICE_KEY" : type === "kosis" ? "KOSIS_API_KEY" : undefined,
+      endpoint: type === "openapi" ? c.url : undefined,
+      targetTable: c.target_table ?? null,
+      outputBaseName: `approved_${c.kind}_${c.dataset_id}`,
+      sourceUrl: c.url ?? null,
+      updateCycle: "—",
+      license: "공공데이터 이용허락",
+      personalDataSafe: true,
+      verified: false,
+      notes: `관리자 승인 등록(${c.decided_by ?? "admin"}). 키워드: ${c.keyword ?? "-"}`
+    };
+  });
+}
+
 async function main() {
   await ensureDir(rawDir);
   await ensureDir(catalogDir);
+
+  const approvedSources = await loadApprovedCandidateSources();
+  if (approvedSources.length > 0) {
+    console.log(`[main] 관리자 승인 후보 ${approvedSources.length}건 동적 수집 포함`);
+  }
+  const allSources = [...publicDataSources, ...approvedSources];
 
   const catalog = {
     generatedAt: new Date().toISOString(),
@@ -417,7 +458,7 @@ async function main() {
     discovery: await discoverDataGoKr()
   };
 
-  for (const source of publicDataSources) {
+  for (const source of allSources) {
     const collector = COLLECTORS[source.type];
     const registry = {
       id: source.id,

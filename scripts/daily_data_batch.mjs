@@ -47,6 +47,7 @@ async function main() {
   await ensureLogDir();
   const steps = [
     ["node", ["scripts/fetch_public_data.mjs"]],
+    ["node", ["scripts/sync_candidates.mjs"]],
     ["node", ["scripts/build_real_data.mjs"]],
     [npmCommand, ["run", "typecheck"]],
     [npmCommand, ["run", "build"]]

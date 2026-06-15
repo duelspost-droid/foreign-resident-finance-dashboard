@@ -133,3 +133,36 @@ CREATE POLICY "allow_read_finance_aggregate"
 CREATE POLICY "allow_read_region_score"
   ON region_finance_score FOR SELECT
   USING (true);
+
+-- ── 데이터 출처 후보 승인 큐 (관리자 승인 워크플로) ────────────────────────────
+-- 매일 배치가 자동 발굴한 신규 데이터셋 후보를 적재하고, 관리자가 승인/거부한다.
+-- 승인(approved)된 후보는 다음 수집 배치에서 자동 등록·수집된다.
+CREATE TABLE IF NOT EXISTS source_candidates (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  dataset_id TEXT NOT NULL,
+  kind TEXT NOT NULL,                 -- fileData | openapi | kosis | ecos
+  provider TEXT,
+  title TEXT,
+  keyword TEXT,                       -- 발굴 키워드
+  url TEXT,
+  target_table TEXT,                  -- 수집 시 매핑할 테이블(승인 시 관리자 지정)
+  status TEXT NOT NULL DEFAULT 'pending',  -- pending | approved | rejected
+  priority TEXT DEFAULT 'mid',        -- high | mid | low
+  rationale TEXT,                     -- 활용 근거(조사 노트)
+  discovered_at TIMESTAMPTZ DEFAULT now(),
+  decided_at TIMESTAMPTZ,
+  decided_by TEXT,
+  notes TEXT,
+  UNIQUE (dataset_id, kind)
+);
+
+ALTER TABLE source_candidates ENABLE ROW LEVEL SECURITY;
+
+-- 읽기는 공개. 쓰기(승인/거부)는 내부 관리도구 용도로 허용.
+-- 운영에서는 Supabase Auth 로 관리자 역할 제한을 권장한다(아래 정책을 교체).
+CREATE POLICY "allow_read_source_candidates"
+  ON source_candidates FOR SELECT USING (true);
+CREATE POLICY "allow_write_source_candidates"
+  ON source_candidates FOR UPDATE USING (true) WITH CHECK (true);
+CREATE POLICY "allow_insert_source_candidates"
+  ON source_candidates FOR INSERT WITH CHECK (true);

@@ -11,6 +11,22 @@
 
 ## 작업 이력 (세션별, 최신순)
 
+### 2026-06-15 세션 (이어서) — 관리자 승인 워크플로 + 수집 성공 확인
+사용자 지시: "매일 새로 조사를 해서 반영할 데이터를 관리자페이지에서 승인받고 등록". 승인 저장 방식=**Supabase 기반** 선택.
+
+1. **수집 실제 성공 확인** (네트워크 회복): run 결과 16개 중 11개 다운로드 — 행안부 지자체 외국인주민 1,692행, 통계청 경제활동인구 376행(**KOSIS 2단계 검증됨**), 법무부 3종, 통계월보, 다문화, 건강보험 등. 실패 5개: KOSIS TX_11025/DT_110025/DT_1B040A11(api_error, 테이블별 파라미터 필요), 교육부 유학생(파일없음), 행안부 openapi(0건).
+2. **승인 워크플로 구축 (Supabase)**:
+   - `supabase/schema.sql`: `source_candidates` 테이블(status pending/approved/rejected, target_table, priority, rationale) + RLS.
+   - `lib/data/supabaseClient.ts`: `fetchSourceCandidates`, `updateCandidateStatus`.
+   - `app/admin/page.tsx`: 관리자 승인 페이지(client) — 승인 대기 큐/승인·거부 버튼/대상 테이블 지정/처리 이력. Supabase 미연결 시 조사노트 후보 읽기전용 fallback.
+   - `scripts/sync_candidates.mjs`: 발굴 후보→Supabase 큐 upsert(pending), 승인 목록→`data/registry/approved_candidates.json` 내려받기. 미연결 시 `pending_candidates.json` 스냅샷만(no-op).
+   - `scripts/fetch_public_data.mjs`: `loadApprovedCandidateSources()` — 승인된 후보를 동적 소스로 수집(승인→다음 배치 자동 등록).
+   - `scripts/daily_data_batch.mjs`: fetch→**sync_candidates**→build 순서.
+   - `components/layout/Sidebar.tsx`: "관리자 승인"(ShieldCheck) 메뉴.
+   - `pages.yml`: 승인 레지스트리 auto-commit 추가, build에 NEXT_PUBLIC_SUPABASE_URL/ANON_KEY 주입(anon만, service_role 금지).
+   - **흐름**: 매일 배치 발굴 → 관리자 페이지 승인 → 레지스트리 기록 → 다음 배치 자동 수집.
+   - **활성화 조건**: Supabase 프로젝트 생성 → schema.sql 적용 → GitHub Secrets에 SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY 등록. 미설정 시 관리자 페이지는 "미연결" 읽기전용.
+
 ### 2026-06-15 세션 (이어서) — 데이터 출처 2차 확장 (경제·금융·4대보험)
 사용자 지시: "더 많은 데이터 원해, 가져올수 있는 정보 찾아봐".
 - 소스 16개로 확장(file 11/kosis 4/openapi 1), 발굴 키워드 12개. 상세는 `docs/data-sources-research.md` 2차 조사 섹션.
