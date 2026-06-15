@@ -11,6 +11,21 @@
 
 ## 작업 이력 (세션별, 최신순)
 
+### 2026-06-15 세션 (이어서) — 수집 실행 + 네트워크 차단 진단
+사용자 지시: "수집하자".
+
+진행:
+1. **KOSIS 2단계 수집 구현**(`fetch_public_data.mjs`): `getMeta(type=ITM)`로 itmId 조회 → `statisticsParameterData.do` 호출. 실패 시 ALL 폴백, 단계별 로깅.
+2. **신규 소스 등록**(총 12개): 행안부 외국인주민 file(3079542), 교육부 국적별 유학생 file(15050054), KOSIS 국적별 등록외국인 DT_110025_A033_A.
+3. **런타임 바운드**(`fetch_public_data.mjs`+`pages.yml`): fetchWithRetry 15s×2회(env FETCH_TIMEOUT_MS), fetch 단계 `timeout-minutes:8`+`continue-on-error`(수집 실패가 배포 차단 안 함).
+4. **수집 런 실행 결과 (run #15, 커밋 89da3a3 카탈로그)**: ⚠️ **전 소스 `fetch failed`** — GitHub Actions 러너가 한국 정부 서버(data.go.kr/kosis.kr/apis.data.go.kr)에 **도달 자체 실패**. 평소 잘 받던 법무부 CSV도 동일 실패 → 코드 문제 아님(네트워크 차단/타임아웃). 행안부 openapi만 status=500(서버 도달, 오퍼레이션 오류).
+   - **원인 추정**: 오늘 14+회 런으로 GitHub IP가 일시 rate-limit/차단된 것으로 추정(오전 초기 런 #1~9는 CSV 정상 다운로드 400/380/42행).
+   - **영향 없음**: 대시보드는 이전 성공 수집분(realData.ts 커밋)으로 실데이터 계속 표시.
+   - **KOSIS 2단계 미검증**: getMeta도 네트워크 실패라 로직 확인 불가. 차단 풀린 뒤 재확인 필요.
+
+**결정(사용자)**: 추가 재시도 안 함. **매일 18:30 UTC 예약 런**(다른 시점·IP)에서 네트워크 회복 시 자동 수집되길 대기.
+**다음 세션 확인사항**: 18:30 UTC 이후 run 의 `latest_fetch_catalog.json` 확인 → 한국 서버 도달 회복 여부, KOSIS 2단계(itmIdSource=getMeta 성공?), 신규 file 소스 다운로드 여부. 회복됐는데 KOSIS 여전히 실패면 `getMeta` 응답 필드명(ITM_ID) 실제값 확인.
+
 ### 2026-06-15 세션 (이어서) — 출처 조사 + 수집기 메뉴 분리
 사용자 지시: "어디서 더 많은 정보를 가져와야할지 면밀하게 찾아봐" / "수집기가 정보 가져오는건 별도 메뉴로 분리해서 관리".
 
