@@ -9214,13 +9214,19 @@ export const realApiStatusData: readonly ForeignResidentStatus[] = [];
 export const realApiRegionData: readonly ForeignResidentRegionMonth[] = [];
 
 export const realDataSummary = {
-  "generatedAt": "2026-06-15T10:19:20.705Z",
+  "generatedAt": "2026-06-15T10:37:02.657Z",
   "statusRowCount": 400,
   "regionRowCount": 200,
   "apiStatusRowCount": 0,
   "apiRegionRowCount": 0,
-  "apiParsedFiles": [],
+  "apiParsedFiles": [
+    {
+      "source": "kosis_foreigner_economic_activity",
+      "file": "kosis_foreigner_economic_activity_2026-06-15.json",
+      "produced": 0
+    }
+  ],
   "sourceFiles": {
-    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-14.csv"
+    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-15.csv"
   }
 } as const;
