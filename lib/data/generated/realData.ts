@@ -15189,7 +15189,7 @@ export const realUniversityStats: readonly RealUniversityStat[] = [
 ];
 
 export const realDataSummary = {
-  "generatedAt": "2026-06-15T22:52:41.904Z",
+  "generatedAt": "2026-06-15T23:00:07.511Z",
   "statusRowCount": 205,
   "nationalityCount": 205,
   "nationalitySource": "annual",
