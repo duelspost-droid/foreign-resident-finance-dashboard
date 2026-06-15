@@ -497,43 +497,65 @@ function transformNationalityByAge(rows) {
   return { ageGroups, nationalities, items };
 }
 
-// 국민건강보험공단 외국인 건강보험 적용인구 CSV: 국적,직장가입(계/남/여),지역가입(계/남/여),...
+// 국민건강보험공단 외국인 건강보험 적용인구 CSV (지역별)
+// 실제 컬럼: 구분, 직장(재외국민 가입자), 직장(재외국민 피부양자),
+//            직장(외국인 가입자), 직장(외국인 피부양자),
+//            지역(재외국민 가입자), 지역(재외국민 세대수),
+//            지역(외국인 가입자), 지역(외국인 세대수)
 function transformHealthInsurance(rows) {
   if (!rows.length) return [];
   logColumnDiag("nhis_coverage", rows);
   return rows
     .map((r) => {
-      const nationality = String(firstValue(r, ["국적", "국가", "국적명"])).trim();
-      const workplace = toNumber(firstValue(r, ["직장가입(계)", "직장가입계", "직장계", "직장가입", "직장"]));
-      const regional = toNumber(firstValue(r, ["지역가입(계)", "지역가입계", "지역계", "지역가입", "지역"]));
-      const total = toNumber(firstValue(r, ["합계", "계", "총계", "인원"])) || workplace + regional;
-      return { nationality, workplace, regional, total };
+      const region = String(firstValue(r, ["구분", "시도", "지역명"])).trim();
+      // 외국인만: "외국인 가입자" 포함 컬럼을 정확히 매핑 (재외국민 컬럼보다 뒤에 있음)
+      const workplace = toNumber(
+        (() => {
+          for (const [k, v] of Object.entries(r)) {
+            const c = k.replace(/\s/g, "");
+            if (c.includes("직장") && c.includes("외국인") && c.includes("가입자")) return v;
+          }
+          return 0;
+        })()
+      );
+      const regional = toNumber(
+        (() => {
+          for (const [k, v] of Object.entries(r)) {
+            const c = k.replace(/\s/g, "");
+            if (c.includes("지역") && c.includes("외국인") && c.includes("가입자")) return v;
+          }
+          return 0;
+        })()
+      );
+      const total = workplace + regional;
+      return { region, workplace, regional, total };
     })
-    .filter((r) => r.nationality && r.total > 0);
+    .filter((r) => r.region && r.total > 0);
 }
 
-// 여성가족부 다문화가족 현황 CSV: 시도(또는 연도), 유형, 합계, 남, 여, ...
+// 여성가족부 다문화가족 현황 CSV (구군별)
+// 실제 컬럼: 구군명, 총계, 총계(남), 총계(여), 결혼이민자, 결혼이민자(남), 결혼이민자(여),
+//            결혼이민자_국적미취득자, ..., 자녀, 자녀(남), 자녀(여)
 function transformMulticulturalFamily(rows) {
   if (!rows.length) return { items: [], totalCount: 0 };
   logColumnDiag("mogef_multicultural", rows);
 
-  const yearOf = (r) => toNumber(firstValue(r, ["연도", "년도", "년", "기준연도"]));
-  const years = rows.map(yearOf).filter((y) => y >= 2000 && y <= 2100);
-  const latestYear = years.length ? Math.max(...years) : null;
-
   const items = rows
-    .filter((r) => !latestYear || yearOf(r) === latestYear)
     .map((r) => {
-      const type = String(firstValue(r, ["유형", "구분", "시도", "지역", "가족유형"])).trim();
-      const total = toNumber(firstValue(r, ["합계", "계", "총계", "인원수", "인원"]));
-      return { type, total, year: latestYear };
+      const region = String(
+        firstValue(r, ["구군명", "시군구명", "지역명", "유형", "구분", "시도", "지역", "가족유형"])
+      ).trim();
+      const total = toNumber(firstValue(r, ["총계", "합계", "계", "인원수", "인원"]));
+      const marriage = toNumber(firstValue(r, ["결혼이민자"]));
+      const children = toNumber(firstValue(r, ["자녀"]));
+      return { region, total, marriage, children };
     })
-    .filter((r) => r.type && r.total > 0);
+    .filter((r) => r.region && r.total > 0);
 
   return {
     items,
     totalCount: items.reduce((s, r) => s + r.total, 0),
-    latestYear
+    latestYear: null
   };
 }
 
@@ -928,10 +950,10 @@ async function main() {
     `export const realNationalityAgeGroups: readonly string[] = ${JSON.stringify(nationalityByAge.ageGroups, null, 2)};\n\n` +
     `export const realNationalityAgeTotals: readonly { nationality: string; total: number }[] = ${JSON.stringify(nationalityByAge.nationalities, null, 2)};\n\n` +
     `// 국민건강보험공단 외국인 건강보험 적용인구 — 소득·취업형태 보조 지표.\n` +
-    `export type RealHealthInsurance = { nationality: string; workplace: number; regional: number; total: number };\n` +
+    `export type RealHealthInsurance = { region: string; workplace: number; regional: number; total: number };\n` +
     `export const realHealthInsurance: readonly RealHealthInsurance[] = ${JSON.stringify(healthInsurance, null, 2)};\n\n` +
     `// 여성가족부 다문화가족 현황.\n` +
-    `export type RealMulticulturalFamily = { type: string; total: number; year: number | null };\n` +
+    `export type RealMulticulturalFamily = { region: string; total: number; marriage: number; children: number };\n` +
     `export const realMulticulturalFamily: readonly RealMulticulturalFamily[] = ${JSON.stringify(multiculturalFamily.items, null, 2)};\n\n` +
     `export const realMulticulturalFamilySummary = ${JSON.stringify({ totalCount: multiculturalFamily.totalCount, latestYear: multiculturalFamily.latestYear }, null, 2)} as const;\n\n` +
     `// 대학알리미 고등교육기관 기본현황 (위치·유형 보조).\n` +

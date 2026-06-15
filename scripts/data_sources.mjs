@@ -82,43 +82,9 @@ export const publicDataSources = [
     notes: "유학(D-2)·연수(D-4) 체류 추세."
   },
 
-  // ── 고용노동부 (파일 다운로드, 인증키 불필요) ──────────────────────────────────────
-  {
-    id: "mol_foreign_worker_employment_2024",
-    type: "file",
-    datasetId: "15137198",
-    detailPk: null,
-    provider: "고용노동부",
-    title: "외국인 고용 현황",
-    category: "외국인 직접 통계",
-    baseDate: "2024-12-31",
-    targetTable: "foreign_resident_status",
-    outputBaseName: "mol_foreign_worker_employment_2024",
-    sourceUrl: "https://www.data.go.kr/data/15137198/fileData.do",
-    updateCycle: "연",
-    license: "공공데이터 이용허락(제1유형)",
-    personalDataSafe: true,
-    verified: false,
-    notes: "고용허가제(E-9·H-2) 외국인 고용 집계. 급여계좌·이체 수요 추정 보조."
-  },
-  {
-    id: "mol_foreign_worker_employment2_2024",
-    type: "file",
-    datasetId: "15137115",
-    detailPk: null,
-    provider: "고용노동부",
-    title: "외국인 취업자 현황",
-    category: "외국인 직접 통계",
-    baseDate: "2024-12-31",
-    targetTable: "foreign_resident_status",
-    outputBaseName: "mol_foreign_worker_employment2_2024",
-    sourceUrl: "https://www.data.go.kr/data/15137115/fileData.do",
-    updateCycle: "연",
-    license: "공공데이터 이용허락(제1유형)",
-    personalDataSafe: true,
-    verified: false,
-    notes: "외국인 취업자 세부 통계. 발굴 자동화로 식별됨."
-  },
+  // ── 고용노동부 (E-9 고용허가제 월별 도입 인원 — data.go.kr 파일) ───────────────────
+  // 15137198/15137115 는 면허코드표/대사관URL로 확인됨 → 삭제. EPS 월별 도입 대체.
+
 
   // ── 여성가족부 / 다문화가족 (파일 다운로드, 인증키 불필요) ────────────────────────
   {
@@ -394,8 +360,8 @@ export const publicDataSources = [
     endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
     orgId: "110",
     tblId: "DT_110025_A033_A",
-    // objL2=ALL 필요: 이 표는 2단계 분류(지역×유형)라 objL2 미지정 시 "objL 누락" 오류.
-    params: { prdSe: "Y", startPrdDe: "2020", endPrdDe: CY, objL1: "ALL", objL2: "ALL" },
+    // 40,000셀 제한으로 연도 1개 요청(최근 연도만). endPrdDe=CY 로 매년 갱신.
+    params: { prdSe: "Y", startPrdDe: CY, endPrdDe: CY, objL1: "ALL", objL2: "ALL" },
     targetTable: "foreign_resident_region_month",
     outputBaseName: "kosis_foreign_resident_by_eupmyeondong",
     responseMapping: { period: "PRD_DE", region: "C1_NM", value: "DT" },
