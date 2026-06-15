@@ -8,7 +8,8 @@ import {
   kpiSummary,
   nationalityDistributionData,
   sampleOpportunityRows,
-  sampleResidentStatus
+  sampleResidentStatus,
+  stayVisaTypes
 } from "./mockData";
 
 // ── 데이터 수집 신선도 ─────────────────────────────────────────────────────────
@@ -20,16 +21,18 @@ export const dataFreshness = {
 } as const;
 
 // ── 시장 규모 KPI (공식 통계 기반, 매 배치 갱신 시 sourceLabel 업데이트) ──────────
+const e9Count = stayVisaTypes.find((v) => v.visaCode === "E-9")?.count ?? 0;
+
 export const marketKpis = {
-  totalForeignResidents: 2_459_883,           // 법무부 2024.12 공식통계
+  totalForeignResidents: kpiSummary.totalResidents > 0 ? kpiSummary.totalResidents : 2_459_883,
   totalForeignResidentsYoy: "+5.2%",
-  registeredForeignResidents: 1_277_945,
-  foreignStudents: 185_010,
+  registeredForeignResidents: kpiSummary.registeredResidents > 0 ? kpiSummary.registeredResidents : 1_277_945,
+  foreignStudents: kpiSummary.foreignStudents > 0 ? kpiSummary.foreignStudents : 185_010,
   foreignStudentsYoy: "+8.7%",
   averageOpportunityScore: Math.round(kpiSummary.averageOpportunityScore),
-  remittanceEstimateKrw: "약 15조원",          // 한국은행 이전소득수지 연간 합산
-  e9WorkerEstimate: "약 30만명",              // 고용노동부 고용허가제 현황
-  sourceLabel: "법무부 2024.12 공식통계 기준",
+  remittanceEstimateKrw: "약 15조원",
+  e9WorkerEstimate: e9Count > 0 ? `${(e9Count / 10000).toFixed(0)}만명` : "약 30만명",
+  sourceLabel: kpiSummary.totalResidents > 0 ? "법무부 실데이터(2024) 기준" : "법무부 2024.12 공식통계 기준",
   collectedRowCount: realDataSummary.statusRowCount
 } as const;
 

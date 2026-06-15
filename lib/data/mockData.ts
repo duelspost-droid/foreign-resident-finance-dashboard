@@ -670,15 +670,16 @@ export const hasRealRegionResidents = realRegionResidents.length > 0;
 
 // 전체 체류외국인 합계 — 국적 분포 실데이터가 있으면 이를 우선 사용.
 const totalFromRealNationality = realNationalityDistribution.reduce((s, r) => s + r.residents, 0);
+// 장기체류 합계 — 비자타입별 실데이터가 있으면 이를 우선 사용.
+const totalLongTermFromVisa = realStayVisaTypes.reduce((s, v) => s + v.count, 0);
 
 export const kpiSummary = {
   totalResidents: totalFromRealNationality > 0
     ? totalFromRealNationality
     : sampleRegionData.reduce((sum, row) => sum + row.residentCount, 0),
-  registeredResidents: sampleRegionData.reduce(
-    (sum, row) => sum + (row.longTermCount ?? 0),
-    0
-  ),
+  registeredResidents: totalLongTermFromVisa > 0
+    ? totalLongTermFromVisa
+    : sampleRegionData.reduce((sum, row) => sum + (row.longTermCount ?? 0), 0),
   foreignLocalResidents: 2450000,
   foreignStudents: realStudentSummary.hasData
     ? realStudentSummary.total

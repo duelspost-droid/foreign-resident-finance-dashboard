@@ -302,12 +302,13 @@ export default function DashboardPage() {
             <div className="surface-header pb-3">
               <div>
                 <h3 className="surface-title">국적별 분포</h3>
-                <p className="surface-subtitle">상위 6개국 — 표본 지역 기준</p>
+                <p className="surface-subtitle">상위 {nationalityDistributionData.length}개국 — {kpiSummary.totalResidents > 0 ? "법무부 실데이터(2024)" : "표본 지역 기준"}</p>
               </div>
             </div>
             <div className="space-y-3 p-4 pt-2">
               {nationalityDistributionData.map((n, i) => {
-                const barColors = ["#0f766e", "#3157a4", "#b45309", "#be123c", "#64748b", "#94a3b8"];
+                const palette = ["#0f766e","#3157a4","#b45309","#be123c","#64748b","#7c3aed","#0369a1","#a16207","#9f1239","#064e3b","#1d4ed8","#92400e","#374151","#7e22ce","#0f5132"];
+                const barColors = palette;
                 const widthPct = Math.round((n.share / nationalityDistributionData[0].share) * 100);
                 return (
                   <div key={n.nationality}>
