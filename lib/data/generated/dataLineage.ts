@@ -22,6 +22,12 @@ export type DataLineageSource = {
   reason: string | null;
 };
 
+export type DataLineageDiscoveryLink = {
+  datasetId: string;
+  kind: string;
+  url: string;
+};
+
 export type DataLineageDiscovery = {
   id: string;
   provider: string;
@@ -29,6 +35,7 @@ export type DataLineageDiscovery = {
   purpose: string;
   status: string;
   foundCount: number;
+  links: DataLineageDiscoveryLink[];
 };
 
 export type DataLineage = {
@@ -413,7 +420,59 @@ export const dataLineage: DataLineage = {
       "keyword": "외국인주민 현황",
       "purpose": "시군구 단위 장기거주 외국인주민 규모",
       "status": "ok",
-      "foundCount": 10
+      "foundCount": 10,
+      "links": [
+        {
+          "datasetId": "3079542",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3079542/fileData.do"
+        },
+        {
+          "datasetId": "15047604",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15047604/fileData.do"
+        },
+        {
+          "datasetId": "15047603",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15047603/fileData.do"
+        },
+        {
+          "datasetId": "15045324",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15045324/fileData.do"
+        },
+        {
+          "datasetId": "15116895",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15116895/fileData.do"
+        },
+        {
+          "datasetId": "15057877",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15057877/openapi.do"
+        },
+        {
+          "datasetId": "15108065",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15108065/openapi.do"
+        },
+        {
+          "datasetId": "15057894",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15057894/openapi.do"
+        },
+        {
+          "datasetId": "15058854",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15058854/openapi.do"
+        },
+        {
+          "datasetId": "15058374",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15058374/openapi.do"
+        }
+      ]
     },
     {
       "id": "moe_foreign_students",
@@ -421,7 +480,54 @@ export const dataLineage: DataLineage = {
       "keyword": "외국인 유학생 현황",
       "purpose": "대학·국적·과정별 유학생 금융 수요",
       "status": "ok",
-      "foundCount": 9
+      "foundCount": 9,
+      "links": [
+        {
+          "datasetId": "15050054",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15050054/fileData.do"
+        },
+        {
+          "datasetId": "15050055",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15050055/fileData.do"
+        },
+        {
+          "datasetId": "15100039",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15100039/fileData.do"
+        },
+        {
+          "datasetId": "15149964",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15149964/fileData.do"
+        },
+        {
+          "datasetId": "15100038",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15100038/fileData.do"
+        },
+        {
+          "datasetId": "15057888",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15057888/openapi.do"
+        },
+        {
+          "datasetId": "15058233",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15058233/openapi.do"
+        },
+        {
+          "datasetId": "15057333",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15057333/openapi.do"
+        },
+        {
+          "datasetId": "15058982",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15058982/openapi.do"
+        }
+      ]
     },
     {
       "id": "academyinfo_foreign_students",
@@ -429,7 +535,59 @@ export const dataLineage: DataLineage = {
       "keyword": "외국인유학생수",
       "purpose": "대학별 외국인 유학생 총량 검증",
       "status": "ok",
-      "foundCount": 10
+      "foundCount": 10,
+      "links": [
+        {
+          "datasetId": "15100038",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15100038/fileData.do"
+        },
+        {
+          "datasetId": "15050054",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15050054/fileData.do"
+        },
+        {
+          "datasetId": "15100039",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15100039/fileData.do"
+        },
+        {
+          "datasetId": "3069982",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3069982/fileData.do"
+        },
+        {
+          "datasetId": "3050000",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3050000/fileData.do"
+        },
+        {
+          "datasetId": "15074265",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15074265/openapi.do"
+        },
+        {
+          "datasetId": "15057877",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15057877/openapi.do"
+        },
+        {
+          "datasetId": "15058233",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15058233/openapi.do"
+        },
+        {
+          "datasetId": "15058854",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15058854/openapi.do"
+        },
+        {
+          "datasetId": "15057333",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15057333/openapi.do"
+        }
+      ]
     },
     {
       "id": "moj_immigration_stats",
@@ -437,7 +595,44 @@ export const dataLineage: DataLineage = {
       "keyword": "출입국 외국인 체류",
       "purpose": "체류자격·국적·지역 추가 통계 발굴",
       "status": "ok",
-      "foundCount": 7
+      "foundCount": 7,
+      "links": [
+        {
+          "datasetId": "3069963",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3069963/fileData.do"
+        },
+        {
+          "datasetId": "3069975",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3069975/fileData.do"
+        },
+        {
+          "datasetId": "3075821",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3075821/fileData.do"
+        },
+        {
+          "datasetId": "15100009",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15100009/fileData.do"
+        },
+        {
+          "datasetId": "15112636",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15112636/fileData.do"
+        },
+        {
+          "datasetId": "15149911",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15149911/openapi.do"
+        },
+        {
+          "datasetId": "15149906",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15149906/openapi.do"
+        }
+      ]
     },
     {
       "id": "mol_foreign_worker",
@@ -445,7 +640,39 @@ export const dataLineage: DataLineage = {
       "keyword": "외국인 고용 취업",
       "purpose": "E-9/E-7 등 취업 외국인 규모(급여계좌 수요)",
       "status": "ok",
-      "foundCount": 6
+      "foundCount": 6,
+      "links": [
+        {
+          "datasetId": "15137198",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15137198/fileData.do"
+        },
+        {
+          "datasetId": "15137115",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15137115/fileData.do"
+        },
+        {
+          "datasetId": "15032256",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15032256/fileData.do"
+        },
+        {
+          "datasetId": "3035864",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3035864/fileData.do"
+        },
+        {
+          "datasetId": "15046410",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15046410/fileData.do"
+        },
+        {
+          "datasetId": "15058233",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15058233/openapi.do"
+        }
+      ]
     },
     {
       "id": "nia_multicultural",
@@ -453,7 +680,34 @@ export const dataLineage: DataLineage = {
       "keyword": "다문화 가구 외국인",
       "purpose": "결혼이민·다문화 가구 금융 수요 보조 지표",
       "status": "ok",
-      "foundCount": 5
+      "foundCount": 5,
+      "links": [
+        {
+          "datasetId": "15054868",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15054868/fileData.do"
+        },
+        {
+          "datasetId": "3034249",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3034249/fileData.do"
+        },
+        {
+          "datasetId": "15011595",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15011595/fileData.do"
+        },
+        {
+          "datasetId": "15074047",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15074047/fileData.do"
+        },
+        {
+          "datasetId": "3073460",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3073460/fileData.do"
+        }
+      ]
     },
     {
       "id": "bok_remittance",
@@ -461,7 +715,8 @@ export const dataLineage: DataLineage = {
       "keyword": "국제수지 이전소득 송금",
       "purpose": "개인 해외송금·이전소득수지 거시지표(외국인 본국송금 대리지표)",
       "status": "ok",
-      "foundCount": 0
+      "foundCount": 0,
+      "links": []
     },
     {
       "id": "fsc_bank_stats",
@@ -469,7 +724,59 @@ export const dataLineage: DataLineage = {
       "keyword": "금융통계 국내은행",
       "purpose": "지역 은행 인프라·금융 접근성 보조 지표",
       "status": "ok",
-      "foundCount": 10
+      "foundCount": 10,
+      "links": [
+        {
+          "datasetId": "3058718",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3058718/fileData.do"
+        },
+        {
+          "datasetId": "3033450",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3033450/fileData.do"
+        },
+        {
+          "datasetId": "15059843",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15059843/fileData.do"
+        },
+        {
+          "datasetId": "15061368",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15061368/fileData.do"
+        },
+        {
+          "datasetId": "3060497",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3060497/fileData.do"
+        },
+        {
+          "datasetId": "15061304",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15061304/openapi.do"
+        },
+        {
+          "datasetId": "15059638",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15059638/openapi.do"
+        },
+        {
+          "datasetId": "15109103",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15109103/openapi.do"
+        },
+        {
+          "datasetId": "15061316",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15061316/openapi.do"
+        },
+        {
+          "datasetId": "15094809",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15094809/openapi.do"
+        }
+      ]
     },
     {
       "id": "foreign_exchange_remittance",
@@ -477,7 +784,8 @@ export const dataLineage: DataLineage = {
       "keyword": "외국인 송금 환전",
       "purpose": "외국인 대상 송금·환전 서비스 직접 통계 발굴",
       "status": "ok",
-      "foundCount": 0
+      "foundCount": 0,
+      "links": []
     },
     {
       "id": "nhis_foreigner_insurance",
@@ -485,7 +793,29 @@ export const dataLineage: DataLineage = {
       "keyword": "외국인 건강보험 가입",
       "purpose": "외국인 직장/지역 가입자·보험료(소득·지불능력 대리지표)",
       "status": "ok",
-      "foundCount": 4
+      "foundCount": 4,
+      "links": [
+        {
+          "datasetId": "15052211",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15052211/fileData.do"
+        },
+        {
+          "datasetId": "15139279",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15139279/fileData.do"
+        },
+        {
+          "datasetId": "15115984",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15115984/fileData.do"
+        },
+        {
+          "datasetId": "15058233",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15058233/openapi.do"
+        }
+      ]
     },
     {
       "id": "nps_foreigner_pension",
@@ -493,7 +823,24 @@ export const dataLineage: DataLineage = {
       "keyword": "외국인 국민연금 가입",
       "purpose": "사업장 가입 외국인 규모(정규 취업·급여계좌 수요)",
       "status": "ok",
-      "foundCount": 3
+      "foundCount": 3,
+      "links": [
+        {
+          "datasetId": "15071645",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15071645/fileData.do"
+        },
+        {
+          "datasetId": "3046074",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3046074/fileData.do"
+        },
+        {
+          "datasetId": "15052084",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15052084/fileData.do"
+        }
+      ]
     },
     {
       "id": "immigrant_employment_survey",
@@ -501,7 +848,34 @@ export const dataLineage: DataLineage = {
       "keyword": "이민자 체류실태 고용조사",
       "purpose": "외국인 취업·소득·경제활동(신용·대출 수요 분석)",
       "status": "ok",
-      "foundCount": 5
+      "foundCount": 5,
+      "links": [
+        {
+          "datasetId": "15032256",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15032256/fileData.do"
+        },
+        {
+          "datasetId": "15046410",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15046410/fileData.do"
+        },
+        {
+          "datasetId": "15048450",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15048450/fileData.do"
+        },
+        {
+          "datasetId": "15106908",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15106908/fileData.do"
+        },
+        {
+          "datasetId": "15054816",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15054816/fileData.do"
+        }
+      ]
     }
   ]
 };

@@ -1,6 +1,13 @@
-import { ExternalLink, KeyRound, RefreshCw } from "lucide-react";
+import { ExternalLink, KeyRound, RefreshCw, Search, Telescope } from "lucide-react";
 import { dataLineage, type DataLineageSource } from "@/lib/data/generated/dataLineage";
+import { candidateSources, dataAxisMapping, type ResearchPriority } from "@/lib/data/researchNotes";
 import { DataTable, type DataTableColumn } from "@/components/tables/DataTable";
+
+const PRIORITY_LABEL: Record<ResearchPriority, { text: string; tone: string }> = {
+  high: { text: "높음", tone: "bg-teal-100 text-teal-800" },
+  mid: { text: "중간", tone: "bg-blue-100 text-blue-800" },
+  low: { text: "낮음", tone: "bg-slate-200 text-slate-600" }
+};
 
 const STATUS_LABEL: Record<string, { text: string; tone: string }> = {
   downloaded: { text: "수집 성공", tone: "bg-teal-100 text-teal-800" },
@@ -161,11 +168,14 @@ export default function DataPipelinePage() {
         ))}
       </section>
 
-      {/* 신규 데이터셋 발굴 후보 */}
+      {/* 신규 데이터셋 발굴 후보 (배치 자동 탐색) */}
       {discovery.length > 0 && (
         <section className="surface mt-4 p-4">
-          <h3 className="surface-title">신규 데이터셋 발굴 후보</h3>
-          <p className="surface-subtitle">data.go.kr 키워드 탐색 결과 (배치 자동 기록)</p>
+          <div className="flex items-center gap-2">
+            <Search aria-hidden className="text-teal-700" size={16} />
+            <h3 className="surface-title">신규 데이터셋 발굴 후보</h3>
+          </div>
+          <p className="surface-subtitle">data.go.kr 키워드 자동 탐색 결과 · 배치마다 갱신</p>
           <ul className="mt-3 grid gap-2 text-sm text-slate-700 sm:grid-cols-2">
             {discovery.map((d) => (
               <li className="rounded-md border border-slate-200 p-3" key={d.id}>
@@ -176,11 +186,103 @@ export default function DataPipelinePage() {
                 <p className="mt-1 text-xs">
                   상태: {d.status} · 후보 {d.foundCount}건
                 </p>
+                {d.links.length > 0 && (
+                  <details className="mt-2 text-xs text-slate-500">
+                    <summary className="cursor-pointer">발견된 데이터셋 ({d.links.length})</summary>
+                    <ul className="mt-1 space-y-1">
+                      {d.links.map((l) => (
+                        <li key={l.datasetId + l.kind}>
+                          <a
+                            className="inline-flex items-center gap-1 text-teal-700 hover:underline"
+                            href={l.url}
+                            rel="noreferrer"
+                            target="_blank"
+                          >
+                            [{l.kind}] {l.datasetId} <ExternalLink aria-hidden size={11} />
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                )}
               </li>
             ))}
           </ul>
         </section>
       )}
+
+      {/* 조사 노트 — 후보 출처 (수동 큐레이션) */}
+      <section className="surface mt-4">
+        <div className="surface-header">
+          <div className="flex items-center gap-2">
+            <Telescope aria-hidden className="text-teal-700" size={18} />
+            <div>
+              <h3 className="surface-title">조사 노트 · 후보 출처</h3>
+              <p className="surface-subtitle">
+                금융 인사이트 관점 출처 조사 결과 · 등록 여부·우선순위·활용 근거
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="table-scroll p-2">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-slate-200 text-left text-xs text-muted">
+                <th className="px-3 py-2">제공기관</th>
+                <th className="px-3 py-2">데이터</th>
+                <th className="px-3 py-2">식별자</th>
+                <th className="px-3 py-2">인증키</th>
+                <th className="px-3 py-2">우선순위</th>
+                <th className="px-3 py-2">상태</th>
+                <th className="px-3 py-2">활용 근거</th>
+              </tr>
+            </thead>
+            <tbody>
+              {candidateSources.map((c) => {
+                const pr = PRIORITY_LABEL[c.priority];
+                return (
+                  <tr className="border-b border-slate-50 align-top" key={c.provider + c.ref}>
+                    <td className="px-3 py-2 text-slate-600">{c.provider}</td>
+                    <td className="px-3 py-2 font-medium text-ink">
+                      <a className="hover:text-teal-700" href={c.sourceUrl} rel="noreferrer" target="_blank">
+                        {c.title}
+                      </a>
+                    </td>
+                    <td className="px-3 py-2 font-mono text-xs text-slate-500">{c.ref}</td>
+                    <td className="px-3 py-2 text-xs text-slate-500">{c.keyEnv ?? "불필요"}</td>
+                    <td className="px-3 py-2">
+                      <span className={`rounded px-2 py-0.5 text-xs font-semibold ${pr.tone}`}>{pr.text}</span>
+                    </td>
+                    <td className="px-3 py-2">
+                      {c.registered ? (
+                        <span className="text-xs font-semibold text-teal-700">등록됨</span>
+                      ) : (
+                        <span className="text-xs text-amber-700">후속 검토</span>
+                      )}
+                    </td>
+                    <td className="px-3 py-2 text-xs text-slate-600">{c.rationale}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* 데이터 축 × 금융 인사이트 매핑 */}
+      <section className="surface mt-4 p-4">
+        <h3 className="surface-title">데이터 축 × 금융 인사이트</h3>
+        <p className="surface-subtitle">수집 데이터를 분석가 관점에서 어떻게 활용하는지 요약</p>
+        <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {dataAxisMapping.map((m) => (
+            <div className="rounded-md border border-slate-200 p-3" key={m.axis}>
+              <p className="text-sm font-bold text-ink">{m.axis}</p>
+              <p className="mt-1 text-xs text-muted">{m.sources}</p>
+              <p className="mt-1 text-xs text-teal-700">→ {m.insight}</p>
+            </div>
+          ))}
+        </div>
+      </section>
     </>
   );
 }
