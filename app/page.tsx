@@ -1,7 +1,10 @@
+import Link from "next/link";
 import {
   ArrowUpRight,
   BarChart3,
   Banknote,
+  CheckCircle2,
+  Clock,
   GraduationCap,
   TrendingUp,
   Users
@@ -12,10 +15,25 @@ import { NationalityBarChart } from "@/components/charts/NationalityBarChart";
 import { TrendLineChart } from "@/components/charts/TrendLineChart";
 import { VisaDonutChart } from "@/components/charts/VisaDonutChart";
 import {
+  econActivityData,
+  hasEconActivity,
+  hasHealthInsurance,
+  hasMulticulturalFamily,
+  hasNationalityByAge,
+  hasRealNationalityData,
+  hasRealStudentData,
+  hasRealUniversityData,
+  hasRealVisaData,
+  healthInsuranceData,
   kpiSummary,
+  multiculturalFamilyData,
+  multiculturalFamilySummary,
+  nationalityAgeTotals,
   nationalityDistributionData,
   sampleOpportunityRows,
   sampleRegionInsights,
+  stayVisaTypes,
+  universitySummary,
   visaDistributionData
 } from "@/lib/data/mockData";
 import { realDataSummary } from "@/lib/data/generated/realData";
@@ -88,6 +106,34 @@ const PRODUCT_ICONS: Record<string, string> = {
   "급여계좌": "💳", "본국송금": "✈️", "체크카드": "🪙",
   "신용카드": "💰", "소액저축": "🏦", "보험·연금": "🛡️"
 };
+
+// ── 체류자격 세그먼트 색상 ──
+const SEG_COLORS: Record<string, string> = {
+  "비전문취업 근로자": "#0f766e",
+  "재외동포": "#3157a4",
+  "유학생": "#b45309",
+  "결혼이민": "#be123c",
+  "어학연수생": "#7c3aed",
+  "전문인력": "#0369a1",
+  "단기체류": "#64748b",
+  "기타": "#94a3b8"
+};
+
+// ── 분석 데이터셋 커버리지 ──
+// 수집된 모든 공공 데이터셋을 분석 화면(상세 페이지)과 연결한다.
+// loaded=true 면 실데이터 적재 완료, false 면 다음 수집 배치에서 자동 적재.
+const DATA_COVERAGE = [
+  { name: "국적별 체류외국인", provider: "법무부", count: realDataSummary.nationalityCount, unit: "개국", loaded: hasRealNationalityData, href: "/nationalities" },
+  { name: "체류자격별 인원", provider: "법무부", count: stayVisaTypes.length, unit: "종", loaded: hasRealVisaData, href: "/visa-segments" },
+  { name: "외국인 유학생 추이", provider: "법무부", count: realDataSummary.studentYearCount, unit: "개년", loaded: hasRealStudentData, href: "/universities" },
+  { name: "대학별 유학생", provider: "교육부", count: universitySummary.universityCount, unit: "개교", loaded: hasRealUniversityData, href: "/universities" },
+  { name: "국적별 연령분포", provider: "행안부", count: nationalityAgeTotals.length, unit: "개국", loaded: hasNationalityByAge, href: "/nationalities" },
+  { name: "건강보험 적용인구", provider: "건보공단", count: healthInsuranceData.length, unit: "개국", loaded: hasHealthInsurance, href: "/financial-insights" },
+  { name: "다문화가족 현황", provider: "여가부", count: multiculturalFamilyData.length, unit: "유형", loaded: hasMulticulturalFamily, href: "/financial-insights" },
+  { name: "경제활동인구", provider: "통계청", count: econActivityData.length, unit: "건", loaded: hasEconActivity, href: "/financial-insights" },
+  { name: "환율(일별)·송금", provider: "한국은행", count: 0, unit: "", loaded: false, href: "/financial-insights" },
+  { name: "지역별 외국인주민", provider: "행안부", count: realDataSummary.regionResidentCount, unit: "개", loaded: realDataSummary.regionResidentCount > 0, href: "/regions" }
+];
 
 export default function DashboardPage() {
   const freshDate = realDataSummary.generatedAt.slice(0, 10);
@@ -204,6 +250,50 @@ export default function DashboardPage() {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* ── 분석 데이터 커버리지 (모든 수집 데이터셋 → 분석 화면 연결) ── */}
+      <section>
+        <div className="mb-3 flex items-center justify-between gap-2">
+          <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "#0f766e" }}>
+            분석 가능한 데이터셋
+          </p>
+          <span className="text-[11px] text-muted">
+            적재 {DATA_COVERAGE.filter((d) => d.loaded).length} / 전체 {DATA_COVERAGE.length} · 클릭 시 상세 분석
+          </span>
+        </div>
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5">
+          {DATA_COVERAGE.map((d) => (
+            <Link
+              key={d.name}
+              href={d.href}
+              className="surface surface-hover flex flex-col gap-2 p-4 transition"
+              style={{ borderTop: `3px solid ${d.loaded ? "#0f766e" : "#cbd5e1"}` }}
+            >
+              <div className="flex items-start justify-between gap-1">
+                <span className="text-sm font-bold leading-tight text-ink">{d.name}</span>
+                {d.loaded ? (
+                  <CheckCircle2 size={15} className="shrink-0" style={{ color: "#0f766e" }} />
+                ) : (
+                  <Clock size={15} className="shrink-0 text-slate-400" />
+                )}
+              </div>
+              <span className="text-[11px] text-muted">{d.provider}</span>
+              <div className="mt-auto flex items-baseline gap-1">
+                {d.loaded && d.count > 0 ? (
+                  <>
+                    <span className="text-xl font-black text-ink">{formatNumber(d.count)}</span>
+                    <span className="text-[11px] text-muted">{d.unit}</span>
+                  </>
+                ) : (
+                  <span className="text-xs font-semibold" style={{ color: d.loaded ? "#0f766e" : "#94a3b8" }}>
+                    {d.loaded ? "적재 완료" : "수집 대기"}
+                  </span>
+                )}
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -373,6 +463,131 @@ export default function DashboardPage() {
           </div>
         </div>
       </section>
+
+      {/* ── 체류자격별 실인원 + (적재 시) 추가 실데이터 분석 ── */}
+      {hasRealVisaData && stayVisaTypes.length > 0 && (
+        <section className="surface">
+          <div className="surface-header pb-3">
+            <div>
+              <h3 className="surface-title">체류자격별 인원 (실데이터)</h3>
+              <p className="surface-subtitle">법무부 외국인체류데이터(2024) · 장기체류 비자타입별 상위 12 · 세그먼트 색상</p>
+            </div>
+            <Link href="/visa-segments" className="text-xs font-semibold" style={{ color: "#0f766e" }}>
+              세그먼트 분석 →
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 gap-x-8 gap-y-2 p-4 pt-2 md:grid-cols-2">
+            {stayVisaTypes.slice(0, 12).map((v, i) => {
+              const max = stayVisaTypes[0]?.count ?? 1;
+              const pct = Math.max(3, Math.round((v.count / max) * 100));
+              const color = SEG_COLORS[v.segment] ?? "#94a3b8";
+              return (
+                <div key={v.visaCode} className="flex items-center gap-3">
+                  <span className="w-4 shrink-0 text-right text-[11px] font-bold text-muted">{i + 1}</span>
+                  <span className="w-12 shrink-0 font-mono text-[11px] font-bold" style={{ color }}>{v.visaCode}</span>
+                  <div className="min-w-0 flex-1">
+                    <div className="mb-0.5 flex items-center justify-between gap-2 text-[11px]">
+                      <span className="truncate text-ink">{v.visaName}</span>
+                      <span className="shrink-0 font-mono text-muted">{formatNumber(v.count)}명</span>
+                    </div>
+                    <div className="h-2 w-full overflow-hidden rounded-full" style={{ background: "#f1f5f9" }}>
+                      <div className="h-2 rounded-full" style={{ width: `${pct}%`, background: color }} />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* ── 추가 실데이터 분석 미니패널 (수집 적재 시 자동 표시) ── */}
+      {(hasNationalityByAge || hasHealthInsurance || hasMulticulturalFamily || hasEconActivity) && (
+        <section className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+          {hasNationalityByAge && (
+            <Link href="/nationalities" className="surface surface-hover p-5">
+              <h3 className="surface-title mb-1">국적별 연령구조</h3>
+              <p className="surface-subtitle mb-3">행안부 외국인주민 · 상위 국적 연령대 분포</p>
+              <div className="space-y-2">
+                {nationalityAgeTotals.slice(0, 5).map((n) => {
+                  const max = nationalityAgeTotals[0]?.total ?? 1;
+                  return (
+                    <div key={n.nationality} className="flex items-center gap-2 text-xs">
+                      <span className="w-20 shrink-0 truncate text-ink">{n.nationality}</span>
+                      <div className="h-2 flex-1 overflow-hidden rounded-full" style={{ background: "#f1f5f9" }}>
+                        <div className="h-2 rounded-full" style={{ width: `${Math.round((n.total / max) * 100)}%`, background: "#0f766e" }} />
+                      </div>
+                      <span className="w-14 shrink-0 text-right font-mono text-muted">{formatNumber(n.total)}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </Link>
+          )}
+          {hasHealthInsurance && (
+            <Link href="/financial-insights" className="surface surface-hover p-5">
+              <h3 className="surface-title mb-1">건강보험 적용인구 (소득 대리지표)</h3>
+              <p className="surface-subtitle mb-3">건보공단 · 국적별 직장/지역 가입 상위 5</p>
+              <div className="space-y-2">
+                {[...healthInsuranceData].sort((a, b) => b.total - a.total).slice(0, 5).map((h) => {
+                  const max = [...healthInsuranceData].sort((a, b) => b.total - a.total)[0]?.total ?? 1;
+                  return (
+                    <div key={h.nationality} className="flex items-center gap-2 text-xs">
+                      <span className="w-20 shrink-0 truncate text-ink">{h.nationality}</span>
+                      <div className="h-2 flex-1 overflow-hidden rounded-full" style={{ background: "#f1f5f9" }}>
+                        <div className="h-2 rounded-full" style={{ width: `${Math.round((h.total / max) * 100)}%`, background: "#3157a4" }} />
+                      </div>
+                      <span className="w-14 shrink-0 text-right font-mono text-muted">{formatNumber(h.total)}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </Link>
+          )}
+          {hasMulticulturalFamily && (
+            <Link href="/financial-insights" className="surface surface-hover p-5">
+              <h3 className="surface-title mb-1">다문화가족 현황</h3>
+              <p className="surface-subtitle mb-3">여가부 · 총 {formatNumber(multiculturalFamilySummary.totalCount)}명 · 유형별 상위 5</p>
+              <div className="space-y-2">
+                {[...multiculturalFamilyData].sort((a, b) => b.total - a.total).slice(0, 5).map((m, i) => {
+                  const max = [...multiculturalFamilyData].sort((a, b) => b.total - a.total)[0]?.total ?? 1;
+                  return (
+                    <div key={`${m.type}-${i}`} className="flex items-center gap-2 text-xs">
+                      <span className="w-24 shrink-0 truncate text-ink">{m.type}</span>
+                      <div className="h-2 flex-1 overflow-hidden rounded-full" style={{ background: "#f1f5f9" }}>
+                        <div className="h-2 rounded-full" style={{ width: `${Math.round((m.total / max) * 100)}%`, background: "#be123c" }} />
+                      </div>
+                      <span className="w-14 shrink-0 text-right font-mono text-muted">{formatNumber(m.total)}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </Link>
+          )}
+          {hasEconActivity && (
+            <Link href="/financial-insights" className="surface surface-hover p-5">
+              <h3 className="surface-title mb-1">외국인 경제활동인구</h3>
+              <p className="surface-subtitle mb-3">통계청 · 체류자격별 취업·경제활동 (취업/소득 = 신용 수요)</p>
+              <div className="space-y-2">
+                {(() => {
+                  const latest = [...econActivityData].sort((a, b) => b.period.localeCompare(a.period))[0]?.period ?? "";
+                  const rows = econActivityData.filter((r) => r.period === latest).sort((a, b) => b.value - a.value).slice(0, 5);
+                  const max = rows[0]?.value ?? 1;
+                  return rows.map((r, i) => (
+                    <div key={`${r.category}-${i}`} className="flex items-center gap-2 text-xs">
+                      <span className="w-24 shrink-0 truncate text-ink">{r.category}</span>
+                      <div className="h-2 flex-1 overflow-hidden rounded-full" style={{ background: "#f1f5f9" }}>
+                        <div className="h-2 rounded-full" style={{ width: `${Math.round((r.value / max) * 100)}%`, background: "#b45309" }} />
+                      </div>
+                      <span className="w-14 shrink-0 text-right font-mono text-muted">{formatNumber(r.value)}</span>
+                    </div>
+                  ));
+                })()}
+              </div>
+            </Link>
+          )}
+        </section>
+      )}
 
       {/* ── 월별 추세 전체 폭 ── */}
       <section className="surface">
