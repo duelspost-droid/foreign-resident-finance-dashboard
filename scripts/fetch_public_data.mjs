@@ -67,11 +67,12 @@ function maskKey(value) {
   return `${value.slice(0, 4)}…${value.slice(-4)}`;
 }
 
-const FETCH_TIMEOUT_MS = Number(process.env.FETCH_TIMEOUT_MS ?? 20000);
-const FETCH_ATTEMPTS = Number(process.env.FETCH_ATTEMPTS ?? 4);
+const FETCH_TIMEOUT_MS = Number(process.env.FETCH_TIMEOUT_MS ?? 12000);
+const FETCH_ATTEMPTS = Number(process.env.FETCH_ATTEMPTS ?? 2);
 
-// data.go.kr/KOSIS는 간헐적으로 일시적 네트워크 오류("fetch failed")를 낸다.
-// 지수 백오프로 여러 번 재시도해 일시 장애에서 회복한다.
+// 일시적 네트워크 오류("fetch failed")에 한해 짧게 재시도한다.
+// 재시도를 과하게 늘리면 data.go.kr 전면 장애 시 단계가 타임아웃에 걸려
+// 캐시 폴백 데이터조차 커밋하지 못하므로, 빠르게 실패하도록 2회로 제한한다.
 async function fetchWithRetry(url, options = {}, attempts = FETCH_ATTEMPTS) {
   let lastError;
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
@@ -93,8 +94,7 @@ async function fetchWithRetry(url, options = {}, attempts = FETCH_ATTEMPTS) {
       clearTimeout(timeout);
       lastError = error;
       if (attempt < attempts) {
-        // 1s, 2s, 4s … 지수 백오프(최대 8s)
-        await sleep(Math.min(8000, 1000 * 2 ** (attempt - 1)));
+        await sleep(1500 * attempt);
       }
     }
   }
