@@ -40,15 +40,15 @@ export type DataLineage = {
 };
 
 export const dataLineage: DataLineage = {
-  "generatedAt": "2026-06-15T08:50:13.956Z",
+  "generatedAt": "2026-06-15T08:52:15.638Z",
   "keysPresent": {
     "DATA_GO_KR_SERVICE_KEY": true,
     "KOSIS_API_KEY": true
   },
   "totals": {
     "sources": 5,
-    "downloaded": 3,
-    "cached": 0,
+    "downloaded": 0,
+    "cached": 3,
     "skippedNoKey": 0,
     "failed": 2
   },
@@ -66,14 +66,14 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "국적×체류자격 집계. 세그먼트 산출의 1차 소스.",
-      "fetchedAt": "2026-06-15T08:50:27.753Z",
-      "status": "downloaded",
-      "rowCount": 400,
-      "savedFile": "moj_foreign_resident_status_2024_2026-06-15.csv",
+      "fetchedAt": "2026-06-15T08:56:27.587Z",
+      "status": "metadata_failed_using_cached_raw",
+      "rowCount": null,
+      "savedFile": "moj_foreign_resident_status_2024_2026-06-14.csv",
       "requestUrls": [
-        "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003562210&fileDetailSn=1"
+        "https://www.data.go.kr/data/3045188/fileData.do"
       ],
-      "reason": null
+      "reason": "fetch failed"
     },
     {
       "id": "moj_foreign_stay_data_2024",
@@ -88,14 +88,14 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "지역 단위 체류 현황.",
-      "fetchedAt": "2026-06-15T08:50:29.860Z",
-      "status": "downloaded",
-      "rowCount": 380,
-      "savedFile": "moj_foreign_stay_data_2024_2026-06-15.csv",
+      "fetchedAt": "2026-06-15T08:57:03.575Z",
+      "status": "metadata_failed_using_cached_raw",
+      "rowCount": null,
+      "savedFile": "moj_foreign_stay_data_2024_2026-06-14.csv",
       "requestUrls": [
-        "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003580938&fileDetailSn=1"
+        "https://www.data.go.kr/data/3069963/fileData.do"
       ],
-      "reason": null
+      "reason": "fetch failed"
     },
     {
       "id": "moj_foreign_student_stay_2024",
@@ -110,14 +110,14 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "유학(D-2)·연수(D-4) 체류 추세.",
-      "fetchedAt": "2026-06-15T08:50:31.696Z",
-      "status": "downloaded",
-      "rowCount": 42,
-      "savedFile": "moj_foreign_student_stay_2024_2026-06-15.csv",
+      "fetchedAt": "2026-06-15T08:57:39.560Z",
+      "status": "metadata_failed_using_cached_raw",
+      "rowCount": null,
+      "savedFile": "moj_foreign_student_stay_2024_2026-06-14.csv",
       "requestUrls": [
-        "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003175552&fileDetailSn=1"
+        "https://www.data.go.kr/data/15100038/fileData.do"
       ],
-      "reason": null
+      "reason": "fetch failed"
     },
     {
       "id": "kosis_registered_foreigner_by_region",
@@ -132,14 +132,14 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 시도별 외국인주민. statisticsData.do 사용(objL 파라미터 불필요). 첫 응답으로 필드명 확정.",
-      "fetchedAt": "2026-06-15T08:50:32.737Z",
-      "status": "api_error",
+      "fetchedAt": "2026-06-15T08:58:15.540Z",
+      "status": "request_failed",
       "rowCount": null,
       "savedFile": null,
       "requestUrls": [
-        "https://kosis.kr/openapi/statisticsData.do?apiKey=MzQ1OGI2MWEyZjY0NDljZWI4MTZhNDI4NmYwNWZhODM%3D&orgId=110&tblId=TX_11025_A000_A&method=getList&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2020&endPrdDe=2024"
+        "https://kosis.kr/openapi/statisticsData.do?apiKey=MzQ1OGI2MWEyZjY0NDljZWI4MTZhNDI4NmYwNWZhODM%3D&orgId=110&tblId=TX_11025_A000_A&method=getList&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2020&endPrdDe=2024&itmId=ALL&objL1=ALL&objL2=ALL"
       ],
-      "reason": "필수요청변수값이 누락되었습니다."
+      "reason": "fetch failed"
     },
     {
       "id": "mois_foreign_resident_by_region_api",
@@ -154,12 +154,12 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 외국인주민 시군구 집계. endpoint 경로 운영 환경에서 확정 필요.",
-      "fetchedAt": "2026-06-15T08:50:34.843Z",
+      "fetchedAt": "2026-06-15T08:58:16.333Z",
       "status": "no_data",
       "rowCount": null,
       "savedFile": null,
       "requestUrls": [
-        "https://apis.data.go.kr/1741000/StatisticsForeignResident/getStatisticsForeignResidentInfo?serviceKey=3811…ce88&type=json&numOfRows=1000&pageNo=1&searchYear=2024"
+        "https://apis.data.go.kr/1741000/StatisticsForeignResident/getForeignResidentInfo?serviceKey=3811…ce88&type=json&numOfRows=1000&pageNo=1&searchYear=2024"
       ],
       "reason": "0 rows (verify endpoint/params)"
     }
@@ -170,48 +170,48 @@ export const dataLineage: DataLineage = {
       "provider": "행정안전부",
       "keyword": "외국인주민 현황",
       "purpose": "시군구 단위 장기거주 외국인주민 규모",
-      "status": "ok",
-      "foundCount": 10
+      "status": "failed",
+      "foundCount": 0
     },
     {
       "id": "moe_foreign_students",
       "provider": "교육부",
       "keyword": "외국인 유학생 현황",
       "purpose": "대학·국적·과정별 유학생 금융 수요",
-      "status": "ok",
-      "foundCount": 9
+      "status": "failed",
+      "foundCount": 0
     },
     {
       "id": "academyinfo_foreign_students",
       "provider": "대학알리미",
       "keyword": "외국인유학생수",
       "purpose": "대학별 외국인 유학생 총량 검증",
-      "status": "ok",
-      "foundCount": 10
+      "status": "failed",
+      "foundCount": 0
     },
     {
       "id": "moj_immigration_stats",
       "provider": "법무부",
       "keyword": "출입국 외국인 체류",
       "purpose": "체류자격·국적·지역 추가 통계 발굴",
-      "status": "ok",
-      "foundCount": 7
+      "status": "failed",
+      "foundCount": 0
     },
     {
       "id": "mol_foreign_worker",
       "provider": "고용노동부",
       "keyword": "외국인 고용 취업",
       "purpose": "E-9/E-7 등 취업 외국인 규모(급여계좌 수요)",
-      "status": "ok",
-      "foundCount": 6
+      "status": "failed",
+      "foundCount": 0
     },
     {
       "id": "nia_multicultural",
       "provider": "통계청/여성가족부",
       "keyword": "다문화 가구 외국인",
       "purpose": "결혼이민·다문화 가구 금융 수요 보조 지표",
-      "status": "ok",
-      "foundCount": 5
+      "status": "failed",
+      "foundCount": 0
     }
   ]
 };
