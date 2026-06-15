@@ -10,7 +10,7 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 643277,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -22,11 +22,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-2",
     "baseYear": 2024,
-    "nationality": "한국계중국인",
+    "nationality": "중국",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 315682,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -38,11 +38,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-3",
     "baseYear": 2024,
-    "nationality": "중국",
+    "nationality": "베트남",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 305936,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -54,11 +54,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-4",
     "baseYear": 2024,
-    "nationality": "중국",
+    "nationality": "타이",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 188770,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -70,11 +70,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-5",
     "baseYear": 2024,
-    "nationality": "베트남",
+    "nationality": "미국",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 170251,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -86,11 +86,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-6",
     "baseYear": 2024,
-    "nationality": "베트남",
+    "nationality": "우즈베키스탄",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 94893,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -102,11 +102,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-7",
     "baseYear": 2024,
-    "nationality": "타이",
+    "nationality": "네팔",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 74641,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -118,11 +118,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-8",
     "baseYear": 2024,
-    "nationality": "타이",
+    "nationality": "인도네시아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 73180,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -134,11 +134,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-9",
     "baseYear": 2024,
-    "nationality": "우즈베키스탄",
+    "nationality": "필리핀",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 70392,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -150,11 +150,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-10",
     "baseYear": 2024,
-    "nationality": "우즈베키스탄",
+    "nationality": "일본",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 65216,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -166,11 +166,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-11",
     "baseYear": 2024,
-    "nationality": "네팔",
+    "nationality": "캄보디아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 63681,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -182,11 +182,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-12",
     "baseYear": 2024,
-    "nationality": "네팔",
+    "nationality": "몽골",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 57093,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -198,11 +198,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-13",
     "baseYear": 2024,
-    "nationality": "인도네시아",
+    "nationality": "미얀마",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 53914,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -214,11 +214,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-14",
     "baseYear": 2024,
-    "nationality": "인도네시아",
+    "nationality": "카자흐스탄",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 44549,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -230,11 +230,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-15",
     "baseYear": 2024,
-    "nationality": "필리핀",
+    "nationality": "한국계러시아인",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 35984,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -246,11 +246,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-16",
     "baseYear": 2024,
-    "nationality": "필리핀",
+    "nationality": "타이완",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 35838,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -262,11 +262,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-17",
     "baseYear": 2024,
-    "nationality": "일본",
+    "nationality": "스리랑카",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 35792,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -278,11 +278,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-18",
     "baseYear": 2024,
-    "nationality": "일본",
+    "nationality": "러시아(연방)",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 33268,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -294,11 +294,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-19",
     "baseYear": 2024,
-    "nationality": "캄보디아",
+    "nationality": "방글라데시",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 31220,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -310,11 +310,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-20",
     "baseYear": 2024,
-    "nationality": "캄보디아",
+    "nationality": "캐나다",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 28604,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -326,11 +326,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-21",
     "baseYear": 2024,
-    "nationality": "몽골",
+    "nationality": "오스트레일리아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 19430,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -342,11 +342,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-22",
     "baseYear": 2024,
-    "nationality": "몽골",
+    "nationality": "파키스탄",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 18355,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -358,11 +358,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-23",
     "baseYear": 2024,
-    "nationality": "미얀마",
+    "nationality": "인도",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 16851,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -374,11 +374,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-24",
     "baseYear": 2024,
-    "nationality": "미얀마",
+    "nationality": "말레이시아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 12951,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -390,11 +390,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-25",
     "baseYear": 2024,
-    "nationality": "카자흐스탄",
+    "nationality": "홍콩",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 12786,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -406,11 +406,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-26",
     "baseYear": 2024,
-    "nationality": "카자흐스탄",
+    "nationality": "싱가포르",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 12003,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -422,11 +422,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-27",
     "baseYear": 2024,
-    "nationality": "타이완",
+    "nationality": "키르기즈",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 11784,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -438,11 +438,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-28",
     "baseYear": 2024,
-    "nationality": "타이완",
+    "nationality": "프랑스",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 8867,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -454,11 +454,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-29",
     "baseYear": 2024,
-    "nationality": "스리랑카",
+    "nationality": "영국",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 8697,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -470,11 +470,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-30",
     "baseYear": 2024,
-    "nationality": "스리랑카",
+    "nationality": "라오스",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 8485,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -486,11 +486,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-31",
     "baseYear": 2024,
-    "nationality": "방글라데시",
+    "nationality": "독일",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 6544,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -502,11 +502,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-32",
     "baseYear": 2024,
-    "nationality": "방글라데시",
+    "nationality": "뉴질랜드",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 5738,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -518,11 +518,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-33",
     "baseYear": 2024,
-    "nationality": "파키스탄",
+    "nationality": "우크라이나",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 5267,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -534,11 +534,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-34",
     "baseYear": 2024,
-    "nationality": "파키스탄",
+    "nationality": "남아프리카공화국",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 5164,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -550,11 +550,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-35",
     "baseYear": 2024,
-    "nationality": "인도",
+    "nationality": "티모르민주공화국",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 4611,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -566,11 +566,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-36",
     "baseYear": 2024,
-    "nationality": "인도",
+    "nationality": "튀르키예",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 4475,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -582,11 +582,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-37",
     "baseYear": 2024,
-    "nationality": "말레이시아",
+    "nationality": "이집트",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 3198,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -598,11 +598,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-38",
     "baseYear": 2024,
-    "nationality": "말레이시아",
+    "nationality": "타지키스탄",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 3123,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -614,11 +614,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-39",
     "baseYear": 2024,
-    "nationality": "홍콩",
+    "nationality": "브라질",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 3089,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -630,11 +630,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-40",
     "baseYear": 2024,
-    "nationality": "홍콩",
+    "nationality": "나이지리아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 2941,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -646,11 +646,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-41",
     "baseYear": 2024,
-    "nationality": "싱가포르",
+    "nationality": "이탈리아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 2841,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -662,11 +662,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-42",
     "baseYear": 2024,
-    "nationality": "싱가포르",
+    "nationality": "멕시코",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 2108,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -678,11 +678,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-43",
     "baseYear": 2024,
-    "nationality": "키르기즈",
+    "nationality": "이란",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 2054,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -694,11 +694,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-44",
     "baseYear": 2024,
-    "nationality": "키르기즈",
+    "nationality": "스페인",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 1999,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -710,11 +710,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-45",
     "baseYear": 2024,
-    "nationality": "라오스",
+    "nationality": "시리아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 1946,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -726,11 +726,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-46",
     "baseYear": 2024,
-    "nationality": "라오스",
+    "nationality": "모로코",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 1916,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -742,11 +742,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-47",
     "baseYear": 2024,
-    "nationality": "티모르민주공화국",
+    "nationality": "네덜란드",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 1663,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -758,11 +758,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-48",
     "baseYear": 2024,
-    "nationality": "티모르민주공화국",
+    "nationality": "가나",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 1612,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -774,11 +774,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-49",
     "baseYear": 2024,
-    "nationality": "튀르키예",
+    "nationality": "에티오피아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 1498,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -790,11 +790,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-50",
     "baseYear": 2024,
-    "nationality": "튀르키예",
+    "nationality": "사우디아라비아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 1448,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -806,11 +806,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-51",
     "baseYear": 2024,
-    "nationality": "타지키스탄",
+    "nationality": "예멘공화국",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 1235,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -822,11 +822,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-52",
     "baseYear": 2024,
-    "nationality": "타지키스탄",
+    "nationality": "투르크메니스탄",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 1204,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -838,11 +838,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-53",
     "baseYear": 2024,
-    "nationality": "이란",
+    "nationality": "스웨덴",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 1106,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -854,11 +854,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-54",
     "baseYear": 2024,
-    "nationality": "이란",
+    "nationality": "리비아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 1038,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -870,11 +870,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-55",
     "baseYear": 2024,
-    "nationality": "시리아",
+    "nationality": "폴란드",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 1021,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -886,11 +886,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-56",
     "baseYear": 2024,
-    "nationality": "시리아",
+    "nationality": "페루",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 988,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -902,11 +902,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-57",
     "baseYear": 2024,
-    "nationality": "사우디아라비아",
+    "nationality": "스위스",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 978,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -918,11 +918,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-58",
     "baseYear": 2024,
-    "nationality": "사우디아라비아",
+    "nationality": "아프가니스탄",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 951,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -934,11 +934,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-59",
     "baseYear": 2024,
-    "nationality": "예멘공화국",
+    "nationality": "콜롬비아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 866,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -950,11 +950,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-60",
     "baseYear": 2024,
-    "nationality": "예멘공화국",
+    "nationality": "카메룬",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 829,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -966,11 +966,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-61",
     "baseYear": 2024,
-    "nationality": "투르크메니스탄",
+    "nationality": "튀니지",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 800,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -982,11 +982,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-62",
     "baseYear": 2024,
-    "nationality": "투르크메니스탄",
+    "nationality": "벨기에",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 797,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -998,11 +998,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-63",
     "baseYear": 2024,
-    "nationality": "아프가니스탄",
+    "nationality": "아일랜드",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 778,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1014,11 +1014,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-64",
     "baseYear": 2024,
-    "nationality": "아프가니스탄",
+    "nationality": "아랍에미리트연합",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 728,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1030,11 +1030,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-65",
     "baseYear": 2024,
-    "nationality": "아랍에미리트연합",
+    "nationality": "마카오",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 706,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1046,11 +1046,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-66",
     "baseYear": 2024,
-    "nationality": "아랍에미리트연합",
+    "nationality": "요르단",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 692,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1062,11 +1062,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-67",
     "baseYear": 2024,
-    "nationality": "마카오",
+    "nationality": "이라크",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 686,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1078,11 +1078,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-68",
     "baseYear": 2024,
-    "nationality": "마카오",
+    "nationality": "케냐",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 676,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1094,11 +1094,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-69",
     "baseYear": 2024,
-    "nationality": "요르단",
+    "nationality": "아르헨티나",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 675,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1110,11 +1110,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-70",
     "baseYear": 2024,
-    "nationality": "요르단",
+    "nationality": "덴마크",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 649,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1126,11 +1126,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-71",
     "baseYear": 2024,
-    "nationality": "이라크",
+    "nationality": "우간다",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 626,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1142,11 +1142,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-72",
     "baseYear": 2024,
-    "nationality": "이라크",
+    "nationality": "오스트리아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 592,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1158,11 +1158,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-73",
     "baseYear": 2024,
-    "nationality": "이스라엘",
+    "nationality": "르완다",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 574,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1174,11 +1174,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-74",
     "baseYear": 2024,
-    "nationality": "이스라엘",
+    "nationality": "부룬디",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 571,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1190,11 +1190,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-75",
     "baseYear": 2024,
-    "nationality": "브루나이",
+    "nationality": "노르웨이",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 565,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1206,11 +1206,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-76",
     "baseYear": 2024,
-    "nationality": "브루나이",
+    "nationality": "탄자니아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 554,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1222,11 +1222,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-77",
     "baseYear": 2024,
-    "nationality": "카타르",
+    "nationality": "알제리",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 523,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1238,11 +1238,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-78",
     "baseYear": 2024,
-    "nationality": "카타르",
+    "nationality": "라이베리아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 523,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1254,11 +1254,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-79",
     "baseYear": 2024,
-    "nationality": "쿠웨이트",
+    "nationality": "루마니아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 521,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1270,11 +1270,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-80",
     "baseYear": 2024,
-    "nationality": "쿠웨이트",
+    "nationality": "칠레",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 492,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1286,11 +1286,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-81",
     "baseYear": 2024,
-    "nationality": "팔레스타인",
+    "nationality": "아제르바이잔",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 490,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1302,11 +1302,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-82",
     "baseYear": 2024,
-    "nationality": "팔레스타인",
+    "nationality": "벨라루스",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 446,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1318,11 +1318,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-83",
     "baseYear": 2024,
-    "nationality": "오만",
+    "nationality": "핀란드",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 433,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1334,11 +1334,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-84",
     "baseYear": 2024,
-    "nationality": "오만",
+    "nationality": "에콰도르",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 410,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1350,11 +1350,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-85",
     "baseYear": 2024,
-    "nationality": "레바논",
+    "nationality": "포르투갈",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 388,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1366,11 +1366,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-86",
     "baseYear": 2024,
-    "nationality": "레바논",
+    "nationality": "수단",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 382,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1382,11 +1382,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-87",
     "baseYear": 2024,
-    "nationality": "부탄",
+    "nationality": "이스라엘",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 379,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1398,11 +1398,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-88",
     "baseYear": 2024,
-    "nationality": "부탄",
+    "nationality": "콩고민주공화국",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 378,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1414,11 +1414,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-89",
     "baseYear": 2024,
-    "nationality": "키프로스",
+    "nationality": "헝가리",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 375,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1430,11 +1430,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-90",
     "baseYear": 2024,
-    "nationality": "키프로스",
+    "nationality": "브루나이",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 356,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1446,11 +1446,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-91",
     "baseYear": 2024,
-    "nationality": "바레인",
+    "nationality": "그리스",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 344,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1462,11 +1462,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-92",
     "baseYear": 2024,
-    "nationality": "바레인",
+    "nationality": "세네갈",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 317,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1478,11 +1478,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-93",
     "baseYear": 2024,
-    "nationality": "홍콩거주난민",
+    "nationality": "체코",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 310,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1494,11 +1494,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-94",
     "baseYear": 2024,
-    "nationality": "홍콩거주난민",
+    "nationality": "기타",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 259,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1510,11 +1510,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-95",
     "baseYear": 2024,
-    "nationality": "몰디브",
+    "nationality": "코트디부아르",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 257,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1526,11 +1526,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-96",
     "baseYear": 2024,
-    "nationality": "몰디브",
+    "nationality": "말리",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 256,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1542,11 +1542,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-97",
     "baseYear": 2024,
-    "nationality": "미국",
+    "nationality": "기니",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 249,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1558,11 +1558,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-98",
     "baseYear": 2024,
-    "nationality": "미국",
+    "nationality": "파라과이",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 239,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1574,11 +1574,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-99",
     "baseYear": 2024,
-    "nationality": "미국",
+    "nationality": "베네수엘라",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 239,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1590,11 +1590,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-100",
     "baseYear": 2024,
-    "nationality": "캐나다",
+    "nationality": "불가리아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 210,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1606,11 +1606,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-101",
     "baseYear": 2024,
-    "nationality": "캐나다",
+    "nationality": "리투아니아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 203,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1622,11 +1622,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-102",
     "baseYear": 2024,
-    "nationality": "브라질",
+    "nationality": "카타르",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 185,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1638,11 +1638,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-103",
     "baseYear": 2024,
-    "nationality": "브라질",
+    "nationality": "영국외지민",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 183,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1654,11 +1654,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-104",
     "baseYear": 2024,
-    "nationality": "멕시코",
+    "nationality": "크로아티아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 158,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1670,11 +1670,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-105",
     "baseYear": 2024,
-    "nationality": "멕시코",
+    "nationality": "조지아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 156,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1686,11 +1686,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-106",
     "baseYear": 2024,
-    "nationality": "페루",
+    "nationality": "아이티",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 155,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1702,11 +1702,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-107",
     "baseYear": 2024,
-    "nationality": "페루",
+    "nationality": "코스타리카",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 148,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1718,11 +1718,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-108",
     "baseYear": 2024,
-    "nationality": "콜롬비아",
+    "nationality": "과테말라",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 144,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1734,11 +1734,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-109",
     "baseYear": 2024,
-    "nationality": "콜롬비아",
+    "nationality": "쿠웨이트",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 143,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1750,11 +1750,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-110",
     "baseYear": 2024,
-    "nationality": "아르헨티나",
+    "nationality": "도미니카공화국",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 143,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1766,11 +1766,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-111",
     "baseYear": 2024,
-    "nationality": "아르헨티나",
+    "nationality": "짐바브웨",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 140,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1782,11 +1782,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-112",
     "baseYear": 2024,
-    "nationality": "칠레",
+    "nationality": "앙골라",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 136,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1798,11 +1798,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-113",
     "baseYear": 2024,
-    "nationality": "칠레",
+    "nationality": "라트비아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 132,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1814,11 +1814,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-114",
     "baseYear": 2024,
-    "nationality": "에콰도르",
+    "nationality": "세르비아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 128,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1830,11 +1830,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-115",
     "baseYear": 2024,
-    "nationality": "에콰도르",
+    "nationality": "감비아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 123,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1846,11 +1846,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-116",
     "baseYear": 2024,
-    "nationality": "파라과이",
+    "nationality": "볼리비아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 122,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1862,11 +1862,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-117",
     "baseYear": 2024,
-    "nationality": "파라과이",
+    "nationality": "가봉",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 120,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1878,11 +1878,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-118",
     "baseYear": 2024,
-    "nationality": "베네수엘라",
+    "nationality": "시에라리온",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 117,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1894,11 +1894,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-119",
     "baseYear": 2024,
-    "nationality": "베네수엘라",
+    "nationality": "슬로바크",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 114,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1910,11 +1910,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-120",
     "baseYear": 2024,
-    "nationality": "아이티",
+    "nationality": "팔레스타인",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 112,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1926,11 +1926,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-121",
     "baseYear": 2024,
-    "nationality": "아이티",
+    "nationality": "잠비아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 107,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1942,11 +1942,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-122",
     "baseYear": 2024,
-    "nationality": "코스타리카",
+    "nationality": "오만",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 101,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1958,11 +1958,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-123",
     "baseYear": 2024,
-    "nationality": "코스타리카",
+    "nationality": "아르메니아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 93,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1974,11 +1974,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-124",
     "baseYear": 2024,
-    "nationality": "과테말라",
+    "nationality": "파나마",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 92,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -1990,11 +1990,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-125",
     "baseYear": 2024,
-    "nationality": "과테말라",
+    "nationality": "온두라스",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 92,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2006,11 +2006,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-126",
     "baseYear": 2024,
-    "nationality": "도미니카공화국",
+    "nationality": "피지",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 91,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2022,11 +2022,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-127",
     "baseYear": 2024,
-    "nationality": "도미니카공화국",
+    "nationality": "에스토니아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 89,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2038,11 +2038,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-128",
     "baseYear": 2024,
-    "nationality": "볼리비아",
+    "nationality": "슬로베니아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 84,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2054,11 +2054,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-129",
     "baseYear": 2024,
-    "nationality": "볼리비아",
+    "nationality": "엘살바도르",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 79,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2070,11 +2070,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-130",
     "baseYear": 2024,
-    "nationality": "파나마",
+    "nationality": "몰도바",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 79,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2086,11 +2086,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-131",
     "baseYear": 2024,
-    "nationality": "파나마",
+    "nationality": "룩셈부르크",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 76,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2102,11 +2102,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-132",
     "baseYear": 2024,
-    "nationality": "온두라스",
+    "nationality": "레바논",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 68,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2118,11 +2118,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-133",
     "baseYear": 2024,
-    "nationality": "온두라스",
+    "nationality": "말라위",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 67,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2134,11 +2134,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-134",
     "baseYear": 2024,
-    "nationality": "엘살바도르",
+    "nationality": "부르키나파소",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 66,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2150,11 +2150,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-135",
     "baseYear": 2024,
-    "nationality": "엘살바도르",
+    "nationality": "마다가스카르",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 65,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2170,7 +2170,7 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 63,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2182,11 +2182,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-137",
     "baseYear": 2024,
-    "nationality": "자메이카",
+    "nationality": "우루과이",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 62,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2198,11 +2198,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-138",
     "baseYear": 2024,
-    "nationality": "우루과이",
+    "nationality": "모잠비크",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 59,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2214,11 +2214,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-139",
     "baseYear": 2024,
-    "nationality": "우루과이",
+    "nationality": "알바니아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 58,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2234,7 +2234,7 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 56,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2246,11 +2246,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-141",
     "baseYear": 2024,
-    "nationality": "니카라과",
+    "nationality": "쿠바",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 55,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2262,11 +2262,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-142",
     "baseYear": 2024,
-    "nationality": "쿠바",
+    "nationality": "토고",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 49,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2278,11 +2278,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-143",
     "baseYear": 2024,
-    "nationality": "쿠바",
+    "nationality": "부탄",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 43,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2294,11 +2294,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-144",
     "baseYear": 2024,
-    "nationality": "도미니카연방",
+    "nationality": "키프로스",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 42,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2314,7 +2314,7 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 42,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2326,11 +2326,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-146",
     "baseYear": 2024,
-    "nationality": "트리니다드토바고",
+    "nationality": "콩고",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 39,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2342,11 +2342,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-147",
     "baseYear": 2024,
-    "nationality": "트리니다드토바고",
+    "nationality": "보츠와나",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 39,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2358,11 +2358,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-148",
     "baseYear": 2024,
-    "nationality": "세인트크리스토퍼네비스",
+    "nationality": "트리니다드토바고",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 37,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2374,11 +2374,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-149",
     "baseYear": 2024,
-    "nationality": "세인트크리스토퍼네비스",
+    "nationality": "몰타",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 37,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2390,11 +2390,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-150",
     "baseYear": 2024,
-    "nationality": "가이아나",
+    "nationality": "바누아투",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 37,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2406,11 +2406,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-151",
     "baseYear": 2024,
-    "nationality": "가이아나",
+    "nationality": "남수단공화국",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 34,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2422,11 +2422,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-152",
     "baseYear": 2024,
-    "nationality": "바하마",
+    "nationality": "바레인",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 33,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2438,11 +2438,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-153",
     "baseYear": 2024,
-    "nationality": "바하마",
+    "nationality": "파푸아뉴기니",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 32,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2454,11 +2454,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-154",
     "baseYear": 2024,
-    "nationality": "바베이도스",
+    "nationality": "마샬군도",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 32,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2470,11 +2470,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-155",
     "baseYear": 2024,
-    "nationality": "바베이도스",
+    "nationality": "모리셔스",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 30,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2486,11 +2486,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-156",
     "baseYear": 2024,
-    "nationality": "앤티카바부다",
+    "nationality": "세인트크리스토퍼네비스",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 27,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2502,11 +2502,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-157",
     "baseYear": 2024,
-    "nationality": "앤티카바부다",
+    "nationality": "소말리아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 27,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2518,11 +2518,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-158",
     "baseYear": 2024,
-    "nationality": "수리남",
+    "nationality": "베냉",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 25,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2534,11 +2534,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-159",
     "baseYear": 2024,
-    "nationality": "수리남",
+    "nationality": "아이슬란드",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 23,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2550,11 +2550,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-160",
     "baseYear": 2024,
-    "nationality": "세인트루시아",
+    "nationality": "보스니아-헤르체고비나",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 23,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2566,11 +2566,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-161",
     "baseYear": 2024,
-    "nationality": "세인트루시아",
+    "nationality": "몬테네그로",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 22,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2582,11 +2582,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-162",
     "baseYear": 2024,
-    "nationality": "벨리즈",
+    "nationality": "미이크로네시아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 21,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2598,11 +2598,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-163",
     "baseYear": 2024,
-    "nationality": "벨리즈",
+    "nationality": "모리타니",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 19,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2614,11 +2614,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-164",
     "baseYear": 2024,
-    "nationality": "그레나다",
+    "nationality": "중앙아프리카공화국",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 18,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2630,11 +2630,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-165",
     "baseYear": 2024,
-    "nationality": "그레나다",
+    "nationality": "레소토",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 17,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2646,11 +2646,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-166",
     "baseYear": 2024,
-    "nationality": "세인트빈센트그레나딘",
+    "nationality": "가이아나",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 16,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2662,11 +2662,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-167",
     "baseYear": 2024,
-    "nationality": "세인트빈센트그레나딘",
+    "nationality": "북마케도니아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 16,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2678,11 +2678,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-168",
     "baseYear": 2024,
-    "nationality": "한국계러시아인",
+    "nationality": "에스와티니",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 16,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2694,11 +2694,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-169",
     "baseYear": 2024,
-    "nationality": "한국계러시아인",
+    "nationality": "홍콩거주난민",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 14,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2710,11 +2710,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-170",
     "baseYear": 2024,
-    "nationality": "러시아(연방)",
+    "nationality": "팔라우",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 14,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2726,11 +2726,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-171",
     "baseYear": 2024,
-    "nationality": "러시아(연방)",
+    "nationality": "솔로몬군도",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 14,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2742,11 +2742,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-172",
     "baseYear": 2024,
-    "nationality": "프랑스",
+    "nationality": "니제르",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 14,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2758,11 +2758,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-173",
     "baseYear": 2024,
-    "nationality": "프랑스",
+    "nationality": "기니비사우",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 14,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2774,11 +2774,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-174",
     "baseYear": 2024,
-    "nationality": "영국",
+    "nationality": "바하마",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 13,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2790,11 +2790,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-175",
     "baseYear": 2024,
-    "nationality": "영국",
+    "nationality": "에리트레아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 13,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2806,11 +2806,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-176",
     "baseYear": 2024,
-    "nationality": "독일",
+    "nationality": "몰디브",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 11,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2822,11 +2822,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-177",
     "baseYear": 2024,
-    "nationality": "독일",
+    "nationality": "통가",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 11,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2838,11 +2838,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-178",
     "baseYear": 2024,
-    "nationality": "우크라이나",
+    "nationality": "적도기니",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 9,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2854,11 +2854,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-179",
     "baseYear": 2024,
-    "nationality": "우크라이나",
+    "nationality": "차드",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 8,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2870,11 +2870,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-180",
     "baseYear": 2024,
-    "nationality": "이탈리아",
+    "nationality": "바베이도스",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 7,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2886,11 +2886,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-181",
     "baseYear": 2024,
-    "nationality": "이탈리아",
+    "nationality": "코소보",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 7,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2902,11 +2902,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-182",
     "baseYear": 2024,
-    "nationality": "스페인",
+    "nationality": "사모아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 7,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2918,11 +2918,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-183",
     "baseYear": 2024,
-    "nationality": "스페인",
+    "nationality": "지부티",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 7,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2934,11 +2934,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-184",
     "baseYear": 2024,
-    "nationality": "네덜란드",
+    "nationality": "자이르",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 7,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2950,11 +2950,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-185",
     "baseYear": 2024,
-    "nationality": "네덜란드",
+    "nationality": "앤티카바부다",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 6,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2966,11 +2966,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-186",
     "baseYear": 2024,
-    "nationality": "스웨덴",
+    "nationality": "수리남",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 6,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2982,11 +2982,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-187",
     "baseYear": 2024,
-    "nationality": "스웨덴",
+    "nationality": "세인트루시아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 6,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -2998,11 +2998,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-188",
     "baseYear": 2024,
-    "nationality": "폴란드",
+    "nationality": "벨리즈",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 6,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -3014,11 +3014,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-189",
     "baseYear": 2024,
-    "nationality": "폴란드",
+    "nationality": "그레나다",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 5,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -3030,11 +3030,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-190",
     "baseYear": 2024,
-    "nationality": "스위스",
+    "nationality": "나우루",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 5,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -3046,11 +3046,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-191",
     "baseYear": 2024,
-    "nationality": "스위스",
+    "nationality": "영국외지시민",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 4,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -3062,11 +3062,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-192",
     "baseYear": 2024,
-    "nationality": "벨기에",
+    "nationality": "영국해외영토시민",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 3,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -3078,11 +3078,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-193",
     "baseYear": 2024,
-    "nationality": "벨기에",
+    "nationality": "리히텐슈타인",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 3,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -3094,11 +3094,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-194",
     "baseYear": 2024,
-    "nationality": "아일랜드",
+    "nationality": "키리바시",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 3,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -3110,11 +3110,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-195",
     "baseYear": 2024,
-    "nationality": "아일랜드",
+    "nationality": "나미비아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 3,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -3126,11 +3126,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-196",
     "baseYear": 2024,
-    "nationality": "덴마크",
+    "nationality": "세인트빈센트그레나딘",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 2,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -3142,11 +3142,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-197",
     "baseYear": 2024,
-    "nationality": "덴마크",
+    "nationality": "산마리노",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 2,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -3158,11 +3158,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-198",
     "baseYear": 2024,
-    "nationality": "오스트리아",
+    "nationality": "교황청",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 2,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -3174,11 +3174,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-199",
     "baseYear": 2024,
-    "nationality": "오스트리아",
+    "nationality": "코모로",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 2,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -3190,11 +3190,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-200",
     "baseYear": 2024,
-    "nationality": "노르웨이",
+    "nationality": "카보베르데",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 2,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -3206,11 +3206,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-201",
     "baseYear": 2024,
-    "nationality": "노르웨이",
+    "nationality": "세이셸",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 2,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -3222,11 +3222,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-202",
     "baseYear": 2024,
-    "nationality": "루마니아",
+    "nationality": "상투메프린시페",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 2,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -3238,11 +3238,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-203",
     "baseYear": 2024,
-    "nationality": "루마니아",
+    "nationality": "유고슬라비아",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 1,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -3254,11 +3254,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-204",
     "baseYear": 2024,
-    "nationality": "아제르바이잔",
+    "nationality": "스발바르",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 1,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -3270,3131 +3270,11 @@ export const realForeignResidentStatus: readonly ForeignResidentStatus[] = [
   {
     "id": "real-status-205",
     "baseYear": 2024,
-    "nationality": "아제르바이잔",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-206",
-    "baseYear": 2024,
-    "nationality": "벨라루스",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-207",
-    "baseYear": 2024,
-    "nationality": "벨라루스",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-208",
-    "baseYear": 2024,
-    "nationality": "핀란드",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-209",
-    "baseYear": 2024,
-    "nationality": "핀란드",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-210",
-    "baseYear": 2024,
-    "nationality": "포르투갈",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-211",
-    "baseYear": 2024,
-    "nationality": "포르투갈",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-212",
-    "baseYear": 2024,
-    "nationality": "헝가리",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-213",
-    "baseYear": 2024,
-    "nationality": "헝가리",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-214",
-    "baseYear": 2024,
-    "nationality": "그리스",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-215",
-    "baseYear": 2024,
-    "nationality": "그리스",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-216",
-    "baseYear": 2024,
-    "nationality": "체코",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-217",
-    "baseYear": 2024,
-    "nationality": "체코",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-218",
-    "baseYear": 2024,
-    "nationality": "불가리아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-219",
-    "baseYear": 2024,
-    "nationality": "불가리아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-220",
-    "baseYear": 2024,
-    "nationality": "리투아니아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-221",
-    "baseYear": 2024,
-    "nationality": "리투아니아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-222",
-    "baseYear": 2024,
-    "nationality": "영국외지민",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-223",
-    "baseYear": 2024,
-    "nationality": "영국외지민",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-224",
-    "baseYear": 2024,
-    "nationality": "크로아티아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-225",
-    "baseYear": 2024,
-    "nationality": "크로아티아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-226",
-    "baseYear": 2024,
-    "nationality": "조지아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-227",
-    "baseYear": 2024,
-    "nationality": "조지아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-228",
-    "baseYear": 2024,
-    "nationality": "라트비아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-229",
-    "baseYear": 2024,
-    "nationality": "라트비아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-230",
-    "baseYear": 2024,
-    "nationality": "세르비아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-231",
-    "baseYear": 2024,
-    "nationality": "세르비아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-232",
-    "baseYear": 2024,
-    "nationality": "슬로바크",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-233",
-    "baseYear": 2024,
-    "nationality": "슬로바크",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-234",
-    "baseYear": 2024,
-    "nationality": "아르메니아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-235",
-    "baseYear": 2024,
-    "nationality": "아르메니아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-236",
-    "baseYear": 2024,
-    "nationality": "에스토니아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-237",
-    "baseYear": 2024,
-    "nationality": "에스토니아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-238",
-    "baseYear": 2024,
-    "nationality": "슬로베니아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-239",
-    "baseYear": 2024,
-    "nationality": "슬로베니아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-240",
-    "baseYear": 2024,
-    "nationality": "몰도바",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-241",
-    "baseYear": 2024,
-    "nationality": "몰도바",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-242",
-    "baseYear": 2024,
-    "nationality": "룩셈부르크",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-243",
-    "baseYear": 2024,
-    "nationality": "룩셈부르크",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-244",
-    "baseYear": 2024,
-    "nationality": "알바니아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-245",
-    "baseYear": 2024,
-    "nationality": "알바니아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-246",
-    "baseYear": 2024,
-    "nationality": "몰타",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-247",
-    "baseYear": 2024,
-    "nationality": "몰타",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-248",
-    "baseYear": 2024,
-    "nationality": "아이슬란드",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-249",
-    "baseYear": 2024,
-    "nationality": "아이슬란드",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-250",
-    "baseYear": 2024,
-    "nationality": "보스니아-헤르체고비나",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-251",
-    "baseYear": 2024,
-    "nationality": "보스니아-헤르체고비나",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-252",
-    "baseYear": 2024,
-    "nationality": "몬테네그로",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-253",
-    "baseYear": 2024,
-    "nationality": "몬테네그로",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-254",
-    "baseYear": 2024,
-    "nationality": "북마케도니아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-255",
-    "baseYear": 2024,
-    "nationality": "북마케도니아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-256",
-    "baseYear": 2024,
-    "nationality": "코소보",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-257",
-    "baseYear": 2024,
-    "nationality": "코소보",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-258",
-    "baseYear": 2024,
-    "nationality": "영국외지시민",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-259",
-    "baseYear": 2024,
-    "nationality": "영국해외영토시민",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-260",
-    "baseYear": 2024,
-    "nationality": "리히텐슈타인",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-261",
-    "baseYear": 2024,
-    "nationality": "산마리노",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-262",
-    "baseYear": 2024,
-    "nationality": "산마리노",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-263",
-    "baseYear": 2024,
-    "nationality": "교황청",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-264",
-    "baseYear": 2024,
-    "nationality": "유고슬라비아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-265",
-    "baseYear": 2024,
-    "nationality": "스발바르",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-266",
-    "baseYear": 2024,
     "nationality": "세르비아몬테네그로",
     "visaCode": "",
     "visaName": "",
     "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-267",
-    "baseYear": 2024,
-    "nationality": "오스트레일리아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-268",
-    "baseYear": 2024,
-    "nationality": "오스트레일리아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-269",
-    "baseYear": 2024,
-    "nationality": "뉴질랜드",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-270",
-    "baseYear": 2024,
-    "nationality": "뉴질랜드",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-271",
-    "baseYear": 2024,
-    "nationality": "피지",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-272",
-    "baseYear": 2024,
-    "nationality": "피지",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-273",
-    "baseYear": 2024,
-    "nationality": "바누아투",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-274",
-    "baseYear": 2024,
-    "nationality": "바누아투",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-275",
-    "baseYear": 2024,
-    "nationality": "파푸아뉴기니",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-276",
-    "baseYear": 2024,
-    "nationality": "파푸아뉴기니",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-277",
-    "baseYear": 2024,
-    "nationality": "마샬군도",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-278",
-    "baseYear": 2024,
-    "nationality": "마샬군도",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-279",
-    "baseYear": 2024,
-    "nationality": "미이크로네시아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-280",
-    "baseYear": 2024,
-    "nationality": "미이크로네시아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-281",
-    "baseYear": 2024,
-    "nationality": "팔라우",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-282",
-    "baseYear": 2024,
-    "nationality": "팔라우",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-283",
-    "baseYear": 2024,
-    "nationality": "솔로몬군도",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-284",
-    "baseYear": 2024,
-    "nationality": "솔로몬군도",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-285",
-    "baseYear": 2024,
-    "nationality": "통가",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-286",
-    "baseYear": 2024,
-    "nationality": "통가",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-287",
-    "baseYear": 2024,
-    "nationality": "사모아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-288",
-    "baseYear": 2024,
-    "nationality": "사모아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-289",
-    "baseYear": 2024,
-    "nationality": "나우루",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-290",
-    "baseYear": 2024,
-    "nationality": "나우루",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-291",
-    "baseYear": 2024,
-    "nationality": "키리바시",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-292",
-    "baseYear": 2024,
-    "nationality": "키리바시",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-293",
-    "baseYear": 2024,
-    "nationality": "남아프리카공화국",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-294",
-    "baseYear": 2024,
-    "nationality": "남아프리카공화국",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-295",
-    "baseYear": 2024,
-    "nationality": "이집트",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-296",
-    "baseYear": 2024,
-    "nationality": "이집트",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-297",
-    "baseYear": 2024,
-    "nationality": "나이지리아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-298",
-    "baseYear": 2024,
-    "nationality": "나이지리아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-299",
-    "baseYear": 2024,
-    "nationality": "모로코",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-300",
-    "baseYear": 2024,
-    "nationality": "모로코",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-301",
-    "baseYear": 2024,
-    "nationality": "가나",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-302",
-    "baseYear": 2024,
-    "nationality": "가나",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-303",
-    "baseYear": 2024,
-    "nationality": "에티오피아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-304",
-    "baseYear": 2024,
-    "nationality": "에티오피아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-305",
-    "baseYear": 2024,
-    "nationality": "리비아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-306",
-    "baseYear": 2024,
-    "nationality": "리비아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-307",
-    "baseYear": 2024,
-    "nationality": "카메룬",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-308",
-    "baseYear": 2024,
-    "nationality": "카메룬",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-309",
-    "baseYear": 2024,
-    "nationality": "튀니지",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-310",
-    "baseYear": 2024,
-    "nationality": "튀니지",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-311",
-    "baseYear": 2024,
-    "nationality": "케냐",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-312",
-    "baseYear": 2024,
-    "nationality": "케냐",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-313",
-    "baseYear": 2024,
-    "nationality": "우간다",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-314",
-    "baseYear": 2024,
-    "nationality": "우간다",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-315",
-    "baseYear": 2024,
-    "nationality": "르완다",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-316",
-    "baseYear": 2024,
-    "nationality": "르완다",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-317",
-    "baseYear": 2024,
-    "nationality": "부룬디",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-318",
-    "baseYear": 2024,
-    "nationality": "부룬디",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-319",
-    "baseYear": 2024,
-    "nationality": "탄자니아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-320",
-    "baseYear": 2024,
-    "nationality": "탄자니아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-321",
-    "baseYear": 2024,
-    "nationality": "알제리",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-322",
-    "baseYear": 2024,
-    "nationality": "알제리",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-323",
-    "baseYear": 2024,
-    "nationality": "라이베리아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-324",
-    "baseYear": 2024,
-    "nationality": "라이베리아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-325",
-    "baseYear": 2024,
-    "nationality": "수단",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-326",
-    "baseYear": 2024,
-    "nationality": "수단",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-327",
-    "baseYear": 2024,
-    "nationality": "콩고민주공화국",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-328",
-    "baseYear": 2024,
-    "nationality": "콩고민주공화국",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-329",
-    "baseYear": 2024,
-    "nationality": "세네갈",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-330",
-    "baseYear": 2024,
-    "nationality": "세네갈",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-331",
-    "baseYear": 2024,
-    "nationality": "코트디부아르",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-332",
-    "baseYear": 2024,
-    "nationality": "코트디부아르",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-333",
-    "baseYear": 2024,
-    "nationality": "말리",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-334",
-    "baseYear": 2024,
-    "nationality": "말리",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-335",
-    "baseYear": 2024,
-    "nationality": "기니",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-336",
-    "baseYear": 2024,
-    "nationality": "기니",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-337",
-    "baseYear": 2024,
-    "nationality": "짐바브웨",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-338",
-    "baseYear": 2024,
-    "nationality": "짐바브웨",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-339",
-    "baseYear": 2024,
-    "nationality": "앙골라",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-340",
-    "baseYear": 2024,
-    "nationality": "앙골라",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-341",
-    "baseYear": 2024,
-    "nationality": "감비아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-342",
-    "baseYear": 2024,
-    "nationality": "감비아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-343",
-    "baseYear": 2024,
-    "nationality": "가봉",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-344",
-    "baseYear": 2024,
-    "nationality": "가봉",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-345",
-    "baseYear": 2024,
-    "nationality": "시에라리온",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-346",
-    "baseYear": 2024,
-    "nationality": "시에라리온",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-347",
-    "baseYear": 2024,
-    "nationality": "잠비아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-348",
-    "baseYear": 2024,
-    "nationality": "잠비아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-349",
-    "baseYear": 2024,
-    "nationality": "말라위",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-350",
-    "baseYear": 2024,
-    "nationality": "말라위",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-351",
-    "baseYear": 2024,
-    "nationality": "부르키나파소",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-352",
-    "baseYear": 2024,
-    "nationality": "부르키나파소",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-353",
-    "baseYear": 2024,
-    "nationality": "마다가스카르",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-354",
-    "baseYear": 2024,
-    "nationality": "마다가스카르",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-355",
-    "baseYear": 2024,
-    "nationality": "모잠비크",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-356",
-    "baseYear": 2024,
-    "nationality": "모잠비크",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-357",
-    "baseYear": 2024,
-    "nationality": "토고",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-358",
-    "baseYear": 2024,
-    "nationality": "토고",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-359",
-    "baseYear": 2024,
-    "nationality": "콩고",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-360",
-    "baseYear": 2024,
-    "nationality": "콩고",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-361",
-    "baseYear": 2024,
-    "nationality": "보츠와나",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-362",
-    "baseYear": 2024,
-    "nationality": "보츠와나",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-363",
-    "baseYear": 2024,
-    "nationality": "남수단공화국",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-364",
-    "baseYear": 2024,
-    "nationality": "남수단공화국",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-365",
-    "baseYear": 2024,
-    "nationality": "모리셔스",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-366",
-    "baseYear": 2024,
-    "nationality": "모리셔스",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-367",
-    "baseYear": 2024,
-    "nationality": "소말리아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-368",
-    "baseYear": 2024,
-    "nationality": "소말리아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-369",
-    "baseYear": 2024,
-    "nationality": "베냉",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-370",
-    "baseYear": 2024,
-    "nationality": "베냉",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-371",
-    "baseYear": 2024,
-    "nationality": "모리타니",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-372",
-    "baseYear": 2024,
-    "nationality": "모리타니",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-373",
-    "baseYear": 2024,
-    "nationality": "중앙아프리카공화국",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-374",
-    "baseYear": 2024,
-    "nationality": "중앙아프리카공화국",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-375",
-    "baseYear": 2024,
-    "nationality": "레소토",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-376",
-    "baseYear": 2024,
-    "nationality": "레소토",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-377",
-    "baseYear": 2024,
-    "nationality": "에스와티니",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-378",
-    "baseYear": 2024,
-    "nationality": "에스와티니",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-379",
-    "baseYear": 2024,
-    "nationality": "니제르",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-380",
-    "baseYear": 2024,
-    "nationality": "니제르",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-381",
-    "baseYear": 2024,
-    "nationality": "기니비사우",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-382",
-    "baseYear": 2024,
-    "nationality": "기니비사우",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-383",
-    "baseYear": 2024,
-    "nationality": "에리트레아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-384",
-    "baseYear": 2024,
-    "nationality": "에리트레아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-385",
-    "baseYear": 2024,
-    "nationality": "적도기니",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-386",
-    "baseYear": 2024,
-    "nationality": "적도기니",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-387",
-    "baseYear": 2024,
-    "nationality": "차드",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-388",
-    "baseYear": 2024,
-    "nationality": "차드",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-389",
-    "baseYear": 2024,
-    "nationality": "지부티",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-390",
-    "baseYear": 2024,
-    "nationality": "지부티",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-391",
-    "baseYear": 2024,
-    "nationality": "자이르",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-392",
-    "baseYear": 2024,
-    "nationality": "자이르",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-393",
-    "baseYear": 2024,
-    "nationality": "나미비아",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-394",
-    "baseYear": 2024,
-    "nationality": "코모로",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-395",
-    "baseYear": 2024,
-    "nationality": "카보베르데",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-396",
-    "baseYear": 2024,
-    "nationality": "세이셸",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-397",
-    "baseYear": 2024,
-    "nationality": "세이셸",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-398",
-    "baseYear": 2024,
-    "nationality": "상투메프린시페",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-399",
-    "baseYear": 2024,
-    "nationality": "기타",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
-    "financialNeedTags": [
-      "기본 계좌",
-      "체크카드",
-      "외국어 상담"
-    ],
-    "sourceName": "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
-    "sourceUrl": "https://www.data.go.kr/data/3045188/fileData.do"
-  },
-  {
-    "id": "real-status-400",
-    "baseYear": 2024,
-    "nationality": "기타",
-    "visaCode": "",
-    "visaName": "",
-    "segmentType": "기타",
-    "residentCount": 0,
+    "residentCount": 1,
     "financialNeedTags": [
       "기본 계좌",
       "체크카드",
@@ -6413,8 +3293,8 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "sigungu": "전국",
     "nationality": "한국계중국인",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 643277,
+    "longTermCount": 643277,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6427,8 +3307,8 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "sigungu": "전국",
     "nationality": "중국",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 315682,
+    "longTermCount": 315682,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6441,8 +3321,8 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "sigungu": "전국",
     "nationality": "베트남",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 305936,
+    "longTermCount": 305936,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6455,8 +3335,8 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "sigungu": "전국",
     "nationality": "타이",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 188770,
+    "longTermCount": 188770,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6467,10 +3347,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "우즈베키스탄",
+    "nationality": "미국",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 170251,
+    "longTermCount": 170251,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6481,10 +3361,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "네팔",
+    "nationality": "우즈베키스탄",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 94893,
+    "longTermCount": 94893,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6495,10 +3375,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "인도네시아",
+    "nationality": "네팔",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 74641,
+    "longTermCount": 74641,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6509,10 +3389,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "필리핀",
+    "nationality": "인도네시아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 73180,
+    "longTermCount": 73180,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6523,10 +3403,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "일본",
+    "nationality": "필리핀",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 70392,
+    "longTermCount": 70392,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6537,10 +3417,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "캄보디아",
+    "nationality": "일본",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 65216,
+    "longTermCount": 65216,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6551,10 +3431,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "몽골",
+    "nationality": "캄보디아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 63681,
+    "longTermCount": 63681,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6565,10 +3445,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "미얀마",
+    "nationality": "몽골",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 57093,
+    "longTermCount": 57093,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6579,10 +3459,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "카자흐스탄",
+    "nationality": "미얀마",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 53914,
+    "longTermCount": 53914,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6593,10 +3473,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "타이완",
+    "nationality": "카자흐스탄",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 44549,
+    "longTermCount": 44549,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6607,10 +3487,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "스리랑카",
+    "nationality": "한국계러시아인",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 35984,
+    "longTermCount": 35984,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6621,10 +3501,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "방글라데시",
+    "nationality": "타이완",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 35838,
+    "longTermCount": 35838,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6635,10 +3515,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "파키스탄",
+    "nationality": "스리랑카",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 35792,
+    "longTermCount": 35792,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6649,10 +3529,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "인도",
+    "nationality": "러시아(연방)",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 33268,
+    "longTermCount": 33268,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6663,10 +3543,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "말레이시아",
+    "nationality": "방글라데시",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 31220,
+    "longTermCount": 31220,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6677,10 +3557,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "홍콩",
+    "nationality": "캐나다",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 28604,
+    "longTermCount": 28604,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6691,10 +3571,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "싱가포르",
+    "nationality": "오스트레일리아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 19430,
+    "longTermCount": 19430,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6705,10 +3585,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "키르기즈",
+    "nationality": "파키스탄",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 18355,
+    "longTermCount": 18355,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6719,10 +3599,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "라오스",
+    "nationality": "인도",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 16851,
+    "longTermCount": 16851,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6733,10 +3613,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "티모르민주공화국",
+    "nationality": "말레이시아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 12951,
+    "longTermCount": 12951,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6747,10 +3627,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "튀르키예",
+    "nationality": "홍콩",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 12786,
+    "longTermCount": 12786,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6761,10 +3641,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "타지키스탄",
+    "nationality": "싱가포르",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 12003,
+    "longTermCount": 12003,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6775,10 +3655,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "이란",
+    "nationality": "키르기즈",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 11784,
+    "longTermCount": 11784,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6789,10 +3669,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "시리아",
+    "nationality": "프랑스",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 8867,
+    "longTermCount": 8867,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6803,10 +3683,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "사우디아라비아",
+    "nationality": "영국",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 8697,
+    "longTermCount": 8697,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6817,10 +3697,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "예멘공화국",
+    "nationality": "라오스",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 8485,
+    "longTermCount": 8485,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6831,10 +3711,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "투르크메니스탄",
+    "nationality": "독일",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 6544,
+    "longTermCount": 6544,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6845,10 +3725,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "아프가니스탄",
+    "nationality": "뉴질랜드",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 5738,
+    "longTermCount": 5738,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6859,10 +3739,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "아랍에미리트연합",
+    "nationality": "우크라이나",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 5267,
+    "longTermCount": 5267,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6873,10 +3753,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "마카오",
+    "nationality": "남아프리카공화국",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 5164,
+    "longTermCount": 5164,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6887,10 +3767,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "요르단",
+    "nationality": "티모르민주공화국",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 4611,
+    "longTermCount": 4611,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6901,10 +3781,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "이라크",
+    "nationality": "튀르키예",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 4475,
+    "longTermCount": 4475,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6915,10 +3795,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "이스라엘",
+    "nationality": "이집트",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 3198,
+    "longTermCount": 3198,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6929,10 +3809,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "브루나이",
+    "nationality": "타지키스탄",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 3123,
+    "longTermCount": 3123,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6943,10 +3823,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "카타르",
+    "nationality": "브라질",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 3089,
+    "longTermCount": 3089,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6957,10 +3837,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "쿠웨이트",
+    "nationality": "나이지리아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 2941,
+    "longTermCount": 2941,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6971,10 +3851,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "팔레스타인",
+    "nationality": "이탈리아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 2841,
+    "longTermCount": 2841,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6985,10 +3865,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "오만",
+    "nationality": "멕시코",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 2108,
+    "longTermCount": 2108,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -6999,10 +3879,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "레바논",
+    "nationality": "이란",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 2054,
+    "longTermCount": 2054,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7013,10 +3893,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "부탄",
+    "nationality": "스페인",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 1999,
+    "longTermCount": 1999,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7027,10 +3907,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "키프로스",
+    "nationality": "시리아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 1946,
+    "longTermCount": 1946,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7041,10 +3921,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "바레인",
+    "nationality": "모로코",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 1916,
+    "longTermCount": 1916,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7055,10 +3935,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "홍콩거주난민",
+    "nationality": "네덜란드",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 1663,
+    "longTermCount": 1663,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7069,10 +3949,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "몰디브",
+    "nationality": "가나",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 1612,
+    "longTermCount": 1612,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7083,10 +3963,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "미국",
+    "nationality": "에티오피아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 1498,
+    "longTermCount": 1498,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7097,10 +3977,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "캐나다",
+    "nationality": "사우디아라비아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 1448,
+    "longTermCount": 1448,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7111,10 +3991,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "브라질",
+    "nationality": "예멘공화국",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 1235,
+    "longTermCount": 1235,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7125,10 +4005,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "멕시코",
+    "nationality": "투르크메니스탄",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 1204,
+    "longTermCount": 1204,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7139,10 +4019,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "페루",
+    "nationality": "스웨덴",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 1106,
+    "longTermCount": 1106,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7153,10 +4033,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "콜롬비아",
+    "nationality": "리비아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 1038,
+    "longTermCount": 1038,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7167,10 +4047,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "아르헨티나",
+    "nationality": "폴란드",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 1021,
+    "longTermCount": 1021,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7181,10 +4061,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "칠레",
+    "nationality": "페루",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 988,
+    "longTermCount": 988,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7195,10 +4075,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "에콰도르",
+    "nationality": "스위스",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 978,
+    "longTermCount": 978,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7209,10 +4089,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "파라과이",
+    "nationality": "아프가니스탄",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 951,
+    "longTermCount": 951,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7223,10 +4103,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "베네수엘라",
+    "nationality": "콜롬비아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 866,
+    "longTermCount": 866,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7237,10 +4117,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "아이티",
+    "nationality": "카메룬",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 829,
+    "longTermCount": 829,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7251,10 +4131,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "코스타리카",
+    "nationality": "튀니지",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 800,
+    "longTermCount": 800,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7265,10 +4145,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "과테말라",
+    "nationality": "벨기에",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 797,
+    "longTermCount": 797,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7279,10 +4159,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "도미니카공화국",
+    "nationality": "아일랜드",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 778,
+    "longTermCount": 778,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7293,10 +4173,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "볼리비아",
+    "nationality": "아랍에미리트연합",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 728,
+    "longTermCount": 728,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7307,10 +4187,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "파나마",
+    "nationality": "마카오",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 706,
+    "longTermCount": 706,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7321,10 +4201,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "온두라스",
+    "nationality": "요르단",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 692,
+    "longTermCount": 692,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7335,10 +4215,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "엘살바도르",
+    "nationality": "이라크",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 686,
+    "longTermCount": 686,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7349,10 +4229,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "자메이카",
+    "nationality": "케냐",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 676,
+    "longTermCount": 676,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7363,10 +4243,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "우루과이",
+    "nationality": "아르헨티나",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 675,
+    "longTermCount": 675,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7377,10 +4257,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "니카라과",
+    "nationality": "덴마크",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 649,
+    "longTermCount": 649,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7391,10 +4271,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "쿠바",
+    "nationality": "우간다",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 626,
+    "longTermCount": 626,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7405,10 +4285,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "도미니카연방",
+    "nationality": "오스트리아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 592,
+    "longTermCount": 592,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7419,10 +4299,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "트리니다드토바고",
+    "nationality": "르완다",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 574,
+    "longTermCount": 574,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7433,10 +4313,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "세인트크리스토퍼네비스",
+    "nationality": "부룬디",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 571,
+    "longTermCount": 571,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7447,10 +4327,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "가이아나",
+    "nationality": "노르웨이",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 565,
+    "longTermCount": 565,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7461,10 +4341,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "바하마",
+    "nationality": "탄자니아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 554,
+    "longTermCount": 554,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7475,10 +4355,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "바베이도스",
+    "nationality": "알제리",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 523,
+    "longTermCount": 523,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7489,10 +4369,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "앤티카바부다",
+    "nationality": "라이베리아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 523,
+    "longTermCount": 523,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7503,10 +4383,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "수리남",
+    "nationality": "루마니아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 521,
+    "longTermCount": 521,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7517,10 +4397,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "세인트루시아",
+    "nationality": "칠레",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 492,
+    "longTermCount": 492,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7531,10 +4411,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "벨리즈",
+    "nationality": "아제르바이잔",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 490,
+    "longTermCount": 490,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7545,10 +4425,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "그레나다",
+    "nationality": "벨라루스",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 446,
+    "longTermCount": 446,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7559,10 +4439,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "세인트빈센트그레나딘",
+    "nationality": "핀란드",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 433,
+    "longTermCount": 433,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7573,10 +4453,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "한국계러시아인",
+    "nationality": "에콰도르",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 410,
+    "longTermCount": 410,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7587,10 +4467,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "러시아(연방)",
+    "nationality": "포르투갈",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 388,
+    "longTermCount": 388,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7601,10 +4481,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "프랑스",
+    "nationality": "수단",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 382,
+    "longTermCount": 382,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7615,10 +4495,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "영국",
+    "nationality": "이스라엘",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 379,
+    "longTermCount": 379,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7629,10 +4509,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "독일",
+    "nationality": "콩고민주공화국",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 378,
+    "longTermCount": 378,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7643,10 +4523,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "우크라이나",
+    "nationality": "헝가리",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 375,
+    "longTermCount": 375,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7657,10 +4537,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "이탈리아",
+    "nationality": "브루나이",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 356,
+    "longTermCount": 356,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7671,10 +4551,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "스페인",
+    "nationality": "그리스",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 344,
+    "longTermCount": 344,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7685,10 +4565,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "네덜란드",
+    "nationality": "세네갈",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 317,
+    "longTermCount": 317,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7699,10 +4579,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "스웨덴",
+    "nationality": "체코",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 310,
+    "longTermCount": 310,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7713,10 +4593,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "폴란드",
+    "nationality": "기타",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 259,
+    "longTermCount": 259,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7727,10 +4607,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "스위스",
+    "nationality": "코트디부아르",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 257,
+    "longTermCount": 257,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7741,10 +4621,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "벨기에",
+    "nationality": "말리",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 256,
+    "longTermCount": 256,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7755,10 +4635,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "아일랜드",
+    "nationality": "기니",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 249,
+    "longTermCount": 249,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7769,10 +4649,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "덴마크",
+    "nationality": "파라과이",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 239,
+    "longTermCount": 239,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7783,10 +4663,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "오스트리아",
+    "nationality": "베네수엘라",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 239,
+    "longTermCount": 239,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7797,10 +4677,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "노르웨이",
+    "nationality": "불가리아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 210,
+    "longTermCount": 210,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7811,10 +4691,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "루마니아",
+    "nationality": "리투아니아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 203,
+    "longTermCount": 203,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7825,10 +4705,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "아제르바이잔",
+    "nationality": "카타르",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 185,
+    "longTermCount": 185,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7839,10 +4719,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "벨라루스",
+    "nationality": "영국외지민",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 183,
+    "longTermCount": 183,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7853,10 +4733,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "핀란드",
+    "nationality": "크로아티아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 158,
+    "longTermCount": 158,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7867,10 +4747,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "포르투갈",
+    "nationality": "조지아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 156,
+    "longTermCount": 156,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7881,10 +4761,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "헝가리",
+    "nationality": "아이티",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 155,
+    "longTermCount": 155,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7895,10 +4775,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "그리스",
+    "nationality": "코스타리카",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 148,
+    "longTermCount": 148,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7909,10 +4789,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "체코",
+    "nationality": "과테말라",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 144,
+    "longTermCount": 144,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7923,10 +4803,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "불가리아",
+    "nationality": "쿠웨이트",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 143,
+    "longTermCount": 143,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7937,10 +4817,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "리투아니아",
+    "nationality": "도미니카공화국",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 143,
+    "longTermCount": 143,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7951,10 +4831,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "영국외지민",
+    "nationality": "짐바브웨",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 140,
+    "longTermCount": 140,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7965,10 +4845,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "크로아티아",
+    "nationality": "앙골라",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 136,
+    "longTermCount": 136,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7979,10 +4859,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "조지아",
+    "nationality": "라트비아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 132,
+    "longTermCount": 132,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -7993,10 +4873,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "라트비아",
+    "nationality": "세르비아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 128,
+    "longTermCount": 128,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8007,10 +4887,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "세르비아",
+    "nationality": "감비아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 123,
+    "longTermCount": 123,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8021,10 +4901,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "슬로바크",
+    "nationality": "볼리비아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 122,
+    "longTermCount": 122,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8035,10 +4915,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "아르메니아",
+    "nationality": "가봉",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 120,
+    "longTermCount": 120,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8049,10 +4929,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "에스토니아",
+    "nationality": "시에라리온",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 117,
+    "longTermCount": 117,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8063,10 +4943,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "슬로베니아",
+    "nationality": "슬로바크",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 114,
+    "longTermCount": 114,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8077,10 +4957,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "몰도바",
+    "nationality": "팔레스타인",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 112,
+    "longTermCount": 112,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8091,10 +4971,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "룩셈부르크",
+    "nationality": "잠비아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 107,
+    "longTermCount": 107,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8105,10 +4985,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "알바니아",
+    "nationality": "오만",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 101,
+    "longTermCount": 101,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8119,10 +4999,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "몰타",
+    "nationality": "아르메니아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 93,
+    "longTermCount": 93,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8133,10 +5013,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "아이슬란드",
+    "nationality": "파나마",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 92,
+    "longTermCount": 92,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8147,10 +5027,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "보스니아-헤르체고비나",
+    "nationality": "온두라스",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 92,
+    "longTermCount": 92,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8161,10 +5041,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "몬테네그로",
+    "nationality": "피지",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 91,
+    "longTermCount": 91,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8175,10 +5055,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "북마케도니아",
+    "nationality": "에스토니아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 89,
+    "longTermCount": 89,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8189,10 +5069,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "코소보",
+    "nationality": "슬로베니아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 84,
+    "longTermCount": 84,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8203,10 +5083,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "영국외지시민",
+    "nationality": "엘살바도르",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 79,
+    "longTermCount": 79,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8217,10 +5097,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "영국해외영토시민",
+    "nationality": "몰도바",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 79,
+    "longTermCount": 79,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8231,10 +5111,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "리히텐슈타인",
+    "nationality": "룩셈부르크",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 76,
+    "longTermCount": 76,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8245,10 +5125,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "산마리노",
+    "nationality": "레바논",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 68,
+    "longTermCount": 68,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8259,10 +5139,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "교황청",
+    "nationality": "말라위",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 67,
+    "longTermCount": 67,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8273,10 +5153,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "유고슬라비아",
+    "nationality": "부르키나파소",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 66,
+    "longTermCount": 66,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8287,10 +5167,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "스발바르",
+    "nationality": "마다가스카르",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 65,
+    "longTermCount": 65,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8301,10 +5181,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "세르비아몬테네그로",
+    "nationality": "자메이카",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 63,
+    "longTermCount": 63,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8315,10 +5195,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "오스트레일리아",
+    "nationality": "우루과이",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 62,
+    "longTermCount": 62,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8329,10 +5209,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "뉴질랜드",
+    "nationality": "모잠비크",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 59,
+    "longTermCount": 59,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8343,10 +5223,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "피지",
+    "nationality": "알바니아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 58,
+    "longTermCount": 58,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8357,10 +5237,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "바누아투",
+    "nationality": "니카라과",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 56,
+    "longTermCount": 56,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8371,10 +5251,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "파푸아뉴기니",
+    "nationality": "쿠바",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 55,
+    "longTermCount": 55,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8385,10 +5265,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "마샬군도",
+    "nationality": "토고",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 49,
+    "longTermCount": 49,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8399,10 +5279,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "미이크로네시아",
+    "nationality": "부탄",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 43,
+    "longTermCount": 43,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8413,10 +5293,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "팔라우",
+    "nationality": "키프로스",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 42,
+    "longTermCount": 42,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8427,10 +5307,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "솔로몬군도",
+    "nationality": "도미니카연방",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 42,
+    "longTermCount": 42,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8441,10 +5321,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "통가",
+    "nationality": "콩고",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 39,
+    "longTermCount": 39,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8455,10 +5335,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "사모아",
+    "nationality": "보츠와나",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 39,
+    "longTermCount": 39,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8469,10 +5349,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "나우루",
+    "nationality": "트리니다드토바고",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 37,
+    "longTermCount": 37,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8483,10 +5363,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "키리바시",
+    "nationality": "몰타",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 37,
+    "longTermCount": 37,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8497,10 +5377,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "남아프리카공화국",
+    "nationality": "바누아투",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 37,
+    "longTermCount": 37,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8511,10 +5391,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "이집트",
+    "nationality": "남수단공화국",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 34,
+    "longTermCount": 34,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8525,10 +5405,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "나이지리아",
+    "nationality": "바레인",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 33,
+    "longTermCount": 33,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8539,10 +5419,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "모로코",
+    "nationality": "파푸아뉴기니",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 32,
+    "longTermCount": 32,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8553,10 +5433,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "가나",
+    "nationality": "마샬군도",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 32,
+    "longTermCount": 32,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8567,10 +5447,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "에티오피아",
+    "nationality": "모리셔스",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 30,
+    "longTermCount": 30,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8581,10 +5461,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "리비아",
+    "nationality": "세인트크리스토퍼네비스",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 27,
+    "longTermCount": 27,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8595,10 +5475,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "카메룬",
+    "nationality": "소말리아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 27,
+    "longTermCount": 27,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8609,10 +5489,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "튀니지",
+    "nationality": "베냉",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 25,
+    "longTermCount": 25,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8623,10 +5503,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "케냐",
+    "nationality": "아이슬란드",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 23,
+    "longTermCount": 23,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8637,10 +5517,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "우간다",
+    "nationality": "보스니아-헤르체고비나",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 23,
+    "longTermCount": 23,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8651,10 +5531,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "르완다",
+    "nationality": "몬테네그로",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 22,
+    "longTermCount": 22,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8665,10 +5545,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "부룬디",
+    "nationality": "미이크로네시아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 21,
+    "longTermCount": 21,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8679,10 +5559,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "탄자니아",
+    "nationality": "모리타니",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 19,
+    "longTermCount": 19,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8693,10 +5573,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "알제리",
+    "nationality": "중앙아프리카공화국",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 18,
+    "longTermCount": 18,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8707,10 +5587,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "라이베리아",
+    "nationality": "레소토",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 17,
+    "longTermCount": 17,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8721,10 +5601,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "수단",
+    "nationality": "가이아나",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 16,
+    "longTermCount": 16,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8735,10 +5615,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "콩고민주공화국",
+    "nationality": "북마케도니아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 16,
+    "longTermCount": 16,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8749,10 +5629,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "세네갈",
+    "nationality": "에스와티니",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 16,
+    "longTermCount": 16,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8763,10 +5643,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "코트디부아르",
+    "nationality": "홍콩거주난민",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 14,
+    "longTermCount": 14,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8777,10 +5657,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "말리",
+    "nationality": "팔라우",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 14,
+    "longTermCount": 14,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8791,10 +5671,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "기니",
+    "nationality": "솔로몬군도",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 14,
+    "longTermCount": 14,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8805,10 +5685,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "짐바브웨",
+    "nationality": "니제르",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 14,
+    "longTermCount": 14,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8819,10 +5699,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "앙골라",
+    "nationality": "기니비사우",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 14,
+    "longTermCount": 14,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8833,10 +5713,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "감비아",
+    "nationality": "바하마",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 13,
+    "longTermCount": 13,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8847,10 +5727,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "가봉",
+    "nationality": "에리트레아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 13,
+    "longTermCount": 13,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8861,10 +5741,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "시에라리온",
+    "nationality": "몰디브",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 11,
+    "longTermCount": 11,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8875,10 +5755,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "잠비아",
+    "nationality": "통가",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 11,
+    "longTermCount": 11,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8889,10 +5769,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "말라위",
+    "nationality": "적도기니",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 9,
+    "longTermCount": 9,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8903,10 +5783,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "부르키나파소",
+    "nationality": "차드",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 8,
+    "longTermCount": 8,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8917,10 +5797,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "마다가스카르",
+    "nationality": "바베이도스",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 7,
+    "longTermCount": 7,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8931,10 +5811,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "모잠비크",
+    "nationality": "코소보",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 7,
+    "longTermCount": 7,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8945,10 +5825,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "토고",
+    "nationality": "사모아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 7,
+    "longTermCount": 7,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8959,10 +5839,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "콩고",
+    "nationality": "지부티",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 7,
+    "longTermCount": 7,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8973,10 +5853,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "보츠와나",
+    "nationality": "자이르",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 7,
+    "longTermCount": 7,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -8987,10 +5867,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "남수단공화국",
+    "nationality": "앤티카바부다",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 6,
+    "longTermCount": 6,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -9001,10 +5881,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "모리셔스",
+    "nationality": "수리남",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 6,
+    "longTermCount": 6,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -9015,10 +5895,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "소말리아",
+    "nationality": "세인트루시아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 6,
+    "longTermCount": 6,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -9029,10 +5909,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "베냉",
+    "nationality": "벨리즈",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 6,
+    "longTermCount": 6,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -9043,10 +5923,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "모리타니",
+    "nationality": "그레나다",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 5,
+    "longTermCount": 5,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -9057,10 +5937,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "중앙아프리카공화국",
+    "nationality": "나우루",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 5,
+    "longTermCount": 5,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -9071,10 +5951,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "레소토",
+    "nationality": "영국외지시민",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 4,
+    "longTermCount": 4,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -9085,10 +5965,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "에스와티니",
+    "nationality": "영국해외영토시민",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 3,
+    "longTermCount": 3,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -9099,10 +5979,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "니제르",
+    "nationality": "리히텐슈타인",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 3,
+    "longTermCount": 3,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -9113,10 +5993,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "기니비사우",
+    "nationality": "키리바시",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 3,
+    "longTermCount": 3,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -9127,10 +6007,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "에리트레아",
+    "nationality": "나미비아",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 3,
+    "longTermCount": 3,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -9141,10 +6021,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "적도기니",
+    "nationality": "세인트빈센트그레나딘",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 2,
+    "longTermCount": 2,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -9155,10 +6035,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "차드",
+    "nationality": "산마리노",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 2,
+    "longTermCount": 2,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -9169,10 +6049,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "지부티",
+    "nationality": "교황청",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 2,
+    "longTermCount": 2,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -9183,10 +6063,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "자이르",
+    "nationality": "코모로",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 2,
+    "longTermCount": 2,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -9197,10 +6077,10 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
     "baseMonth": "2024-12-01",
     "sido": "전국",
     "sigungu": "전국",
-    "nationality": "나미비아",
+    "nationality": "카보베르데",
     "gender": "전체",
-    "residentCount": 0,
-    "longTermCount": 0,
+    "residentCount": 2,
+    "longTermCount": 2,
     "shortTermCount": 0,
     "yoyChangeRate": 0,
     "momChangeRate": 0,
@@ -9212,6 +6092,1196 @@ export const realRegionData: readonly ForeignResidentRegionMonth[] = [
 export const realApiStatusData: readonly ForeignResidentStatus[] = [];
 
 export const realApiRegionData: readonly ForeignResidentRegionMonth[] = [];
+
+// 국적 분포 + 비자/세그먼트 분포 — 국적·체류자격 페이지가 사용.
+export type RealNationalityDist = { nationality: string; residents: number; share: number };
+export type RealVisaSegment = { name: string; value: number };
+export type RealVisaType = { visaCode: string; visaName: string; count: number; segment: string };
+export const realNationalityDistribution: readonly RealNationalityDist[] = [
+  {
+    "nationality": "한국계중국인",
+    "residents": 643277,
+    "share": 24.3
+  },
+  {
+    "nationality": "중국",
+    "residents": 315682,
+    "share": 11.9
+  },
+  {
+    "nationality": "베트남",
+    "residents": 305936,
+    "share": 11.5
+  },
+  {
+    "nationality": "타이",
+    "residents": 188770,
+    "share": 7.1
+  },
+  {
+    "nationality": "미국",
+    "residents": 170251,
+    "share": 6.4
+  },
+  {
+    "nationality": "우즈베키스탄",
+    "residents": 94893,
+    "share": 3.6
+  },
+  {
+    "nationality": "네팔",
+    "residents": 74641,
+    "share": 2.8
+  },
+  {
+    "nationality": "인도네시아",
+    "residents": 73180,
+    "share": 2.8
+  },
+  {
+    "nationality": "필리핀",
+    "residents": 70392,
+    "share": 2.7
+  },
+  {
+    "nationality": "일본",
+    "residents": 65216,
+    "share": 2.5
+  },
+  {
+    "nationality": "캄보디아",
+    "residents": 63681,
+    "share": 2.4
+  },
+  {
+    "nationality": "몽골",
+    "residents": 57093,
+    "share": 2.2
+  },
+  {
+    "nationality": "미얀마",
+    "residents": 53914,
+    "share": 2
+  },
+  {
+    "nationality": "카자흐스탄",
+    "residents": 44549,
+    "share": 1.7
+  },
+  {
+    "nationality": "한국계러시아인",
+    "residents": 35984,
+    "share": 1.4
+  },
+  {
+    "nationality": "타이완",
+    "residents": 35838,
+    "share": 1.4
+  },
+  {
+    "nationality": "스리랑카",
+    "residents": 35792,
+    "share": 1.4
+  },
+  {
+    "nationality": "러시아(연방)",
+    "residents": 33268,
+    "share": 1.3
+  },
+  {
+    "nationality": "방글라데시",
+    "residents": 31220,
+    "share": 1.2
+  },
+  {
+    "nationality": "캐나다",
+    "residents": 28604,
+    "share": 1.1
+  },
+  {
+    "nationality": "오스트레일리아",
+    "residents": 19430,
+    "share": 0.7
+  },
+  {
+    "nationality": "파키스탄",
+    "residents": 18355,
+    "share": 0.7
+  },
+  {
+    "nationality": "인도",
+    "residents": 16851,
+    "share": 0.6
+  },
+  {
+    "nationality": "말레이시아",
+    "residents": 12951,
+    "share": 0.5
+  },
+  {
+    "nationality": "홍콩",
+    "residents": 12786,
+    "share": 0.5
+  },
+  {
+    "nationality": "싱가포르",
+    "residents": 12003,
+    "share": 0.5
+  },
+  {
+    "nationality": "키르기즈",
+    "residents": 11784,
+    "share": 0.4
+  },
+  {
+    "nationality": "프랑스",
+    "residents": 8867,
+    "share": 0.3
+  },
+  {
+    "nationality": "영국",
+    "residents": 8697,
+    "share": 0.3
+  },
+  {
+    "nationality": "라오스",
+    "residents": 8485,
+    "share": 0.3
+  },
+  {
+    "nationality": "독일",
+    "residents": 6544,
+    "share": 0.2
+  },
+  {
+    "nationality": "뉴질랜드",
+    "residents": 5738,
+    "share": 0.2
+  },
+  {
+    "nationality": "우크라이나",
+    "residents": 5267,
+    "share": 0.2
+  },
+  {
+    "nationality": "남아프리카공화국",
+    "residents": 5164,
+    "share": 0.2
+  },
+  {
+    "nationality": "티모르민주공화국",
+    "residents": 4611,
+    "share": 0.2
+  },
+  {
+    "nationality": "튀르키예",
+    "residents": 4475,
+    "share": 0.2
+  },
+  {
+    "nationality": "이집트",
+    "residents": 3198,
+    "share": 0.1
+  },
+  {
+    "nationality": "타지키스탄",
+    "residents": 3123,
+    "share": 0.1
+  },
+  {
+    "nationality": "브라질",
+    "residents": 3089,
+    "share": 0.1
+  },
+  {
+    "nationality": "나이지리아",
+    "residents": 2941,
+    "share": 0.1
+  },
+  {
+    "nationality": "이탈리아",
+    "residents": 2841,
+    "share": 0.1
+  },
+  {
+    "nationality": "멕시코",
+    "residents": 2108,
+    "share": 0.1
+  },
+  {
+    "nationality": "이란",
+    "residents": 2054,
+    "share": 0.1
+  },
+  {
+    "nationality": "스페인",
+    "residents": 1999,
+    "share": 0.1
+  },
+  {
+    "nationality": "시리아",
+    "residents": 1946,
+    "share": 0.1
+  },
+  {
+    "nationality": "모로코",
+    "residents": 1916,
+    "share": 0.1
+  },
+  {
+    "nationality": "네덜란드",
+    "residents": 1663,
+    "share": 0.1
+  },
+  {
+    "nationality": "가나",
+    "residents": 1612,
+    "share": 0.1
+  },
+  {
+    "nationality": "에티오피아",
+    "residents": 1498,
+    "share": 0.1
+  },
+  {
+    "nationality": "사우디아라비아",
+    "residents": 1448,
+    "share": 0.1
+  },
+  {
+    "nationality": "예멘공화국",
+    "residents": 1235,
+    "share": 0
+  },
+  {
+    "nationality": "투르크메니스탄",
+    "residents": 1204,
+    "share": 0
+  },
+  {
+    "nationality": "스웨덴",
+    "residents": 1106,
+    "share": 0
+  },
+  {
+    "nationality": "리비아",
+    "residents": 1038,
+    "share": 0
+  },
+  {
+    "nationality": "폴란드",
+    "residents": 1021,
+    "share": 0
+  },
+  {
+    "nationality": "페루",
+    "residents": 988,
+    "share": 0
+  },
+  {
+    "nationality": "스위스",
+    "residents": 978,
+    "share": 0
+  },
+  {
+    "nationality": "아프가니스탄",
+    "residents": 951,
+    "share": 0
+  },
+  {
+    "nationality": "콜롬비아",
+    "residents": 866,
+    "share": 0
+  },
+  {
+    "nationality": "카메룬",
+    "residents": 829,
+    "share": 0
+  },
+  {
+    "nationality": "튀니지",
+    "residents": 800,
+    "share": 0
+  },
+  {
+    "nationality": "벨기에",
+    "residents": 797,
+    "share": 0
+  },
+  {
+    "nationality": "아일랜드",
+    "residents": 778,
+    "share": 0
+  },
+  {
+    "nationality": "아랍에미리트연합",
+    "residents": 728,
+    "share": 0
+  },
+  {
+    "nationality": "마카오",
+    "residents": 706,
+    "share": 0
+  },
+  {
+    "nationality": "요르단",
+    "residents": 692,
+    "share": 0
+  },
+  {
+    "nationality": "이라크",
+    "residents": 686,
+    "share": 0
+  },
+  {
+    "nationality": "케냐",
+    "residents": 676,
+    "share": 0
+  },
+  {
+    "nationality": "아르헨티나",
+    "residents": 675,
+    "share": 0
+  },
+  {
+    "nationality": "덴마크",
+    "residents": 649,
+    "share": 0
+  },
+  {
+    "nationality": "우간다",
+    "residents": 626,
+    "share": 0
+  },
+  {
+    "nationality": "오스트리아",
+    "residents": 592,
+    "share": 0
+  },
+  {
+    "nationality": "르완다",
+    "residents": 574,
+    "share": 0
+  },
+  {
+    "nationality": "부룬디",
+    "residents": 571,
+    "share": 0
+  },
+  {
+    "nationality": "노르웨이",
+    "residents": 565,
+    "share": 0
+  },
+  {
+    "nationality": "탄자니아",
+    "residents": 554,
+    "share": 0
+  },
+  {
+    "nationality": "알제리",
+    "residents": 523,
+    "share": 0
+  },
+  {
+    "nationality": "라이베리아",
+    "residents": 523,
+    "share": 0
+  },
+  {
+    "nationality": "루마니아",
+    "residents": 521,
+    "share": 0
+  },
+  {
+    "nationality": "칠레",
+    "residents": 492,
+    "share": 0
+  },
+  {
+    "nationality": "아제르바이잔",
+    "residents": 490,
+    "share": 0
+  },
+  {
+    "nationality": "벨라루스",
+    "residents": 446,
+    "share": 0
+  },
+  {
+    "nationality": "핀란드",
+    "residents": 433,
+    "share": 0
+  },
+  {
+    "nationality": "에콰도르",
+    "residents": 410,
+    "share": 0
+  },
+  {
+    "nationality": "포르투갈",
+    "residents": 388,
+    "share": 0
+  },
+  {
+    "nationality": "수단",
+    "residents": 382,
+    "share": 0
+  },
+  {
+    "nationality": "이스라엘",
+    "residents": 379,
+    "share": 0
+  },
+  {
+    "nationality": "콩고민주공화국",
+    "residents": 378,
+    "share": 0
+  },
+  {
+    "nationality": "헝가리",
+    "residents": 375,
+    "share": 0
+  },
+  {
+    "nationality": "브루나이",
+    "residents": 356,
+    "share": 0
+  },
+  {
+    "nationality": "그리스",
+    "residents": 344,
+    "share": 0
+  },
+  {
+    "nationality": "세네갈",
+    "residents": 317,
+    "share": 0
+  },
+  {
+    "nationality": "체코",
+    "residents": 310,
+    "share": 0
+  },
+  {
+    "nationality": "기타",
+    "residents": 259,
+    "share": 0
+  },
+  {
+    "nationality": "코트디부아르",
+    "residents": 257,
+    "share": 0
+  },
+  {
+    "nationality": "말리",
+    "residents": 256,
+    "share": 0
+  },
+  {
+    "nationality": "기니",
+    "residents": 249,
+    "share": 0
+  },
+  {
+    "nationality": "파라과이",
+    "residents": 239,
+    "share": 0
+  },
+  {
+    "nationality": "베네수엘라",
+    "residents": 239,
+    "share": 0
+  },
+  {
+    "nationality": "불가리아",
+    "residents": 210,
+    "share": 0
+  },
+  {
+    "nationality": "리투아니아",
+    "residents": 203,
+    "share": 0
+  },
+  {
+    "nationality": "카타르",
+    "residents": 185,
+    "share": 0
+  },
+  {
+    "nationality": "영국외지민",
+    "residents": 183,
+    "share": 0
+  },
+  {
+    "nationality": "크로아티아",
+    "residents": 158,
+    "share": 0
+  },
+  {
+    "nationality": "조지아",
+    "residents": 156,
+    "share": 0
+  },
+  {
+    "nationality": "아이티",
+    "residents": 155,
+    "share": 0
+  },
+  {
+    "nationality": "코스타리카",
+    "residents": 148,
+    "share": 0
+  },
+  {
+    "nationality": "과테말라",
+    "residents": 144,
+    "share": 0
+  },
+  {
+    "nationality": "쿠웨이트",
+    "residents": 143,
+    "share": 0
+  },
+  {
+    "nationality": "도미니카공화국",
+    "residents": 143,
+    "share": 0
+  },
+  {
+    "nationality": "짐바브웨",
+    "residents": 140,
+    "share": 0
+  },
+  {
+    "nationality": "앙골라",
+    "residents": 136,
+    "share": 0
+  },
+  {
+    "nationality": "라트비아",
+    "residents": 132,
+    "share": 0
+  },
+  {
+    "nationality": "세르비아",
+    "residents": 128,
+    "share": 0
+  },
+  {
+    "nationality": "감비아",
+    "residents": 123,
+    "share": 0
+  },
+  {
+    "nationality": "볼리비아",
+    "residents": 122,
+    "share": 0
+  },
+  {
+    "nationality": "가봉",
+    "residents": 120,
+    "share": 0
+  },
+  {
+    "nationality": "시에라리온",
+    "residents": 117,
+    "share": 0
+  },
+  {
+    "nationality": "슬로바크",
+    "residents": 114,
+    "share": 0
+  },
+  {
+    "nationality": "팔레스타인",
+    "residents": 112,
+    "share": 0
+  },
+  {
+    "nationality": "잠비아",
+    "residents": 107,
+    "share": 0
+  },
+  {
+    "nationality": "오만",
+    "residents": 101,
+    "share": 0
+  },
+  {
+    "nationality": "아르메니아",
+    "residents": 93,
+    "share": 0
+  },
+  {
+    "nationality": "파나마",
+    "residents": 92,
+    "share": 0
+  },
+  {
+    "nationality": "온두라스",
+    "residents": 92,
+    "share": 0
+  },
+  {
+    "nationality": "피지",
+    "residents": 91,
+    "share": 0
+  },
+  {
+    "nationality": "에스토니아",
+    "residents": 89,
+    "share": 0
+  },
+  {
+    "nationality": "슬로베니아",
+    "residents": 84,
+    "share": 0
+  },
+  {
+    "nationality": "엘살바도르",
+    "residents": 79,
+    "share": 0
+  },
+  {
+    "nationality": "몰도바",
+    "residents": 79,
+    "share": 0
+  },
+  {
+    "nationality": "룩셈부르크",
+    "residents": 76,
+    "share": 0
+  },
+  {
+    "nationality": "레바논",
+    "residents": 68,
+    "share": 0
+  },
+  {
+    "nationality": "말라위",
+    "residents": 67,
+    "share": 0
+  },
+  {
+    "nationality": "부르키나파소",
+    "residents": 66,
+    "share": 0
+  },
+  {
+    "nationality": "마다가스카르",
+    "residents": 65,
+    "share": 0
+  },
+  {
+    "nationality": "자메이카",
+    "residents": 63,
+    "share": 0
+  },
+  {
+    "nationality": "우루과이",
+    "residents": 62,
+    "share": 0
+  },
+  {
+    "nationality": "모잠비크",
+    "residents": 59,
+    "share": 0
+  },
+  {
+    "nationality": "알바니아",
+    "residents": 58,
+    "share": 0
+  },
+  {
+    "nationality": "니카라과",
+    "residents": 56,
+    "share": 0
+  },
+  {
+    "nationality": "쿠바",
+    "residents": 55,
+    "share": 0
+  },
+  {
+    "nationality": "토고",
+    "residents": 49,
+    "share": 0
+  },
+  {
+    "nationality": "부탄",
+    "residents": 43,
+    "share": 0
+  },
+  {
+    "nationality": "키프로스",
+    "residents": 42,
+    "share": 0
+  },
+  {
+    "nationality": "도미니카연방",
+    "residents": 42,
+    "share": 0
+  },
+  {
+    "nationality": "콩고",
+    "residents": 39,
+    "share": 0
+  },
+  {
+    "nationality": "보츠와나",
+    "residents": 39,
+    "share": 0
+  },
+  {
+    "nationality": "트리니다드토바고",
+    "residents": 37,
+    "share": 0
+  },
+  {
+    "nationality": "몰타",
+    "residents": 37,
+    "share": 0
+  },
+  {
+    "nationality": "바누아투",
+    "residents": 37,
+    "share": 0
+  },
+  {
+    "nationality": "남수단공화국",
+    "residents": 34,
+    "share": 0
+  },
+  {
+    "nationality": "바레인",
+    "residents": 33,
+    "share": 0
+  },
+  {
+    "nationality": "파푸아뉴기니",
+    "residents": 32,
+    "share": 0
+  },
+  {
+    "nationality": "마샬군도",
+    "residents": 32,
+    "share": 0
+  },
+  {
+    "nationality": "모리셔스",
+    "residents": 30,
+    "share": 0
+  },
+  {
+    "nationality": "세인트크리스토퍼네비스",
+    "residents": 27,
+    "share": 0
+  },
+  {
+    "nationality": "소말리아",
+    "residents": 27,
+    "share": 0
+  },
+  {
+    "nationality": "베냉",
+    "residents": 25,
+    "share": 0
+  },
+  {
+    "nationality": "아이슬란드",
+    "residents": 23,
+    "share": 0
+  },
+  {
+    "nationality": "보스니아-헤르체고비나",
+    "residents": 23,
+    "share": 0
+  },
+  {
+    "nationality": "몬테네그로",
+    "residents": 22,
+    "share": 0
+  },
+  {
+    "nationality": "미이크로네시아",
+    "residents": 21,
+    "share": 0
+  },
+  {
+    "nationality": "모리타니",
+    "residents": 19,
+    "share": 0
+  },
+  {
+    "nationality": "중앙아프리카공화국",
+    "residents": 18,
+    "share": 0
+  },
+  {
+    "nationality": "레소토",
+    "residents": 17,
+    "share": 0
+  },
+  {
+    "nationality": "가이아나",
+    "residents": 16,
+    "share": 0
+  },
+  {
+    "nationality": "북마케도니아",
+    "residents": 16,
+    "share": 0
+  },
+  {
+    "nationality": "에스와티니",
+    "residents": 16,
+    "share": 0
+  },
+  {
+    "nationality": "홍콩거주난민",
+    "residents": 14,
+    "share": 0
+  },
+  {
+    "nationality": "팔라우",
+    "residents": 14,
+    "share": 0
+  },
+  {
+    "nationality": "솔로몬군도",
+    "residents": 14,
+    "share": 0
+  },
+  {
+    "nationality": "니제르",
+    "residents": 14,
+    "share": 0
+  },
+  {
+    "nationality": "기니비사우",
+    "residents": 14,
+    "share": 0
+  },
+  {
+    "nationality": "바하마",
+    "residents": 13,
+    "share": 0
+  },
+  {
+    "nationality": "에리트레아",
+    "residents": 13,
+    "share": 0
+  },
+  {
+    "nationality": "몰디브",
+    "residents": 11,
+    "share": 0
+  },
+  {
+    "nationality": "통가",
+    "residents": 11,
+    "share": 0
+  },
+  {
+    "nationality": "적도기니",
+    "residents": 9,
+    "share": 0
+  },
+  {
+    "nationality": "차드",
+    "residents": 8,
+    "share": 0
+  },
+  {
+    "nationality": "바베이도스",
+    "residents": 7,
+    "share": 0
+  },
+  {
+    "nationality": "코소보",
+    "residents": 7,
+    "share": 0
+  },
+  {
+    "nationality": "사모아",
+    "residents": 7,
+    "share": 0
+  },
+  {
+    "nationality": "지부티",
+    "residents": 7,
+    "share": 0
+  },
+  {
+    "nationality": "자이르",
+    "residents": 7,
+    "share": 0
+  },
+  {
+    "nationality": "앤티카바부다",
+    "residents": 6,
+    "share": 0
+  },
+  {
+    "nationality": "수리남",
+    "residents": 6,
+    "share": 0
+  },
+  {
+    "nationality": "세인트루시아",
+    "residents": 6,
+    "share": 0
+  },
+  {
+    "nationality": "벨리즈",
+    "residents": 6,
+    "share": 0
+  },
+  {
+    "nationality": "그레나다",
+    "residents": 5,
+    "share": 0
+  },
+  {
+    "nationality": "나우루",
+    "residents": 5,
+    "share": 0
+  },
+  {
+    "nationality": "영국외지시민",
+    "residents": 4,
+    "share": 0
+  },
+  {
+    "nationality": "영국해외영토시민",
+    "residents": 3,
+    "share": 0
+  },
+  {
+    "nationality": "리히텐슈타인",
+    "residents": 3,
+    "share": 0
+  },
+  {
+    "nationality": "키리바시",
+    "residents": 3,
+    "share": 0
+  },
+  {
+    "nationality": "나미비아",
+    "residents": 3,
+    "share": 0
+  },
+  {
+    "nationality": "세인트빈센트그레나딘",
+    "residents": 2,
+    "share": 0
+  },
+  {
+    "nationality": "산마리노",
+    "residents": 2,
+    "share": 0
+  },
+  {
+    "nationality": "교황청",
+    "residents": 2,
+    "share": 0
+  },
+  {
+    "nationality": "코모로",
+    "residents": 2,
+    "share": 0
+  },
+  {
+    "nationality": "카보베르데",
+    "residents": 2,
+    "share": 0
+  },
+  {
+    "nationality": "세이셸",
+    "residents": 2,
+    "share": 0
+  },
+  {
+    "nationality": "상투메프린시페",
+    "residents": 2,
+    "share": 0
+  },
+  {
+    "nationality": "유고슬라비아",
+    "residents": 1,
+    "share": 0
+  },
+  {
+    "nationality": "스발바르",
+    "residents": 1,
+    "share": 0
+  },
+  {
+    "nationality": "세르비아몬테네그로",
+    "residents": 1,
+    "share": 0
+  }
+];
+
+export const realVisaDistribution: readonly RealVisaSegment[] = [
+  {
+    "name": "재외동포",
+    "value": 23.9
+  },
+  {
+    "name": "비전문취업 근로자",
+    "value": 23.4
+  },
+  {
+    "name": "기타",
+    "value": 16.6
+  },
+  {
+    "name": "유학생",
+    "value": 12
+  },
+  {
+    "name": "결혼이민",
+    "value": 9.9
+  },
+  {
+    "name": "전문인력",
+    "value": 8.7
+  },
+  {
+    "name": "어학연수생",
+    "value": 5.4
+  },
+  {
+    "name": "단기체류",
+    "value": 0.2
+  }
+];
+
+export const realStayVisaTypes: readonly RealVisaType[] = [
+  {
+    "visaCode": "E-9",
+    "visaName": "비전문취업",
+    "count": 328114,
+    "segment": "비전문취업 근로자"
+  },
+  {
+    "visaCode": "F-5",
+    "visaName": "영주",
+    "count": 202738,
+    "segment": "재외동포"
+  },
+  {
+    "visaCode": "D-2",
+    "visaName": "유학",
+    "count": 178107,
+    "segment": "유학생"
+  },
+  {
+    "visaCode": "F-6",
+    "visaName": "결혼이민",
+    "count": 146672,
+    "segment": "결혼이민"
+  },
+  {
+    "visaCode": "F-1",
+    "visaName": "방문동거",
+    "count": 96797,
+    "segment": "기타"
+  },
+  {
+    "visaCode": "H-2",
+    "visaName": "방문취업",
+    "count": 91818,
+    "segment": "재외동포"
+  },
+  {
+    "visaCode": "D-4",
+    "visaName": "일반연수",
+    "count": 79805,
+    "segment": "어학연수생"
+  },
+  {
+    "visaCode": "E-7",
+    "visaName": "특정활동",
+    "count": 62975,
+    "segment": "전문인력"
+  },
+  {
+    "visaCode": "F-2",
+    "visaName": "거주",
+    "count": 61039,
+    "segment": "재외동포"
+  },
+  {
+    "visaCode": "G-1",
+    "visaName": "기타",
+    "count": 56475,
+    "segment": "기타"
+  },
+  {
+    "visaCode": "F-3",
+    "visaName": "동반",
+    "count": 51298,
+    "segment": "기타"
+  },
+  {
+    "visaCode": "기타(Other)",
+    "visaName": "기타(Other)",
+    "count": 31626,
+    "segment": "기타"
+  },
+  {
+    "visaCode": "E-10",
+    "visaName": "선원취업",
+    "count": 21548,
+    "segment": "전문인력"
+  },
+  {
+    "visaCode": "E-8",
+    "visaName": "계절근로",
+    "count": 19690,
+    "segment": "비전문취업 근로자"
+  },
+  {
+    "visaCode": "D-10",
+    "visaName": "구직",
+    "count": 18212,
+    "segment": "전문인력"
+  },
+  {
+    "visaCode": "E-2",
+    "visaName": "회화",
+    "count": 13348,
+    "segment": "전문인력"
+  },
+  {
+    "visaCode": "D-8",
+    "visaName": "기업투자",
+    "count": 8321,
+    "segment": "기타"
+  },
+  {
+    "visaCode": "E-6",
+    "visaName": "예술흥행",
+    "count": 4013,
+    "segment": "전문인력"
+  },
+  {
+    "visaCode": "H-1",
+    "visaName": "관광취업",
+    "count": 3577,
+    "segment": "단기체류"
+  },
+  {
+    "visaCode": "E-3",
+    "visaName": "연구",
+    "count": 3397,
+    "segment": "전문인력"
+  }
+];
 
 // 외국인 유학생 체류현황(법무부). 연도×체류자격 집계 — 대학/유학생 페이지가 사용.
 export type RealStudentYear = { year: number; total: number; degree: number; language: number };
@@ -9351,8 +7421,10 @@ export const realRegionResidentSummary = {
 } as const;
 
 export const realDataSummary = {
-  "generatedAt": "2026-06-15T15:37:59.083Z",
-  "statusRowCount": 400,
+  "generatedAt": "2026-06-15T21:20:13.024Z",
+  "statusRowCount": 205,
+  "nationalityCount": 205,
+  "visaSegmentCount": 8,
   "regionRowCount": 200,
   "apiStatusRowCount": 0,
   "apiRegionRowCount": 0,
@@ -9361,8 +7433,9 @@ export const realDataSummary = {
   "regionResidentCount": 0,
   "apiParsedFiles": [],
   "sourceFiles": {
-    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-14.csv",
-    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-14.csv",
+    "status": "/home/user/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-14.csv",
+    "stay": "/home/user/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-06-14.csv",
+    "student": "/home/user/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-14.csv",
     "academy": null,
     "mois": null
   }

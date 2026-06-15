@@ -90,14 +90,15 @@ function firstValue(row, candidates) {
 }
 
 function inferSegment(visaCode, visaName) {
-  const value = `${visaCode} ${visaName}`;
-  if (value.includes("D-2") || value.includes("유학")) return "유학생";
-  if (value.includes("D-4") || value.includes("연수")) return "어학연수생";
-  if (value.includes("E-9") || value.includes("비전문")) return "비전문취업 근로자";
-  if (value.includes("E-7") || value.includes("전문")) return "전문인력";
-  if (value.includes("F-4") || value.includes("동포")) return "재외동포";
-  if (value.includes("F-6") || value.includes("결혼")) return "결혼이민";
-  if (value.includes("C-3") || value.includes("단기")) return "단기체류";
+  const v = `${visaCode} ${visaName}`.toUpperCase();
+  if (/D-?2|유학/.test(v)) return "유학생";
+  if (/D-?4|어학연수|일반연수/.test(v)) return "어학연수생";
+  if (/E-?9|비전문취업|계절근로/.test(v)) return "비전문취업 근로자";
+  if (/E-?[1-8]|전문인력|특정활동|교수|회화|연구|기술지도|전문직|예술흥행|주재|무역|구직|선원/.test(v)) return "전문인력";
+  if (/F-?4|재외동포/.test(v)) return "재외동포";
+  if (/F-?[25]|H-?2|영주|거주|방문취업/.test(v)) return "재외동포";
+  if (/F-?6|결혼이민/.test(v)) return "결혼이민";
+  if (/[ABC]-?\d|단기|관광|통과|사증면제|외교|공무|취재/.test(v)) return "단기체류";
   return "기타";
 }
 
@@ -114,26 +115,125 @@ function needsForSegment(segment) {
   }[segment] ?? ["기본 계좌"];
 }
 
+// 열 헤더에서 "D2(유학)" → { code: "D-2", name: "유학" } 추출.
+function parseVisaColHeader(col) {
+  const m = col.match(/^([A-Z]+\d+[a-z]?\d*)\((.+)\)$/);
+  if (m) {
+    const rawCode = m[1];
+    const visaCode = rawCode.replace(/([A-Z]+)(\d)/, "$1-$2");
+    return { visaCode, visaName: m[2] };
+  }
+  return { visaCode: col, visaName: col };
+}
+
+// 가로형(wide) MOJ CSV 감지 — 국적 컬럼은 있으나 체류외국인수 컬럼이 없으면 wide.
+function isWideFormat(rows) {
+  if (!rows.length) return false;
+  const headers = Object.keys(rows[0]).filter((k) => k !== "__rowNumber");
+  return headers.includes("국적") && !headers.includes("체류외국인수") && headers.length > 6;
+}
+
+// Wide CSV → 국적별 합계 ForeignResidentStatus 레코드 (남녀 합산).
+// 체류외국인 국적별 현황: 대륙, 국적, 성별, [비자컬럼...]
 function transformStatus(rows) {
-  return rows.map((row, index) => {
-    const nationality = firstValue(row, ["국적", "지역"]);
-    const visaCode = firstValue(row, ["체류자격", "비자"]);
-    const visaName = firstValue(row, ["체류자격명", "자격명"]);
-    const residentCount = toNumber(firstValue(row, ["체류외국인수", "인원", "계"]));
-    const segmentType = inferSegment(visaCode, visaName);
-    return {
-      id: `real-status-${index + 1}`,
+  if (!isWideFormat(rows)) {
+    // 기존 narrow 포맷 폴백
+    return rows.map((row, index) => {
+      const nationality = firstValue(row, ["국적", "지역"]);
+      const visaCode = firstValue(row, ["체류자격", "비자"]);
+      const visaName = firstValue(row, ["체류자격명", "자격명"]);
+      const residentCount = toNumber(firstValue(row, ["체류외국인수", "인원", "계"]));
+      const segmentType = inferSegment(visaCode, visaName);
+      return {
+        id: `real-status-${index + 1}`,
+        baseYear: 2024,
+        nationality,
+        visaCode,
+        visaName,
+        segmentType,
+        residentCount,
+        financialNeedTags: needsForSegment(segmentType),
+        sourceName: "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
+        sourceUrl: "https://www.data.go.kr/data/3045188/fileData.do"
+      };
+    }).filter((row) => row.nationality || row.visaCode || row.residentCount > 0);
+  }
+
+  // Wide 포맷: 국적×성별 행 → 비자컬럼 합산 → 국적별 총계 레코드
+  const headers = Object.keys(rows[0]).filter((k) => k !== "__rowNumber");
+  const visaCols = headers.slice(3);
+  const natMap = new Map();
+  for (const row of rows) {
+    const nationality = (row["국적"] ?? "").trim();
+    if (!nationality) continue;
+    let total = 0;
+    for (const col of visaCols) total += toNumber(row[col]);
+    natMap.set(nationality, (natMap.get(nationality) ?? 0) + total);
+  }
+  return [...natMap.entries()]
+    .filter(([, count]) => count > 0)
+    .sort((a, b) => b[1] - a[1])
+    .map(([nationality, residentCount], i) => ({
+      id: `real-status-${i + 1}`,
       baseYear: 2024,
       nationality,
-      visaCode,
-      visaName,
-      segmentType,
+      visaCode: "",
+      visaName: "",
+      segmentType: "기타",
       residentCount,
-      financialNeedTags: needsForSegment(segmentType),
+      financialNeedTags: ["기본 계좌", "체크카드", "외국어 상담"],
       sourceName: "공공데이터포털 법무부 체류외국인 국적 및 체류자격별 현황",
       sourceUrl: "https://www.data.go.kr/data/3045188/fileData.do"
-    };
-  }).filter((row) => row.nationality || row.visaCode || row.residentCount > 0);
+    }));
+}
+
+// Wide CSV → 국적 분포(residents/share) + 비자 세그먼트 분포.
+// 두 MOJ 파일 중 어느 쪽이든 동일 로직으로 집계.
+function aggregateStatusWide(rows, sourceName, sourceUrl) {
+  if (!isWideFormat(rows)) return { nationals: [], visaTypes: [], visaSegments: [] };
+  const headers = Object.keys(rows[0]).filter((k) => k !== "__rowNumber");
+  const visaCols = headers.slice(3);
+
+  const natMap = new Map();
+  const visaMap = new Map();
+  for (const row of rows) {
+    const nationality = (row["국적"] ?? "").trim();
+    if (!nationality) continue;
+    for (const col of visaCols) {
+      const count = toNumber(row[col]);
+      if (!count) continue;
+      natMap.set(nationality, (natMap.get(nationality) ?? 0) + count);
+      const prev = visaMap.get(col) ?? { ...parseVisaColHeader(col), count: 0 };
+      prev.count += count;
+      visaMap.set(col, prev);
+    }
+  }
+
+  const grandTotal = [...natMap.values()].reduce((s, v) => s + v, 0) || 1;
+  const nationals = [...natMap.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([nationality, residents]) => ({
+      nationality,
+      residents,
+      share: Number(((residents / grandTotal) * 100).toFixed(1))
+    }));
+
+  const visaTypes = [...visaMap.values()]
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 20)
+    .map((v) => ({ ...v, segment: inferSegment(v.visaCode, v.visaName) }));
+
+  const segMap = new Map();
+  for (const v of visaMap.values()) {
+    const seg = inferSegment(v.visaCode, v.visaName);
+    segMap.set(seg, (segMap.get(seg) ?? 0) + v.count);
+  }
+  const segTotal = [...segMap.values()].reduce((s, v) => s + v, 0) || 1;
+  const visaSegments = [...segMap.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([name, count]) => ({ name, value: Number(((count / segTotal) * 100).toFixed(1)) }));
+
+  return { nationals, visaTypes, visaSegments };
 }
 
 function summarizeStatus(statusRows) {
@@ -508,13 +608,33 @@ async function main() {
   await ensureDir(processedDir);
   await ensureDir(generatedDir);
 
+  // 법무부 체류외국인 국적별 현황 (전체, 단기+장기 포함) — 국적 분포 집계
   const statusRaw = await readLatestRaw("moj_foreign_resident_status_2024");
   let statusRows = [];
+  let nationalityDistribution = [];
+  let allVisaSegments = [];
   if (statusRaw) {
-    statusRows = transformStatus(parseCsv(statusRaw.text));
+    const parsed = parseCsv(statusRaw.text);
+    statusRows = transformStatus(parsed);
+    const agg = aggregateStatusWide(parsed, "법무부 체류외국인 국적 및 체류자격별 현황", "https://www.data.go.kr/data/3045188/fileData.do");
+    nationalityDistribution = agg.nationals;
+    allVisaSegments = agg.visaSegments;
   }
 
   const regionRows = summarizeStatus(statusRows).slice(0, 200);
+
+  // 법무부 외국인체류데이터 (장기체류 중심) — 비자/세그먼트 분포 집계
+  const stayRaw = await readLatestRaw("moj_foreign_stay_data_2024");
+  let stayVisaSegments = [];
+  let stayVisaTypes = [];
+  if (stayRaw) {
+    const parsed = parseCsv(stayRaw.text);
+    const agg = aggregateStatusWide(parsed, "법무부 외국인체류데이터", "https://www.data.go.kr/data/3069963/fileData.do");
+    stayVisaSegments = agg.visaSegments;
+    stayVisaTypes = agg.visaTypes;
+  }
+  // 장기체류 세그먼트가 있으면 이쪽을 우선 사용 (금융 활용도 높은 장기 체류자 기준)
+  const visaDistribution = stayVisaSegments.length > 0 ? stayVisaSegments : allVisaSegments;
 
   // 유학생 체류현황(법무부 연도별 외국인 유학생). 연도×체류자격 집계.
   const studentRaw = await readLatestRaw("moj_foreign_student_stay");
@@ -554,6 +674,13 @@ async function main() {
     `// API(KOSIS/data.go.kr) 수집 보조 데이터. 1차(MOJ) 집계와 분리해 제공한다.\n` +
     `export const realApiStatusData: readonly ForeignResidentStatus[] = ${JSON.stringify(apiStatus, null, 2)};\n\n` +
     `export const realApiRegionData: readonly ForeignResidentRegionMonth[] = ${JSON.stringify(apiRegion, null, 2)};\n\n` +
+    `// 국적 분포 + 비자/세그먼트 분포 — 국적·체류자격 페이지가 사용.\n` +
+    `export type RealNationalityDist = { nationality: string; residents: number; share: number };\n` +
+    `export type RealVisaSegment = { name: string; value: number };\n` +
+    `export type RealVisaType = { visaCode: string; visaName: string; count: number; segment: string };\n` +
+    `export const realNationalityDistribution: readonly RealNationalityDist[] = ${JSON.stringify(nationalityDistribution, null, 2)};\n\n` +
+    `export const realVisaDistribution: readonly RealVisaSegment[] = ${JSON.stringify(visaDistribution, null, 2)};\n\n` +
+    `export const realStayVisaTypes: readonly RealVisaType[] = ${JSON.stringify(stayVisaTypes, null, 2)};\n\n` +
     `// 외국인 유학생 체류현황(법무부). 연도×체류자격 집계 — 대학/유학생 페이지가 사용.\n` +
     `export type RealStudentYear = { year: number; total: number; degree: number; language: number };\n` +
     `export type RealStudentVisa = { visaRaw: string; course: string; count: number };\n` +
@@ -579,6 +706,8 @@ async function main() {
     `export const realDataSummary = ${JSON.stringify({
       generatedAt: new Date().toISOString(),
       statusRowCount: statusRows.length,
+      nationalityCount: nationalityDistribution.length,
+      visaSegmentCount: visaDistribution.length,
       regionRowCount: regionRows.length,
       apiStatusRowCount: apiStatus.length,
       apiRegionRowCount: apiRegion.length,
@@ -588,6 +717,7 @@ async function main() {
       apiParsedFiles: parsedFiles,
       sourceFiles: {
         status: statusRaw?.path ?? null,
+        stay: stayRaw?.path ?? null,
         student: studentRaw?.path ?? null,
         academy: academyRaw?.path ?? null,
         mois: moisRaw?.path ?? null
@@ -613,6 +743,8 @@ async function main() {
       {
         ok: true,
         statusRowCount: statusRows.length,
+        nationalityCount: nationalityDistribution.length,
+        visaSegmentCount: visaDistribution.length,
         regionRowCount: regionRows.length,
         apiStatusRowCount: apiStatus.length,
         apiRegionRowCount: apiRegion.length,

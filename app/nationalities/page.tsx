@@ -8,6 +8,9 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Panel } from "@/components/ui/Panel";
 import { StatTile } from "@/components/ui/StatTile";
 import {
+  hasRealNationalityData,
+  hasRealVisaData,
+  kpiSummary,
   nationalityDistributionData,
   sampleResidentStatus,
   visaDistributionData
@@ -83,7 +86,15 @@ export default function NationalitiesPage() {
         title="국적별 체류 구조와 금융 니즈"
         description="국적별 거주 규모와 체류자격 구성, 월별 증가 추세를 비교하고 계좌개설·송금·체크카드·자산관리 같은 니즈 태그를 한눈에 확인합니다."
         right={
-          <span className="eyebrow">상위 {nationalityDistributionData.length}개국 · 집계 통계</span>
+          <div className="flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-white">
+            <Flag aria-hidden size={18} />
+            <div className="leading-tight">
+              <p className="text-lg font-bold">{formatNumber(kpiSummary.totalResidents)}</p>
+              <p className="text-[11px] text-white/75">
+                {hasRealNationalityData ? "실데이터 · 법무부 2024" : "샘플 데이터"} · 총 체류외국인
+              </p>
+            </div>
+          </div>
         }
       />
 
@@ -124,8 +135,8 @@ export default function NationalitiesPage() {
 
       <Panel
         title="국적별 분포"
-        subtitle="상위 국적의 샘플 거주자 수와 점유율"
-        right={<span className="eyebrow">단위 · 명</span>}
+        subtitle={hasRealNationalityData ? "법무부 체류외국인 국적별 현황(2024) · 상위 15개국" : "상위 국적의 샘플 거주자 수와 점유율"}
+        right={<span className="eyebrow">{hasRealNationalityData ? "실데이터" : "샘플"} · 단위 명</span>}
       >
         <BarList items={distributionItems} unit="명" />
       </Panel>
@@ -143,7 +154,7 @@ export default function NationalitiesPage() {
 
         <Panel
           title="체류자격 구성"
-          subtitle="세그먼트별 비중 샘플"
+          subtitle={hasRealVisaData ? "법무부 외국인체류데이터(2024) · 장기체류 기준 세그먼트 분포" : "세그먼트별 비중 샘플"}
           bodyClassName="p-0"
         >
           <div className="chart-box">
@@ -181,9 +192,9 @@ export default function NationalitiesPage() {
       </Panel>
 
       <Panel
-        title="국적별 체류자격과 금융 니즈"
-        subtitle="체류자격은 금융행동의 직접 증거가 아닌 세그먼트 가설입니다."
-        right={<span className="chip chip-neutral">가설 기반 해석</span>}
+        title="체류자격별 인원 및 금융 니즈"
+        subtitle={sampleResidentStatus[0]?.nationality === "전체" ? "법무부 외국인체류데이터(2024) · 장기체류 비자타입별 집계" : "체류자격은 금융행동의 직접 증거가 아닌 세그먼트 가설입니다."}
+        right={<span className="chip chip-neutral">{sampleResidentStatus[0]?.nationality === "전체" ? "실데이터" : "가설 기반"}</span>}
         bodyClassName="p-2"
       >
         <DataTable
