@@ -327,6 +327,68 @@ function summarizeStudents(studentRows) {
   };
 }
 
+// 월별 유학생 데이터셋(15100039: 년,월,국적지역,구분,유학생수) → 연도별 최신월 스톡 추세.
+// 연도말 단독표(15100038)의 2024 행 손상(유학 D-2가 실제 178,519의 절반인 85,256으로 기록)·2024 고정 문제를
+// 해결한다. 월별표는 2022~최신월(2026.4)까지 정확하며 2022·2023 값은 15100038과 일치(교차검증 완료, 2026-06-16).
+function summarizeStudentsMonthly(rows) {
+  const parsed = rows
+    .map((r) => ({
+      year: toNumber(firstValue(r, ["년", "연도", "year"])),
+      month: String(firstValue(r, ["월", "month"])).padStart(2, "0"),
+      gubun: String(firstValue(r, ["구분", "체류자격", "자격"])).trim(),
+      count: toNumber(firstValue(r, ["유학생수", "인원", "학생수", "학생"]))
+    }))
+    .filter((r) => r.year >= 2000 && r.year <= 2100 && r.gubun);
+  if (!parsed.length) return null;
+  const isLang = (g) => /연수/.test(g) || /D[-\s]?4/i.test(g);
+  const years = [...new Set(parsed.map((r) => r.year))].sort((a, b) => a - b);
+  const snapshotOf = (year) => {
+    const yr = parsed.filter((r) => r.year === year);
+    const maxM = [...new Set(yr.map((r) => r.month))].sort().at(-1);
+    return { month: maxM, rows: yr.filter((r) => r.month === maxM) };
+  };
+  const yearSeries = years.map((year) => {
+    const { month, rows: snap } = snapshotOf(year);
+    let degree = 0;
+    let language = 0;
+    for (const r of snap) {
+      if (isLang(r.gubun)) language += r.count;
+      else degree += r.count;
+    }
+    return { year, total: degree + language, degree, language, asOfMonth: month };
+  });
+  const latest = yearSeries.at(-1);
+  // 스톡 시계열의 정확한 YoY: 최신월의 전년 동월 스톡과 비교.
+  const sameMonthPrev = parsed.filter((r) => r.year === latest.year - 1 && r.month === latest.asOfMonth);
+  let yoy = 0;
+  if (sameMonthPrev.length) {
+    const prevTot = sameMonthPrev.reduce((s, r) => s + r.count, 0);
+    if (prevTot > 0) yoy = Number((((latest.total - prevTot) / prevTot) * 100).toFixed(1));
+  }
+  const { rows: latestSnap } = snapshotOf(latest.year);
+  const visaAgg = new Map();
+  for (const r of latestSnap) {
+    const course = isLang(r.gubun) ? "어학연수(D-4)" : "학위과정(D-2)";
+    const cur = visaAgg.get(r.gubun) ?? { visaRaw: r.gubun, course, count: 0 };
+    cur.count += r.count;
+    visaAgg.set(r.gubun, cur);
+  }
+  const byVisa = [...visaAgg.values()].sort((a, b) => b.count - a.count);
+  return {
+    yearSeries,
+    byVisa,
+    summary: {
+      hasData: true,
+      latestYear: latest.year,
+      asOfMonth: latest.asOfMonth,
+      total: latest.total,
+      degree: latest.degree,
+      language: latest.language,
+      yoy
+    }
+  };
+}
+
 // 파서 결과가 비어있을 때 실제 컬럼명을 로그 출력 (다음 런에서 파서 수정 확인용).
 function logColumnDiag(label, rows) {
   if (!rows.length) return;
@@ -339,7 +401,10 @@ function logColumnDiag(label, rows) {
 
 // 대학알리미 대학별 외국인유학생수 CSV → 대학별 집계(최신연도, 상위 30).
 // 실제 컬럼이 성별,국적명,체류자격,학교명 처럼 count 컬럼이 없으면 행 수를 학생 수로 추정.
-function transformAcademyUniversities(rows) {
+// 고등교육기관(대학)명 패턴 — 학생단위 레코드의 자기기재 학교명에서 비대학(어학원·기업·공란 등) 노이즈 제거.
+const UNIV_NAME_RE = /대학|과학기술원|KAIST|UNIST|GIST|DGIST|POSTECH|포스텍|폴리텍|사이버대|방송통신대|한국기술교육|예술종합학교/i;
+
+function transformAcademyUniversities(rows, baseYear = null) {
   if (!rows.length) return { latestYear: null, universities: [], universityCount: 0, totalForeignStudents: 0 };
   logColumnDiag("academyinfo", rows);
 
@@ -350,12 +415,14 @@ function transformAcademyUniversities(rows) {
 
   const yearOf = (r) => toNumber(firstValue(r, ["기준연도", "학년도", "연도", "년도", "년"]));
   const years = rows.map(yearOf).filter((y) => y >= 2000 && y <= 2100);
-  const latestYear = years.length ? Math.max(...years) : null;
+  const latestYear = years.length ? Math.max(...years) : baseYear;
   const agg = new Map();
   for (const r of rows) {
-    if (latestYear && yearOf(r) && yearOf(r) !== latestYear) continue;
+    if (years.length && yearOf(r) && yearOf(r) !== Math.max(...years)) continue;
     const uni = String(firstValue(r, ["대학명", "학교명", "기관명", "대학", "학교"])).trim();
     if (!uni || /합계|소계|총계|전체/.test(uni)) continue;
+    // 학생단위 레코드(연도·카운트 컬럼 없음)일 때만 대학명 필터 적용 — 자기기재 비대학 노이즈 제거.
+    if (!hasCountCol && !UNIV_NAME_RE.test(uni)) continue;
     const campus = String(firstValue(r, ["캠퍼스", "분교", "캠퍼스명"])).trim();
     const foreign = hasCountCol
       ? toNumber(firstValue(r, ["외국인유학생수", "외국인유학생", "유학생수", "유학생", "외국인학생수", "외국인학생", "외국인재학생수"]))
@@ -1045,13 +1112,20 @@ async function main() {
   const visaDistribution = stayVisaSegments.length > 0 ? stayVisaSegments : allVisaSegments;
 
   // 유학생 체류현황(법무부 연도별 외국인 유학생). 연도×체류자격 집계.
+  // 유학생 추이: 월별표(15100039=moe_foreign_student_region, 정확·최신 2022~2026.4)를 1차로.
+  // 연도말 단독표(15100038=moj_foreign_student_stay)는 2024 행 손상(D-2 절반)·2024 고정 → 폴백으로만.
+  const studentMonthlyRaw = await readLatestRaw("moe_foreign_student_region");
   const studentRaw = await readLatestRaw("moj_foreign_student_stay");
   let studentByYear = [];
   let studentByVisa = [];
   let studentSummary = { hasData: false, latestYear: null, total: 0, degree: 0, language: 0, yoy: 0 };
-  if (studentRaw) {
-    const studentRows = transformStudentStay(parseCsv(studentRaw.text));
-    const agg = summarizeStudents(studentRows);
+  const monthlyAgg = studentMonthlyRaw ? summarizeStudentsMonthly(parseCsv(studentMonthlyRaw.text)) : null;
+  if (monthlyAgg) {
+    studentByYear = monthlyAgg.yearSeries;
+    studentByVisa = monthlyAgg.byVisa;
+    studentSummary = monthlyAgg.summary;
+  } else if (studentRaw) {
+    const agg = summarizeStudents(transformStudentStay(parseCsv(studentRaw.text)));
     studentByYear = agg.yearSeries;
     studentByVisa = agg.byVisa;
     studentSummary = agg.summary;
@@ -1071,18 +1145,18 @@ async function main() {
   const finalNationalityDist = monthlyTotal > annualTotal ? monthlyNationalityDist : nationalityDistribution;
 
   // 교육부 최신 유학생 현황(moe) → 대학별 랭킹 1차 소스.
+  // 대학별 외국인유학생 랭킹: 대학알리미/유학생관리정보(학생단위 레코드)가 1차 — 학교별 집계로 실제 대학 top30 산출.
+  // 주의: 과거 1차였던 moe_foreign_student_latest는 실제로 '세종시 고등학교' 파일(대학 0개)이라 랭킹을 1건으로 망가뜨렸다 → 폴백으로만.
+  const academyRaw = await readLatestRaw("academyinfo_foreign_student_count");
   const moeStudentRaw = await readLatestRaw("moe_foreign_student_latest");
   let universityRanking = { latestYear: null, universities: [], universityCount: 0, totalForeignStudents: 0 };
-  if (moeStudentRaw) {
+  if (academyRaw) {
+    // baseYear 2025: academyinfo(3069982) 학생단위 레코드는 연도 컬럼이 없음. 라이브 확인 결과 데이터 빈티지=2025년 기준.
+    universityRanking = transformAcademyUniversities(parseCsv(academyRaw.text), 2025);
+  }
+  if (universityRanking.universities.length === 0 && moeStudentRaw) {
     const moeResult = transformMoeStudentsBySchool(parseCsv(moeStudentRaw.text));
     if (moeResult.universities.length > 0) universityRanking = moeResult;
-  }
-  // 대학알리미 → 폴백 (MOE 데이터 없을 때만 사용).
-  if (universityRanking.universities.length === 0) {
-    const academyRaw = await readLatestRaw("academyinfo_foreign_student_count");
-    if (academyRaw) {
-      universityRanking = transformAcademyUniversities(parseCsv(academyRaw.text));
-    }
   }
 
   // 행안부 국적×연령 현황(국적,연령대,값,데이터기준일자) → 국적별 연령 분포.
@@ -1155,7 +1229,7 @@ async function main() {
     `export const realVisaDistribution: readonly RealVisaSegment[] = ${JSON.stringify(visaDistribution, null, 2)};\n\n` +
     `export const realStayVisaTypes: readonly RealVisaType[] = ${JSON.stringify(stayVisaTypes, null, 2)};\n\n` +
     `// 외국인 유학생 체류현황(법무부). 연도×체류자격 집계 — 대학/유학생 페이지가 사용.\n` +
-    `export type RealStudentYear = { year: number; total: number; degree: number; language: number };\n` +
+    `export type RealStudentYear = { year: number; total: number; degree: number; language: number; asOfMonth?: string };\n` +
     `export type RealStudentVisa = { visaRaw: string; course: string; count: number };\n` +
     `export const realForeignStudentByYear: readonly RealStudentYear[] = ${JSON.stringify(studentByYear, null, 2)};\n\n` +
     `export const realForeignStudentByVisa: readonly RealStudentVisa[] = ${JSON.stringify(studentByVisa, null, 2)};\n\n` +

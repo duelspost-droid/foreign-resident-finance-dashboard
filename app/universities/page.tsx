@@ -53,6 +53,8 @@ export default function UniversitiesPage() {
   const series = [...foreignStudentByYear];
   const summary = foreignStudentSummary;
   const freshDate = realDataSummary.generatedAt.slice(0, 10);
+  // 최신 시점 라벨: 월별 스톡이면 'YYYY.MM', 아니면 'YYYY'.
+  const asOf = "asOfMonth" in summary && summary.asOfMonth ? `${summary.latestYear}.${summary.asOfMonth}` : `${summary.latestYear}`;
 
   // 추이 시각화 스케일 + 정점 연도
   const maxTotal = series.reduce((m, r) => Math.max(m, r.total), 1);
@@ -92,7 +94,7 @@ export default function UniversitiesPage() {
         <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: "#22c55e" }} />
         <span>
           출처: <strong>법무부 출입국·외국인정책본부</strong> · 수집 기준일 <strong>{freshDate}</strong> ·
-          {series.length > 0 ? ` ${series[0].year}~${summary.latestYear} 시계열` : " 데이터 준비 중"} ·
+          {series.length > 0 ? ` ${series[0].year}~${asOf} 시계열` : " 데이터 준비 중"} ·
           매일 18:30 UTC 자동 갱신
         </span>
       </div>
@@ -102,7 +104,7 @@ export default function UniversitiesPage() {
           {/* KPI 카드 (실데이터) */}
           <section className="metric-grid">
             {[
-              { label: `외국인 유학생 (${summary.latestYear})`, value: summary.total, icon: Users, bg: "#0f766e", sub: "법무부 체류현황" },
+              { label: `외국인 유학생 (${asOf})`, value: summary.total, icon: Users, bg: "#0f766e", sub: "법무부 체류현황(월별 스톡)" },
               { label: "학위과정 (D-2)", value: summary.degree, icon: GraduationCap, bg: "#3157a4", sub: "학위·연구 과정" },
               { label: "어학연수 (D-4)", value: summary.language, icon: Languages, bg: "#b45309", sub: "한국어·외국어 연수" },
               { label: `정점 (${peak.year})`, value: peak.total, icon: TrendingUp, bg: "#be123c", sub: "역대 최다 연도" }
