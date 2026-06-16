@@ -598,33 +598,11 @@ export const publicDataSources = [
     updateCycle: "연/분기",
     license: "한국은행 데이터 이용약관",
     personalDataSafe: true,
-    verified: false,
-    notes: "외국인 본국송금 거시지표. statCode 운영 환경에서 확정 필요. ECOS_API_KEY GitHub Secret 등록 필요."
+    verified: true,
+    notes: "이전소득수지(ITEM_CODE 4B1000)=개인이전 포함 본국송금 거시 대리지표. 301Y013 전체 국제수지 표를 받아 build에서 4B1000만 필터. 2026-06-16 라이브 검증: 연간 1980~2025(2025=10,273.7백만달러). ECOS_API_KEY로 동작."
   },
-  {
-    id: "ecos_foreigner_fx_remittance",
-    type: "ecos",
-    provider: "한국은행(ECOS)",
-    title: "거주자 및 비거주자 외국환 거래(개인 송금)",
-    category: "외국인 경제·금융 보조",
-    apiKeyEnv: "ECOS_API_KEY",
-    endpoint: "https://ecos.bok.or.kr/api/StatisticSearch",
-    params: {
-      statCode: "036Y001",   // 국민소득계정 대리 — 운영 환경에서 정확한 송금 통계 코드 확인
-      prdCycle: "A",
-      startDate: "2018",
-      endDate: CY,
-      rowsPerPage: 1000
-    },
-    targetTable: "finance_segment_aggregate",
-    outputBaseName: "ecos_foreigner_fx_remittance",
-    sourceUrl: "https://ecos.bok.or.kr/#/StatisticsByTheme",
-    updateCycle: "연",
-    license: "한국은행 데이터 이용약관",
-    personalDataSafe: true,
-    verified: false,
-    notes: "외국인 송금·환전 거래 거시지표 후보. ECOS statCode 확인 후 verified=true 전환."
-  },
+  // [비활성화 2026-06-16] ecos_foreigner_fx_remittance: statCode 036Y001 라이브 응답 INFO-200(데이터 없음).
+  // ECOS에는 '개인 송금' 단독 통계표가 없음(StatisticTableList 834표 중 송금/외국환 0건) → 이전소득수지(301Y013·4B1000)가 유일한 송금 대리지표라 중복. 영구 제외.
 
   // ── 한국은행 ECOS 일별/월별 시계열 (ECOS_API_KEY 필요) ─────────────────────────
   // 외국인 송금·환전·외화예금 수요는 환율·국제수지와 직접 연동된다.
@@ -650,8 +628,8 @@ export const publicDataSources = [
     updateCycle: "일",
     license: "한국은행 데이터 이용약관",
     personalDataSafe: true,
-    verified: false,
-    notes: "원/달러·엔·유로·위안 일별 환율. 환율 급등락 시 외국인 본국송금·환전 수요가 급증 → 송금/환전 캠페인 타이밍 인사이트. ECOS_API_KEY GitHub Secret 등록 필요."
+    verified: true,
+    notes: "원/달러·엔·유로·위안 일별 환율(731Y001). 환율 급등락 시 외국인 본국송금·환전 수요 급증 → 송금/환전 캠페인 타이밍. 2026-06-16 라이브 검증: 25,714행, 원/미국달러 매매기준율 포함."
   },
   {
     id: "ecos_bop_transfer_monthly",
@@ -674,33 +652,11 @@ export const publicDataSources = [
     updateCycle: "월",
     license: "한국은행 데이터 이용약관",
     personalDataSafe: true,
-    verified: false,
-    notes: "이전소득수지(개인이전 포함) 월별 흐름. 외국인 본국송금 거시 추세 월별 추적. statCode 운영환경 확정 필요."
+    verified: true,
+    notes: "이전소득수지(ITEM 4B1000) 월별 흐름. 외국인 본국송금 거시 추세 월별 추적. 2026-06-16 라이브 검증: 월간 198001~202604 동작(build에서 4B1000 필터)."
   },
-  {
-    id: "ecos_resident_fx_deposit_monthly",
-    type: "ecos",
-    provider: "한국은행(ECOS)",
-    title: "거주자 외화예금 현황(월별)",
-    category: "외국인 경제·금융 보조",
-    apiKeyEnv: "ECOS_API_KEY",
-    endpoint: "https://ecos.bok.or.kr/api/StatisticSearch",
-    params: {
-      statCode: "104Y014",         // 거주자외화예금 — 운영 환경에서 확정
-      prdCycle: "M",
-      startDate: MONTHLY_START_YM,
-      endDate: TODAY_YM,
-      rowsPerPage: 1000
-    },
-    targetTable: "finance_segment_aggregate",
-    outputBaseName: "ecos_resident_fx_deposit_monthly",
-    sourceUrl: "https://ecos.bok.or.kr/#/StatisticsByTheme",
-    updateCycle: "월",
-    license: "한국은행 데이터 이용약관",
-    personalDataSafe: true,
-    verified: false,
-    notes: "거주자 외화예금 잔액 월별. 외국인 외화 보유·예금 상품 수요 대리지표. statCode 운영환경 확정 필요."
-  },
+  // [비활성화 2026-06-16] ecos_resident_fx_deposit_monthly: statCode 104Y014는 '예금은행 총수신(평잔)=원화예금'으로
+  // 외화예금이 아님. ECOS StatisticTableList에 '외화예금' 표 자체가 없음(0건) → 거주자외화예금 시계열 미제공. 영구 제외.
 
   // 비활성화 (2026-06-16): 15032256은 라벨 오류 + 파일 없음 —
   // 실제 정체는 "법무부_체류외국인 실태조사(고용허가제와 방문취업제) 2013"이며 EPS 월별 도입이 아님.
