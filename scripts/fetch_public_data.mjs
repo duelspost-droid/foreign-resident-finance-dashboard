@@ -387,8 +387,20 @@ function maskUrl(url, apiKey) {
     .replace(apiKey, maskKey(apiKey));
 }
 
-// getMeta(type=ITM) 로 itmId 목록을 가져온다. "+"로 join 한 문자열 반환(없으면 null).
-async function fetchKosisItmIds(source, apiKey, attempts) {
+// KOSIS는 일부 응답에서 키에 따옴표를 붙이지 않는 비표준 JSON을 반환한다(JSON.parse 실패).
+// 표준 파싱을 먼저 시도하고, 실패하면 키에 따옴표를 보강해 재파싱한다.
+function parseKosisJson(text) {
+  const t = (text ?? "").replace(/^﻿/, "");
+  try { return JSON.parse(t); } catch {}
+  try { return JSON.parse(t.replace(/([{,]\s*)([A-Za-z_]\w*)\s*:/g, '$1"$2":')); } catch {}
+  return null;
+}
+
+// getMeta(type=ITM) 한 번으로 항목(itmId)과 분류(objL) 코드를 함께 가져온다.
+// 응답에는 OBJ_ID="ITEM" 행(항목)과 OBJ_ID=<분류ID> 행(분류값 코드)이 섞여 있다.
+// getMeta(type=OBJ)는 다수 테이블에서 err 30("데이터 없음")을 내므로 ITM 응답에서 분류를 추출한다.
+// 반환: { itemId, objLevels: [["1110100A00", ...], ...] } (objLevels는 OBJ_ID 등장 순서).
+async function fetchKosisMeta(source, apiKey, attempts) {
   const url = new URL(KOSIS_META_ENDPOINT);
   url.searchParams.set("method", "getMeta");
   url.searchParams.set("type", "ITM");
@@ -401,73 +413,56 @@ async function fetchKosisItmIds(source, apiKey, attempts) {
     const res = await fetchWithRetry(url);
     attempts.push({ step: "getMeta(ITM)", url: safeUrl, status: res.status });
     if (!res.ok) return null;
-    const rawText = (await res.text()).replace(/^﻿/, "");
-    const body = JSON.parse(rawText);
-    if (body?.err || body?.errMsg) {
-      attempts.push({ step: "getMeta(ITM)", error: body.errMsg ?? body.err });
+    const body = parseKosisJson(await res.text());
+    if (!Array.isArray(body)) {
+      attempts.push({ step: "getMeta(ITM)", error: body?.errMsg ?? body?.err ?? "parse failed" });
       return null;
     }
-    const rows = Array.isArray(body) ? body : extractItems(body);
-    const ids = [...new Set(rows.map((r) => r.ITM_ID ?? r.itmId ?? r.itm_id).filter(Boolean))];
-    return ids.length > 0 ? ids.slice(0, 50).join("+") : null;
+    const itemIds = [];
+    const levels = new Map();   // OBJ_ID -> [codes], 삽입 순서 = objL 순서
+    for (const r of body) {
+      const objId = r.OBJ_ID ?? r.obj_id;
+      const itmId = r.ITM_ID ?? r.itmId ?? r.itm_id;
+      if (!objId || !itmId) continue;
+      if (objId === "ITEM") itemIds.push(itmId);
+      else { if (!levels.has(objId)) levels.set(objId, []); levels.get(objId).push(itmId); }
+    }
+    if (itemIds.length === 0 && levels.size === 0) return null;
+    return { itemId: itemIds.join("+") || null, objLevels: [...levels.values()] };
   } catch (error) {
     attempts.push({ step: "getMeta(ITM)", error: error.message });
     return null;
   }
 }
 
-// getMeta(type=OBJ, lv=N) 로 objL{N} 분류 코드 목록을 가져온다. "+"로 join(없으면 null).
-// statisticsParameterData.do 는 itmId=ALL 일 때 구조를 못 찾아 "objL 누락" 오류를 낸다.
-// 실제 OBJ 코드를 직접 조회해 objL 파라미터로 전달하면 이 오류를 우회할 수 있다.
-async function fetchKosisObjIds(source, level, apiKey) {
-  const url = new URL(KOSIS_META_ENDPOINT);
-  url.searchParams.set("method", "getMeta");
-  url.searchParams.set("type", "OBJ");
-  url.searchParams.set("lv", String(level));
-  url.searchParams.set("apiKey", apiKey);
-  url.searchParams.set("orgId", source.orgId);
-  url.searchParams.set("tblId", source.tblId);
-  url.searchParams.set("format", "json");
-  try {
-    const res = await fetchWithRetry(url, {}, 2);
-    if (!res.ok) return null;
-    const rawText = (await res.text()).replace(/^﻿/, "");
-    const body = JSON.parse(rawText);
-    if (body?.err || body?.errMsg) return null;
-    const rows = Array.isArray(body) ? body : extractItems(body);
-    const ids = [...new Set(
-      rows.map((r) => r.OBJ_ID ?? r.obj_id ?? r.CLASS_ID ?? r.classId).filter(Boolean)
-    )];
-    return ids.length > 0 ? ids.slice(0, 100).join("+") : null;
-  } catch {
-    return null;
-  }
-}
-
-// KOSIS metaData.do(method=periodData)로 해당 테이블의 최신 발행 기간을 조회한다.
-// 성공 시 가장 최근 PRD_DE 문자열 반환, 실패 시 null.
+// 해당 테이블의 최신 발행 연도를 getMeta(type=PRD)로 조회한다(END_PRD_DE 최대값).
+// 과거 metaData.do?method=periodData는 HTML을 반환해 항상 실패했다.
 async function getKosisLatestPeriod(apiKey, orgId, tblId) {
   try {
-    const url = new URL("https://kosis.kr/openapi/metaData.do");
-    url.searchParams.set("method", "periodData");
+    const url = new URL(KOSIS_META_ENDPOINT);
+    url.searchParams.set("method", "getMeta");
+    url.searchParams.set("type", "PRD");
     url.searchParams.set("apiKey", apiKey);
     url.searchParams.set("orgId", orgId);
     url.searchParams.set("tblId", tblId);
     url.searchParams.set("format", "json");
     const res = await fetchWithRetry(url, {}, 2);
     if (!res.ok) return null;
-    const body = await res.json().catch(() => null);
+    const body = parseKosisJson(await res.text());
     if (!Array.isArray(body) || body.length === 0) return null;
-    // PRD_DE 내림차순 정렬 후 첫 번째 기간 반환
-    const sorted = body
-      .map((r) => r.PRD_DE ?? r.prd_de ?? "")
+    // END_PRD_DE(없으면 PRD_DE) 내림차순 → 최신 발행 기간.
+    const ends = body
+      .map((r) => r.END_PRD_DE ?? r.end_prd_de ?? r.PRD_DE ?? "")
       .filter(Boolean)
       .sort((a, b) => b.localeCompare(a));
-    return sorted[0] ?? null;
+    return ends[0] ?? null;
   } catch {
     return null;
   }
 }
+
+const KOSIS_CELL_LIMIT = 38000;       // KOSIS 응답 셀 상한(40,000)의 안전 마진
+const KOSIS_OBJ_URL_LIMIT = 6000;     // objL 파라미터 총 길이 상한(HTTP 414 방지)
 
 async function collectKosisSource(source) {
   const apiKey = process.env[source.apiKeyEnv];
@@ -478,53 +473,60 @@ async function collectKosisSource(source) {
   const attempts = [];
   const requestUrls = [];
 
-  // 1단계: 실제 itmId 코드 조회 (실패 시 params.itmId 또는 ALL 폴백)
-  const metaItmId = await fetchKosisItmIds(source, apiKey, attempts);
-  const itmId = metaItmId ?? source.params?.itmId ?? "ALL";
+  // getMeta(ITM) 한 번으로 실제 itmId(항목) + 분류(objL) 코드를 가져온다.
+  // 핵심: itmId=ALL/objL=ALL 은 다수 테이블에서 "objL 누락"(err 20) → 실제 코드를 줘야 한다.
+  const meta = await fetchKosisMeta(source, apiKey, attempts);
+  const itmId = meta?.itemId ?? source.params?.itmId ?? "ALL";
+  const objLevels = meta?.objLevels ?? [];
 
-  // 1-b: objL 분류 코드 조회 (getMeta type=OBJ). statisticsParameterData.do 는
-  // itmId=ALL일 때 구조를 못 찾아 "objL 누락" 오류를 낸다.
-  // 실제 OBJ 코드를 사용하면 이 오류를 우회할 수 있다.
-  const useParamEndpoint = (source.endpoint ?? KOSIS_DATA_ENDPOINT).includes("statisticsParameterData");
-  const objCodes = {};
-  if (useParamEndpoint) {
-    for (let lvl = 1; lvl <= 4; lvl += 1) {
-      const sourceHasLevel = lvl === 1 || source.params?.[`objL${lvl}`] != null;
-      if (!sourceHasLevel) break;
-      const codes = await fetchKosisObjIds(source, lvl, apiKey);
-      if (codes) objCodes[`objL${lvl}`] = codes;
+  // objL 파라미터: 실제 분류 코드(있으면) → 없으면 source.params/ALL.
+  const objParams = {};
+  if (objLevels.length > 0) {
+    objLevels.forEach((codes, i) => { objParams[`objL${i + 1}`] = codes.join("+"); });
+  } else {
+    objParams.objL1 = source.params?.objL1 ?? "ALL";
+    for (let lvl = 2; lvl <= 8; lvl += 1) {
+      const v = source.params?.[`objL${lvl}`];
+      if (v != null && v !== "") objParams[`objL${lvl}`] = v;
     }
   }
 
-  // 종료 기간 동적 결정: metaData.do(periodData)로 실제 최신 발행 기간을 조회한다.
-  const latestPeriod = await getKosisLatestPeriod(apiKey, source.orgId, source.tblId);
+  // URL 길이 가드: 분류 코드가 너무 많으면(읍면동 등) HTTP 414가 나므로 건너뛴다(페이지네이션 미지원).
+  const objLen = Object.values(objParams).join("&").length;
+  if (objLen > KOSIS_OBJ_URL_LIMIT) {
+    return {
+      status: "skipped_too_large", requestUrls, attempts,
+      reason: `분류 코드 과다(objL ${objLen}자) — KOSIS URL 길이 제한. 페이지네이션 필요.`
+    };
+  }
 
-  // 2단계: 데이터 조회. source.endpoint(소스별 오버라이드) → 기본값 statisticsParameterData.do
-  const dataUrl = new URL(source.dataEndpoint ?? source.endpoint ?? KOSIS_DATA_ENDPOINT);
+  // 셀 제한(40,000) 안에서 요청 기간 수를 정한다. cellsPerPeriod = 각 분류 레벨 코드 수의 곱.
+  const cellsPerPeriod = objLevels.length > 0
+    ? objLevels.reduce((a, lv) => a * Math.max(lv.length, 1), 1)
+    : 1;
+  const maxPeriods = Math.max(1, Math.floor(KOSIS_CELL_LIMIT / Math.max(cellsPerPeriod, 1)));
+
+  // 최신 발행 기간(연도) → 종료 연도. 시작 연도는 셀 제한 내 기간 수만큼 거슬러 올라간다.
+  const latestPeriod = await getKosisLatestPeriod(apiKey, source.orgId, source.tblId);
+  const endYear = Number(String(latestPeriod ?? "").slice(0, 4)) || (new Date().getFullYear() - 1);
+  const wantPeriods = Number(source.params?.newEstPrdCnt)
+    || (source.params?.startPrdDe ? endYear - Number(source.params.startPrdDe) + 1 : 10);
+  const periods = Math.max(1, Math.min(wantPeriods || 10, maxPeriods));
+  const startYear = endYear - periods + 1;
+
+  // 데이터 조회: 항상 Param 엔드포인트(statisticsParameterData.do) + 실제 itmId/objL.
+  const dataUrl = new URL(source.dataEndpoint ?? KOSIS_DATA_ENDPOINT);
   dataUrl.searchParams.set("method", "getList");
   dataUrl.searchParams.set("apiKey", apiKey);
   dataUrl.searchParams.set("orgId", source.orgId);
   dataUrl.searchParams.set("tblId", source.tblId);
   dataUrl.searchParams.set("itmId", itmId);
-
-  // objL: 실제 코드(objCodes) 우선 → source.params → "ALL"
-  dataUrl.searchParams.set("objL1", objCodes.objL1 ?? source.params?.objL1 ?? "ALL");
-  for (let lvl = 2; lvl <= 8; lvl += 1) {
-    const v = objCodes[`objL${lvl}`] ?? source.params?.[`objL${lvl}`];
-    if (v != null && v !== "") dataUrl.searchParams.set(`objL${lvl}`, v);
-  }
+  for (const [k, v] of Object.entries(objParams)) dataUrl.searchParams.set(k, v);
   dataUrl.searchParams.set("format", "json");
   dataUrl.searchParams.set("jsonVD", "Y");
   dataUrl.searchParams.set("prdSe", source.params?.prdSe ?? "Y");
-
-  // 기간: newEstPrdCnt(최근 N기)가 지정되면 우선 사용(연도 하드코딩 없음).
-  if (source.params?.newEstPrdCnt) {
-    dataUrl.searchParams.set("newEstPrdCnt", String(source.params.newEstPrdCnt));
-  } else {
-    const fallbackEnd = source.params?.endPrdDe ?? String(new Date().getFullYear());
-    dataUrl.searchParams.set("startPrdDe", source.params?.startPrdDe ?? "2020");
-    dataUrl.searchParams.set("endPrdDe", latestPeriod ?? fallbackEnd);
-  }
+  dataUrl.searchParams.set("startPrdDe", String(startYear));
+  dataUrl.searchParams.set("endPrdDe", String(endYear));
 
   const safeDataUrl = maskUrl(dataUrl, apiKey);
   requestUrls.push(safeDataUrl);
@@ -535,14 +537,11 @@ async function collectKosisSource(source) {
     if (!res.ok) {
       return { status: "request_failed", requestUrls, attempts, reason: `${res.status} ${res.statusText}` };
     }
-    const text = await res.text();
-    let body;
-    try {
-      body = JSON.parse(text);
-    } catch {
-      return { status: "non_json_response", requestUrls, attempts, reason: text.slice(0, 200) };
+    const body = parseKosisJson(await res.text());
+    if (body == null) {
+      return { status: "non_json_response", requestUrls, attempts, reason: "parse failed" };
     }
-    if (body?.err || body?.errMsg) {
+    if (!Array.isArray(body) && (body.err || body.errMsg)) {
       return { status: "api_error", requestUrls, attempts, reason: body.errMsg ?? body.err };
     }
     const items = Array.isArray(body) ? body : extractItems(body);
@@ -551,15 +550,16 @@ async function collectKosisSource(source) {
     }
     const fileName = `${source.outputBaseName}_${todayStamp()}.json`;
     await writeFile(join(rawDir, fileName), JSON.stringify(items, null, 2), "utf8");
-    // itmId 출처와 실제 사용한 최신 기간을 함께 기록
     return {
       status: "downloaded",
       rowCount: items.length,
       savedFile: fileName,
       requestUrls,
       attempts,
-      itmIdSource: metaItmId ? "getMeta" : "fallback",
-      detectedLatestPeriod: latestPeriod ?? null
+      itmIdSource: meta?.itemId ? "getMeta" : "fallback",
+      detectedLatestPeriod: latestPeriod ?? null,
+      cellsPerPeriod,
+      periods
     };
   } catch (error) {
     return { status: "request_failed", requestUrls, attempts, reason: error.message };
