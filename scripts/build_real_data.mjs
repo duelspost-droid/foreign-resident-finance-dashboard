@@ -389,6 +389,55 @@ function summarizeStudentsMonthly(rows) {
   };
 }
 
+// JDC 면세점 국적별 매출(국적,판매년월,매출): 외국인 국적별 연매출 + 월별 외국인 총매출 추세.
+function buildDutyFreeSales(rows) {
+  const parsed = (rows ?? [])
+    .map((r) => ({
+      nat: String(firstValue(r, ["국적"])).trim(),
+      ym: String(firstValue(r, ["판매년월"])).trim(),
+      sales: toNumber(firstValue(r, ["매출"]))
+    }))
+    .filter((r) => r.nat && /^\d{4}/.test(r.ym));
+  if (!parsed.length) return { latestYear: null, unit: "원", byNationality: [], monthly: [], foreignTotal: 0, internalTotal: 0 };
+  const yearOf = (ym) => Number(ym.slice(0, 4));
+  const ly = Math.max(...parsed.map((r) => yearOf(r.ym)));
+  const isInternal = (n) => /내국인/.test(n);
+  const natAgg = new Map();
+  for (const r of parsed.filter((r) => yearOf(r.ym) === ly && !isInternal(r.nat))) {
+    natAgg.set(r.nat, (natAgg.get(r.nat) ?? 0) + r.sales);
+  }
+  const byNationality = [...natAgg.entries()].map(([nationality, value]) => ({ nationality, value })).filter((r) => r.value > 0).sort((a, b) => b.value - a.value);
+  const monAgg = new Map();
+  for (const r of parsed.filter((r) => !isInternal(r.nat))) {
+    const m = r.ym.slice(0, 7);
+    monAgg.set(m, (monAgg.get(m) ?? 0) + r.sales);
+  }
+  const monthly = [...monAgg.entries()].map(([month, value]) => ({ month, value })).sort((a, b) => a.month.localeCompare(b.month));
+  const foreignTotal = byNationality.reduce((s, r) => s + r.value, 0);
+  const internalTotal = parsed.filter((r) => yearOf(r.ym) === ly && isInternal(r.nat)).reduce((s, r) => s + r.sales, 0);
+  return { latestYear: ly, unit: "원", byNationality, monthly, foreignTotal, internalTotal };
+}
+
+// 제주 외국인 토지취득: 유형=국적별 패널에서 구분=국적, 12개월 취득금액(백만원) 합산 → 국적별 연취득금액.
+function buildForeignLandAcquisition(rows) {
+  if (!rows?.length) return { latestYear: null, unit: "백만원", byNationality: [], total: 0 };
+  const headers = Object.keys(rows[0]).filter((k) => k !== "__rowNumber");
+  const amtCols = headers.filter((h) => /취득\s?금액/.test(h));
+  const yearOf = (r) => toNumber(firstValue(r, ["연도", "년도", "year"]));
+  const years = rows.map(yearOf).filter((y) => y >= 2000);
+  const ly = years.length ? Math.max(...years) : null;
+  const natPanel = rows.filter((r) => String(firstValue(r, ["유형"])).trim() === "국적별" && (!ly || yearOf(r) === ly));
+  const agg = new Map();
+  for (const r of natPanel) {
+    const nat = String(firstValue(r, ["구분"])).trim();
+    if (!nat || /합계|소계|계$|전체|총/.test(nat)) continue;
+    const amt = amtCols.reduce((s, c) => s + toNumber(r[c]), 0);
+    agg.set(nat, (agg.get(nat) ?? 0) + amt);
+  }
+  const byNationality = [...agg.entries()].map(([nationality, value]) => ({ nationality, value })).filter((r) => r.value > 0).sort((a, b) => b.value - a.value);
+  return { latestYear: ly, unit: "백만원", byNationality, total: byNationality.reduce((s, r) => s + r.value, 0) };
+}
+
 // 파서 결과가 비어있을 때 실제 컬럼명을 로그 출력 (다음 런에서 파서 수정 확인용).
 function logColumnDiag(label, rows) {
   if (!rows.length) return;
@@ -1239,6 +1288,12 @@ async function main() {
   const ecosFxRaw = await readLatestRawJson("ecos_exchange_rate_daily");
   const exchangeRate = ecosFxRaw ? buildExchangeRate(ecosFxRaw.rows) : { latest: {}, monthly: [] };
 
+  // 외국인 소비·거래 (data.go.kr file): 면세점 국적별 매출 · 제주 외국인 토지취득.
+  const dutyFreeRaw = await readLatestRaw("jdc_dutyfree_sales_by_nationality");
+  const dutyFreeSales = dutyFreeRaw ? buildDutyFreeSales(parseCsv(dutyFreeRaw.text)) : { latestYear: null, unit: "원", byNationality: [], monthly: [], foreignTotal: 0, internalTotal: 0 };
+  const landRaw = await readLatestRaw("jeju_foreign_land_acquisition");
+  const foreignLandAcquisition = landRaw ? buildForeignLandAcquisition(parseCsv(landRaw.text)) : { latestYear: null, unit: "백만원", byNationality: [], total: 0 };
+
   // ── 데이터 품질 가드: 주요 '스톡' 시계열의 비정상 급락 감지(손상/집계기준변동 조기 경보) ──
   // 스톡(누적 인원·잔액) 시계열에만 적용한다. EPS 신규 도입 등 'flow(연간 신규)' 시계열은
   // 본질적으로 변동이 커(2020 COVID 국경폐쇄로 -87% 등 정상적 급변) 가드 대상에서 제외.
@@ -1327,6 +1382,9 @@ async function main() {
     `// financial-insights '거시 금융지표'가 사용.\n` +
     `export const realBopTransferIncome = ${JSON.stringify(bopTransferIncome, null, 2)} as const;\n\n` +
     `export const realExchangeRate = ${JSON.stringify(exchangeRate, null, 2)} as const;\n\n` +
+    `// ── 외국인 소비·거래 (data.go.kr file): 면세점 국적별 매출 · 제주 외국인 토지취득 (2026-06-16 추가) ──\n` +
+    `export const realDutyFreeSales = ${JSON.stringify(dutyFreeSales, null, 2)} as const;\n\n` +
+    `export const realForeignLandAcquisition = ${JSON.stringify(foreignLandAcquisition, null, 2)} as const;\n\n` +
     `// ── 데이터 품질 가드 결과: 주요 시계열 비정상 급락 경보 (2026-06-16 추가) ──\n` +
     `// 빈 배열 = 모든 시계열 정상. 비어있지 않으면 해당 소스의 손상/집계기준 변동을 점검해야 한다.\n` +
     `export type RealDataQualityWarning = { series: string; field: string; period: number; prevPeriod: number; changePct: number; message: string };\n` +

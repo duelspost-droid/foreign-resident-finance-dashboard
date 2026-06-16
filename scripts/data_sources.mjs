@@ -268,6 +268,47 @@ export const publicDataSources = [
     notes: "대학알리미 고등교육기관 기본정보(위치·유형). 대학 외국인 유학생 지도 구축 보조."
   },
 
+  // ── 외국인 소비·거래 (data.go.kr file, 인증키 불필요 — 2026-06-16 발굴 워크플로 검증) ──
+  {
+    id: "jdc_dutyfree_sales_by_nationality",
+    type: "file",
+    datasetId: "15070346",
+    detailPk: "uddi:39b3894c-2043-44f3-843e-dd2150a042bb",
+    provider: "제주국제자유도시개발센터(JDC)",
+    title: "JDC지정면세점 국적별 매출",
+    category: "외국인 소비·거래",
+    baseDate: "2024-12-31",
+    targetTable: "foreign_consumption_aggregate",
+    outputBaseName: "jdc_dutyfree_sales_by_nationality",
+    sourceUrl: "https://www.data.go.kr/data/15070346/fileData.do",
+    updateCycle: "연",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "국적(내국인/일·중·미·러·태·홍·필/기타 9종)×판매년월×매출. 면세점 국적별 소비=외국인 결제·환전 수요 직접 지표. CSV 3차원, 차기등록 2026-11."
+  },
+  {
+    id: "jeju_foreign_land_acquisition",
+    type: "file",
+    datasetId: "15010289",
+    detailPk: "uddi:c1ef726f-204b-40f1-8392-e98f2fe9eab2",
+    provider: "제주특별자치도",
+    title: "외국인 토지취득현황(국적별)",
+    category: "외국인 소비·거래",
+    baseDate: "2024-12-31",
+    targetTable: "foreign_consumption_aggregate",
+    outputBaseName: "jeju_foreign_land_acquisition",
+    sourceUrl: "https://www.data.go.kr/data/15010289/fileData.do",
+    updateCycle: "연",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "연도×국적별×월별 취득필지·취득면적(㎡)·취득금액(백만원). 외국인 부동산 매입=대출·자산관리 수요 대리지표. 취득금액(실금액) 차원 보유. 제주 한정."
+  },
+  // [비활성화 2026-06-16] daejeon_yuseong_foreign_consumption(15098191): fileDownload.do가 200을
+  // 반환하나 유효 CSV 아님(atchFileId FILE_000000002691344 토큰 만료/HTML 응답) → download_failed.
+  // 값도 절대금액 아닌 '소비지수'라 우선순위 낮음. 토큰 갱신 시 재시도 가능(detailPk uddi:1a45ed51-057e-4c93-8aad-bb6c3a4dad8e).
+
   // 비활성화 (2026-06-16): 15005710은 '외국인' 데이터가 아님 (오라벨) —
   // data.go.kr 15005710의 실제 정체는 '국민연금공단_국민연금 가입현황'(전국민 대상, 법정동·연령·성별·가입종별,
   // 국적 차원 없음). 발굴 워크플로 확인: 외국인 국적별 국민연금 가입자 통계는 공개 파일/오픈API로 존재하지 않음.

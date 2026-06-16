@@ -56,12 +56,18 @@ import {
   ExchangeRateChart
 } from "@/components/charts/EcosCharts";
 import {
+  DutyFreeNationalityChart,
+  ForeignLandNationalityChart
+} from "@/components/charts/ForeignConsumptionCharts";
+import {
   realBopTransferIncome,
+  realDutyFreeSales,
   realEpsIntroduction,
   realExchangeRate,
   realForeignAgeActivity,
   realForeignEmploymentStatus,
   realForeignIndustry,
+  realForeignLandAcquisition,
   realForeignWage
 } from "@/lib/data/generated/realData";
 
@@ -298,6 +304,12 @@ export default function FinancialInsightsPage() {
     { label: "원/엔(100엔)", v: fxLatest.jpy?.value },
     { label: "원/유로", v: fxLatest.eur?.value }
   ];
+
+  // 외국인 소비·거래 (data.go.kr file)
+  const dutyFreeHasData = realDutyFreeSales.byNationality.length > 0;
+  const landHasData = realForeignLandAcquisition.byNationality.length > 0;
+  const dutyFreeTop = dutyFreeHasData ? realDutyFreeSales.byNationality[0] : null;
+  const landTop = landHasData ? realForeignLandAcquisition.byNationality[0] : null;
 
   return (
     <div className="space-y-7 pb-14">
@@ -1095,6 +1107,83 @@ export default function FinancialInsightsPage() {
           매일 18:30 UTC 수집 배치 완료 시 자동 갱신.
         </p>
       </section>
+
+      {/* ── 외국인 소비·거래 (data.go.kr): 면세점 국적별 매출 · 외국인 토지취득 ───── */}
+      {(dutyFreeHasData || landHasData) && (
+        <section>
+          <div className="mb-3 flex items-center gap-2">
+            <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">
+              외국인 소비·거래 — 국적별
+            </h2>
+            <span className="rounded-full bg-rose-100 px-2 py-0.5 text-xs font-semibold text-rose-700">
+              data.go.kr · 실측 거래
+            </span>
+          </div>
+
+          <div className="two-column mb-3">
+            {dutyFreeHasData ? (
+              <Panel
+                title="면세점 외국인 국적별 매출"
+                subtitle={`JDC 지정면세점 · ${realDutyFreeSales.latestYear}년 · 외국인 합계 ${formatNumber(Math.round(realDutyFreeSales.foreignTotal / 1e8))}억원`}
+                right={<span className="eyebrow">실데이터 · data.go.kr</span>}
+                bodyClassName="p-0"
+              >
+                <div className="chart-box">
+                  <DutyFreeNationalityChart />
+                </div>
+                <div className="border-t border-line px-5 py-3">
+                  <p className="text-xs leading-relaxed text-slate-600">
+                    <span className="font-semibold text-rose-700">금융 관점:</span> 국적별 면세 소비는
+                    카드결제·환전 수요의 직접 신호입니다.
+                    {dutyFreeTop ? (
+                      <>
+                        {" "}최대 소비국 <span className="font-semibold text-slate-800">{dutyFreeTop.nationality}</span>
+                        ({formatNumber(Math.round(dutyFreeTop.value / 1e8))}억원)을 중심으로 국적별 결제·환율 우대
+                        프로모션을 설계할 수 있습니다.
+                      </>
+                    ) : null}
+                  </p>
+                </div>
+              </Panel>
+            ) : (
+              <div className="surface p-5 text-sm text-muted">면세점 매출 데이터 수집 대기 중</div>
+            )}
+
+            {landHasData ? (
+              <Panel
+                title="외국인 국적별 토지 취득금액"
+                subtitle={`제주특별자치도 · ${realForeignLandAcquisition.latestYear}년 · 총 ${formatNumber(Math.round(realForeignLandAcquisition.total / 100))}억원`}
+                right={<span className="eyebrow">실데이터 · data.go.kr</span>}
+                bodyClassName="p-0"
+              >
+                <div className="chart-box">
+                  <ForeignLandNationalityChart />
+                </div>
+                <div className="border-t border-line px-5 py-3">
+                  <p className="text-xs leading-relaxed text-slate-600">
+                    <span className="font-semibold text-teal-700">금융 관점:</span> 외국인 부동산 취득은
+                    주택담보대출·자산관리·법인 금융 수요와 직결됩니다.
+                    {landTop ? (
+                      <>
+                        {" "}최대 취득국 <span className="font-semibold text-slate-800">{landTop.nationality}</span>
+                        ({formatNumber(Math.round(landTop.value / 100))}억원)이 압도적이라 해당 국적 타깃 대출·자산관리
+                        상품 기회가 큽니다.
+                      </>
+                    ) : null}
+                  </p>
+                </div>
+              </Panel>
+            ) : (
+              <div className="surface p-5 text-sm text-muted">외국인 토지취득 데이터 수집 대기 중</div>
+            )}
+          </div>
+
+          <p className="text-xs text-slate-500">
+            데이터 출처: 공공데이터포털(data.go.kr) — JDC지정면세점 국적별 매출(제주국제자유도시개발센터),
+            외국인 토지취득현황(제주특별자치도, 유형=국적별). 지역(제주) 표본 한정 — 전국 일반화 시 유의.
+          </p>
+        </section>
+      )}
 
       {/* ── 컴플라이언스 주의사항 ────────────────────────────────── */}
       <section>
