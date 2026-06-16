@@ -482,6 +482,50 @@ export const publicDataSources = [
     notes: "고용허가제 E-9 신규 도입 인원(업종별: 제조/건설/농축산/서비스/어업 등). 2026-06-16 검증 64행."
   },
 
+  // ── KOSIS 외국인 소득·금융 (2026-06-16 금융 발굴 워크플로 검증) ──────────────────
+  {
+    id: "kosis_immigrant_wage_distribution",
+    type: "kosis",
+    provider: "KOSIS(통계청 이민자체류실태조사)",
+    title: "월평균 임금수준별 임금근로자(외국인·이민자)",
+    category: "외국인 경제·금융 보조",
+    apiKeyEnv: "KOSIS_API_KEY",
+    endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
+    orgId: "101",
+    tblId: "DT_2FC001F",
+    params: { prdSe: "Y", startPrdDe: "2016" },
+    targetTable: "finance_segment_aggregate",
+    outputBaseName: "kosis_immigrant_wage_distribution",
+    responseMapping: { period: "PRD_DE", segment: "C1_NM", characteristic: "C2_NM", item: "ITM_NM", value: "DT" },
+    sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=101&tblId=DT_2FC001F",
+    updateCycle: "연",
+    license: "KOSIS 이용약관",
+    personalDataSafe: true,
+    verified: true,
+    notes: "외국인/귀화 임금근로자 월평균 임금구간(100만 미만~300만 이상)×대상별×성별×체류자격(E-9/H-2/F-4/F-5/D-2 등). 소득=급여계좌·신용·대출·적금 수요 직결 핵심 지표. 2026-06-16 검증 863행(2017~2025)."
+  },
+  {
+    id: "kosis_immigrant_contract_period",
+    type: "kosis",
+    provider: "KOSIS(통계청 이민자체류실태조사)",
+    title: "고용계약기간별 임금근로자(외국인·이민자)",
+    category: "외국인 경제·금융 보조",
+    apiKeyEnv: "KOSIS_API_KEY",
+    endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
+    orgId: "101",
+    tblId: "DT_2FC002F",
+    params: { prdSe: "Y", startPrdDe: "2016" },
+    targetTable: "finance_segment_aggregate",
+    outputBaseName: "kosis_immigrant_contract_period",
+    responseMapping: { period: "PRD_DE", segment: "C1_NM", characteristic: "C2_NM", item: "ITM_NM", value: "DT" },
+    sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=101&tblId=DT_2FC002F",
+    updateCycle: "연",
+    license: "KOSIS 이용약관",
+    personalDataSafe: true,
+    verified: true,
+    notes: "외국인 고용계약기간(1개월 미만~3년 이상/미정)별 임금근로자×대상별×성별. 고용 안정성=정규 급여계좌·자동이체 모집단 대리지표. 2026-06-16 검증 624행."
+  },
+
   // ── 한국은행 ECOS 오픈API (ECOS_API_KEY 필요) ─────────────────────────────────
   // 발급: https://ecos.bok.or.kr/api/#/DevGuide/apiKey
   // 형식: StatisticSearch/{key}/json/kr/{start}/{end}/{statCode}/{prdCycle}/{startDate}/{endDate}
