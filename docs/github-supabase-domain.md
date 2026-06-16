@@ -97,23 +97,36 @@ npm run supabase:load
 
 The service role key must only be stored in GitHub Actions secrets or a local `.env` file. Do not commit it.
 
-## Current Status - 2026-06-14
+## Current Status - 2026-06-16
 
 - GitHub repository is public: `https://github.com/duelspost-droid/foreign-resident-finance-dashboard`
 - GitHub Pages source is configured as GitHub Actions.
 - Custom domain is registered in GitHub Pages: `data.jbax.co.kr`
-- Latest successful Pages workflow run: `27502507989`
-- GitHub Pages currently reports: `http://data.jbax.co.kr/`
-- HTTPS enforcement is not enabled yet because DNS and certificate verification are not complete.
-- DNS lookup for `data.jbax.co.kr` currently returns no record.
-- Required DNS record remains:
+- `public/CNAME` is deployed (verified in build output `out/CNAME`).
+- **DNS is now resolving correctly.** `data.jbax.co.kr` is a CNAME to
+  `duelspost-droid.github.io`, which resolves to GitHub Pages IPs
+  (`2606:50c0:800x::153`). `www.jbax.co.kr` also resolves to GitHub Pages.
+  This was the blocker that previously prevented certificate provisioning.
+- Because DNS now verifies, GitHub Pages auto-provisions a Let's Encrypt TLS
+  certificate. Provisioning is automatic and can take from a few minutes up to
+  ~24h after DNS verification passes.
+
+### Remaining step to finish HTTPS (manual, repo owner only)
+
+1. Settings → Pages → confirm Custom domain shows `data.jbax.co.kr` with a
+   green check (DNS verified).
+2. Tick **Enforce HTTPS**.
+   - If the checkbox is greyed out, the certificate is still provisioning —
+     wait and revisit. To force a re-check, clear the Custom domain field,
+     Save, re-enter `data.jbax.co.kr`, and Save again.
+3. After enforcement is on, the canonical URL becomes `https://data.jbax.co.kr/`.
+
+Verified DNS (2026-06-16):
 
 ```text
-Type: CNAME
-Name: data
-Value: duelspost-droid.github.io
-TTL: Auto
-Proxy: DNS only, if using Cloudflare
+data.jbax.co.kr  CNAME  duelspost-droid.github.io
+www.jbax.co.kr   CNAME  duelspost-droid.github.io
+duelspost-droid.github.io  →  2606:50c0:8000::153 (and :8001/:8002/:8003)
 ```
 
 - Supabase GitHub Actions secrets are not configured yet.

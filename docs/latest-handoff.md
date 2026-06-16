@@ -7,9 +7,10 @@
 - Repository visibility: public
 - GitHub Pages source: GitHub Actions
 - Custom domain configured in GitHub Pages: `data.jbax.co.kr`
-- Latest successful Pages workflow run: `27502507989`
 - GitHub Pages reported URL: `http://data.jbax.co.kr/`
-- HTTPS enforcement: disabled until DNS and certificate verification complete
+- HTTPS: DNS now resolves (`data.jbax.co.kr` CNAME → `duelspost-droid.github.io`).
+  Cert auto-provisions; remaining manual step is ticking **Enforce HTTPS** in
+  Settings → Pages once the cert is ready. See `docs/github-supabase-domain.md`.
 
 ## What Was Added
 
@@ -46,17 +47,12 @@
 
 ## Remaining Work
 
-Add this DNS record at the DNS provider for `jbax.co.kr`:
+DNS is already configured and verified (2026-06-16): `data.jbax.co.kr` is a
+CNAME to `duelspost-droid.github.io` and resolves to GitHub Pages.
 
-```text
-Type: CNAME
-Name: data
-Value: duelspost-droid.github.io
-TTL: Auto
-Proxy: DNS only, if using Cloudflare
-```
-
-After DNS resolves, enable HTTPS enforcement in GitHub Pages.
+Finish HTTPS (repo owner, one-time): Settings → Pages → tick **Enforce HTTPS**
+once the Let's Encrypt cert finishes provisioning. If greyed out, wait or
+re-save the custom domain to force a re-check.
 
 Create or choose a Supabase project, run the schema migration, then add these GitHub repository secrets:
 
