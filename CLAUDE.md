@@ -11,6 +11,36 @@
 
 ## 작업 이력 (세션별, 최신순)
 
+### 2026-06-16 세션 (opus, Mac 로컬) — origin/main 동기화 + 수집 실패 분류 + 키/푸시 블로커
+
+사용자 지시: "수집기 다시 배치 돌려 되는거/안되는거 확인" → "안되는 거 고치고 / 오늘 데이터 커밋 / 백엔드 배치" → "작업 기록을 원격에서도 공유 가능하게".
+
+**상황**: 이 Mac 로컬 체크아웃(`~/Documents/Claude/Scheduled/foreign-resident-finance-dashboard`)이 origin/main보다 **95커밋 뒤** + 커밋 안 된 6/15 Supabase 스캐폴드 포크가 갈라져 있었음.
+
+1. **동기화**: 로컬 미커밋 변경을 `git stash`(stash@{0}, untracked 포함)로 보존 → `main`을 origin/main(`0d87c0f`)으로 fast-forward. ⚠️ stash@{0}에 6/15 로컬 스캐폴드(app/data-ops·supabase/functions·002 migration 등)가 들어있음 — 필요시 `git stash branch <name> stash@{0}`로 복구.
+
+2. **현재 실패 분류** (마지막 CI 배치 `0d87c0f`, catalog 2026-06-16T00:14Z, 27소스):
+   - ✅ 13 downloaded (법무부 3·여가부·건보 2·통계월보·행안부 1,692·교육부 지역/최신·대학알리미 2·KOSIS 경제활동 429)
+   - ❌ KOSIS 3: 시도별 `TX_11025_A000_A`·법무부 `DT_1B040A11` = objL 누락; 읍면동 `DT_110025_A033_A` = "데이터가 존재하지 않습니다"
+   - ❌ metadata_without_file 4: 교육부 국적별(15050054)·대학유형별(15050055)·국민연금(15005710)·고용노동부 EPS(15032256)
+   - ❌ no_data 1: 행안부 openapi 시군구(`mois_foreign_resident_by_region_api`)
+   - ⏭️ skipped_no_key 6: ECOS 5 + 서울 1
+
+3. **file 소스 실측 진단(키 불필요)**: 15050054=다중파일+변수형 버튼(`fn_fileDataDown(self.publicDataPk, self.publicDataDetailPk)`)이라 `extractDetailPk`(5-arg 정규식) 매칭 실패; 15050055/15032256=페이지 uddi가 실제 다운로드 pk 아님(`selectFileDataDownload.do`가 JSON 아닌 HTML 반환→metadata_failed, `/download/{pk}/fileData.do`=404); **15005710=파일 아님, openapi 전용 데이터셋(`type:"file"` 오설정)**. → 교육부/고용노동부 file은 파일목록 AJAX 리버스 필요(낮은 우선순위, 유학생 데이터는 동작 소스로 커버됨).
+
+4. **환경/블로커**: 이 Mac엔 system node/npm 없음 → 번들 노드 `/Users/hk/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node`(v24, `--env-file` 지원). KOSIS_API_KEY·DATA_GO_KR_SERVICE_KEY는 GitHub Secret이라 로컬에 없어 KOSIS/openapi 로컬 검증 불가. **푸시 불가**: `gh` 미설치 + osxkeychain에 github 자격증명 없음.
+
+5. **사용자 결정**: (a) 기존 KOSIS·DATA_GO_KR 키를 `.env.local`(gitignore됨, 템플릿 생성함)에 직접 입력해 로컬 검증; (b) 배포는 "커밋 준비 → 소유자 직접 푸시". ECOS·서울 키 발급은 보류.
+
+**다음 세션 TODO** (키 입력 후):
+- 실행: `node --env-file=.env.local scripts/fetch_public_data.mjs`
+- KOSIS `TX_11025`·`DT_1B040A11`: statisticsData.do 경로에서도 실제 OBJ 코드 조회(getMeta type=OBJ) 후 objL 전달 (현재 코드는 Param 엔드포인트일 때만 OBJ 조회 → statisticsData.do는 objL=ALL 누락 오류)
+- KOSIS `DT_110025`: `startPrdDe=endPrdDe=CY`(2026, 무데이터) → 최근 기간(newEstPrdCnt 또는 CY-2~CY)
+- 행안부 openapi: endpoint/params 실응답으로 확정, 0행 해소
+- 국민연금 15005710: `type:"file"`→`openapi`(DATA_GO_KR 키, operation 확인)
+- ECOS 5 + 서울 1: 키 발급 시 활성화(statCode/serviceName 실응답 확정)
+- 수정 후 `build_real_data.mjs` 정제 검증 → 커밋(소유자 푸시)
+
 ### 2026-06-15 세션 (이어서) — 관리자 승인 워크플로 + 수집 성공 확인
 사용자 지시: "매일 새로 조사를 해서 반영할 데이터를 관리자페이지에서 승인받고 등록". 승인 저장 방식=**Supabase 기반** 선택.
 
