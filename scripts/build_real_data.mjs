@@ -721,15 +721,25 @@ async function buildApiSources() {
 // 소스별 전용 집계로 차트용 export를 만든다.
 const KOSIS_TOTAL_LABELS = ["합계", "총계", "계", "전체", "소계"];
 function readKosisDimRows(rows) {
-  return rows.map((r) => ({
-    year: Number(String(r.PRD_DE ?? "").slice(0, 4)) || null,
-    c1: String(r.C1_NM ?? "").trim(),
-    c2: String(r.C2_NM ?? "").trim(),
-    c3: String(r.C3_NM ?? "").trim(),
-    itm: String(r.ITM_NM ?? "").trim(),
-    value: toNumber(r.DT),
-    unit: String(r.UNIT_NM ?? "").trim()
-  }));
+  // 분류 키(연도+C1~C3+ITM)로 중복 제거 — 일부 KOSIS 표가 동일 셀을 2회 반환한다.
+  const seen = new Set();
+  const out = [];
+  for (const r of rows) {
+    const o = {
+      year: Number(String(r.PRD_DE ?? "").slice(0, 4)) || null,
+      c1: String(r.C1_NM ?? "").trim(),
+      c2: String(r.C2_NM ?? "").trim(),
+      c3: String(r.C3_NM ?? "").trim(),
+      itm: String(r.ITM_NM ?? "").trim(),
+      value: toNumber(r.DT),
+      unit: String(r.UNIT_NM ?? "").trim()
+    };
+    const key = `${o.year}|${o.c1}|${o.c2}|${o.c3}|${o.itm}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(o);
+  }
+  return out;
 }
 function maxYearOf(rows) {
   const ys = rows.map((r) => r.year).filter(Boolean);

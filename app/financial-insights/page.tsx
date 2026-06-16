@@ -30,7 +30,25 @@ import {
   multiculturalFamilySummary
 } from "@/lib/data/mockData";
 import { PageHero } from "@/components/ui/PageHero";
+import { Panel } from "@/components/ui/Panel";
 import { formatNumber } from "@/lib/utils/format";
+import {
+  ForeignWageDistributionChart,
+  ForeignWageTrendChart
+} from "@/components/charts/ForeignWageChart";
+import {
+  EpsByCountryChart,
+  EpsByIndustryChart,
+  EpsTrendChart
+} from "@/components/charts/EpsIntroductionChart";
+import {
+  ForeignContractChart,
+  contractSummary
+} from "@/components/charts/ForeignContractChart";
+import {
+  realEpsIntroduction,
+  realForeignWage
+} from "@/lib/data/generated/realData";
 
 // ── 유스케이스 카드 (전략 큐레이션 = 정적 콘텐츠) ─────────────────────────────
 const USE_CASES = [
@@ -221,6 +239,21 @@ function FreshnessTag() {
 }
 
 export default function FinancialInsightsPage() {
+  // ── 실데이터(KOSIS) 파생 요약값 ─────────────────────────────────────────
+  const wageHasData = realForeignWage.distribution.length > 0;
+  const epsHasData = realEpsIntroduction.byCountry.length > 0;
+  const contractHasData = contractSummary.fixedTerm + contractSummary.openTerm > 0;
+
+  const epsTopCountry = epsHasData
+    ? [...realEpsIntroduction.byCountry].sort((a, b) => b.value - a.value)[0]
+    : null;
+  const epsLatest = realEpsIntroduction.trend.length
+    ? [...realEpsIntroduction.trend].sort((a, b) => a.year - b.year).at(-1)
+    : null;
+  const epsTotal = realEpsIntroduction.byCountry.reduce((s, r) => s + r.value, 0);
+  const contractTotal = contractSummary.fixedTerm + contractSummary.openTerm;
+  const fixedShare = contractTotal > 0 ? Math.round((contractSummary.fixedTerm / contractTotal) * 100) : 0;
+
   return (
     <div className="space-y-7 pb-14">
       <PageHero
@@ -635,6 +668,183 @@ export default function FinancialInsightsPage() {
           </section>
         );
       })()}
+
+      {/* ── 실데이터 차트: 소득·도입·계약 (KOSIS) ─────────────────── */}
+      <section>
+        <div className="mb-3 flex items-center gap-2">
+          <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">
+            실데이터 금융 선행지표
+          </h2>
+          <span className="rounded-full bg-teal-100 px-2 py-0.5 text-xs font-semibold text-teal-700">
+            KOSIS · 실측 통계
+          </span>
+        </div>
+
+        {/* (1) 외국인 월평균 임금구간 분포 + 연도 추세 */}
+        {wageHasData ? (
+          <div className="two-column mb-5">
+            <Panel
+              title="외국인 월평균 임금구간 분포"
+              subtitle={`외국인 취업자의 월평균 임금 구간별 규모 · ${realForeignWage.latestYear}년 (단위 ${realForeignWage.unit})`}
+              right={<span className="eyebrow">실데이터 · KOSIS</span>}
+              bodyClassName="p-0"
+            >
+              <div className="chart-box">
+                <ForeignWageDistributionChart />
+              </div>
+              <div className="border-t border-line px-5 py-3">
+                <p className="text-xs leading-relaxed text-slate-600">
+                  <span className="font-semibold text-teal-700">금융 관점:</span> 소득 구간은
+                  급여계좌·신용(카드·대출) 수요의 직접 대리지표입니다. 200~300만원 구간이 최대
+                  밀집층으로 급여계좌·체크카드 기본 수요가 집중되며, 300만원 이상 구간은
+                  신용카드·소액대출·적금 등 상향 상품의 타깃입니다.
+                </p>
+              </div>
+            </Panel>
+
+            <Panel
+              title="외국인 취업자 총계 연도 추세"
+              subtitle={`연도별 외국인 취업자 규모 추이 (단위 ${realForeignWage.unit})`}
+              right={<span className="eyebrow">실데이터 · KOSIS</span>}
+              bodyClassName="p-0"
+            >
+              <div className="chart-box">
+                <ForeignWageTrendChart />
+              </div>
+              <div className="border-t border-line px-5 py-3">
+                <p className="text-xs leading-relaxed text-slate-600">
+                  <span className="font-semibold text-teal-700">금융 관점:</span> 취업자 총계
+                  증가는 급여계좌·송금 거래의 전체 풀(pool) 확대를 의미합니다. 최근 연도
+                  상승 추세는 신규 계좌·송금 수요의 구조적 성장 신호입니다.
+                </p>
+              </div>
+            </Panel>
+          </div>
+        ) : (
+          <div className="surface mb-5 p-5 text-sm text-muted">임금 분포 데이터 수집 대기 중</div>
+        )}
+
+        {/* (2) 고용허가제 E-9 국가별·연도별·업종별 */}
+        {epsHasData ? (
+          <>
+            <div className="two-column mb-5">
+              <Panel
+                title="고용허가제(E-9) 국가별 도입 Top 10"
+                subtitle={`E-9 신규 도입 인원 상위 국가 · ${realEpsIntroduction.latestYear}년 (단위 ${realEpsIntroduction.unit})`}
+                right={<span className="eyebrow">실데이터 · KOSIS</span>}
+                bodyClassName="p-0"
+              >
+                <div className="chart-box">
+                  <EpsByCountryChart />
+                </div>
+                <div className="border-t border-line px-5 py-3">
+                  <p className="text-xs leading-relaxed text-slate-600">
+                    <span className="font-semibold text-blue-700">금융 관점:</span> 신규 도입은
+                    급여계좌·송금의 선행지표입니다.
+                    {epsTopCountry ? (
+                      <>
+                        {" "}최다 도입국 <span className="font-semibold text-slate-800">{epsTopCountry.country}</span>
+                        ({formatNumber(epsTopCountry.value)}명)을 중심으로 본국 수취국 연계 송금
+                        파트너십·다국어 급여계좌 온보딩을 우선 설계할 수 있습니다.
+                      </>
+                    ) : null}
+                  </p>
+                </div>
+              </Panel>
+
+              <Panel
+                title="E-9 연도별 도입 합계 추세"
+                subtitle={`연도별 E-9 도입 인원 추이 (단위 ${realEpsIntroduction.unit})`}
+                right={<span className="eyebrow">실데이터 · KOSIS</span>}
+                bodyClassName="p-0"
+              >
+                <div className="chart-box">
+                  <EpsTrendChart />
+                </div>
+                <div className="border-t border-line px-5 py-3">
+                  <p className="text-xs leading-relaxed text-slate-600">
+                    <span className="font-semibold text-amber-700">금융 관점:</span> 연간 도입
+                    규모는 차년도 급여계좌 신규 개설·해외송금 수요의 선행지표입니다.
+                    {epsLatest ? (
+                      <>
+                        {" "}최근({epsLatest.year}년) 도입 {formatNumber(epsLatest.value)}명은
+                        그만큼의 신규 급여이체·정기송금 트래픽 유입을 예고합니다.
+                      </>
+                    ) : null}
+                  </p>
+                </div>
+              </Panel>
+            </div>
+
+            <Panel
+              title="E-9 업종별 도입 분포"
+              subtitle={`도입 업종별 인원 (단위 ${realEpsIntroduction.unit}) · 총 ${formatNumber(epsTotal)}명`}
+              right={<span className="eyebrow">실데이터 · KOSIS</span>}
+              bodyClassName="p-0"
+            >
+              <div className="chart-box">
+                <EpsByIndustryChart />
+              </div>
+              <div className="border-t border-line px-5 py-3">
+                <p className="text-xs leading-relaxed text-slate-600">
+                  <span className="font-semibold text-blue-700">금융 관점:</span> 제조업 집중은
+                  산업단지 밀집 지역의 급여계좌·번들상품(급여계좌+적금+송금) 영업 우선순위를
+                  결정합니다. 업종별 평균 임금·계약기간 차이를 신용 한도 정책에 반영할 수 있습니다.
+                </p>
+              </div>
+            </Panel>
+          </>
+        ) : (
+          <div className="surface mb-5 p-5 text-sm text-muted">E-9 도입 데이터 수집 대기 중</div>
+        )}
+
+        {/* (3) 외국인 고용계약기간(근로기간 지정 유무) 분포 */}
+        {contractHasData ? (
+          <Panel
+            title="외국인 고용계약기간 분포"
+            subtitle={`근로기간 지정 유무 및 기간 구간별 취업자 · ${contractSummary.latestYear}년 (단위 ${contractSummary.unit})`}
+            right={<span className="eyebrow">실데이터 · KOSIS</span>}
+            bodyClassName="p-0"
+          >
+            <div className="grid grid-cols-3 gap-4 border-b border-line px-5 py-4 text-center">
+              <div>
+                <p className="text-lg font-black text-ink">{formatNumber(contractTotal)}</p>
+                <p className="text-xs text-muted">전체 ({contractSummary.unit})</p>
+              </div>
+              <div>
+                <p className="text-lg font-black" style={{ color: "#0f766e" }}>
+                  {formatNumber(contractSummary.fixedTerm)}
+                </p>
+                <p className="text-xs text-muted">근로기간 정함 ({fixedShare}%)</p>
+              </div>
+              <div>
+                <p className="text-lg font-black" style={{ color: "#be123c" }}>
+                  {formatNumber(contractSummary.openTerm)}
+                </p>
+                <p className="text-xs text-muted">정하지 않음</p>
+              </div>
+            </div>
+            <div className="chart-box">
+              <ForeignContractChart />
+            </div>
+            <div className="border-t border-line px-5 py-3">
+              <p className="text-xs leading-relaxed text-slate-600">
+                <span className="font-semibold text-rose-700">금융 관점:</span> 계약기간은
+                신용 리스크·상품 만기 설계의 핵심 축입니다. 근로기간을 정한 비중이 {fixedShare}%로,
+                계약기간에 맞춘 정기적금·단기 신용 한도 설정이 가능합니다. 1년 이상 장기 계약층은
+                적금·소액대출의 우량 타깃, 1개월 미만·단기층은 급여계좌·송금 중심으로 접근합니다.
+              </p>
+            </div>
+          </Panel>
+        ) : (
+          <div className="surface p-5 text-sm text-muted">고용계약기간 데이터 수집 대기 중</div>
+        )}
+
+        <p className="mt-3 text-xs text-slate-500">
+          데이터 출처: KOSIS(국가통계포털) — 외국인 임금구간·고용계약기간(통계청 이민자체류실태·고용조사),
+          고용허가제 E-9 국가별·업종별 도입(고용노동부). 매일 18:30 UTC 수집 배치 완료 시 자동 갱신.
+        </p>
+      </section>
 
       {/* ── 컴플라이언스 주의사항 ────────────────────────────────── */}
       <section>

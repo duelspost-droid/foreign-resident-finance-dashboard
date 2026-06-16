@@ -14,6 +14,8 @@ import { TrendLineChart } from "@/components/charts/TrendLineChart";
 import { VisaDonutChart } from "@/components/charts/VisaDonutChart";
 import { ScoreRadarChart } from "@/components/charts/ScoreRadarChart";
 import { RegionMap } from "@/components/charts/RegionMap";
+import { SparkLineChart } from "@/components/charts/SparkLineChart";
+import { MiniBarChart } from "@/components/charts/MiniBarChart";
 import {
   econActivityData,
   hasEconActivity,
@@ -36,7 +38,12 @@ import {
   universitySummary,
   visaDistributionData
 } from "@/lib/data/mockData";
-import { realDataSummary } from "@/lib/data/generated/realData";
+import {
+  realDataSummary,
+  realForeignWage,
+  realEpsIntroduction,
+  realForeignStudentNationality
+} from "@/lib/data/generated/realData";
 import { formatNumber } from "@/lib/utils/format";
 
 // ── 색상 헬퍼 ────────────────────────────────────────────────────────────────────
@@ -127,6 +134,37 @@ export default function DashboardPage() {
     }
   ];
 
+  // ── 신규 실데이터 파생 지표 ────────────────────────────────────────────────────
+  // 외국인 월평균 임금구간 분포(단위 천명) — band 중복 제거 후 최다 구간 산출
+  const wageBands = Array.from(
+    new Map(realForeignWage.distribution.map((d) => [d.band, d])).values()
+  );
+  const wageTotal = wageBands.reduce((sum, b) => sum + b.value, 0);
+  const wageTop = wageBands.length
+    ? wageBands.reduce((max, b) => (b.value > max.value ? b : max), wageBands[0])
+    : null;
+  const wageTopPct = wageTop && wageTotal > 0 ? (wageTop.value / wageTotal) * 100 : 0;
+
+  // E-9 도입(고용허가제) — 최신연도 합계(trend 마지막) + 1위 국가 + 연도 추세 스파크
+  const epsTrend = Array.from(
+    new Map(realEpsIntroduction.trend.map((t) => [t.year, t])).values()
+  ).sort((a, b) => a.year - b.year);
+  const epsLatest = epsTrend.length ? epsTrend[epsTrend.length - 1] : null;
+  const epsTopCountry = realEpsIntroduction.byCountry.length
+    ? realEpsIntroduction.byCountry[0]
+    : null;
+  const epsSpark = epsTrend.map((t) => ({ label: t.year, value: t.value }));
+
+  // 유학생 1위 국적 + 국적 TOP5 미니 막대
+  const studentNats = realForeignStudentNationality.byNationality;
+  const studentTop = studentNats.length ? studentNats[0] : null;
+  const studentTotalTop = studentNats.reduce((sum, n) => sum + n.value, 0);
+  const studentTopPct =
+    studentTop && studentTotalTop > 0 ? (studentTop.value / studentTotalTop) * 100 : 0;
+  const studentBars = studentNats
+    .slice(0, 5)
+    .map((n) => ({ label: n.nationality, value: n.value }));
+
   return (
     <div className="space-y-6 pb-14">
 
@@ -183,6 +221,135 @@ export default function DashboardPage() {
             </div>
           );
         })}
+      </section>
+
+      {/* ── 신규 실데이터 인사이트 카드 (임금대역 · E-9 도입 · 유학생 국적) ── */}
+      <section className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+
+        {/* 외국인 임금 중앙대역 / 최다 구간 */}
+        <div className="surface flex flex-col p-5">
+          <div className="flex items-start justify-between gap-2">
+            <div>
+              <h3 className="surface-title text-sm">외국인 임금 최다 구간</h3>
+              <p className="surface-subtitle">통계청 · {realForeignWage.latestYear} · 월평균 임금분포</p>
+            </div>
+            <span
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-white"
+              style={{ background: "#0369a1" }}
+            >
+              <Banknote aria-hidden size={18} />
+            </span>
+          </div>
+          {wageTop ? (
+            <>
+              <div className="mt-3 flex items-end gap-1.5">
+                <span className="text-[1.5rem] font-black leading-tight text-ink">{wageTop.band}</span>
+              </div>
+              <div className="mt-1 flex items-center gap-2 text-xs">
+                <span className="font-bold" style={{ color: "#0369a1" }}>
+                  {formatNumber(wageTop.value)} {realForeignWage.unit}
+                </span>
+                <span className="text-muted">· 전체의 {wageTopPct.toFixed(1)}%</span>
+              </div>
+              {/* 구간 분포 미니 막대 */}
+              <div className="mt-4 space-y-2">
+                {wageBands.map((b) => {
+                  const max = wageTop.value || 1;
+                  return (
+                    <div key={b.band} className="flex items-center gap-2 text-[11px]">
+                      <span className="w-28 shrink-0 truncate text-slate-600">{b.band}</span>
+                      <div className="h-2 flex-1 overflow-hidden rounded-full" style={{ background: "#f1f5f9" }}>
+                        <div
+                          className="h-2 rounded-full"
+                          style={{ width: `${Math.max(3, Math.round((b.value / max) * 100))}%`, background: b === wageTop ? "#0369a1" : "#93c5fd" }}
+                        />
+                      </div>
+                      <span className="w-12 shrink-0 text-right font-mono text-muted">{formatNumber(b.value)}</span>
+                    </div>
+                  );
+                })}
+              </div>
+              <p className="mt-3 text-[10px] text-muted">단위: {realForeignWage.unit} · 200~300만원대가 임금 중앙대역</p>
+            </>
+          ) : (
+            <p className="mt-4 text-sm text-muted">임금분포 데이터 없음</p>
+          )}
+        </div>
+
+        {/* 최신연도 E-9 도입 합계 + top 국가 + 추세 스파크 */}
+        <div className="surface flex flex-col p-5">
+          <div className="flex items-start justify-between gap-2">
+            <div>
+              <h3 className="surface-title text-sm">E-9 도입 (고용허가제)</h3>
+              <p className="surface-subtitle">
+                {epsLatest ? `${epsLatest.year} 도입 합계` : "도입 추세"} · {realEpsIntroduction.unit}
+              </p>
+            </div>
+            <span
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-white"
+              style={{ background: "#0f766e" }}
+            >
+              <Users aria-hidden size={18} />
+            </span>
+          </div>
+          {epsLatest ? (
+            <>
+              <div className="mt-3 flex items-end gap-1.5">
+                <span className="text-[2.1rem] font-black leading-none text-ink">{formatNumber(epsLatest.value)}</span>
+                <span className="mb-0.5 text-sm text-muted">{realEpsIntroduction.unit}</span>
+              </div>
+              {epsTopCountry && (
+                <div className="mt-1.5 flex items-center gap-1.5 text-xs">
+                  <span className="rounded-full px-2 py-0.5 text-[11px] font-bold text-white" style={{ background: "#0f766e" }}>
+                    1위 {epsTopCountry.country}
+                  </span>
+                  <span className="text-muted">{formatNumber(epsTopCountry.value)} {realEpsIntroduction.unit}</span>
+                </div>
+              )}
+              {/* 연도별 도입 추세 스파크라인 */}
+              <div className="mt-3" style={{ height: 80 }}>
+                <SparkLineChart data={epsSpark} color="#0f766e" unit={`${realEpsIntroduction.unit}`} />
+              </div>
+              <p className="mt-2 text-[10px] text-muted">연도별 도입 추세 ({epsTrend.length ? `${epsTrend[0].year}–${epsLatest.year}` : "-"})</p>
+            </>
+          ) : (
+            <p className="mt-4 text-sm text-muted">E-9 도입 데이터 없음</p>
+          )}
+        </div>
+
+        {/* 유학생 1위 국적 + TOP5 미니 막대 */}
+        <div className="surface flex flex-col p-5">
+          <div className="flex items-start justify-between gap-2">
+            <div>
+              <h3 className="surface-title text-sm">유학생 1위 국적</h3>
+              <p className="surface-subtitle">법무부 · {realForeignStudentNationality.latestYear} · 국적별 유학생(명)</p>
+            </div>
+            <span
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-white"
+              style={{ background: "#b45309" }}
+            >
+              <GraduationCap aria-hidden size={18} />
+            </span>
+          </div>
+          {studentTop ? (
+            <>
+              <div className="mt-3 flex items-end gap-1.5">
+                <span className="text-[1.7rem] font-black leading-none text-ink">{studentTop.nationality}</span>
+              </div>
+              <div className="mt-1 flex items-center gap-2 text-xs">
+                <span className="font-bold" style={{ color: "#b45309" }}>{formatNumber(studentTop.value)} 명</span>
+                <span className="text-muted">· 상위국 합계의 {studentTopPct.toFixed(1)}%</span>
+              </div>
+              {/* 국적 TOP5 미니 막대 차트 */}
+              <div className="mt-3" style={{ height: 96 }}>
+                <MiniBarChart data={studentBars} unit="명" />
+              </div>
+              <p className="mt-2 text-[10px] text-muted">국적별 유학생 TOP {studentBars.length} · 단위: 명</p>
+            </>
+          ) : (
+            <p className="mt-4 text-sm text-muted">유학생 국적 데이터 없음</p>
+          )}
+        </div>
       </section>
 
       {/* ── 시각화 히어로: 지역 지도 + 체류자격 도넛 ── */}

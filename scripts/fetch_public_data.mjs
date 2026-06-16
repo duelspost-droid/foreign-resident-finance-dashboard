@@ -425,7 +425,7 @@ async function fetchKosisMeta(source, apiKey, attempts) {
       const itmId = r.ITM_ID ?? r.itmId ?? r.itm_id;
       if (!objId || !itmId) continue;
       if (objId === "ITEM") itemIds.push(itmId);
-      else { if (!levels.has(objId)) levels.set(objId, []); levels.get(objId).push(itmId); }
+      else { if (!levels.has(objId)) levels.set(objId, []); const arr = levels.get(objId); if (!arr.includes(itmId)) arr.push(itmId); }  // objL 코드 중복 제거(일부 표는 getMeta가 중복 반환 → 셀 2배 방지)
     }
     if (itemIds.length === 0 && levels.size === 0) return null;
     return { itemId: itemIds.join("+") || null, objLevels: [...levels.values()] };
