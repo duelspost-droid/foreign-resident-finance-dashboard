@@ -186,42 +186,13 @@ export const publicDataSources = [
   },
 
   // ── 교육부 외국인 유학생 (파일 다운로드, 인증키 불필요) ──────────────────────────
-  {
-    id: "moe_foreign_student_by_nationality",
-    type: "file",
-    datasetId: "15050054",
-    detailPk: null,
-    provider: "교육부",
-    title: "외국인 유학생 현황(국적별)",
-    category: "외국인 직접 통계",
-    baseDate: "2024-12-31",
-    targetTable: "foreign_student_university",
-    outputBaseName: "moe_foreign_student_by_nationality",
-    sourceUrl: "https://www.data.go.kr/data/15050054/fileData.do",
-    updateCycle: "연",
-    license: "공공데이터 이용허락(제1유형)",
-    personalDataSafe: true,
-    verified: false,
-    notes: "교육부 대학·국적별 유학생. 유학생 금융 수요 세분화(발굴 자동화)."
-  },
-  {
-    id: "moe_foreign_student_univ_type",
-    type: "file",
-    datasetId: "15050055",
-    detailPk: null,
-    provider: "교육부",
-    title: "외국인 유학생 현황(대학유형별·학위과정별)",
-    category: "외국인 직접 통계",
-    baseDate: "2024-12-31",
-    targetTable: "foreign_student_university",
-    outputBaseName: "moe_foreign_student_univ_type",
-    sourceUrl: "https://www.data.go.kr/data/15050055/fileData.do",
-    updateCycle: "연",
-    license: "공공데이터 이용허락(제1유형)",
-    personalDataSafe: true,
-    verified: false,
-    notes: "대학유형(4년제/전문대/대학원)×학위과정별 외국인 유학생. 학생 세그먼트 상품 설계 보조."
-  },
+  // 비활성화 (2026-06-16): 15050054(한국교육개발원 외국인 유학생 현황_대학)은 data.go.kr 연계형 —
+  // 실다운로드 테스트 결과 atchFileId 없음(파일 없음). 유학생 국적별 분포는 동작 소스
+  // moe_foreign_student_region(15100039, 법무부 월별 국적[지역]별, 17,486행)에 이미 포함됨.
+  // 학위/유형 세분이 필요하면 KOSIS의 KEDI 통계표로 수집(KOSIS_API_KEY 필요).
+  // 비활성화 (2026-06-16): 15050055(한국교육개발원 외국인 유학생 현황_전문대학)도 연계형 —
+  // 실다운로드 테스트 결과 atchFileId 없음(파일 없음). 대학 단위는 academyinfo_foreign_student_count
+  // (3069982, 304,360행)로 커버. 대학유형/학위과정 세분은 KOSIS KEDI 통계표로 수집 예정(KOSIS_API_KEY 필요).
   {
     id: "moe_foreign_student_region",
     type: "file",
@@ -552,25 +523,11 @@ export const publicDataSources = [
     notes: "거주자 외화예금 잔액 월별. 외국인 외화 보유·예금 상품 수요 대리지표. statCode 운영환경 확정 필요."
   },
 
-  // ── 고용노동부 고용허가제(EPS) 외국인근로자 월별 도입현황 (파일, 인증키 불필요) ──
-  {
-    id: "mol_eps_monthly_introduction",
-    type: "file",
-    datasetId: "15032256",
-    detailPk: null,
-    provider: "고용노동부",
-    title: "고용허가제 외국인근로자 도입 현황(월별)",
-    category: "외국인 직접 통계",
-    baseDate: "2024-12-31",
-    targetTable: "foreign_resident_status",
-    outputBaseName: "mol_eps_monthly_introduction",
-    sourceUrl: "https://www.data.go.kr/data/15032256/fileData.do",
-    updateCycle: "월",
-    license: "공공데이터 이용허락(제1유형)",
-    personalDataSafe: true,
-    verified: false,
-    notes: "E-9 고용허가제 월별 도입 인원(국가·업종별). 신규 입국 근로자 급여계좌·송금 수요 선행지표(월 단위). 발굴 후보 검증 필요."
-  },
+  // 비활성화 (2026-06-16): 15032256은 라벨 오류 + 파일 없음 —
+  // 실제 정체는 "법무부_체류외국인 실태조사(고용허가제와 방문취업제) 2013"이며 EPS 월별 도입이 아님.
+  // 실다운로드 테스트 결과 atchFileId 없음. data.go.kr의 EPS 도입 데이터셋(15002263 도입계획·
+  // 15105240 고용정보원 일반고용허가제 도입현황)도 전부 연계형(파일 없음).
+  // EPS 월별 도입은 KOSIS 고용노동부/고용정보원 통계표로 수집 예정(KOSIS_API_KEY 필요).
 
   // ── 서울시 열린데이터광장 오픈API (SEOUL_OPENAPI_KEY 필요) ──────────────────────
   // 발급: https://data.seoul.go.kr/dataList/OA-14979/S/1/datasetView.do (회원가입 후)
