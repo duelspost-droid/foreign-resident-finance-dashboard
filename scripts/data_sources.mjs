@@ -268,25 +268,10 @@ export const publicDataSources = [
     notes: "대학알리미 고등교육기관 기본정보(위치·유형). 대학 외국인 유학생 지도 구축 보조."
   },
 
-  // ── 국민연금공단 (파일 다운로드, 인증키 불필요) ────────────────────────────────────
-  {
-    id: "nps_foreigner_subscriber",
-    type: "file",
-    datasetId: "15005710",
-    detailPk: null,
-    provider: "국민연금공단",
-    title: "외국인 국민연금 가입자 현황",
-    category: "외국인 경제·금융 보조",
-    baseDate: "2024-12-31",
-    targetTable: "foreign_resident_status",
-    outputBaseName: "nps_foreigner_subscriber",
-    sourceUrl: "https://www.data.go.kr/data/15005710/fileData.do",
-    updateCycle: "연",
-    license: "공공데이터 이용허락(제1유형)",
-    personalDataSafe: true,
-    verified: false,
-    notes: "국적별 사업장·지역 가입 외국인 연금 가입자. 정규 취업 외국인(급여계좌·적금) 규모 직접 측정."
-  },
+  // 비활성화 (2026-06-16): 15005710은 '외국인' 데이터가 아님 (오라벨) —
+  // data.go.kr 15005710의 실제 정체는 '국민연금공단_국민연금 가입현황'(전국민 대상, 법정동·연령·성별·가입종별,
+  // 국적 차원 없음). 발굴 워크플로 확인: 외국인 국적별 국민연금 가입자 통계는 공개 파일/오픈API로 존재하지 않음.
+  // file로도 atchFileId 없음(metadata_without_file). 외국인 취업·소득 대리지표는 KOSIS 임금분포(DT_2FC001F)·EPS로 커버.
 
   // ── KOSIS 국가통계포털 오픈API (KOSIS_API_KEY 필요) ────────────────────────────
   // statisticsData.do: newEstPrdCnt=KOSIS_RECENT → 항상 최근 N기 자동 반환(연도 하드코딩 불필요).
@@ -538,7 +523,7 @@ export const publicDataSources = [
     apiKeyEnv: "ECOS_API_KEY",
     endpoint: "https://ecos.bok.or.kr/api/StatisticSearch",
     params: {
-      statCode: "021Y205",   // 국제수지 서비스수지·이전소득수지 — 운영 환경에서 정확한 코드 확인 필요
+      statCode: "301Y013",   // 국제수지(이전소득 500000·본원소득 300000 포함). 021Y205 오류 → 301Y013 정정(2026-06-16 검증, A/M 동작)
       prdCycle: "A",         // 연간(Annual)
       startDate: "2018",
       endDate: CY,
@@ -614,7 +599,7 @@ export const publicDataSources = [
     apiKeyEnv: "ECOS_API_KEY",
     endpoint: "https://ecos.bok.or.kr/api/StatisticSearch",
     params: {
-      statCode: "301Y017",         // 국제수지(이전소득수지 세부) — 운영 환경에서 확정
+      statCode: "301Y013",         // 301Y017(경상수지 계절조정 SA000)은 이전소득 세부 없음 → 301Y013 정정(2026-06-16)
       prdCycle: "M",               // 월별(Monthly)
       startDate: MONTHLY_START_YM, // 최근 5년 (YYYYMM)
       endDate: TODAY_YM,

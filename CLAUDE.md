@@ -11,6 +11,28 @@
 
 ## 작업 이력 (세션별, 최신순)
 
+### 2026-06-16 세션 (이어서) — KOSIS objL 근본해결 + API 연동 6종 추가 (유학생·EPS·금융)
+
+사용자가 KOSIS·DATA_GO_KR 키를 `.env.local`(브라우저 마이페이지에서 복사)로 제공 → 보유 키로 실검증하며 작업. (KOSIS 키는 base64 끝 `=` 누락 주의.)
+
+1. **KOSIS objL 문제 근본해결** (커밋 `cee9755`): KOSIS가 비표준 JSON(키 따옴표 없음) 반환 → `JSON.parse` 실패 → itmId/objL=ALL 폴백 → "필수요청변수값 누락(objL)". 수정(`fetch_public_data.mjs`): `parseKosisJson`(관대한 파서) + `getMeta(ITM)`에서 항목 itmId·분류 실코드 추출(`getMeta(OBJ)`는 err30이라 미사용) + Param 엔드포인트 + `getMeta(PRD)` END_PRD_DE로 최신연도 + 40k셀/URL 길이 가드. 검증: TX_11025 5,580·DT_1B040A11 24,210·경제활동 429행. 읍면동 DT_110025_A033_A는 분류 3,957개로 URL 초과 → `skipped_too_large`(페이지네이션 필요).
+
+2. **병렬 발굴 워크플로 2개**(발굴→독립검증)로 외부 원천 확정 → **KOSIS 6종 신규 등록**(커밋 `4826c71`·`8e8a63a`, 모두 보유 키로 실검증):
+   - 유학생 국적×성별×학위 `DT_1B040A14`(법무부 111) 18,188행 — 폐기된 교육부 file 15050054 대체
+   - KEDI 고등교육 외국인유학생 `DT_1963003_010_S`(org 334) 1,224행 — 15050055 대체 (대학유형 분해: `_011_S` 전문대·`_013_S` 대학·`_014_S` 대학원 등)
+   - EPS 국가별 도입 `DT_11827_N001`(org 118) 169행 · 업종별 `DT_11827_I001` 64행 — 폐기된 고용노동부 file 대체
+   - 외국인 임금분포 `DT_2FC001F`(통계청 101) 863행 · 고용계약기간 `DT_2FC002F` 624행 — 금융 소득 핵심 지표
+
+3. **정리/정정**: 죽은 소스 비활성화(교육부 file 2·고용노동부 EPS file·국민연금 15005710=외국인 데이터 아님, 국적 차원 없는 오라벨). ECOS statCode 정정(이전소득수지 021Y205/301Y017 → **301Y013** A/M; 환율 일별 731Y001 정확; 월평균 **731Y004** 추가 권장; 거주자외화예금 104Y014는 ECOS API 미존재=폐기 권고) — 단 ECOS는 `ECOS_API_KEY` 미보유로 skipped.
+
+**블로커 / 소유자 작업 필요**:
+- **data.go.kr openapi REST는 API별 '활용신청(구독)' 필요** → 행안부 openapi(정답 endpoint=`apis.data.go.kr/1741000/ForeignLocalGovernmentsYear/getForeignLocalGovernmentsYear`, datasetId 15107331, 403)·국민연금 모두 미구독. file 다운로드는 신청 불필요(정상). 시군구 외국인주민은 file 3079542(1,692행)로 이미 커버.
+- **`ECOS_API_KEY` 미발급** → 송금/환율 거시지표(301Y013·731Y001·731Y004) 활성화 대기. statCode는 확정됨.
+- 외국인 **송금 직접표**(KOSIS DT_2FI004F 송금여부·DT_2FI005F 송금액·DT_2FI001F 월총소득 등)는 격년/3년 주기라 KOSIS Param API 미노출(statHtml 전용) → 자동수집 불가, 파일/수동 경로 필요.
+- data.go.kr file 금융 후보(대전 유성구 외국인 카드소비·면세점 국적별 매출·근로복지공단 국가별 보험급여)는 검증됨이나 관광/면세 성격 — 필요 시 추가 등록 가능(워크플로 결과 보관).
+
+검증 명령: `node --env-file=.env.local scripts/fetch_public_data.mjs` → downloaded 21/30(KOSIS 9종 포함). 현재 `main` = origin/main +여러 커밋(소유자 직접 push).
+
 ### 2026-06-16 세션 (opus, Mac 로컬) — origin/main 동기화 + 수집 실패 분류 + 키/푸시 블로커
 
 사용자 지시: "수집기 다시 배치 돌려 되는거/안되는거 확인" → "안되는 거 고치고 / 오늘 데이터 커밋 / 백엔드 배치" → "작업 기록을 원격에서도 공유 가능하게".
