@@ -716,6 +716,92 @@ async function buildApiSources() {
   return { apiStatus, apiRegion, apiEconActivity, parsedFiles };
 }
 
+// ── KOSIS 분류형 시계열 전용 파서 (외국인 금융/소득·EPS 도입·유학생 국적/학위) ──────────
+// 신규 KOSIS 소스는 PRD_DE(연도)·C1~C3_NM(분류)·ITM_NM(항목)·DT(값) 구조라 제네릭 버킷이 아닌
+// 소스별 전용 집계로 차트용 export를 만든다.
+const KOSIS_TOTAL_LABELS = ["합계", "총계", "계", "전체", "소계"];
+function readKosisDimRows(rows) {
+  return rows.map((r) => ({
+    year: Number(String(r.PRD_DE ?? "").slice(0, 4)) || null,
+    c1: String(r.C1_NM ?? "").trim(),
+    c2: String(r.C2_NM ?? "").trim(),
+    c3: String(r.C3_NM ?? "").trim(),
+    itm: String(r.ITM_NM ?? "").trim(),
+    value: toNumber(r.DT),
+    unit: String(r.UNIT_NM ?? "").trim()
+  }));
+}
+function maxYearOf(rows) {
+  const ys = rows.map((r) => r.year).filter(Boolean);
+  return ys.length ? Math.max(...ys) : null;
+}
+// 임금/고용계약: c1=대상(외국인/이민자/귀화), c2=특성(계 등), itm=구간. 외국인·계의 구간 분포 + 합계 추세.
+function buildBandDist(raw, targetC1) {
+  const rows = readKosisDimRows(raw).filter((r) => r.c1 === targetC1 && r.c2 === "계");
+  const ly = maxYearOf(rows);
+  const distribution = rows
+    .filter((r) => r.year === ly && !KOSIS_TOTAL_LABELS.includes(r.itm) && r.value > 0)
+    .map((r) => ({ band: r.itm, value: r.value }));
+  const trend = rows
+    .filter((r) => r.itm === "합계" && r.value > 0)
+    .sort((a, b) => a.year - b.year)
+    .map((r) => ({ year: r.year, value: r.value }));
+  return { latestYear: ly, unit: rows[0]?.unit ?? "", distribution, trend };
+}
+// EPS 도입: c1=국가 또는 업종, itm=도입현황. 국가별(합계 제외)·업종별 분포 + 합계 연도 추세.
+function buildEps(rawCountry, rawIndustry) {
+  const c = readKosisDimRows(rawCountry);
+  const ly = maxYearOf(c);
+  const byCountry = c
+    .filter((r) => r.year === ly && !KOSIS_TOTAL_LABELS.includes(r.c1) && r.value > 0)
+    .map((r) => ({ country: r.c1, value: r.value }))
+    .sort((a, b) => b.value - a.value);
+  const trend = c
+    .filter((r) => KOSIS_TOTAL_LABELS.includes(r.c1) && r.value > 0)
+    .sort((a, b) => a.year - b.year)
+    .map((r) => ({ year: r.year, value: r.value }));
+  const ind = readKosisDimRows(rawIndustry);
+  const ily = maxYearOf(ind);
+  const byIndustry = ind
+    .filter((r) => r.year === ily && !KOSIS_TOTAL_LABELS.includes(r.c1) && r.value > 0)
+    .map((r) => ({ industry: r.c1, value: r.value }))
+    .sort((a, b) => b.value - a.value);
+  return { latestYear: ly, unit: c[0]?.unit ?? "명", byCountry, byIndustry, trend };
+}
+// 유학생 국적/학위 (DT_1B040A14): c1=국적, c2=성별, c3=학위과정. c2=계 기준 국적별 top + 학위과정 분포.
+function buildStudentNationality(raw) {
+  const rows = readKosisDimRows(raw).filter((r) => r.c2 === "계");
+  const ly = maxYearOf(rows);
+  // 대륙 집계(아시아주계 등 '주계')·총계·기타계는 국가가 아니므로 제외.
+  const isNatAgg = (s) => /주계$/.test(s) || ["총계", "기타계", "합계", "계", "전체"].includes(s);
+  const byNationality = rows
+    .filter((r) => r.year === ly && r.c3 === "합계" && !isNatAgg(r.c1) && r.value > 0)
+    .map((r) => ({ nationality: r.c1, value: r.value }))
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 20);
+  const totalNat = rows.filter((r) => r.year === ly && KOSIS_TOTAL_LABELS.includes(r.c1));
+  const degSrc = totalNat.length ? totalNat : rows.filter((r) => r.year === ly && !KOSIS_TOTAL_LABELS.includes(r.c1));
+  const degMap = new Map();
+  for (const r of degSrc) {
+    if (!r.c3 || KOSIS_TOTAL_LABELS.includes(r.c3) || r.value <= 0) continue;
+    degMap.set(r.c3, (degMap.get(r.c3) ?? 0) + r.value);
+  }
+  const byDegree = [...degMap.entries()].map(([degree, value]) => ({ degree, value })).sort((a, b) => b.value - a.value);
+  return { latestYear: ly, byNationality, byDegree };
+}
+// KEDI 고등교육 (DT_1963003_010_S): c1=시도, c2=학위/학교현황. 시도별 합산 + 학위별(시도=총계).
+function buildKediRegion(raw) {
+  const rows = readKosisDimRows(raw);
+  const ly = maxYearOf(rows);
+  // C2(학교현황)는 재적학생·교원 등 11종이 섞여 있다 → '외국인 학생수(학위과정)' 항목만 사용.
+  const FOREIGN_C2 = "외국인 학생수(학위과정)";
+  const byRegion = rows
+    .filter((r) => r.year === ly && r.c2 === FOREIGN_C2 && !KOSIS_TOTAL_LABELS.includes(r.c1) && r.value > 0)
+    .map((r) => ({ region: r.c1, value: r.value }))
+    .sort((a, b) => b.value - a.value);
+  return { latestYear: ly, byRegion };
+}
+
 // 수집 이력(catalog)을 앱이 읽는 커밋 대상 TS 파일로 변환한다.
 // 파일이 git에 커밋되므로 git 이력으로 일자별 수집 이력이 영구 보존된다.
 async function buildLineage() {
@@ -904,6 +990,19 @@ async function main() {
   // API(KOSIS/openapi) 보조 데이터. 키 없으면 빈 배열. MOJ 1차 데이터와 분리 유지.
   const { apiStatus, apiRegion, apiEconActivity, parsedFiles } = await buildApiSources();
 
+  // KOSIS 외국인 금융/소득·EPS 도입·유학생 국적/학위 (신규, JSON 직접 전용 파싱).
+  const wageRaw = await readLatestRawJson("kosis_immigrant_wage_distribution");
+  const foreignWage = wageRaw ? buildBandDist(wageRaw.rows, "외국인") : { latestYear: null, unit: "", distribution: [], trend: [] };
+  const contractRaw = await readLatestRawJson("kosis_immigrant_contract_period");
+  const foreignContract = contractRaw ? buildBandDist(contractRaw.rows, "외국인") : { latestYear: null, unit: "", distribution: [], trend: [] };
+  const epsCountryRaw = await readLatestRawJson("kosis_eps_introduction_by_country");
+  const epsIndustryRaw = await readLatestRawJson("kosis_eps_introduction_by_industry");
+  const epsIntroduction = buildEps(epsCountryRaw?.rows ?? [], epsIndustryRaw?.rows ?? []);
+  const studentNatRaw = await readLatestRawJson("kosis_foreign_student_nationality_visa");
+  const studentNationality = studentNatRaw ? buildStudentNationality(studentNatRaw.rows) : { latestYear: null, byNationality: [], byDegree: [] };
+  const kediRaw = await readLatestRawJson("kosis_kedi_higher_edu_foreign_students");
+  const kediStudentRegion = kediRaw ? buildKediRegion(kediRaw.rows) : { latestYear: null, byRegion: [], byDegree: [] };
+
   const generated =
     `// Auto-generated by scripts/build_real_data.mjs. Do not edit by hand.\n\n` +
     `import type { ForeignResidentRegionMonth, ForeignResidentStatus } from "@/lib/types/foreignResident";\n\n` +
@@ -959,6 +1058,13 @@ async function main() {
     `// 대학알리미 고등교육기관 기본현황 (위치·유형 보조).\n` +
     `export type RealUniversityStat = { name: string; type: string; region: string };\n` +
     `export const realUniversityStats: readonly RealUniversityStat[] = ${JSON.stringify(universityStats.slice(0, 200), null, 2)};\n\n` +
+    `// ── 외국인 금융/소득(임금·고용계약)·EPS 도입·유학생 국적/학위 (KOSIS, 2026-06-16 추가) ──\n` +
+    `// financial-insights·universities·nationalities·홈 KPI가 사용.\n` +
+    `export const realForeignWage = ${JSON.stringify(foreignWage, null, 2)} as const;\n\n` +
+    `export const realForeignContract = ${JSON.stringify(foreignContract, null, 2)} as const;\n\n` +
+    `export const realEpsIntroduction = ${JSON.stringify(epsIntroduction, null, 2)} as const;\n\n` +
+    `export const realForeignStudentNationality = ${JSON.stringify(studentNationality, null, 2)} as const;\n\n` +
+    `export const realKediStudentRegion = ${JSON.stringify(kediStudentRegion, null, 2)} as const;\n\n` +
     `export const realDataSummary = ${JSON.stringify({
       generatedAt: new Date().toISOString(),
       statusRowCount: statusRows.length,
