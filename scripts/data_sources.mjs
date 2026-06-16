@@ -395,6 +395,93 @@ export const publicDataSources = [
   // 국적별 집계 트렌드가 필요하면 orgId=111 정확한 tblId 확인 후 재활성화 한다.
   // { id: "kosis_foreigner_by_nationality", type: "kosis", orgId: "111", tblId: "DT_1B040A1", ... },
 
+  // ── KOSIS 추가 (2026-06-16 발굴·실검증) — 폐기된 data.go.kr 연계형 file 대체 ──────────
+  // collectKosisSource가 getMeta(ITM)로 itmId·objL 실코드를 자동 채우므로 params는 prdSe만 있으면 됨.
+  {
+    id: "kosis_foreign_student_nationality_visa",
+    type: "kosis",
+    provider: "KOSIS(법무부 출입국)",
+    title: "외국인 유학생 국적·성별·학위과정별 현황",
+    category: "외국인 직접 통계",
+    apiKeyEnv: "KOSIS_API_KEY",
+    endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
+    orgId: "111",
+    tblId: "DT_1B040A14",
+    params: { prdSe: "Y" },   // 분류 ~10,215셀/년 → collectKosisSource가 셀 제한 내 최근연도 자동 조정
+    targetTable: "foreign_student_university",
+    outputBaseName: "kosis_foreign_student_nationality_visa",
+    responseMapping: { period: "PRD_DE", nationality: "C1_NM", segment: "C3_NM", value: "DT" },
+    sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=111&tblId=DT_1B040A14",
+    updateCycle: "연",
+    license: "KOSIS 이용약관",
+    personalDataSafe: true,
+    verified: true,
+    notes: "유학생 국적(227)×성별(3)×학위과정/체류자격(15: 유학D-2·전문학사·학사·석사·박사·연구·교환·연수D-4). 2026-06-16 검증 7,007행. 폐기된 교육부 file 15050054(국적별) 대체."
+  },
+  {
+    id: "kosis_kedi_higher_edu_foreign_students",
+    type: "kosis",
+    provider: "KOSIS(교육부/한국교육개발원 KEDI)",
+    title: "고등교육기관 외국인 유학생(시도별·학위과정)",
+    category: "외국인 직접 통계",
+    apiKeyEnv: "KOSIS_API_KEY",
+    endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
+    orgId: "334",
+    tblId: "DT_1963003_010_S",
+    params: { prdSe: "Y" },
+    targetTable: "foreign_student_university",
+    outputBaseName: "kosis_kedi_higher_edu_foreign_students",
+    responseMapping: { period: "PRD_DE", region: "C1_NM", segment: "C2_NM", value: "DT" },
+    sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=334&tblId=DT_1963003_010_S",
+    updateCycle: "연",
+    license: "KOSIS 이용약관",
+    personalDataSafe: true,
+    verified: true,
+    notes: "KEDI 교육기본통계 고등교육기관 개황(시도별×학교현황별, 외국인 학생수 학위과정 포함). 2026-06-16 검증 612행. 대학유형 분해: 동일 시리즈 DT_1963003_011_S(전문대)·013_S(대학)·014_S(대학원) 등. 폐기된 교육부 file 15050055(대학유형별) 대체."
+  },
+  {
+    id: "kosis_eps_introduction_by_country",
+    type: "kosis",
+    provider: "KOSIS(고용노동부/한국고용정보원)",
+    title: "일반고용허가제(E-9) 외국인근로자 국가별 도입현황",
+    category: "외국인 경제·금융 보조",
+    apiKeyEnv: "KOSIS_API_KEY",
+    endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
+    orgId: "118",
+    tblId: "DT_11827_N001",
+    params: { prdSe: "Y", newEstPrdCnt: KOSIS_RECENT },
+    targetTable: "foreign_resident_status",
+    outputBaseName: "kosis_eps_introduction_by_country",
+    responseMapping: { period: "PRD_DE", country: "C1_NM", value: "DT" },
+    sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=118&tblId=DT_11827_N001",
+    updateCycle: "연",
+    license: "KOSIS 이용약관",
+    personalDataSafe: true,
+    verified: true,
+    notes: "고용허가제 E-9 신규 도입 인원(국가별, 단위 명). 2026-06-16 검증 169행(2016~2025). data.go.kr EPS는 연계형(파일없음)이라 KOSIS로 대체. C1_NM='합계' 행 포함(집계 시 제외). 신규 입국 근로자=급여계좌·송금 수요 선행지표."
+  },
+  {
+    id: "kosis_eps_introduction_by_industry",
+    type: "kosis",
+    provider: "KOSIS(고용노동부/한국고용정보원)",
+    title: "일반고용허가제(E-9) 외국인근로자 업종별 도입현황",
+    category: "외국인 경제·금융 보조",
+    apiKeyEnv: "KOSIS_API_KEY",
+    endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
+    orgId: "118",
+    tblId: "DT_11827_I001",
+    params: { prdSe: "Y", newEstPrdCnt: KOSIS_RECENT },
+    targetTable: "foreign_resident_status",
+    outputBaseName: "kosis_eps_introduction_by_industry",
+    responseMapping: { period: "PRD_DE", segment: "C1_NM", value: "DT" },
+    sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=118&tblId=DT_11827_I001",
+    updateCycle: "연",
+    license: "KOSIS 이용약관",
+    personalDataSafe: true,
+    verified: true,
+    notes: "고용허가제 E-9 신규 도입 인원(업종별: 제조/건설/농축산/서비스/어업 등). 2026-06-16 검증 64행."
+  },
+
   // ── 한국은행 ECOS 오픈API (ECOS_API_KEY 필요) ─────────────────────────────────
   // 발급: https://ecos.bok.or.kr/api/#/DevGuide/apiKey
   // 형식: StatisticSearch/{key}/json/kr/{start}/{end}/{statCode}/{prdCycle}/{startDate}/{endDate}
