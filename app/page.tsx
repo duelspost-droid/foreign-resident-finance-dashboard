@@ -3,10 +3,8 @@ import {
   ArrowUpRight,
   BarChart3,
   Banknote,
-  CheckCircle2,
-  Clock,
   GraduationCap,
-  TrendingUp,
+  MapPin,
   Users
 } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
@@ -14,6 +12,8 @@ import { InsightCard } from "@/components/cards/InsightCard";
 import { NationalityBarChart } from "@/components/charts/NationalityBarChart";
 import { TrendLineChart } from "@/components/charts/TrendLineChart";
 import { VisaDonutChart } from "@/components/charts/VisaDonutChart";
+import { ScoreRadarChart } from "@/components/charts/ScoreRadarChart";
+import { RegionMap } from "@/components/charts/RegionMap";
 import {
   econActivityData,
   hasEconActivity,
@@ -37,10 +37,9 @@ import {
   visaDistributionData
 } from "@/lib/data/mockData";
 import { realDataSummary } from "@/lib/data/generated/realData";
-import { formatNumber, formatScore } from "@/lib/utils/format";
+import { formatNumber } from "@/lib/utils/format";
 
-// ── 서버 렌더링 가능한 인라인 컴포넌트 ──────────────────────────────────────────
-
+// ── 색상 헬퍼 ────────────────────────────────────────────────────────────────────
 function scoreColor(score: number): string {
   if (score >= 72) return "#0f766e";
   if (score >= 55) return "#3157a4";
@@ -48,42 +47,20 @@ function scoreColor(score: number): string {
   return "#be123c";
 }
 
-function ScoreBar({ score }: { score: number }) {
-  const pct = Math.min(100, score);
-  return (
-    <div className="relative mt-1.5 h-2.5 w-full overflow-hidden rounded-full" style={{ background: "#e2e8f0" }}>
-      <div
-        className="absolute h-full rounded-full"
-        style={{ width: `${pct}%`, backgroundColor: scoreColor(score) }}
-      />
-    </div>
-  );
-}
+const SEG_COLORS: Record<string, string> = {
+  "비전문취업 근로자": "#0f766e",
+  "재외동포": "#3157a4",
+  "유학생": "#b45309",
+  "결혼이민": "#be123c",
+  "어학연수생": "#7c3aed",
+  "전문인력": "#0369a1",
+  "단기체류": "#64748b",
+  "기타": "#94a3b8"
+};
 
-function GrowthBadge({ rate }: { rate: number }) {
-  const up = rate >= 0;
-  return (
-    <span
-      className="inline-flex items-center gap-0.5 rounded-full px-2 py-0.5 text-[11px] font-bold"
-      style={{
-        background: up ? "#ecfdf5" : "#fff1f2",
-        color: up ? "#059669" : "#be123c"
-      }}
-    >
-      {up ? "▲" : "▼"} {Math.abs(rate).toFixed(1)}%
-    </span>
-  );
-}
+const DONUT_COLORS = ["#0f766e", "#3157a4", "#b45309", "#be123c", "#64748b", "#7c3aed"];
 
-function SegTag({ children }: { children: string }) {
-  return (
-    <span className="rounded border border-line bg-panel px-1.5 py-0.5 text-[10px] font-medium text-muted">
-      {children}
-    </span>
-  );
-}
-
-// ── 금융 상품 수요 매트릭스 ────────────────────────────────────────────────────────
+// ── 금융 상품 수요 히트맵 ──────────────────────────────────────────────────────────
 const PRODUCTS = ["급여계좌", "본국송금", "체크카드", "신용카드", "소액저축", "보험·연금"];
 const DEMAND: Record<string, number[]> = {
   "비전문취업 근로자": [95, 90, 68, 28, 72, 45],
@@ -96,387 +73,270 @@ const DEMAND: Record<string, number[]> = {
 
 function cellStyle(v: number): React.CSSProperties {
   if (v >= 80) return { background: "#0f766e", color: "#fff", fontWeight: 700 };
-  if (v >= 60) return { background: "#ccfbf1", color: "#0f4c41", fontWeight: 600 };
-  if (v >= 40) return { background: "#e0f2fe", color: "#0369a1" };
+  if (v >= 60) return { background: "#5eada4", color: "#fff", fontWeight: 600 };
+  if (v >= 40) return { background: "#cce7e3", color: "#0f4c41" };
+  if (v >= 20) return { background: "#eef5f4", color: "#64748b" };
   return { background: "#f8fafc", color: "#cbd5e1" };
 }
-
-// ── 상품 아이콘 (이모지 대신 ASCII) ──
-const PRODUCT_ICONS: Record<string, string> = {
-  "급여계좌": "💳", "본국송금": "✈️", "체크카드": "🪙",
-  "신용카드": "💰", "소액저축": "🏦", "보험·연금": "🛡️"
-};
-
-// ── 체류자격 세그먼트 색상 ──
-const SEG_COLORS: Record<string, string> = {
-  "비전문취업 근로자": "#0f766e",
-  "재외동포": "#3157a4",
-  "유학생": "#b45309",
-  "결혼이민": "#be123c",
-  "어학연수생": "#7c3aed",
-  "전문인력": "#0369a1",
-  "단기체류": "#64748b",
-  "기타": "#94a3b8"
-};
-
-// ── 분석 데이터셋 커버리지 ──
-// 수집된 모든 공공 데이터셋을 분석 화면(상세 페이지)과 연결한다.
-// loaded=true 면 실데이터 적재 완료, false 면 다음 수집 배치에서 자동 적재.
-const DATA_COVERAGE = [
-  { name: "국적별 체류외국인", provider: "법무부", count: realDataSummary.nationalityCount, unit: "개국", loaded: hasRealNationalityData, href: "/nationalities" },
-  { name: "체류자격별 인원", provider: "법무부", count: stayVisaTypes.length, unit: "종", loaded: hasRealVisaData, href: "/visa-segments" },
-  { name: "외국인 유학생 추이", provider: "법무부", count: realDataSummary.studentYearCount, unit: "개년", loaded: hasRealStudentData, href: "/universities" },
-  { name: "대학별 유학생", provider: "교육부", count: universitySummary.universityCount, unit: "개교", loaded: hasRealUniversityData, href: "/universities" },
-  { name: "국적별 연령분포", provider: "행안부", count: nationalityAgeTotals.length, unit: "개국", loaded: hasNationalityByAge, href: "/nationalities" },
-  { name: "건강보험 적용인구", provider: "건보공단", count: healthInsuranceData.length, unit: "개국", loaded: hasHealthInsurance, href: "/financial-insights" },
-  { name: "다문화가족 현황", provider: "여가부", count: multiculturalFamilyData.length, unit: "유형", loaded: hasMulticulturalFamily, href: "/financial-insights" },
-  { name: "경제활동인구", provider: "통계청", count: econActivityData.length, unit: "건", loaded: hasEconActivity, href: "/financial-insights" },
-  { name: "환율(일별)·송금", provider: "한국은행", count: 0, unit: "", loaded: false, href: "/financial-insights" },
-  { name: "지역별 외국인주민", provider: "행안부", count: realDataSummary.regionResidentCount, unit: "개", loaded: realDataSummary.regionResidentCount > 0, href: "/regions" }
-];
 
 export default function DashboardPage() {
   const freshDate = realDataSummary.generatedAt.slice(0, 10);
   const totalRows = realDataSummary.statusRowCount + realDataSummary.regionRowCount;
   const avg = kpiSummary.averageOpportunityScore;
+  const loadedDatasets = [
+    hasRealNationalityData, hasRealVisaData, hasRealStudentData, hasRealUniversityData,
+    hasNationalityByAge, hasHealthInsurance, hasMulticulturalFamily, hasEconActivity
+  ].filter(Boolean).length;
 
   const kpis = [
     {
       label: "총 체류외국인",
-      value: kpiSummary.totalResidents > 0 ? kpiSummary.totalResidents : 2_459_883,
+      display: formatNumber(kpiSummary.totalResidents > 0 ? kpiSummary.totalResidents : 2_459_883),
       unit: "명",
-      trend: "+4.2% YoY",
+      trend: "+4.2%",
       icon: Users,
-      bg: "#0f766e",
-      sub: kpiSummary.totalResidents > 0 ? "법무부 국적별 현황(2024) · 실데이터" : "법무부 체류통계 기준"
+      color: "#0f766e",
+      sub: kpiSummary.totalResidents > 0 ? "법무부 실데이터 2024" : "법무부 체류통계"
     },
     {
       label: "등록외국인",
-      value: kpiSummary.registeredResidents > 0 ? kpiSummary.registeredResidents : 1_320_540,
+      display: formatNumber(kpiSummary.registeredResidents > 0 ? kpiSummary.registeredResidents : 1_320_540),
       unit: "명",
-      trend: "+3.8% YoY",
+      trend: "+3.8%",
       icon: Banknote,
-      bg: "#3157a4",
-      sub: "장기체류·금융 주고객층"
+      color: "#3157a4",
+      sub: "장기체류 · 금융 주고객"
     },
     {
       label: "외국인 유학생",
-      value: kpiSummary.foreignStudents > 0 ? kpiSummary.foreignStudents : 173_490,
+      display: formatNumber(kpiSummary.foreignStudents > 0 ? kpiSummary.foreignStudents : 173_490),
       unit: "명",
-      trend: kpiSummary.foreignStudents > 0 ? `${realDataSummary.studentYearCount}개년 실데이터` : "+12.3% YoY",
+      trend: "+12.3%",
       icon: GraduationCap,
-      bg: "#b45309",
-      sub: "D-2/D-4 체류 기준"
+      color: "#b45309",
+      sub: "D-2 / D-4 체류"
     },
     {
       label: "평균 금융기회점수",
-      value: null,
-      score: avg,
+      display: avg.toFixed(1),
       unit: "/ 100",
-      trend: `상위 ${sampleOpportunityRows.length}개 지역`,
+      trend: `${sampleOpportunityRows.length}개 지역`,
       icon: BarChart3,
-      bg: "#be123c",
-      sub: "복합 기회지수 평균"
+      color: "#be123c",
+      sub: "복합 기회지수"
     }
   ];
 
   return (
-    <div className="space-y-7 pb-14">
+    <div className="space-y-6 pb-14">
 
       <PageHero
-        kicker="MVP 대시보드"
-        title="외국인 금융 인사이트"
-        description="공개 통계와 내부 금융 집계 데이터를 개인이 아닌 지역·국적·체류자격·대학 단위로 결합해 금융 상품 기획·마케팅·지점 전략을 검토하는 분석 화면입니다."
+        kicker="외국인 금융 인사이트"
+        title="외국인 금융 시장 대시보드"
+        description="공개 통계와 금융 집계 데이터를 지역·국적·체류자격·대학 단위로 시각화한 분석 화면입니다."
       />
 
       {/* ── 데이터 신선도 배너 ── */}
       <div
-        className="flex items-center gap-2 rounded-lg px-4 py-2.5 text-xs"
+        className="flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg px-4 py-2.5 text-xs"
         style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", color: "#166534" }}
       >
-        <span
-          className="h-2 w-2 shrink-0 rounded-full"
-          style={{ background: "#22c55e" }}
-        />
-        <span>
-          수집 기준일:{" "}
-          <strong>{freshDate}</strong>
-          &nbsp;·&nbsp;누적 수집 {totalRows.toLocaleString()}행
-          &nbsp;·&nbsp;매일 18:30 UTC 자동 갱신
-        </span>
+        <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: "#22c55e" }} />
+        <span>수집 기준일 <strong>{freshDate}</strong></span>
+        <span className="text-green-300">·</span>
+        <span>누적 {totalRows.toLocaleString()}행</span>
+        <span className="text-green-300">·</span>
+        <span>실데이터셋 {loadedDatasets}/8 적재</span>
+        <span className="text-green-300">·</span>
+        <span>매일 01:00 KST 자동 갱신</span>
       </div>
 
-      {/* ── KPI 히어로 스트립 ── */}
-      <section>
-        <p
-          className="mb-3 text-xs font-bold uppercase tracking-widest"
-          style={{ color: "#0f766e" }}
-        >
-          외국인 금융 시장 핵심 지표
-        </p>
-        <div className="metric-grid">
-          {kpis.map((kpi) => {
-            const Icon = kpi.icon;
-            return (
-              <div
-                key={kpi.label}
-                className="surface flex flex-col gap-3 p-5"
-                style={{ borderLeft: `4px solid ${kpi.bg}` }}
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <span className="text-sm font-medium text-muted">{kpi.label}</span>
-                  <span
-                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-white"
-                    style={{ background: kpi.bg }}
-                  >
-                    <Icon aria-hidden size={18} />
-                  </span>
-                </div>
-                <div className="flex items-end gap-1.5">
-                  <span className="text-[2.2rem] font-black leading-none text-ink">
-                    {kpi.score != null
-                      ? kpi.score.toFixed(1)
-                      : formatNumber(kpi.value!)}
-                  </span>
-                  <span className="mb-0.5 text-sm text-muted">{kpi.unit}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-1 text-xs font-semibold" style={{ color: "#059669" }}>
-                    <ArrowUpRight size={13} />
-                    {kpi.trend}
-                  </span>
-                  <span className="text-[10px] text-muted">{kpi.sub}</span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ── 분석 데이터 커버리지 (모든 수집 데이터셋 → 분석 화면 연결) ── */}
-      <section>
-        <div className="mb-3 flex items-center justify-between gap-2">
-          <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "#0f766e" }}>
-            분석 가능한 데이터셋
-          </p>
-          <span className="text-[11px] text-muted">
-            적재 {DATA_COVERAGE.filter((d) => d.loaded).length} / 전체 {DATA_COVERAGE.length} · 클릭 시 상세 분석
-          </span>
-        </div>
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-5">
-          {DATA_COVERAGE.map((d) => (
-            <Link
-              key={d.name}
-              href={d.href}
-              className="surface surface-hover flex flex-col gap-2 p-4 transition"
-              style={{ borderTop: `3px solid ${d.loaded ? "#0f766e" : "#cbd5e1"}` }}
-            >
-              <div className="flex items-start justify-between gap-1">
-                <span className="text-sm font-bold leading-tight text-ink">{d.name}</span>
-                {d.loaded ? (
-                  <CheckCircle2 size={15} className="shrink-0" style={{ color: "#0f766e" }} />
-                ) : (
-                  <Clock size={15} className="shrink-0 text-slate-400" />
-                )}
-              </div>
-              <span className="text-[11px] text-muted">{d.provider}</span>
-              <div className="mt-auto flex items-baseline gap-1">
-                {d.loaded && d.count > 0 ? (
-                  <>
-                    <span className="text-xl font-black text-ink">{formatNumber(d.count)}</span>
-                    <span className="text-[11px] text-muted">{d.unit}</span>
-                  </>
-                ) : (
-                  <span className="text-xs font-semibold" style={{ color: d.loaded ? "#0f766e" : "#94a3b8" }}>
-                    {d.loaded ? "적재 완료" : "수집 대기"}
-                  </span>
-                )}
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* ── 지역 기회 점수 + 국적 분포 패널 ── */}
-      <section className="section-grid" style={{ gap: 20 }}>
-
-        {/* 지역 기회 점수 TOP */}
-        <div className="surface overflow-hidden">
-          <div className="surface-header pb-3">
-            <div>
-              <h3 className="surface-title">지역별 금융 기회 점수 순위</h3>
-              <p className="surface-subtitle">외국인 밀도 · 성장률 · 세그먼트 · 금융접근성 복합 지수</p>
-            </div>
-            <span
-              className="rounded-full px-2.5 py-1 text-xs font-bold"
-              style={{ background: "#f0fdf4", color: "#0f766e" }}
-            >
-              TOP {sampleOpportunityRows.length}
-            </span>
-          </div>
-
-          {/* 점수 헤더바 */}
-          <div
-            className="grid text-[10px] font-bold uppercase tracking-wider"
-            style={{
-              gridTemplateColumns: "2rem 1fr 5rem",
-              padding: "6px 18px",
-              background: "#f8fafc",
-              borderBottom: "1px solid #e2e8f0",
-              color: "#697586"
-            }}
-          >
-            <span>#</span>
-            <span>지역 / 세그먼트</span>
-            <span className="text-right">점수 / YoY</span>
-          </div>
-
-          <div className="divide-y divide-slate-100">
-            {sampleOpportunityRows.map((row) => (
-              <div
-                key={row.id}
-                className="flex items-center gap-4 px-4 py-4 hover:bg-slate-50"
-              >
-                {/* Rank circle */}
-                <div
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-black text-white"
-                  style={{ background: scoreColor(row.overallOpportunityScore) }}
+      {/* ── KPI 스트립 ── */}
+      <section className="metric-grid">
+        {kpis.map((kpi) => {
+          const Icon = kpi.icon;
+          return (
+            <div key={kpi.label} className="surface relative flex flex-col gap-3 overflow-hidden p-5">
+              <span
+                className="absolute right-0 top-0 h-full w-1"
+                style={{ background: kpi.color }}
+              />
+              <div className="flex items-start justify-between gap-2">
+                <span className="text-sm font-medium text-muted">{kpi.label}</span>
+                <span
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-white"
+                  style={{ background: kpi.color }}
                 >
-                  {row.rank}
-                </div>
-
-                {/* Info + bar */}
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-bold text-ink">{row.sido}</span>
-                    <span className="text-sm text-muted">{row.sigungu}</span>
-                  </div>
-                  <div className="mt-1 flex flex-wrap gap-1">
-                    <SegTag>{row.dominantSegment}</SegTag>
-                    <SegTag>{row.topNationality}</SegTag>
-                  </div>
-                  <ScoreBar score={row.overallOpportunityScore} />
-                </div>
-
-                {/* Score */}
-                <div className="shrink-0 text-right">
-                  <div
-                    className="text-2xl font-black leading-none"
-                    style={{ color: scoreColor(row.overallOpportunityScore) }}
-                  >
-                    {row.overallOpportunityScore.toFixed(0)}
-                  </div>
-                  <div className="mt-1">
-                    <GrowthBadge rate={row.yoyChangeRate ?? 0} />
-                  </div>
-                </div>
+                  <Icon aria-hidden size={18} />
+                </span>
               </div>
+              <div className="flex items-end gap-1.5">
+                <span className="text-[2.1rem] font-black leading-none text-ink">{kpi.display}</span>
+                <span className="mb-0.5 text-sm text-muted">{kpi.unit}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="flex items-center gap-0.5 text-xs font-bold" style={{ color: "#059669" }}>
+                  <ArrowUpRight size={13} />{kpi.trend} YoY
+                </span>
+                <span className="text-[10px] text-muted">{kpi.sub}</span>
+              </div>
+            </div>
+          );
+        })}
+      </section>
+
+      {/* ── 시각화 히어로: 지역 지도 + 체류자격 도넛 ── */}
+      <section className="grid grid-cols-1 gap-5 lg:grid-cols-[1.5fr_1fr]">
+
+        {/* 지역별 기회 버블 지도 */}
+        <div className="surface overflow-hidden">
+          <div className="surface-header pb-1">
+            <div>
+              <h3 className="surface-title flex items-center gap-1.5">
+                <MapPin size={16} style={{ color: "#0f766e" }} /> 지역별 금융 기회 지도
+              </h3>
+              <p className="surface-subtitle">거품 크기 = 외국인 규모 · 색상 = 기회 점수</p>
+            </div>
+            <Link href="/regions" className="text-xs font-semibold" style={{ color: "#0f766e" }}>
+              지역 분석 →
+            </Link>
+          </div>
+          <div className="flex items-center justify-center px-2 pb-2">
+            <RegionMap />
+          </div>
+          {/* 색상 범례 */}
+          <div className="flex flex-wrap items-center justify-center gap-4 border-t border-slate-100 py-3 text-xs text-muted">
+            {[
+              { c: "#0f766e", l: "72+ 매우 높음" },
+              { c: "#3157a4", l: "55–71 높음" },
+              { c: "#b45309", l: "40–54 보통" },
+              { c: "#be123c", l: "~39 낮음" }
+            ].map((x) => (
+              <span key={x.l} className="flex items-center gap-1.5">
+                <span className="h-3 w-3 rounded-full" style={{ background: x.c }} />{x.l}
+              </span>
             ))}
           </div>
-
-          {/* 추천 액션 요약 */}
-          <div
-            className="p-4 text-xs text-muted"
-            style={{ borderTop: "1px solid #e2e8f0", background: "#fafafa" }}
-          >
-            <span className="font-semibold text-ink">권장 전략: </span>
-            {sampleOpportunityRows[0]?.recommendedAction ?? "—"}
-          </div>
         </div>
 
-        {/* 우측 패널 */}
+        {/* 체류자격 도넛 + 순위 */}
         <div className="flex flex-col gap-5">
-
-          {/* 국적 분포 */}
-          <div className="surface">
-            <div className="surface-header pb-3">
+          <div className="surface flex flex-col">
+            <div className="surface-header pb-0">
               <div>
-                <h3 className="surface-title">국적별 분포</h3>
-                <p className="surface-subtitle">상위 {nationalityDistributionData.length}개국 — {kpiSummary.totalResidents > 0 ? "법무부 실데이터(2024)" : "표본 지역 기준"}</p>
+                <h3 className="surface-title">체류자격 세그먼트</h3>
+                <p className="surface-subtitle">{hasRealVisaData ? "법무부 실데이터" : "표본 기준"} · 비중 분포</p>
               </div>
             </div>
-            <div className="space-y-3 p-4 pt-2">
-              {nationalityDistributionData.map((n, i) => {
-                const palette = ["#0f766e","#3157a4","#b45309","#be123c","#64748b","#7c3aed","#0369a1","#a16207","#9f1239","#064e3b","#1d4ed8","#92400e","#374151","#7e22ce","#0f5132"];
-                const barColors = palette;
-                const widthPct = Math.round((n.share / nationalityDistributionData[0].share) * 100);
-                return (
-                  <div key={n.nationality}>
-                    <div className="mb-1 flex items-center justify-between text-xs">
-                      <span className="font-semibold text-ink">{n.nationality}</span>
-                      <span className="font-mono text-muted">
-                        {formatNumber(n.residents)}명
-                        <span className="ml-2 font-bold" style={{ color: barColors[i] }}>
-                          {n.share}%
-                        </span>
-                      </span>
-                    </div>
-                    <div
-                      className="h-4 w-full overflow-hidden rounded"
-                      style={{ background: "#f1f5f9" }}
-                    >
-                      <div
-                        className="h-4 rounded"
-                        style={{
-                          width: `${widthPct}%`,
-                          background: barColors[i] ?? "#94a3b8"
-                        }}
-                      />
-                    </div>
-                  </div>
-                );
-              })}
+            <div style={{ height: 200 }}>
+              <VisaDonutChart />
             </div>
-
-            {/* 차트 컴포넌트 (Recharts) */}
-            <div style={{ height: 180 }} className="px-2 pb-2">
-              <NationalityBarChart />
+            <div className="grid grid-cols-2 gap-x-3 gap-y-1.5 p-4 pt-1">
+              {visaDistributionData.map((d, i) => (
+                <div key={d.name} className="flex items-center gap-1.5 text-xs">
+                  <span className="h-2.5 w-2.5 shrink-0 rounded-sm" style={{ background: DONUT_COLORS[i % DONUT_COLORS.length] }} />
+                  <span className="truncate text-slate-600">{d.name}</span>
+                  <span className="ml-auto font-bold text-ink">{d.value}%</span>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* 체류자격 도넛 + 범례 */}
-          <div className="surface flex flex-col">
-            <div className="surface-header pb-2">
-              <div>
-                <h3 className="surface-title">체류자격 세그먼트</h3>
-                <p className="surface-subtitle">비중 분포</p>
-              </div>
-            </div>
-            <div style={{ height: 180 }}>
-              <VisaDonutChart />
-            </div>
-            <div className="grid grid-cols-2 gap-1.5 p-4 pt-0">
-              {visaDistributionData.map((d, i) => {
-                const colors = ["#0f766e", "#3157a4", "#b45309", "#be123c", "#64748b", "#7c3aed"];
-                return (
-                  <div key={d.name} className="flex items-center gap-1.5 text-xs">
-                    <span
-                      className="h-2.5 w-2.5 shrink-0 rounded-sm"
-                      style={{ background: colors[i] }}
-                    />
-                    <span className="truncate text-slate-600">{d.name}</span>
-                    <span className="ml-auto font-bold text-ink">{d.value}%</span>
+          {/* 기회 점수 TOP 3 미니 */}
+          <div className="surface p-4">
+            <h3 className="surface-title mb-3 px-1 text-sm">기회 점수 TOP {Math.min(3, sampleOpportunityRows.length)}</h3>
+            <div className="space-y-2.5">
+              {sampleOpportunityRows.slice(0, 3).map((row) => (
+                <div key={row.id} className="flex items-center gap-3">
+                  <span
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-black text-white"
+                    style={{ background: scoreColor(row.overallOpportunityScore) }}
+                  >
+                    {row.rank}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-baseline gap-1.5">
+                      <span className="truncate text-sm font-bold text-ink">{row.sido}</span>
+                      <span className="truncate text-[11px] text-muted">{row.sigungu}</span>
+                    </div>
+                    <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full" style={{ background: "#e2e8f0" }}>
+                      <div className="h-full rounded-full" style={{ width: `${Math.min(100, row.overallOpportunityScore)}%`, background: scoreColor(row.overallOpportunityScore) }} />
+                    </div>
                   </div>
-                );
-              })}
+                  <span className="shrink-0 text-lg font-black" style={{ color: scoreColor(row.overallOpportunityScore) }}>
+                    {row.overallOpportunityScore.toFixed(0)}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── 체류자격별 실인원 + (적재 시) 추가 실데이터 분석 ── */}
+      {/* ── 국적별 분포 + 지역 역량 레이더 ── */}
+      <section className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+
+        {/* 국적별 분포 막대 차트 */}
+        <div className="surface flex flex-col">
+          <div className="surface-header pb-0">
+            <div>
+              <h3 className="surface-title">국적별 분포 TOP {Math.min(10, nationalityDistributionData.length)}</h3>
+              <p className="surface-subtitle">{hasRealNationalityData ? "법무부 국적별 현황 2024" : "표본 지역 기준"}</p>
+            </div>
+          </div>
+          <div style={{ height: 340 }} className="px-2 pb-3 pt-2">
+            <NationalityBarChart data={nationalityDistributionData.slice(0, 10)} />
+          </div>
+        </div>
+
+        {/* 지역 역량 레이더 */}
+        <div className="surface flex flex-col">
+          <div className="surface-header pb-0">
+            <div>
+              <h3 className="surface-title">지역 금융 역량 비교</h3>
+              <p className="surface-subtitle">송금 · 유학생 · 급여계좌 · 다국어 5개 축 (안산 / 구로 / 동대문)</p>
+            </div>
+          </div>
+          <div style={{ height: 340 }} className="px-2 pb-3 pt-2">
+            <ScoreRadarChart />
+          </div>
+        </div>
+      </section>
+
+      {/* ── 월별 추세 라인차트 (full width) ── */}
+      <section className="surface">
+        <div className="surface-header pb-0">
+          <div>
+            <h3 className="surface-title">주요 국적별 월별 체류 추세</h3>
+            <p className="surface-subtitle">최근 6개월 · 중국 / 우즈베키스탄 / 베트남 / 몽골</p>
+          </div>
+          <div className="hidden gap-3 text-xs sm:flex">
+            {["중국", "우즈베키스탄", "베트남", "몽골"].map((n, i) => (
+              <span key={n} className="flex items-center gap-1">
+                <span className="h-2 w-4 rounded-sm" style={{ background: ["#0f766e", "#3157a4", "#b45309", "#be123c"][i] }} />
+                <span className="text-muted">{n}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="chart-box" style={{ height: 300 }}>
+          <TrendLineChart />
+        </div>
+      </section>
+
+      {/* ── 체류자격별 실인원 (실데이터) ── */}
       {hasRealVisaData && stayVisaTypes.length > 0 && (
         <section className="surface">
           <div className="surface-header pb-3">
             <div>
               <h3 className="surface-title">체류자격별 인원 (실데이터)</h3>
-              <p className="surface-subtitle">법무부 외국인체류데이터(2024) · 장기체류 비자타입별 상위 12 · 세그먼트 색상</p>
+              <p className="surface-subtitle">법무부 외국인체류데이터 2024 · 비자타입 상위 12 · 세그먼트 색상</p>
             </div>
             <Link href="/visa-segments" className="text-xs font-semibold" style={{ color: "#0f766e" }}>
               세그먼트 분석 →
             </Link>
           </div>
-          <div className="grid grid-cols-1 gap-x-8 gap-y-2 p-4 pt-2 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-x-8 gap-y-2.5 p-4 pt-2 md:grid-cols-2">
             {stayVisaTypes.slice(0, 12).map((v, i) => {
               const max = stayVisaTypes[0]?.count ?? 1;
               const pct = Math.max(3, Math.round((v.count / max) * 100));
@@ -501,13 +361,13 @@ export default function DashboardPage() {
         </section>
       )}
 
-      {/* ── 추가 실데이터 분석 미니패널 (수집 적재 시 자동 표시) ── */}
+      {/* ── 추가 실데이터 미니패널 (적재 시 자동 표시) ── */}
       {(hasNationalityByAge || hasHealthInsurance || hasMulticulturalFamily || hasEconActivity) && (
         <section className="grid grid-cols-1 gap-5 lg:grid-cols-2">
           {hasNationalityByAge && (
             <Link href="/nationalities" className="surface surface-hover p-5">
               <h3 className="surface-title mb-1">국적별 연령구조</h3>
-              <p className="surface-subtitle mb-3">행안부 외국인주민 · 상위 국적 연령대 분포</p>
+              <p className="surface-subtitle mb-3">행안부 외국인주민 · 상위 국적 연령대</p>
               <div className="space-y-2">
                 {nationalityAgeTotals.slice(0, 5).map((n) => {
                   const max = nationalityAgeTotals[0]?.total ?? 1;
@@ -527,7 +387,7 @@ export default function DashboardPage() {
           {hasHealthInsurance && (
             <Link href="/financial-insights" className="surface surface-hover p-5">
               <h3 className="surface-title mb-1">건강보험 적용인구 (소득 대리지표)</h3>
-              <p className="surface-subtitle mb-3">건보공단 · 국적별 직장/지역 가입 상위 5</p>
+              <p className="surface-subtitle mb-3">건보공단 · 지역별 가입 상위 5</p>
               <div className="space-y-2">
                 {[...healthInsuranceData].sort((a, b) => b.total - a.total).slice(0, 5).map((h) => {
                   const max = [...healthInsuranceData].sort((a, b) => b.total - a.total)[0]?.total ?? 1;
@@ -547,7 +407,7 @@ export default function DashboardPage() {
           {hasMulticulturalFamily && (
             <Link href="/financial-insights" className="surface surface-hover p-5">
               <h3 className="surface-title mb-1">다문화가족 현황</h3>
-              <p className="surface-subtitle mb-3">여가부 · 총 {formatNumber(multiculturalFamilySummary.totalCount)}명 · 유형별 상위 5</p>
+              <p className="surface-subtitle mb-3">여가부 · 총 {formatNumber(multiculturalFamilySummary.totalCount)}명 · 지역별 상위 5</p>
               <div className="space-y-2">
                 {[...multiculturalFamilyData].sort((a, b) => b.total - a.total).slice(0, 5).map((m, i) => {
                   const max = [...multiculturalFamilyData].sort((a, b) => b.total - a.total)[0]?.total ?? 1;
@@ -567,7 +427,7 @@ export default function DashboardPage() {
           {hasEconActivity && (
             <Link href="/financial-insights" className="surface surface-hover p-5">
               <h3 className="surface-title mb-1">외국인 경제활동인구</h3>
-              <p className="surface-subtitle mb-3">통계청 · 체류자격별 취업·경제활동 (취업/소득 = 신용 수요)</p>
+              <p className="surface-subtitle mb-3">통계청 · 체류자격별 취업·경제활동</p>
               <div className="space-y-2">
                 {(() => {
                   const latest = [...econActivityData].sort((a, b) => b.period.localeCompare(a.period))[0]?.period ?? "";
@@ -589,41 +449,15 @@ export default function DashboardPage() {
         </section>
       )}
 
-      {/* ── 월별 추세 전체 폭 ── */}
-      <section className="surface">
-        <div className="surface-header pb-0">
-          <div>
-            <h3 className="surface-title">주요 국적별 월별 체류 추세</h3>
-            <p className="surface-subtitle">
-              최근 6개월 · 중국 / 우즈베키스탄 / 베트남 / 몽골 등록외국인 수
-            </p>
-          </div>
-          <div className="flex gap-3 text-xs">
-            {["중국", "우즈베키스탄", "베트남", "몽골"].map((n, i) => {
-              const colors = ["#0f766e", "#3157a4", "#b45309", "#be123c"];
-              return (
-                <span key={n} className="flex items-center gap-1">
-                  <span className="h-2 w-4 rounded-sm" style={{ background: colors[i] }} />
-                  <span className="text-muted">{n}</span>
-                </span>
-              );
-            })}
-          </div>
-        </div>
-        <div className="chart-box" style={{ height: 300 }}>
-          <TrendLineChart />
-        </div>
-      </section>
+      {/* ── 수요 히트맵 + 인사이트 ── */}
+      <section className="grid grid-cols-1 gap-5 lg:grid-cols-[1.4fr_1fr]">
 
-      {/* ── 금융 상품 수요 매트릭스 + 인사이트 ── */}
-      <section className="two-column" style={{ gap: 20 }}>
-
-        {/* 매트릭스 */}
+        {/* 히트맵 */}
         <div className="surface">
           <div className="surface-header pb-3">
             <div>
-              <h3 className="surface-title">체류자격 × 금융 상품 수요 매트릭스</h3>
-              <p className="surface-subtitle">수요 강도 (0–100) — 짙을수록 높은 우선순위</p>
+              <h3 className="surface-title">체류자격 × 금융상품 수요 히트맵</h3>
+              <p className="surface-subtitle">수요 강도 0–100 · 짙을수록 우선순위 높음</p>
             </div>
           </div>
           <div className="overflow-x-auto">
@@ -632,30 +466,17 @@ export default function DashboardPage() {
                 <tr style={{ background: "#f8fafc", borderBottom: "2px solid #e2e8f0" }}>
                   <th className="px-4 py-2.5 text-left text-xs font-bold text-muted">세그먼트</th>
                   {PRODUCTS.map((p) => (
-                    <th key={p} className="px-2 py-2.5 text-center text-xs font-bold text-muted">
-                      <div>{PRODUCT_ICONS[p]}</div>
-                      <div>{p}</div>
-                    </th>
+                    <th key={p} className="px-2 py-2.5 text-center text-[11px] font-bold text-muted">{p}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {Object.entries(DEMAND).map(([seg, vals]) => (
-                  <tr
-                    key={seg}
-                    className="hover:opacity-90"
-                    style={{ borderBottom: "1px solid #f1f5f9" }}
-                  >
-                    <td className="px-4 py-2 text-xs font-semibold text-ink whitespace-nowrap">
-                      {seg}
-                    </td>
+                  <tr key={seg} style={{ borderBottom: "1px solid #f1f5f9" }}>
+                    <td className="whitespace-nowrap px-4 py-2 text-xs font-semibold text-ink">{seg}</td>
                     {vals.map((v, i) => (
-                      <td
-                        key={i}
-                        className="px-2 py-2 text-center text-xs"
-                        style={cellStyle(v)}
-                      >
-                        {v >= 40 ? v : "·"}
+                      <td key={i} className="px-2 py-2.5 text-center text-xs" style={cellStyle(v)}>
+                        {v >= 20 ? v : "·"}
                       </td>
                     ))}
                   </tr>
@@ -663,22 +484,15 @@ export default function DashboardPage() {
               </tbody>
             </table>
           </div>
-          {/* 범례 */}
-          <div
-            className="flex flex-wrap items-center gap-4 px-4 py-3 text-xs text-muted"
-            style={{ borderTop: "1px solid #e2e8f0" }}
-          >
+          <div className="flex flex-wrap items-center gap-4 px-4 py-3 text-xs text-muted" style={{ borderTop: "1px solid #e2e8f0" }}>
             {[
-              { bg: "#0f766e", color: "#fff", label: "80+ 최우선" },
-              { bg: "#ccfbf1", color: "#0f4c41", label: "60~79 우선" },
-              { bg: "#e0f2fe", color: "#0369a1", label: "40~59 보통" },
-              { bg: "#f8fafc", color: "#94a3b8", label: "~39 낮음" }
+              { bg: "#0f766e", color: "#fff", label: "80+" },
+              { bg: "#5eada4", color: "#fff", label: "60–79" },
+              { bg: "#cce7e3", color: "#0f4c41", label: "40–59" },
+              { bg: "#eef5f4", color: "#64748b", label: "20–39" }
             ].map(({ bg, color, label }) => (
               <span key={label} className="flex items-center gap-1.5">
-                <span
-                  className="h-3.5 w-5 rounded-sm border border-line"
-                  style={{ background: bg }}
-                />
+                <span className="h-3.5 w-5 rounded-sm border border-line" style={{ background: bg }} />
                 <span style={{ color }}>{label}</span>
               </span>
             ))}
@@ -687,10 +501,7 @@ export default function DashboardPage() {
 
         {/* 인사이트 카드 */}
         <div className="flex flex-col gap-4">
-          <p
-            className="text-xs font-bold uppercase tracking-widest"
-            style={{ color: "#697586" }}
-          >
+          <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "#697586" }}>
             자동 생성 지역 인사이트
           </p>
           {sampleRegionInsights.slice(0, 3).map((insight) => (
@@ -701,9 +512,7 @@ export default function DashboardPage() {
               score={insight.score}
             />
           ))}
-          <p className="text-xs text-muted">
-            * 인사이트는 수집 데이터 기반으로 매일 자동 생성됩니다.
-          </p>
+          <p className="text-xs text-muted">* 수집 데이터 기반 매일 자동 생성됩니다.</p>
         </div>
       </section>
 
