@@ -46,7 +46,15 @@ import {
   contractSummary
 } from "@/components/charts/ForeignContractChart";
 import {
+  AgeActivityChart,
+  EmploymentStatusChart,
+  IndustryEmploymentChart
+} from "@/components/charts/ForeignEmploymentCharts";
+import {
   realEpsIntroduction,
+  realForeignAgeActivity,
+  realForeignEmploymentStatus,
+  realForeignIndustry,
   realForeignWage
 } from "@/lib/data/generated/realData";
 
@@ -253,6 +261,18 @@ export default function FinancialInsightsPage() {
   const epsTotal = realEpsIntroduction.byCountry.reduce((s, r) => s + r.value, 0);
   const contractTotal = contractSummary.fixedTerm + contractSummary.openTerm;
   const fixedShare = contractTotal > 0 ? Math.round((contractSummary.fixedTerm / contractTotal) * 100) : 0;
+
+  // 종사상지위·산업·연령 (신규 KOSIS 이민자체류실태조사)
+  const empStatusHasData = realForeignEmploymentStatus.distribution.length > 0;
+  const industryHasData = realForeignIndustry.distribution.length > 0;
+  const ageHasData = realForeignAgeActivity.distribution.length > 0;
+  const topIndustry = industryHasData
+    ? [...realForeignIndustry.distribution].sort((a, b) => b.value - a.value)[0]
+    : null;
+  const financeIndustry = realForeignIndustry.distribution.find((d) => d.industry.includes("금융")) ?? null;
+  const peakAge = ageHasData
+    ? [...realForeignAgeActivity.distribution].sort((a, b) => (b.employed ?? 0) - (a.employed ?? 0))[0]
+    : null;
 
   return (
     <div className="space-y-7 pb-14">
@@ -843,6 +863,111 @@ export default function FinancialInsightsPage() {
         <p className="mt-3 text-xs text-slate-500">
           데이터 출처: KOSIS(국가통계포털) — 외국인 임금구간·고용계약기간(통계청 이민자체류실태·고용조사),
           고용허가제 E-9 국가별·업종별 도입(고용노동부). 매일 18:30 UTC 수집 배치 완료 시 자동 갱신.
+        </p>
+      </section>
+
+      {/* ── 실데이터 차트: 종사상지위·산업·연령 (KOSIS 이민자체류실태조사) ───── */}
+      <section>
+        <div className="mb-3 flex items-center gap-2">
+          <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">
+            외국인 취업 구조 — 종사상지위·산업·연령
+          </h2>
+          <span className="rounded-full bg-teal-100 px-2 py-0.5 text-xs font-semibold text-teal-700">
+            KOSIS · 이민자체류실태조사
+          </span>
+        </div>
+
+        {/* (1) 종사상지위 + (2) 산업별 */}
+        <div className="two-column mb-5">
+          {empStatusHasData ? (
+            <Panel
+              title="종사상지위별 외국인 취업자"
+              subtitle={`상용·임시·일용·자영업 등 분포 · ${realForeignEmploymentStatus.latestYear}년 (단위 ${realForeignEmploymentStatus.unit})`}
+              right={<span className="eyebrow">실데이터 · KOSIS</span>}
+              bodyClassName="p-0"
+            >
+              <div className="chart-box">
+                <EmploymentStatusChart />
+              </div>
+              <div className="border-t border-line px-5 py-3">
+                <p className="text-xs leading-relaxed text-slate-600">
+                  <span className="font-semibold text-teal-700">금융 관점:</span> 상용근로자 비중
+                  {realForeignEmploymentStatus.regularShare != null ? (
+                    <span className="font-semibold text-slate-800"> {realForeignEmploymentStatus.regularShare}%</span>
+                  ) : null}
+                  은 안정적 급여소득 모집단의 크기를 나타냅니다. 상용직은 신용카드·신용대출·자동이체
+                  적금의 우량 타깃이며, 임시·일용·자영업층은 급여계좌·송금 중심으로 접근합니다.
+                </p>
+              </div>
+            </Panel>
+          ) : (
+            <div className="surface p-5 text-sm text-muted">종사상지위 데이터 수집 대기 중</div>
+          )}
+
+          {industryHasData ? (
+            <Panel
+              title="산업별 외국인 취업자"
+              subtitle={`산업 대분류별 취업자 규모 · ${realForeignIndustry.latestYear}년 (단위 ${realForeignIndustry.unit})`}
+              right={<span className="eyebrow">실데이터 · KOSIS</span>}
+              bodyClassName="p-0"
+            >
+              <div className="chart-box">
+                <IndustryEmploymentChart />
+              </div>
+              <div className="border-t border-line px-5 py-3">
+                <p className="text-xs leading-relaxed text-slate-600">
+                  <span className="font-semibold text-blue-700">금융 관점:</span>{" "}
+                  {topIndustry ? (
+                    <>
+                      <span className="font-semibold text-slate-800">{topIndustry.industry}</span>
+                      ({formatNumber(topIndustry.value)}천명) 집중은 산업단지 밀집 지역의 급여계좌·번들
+                      영업 우선순위를 결정합니다.{" "}
+                    </>
+                  ) : null}
+                  금융·보험 종사자는 '전기·운수·통신·금융' 분류에 포함되어 보고됩니다
+                  {financeIndustry ? ` (${formatNumber(financeIndustry.value)}천명)` : ""}.
+                </p>
+              </div>
+            </Panel>
+          ) : (
+            <div className="surface p-5 text-sm text-muted">산업별 취업 데이터 수집 대기 중</div>
+          )}
+        </div>
+
+        {/* (3) 연령대별 경제활동 */}
+        {ageHasData ? (
+          <Panel
+            title="연령대별 외국인 취업자 · 고용률"
+            subtitle={`연령계층별 취업자(천명)와 고용률(%) · ${realForeignAgeActivity.latestYear}년`}
+            right={<span className="eyebrow">실데이터 · KOSIS</span>}
+            bodyClassName="p-0"
+          >
+            <div className="chart-box">
+              <AgeActivityChart />
+            </div>
+            <div className="border-t border-line px-5 py-3">
+              <p className="text-xs leading-relaxed text-slate-600">
+                <span className="font-semibold text-amber-700">금융 관점:</span> 연령 분포는 생애주기
+                금융상품 타깃팅의 축입니다.{" "}
+                {peakAge ? (
+                  <>
+                    취업자가 가장 많은 <span className="font-semibold text-slate-800">{peakAge.ageBand}</span>
+                    ({formatNumber(peakAge.employed ?? 0)}천명, 고용률 {peakAge.employmentRate ?? "-"}%)는
+                    적금·소액대출·해외송금의 핵심 수요층입니다.{" "}
+                  </>
+                ) : null}
+                30~40대 고소득·고용률 구간은 신용·자산관리 상품, 청년층은 디지털 송금·체크카드 중심으로
+                접근할 수 있습니다.
+              </p>
+            </div>
+          </Panel>
+        ) : (
+          <div className="surface p-5 text-sm text-muted">연령별 경제활동 데이터 수집 대기 중</div>
+        )}
+
+        <p className="mt-3 text-xs text-slate-500">
+          데이터 출처: KOSIS(국가통계포털) — 통계청 이민자체류실태조사(종사상지위 DT_2FB007F·산업별 취업 DT_2FB021F·
+          연령계층별 경제활동 DT_2FA005F). 매일 18:30 UTC 수집 배치 완료 시 자동 갱신.
         </p>
       </section>
 
