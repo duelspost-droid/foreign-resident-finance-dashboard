@@ -6095,7 +6095,3432 @@ export const realApiRegionData: readonly ForeignResidentRegionMonth[] = [];
 
 // KOSIS 경제활동인구(취업자·실업자 등) — nationality 없는 집계 시계열.
 export type RealEconActivity = { period: string; category: string; value: number; sourceId: string; provider: string; title: string };
-export const realEconActivity: readonly RealEconActivity[] = [];
+export const realEconActivity: readonly RealEconActivity[] = [
+  {
+    "period": "2018",
+    "category": "계",
+    "value": 1300.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "계",
+    "value": 1322.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "계",
+    "value": 1331.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "계",
+    "value": 1331.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "계",
+    "value": 1301.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "계",
+    "value": 1430.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "계",
+    "value": 1560.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "계",
+    "value": 1692.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "계",
+    "value": 929.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "계",
+    "value": 913.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "계",
+    "value": 917.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "계",
+    "value": 909.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "계",
+    "value": 879.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "계",
+    "value": 975.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "계",
+    "value": 1071.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "계",
+    "value": 1185.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "계",
+    "value": 884.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "계",
+    "value": 863.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "계",
+    "value": 847.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "계",
+    "value": 855.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "계",
+    "value": 843,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "계",
+    "value": 922.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "계",
+    "value": 1010,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "계",
+    "value": 1109.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "계",
+    "value": 371.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "계",
+    "value": 409,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "계",
+    "value": 414.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "계",
+    "value": 422.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "계",
+    "value": 422.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "계",
+    "value": 455.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "계",
+    "value": 489.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "계",
+    "value": 507.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "계",
+    "value": 71.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "계",
+    "value": 69.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "계",
+    "value": 68.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "계",
+    "value": 68.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "계",
+    "value": 67.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "계",
+    "value": 68.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "계",
+    "value": 68.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "계",
+    "value": 70,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "계",
+    "value": 68,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "계",
+    "value": 65.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "계",
+    "value": 63.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "계",
+    "value": 64.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "계",
+    "value": 64.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "계",
+    "value": 64.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "계",
+    "value": 64.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "계",
+    "value": 65.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "비전문취업(E-9)",
+    "value": 262.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "비전문취업(E-9)",
+    "value": 261.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "비전문취업(E-9)",
+    "value": 252.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "비전문취업(E-9)",
+    "value": 216.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "비전문취업(E-9)",
+    "value": 209.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "비전문취업(E-9)",
+    "value": 269.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "비전문취업(E-9)",
+    "value": 303.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "비전문취업(E-9)",
+    "value": 320.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "비전문취업(E-9)",
+    "value": 262.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "비전문취업(E-9)",
+    "value": 261,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "비전문취업(E-9)",
+    "value": 251.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "비전문취업(E-9)",
+    "value": 216.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "비전문취업(E-9)",
+    "value": 209.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "비전문취업(E-9)",
+    "value": 269.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "비전문취업(E-9)",
+    "value": 303.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "비전문취업(E-9)",
+    "value": 320.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "비전문취업(E-9)",
+    "value": 262.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "비전문취업(E-9)",
+    "value": 260.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "비전문취업(E-9)",
+    "value": 251.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "비전문취업(E-9)",
+    "value": 216,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "비전문취업(E-9)",
+    "value": 209.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "비전문취업(E-9)",
+    "value": 268.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "비전문취업(E-9)",
+    "value": 302.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "비전문취업(E-9)",
+    "value": 320.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "비전문취업(E-9)",
+    "value": 0.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "비전문취업(E-9)",
+    "value": 0.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "비전문취업(E-9)",
+    "value": 0.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "비전문취업(E-9)",
+    "value": 0.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "비전문취업(E-9)",
+    "value": 0.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "비전문취업(E-9)",
+    "value": 100,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "비전문취업(E-9)",
+    "value": 99.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "비전문취업(E-9)",
+    "value": 99.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "비전문취업(E-9)",
+    "value": 99.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "비전문취업(E-9)",
+    "value": 99.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "비전문취업(E-9)",
+    "value": 100,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "비전문취업(E-9)",
+    "value": 100,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "비전문취업(E-9)",
+    "value": 100,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "비전문취업(E-9)",
+    "value": 99.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "비전문취업(E-9)",
+    "value": 99.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "비전문취업(E-9)",
+    "value": 99.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "비전문취업(E-9)",
+    "value": 99.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "비전문취업(E-9)",
+    "value": 99.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "비전문취업(E-9)",
+    "value": 99.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "비전문취업(E-9)",
+    "value": 99.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "비전문취업(E-9)",
+    "value": 99.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "방문취업(H-2)",
+    "value": 209.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "방문취업(H-2)",
+    "value": 200.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "방문취업(H-2)",
+    "value": 160.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "방문취업(H-2)",
+    "value": 122.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "방문취업(H-2)",
+    "value": 96.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "방문취업(H-2)",
+    "value": 87,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "방문취업(H-2)",
+    "value": 82.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "방문취업(H-2)",
+    "value": 73,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "방문취업(H-2)",
+    "value": 179.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "방문취업(H-2)",
+    "value": 168.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "방문취업(H-2)",
+    "value": 132.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "방문취업(H-2)",
+    "value": 101.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "방문취업(H-2)",
+    "value": 75.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "방문취업(H-2)",
+    "value": 67.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "방문취업(H-2)",
+    "value": 66.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "방문취업(H-2)",
+    "value": 59,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "방문취업(H-2)",
+    "value": 170.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "방문취업(H-2)",
+    "value": 158.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "방문취업(H-2)",
+    "value": 117.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "방문취업(H-2)",
+    "value": 93.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "방문취업(H-2)",
+    "value": 71.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "방문취업(H-2)",
+    "value": 63.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "방문취업(H-2)",
+    "value": 61.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "방문취업(H-2)",
+    "value": 54.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "방문취업(H-2)",
+    "value": 29.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "방문취업(H-2)",
+    "value": 31.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "방문취업(H-2)",
+    "value": 28.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "방문취업(H-2)",
+    "value": 21.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "방문취업(H-2)",
+    "value": 21.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "방문취업(H-2)",
+    "value": 19.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "방문취업(H-2)",
+    "value": 16.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "방문취업(H-2)",
+    "value": 13.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "방문취업(H-2)",
+    "value": 85.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "방문취업(H-2)",
+    "value": 84.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "방문취업(H-2)",
+    "value": 82.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "방문취업(H-2)",
+    "value": 82.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "방문취업(H-2)",
+    "value": 77.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "방문취업(H-2)",
+    "value": 77.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "방문취업(H-2)",
+    "value": 80,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "방문취업(H-2)",
+    "value": 80.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "방문취업(H-2)",
+    "value": 81.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "방문취업(H-2)",
+    "value": 78.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "방문취업(H-2)",
+    "value": 73,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "방문취업(H-2)",
+    "value": 76.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "방문취업(H-2)",
+    "value": 74.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "방문취업(H-2)",
+    "value": 72.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "방문취업(H-2)",
+    "value": 74.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "방문취업(H-2)",
+    "value": 74.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "전문인력(E-1~E-7)",
+    "value": 37.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "전문인력(E-1~E-7)",
+    "value": 38.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "전문인력(E-1~E-7)",
+    "value": 39.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "전문인력(E-1~E-7)",
+    "value": 40,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "전문인력(E-1~E-7)",
+    "value": 41.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "전문인력(E-1~E-7)",
+    "value": 46.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "전문인력(E-1~E-7)",
+    "value": 65.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "전문인력(E-1~E-7)",
+    "value": 82.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "전문인력(E-1~E-7)",
+    "value": 36.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "전문인력(E-1~E-7)",
+    "value": 38.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "전문인력(E-1~E-7)",
+    "value": 38.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "전문인력(E-1~E-7)",
+    "value": 39.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "전문인력(E-1~E-7)",
+    "value": 41.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "전문인력(E-1~E-7)",
+    "value": 46.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "전문인력(E-1~E-7)",
+    "value": 65.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "전문인력(E-1~E-7)",
+    "value": 81.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "전문인력(E-1~E-7)",
+    "value": 36.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "전문인력(E-1~E-7)",
+    "value": 38.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "전문인력(E-1~E-7)",
+    "value": 38.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "전문인력(E-1~E-7)",
+    "value": 39.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "전문인력(E-1~E-7)",
+    "value": 40.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "전문인력(E-1~E-7)",
+    "value": 46.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "전문인력(E-1~E-7)",
+    "value": 64.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "전문인력(E-1~E-7)",
+    "value": 81.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "전문인력(E-1~E-7)",
+    "value": 0.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "전문인력(E-1~E-7)",
+    "value": 0.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "전문인력(E-1~E-7)",
+    "value": 0.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "전문인력(E-1~E-7)",
+    "value": 0.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "전문인력(E-1~E-7)",
+    "value": 0.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "전문인력(E-1~E-7)",
+    "value": 0.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "전문인력(E-1~E-7)",
+    "value": 0.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "전문인력(E-1~E-7)",
+    "value": 99.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "전문인력(E-1~E-7)",
+    "value": 99.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "전문인력(E-1~E-7)",
+    "value": 97.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "전문인력(E-1~E-7)",
+    "value": 98.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "전문인력(E-1~E-7)",
+    "value": 98.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "전문인력(E-1~E-7)",
+    "value": 100,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "전문인력(E-1~E-7)",
+    "value": 99.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "전문인력(E-1~E-7)",
+    "value": 99.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "전문인력(E-1~E-7)",
+    "value": 98.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "전문인력(E-1~E-7)",
+    "value": 99.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "전문인력(E-1~E-7)",
+    "value": 97.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "전문인력(E-1~E-7)",
+    "value": 98.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "전문인력(E-1~E-7)",
+    "value": 97.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "전문인력(E-1~E-7)",
+    "value": 100,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "전문인력(E-1~E-7)",
+    "value": 99.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "전문인력(E-1~E-7)",
+    "value": 99.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 121.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 143.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 137,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 143.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 162.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 187.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 199.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 236.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 25.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 29.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 36.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 40,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 35,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 40.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 40.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 68.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 19.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 23,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 27.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 34.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 28.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 33.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 32.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 55.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 96.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 113.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 100.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 103.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 127.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 147.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 159.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 168,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 20.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 20.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 26.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 27.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 21.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 21.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 20.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 28.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 16.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 16.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 19.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 23.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 17.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 17.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 16.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "유학생(D-2 D-4-1 D-4-7)",
+    "value": 23.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "재외동포(F-4)",
+    "value": 306.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "재외동포(F-4)",
+    "value": 312.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "재외동포(F-4)",
+    "value": 335.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "재외동포(F-4)",
+    "value": 380,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "재외동포(F-4)",
+    "value": 374.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "재외동포(F-4)",
+    "value": 386.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "재외동포(F-4)",
+    "value": 402.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "재외동포(F-4)",
+    "value": 409.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "재외동포(F-4)",
+    "value": 211.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "재외동포(F-4)",
+    "value": 210.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "재외동포(F-4)",
+    "value": 227.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "재외동포(F-4)",
+    "value": 254.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "재외동포(F-4)",
+    "value": 256.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "재외동포(F-4)",
+    "value": 264.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "재외동포(F-4)",
+    "value": 273.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "재외동포(F-4)",
+    "value": 273,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "재외동포(F-4)",
+    "value": 199.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "재외동포(F-4)",
+    "value": 194.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "재외동포(F-4)",
+    "value": 205.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "재외동포(F-4)",
+    "value": 236.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "재외동포(F-4)",
+    "value": 245.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "재외동포(F-4)",
+    "value": 249.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "재외동포(F-4)",
+    "value": 258.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "재외동포(F-4)",
+    "value": 253.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "재외동포(F-4)",
+    "value": 95,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "재외동포(F-4)",
+    "value": 101.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "재외동포(F-4)",
+    "value": 108.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "재외동포(F-4)",
+    "value": 125.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "재외동포(F-4)",
+    "value": 117.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "재외동포(F-4)",
+    "value": 122,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "재외동포(F-4)",
+    "value": 128.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "재외동포(F-4)",
+    "value": 136.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "재외동포(F-4)",
+    "value": 69,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "재외동포(F-4)",
+    "value": 67.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "재외동포(F-4)",
+    "value": 67.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "재외동포(F-4)",
+    "value": 66.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "재외동포(F-4)",
+    "value": 68.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "재외동포(F-4)",
+    "value": 68.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "재외동포(F-4)",
+    "value": 68,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "재외동포(F-4)",
+    "value": 66.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "재외동포(F-4)",
+    "value": 64.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "재외동포(F-4)",
+    "value": 62.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "재외동포(F-4)",
+    "value": 61.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "재외동포(F-4)",
+    "value": 62.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "재외동포(F-4)",
+    "value": 65.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "재외동포(F-4)",
+    "value": 64.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "재외동포(F-4)",
+    "value": 64.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "재외동포(F-4)",
+    "value": 61.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "영주(F-5)",
+    "value": 104,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "영주(F-5)",
+    "value": 103.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "영주(F-5)",
+    "value": 114.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "영주(F-5)",
+    "value": 128.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "영주(F-5)",
+    "value": 129.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "영주(F-5)",
+    "value": 130.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "영주(F-5)",
+    "value": 141.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "영주(F-5)",
+    "value": 162.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "영주(F-5)",
+    "value": 83,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "영주(F-5)",
+    "value": 81.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "영주(F-5)",
+    "value": 86.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "영주(F-5)",
+    "value": 96.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "영주(F-5)",
+    "value": 99.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "영주(F-5)",
+    "value": 102.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "영주(F-5)",
+    "value": 110.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "영주(F-5)",
+    "value": 130.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "영주(F-5)",
+    "value": 78.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "영주(F-5)",
+    "value": 76.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "영주(F-5)",
+    "value": 79.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "영주(F-5)",
+    "value": 89.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "영주(F-5)",
+    "value": 95.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "영주(F-5)",
+    "value": 97.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "영주(F-5)",
+    "value": 105.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "영주(F-5)",
+    "value": 123.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "영주(F-5)",
+    "value": 21.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "영주(F-5)",
+    "value": 22,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "영주(F-5)",
+    "value": 28.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "영주(F-5)",
+    "value": 32.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "영주(F-5)",
+    "value": 30.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "영주(F-5)",
+    "value": 28.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "영주(F-5)",
+    "value": 30.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "영주(F-5)",
+    "value": 32.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "영주(F-5)",
+    "value": 79.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "영주(F-5)",
+    "value": 78.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "영주(F-5)",
+    "value": 75.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "영주(F-5)",
+    "value": 75,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "영주(F-5)",
+    "value": 76.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "영주(F-5)",
+    "value": 78.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "영주(F-5)",
+    "value": 78.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "영주(F-5)",
+    "value": 80,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "영주(F-5)",
+    "value": 75.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "영주(F-5)",
+    "value": 73.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "영주(F-5)",
+    "value": 69.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "영주(F-5)",
+    "value": 69.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "영주(F-5)",
+    "value": 73.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "영주(F-5)",
+    "value": 74.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "영주(F-5)",
+    "value": 74.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "영주(F-5)",
+    "value": 75.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 108.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 109.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 121.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 127,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 122.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 120.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 122,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 127.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 63,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 59.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 67.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 69.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 72.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 74.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 75.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 83,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 60.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 56.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 61.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 64.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 67.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 70.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 71.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 77.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 45.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 50.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 54.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 57.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 50.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 45.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 46.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 44.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 58,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 54.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 55.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 54.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 59.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 61.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 62,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 64.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 55.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 51.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 50.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 50.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 55.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 58.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 58.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "결혼이민(F-6 F-2-1)",
+    "value": 60.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "기타",
+    "value": 150.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "기타",
+    "value": 153,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "기타",
+    "value": 170.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "기타",
+    "value": 173.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "기타",
+    "value": 165,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "기타",
+    "value": 203.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "기타",
+    "value": 243.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "기타",
+    "value": 279.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "기타",
+    "value": 67.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "기타",
+    "value": 63.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "기타",
+    "value": 76.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "기타",
+    "value": 92.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "기타",
+    "value": 90.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "기타",
+    "value": 110.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "기타",
+    "value": 136.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "기타",
+    "value": 169.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "기타",
+    "value": 57.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "기타",
+    "value": 55.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "기타",
+    "value": 66.9,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "기타",
+    "value": 81.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "기타",
+    "value": 83.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "기타",
+    "value": 94,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "기타",
+    "value": 114.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "기타",
+    "value": 143.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "기타",
+    "value": 83.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "기타",
+    "value": 89.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "기타",
+    "value": 93.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "기타",
+    "value": 81.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "기타",
+    "value": 74.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "기타",
+    "value": 92.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "기타",
+    "value": 107.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "기타",
+    "value": 110.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "기타",
+    "value": 44.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "기타",
+    "value": 41.6,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "기타",
+    "value": 45.2,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "기타",
+    "value": 53.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "기타",
+    "value": 55,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "기타",
+    "value": 54.5,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "기타",
+    "value": 55.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "기타",
+    "value": 60.4,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2018",
+    "category": "기타",
+    "value": 38.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2019",
+    "category": "기타",
+    "value": 36.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2020",
+    "category": "기타",
+    "value": 39.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2021",
+    "category": "기타",
+    "value": 47.1,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2022",
+    "category": "기타",
+    "value": 50.7,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2023",
+    "category": "기타",
+    "value": 46.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2024",
+    "category": "기타",
+    "value": 46.8,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  },
+  {
+    "period": "2025",
+    "category": "기타",
+    "value": 51.3,
+    "sourceId": "kosis_foreigner_economic_activity",
+    "provider": "KOSIS(통계청 이민자체류실태조사)",
+    "title": "체류자격별 경제활동인구(외국인)"
+  }
+];
 
 // 국적 분포 + 비자/세그먼트 분포 — 국적·체류자격 페이지가 사용.
 export type RealNationalityDist = { nationality: string; residents: number; share: number };
@@ -11964,7 +15389,7 @@ export const realUniversityStats: readonly RealUniversityStat[] = [
 ];
 
 export const realDataSummary = {
-  "generatedAt": "2026-06-15T23:58:40.082Z",
+  "generatedAt": "2026-06-16T00:15:23.454Z",
   "statusRowCount": 205,
   "nationalityCount": 205,
   "nationalitySource": "annual",
@@ -11972,7 +15397,7 @@ export const realDataSummary = {
   "regionRowCount": 200,
   "apiStatusRowCount": 0,
   "apiRegionRowCount": 0,
-  "apiEconActivityCount": 0,
+  "apiEconActivityCount": 428,
   "studentYearCount": 14,
   "universityCount": 1,
   "regionResidentCount": 0,
@@ -11980,13 +15405,19 @@ export const realDataSummary = {
   "healthInsuranceCount": 17,
   "multiculturalFamilyCount": 16,
   "universityStatsCount": 6363,
-  "apiParsedFiles": [],
+  "apiParsedFiles": [
+    {
+      "source": "kosis_foreigner_economic_activity",
+      "file": "kosis_foreigner_economic_activity_2026-06-16.json",
+      "produced": 428
+    }
+  ],
   "sourceFiles": {
-    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-15.csv",
-    "stay": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-06-15.csv",
-    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-15.csv",
-    "moeStudent": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moe_foreign_student_latest_2026-06-15.csv",
-    "mois": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/mois_foreign_resident_region_file_2026-06-15.csv",
-    "monthly": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_immigration_monthly_2024_2026-06-15.csv"
+    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-16.csv",
+    "stay": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-06-16.csv",
+    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-16.csv",
+    "moeStudent": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moe_foreign_student_latest_2026-06-16.csv",
+    "mois": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/mois_foreign_resident_region_file_2026-06-16.csv",
+    "monthly": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_immigration_monthly_2024_2026-06-16.csv"
   }
 } as const;
