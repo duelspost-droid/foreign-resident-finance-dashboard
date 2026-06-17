@@ -15,7 +15,8 @@ coverage
 data/raw/*
 !data/raw/
 !data/raw/*.csv
-# 대용량 원본(304k행)은 캐시 커밋에서 제외 — 대학 파서는 moe_foreign_student_latest 사용.
+# 대용량 원본(304k행, 15M)은 캐시 커밋에서 제외. 대학 랭킹 파서가 이 파일을 1차로 쓰지만,
+# CI 수집 실패 시엔 build_real_data의 last-good 보존이 직전 커밋 랭킹을 유지한다(세종 고교 회귀 방지).
 data/raw/academyinfo_foreign_student_count*.csv
 data/processed
 data/catalog/*

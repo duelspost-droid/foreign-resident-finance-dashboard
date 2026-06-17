@@ -438,6 +438,43 @@ function buildForeignLandAcquisition(rows) {
   return { latestYear: ly, unit: "백만원", byNationality, total: byNationality.reduce((s, r) => s + r.value, 0) };
 }
 
+// 직전 커밋된 realData.ts에서 특정 export의 값을 추출한다(공공 API 일시장애 시 last-good 보존용).
+// `= ` 뒤의 첫 `{`/`[` 부터 균형 잡힌 끝 위치까지 잘라낸다(문자열 인지) → 뒤따르는 ` as const;`·주석에 영향 안 받음.
+function extractPrevExport(prevText, name) {
+  if (!prevText) return null;
+  const marker = `export const ${name}`;
+  const i = prevText.indexOf(marker);
+  if (i < 0) return null;
+  let p = prevText.indexOf("=", i + marker.length);
+  if (p < 0) return null;
+  p += 1;
+  while (p < prevText.length && /\s/.test(prevText[p])) p += 1;
+  const open = prevText[p];
+  if (open !== "{" && open !== "[") return null;
+  const close = open === "{" ? "}" : "]";
+  let depth = 0;
+  let inStr = false;
+  let esc = false;
+  let end = -1;
+  for (let k = p; k < prevText.length; k += 1) {
+    const ch = prevText[k];
+    if (inStr) {
+      if (esc) esc = false;
+      else if (ch === "\\") esc = true;
+      else if (ch === '"') inStr = false;
+    } else if (ch === '"') {
+      inStr = true;
+    } else if (ch === open) {
+      depth += 1;
+    } else if (ch === close) {
+      depth -= 1;
+      if (depth === 0) { end = k + 1; break; }
+    }
+  }
+  if (end < 0) return null;
+  try { return JSON.parse(prevText.slice(p, end)); } catch { return null; }
+}
+
 // 파서 결과가 비어있을 때 실제 컬럼명을 로그 출력 (다음 런에서 파서 수정 확인용).
 function logColumnDiag(label, rows) {
   if (!rows.length) return;
@@ -1232,10 +1269,8 @@ async function main() {
     // baseYear 2025: academyinfo(3069982) 학생단위 레코드는 연도 컬럼이 없음. 라이브 확인 결과 데이터 빈티지=2025년 기준.
     universityRanking = transformAcademyUniversities(parseCsv(academyRaw.text), 2025);
   }
-  if (universityRanking.universities.length === 0 && moeStudentRaw) {
-    const moeResult = transformMoeStudentsBySchool(parseCsv(moeStudentRaw.text));
-    if (moeResult.universities.length > 0) universityRanking = moeResult;
-  }
+  // moe_foreign_student_latest(세종 고교 파일) fallback 제거: academyinfo 미수집 시 빈값으로 두고,
+  // 아래 last-good 보존이 직전 커밋 랭킹을 유지한다(고교 오데이터로 회귀 금지). transformMoeStudentsBySchool는 미사용.
 
   // 행안부 국적×연령 현황(국적,연령대,값,데이터기준일자) → 국적별 연령 분포.
   const moisRaw = await readLatestRaw("mois_foreign_resident_region_file");
@@ -1264,35 +1299,79 @@ async function main() {
 
   // KOSIS 외국인 금융/소득·EPS 도입·유학생 국적/학위 (신규, JSON 직접 전용 파싱).
   const wageRaw = await readLatestRawJson("kosis_immigrant_wage_distribution");
-  const foreignWage = wageRaw ? buildBandDist(wageRaw.rows, "외국인") : { latestYear: null, unit: "", distribution: [], trend: [] };
+  let foreignWage = wageRaw ? buildBandDist(wageRaw.rows, "외국인") : { latestYear: null, unit: "", distribution: [], trend: [] };
   const contractRaw = await readLatestRawJson("kosis_immigrant_contract_period");
-  const foreignContract = contractRaw ? buildBandDist(contractRaw.rows, "외국인") : { latestYear: null, unit: "", distribution: [], trend: [] };
+  let foreignContract = contractRaw ? buildBandDist(contractRaw.rows, "외국인") : { latestYear: null, unit: "", distribution: [], trend: [] };
   const epsCountryRaw = await readLatestRawJson("kosis_eps_introduction_by_country");
   const epsIndustryRaw = await readLatestRawJson("kosis_eps_introduction_by_industry");
-  const epsIntroduction = buildEps(epsCountryRaw?.rows ?? [], epsIndustryRaw?.rows ?? []);
+  let epsIntroduction = buildEps(epsCountryRaw?.rows ?? [], epsIndustryRaw?.rows ?? []);
   const studentNatRaw = await readLatestRawJson("kosis_foreign_student_nationality_visa");
-  const studentNationality = studentNatRaw ? buildStudentNationality(studentNatRaw.rows) : { latestYear: null, byNationality: [], byDegree: [] };
+  let studentNationality = studentNatRaw ? buildStudentNationality(studentNatRaw.rows) : { latestYear: null, byNationality: [], byDegree: [] };
   const kediRaw = await readLatestRawJson("kosis_kedi_higher_edu_foreign_students");
-  const kediStudentRegion = kediRaw ? buildKediRegion(kediRaw.rows) : { latestYear: null, byRegion: [], byDegree: [] };
+  let kediStudentRegion = kediRaw ? buildKediRegion(kediRaw.rows) : { latestYear: null, byRegion: [], byDegree: [] };
   const empStatusRaw = await readLatestRawJson("kosis_immigrant_employment_status");
-  const foreignEmploymentStatus = empStatusRaw ? buildEmploymentStatus(empStatusRaw.rows) : { latestYear: null, unit: "", distribution: [], trend: [], regularShare: null };
+  let foreignEmploymentStatus = empStatusRaw ? buildEmploymentStatus(empStatusRaw.rows) : { latestYear: null, unit: "", distribution: [], trend: [], regularShare: null };
   const industryRaw = await readLatestRawJson("kosis_immigrant_employment_by_industry");
-  const foreignIndustry = industryRaw ? buildIndustryEmployment(industryRaw.rows) : { latestYear: null, unit: "", distribution: [], trend: [] };
+  let foreignIndustry = industryRaw ? buildIndustryEmployment(industryRaw.rows) : { latestYear: null, unit: "", distribution: [], trend: [] };
   const ageRaw = await readLatestRawJson("kosis_immigrant_econ_activity_by_age");
-  const foreignAgeActivity = ageRaw ? buildAgeActivity(ageRaw.rows) : { latestYear: null, unit: "", distribution: [] };
+  let foreignAgeActivity = ageRaw ? buildAgeActivity(ageRaw.rows) : { latestYear: null, unit: "", distribution: [] };
 
   // 한국은행 ECOS: 이전소득수지(본국송금 대리)·환율.
   const ecosTransferARaw = await readLatestRawJson("ecos_bop_transfer_income");
   const ecosTransferMRaw = await readLatestRawJson("ecos_bop_transfer_monthly");
-  const bopTransferIncome = buildBopTransferIncome(ecosTransferARaw?.rows ?? [], ecosTransferMRaw?.rows ?? []);
+  let bopTransferIncome = buildBopTransferIncome(ecosTransferARaw?.rows ?? [], ecosTransferMRaw?.rows ?? []);
   const ecosFxRaw = await readLatestRawJson("ecos_exchange_rate_daily");
-  const exchangeRate = ecosFxRaw ? buildExchangeRate(ecosFxRaw.rows) : { latest: {}, monthly: [] };
+  let exchangeRate = ecosFxRaw ? buildExchangeRate(ecosFxRaw.rows) : { latest: {}, monthly: [] };
 
   // 외국인 소비·거래 (data.go.kr file): 면세점 국적별 매출 · 제주 외국인 토지취득.
   const dutyFreeRaw = await readLatestRaw("jdc_dutyfree_sales_by_nationality");
-  const dutyFreeSales = dutyFreeRaw ? buildDutyFreeSales(parseCsv(dutyFreeRaw.text)) : { latestYear: null, unit: "원", byNationality: [], monthly: [], foreignTotal: 0, internalTotal: 0 };
+  let dutyFreeSales = dutyFreeRaw ? buildDutyFreeSales(parseCsv(dutyFreeRaw.text)) : { latestYear: null, unit: "원", byNationality: [], monthly: [], foreignTotal: 0, internalTotal: 0 };
   const landRaw = await readLatestRaw("jeju_foreign_land_acquisition");
-  const foreignLandAcquisition = landRaw ? buildForeignLandAcquisition(parseCsv(landRaw.text)) : { latestYear: null, unit: "백만원", byNationality: [], total: 0 };
+  let foreignLandAcquisition = landRaw ? buildForeignLandAcquisition(parseCsv(landRaw.text)) : { latestYear: null, unit: "백만원", byNationality: [], total: 0 };
+
+  // ── last-good 보존: 공공 API(KOSIS·data.go.kr 등) 일시장애로 이번 수집이 빈/열화되면 ──
+  // 직전 커밋된 realData.ts의 값을 유지해 배포 데이터가 회귀하지 않게 한다.
+  // (커밋된 CSV 캐시가 있는 소스는 collector가 cached_raw로 살리지만, gitignore된 대용량
+  //  KOSIS(json)·academyinfo는 캐시가 없어 전역 장애 시 빈값이 되므로 여기서 보존한다.)
+  const prevGen = await readFile(join(generatedDir, "realData.ts"), "utf8").catch(() => "");
+  const retainedExports = [];
+  const lastGood = (name, fresh, isEmpty) => {
+    if (!isEmpty(fresh)) return fresh;
+    const prev = extractPrevExport(prevGen, name);
+    if (prev != null && !isEmpty(prev)) { retainedExports.push(name); return prev; }
+    return fresh;
+  };
+  const emptyDist = (o) => !(o && o.distribution && o.distribution.length);
+  const emptyKey = (k) => (o) => !(o && Array.isArray(o[k]) && o[k].length);
+  foreignWage = lastGood("realForeignWage", foreignWage, emptyDist);
+  foreignContract = lastGood("realForeignContract", foreignContract, emptyDist);
+  epsIntroduction = lastGood("realEpsIntroduction", epsIntroduction, emptyKey("byCountry"));
+  studentNationality = lastGood("realForeignStudentNationality", studentNationality, emptyKey("byNationality"));
+  kediStudentRegion = lastGood("realKediStudentRegion", kediStudentRegion, emptyKey("byRegion"));
+  foreignEmploymentStatus = lastGood("realForeignEmploymentStatus", foreignEmploymentStatus, emptyDist);
+  foreignIndustry = lastGood("realForeignIndustry", foreignIndustry, emptyDist);
+  foreignAgeActivity = lastGood("realForeignAgeActivity", foreignAgeActivity, emptyDist);
+  bopTransferIncome = lastGood("realBopTransferIncome", bopTransferIncome, emptyKey("annual"));
+  exchangeRate = lastGood("realExchangeRate", exchangeRate, emptyKey("monthly"));
+  dutyFreeSales = lastGood("realDutyFreeSales", dutyFreeSales, emptyKey("byNationality"));
+  foreignLandAcquisition = lastGood("realForeignLandAcquisition", foreignLandAcquisition, emptyKey("byNationality"));
+  // 대학 랭킹: academyinfo 미수집(<10개교)이면 직전 랭킹+요약 복원(세종 고교 같은 오데이터로 회귀 금지).
+  const prevRanking = extractPrevExport(prevGen, "realUniversityRanking");
+  const prevUniSummary = extractPrevExport(prevGen, "realUniversitySummary");
+  if (universityRanking.universities.length < 10 && Array.isArray(prevRanking) && prevRanking.length >= 10) {
+    retainedExports.push("realUniversityRanking");
+    universityRanking = {
+      universities: prevRanking,
+      latestYear: prevUniSummary?.latestYear ?? null,
+      universityCount: prevUniSummary?.universityCount ?? prevRanking.length,
+      totalForeignStudents: prevUniSummary?.totalForeignStudents ?? 0
+    };
+  }
+  if (retainedExports.length) {
+    console.error(`[LAST-GOOD] 이번 수집 실패로 ${retainedExports.length}개 export를 직전 커밋값으로 유지: ${retainedExports.join(", ")}`);
+  } else {
+    console.log("[LAST-GOOD] 보존 불필요 — 모든 핵심 export 신규 수집 성공");
+  }
 
   // ── 데이터 품질 가드: 주요 '스톡' 시계열의 비정상 급락 감지(손상/집계기준변동 조기 경보) ──
   // 스톡(누적 인원·잔액) 시계열에만 적용한다. EPS 신규 도입 등 'flow(연간 신규)' 시계열은
@@ -1392,6 +1471,8 @@ async function main() {
     `export const realDataSummary = ${JSON.stringify({
       generatedAt: new Date().toISOString(),
       dataQualityWarningCount: dataQualityWarnings.length,
+      retainedExportCount: retainedExports.length,
+      retainedExports,
       statusRowCount: statusRows.length,
       nationalityCount: finalNationalityDist.length,
       nationalitySource: monthlyTotal > annualTotal ? "monthly" : "annual",
