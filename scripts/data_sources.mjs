@@ -347,28 +347,9 @@ export const publicDataSources = [
     verified: false,
     notes: "행안부 시도별 외국인주민. newEstPrdCnt로 최신 N기 자동 수집. 첫 성공 응답으로 필드명 확정."
   },
-  {
-    id: "kosis_foreign_resident_by_eupmyeondong",
-    type: "kosis",
-    provider: "KOSIS(행정안전부 외국인주민)",
-    title: "읍면동별 유형 및 지역별 외국인주민 현황",
-    category: "외국인 직접 통계",
-    apiKeyEnv: "KOSIS_API_KEY",
-    endpoint: "https://kosis.kr/openapi/Param/statisticsParameterData.do",
-    orgId: "110",
-    tblId: "DT_110025_A033_A",
-    // 40,000셀 제한으로 연도 1개 요청(최근 연도만). endPrdDe=CY 로 매년 갱신.
-    params: { prdSe: "Y", startPrdDe: CY, endPrdDe: CY, objL1: "ALL", objL2: "ALL" },
-    targetTable: "foreign_resident_region_month",
-    outputBaseName: "kosis_foreign_resident_by_eupmyeondong",
-    responseMapping: { period: "PRD_DE", region: "C1_NM", value: "DT" },
-    sourceUrl: "https://kosis.kr/statHtml/statHtml.do?orgId=110&tblId=DT_110025_A033_A",
-    updateCycle: "연",
-    license: "KOSIS 이용약관",
-    personalDataSafe: true,
-    verified: false,
-    notes: "행안부 읍면동 단위 외국인주민. endPrdDe=CY로 매년 자동 갱신."
-  },
+  // [비활성화 2026-06-17] kosis_foreign_resident_by_eupmyeondong: 읍면동 분류 3,957개 → objL 31,184자로
+  // KOSIS URL 길이 제한 초과(skipped_too_large) → 매번 미수집. 읍면동 granularity는 우선순위 낮음(backlog #8,
+  // 페이지네이션 구현 시 재활성화). 지역 단위는 시군구 소스로 커버되므로 영구 skip 대신 비활성화해 '실패' 표시 제거.
   {
     id: "kosis_registered_foreigner_sigungu_visa",
     type: "kosis",

@@ -1157,6 +1157,26 @@ async function buildLineage() {
     if (s === "skipped_no_key") return "skippedNoKey";
     return "failed";
   }
+
+  // last-good lineage carry-forward: 이번 수집은 실패했지만 직전에 성공(데이터 보존)한 소스는
+  // '실패'가 아니라 'cached(캐시 사용)'로 표기한다. CI가 클라우드 IP 차단으로 매번 수집 실패해도
+  // realData는 last-good로 보존되므로, 데이터가 멀쩡한데 화면이 '실패 N'으로 과장 표시되는 것을 막는다.
+  const prevLineageText = await readFile(join(generatedDir, "dataLineage.ts"), "utf8").catch(() => "");
+  const prevLineage = extractPrevExport(prevLineageText, "dataLineage");
+  const prevById = new Map((prevLineage?.sources ?? []).map((e) => [e.id, e]));
+  for (const e of entries) {
+    if (classify(e.status) !== "failed") continue;
+    const prev = prevById.get(e.id);
+    const prevOk = prev && (prev.status === "downloaded" || String(prev.status).includes("cached")) && (prev.rowCount ?? 0) > 0;
+    if (prevOk) {
+      e.reason = `이번 수집 실패(${e.status}${e.reason ? ": " + e.reason : ""}) — 직전 수집값 유지`;
+      e.status = "cached";
+      e.rowCount = prev.rowCount;
+      e.savedFile = prev.savedFile ?? e.savedFile;
+      e.fetchedAt = e.fetchedAt ?? prev.fetchedAt ?? null;
+    }
+  }
+
   const buckets = { downloaded: 0, cached: 0, skippedNoKey: 0, failed: 0 };
   for (const e of entries) buckets[classify(e.status)] += 1;
 
