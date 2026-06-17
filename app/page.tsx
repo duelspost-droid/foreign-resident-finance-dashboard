@@ -3,10 +3,16 @@ import {
   ArrowUpRight,
   BarChart3,
   Banknote,
+  Briefcase,
+  DollarSign,
   GraduationCap,
   Landmark,
   LayoutGrid,
   MapPin,
+  Send,
+  ShoppingBag,
+  TrendingDown,
+  TrendingUp,
   Users
 } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
@@ -44,7 +50,11 @@ import {
   realDataSummary,
   realForeignWage,
   realEpsIntroduction,
-  realForeignStudentNationality
+  realForeignStudentNationality,
+  realBopTransferIncome,
+  realExchangeRate,
+  realForeignEmploymentStatus,
+  realDutyFreeSales
 } from "@/lib/data/generated/realData";
 import { formatNumber } from "@/lib/utils/format";
 
@@ -167,6 +177,79 @@ export default function DashboardPage() {
     .slice(0, 5)
     .map((n) => ({ label: n.nationality, value: n.value }));
 
+  // ── 실데이터 금융 시그널 (본국송금 · 환율 · 상용직 · 면세소비) ────────────────────
+  const bopAnnual = [...realBopTransferIncome.annual].sort((a, b) => a.year - b.year);
+  const bopLatest = bopAnnual.length ? bopAnnual[bopAnnual.length - 1] : null;
+  const bopPrev = bopAnnual.length > 1 ? bopAnnual[bopAnnual.length - 2] : null;
+  const bopYoY = bopLatest && bopPrev && bopPrev.value ? ((bopLatest.value - bopPrev.value) / bopPrev.value) * 100 : null;
+
+  const fxUsd = realExchangeRate.latest?.usd ?? null;
+  const fxMonthly = realExchangeRate.monthly;
+  const fxLastMonth = fxMonthly.length ? fxMonthly[fxMonthly.length - 1] : null;
+  const fxPrevMonth = fxMonthly.length > 1 ? fxMonthly[fxMonthly.length - 2] : null;
+  const fxMoM = fxLastMonth && fxPrevMonth && fxPrevMonth.usd ? ((fxLastMonth.usd - fxPrevMonth.usd) / fxPrevMonth.usd) * 100 : null;
+  const fxDate = fxUsd ? `${fxUsd.date.slice(0, 4)}.${fxUsd.date.slice(4, 6)}.${fxUsd.date.slice(6, 8)}` : "";
+
+  const dutyTop = realDutyFreeSales.byNationality.length ? realDutyFreeSales.byNationality[0] : null;
+  const dutyTopPct = dutyTop && realDutyFreeSales.foreignTotal ? (dutyTop.value / realDutyFreeSales.foreignTotal) * 100 : 0;
+
+  const signals: {
+    label: string;
+    value: string;
+    unit: string;
+    sub: string;
+    delta: number | null;
+    deltaSuffix: string;
+    deltaInverse: boolean;
+    icon: typeof Send;
+    color: string;
+  }[] = [
+    {
+      label: "본국송금 (이전소득수지)",
+      value: bopLatest ? (bopLatest.value / 100).toFixed(1) : "—",
+      unit: "억$",
+      sub: bopLatest ? `${bopLatest.year} 연간 · 한국은행 ECOS` : "데이터 없음",
+      delta: bopYoY,
+      deltaSuffix: "YoY",
+      deltaInverse: false,
+      icon: Send,
+      color: "#0f766e"
+    },
+    {
+      label: "원/달러 환율",
+      value: fxUsd ? formatNumber(Math.round(fxUsd.value)) : "—",
+      unit: "원",
+      sub: fxUsd ? `${fxDate} 기준 · ECOS 일별` : "데이터 없음",
+      delta: fxMoM,
+      deltaSuffix: "MoM",
+      deltaInverse: true, // 환율 상승 = 원화 약세
+      icon: DollarSign,
+      color: "#3157a4"
+    },
+    {
+      label: "외국인 상용직 비중",
+      value: realForeignEmploymentStatus.regularShare.toFixed(1),
+      unit: "%",
+      sub: `상용 ${formatNumber(realForeignEmploymentStatus.regular)}천명 / 취업 ${formatNumber(realForeignEmploymentStatus.total)}천명 · ${realForeignEmploymentStatus.latestYear}`,
+      delta: null,
+      deltaSuffix: "",
+      deltaInverse: false,
+      icon: Briefcase,
+      color: "#b45309"
+    },
+    {
+      label: "면세 소비 1위 국적",
+      value: dutyTop ? dutyTop.nationality : "—",
+      unit: "",
+      sub: dutyTop ? `외국인 면세매출의 ${dutyTopPct.toFixed(1)}% · ${realDutyFreeSales.latestYear} JDC` : "데이터 없음",
+      delta: null,
+      deltaSuffix: "",
+      deltaInverse: false,
+      icon: ShoppingBag,
+      color: "#be123c"
+    }
+  ];
+
   return (
     <div className="space-y-6 pb-14">
 
@@ -257,6 +340,50 @@ export default function DashboardPage() {
             </div>
           );
         })}
+      </section>
+
+      {/* ── 실데이터 금융 시그널 (본국송금 · 환율 · 상용직 · 면세소비) ── */}
+      <section>
+        <div className="mb-3 flex items-center gap-2">
+          <span className="text-xs font-bold uppercase tracking-widest" style={{ color: "#697586" }}>
+            실데이터 금융 시그널
+          </span>
+          <span className="text-[11px] text-muted">한국은행 ECOS · 통계청 · JDC 면세 — 매 배치 자동 갱신</span>
+        </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {signals.map((s) => {
+            const Icon = s.icon;
+            const good = s.delta == null ? null : s.deltaInverse ? s.delta < 0 : s.delta >= 0;
+            const deltaColor = good == null ? "#697586" : good ? "#059669" : "#dc2626";
+            const DeltaIcon = s.delta != null && s.delta < 0 ? TrendingDown : TrendingUp;
+            return (
+              <div key={s.label} className="surface relative flex flex-col gap-2 overflow-hidden p-5">
+                <span className="absolute left-0 top-0 h-1 w-full" style={{ background: s.color }} />
+                <div className="flex items-start justify-between gap-2">
+                  <span className="text-sm font-medium text-muted">{s.label}</span>
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-white" style={{ background: s.color }}>
+                    <Icon aria-hidden size={18} />
+                  </span>
+                </div>
+                <div className="flex items-end gap-1.5">
+                  <span className="text-[1.9rem] font-black leading-none text-ink">{s.value}</span>
+                  {s.unit && <span className="mb-0.5 text-sm text-muted">{s.unit}</span>}
+                </div>
+                <div className="flex items-center justify-between gap-2">
+                  {s.delta != null ? (
+                    <span className="flex items-center gap-0.5 text-xs font-bold" style={{ color: deltaColor }}>
+                      <DeltaIcon size={13} />
+                      {s.delta >= 0 ? "+" : ""}{s.delta.toFixed(1)}% {s.deltaSuffix}
+                    </span>
+                  ) : (
+                    <span />
+                  )}
+                  <span className="truncate text-[10px] text-muted">{s.sub}</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </section>
 
       {/* ── 신규 실데이터 인사이트 카드 (임금대역 · E-9 도입 · 유학생 국적) ── */}

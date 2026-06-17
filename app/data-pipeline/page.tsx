@@ -1,5 +1,18 @@
-import { ExternalLink, KeyRound, RefreshCw, Search, Telescope } from "lucide-react";
+import {
+  Activity,
+  AlertTriangle,
+  Archive,
+  CheckCircle2,
+  ExternalLink,
+  Gauge,
+  KeyRound,
+  RefreshCw,
+  Search,
+  ShieldCheck,
+  Telescope
+} from "lucide-react";
 import { dataLineage, type DataLineageSource } from "@/lib/data/generated/dataLineage";
+import { realDataQualityWarnings, realDataSummary } from "@/lib/data/generated/realData";
 import { candidateSources, dataAxisMapping, type ResearchPriority } from "@/lib/data/researchNotes";
 import { DataTable, type DataTableColumn } from "@/components/tables/DataTable";
 
@@ -49,6 +62,32 @@ const lineageColumns: DataTableColumn<DataLineageSource>[] = [
 export default function DataPipelinePage() {
   const { totals, keysPresent, generatedAt, sources, discovery } = dataLineage;
 
+  // ── 데이터 건강 종합 진단 ────────────────────────────────────────────────────────
+  const verifiedCount = sources.filter((s) => s.verified).length;
+  const secured = totals.downloaded + totals.cached;
+  const securedRate = totals.sources ? (secured / totals.sources) * 100 : 0;
+  const freshRate = totals.sources ? (totals.downloaded / totals.sources) * 100 : 0;
+  const verifiedRate = totals.sources ? (verifiedCount / totals.sources) * 100 : 0;
+  const warningCount = realDataQualityWarnings.length;
+  const retainedCount = realDataSummary.retainedExportCount;
+  const retainedExports = realDataSummary.retainedExports as readonly unknown[];
+  const qualityScore = warningCount === 0 ? 100 : Math.max(0, 100 - warningCount * 25);
+  const retainScore = retainedCount === 0 ? 100 : Math.max(0, 100 - retainedCount * 15);
+  const healthScore = Math.round(
+    securedRate * 0.45 + freshRate * 0.2 + verifiedRate * 0.2 + qualityScore * 0.1 + retainScore * 0.05
+  );
+  const health =
+    healthScore >= 85
+      ? { label: "양호", tone: "#0f766e", bg: "#f0fdfa", border: "#99f6e4" }
+      : healthScore >= 70
+        ? { label: "주의", tone: "#b45309", bg: "#fffbeb", border: "#fde68a" }
+        : { label: "경고", tone: "#be123c", bg: "#fef2f2", border: "#fecaca" };
+  const healthDims = [
+    { label: "수집 확보율", value: securedRate, note: `${secured}/${totals.sources}개 (수집+캐시)`, color: "#0f766e" },
+    { label: "신규 수집률", value: freshRate, note: `${totals.downloaded}/${totals.sources}개 최신 수집`, color: "#3157a4" },
+    { label: "검증 확정률", value: verifiedRate, note: `${verifiedCount}/${totals.sources}개 확정`, color: "#b45309" }
+  ];
+
   return (
     <>
       <section className="page-header">
@@ -97,6 +136,124 @@ export default function DataPipelinePage() {
             <p className={`mt-1 text-2xl font-bold ${card.tone}`}>{card.value}</p>
           </div>
         ))}
+      </section>
+
+      {/* 데이터 건강 대시보드 */}
+      <section className="surface mt-4 p-5">
+        <div className="flex items-center gap-2">
+          <Activity aria-hidden className="text-teal-700" size={18} />
+          <div>
+            <h3 className="surface-title">데이터 건강 대시보드</h3>
+            <p className="surface-subtitle">수집 확보·신선도·검증·품질·폴백 보존 상태 종합 진단</p>
+          </div>
+        </div>
+
+        <div className="mt-4 grid gap-4 lg:grid-cols-[260px_1fr]">
+          {/* 종합 건강 점수 */}
+          <div
+            className="flex flex-col items-center justify-center rounded-xl px-5 py-6 text-center"
+            style={{ background: health.bg, border: `1px solid ${health.border}` }}
+          >
+            <span className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest" style={{ color: health.tone }}>
+              <Gauge size={14} aria-hidden /> 종합 건강 점수
+            </span>
+            <div className="mt-2 flex items-end gap-1">
+              <span className="text-5xl font-black leading-none" style={{ color: health.tone }}>{healthScore}</span>
+              <span className="mb-1 text-lg font-bold text-muted">/100</span>
+            </div>
+            <span
+              className="mt-3 rounded-full px-3 py-1 text-sm font-bold text-white"
+              style={{ background: health.tone }}
+            >
+              {health.label}
+            </span>
+            <p className="mt-3 text-[11px] leading-4 text-muted">
+              확보율·검증·품질·폴백 가중 합산 · 매 배치 자동 산출
+            </p>
+          </div>
+
+          {/* 진단 지표 바 */}
+          <div className="flex flex-col justify-center gap-4">
+            {healthDims.map((d) => (
+              <div key={d.label}>
+                <div className="mb-1 flex items-center justify-between text-sm">
+                  <span className="font-semibold text-ink">{d.label}</span>
+                  <span className="font-mono font-bold" style={{ color: d.color }}>{d.value.toFixed(0)}%</span>
+                </div>
+                <div className="h-2.5 w-full overflow-hidden rounded-full" style={{ background: "#f1f5f9" }}>
+                  <div className="h-2.5 rounded-full" style={{ width: `${Math.max(2, Math.min(100, d.value))}%`, background: d.color }} />
+                </div>
+                <p className="mt-1 text-[11px] text-muted">{d.note}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 품질 경보 + 폴백 보존 */}
+        <div className="mt-5 grid gap-3 sm:grid-cols-2">
+          {/* 품질 경보 */}
+          <div className="rounded-xl border border-slate-200 p-4">
+            <div className="flex items-center gap-2">
+              {warningCount === 0 ? (
+                <ShieldCheck aria-hidden className="text-teal-700" size={16} />
+              ) : (
+                <AlertTriangle aria-hidden className="text-rose-600" size={16} />
+              )}
+              <h4 className="text-sm font-bold text-ink">시계열 품질 경보</h4>
+              <span
+                className={`ml-auto rounded-md px-2 py-0.5 text-xs font-semibold ${warningCount === 0 ? "bg-teal-100 text-teal-800" : "bg-rose-100 text-rose-800"}`}
+              >
+                {warningCount === 0 ? "정상" : `${warningCount}건`}
+              </span>
+            </div>
+            {warningCount === 0 ? (
+              <p className="mt-2 flex items-center gap-1.5 text-xs text-muted">
+                <CheckCircle2 size={13} className="text-teal-600" aria-hidden />
+                주요 시계열에서 비정상 급락·집계기준 변동이 감지되지 않았습니다.
+              </p>
+            ) : (
+              <ul className="mt-2 space-y-1.5">
+                {realDataQualityWarnings.map((w, i) => (
+                  <li key={i} className="rounded-md bg-rose-50 p-2 text-xs leading-5 text-rose-800">
+                    <span className="font-semibold">{w.series}</span> · {w.message}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {/* 폴백(last-good) 보존 */}
+          <div className="rounded-xl border border-slate-200 p-4">
+            <div className="flex items-center gap-2">
+              <Archive aria-hidden className={retainedCount === 0 ? "text-teal-700" : "text-amber-600"} size={16} />
+              <h4 className="text-sm font-bold text-ink">폴백 보존 (last-good)</h4>
+              <span
+                className={`ml-auto rounded-md px-2 py-0.5 text-xs font-semibold ${retainedCount === 0 ? "bg-teal-100 text-teal-800" : "bg-amber-100 text-amber-800"}`}
+              >
+                {retainedCount === 0 ? "전량 최신" : `${retainedCount}개 보존`}
+              </span>
+            </div>
+            {retainedCount === 0 ? (
+              <p className="mt-2 flex items-center gap-1.5 text-xs text-muted">
+                <CheckCircle2 size={13} className="text-teal-600" aria-hidden />
+                모든 지표가 이번 배치의 신규 수집분을 사용 중입니다(직전 커밋 폴백 없음).
+              </p>
+            ) : (
+              <>
+                <p className="mt-2 text-xs text-muted">
+                  수집 실패로 직전 커밋 데이터를 유지한 지표입니다(회귀 방지).
+                </p>
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  {retainedExports.map((e, i) => (
+                    <span key={i} className="rounded-md bg-amber-50 px-2 py-0.5 text-[11px] font-mono text-amber-800">
+                      {typeof e === "string" ? e : JSON.stringify(e)}
+                    </span>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </div>
       </section>
 
       {/* 수집 이력 테이블 */}
