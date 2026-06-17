@@ -4,13 +4,15 @@ import { usePathname } from "next/navigation";
 import { CalendarDays } from "lucide-react";
 
 const pageNames: Record<string, { title: string; sub: string }> = {
-  "/":                    { title: "대시보드",     sub: "핵심 지표 한눈에 보기" },
-  "/financial-insights":  { title: "금융 인사이트", sub: "경제·보험·다문화 데이터 분석" },
-  "/regions":             { title: "지역 분석",    sub: "시도별 외국인 분포 및 기회 점수" },
-  "/nationalities":       { title: "국적 분석",    sub: "국적·연령별 체류 현황" },
-  "/universities":        { title: "대학/유학생",  sub: "대학별 외국인 유학생 현황" },
-  "/data-pipeline":       { title: "데이터 관리",  sub: "수집 파이프라인 및 발굴 현황" },
-  "/admin":               { title: "관리자",       sub: "신규 데이터 소스 승인" },
+  "/":                    { title: "대시보드",       sub: "핵심 지표 한눈에 보기" },
+  "/financial-insights":  { title: "금융 인사이트",   sub: "시장 기회·지역 전략·유스케이스" },
+  "/nationalities":       { title: "국적 분석",      sub: "국적·연령별 체류 현황" },
+  "/regions":             { title: "지역 분석",      sub: "시도별 외국인 분포 및 기회 점수" },
+  "/economy":             { title: "경제활동·소득",   sub: "임금·고용·산업·연령·EPS·건강보험" },
+  "/universities":        { title: "유학생",         sub: "유학생 추이·국적·대학·시도" },
+  "/consumption":         { title: "소비·금융거래",   sub: "면세점·부동산·본국송금·환율" },
+  "/data-pipeline":       { title: "데이터 관리",     sub: "수집 파이프라인 및 발굴 현황" },
+  "/admin":               { title: "관리자",         sub: "신규 데이터 소스 승인" },
 };
 
 export function Header() {
