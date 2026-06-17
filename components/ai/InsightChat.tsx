@@ -48,7 +48,9 @@ export function InsightChat() {
   const [showHistory, setShowHistory] = useState(false);
   const threadRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => setHistory(loadHistory()), []);
+  useEffect(() => {
+    void loadHistory().then(setHistory);
+  }, []);
   useEffect(() => {
     threadRef.current?.scrollTo({ top: threadRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, loading]);
@@ -82,7 +84,7 @@ export function InsightChat() {
     }
 
     setMessages((m) => [...m, { role: "assistant", content: answer, source, pages }]);
-    setHistory(saveEntry({ id: newId(), question: q, answer, source, pages, ts: Date.now() }));
+    setHistory(await saveEntry({ id: newId(), question: q, answer, source, pages, ts: Date.now() }));
     setLoading(false);
   }
 
@@ -123,7 +125,7 @@ export function InsightChat() {
             {history.length > 0 && (
               <button
                 type="button"
-                onClick={() => { clearHistory(); setHistory([]); }}
+                onClick={() => { void clearHistory(); setHistory([]); }}
                 className="flex items-center gap-1 text-[11px] text-slate-400 hover:text-rose-600"
               >
                 <Trash2 size={11} aria-hidden /> 전체 삭제

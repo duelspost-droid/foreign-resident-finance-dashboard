@@ -270,3 +270,56 @@ export async function fetchUniversityData(
     sourceName: row.source_name ?? undefined,
   }));
 }
+
+// ── AI 인사이트 질의 이력 (ai_insight_chat) ──────────────────────────────────────
+export type ChatRow = {
+  id: number;
+  session_id: string;
+  question: string;
+  answer: string;
+  source: string;
+  pages: string[];
+  created_at: string;
+};
+
+// 이력 1건 삽입(best-effort). Supabase 미연결/테이블 없음/오류 시 false.
+export async function insertChatEntry(e: {
+  sessionId: string;
+  question: string;
+  answer: string;
+  source: string;
+  pages: string[];
+}): Promise<boolean> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return false;
+  const { error } = await client.from("ai_insight_chat").insert({
+    session_id: e.sessionId,
+    question: e.question,
+    answer: e.answer,
+    source: e.source,
+    pages: e.pages
+  });
+  return !error;
+}
+
+// 세션 이력 조회. 미연결/오류 시 null(호출부에서 localStorage 폴백).
+export async function fetchChatHistory(sessionId: string, limit = 100): Promise<ChatRow[] | null> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return null;
+  const { data, error } = await client
+    .from("ai_insight_chat")
+    .select("*")
+    .eq("session_id", sessionId)
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  if (error) return null;
+  return (data ?? []) as ChatRow[];
+}
+
+// 세션 이력 전체 삭제(best-effort).
+export async function deleteChatHistory(sessionId: string): Promise<boolean> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return false;
+  const { error } = await client.from("ai_insight_chat").delete().eq("session_id", sessionId);
+  return !error;
+}
