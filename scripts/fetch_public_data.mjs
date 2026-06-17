@@ -67,12 +67,27 @@ function maskKey(value) {
   return `${value.slice(0, 4)}…${value.slice(-4)}`;
 }
 
-const FETCH_TIMEOUT_MS = Number(process.env.FETCH_TIMEOUT_MS ?? 12000);
-const FETCH_ATTEMPTS = Number(process.env.FETCH_ATTEMPTS ?? 2);
+const FETCH_TIMEOUT_MS = Number(process.env.FETCH_TIMEOUT_MS ?? 18000);
+const FETCH_ATTEMPTS = Number(process.env.FETCH_ATTEMPTS ?? 3);
+// 브라우저 User-Agent: 일부 정부 API(KOSIS·data.go.kr)는 봇/비브라우저 UA를 차단한다.
+const BROWSER_UA =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36";
 
-// 일시적 네트워크 오류("fetch failed")에 한해 짧게 재시도한다.
-// 재시도를 과하게 늘리면 data.go.kr 전면 장애 시 단계가 타임아웃에 걸려
-// 캐시 폴백 데이터조차 커밋하지 못하므로, 빠르게 실패하도록 2회로 제한한다.
+// 네트워크 오류 원인 코드를 추출한다(undici의 'fetch failed'는 error.cause.code에 실제 원인:
+// ECONNRESET=연결 리셋(방화벽/차단), ETIMEDOUT/UND_ERR_CONNECT_TIMEOUT=연결 타임아웃,
+// ENOTFOUND=DNS 실패, CERT/TLS 관련=인증서 문제). CI 진단을 위해 reason에 노출한다.
+function errCode(error) {
+  return (
+    error?.cause?.code ||
+    error?.code ||
+    (error?.name === "AbortError" ? "ABORT_TIMEOUT" : "") ||
+    (error?.cause?.message ? String(error.cause.message).slice(0, 40) : "")
+  );
+}
+
+// 일시적 네트워크 오류에 한해 지수 백오프로 재시도한다.
+// last-good 보존이 데이터 회귀를 막으므로 3회까지 허용하되, 전면 장애 시 15분 캡을
+// 넘지 않도록 타임아웃·횟수를 제한한다. 5xx(서버 일시 오류)도 재시도 대상에 포함.
 async function fetchWithRetry(url, options = {}, attempts = FETCH_ATTEMPTS) {
   let lastError;
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
@@ -83,18 +98,24 @@ async function fetchWithRetry(url, options = {}, attempts = FETCH_ATTEMPTS) {
         ...options,
         signal: controller.signal,
         headers: {
-          "User-Agent":
-            "foreign-resident-finance-dashboard/0.1 data collector",
+          "User-Agent": BROWSER_UA,
+          Accept: "*/*",
+          "Accept-Language": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
           ...(options.headers ?? {})
         }
       });
       clearTimeout(timeout);
+      if (res.status >= 500 && attempt < attempts) {
+        await sleep(1500 * 2 ** (attempt - 1));
+        continue;
+      }
       return res;
     } catch (error) {
       clearTimeout(timeout);
-      lastError = error;
+      const code = errCode(error);
+      lastError = code ? new Error(`${error.message} [${code}]`) : error;
       if (attempt < attempts) {
-        await sleep(1500 * attempt);
+        await sleep(1500 * 2 ** (attempt - 1));
       }
     }
   }

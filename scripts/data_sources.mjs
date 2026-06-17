@@ -730,40 +730,9 @@ export const publicDataSources = [
     notes: "서울 25개 자치구×국적별 외국인 월별 통계. serviceName 실제 값 확인 필요. SEOUL_OPENAPI_KEY GitHub Secret 등록 필요."
   },
 
-  // ── data.go.kr REST 오픈API (DATA_GO_KR_SERVICE_KEY 필요) ─────────────────────
-  // 구조: https://apis.data.go.kr/{org}/{api}/{op}?serviceKey=...&type=json&pageNo=&numOfRows=
-  {
-    id: "mois_foreign_resident_by_region_api",
-    type: "openapi",
-    provider: "행정안전부",
-    title: "지자체 외국인주민 현황(시군구)",
-    category: "외국인 직접 통계",
-    apiKeyEnv: "DATA_GO_KR_SERVICE_KEY",
-    // data.go.kr 오퍼레이션 목록에서 정확한 경로 확인 필요. 아래는 후보 2개.
-    // 실제 응답 확인 후 verified=true 로 변경한다.
-    // 후보1: /1741000/StatisticsForeignResident/getForeignResidentInfo
-    // 후보2: /1741000/YearFrgnInfo/getYearFrgnInfoList
-    endpoint: "https://apis.data.go.kr/1741000/StatisticsForeignResident/getForeignResidentInfo",
-    // searchYear: PY 사용 — 행안부 연간 집계는 당해년도 완성 전까지 전년도까지만 제공.
-    // PY(전년도)로 설정하면 매년 자동으로 최신 완성 연도를 가져온다.
-    params: { type: "json", numOfRows: "1000", pageNo: "1", searchYear: PY },
-    pagination: { pageParam: "pageNo", rowsParam: "numOfRows", rows: 1000, maxPages: 50 },
-    targetTable: "foreign_resident_region_month",
-    outputBaseName: "mois_foreign_resident_by_region_api",
-    // 후보 필드명(한/영) — 실제 응답으로 확정. 일치하는 첫 키를 사용한다.
-    responseMapping: {
-      sido: ["시도", "sido", "ctprvnNm", "sidoNm"],
-      sigungu: ["시군구", "sigungu", "signguNm", "sigunguNm"],
-      value: ["외국인주민수", "외국인수", "frgnrCnt", "cnt", "popltnCnt"],
-      period: ["기준연도", "year", "baseYear", "stdrYy"]
-    },
-    sourceUrl: "https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=외국인주민",
-    updateCycle: "연",
-    license: "공공데이터 이용허락(제1유형)",
-    personalDataSafe: true,
-    verified: false,
-    notes: "행안부 외국인주민 시군구 집계. endpoint 경로 운영 환경에서 확정 필요."
-  }
+  // [비활성화 2026-06-17] mois_foreign_resident_by_region_api: apis.data.go.kr 응답 HTTP 500(no_data),
+  // 미구독 openapi라 동작 안 함. 시군구 외국인주민은 file 소스(mois_foreign_resident_region_file, 1,692행)로
+  // 이미 커버 → 영구 제외(수집기 실패 목록에서 제거).
 ];
 
 // data.go.kr 키워드 검색으로 신규 외국인 데이터셋을 자동 발굴(이력에 후보로 기록).
