@@ -35,14 +35,30 @@ export function Sidebar() {
 
   return (
     <aside className="flex flex-col border-r border-white/5 bg-[#0d1117] px-3 py-4 lg:min-h-screen">
-      {/* 로고 */}
+      {/* 로고 — JB×AX 브랜드 마크 (맛집 트래커와 동일 패턴: 골드 그라데이션 ×AX) */}
       <Link href="/" className="mb-6 flex items-center gap-3 rounded-xl px-3 py-2.5 transition hover:bg-white/5">
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-teal-400 to-cyan-600 shadow-lg shadow-teal-900/40">
+        <span
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg shadow-lg shadow-blue-900/40"
+          style={{ background: "linear-gradient(135deg, #155BFF, #061A40)" }}
+        >
           <TrendingUp size={18} className="text-white" aria-hidden />
         </span>
         <span className="min-w-0">
-          <span className="block text-[13px] font-bold leading-tight text-white">외국인 금융</span>
-          <span className="block text-[11px] leading-tight text-white/40">Finance Intelligence</span>
+          <span className="block text-[13px] font-extrabold leading-tight tracking-tight text-white">
+            JB
+            <span
+              className="font-black"
+              style={{
+                background: "linear-gradient(90deg, #ffd54a, #ffb300)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                WebkitTextFillColor: "transparent"
+              }}
+            >
+              ×AX
+            </span>
+          </span>
+          <span className="block text-[12px] font-semibold leading-tight text-white/85">외국인 금융 인사이트</span>
         </span>
       </Link>
 
