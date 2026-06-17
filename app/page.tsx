@@ -4,6 +4,8 @@ import {
   BarChart3,
   Banknote,
   GraduationCap,
+  Landmark,
+  LayoutGrid,
   MapPin,
   Users
 } from "lucide-react";
@@ -188,6 +190,40 @@ export default function DashboardPage() {
         <span className="text-green-300">·</span>
         <span>매일 01:00 KST 자동 갱신</span>
       </div>
+
+      {/* ── 2축 진입점 ── */}
+      <section className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <Link href="/financial-insights" className="surface surface-hover group flex flex-col gap-2 p-6">
+          <div className="flex items-center gap-3">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white" style={{ background: "linear-gradient(135deg, #f6b23c, #b45309)" }}>
+              <Landmark aria-hidden size={20} />
+            </span>
+            <div className="min-w-0">
+              <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: "#b45309" }}>축 1</p>
+              <h3 className="text-lg font-black text-ink">금융 인사이트</h3>
+            </div>
+            <ArrowUpRight aria-hidden size={18} className="ml-auto shrink-0 text-muted transition group-hover:-translate-y-0.5 group-hover:text-amber-600" />
+          </div>
+          <p className="text-sm leading-relaxed text-muted">
+            시장 기회·지역 전략·체류자격×상품 매트릭스·유스케이스·로드맵 — 은행·캐피탈이 데이터를 어떻게 활용할지 해석합니다.
+          </p>
+        </Link>
+        <Link href="/catalog" className="surface surface-hover group flex flex-col gap-2 p-6">
+          <div className="flex items-center gap-3">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white" style={{ background: "linear-gradient(135deg, #2dd4bf, #0f766e)" }}>
+              <LayoutGrid aria-hidden size={20} />
+            </span>
+            <div className="min-w-0">
+              <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: "#0f766e" }}>축 2</p>
+              <h3 className="text-lg font-black text-ink">분석 데이터 활용</h3>
+            </div>
+            <ArrowUpRight aria-hidden size={18} className="ml-auto shrink-0 text-muted transition group-hover:-translate-y-0.5 group-hover:text-teal-600" />
+          </div>
+          <p className="text-sm leading-relaxed text-muted">
+            인구·체류 · 경제활동·소득 · 유학생 · 소비·금융거래 — 수집한 30여 종 데이터를 카테고리별로 직접 탐색·분석합니다.
+          </p>
+        </Link>
+      </section>
 
       {/* ── KPI 스트립 ── */}
       <section className="metric-grid">
@@ -552,7 +588,7 @@ export default function DashboardPage() {
             </Link>
           )}
           {hasHealthInsurance && (
-            <Link href="/financial-insights" className="surface surface-hover p-5">
+            <Link href="/economy#health" className="surface surface-hover p-5">
               <h3 className="surface-title mb-1">건강보험 적용인구 (소득 대리지표)</h3>
               <p className="surface-subtitle mb-3">건보공단 · 지역별 가입 상위 5</p>
               <div className="space-y-2">
@@ -572,7 +608,7 @@ export default function DashboardPage() {
             </Link>
           )}
           {hasMulticulturalFamily && (
-            <Link href="/financial-insights" className="surface surface-hover p-5">
+            <Link href="/economy#welfare" className="surface surface-hover p-5">
               <h3 className="surface-title mb-1">다문화가족 현황</h3>
               <p className="surface-subtitle mb-3">여가부 · 총 {formatNumber(multiculturalFamilySummary.totalCount)}명 · 지역별 상위 5</p>
               <div className="space-y-2">
@@ -592,7 +628,7 @@ export default function DashboardPage() {
             </Link>
           )}
           {hasEconActivity && (
-            <Link href="/financial-insights" className="surface surface-hover p-5">
+            <Link href="/economy#econ-activity" className="surface surface-hover p-5">
               <h3 className="surface-title mb-1">외국인 경제활동인구</h3>
               <p className="surface-subtitle mb-3">통계청 · 체류자격별 취업·경제활동</p>
               <div className="space-y-2">

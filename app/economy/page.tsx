@@ -80,7 +80,7 @@ export default function EconomyPage() {
         const latestRows = econActivityData.filter((r) => r.period === latestPeriod);
         const maxVal = Math.max(...latestRows.map((r) => r.value), 1);
         return (
-          <section>
+          <section id="econ-activity" className="scroll-mt-20">
             <div className="mb-3 flex items-center gap-2">
               <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">외국인 경제활동인구</h2>
               <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">
@@ -125,7 +125,7 @@ export default function EconomyPage() {
         const workplaceTotal = sorted.reduce((s, r) => s + r.workplace, 0);
         const regionalTotal = sorted.reduce((s, r) => s + r.regional, 0);
         return (
-          <section>
+          <section id="health" className="scroll-mt-20">
             <div className="mb-3 flex items-center gap-2">
               <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">외국인 건강보험 적용인구</h2>
               <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">국민건강보험공단 · 2022</span>
@@ -164,7 +164,7 @@ export default function EconomyPage() {
         const sorted = [...multiculturalFamilyData].sort((a, b) => b.total - a.total);
         const maxTotal = sorted[0]?.total || 1;
         return (
-          <section>
+          <section id="welfare" className="scroll-mt-20">
             <div className="mb-3 flex items-center gap-2">
               <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">다문화가족 현황</h2>
               <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">
@@ -197,7 +197,7 @@ export default function EconomyPage() {
       })()}
 
       {/* ── 실데이터 차트: 소득·도입·계약 (KOSIS) ─────────────────── */}
-      <section>
+      <section id="income" className="scroll-mt-20">
         <div className="mb-3 flex items-center gap-2">
           <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">
             실데이터 금융 선행지표
@@ -374,7 +374,7 @@ export default function EconomyPage() {
       </section>
 
       {/* ── 실데이터 차트: 종사상지위·산업·연령 (KOSIS 이민자체류실태조사) ───── */}
-      <section>
+      <section id="employment" className="scroll-mt-20">
         <div className="mb-3 flex items-center gap-2">
           <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">
             외국인 취업 구조 — 종사상지위·산업·연령

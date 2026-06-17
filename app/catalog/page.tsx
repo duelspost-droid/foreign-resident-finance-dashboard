@@ -12,22 +12,24 @@ import {
 import { dataLineage, type DataLineageSource } from "@/lib/data/generated/dataLineage";
 import { PageHero } from "@/components/ui/PageHero";
 
-// 축 2 카테고리 → 분석 페이지 + 소속 데이터셋(수집 소스 id)
-const CATEGORIES = [
+// 축 2 카테고리 → 분석 페이지 + 소속 데이터셋(수집 소스 id) + 해당 섹션 앵커
+type CatItem = { id: string; anchor?: string };
+type CatGroup = { label: string; href: string; icon: typeof Users; desc: string; items: CatItem[] };
+const CATEGORIES: CatGroup[] = [
   {
     label: "인구·체류",
     href: "/nationalities",
     icon: Users,
     desc: "국적·체류자격·지역 분포",
-    ids: [
-      "moj_foreign_resident_status_2024",
-      "moj_foreign_stay_data_2024",
-      "moj_immigration_monthly_2024",
-      "mois_foreign_resident_region_file",
-      "kosis_registered_foreigner_by_region",
-      "kosis_registered_foreigner_sigungu_visa",
-      "kosis_foreigner_economic_activity",
-      "seoul_foreigner_population"
+    items: [
+      { id: "moj_foreign_resident_status_2024" },
+      { id: "moj_foreign_stay_data_2024" },
+      { id: "moj_immigration_monthly_2024" },
+      { id: "mois_foreign_resident_region_file" },
+      { id: "kosis_registered_foreigner_by_region" },
+      { id: "kosis_registered_foreigner_sigungu_visa" },
+      { id: "kosis_foreigner_economic_activity" },
+      { id: "seoul_foreigner_population" }
     ]
   },
   {
@@ -35,17 +37,17 @@ const CATEGORIES = [
     href: "/economy",
     icon: BarChart3,
     desc: "임금·고용·산업·연령·EPS·건강보험·다문화",
-    ids: [
-      "kosis_immigrant_wage_distribution",
-      "kosis_immigrant_contract_period",
-      "kosis_immigrant_employment_status",
-      "kosis_immigrant_employment_by_industry",
-      "kosis_immigrant_econ_activity_by_age",
-      "kosis_eps_introduction_by_country",
-      "kosis_eps_introduction_by_industry",
-      "nhis_foreigner_coverage_2022",
-      "nhis_foreigner_premium_2023",
-      "mogef_multicultural_family_2024"
+    items: [
+      { id: "kosis_immigrant_wage_distribution", anchor: "income" },
+      { id: "kosis_immigrant_contract_period", anchor: "income" },
+      { id: "kosis_eps_introduction_by_country", anchor: "income" },
+      { id: "kosis_eps_introduction_by_industry", anchor: "income" },
+      { id: "kosis_immigrant_employment_status", anchor: "employment" },
+      { id: "kosis_immigrant_employment_by_industry", anchor: "employment" },
+      { id: "kosis_immigrant_econ_activity_by_age", anchor: "employment" },
+      { id: "nhis_foreigner_coverage_2022", anchor: "health" },
+      { id: "nhis_foreigner_premium_2023", anchor: "health" },
+      { id: "mogef_multicultural_family_2024", anchor: "welfare" }
     ]
   },
   {
@@ -53,14 +55,14 @@ const CATEGORIES = [
     href: "/universities",
     icon: GraduationCap,
     desc: "추이·국적·대학·시도",
-    ids: [
-      "moj_foreign_student_stay_2024",
-      "moe_foreign_student_region",
-      "academyinfo_foreign_student_count",
-      "academyinfo_university_stats",
-      "kosis_foreign_student_nationality_visa",
-      "kosis_kedi_higher_edu_foreign_students",
-      "moe_foreign_student_latest"
+    items: [
+      { id: "moj_foreign_student_stay_2024" },
+      { id: "moe_foreign_student_region" },
+      { id: "academyinfo_foreign_student_count" },
+      { id: "academyinfo_university_stats" },
+      { id: "kosis_foreign_student_nationality_visa" },
+      { id: "kosis_kedi_higher_edu_foreign_students" },
+      { id: "moe_foreign_student_latest" }
     ]
   },
   {
@@ -68,12 +70,12 @@ const CATEGORIES = [
     href: "/consumption",
     icon: ShoppingBag,
     desc: "면세점·부동산·본국송금·환율",
-    ids: [
-      "ecos_bop_transfer_income",
-      "ecos_bop_transfer_monthly",
-      "ecos_exchange_rate_daily",
-      "jdc_dutyfree_sales_by_nationality",
-      "jeju_foreign_land_acquisition"
+    items: [
+      { id: "ecos_bop_transfer_income", anchor: "macro" },
+      { id: "ecos_bop_transfer_monthly", anchor: "macro" },
+      { id: "ecos_exchange_rate_daily", anchor: "macro" },
+      { id: "jdc_dutyfree_sales_by_nationality", anchor: "trade" },
+      { id: "jeju_foreign_land_acquisition", anchor: "trade" }
     ]
   }
 ];
@@ -95,14 +97,14 @@ export default function CatalogPage() {
   const updated = dataLineage.generatedAt
     ? new Date(dataLineage.generatedAt).toLocaleDateString("ko-KR", { year: "numeric", month: "short", day: "numeric" })
     : "—";
-  const cataloged = CATEGORIES.reduce((n, c) => n + c.ids.filter((id) => byId.has(id)).length, 0);
+  const cataloged = CATEGORIES.reduce((n, c) => n + c.items.filter((it) => byId.has(it.id)).length, 0);
 
   return (
     <div className="space-y-7 pb-14">
       <PageHero
         kicker="분석 데이터 활용"
         title="분석 데이터 카탈로그"
-        description="수집 중인 외국인 데이터셋을 카테고리별로 한눈에 보고, 각 분석 페이지로 이동합니다. 수집 상태·행수는 매일 자동 갱신됩니다."
+        description="수집 중인 외국인 데이터셋을 카테고리별로 한눈에 보고, 각 분석 차트로 바로 이동합니다. 수집 상태·행수는 매일 자동 갱신됩니다."
       />
 
       {/* 요약 */}
@@ -122,7 +124,9 @@ export default function CatalogPage() {
 
       {CATEGORIES.map((cat) => {
         const Icon = cat.icon;
-        const items = cat.ids.map((id) => byId.get(id)).filter((s): s is DataLineageSource => Boolean(s));
+        const items = cat.items
+          .map((it) => ({ source: byId.get(it.id), anchor: it.anchor }))
+          .filter((x): x is { source: DataLineageSource; anchor: string | undefined } => Boolean(x.source));
         if (items.length === 0) return null;
         return (
           <section key={cat.label}>
@@ -140,37 +144,40 @@ export default function CatalogPage() {
               </Link>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {items.map((s) => (
-                <div key={s.id} className="flex flex-col rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-                  <div className="flex items-start justify-between gap-2">
-                    <h3 className="text-[13px] font-bold leading-snug text-slate-900">{s.title}</h3>
-                    <StatusBadge status={s.status} />
+              {items.map(({ source: s, anchor }) => {
+                const target = anchor ? `${cat.href}#${anchor}` : cat.href;
+                return (
+                  <div key={s.id} className="flex flex-col rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+                    <div className="flex items-start justify-between gap-2">
+                      <h3 className="text-[13px] font-bold leading-snug text-slate-900">{s.title}</h3>
+                      <StatusBadge status={s.status} />
+                    </div>
+                    <p className="mt-1 text-xs text-slate-500">{s.provider}</p>
+                    <div className="mt-2 flex items-center justify-between text-xs">
+                      <span className="text-slate-600">
+                        {s.rowCount != null ? `${s.rowCount.toLocaleString()}행` : "—"}
+                        {s.updateCycle ? ` · ${s.updateCycle}` : ""}
+                      </span>
+                      {s.sourceUrl && (
+                        <a
+                          href={s.sourceUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex items-center gap-0.5 text-[11px] text-slate-400 hover:text-teal-600"
+                        >
+                          원본 <ExternalLink size={11} aria-hidden />
+                        </a>
+                      )}
+                    </div>
+                    <Link
+                      href={target}
+                      className="mt-3 flex items-center gap-1 text-xs font-semibold text-teal-700 hover:underline"
+                    >
+                      분석하기 <ArrowRight size={12} aria-hidden />
+                    </Link>
                   </div>
-                  <p className="mt-1 text-xs text-slate-500">{s.provider}</p>
-                  <div className="mt-2 flex items-center justify-between text-xs">
-                    <span className="text-slate-600">
-                      {s.rowCount != null ? `${s.rowCount.toLocaleString()}행` : "—"}
-                      {s.updateCycle ? ` · ${s.updateCycle}` : ""}
-                    </span>
-                    {s.sourceUrl && (
-                      <a
-                        href={s.sourceUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex items-center gap-0.5 text-[11px] text-slate-400 hover:text-teal-600"
-                      >
-                        원본 <ExternalLink size={11} aria-hidden />
-                      </a>
-                    )}
-                  </div>
-                  <Link
-                    href={cat.href}
-                    className="mt-3 flex items-center gap-1 text-xs font-semibold text-teal-700 hover:underline"
-                  >
-                    분석하기 <ArrowRight size={12} aria-hidden />
-                  </Link>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </section>
         );
