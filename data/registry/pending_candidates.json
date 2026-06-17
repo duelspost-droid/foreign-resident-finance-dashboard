@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-17T05:27:20.360Z",
+  "generatedAt": "2026-06-17T06:07:42.548Z",
   "candidates": [
     {
       "dataset_id": "15047604",
@@ -164,17 +164,6 @@
       "url": "https://www.data.go.kr/data/15058982/openapi.do",
       "priority": "mid",
       "rationale": "대학·국적·과정별 유학생 금융 수요",
-      "status": "pending"
-    },
-    {
-      "dataset_id": "15074265",
-      "kind": "openapi",
-      "provider": "대학알리미",
-      "title": null,
-      "keyword": "외국인유학생수",
-      "url": "https://www.data.go.kr/data/15074265/openapi.do",
-      "priority": "mid",
-      "rationale": "대학별 외국인 유학생 총량 검증",
       "status": "pending"
     },
     {
@@ -472,39 +461,6 @@
       "url": "https://www.data.go.kr/data/15115984/fileData.do",
       "priority": "mid",
       "rationale": "외국인 직장/지역 가입자·보험료(소득·지불능력 대리지표)",
-      "status": "pending"
-    },
-    {
-      "dataset_id": "15071645",
-      "kind": "fileData",
-      "provider": "국민연금공단",
-      "title": null,
-      "keyword": "외국인 국민연금 가입",
-      "url": "https://www.data.go.kr/data/15071645/fileData.do",
-      "priority": "mid",
-      "rationale": "사업장 가입 외국인 규모(정규 취업·급여계좌 수요)",
-      "status": "pending"
-    },
-    {
-      "dataset_id": "3046074",
-      "kind": "fileData",
-      "provider": "국민연금공단",
-      "title": null,
-      "keyword": "외국인 국민연금 가입",
-      "url": "https://www.data.go.kr/data/3046074/fileData.do",
-      "priority": "mid",
-      "rationale": "사업장 가입 외국인 규모(정규 취업·급여계좌 수요)",
-      "status": "pending"
-    },
-    {
-      "dataset_id": "15052084",
-      "kind": "fileData",
-      "provider": "국민연금공단",
-      "title": null,
-      "keyword": "외국인 국민연금 가입",
-      "url": "https://www.data.go.kr/data/15052084/fileData.do",
-      "priority": "mid",
-      "rationale": "사업장 가입 외국인 규모(정규 취업·급여계좌 수요)",
       "status": "pending"
     },
     {
