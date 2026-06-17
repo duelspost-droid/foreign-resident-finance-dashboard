@@ -22,6 +22,7 @@ import {
 } from "@/lib/data/financialInsightsData";
 import Link from "next/link";
 import { PageHero } from "@/components/ui/PageHero";
+import { InsightChat } from "@/components/ai/InsightChat";
 import { formatNumber } from "@/lib/utils/format";
 
 // ── 유스케이스 카드 (전략 큐레이션 = 정적 콘텐츠) ─────────────────────────────
@@ -221,6 +222,11 @@ export default function FinancialInsightsPage() {
         description="외국인 체류·경제활동 공공 통계를 은행·캐피탈 비즈니스 전략에 활용하는 방법을 분석합니다. 시장 KPI와 지역 순위는 수집 배치 완료 시 자동 갱신됩니다."
       />
       <FreshnessTag />
+
+      {/* ── AI 인사이트 질의 ──────────────────────────────────── */}
+      <section>
+        <InsightChat />
+      </section>
 
       {/* ── 시장 규모 KPI ──────────────────────────────────────── */}
       <section>
