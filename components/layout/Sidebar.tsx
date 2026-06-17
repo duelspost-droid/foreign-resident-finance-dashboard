@@ -9,6 +9,7 @@ import {
   GraduationCap,
   Landmark,
   LayoutDashboard,
+  LayoutGrid,
   Map,
   ShieldCheck,
   ShoppingBag,
@@ -24,6 +25,7 @@ const financeNav = [
 
 // 축 2 · 분석 데이터 활용 (데이터 탐색)
 const analysisNav = [
+  { href: "/catalog", label: "데이터 카탈로그", icon: LayoutGrid },
   { href: "/nationalities", label: "국적 분석", icon: Flag },
   { href: "/regions", label: "지역 분석", icon: Map },
   { href: "/economy", label: "경제활동·소득", icon: BarChart3 },

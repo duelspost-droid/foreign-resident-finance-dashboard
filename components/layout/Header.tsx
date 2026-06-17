@@ -6,6 +6,7 @@ import { CalendarDays } from "lucide-react";
 const pageNames: Record<string, { title: string; sub: string }> = {
   "/":                    { title: "대시보드",       sub: "핵심 지표 한눈에 보기" },
   "/financial-insights":  { title: "금융 인사이트",   sub: "시장 기회·지역 전략·유스케이스" },
+  "/catalog":             { title: "데이터 카탈로그", sub: "수집 데이터셋 색인 · 카테고리별" },
   "/nationalities":       { title: "국적 분석",      sub: "국적·연령별 체류 현황" },
   "/regions":             { title: "지역 분석",      sub: "시도별 외국인 분포 및 기회 점수" },
   "/economy":             { title: "경제활동·소득",   sub: "임금·고용·산업·연령·EPS·건강보험" },
