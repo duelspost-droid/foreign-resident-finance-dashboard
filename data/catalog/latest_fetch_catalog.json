@@ -31,7 +31,7 @@
         ],
         "download": {
           "ok": true,
-          "path": "/Users/hk/Documents/Claude/Scheduled/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-17.csv",
+          "path": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-06-17.csv",
           "fileName": "moj_foreign_resident_status_2024_2026-06-17.csv",
           "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003562210&fileDetailSn=1",
           "attempts": [
@@ -70,7 +70,7 @@
         ],
         "download": {
           "ok": true,
-          "path": "/Users/hk/Documents/Claude/Scheduled/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-06-17.csv",
+          "path": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-06-17.csv",
           "fileName": "moj_foreign_stay_data_2024_2026-06-17.csv",
           "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003580938&fileDetailSn=1",
           "attempts": [
@@ -109,7 +109,7 @@
         ],
         "download": {
           "ok": true,
-          "path": "/Users/hk/Documents/Claude/Scheduled/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-17.csv",
+          "path": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-06-17.csv",
           "fileName": "moj_foreign_student_stay_2024_2026-06-17.csv",
           "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003175552&fileDetailSn=1",
           "attempts": [
@@ -148,7 +148,7 @@
         ],
         "download": {
           "ok": true,
-          "path": "/Users/hk/Documents/Claude/Scheduled/foreign-resident-finance-dashboard/data/raw/mogef_multicultural_family_2024_2026-06-17.csv",
+          "path": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/mogef_multicultural_family_2024_2026-06-17.csv",
           "fileName": "mogef_multicultural_family_2024_2026-06-17.csv",
           "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003526233&fileDetailSn=1",
           "attempts": [
@@ -187,7 +187,7 @@
         ],
         "download": {
           "ok": true,
-          "path": "/Users/hk/Documents/Claude/Scheduled/foreign-resident-finance-dashboard/data/raw/nhis_foreigner_premium_2023_2026-06-17.xlsx",
+          "path": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/nhis_foreigner_premium_2023_2026-06-17.xlsx",
           "fileName": "nhis_foreigner_premium_2023_2026-06-17.xlsx",
           "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003190542&fileDetailSn=1",
           "attempts": [
@@ -225,7 +225,7 @@
         ],
         "download": {
           "ok": true,
-          "path": "/Users/hk/Documents/Claude/Scheduled/foreign-resident-finance-dashboard/data/raw/nhis_foreigner_coverage_2022_2026-06-17.csv",
+          "path": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/nhis_foreigner_coverage_2022_2026-06-17.csv",
           "fileName": "nhis_foreigner_coverage_2022_2026-06-17.csv",
           "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003517522&fileDetailSn=1",
           "attempts": [
@@ -264,7 +264,7 @@
         ],
         "download": {
           "ok": true,
-          "path": "/Users/hk/Documents/Claude/Scheduled/foreign-resident-finance-dashboard/data/raw/moj_immigration_monthly_2024_2026-06-17.csv",
+          "path": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_immigration_monthly_2024_2026-06-17.csv",
           "fileName": "moj_immigration_monthly_2024_2026-06-17.csv",
           "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003531546&fileDetailSn=1",
           "attempts": [
@@ -303,7 +303,7 @@
         ],
         "download": {
           "ok": true,
-          "path": "/Users/hk/Documents/Claude/Scheduled/foreign-resident-finance-dashboard/data/raw/mois_foreign_resident_region_file_2026-06-17.csv",
+          "path": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/mois_foreign_resident_region_file_2026-06-17.csv",
           "fileName": "mois_foreign_resident_region_file_2026-06-17.csv",
           "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003655053&fileDetailSn=1",
           "attempts": [
@@ -342,7 +342,7 @@
         ],
         "download": {
           "ok": true,
-          "path": "/Users/hk/Documents/Claude/Scheduled/foreign-resident-finance-dashboard/data/raw/moe_foreign_student_region_2026-06-17.csv",
+          "path": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moe_foreign_student_region_2026-06-17.csv",
           "fileName": "moe_foreign_student_region_2026-06-17.csv",
           "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003645680&fileDetailSn=1",
           "attempts": [
@@ -381,7 +381,7 @@
         ],
         "download": {
           "ok": true,
-          "path": "/Users/hk/Documents/Claude/Scheduled/foreign-resident-finance-dashboard/data/raw/moe_foreign_student_latest_2026-06-17.csv",
+          "path": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moe_foreign_student_latest_2026-06-17.csv",
           "fileName": "moe_foreign_student_latest_2026-06-17.csv",
           "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003254817&fileDetailSn=1",
           "attempts": [
@@ -420,7 +420,7 @@
         ],
         "download": {
           "ok": true,
-          "path": "/Users/hk/Documents/Claude/Scheduled/foreign-resident-finance-dashboard/data/raw/academyinfo_foreign_student_count_2026-06-17.csv",
+          "path": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/academyinfo_foreign_student_count_2026-06-17.csv",
           "fileName": "academyinfo_foreign_student_count_2026-06-17.csv",
           "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003578044&fileDetailSn=1",
           "attempts": [
@@ -459,7 +459,7 @@
         ],
         "download": {
           "ok": true,
-          "path": "/Users/hk/Documents/Claude/Scheduled/foreign-resident-finance-dashboard/data/raw/academyinfo_university_stats_2026-06-17.csv",
+          "path": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/academyinfo_university_stats_2026-06-17.csv",
           "fileName": "academyinfo_university_stats_2026-06-17.csv",
           "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003220926&fileDetailSn=1",
           "attempts": [
@@ -498,7 +498,7 @@
         ],
         "download": {
           "ok": true,
-          "path": "/Users/hk/Documents/Claude/Scheduled/foreign-resident-finance-dashboard/data/raw/jdc_dutyfree_sales_by_nationality_2026-06-17.csv",
+          "path": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/jdc_dutyfree_sales_by_nationality_2026-06-17.csv",
           "fileName": "jdc_dutyfree_sales_by_nationality_2026-06-17.csv",
           "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003511883&fileDetailSn=1",
           "attempts": [
@@ -537,7 +537,7 @@
         ],
         "download": {
           "ok": true,
-          "path": "/Users/hk/Documents/Claude/Scheduled/foreign-resident-finance-dashboard/data/raw/jeju_foreign_land_acquisition_2026-06-17.csv",
+          "path": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/jeju_foreign_land_acquisition_2026-06-17.csv",
           "fileName": "jeju_foreign_land_acquisition_2026-06-17.csv",
           "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003141788&fileDetailSn=1",
           "attempts": [
