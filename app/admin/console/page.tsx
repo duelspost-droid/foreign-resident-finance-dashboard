@@ -90,18 +90,21 @@ function LoginCard({ onLogin }: { onLogin: (token: string) => void }) {
 function ChangePasswordCard({ onChanged }: { onChanged: (token: string) => void }) {
   const [cur, setCur] = useState("");
   const [next, setNext] = useState("");
+  const [next2, setNext2] = useState("");
   const [msg, setMsg] = useState<{ kind: "ok" | "err"; text: string } | null>(null);
   const [busy, setBusy] = useState(false);
 
   async function submit() {
     if (busy || !cur || !next) return;
+    if (next.length < 8) { setMsg({ kind: "err", text: "새 비밀번호는 8자 이상이어야 합니다." }); return; }
+    if (next !== next2) { setMsg({ kind: "err", text: "새 비밀번호가 일치하지 않습니다." }); return; }
     setBusy(true);
     setMsg(null);
     const { ok, token, error } = await adminChangePassword(cur, next);
     setBusy(false);
     if (ok && token) {
       try { localStorage.setItem(TOKEN_KEY, token); } catch { /* ignore */ }
-      setCur(""); setNext("");
+      setCur(""); setNext(""); setNext2("");
       setMsg({ kind: "ok", text: "비밀번호가 변경됐습니다. 다른 기기 세션은 모두 로그아웃됩니다." });
       onChanged(token);
     } else {
@@ -119,10 +122,12 @@ function ChangePasswordCard({ onChanged }: { onChanged: (token: string) => void 
       <div className="mt-3 space-y-2">
         <input type="password" value={cur} onChange={(e) => setCur(e.target.value)} placeholder="현재 비밀번호"
           className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-teal-400" />
-        <input type="password" value={next} onChange={(e) => setNext(e.target.value)} placeholder="새 비밀번호 (6자 이상)"
+        <input type="password" value={next} onChange={(e) => setNext(e.target.value)} placeholder="새 비밀번호 (8자 이상)"
+          className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-teal-400" />
+        <input type="password" value={next2} onChange={(e) => setNext2(e.target.value)} placeholder="새 비밀번호 확인"
           className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-teal-400" />
         {msg && <p className={`text-xs ${msg.kind === "ok" ? "text-teal-700" : "text-rose-600"}`}>{msg.text}</p>}
-        <button type="button" onClick={submit} disabled={busy || !cur || !next}
+        <button type="button" onClick={submit} disabled={busy || !cur || !next || !next2}
           className="rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-40">
           {busy ? "변경 중…" : "변경"}
         </button>
@@ -132,7 +137,7 @@ function ChangePasswordCard({ onChanged }: { onChanged: (token: string) => void 
 }
 
 // ── 제안 카드(답변 작성) ───────────────────────────────────────────────────────────
-function RequestCard({ row, token, onSaved }: { row: FeatureRequestRow; token: string; onSaved: (r: FeatureRequestRow) => void }) {
+function RequestCard({ row, token, onSaved, onAuthExpired }: { row: FeatureRequestRow; token: string; onSaved: (r: FeatureRequestRow) => void; onAuthExpired: () => void }) {
   const [status, setStatus] = useState(row.status);
   const [response, setResponse] = useState(row.admin_response ?? "");
   const [busy, setBusy] = useState(false);
@@ -145,13 +150,14 @@ function RequestCard({ row, token, onSaved }: { row: FeatureRequestRow; token: s
     setBusy(true);
     setSaved(false);
     setFailed(false);
-    const ok = await adminRespond(token, row.id, { status, adminResponse: response.trim() || undefined });
+    const { ok, authExpired } = await adminRespond(token, row.id, { status, adminResponse: response.trim() || undefined });
     setBusy(false);
     if (ok) {
       setSaved(true);
       onSaved({ ...row, status, admin_response: response.trim() || null, responded_at: new Date().toISOString() });
     } else {
       setFailed(true);
+      if (authExpired) onAuthExpired(); // 세션 만료 → 재로그인
     }
   }
 
@@ -218,8 +224,9 @@ export default function AdminConsolePage() {
     let t = "";
     try { t = localStorage.getItem(TOKEN_KEY) || ""; } catch { /* ignore */ }
     if (!t) { setAuthChecking(false); return; }
-    void adminValidate(t).then((ok) => {
-      if (ok) setToken(t);
+    void adminValidate(t).then((state) => {
+      // valid·unreachable(전송 실패)면 토큰 유지(오프라인/블립에 로그아웃 방지). invalid만 제거.
+      if (state === "valid" || state === "unreachable") setToken(t);
       else { try { localStorage.removeItem(TOKEN_KEY); } catch { /* ignore */ } }
       setAuthChecking(false);
     });
@@ -427,6 +434,7 @@ export default function AdminConsolePage() {
                 row={r}
                 token={token}
                 onSaved={(updated) => setRequests((list) => list.map((x) => (x.id === updated.id ? updated : x)))}
+                onAuthExpired={() => void logout()}
               />
             ))
           )}

@@ -108,6 +108,9 @@ async function deleteSession(token: string) {
 async function deleteAllSessions() {
   await fetch(`${SB_URL}/rest/v1/admin_sessions?token=neq.__none__`, { method: "DELETE", headers: SH });
 }
+async function purgeExpiredSessions() {
+  await fetch(`${SB_URL}/rest/v1/admin_sessions?expires_at=lt.${encodeURIComponent(new Date().toISOString())}`, { method: "DELETE", headers: SH }).catch(() => {});
+}
 
 // ── 감사 로그 / 잠금 ──────────────────────────────────────────
 function getIP(req: Request): string {
@@ -147,6 +150,7 @@ Deno.serve(async (req: Request): Promise<Response> => {
       return json({ error: "비밀번호가 올바르지 않습니다" }, 401);
     }
     await logAudit("admin_login", ip, "", ua);
+    await purgeExpiredSessions(); // 만료 세션 정리(테이블 증가 방지)
     const sess = await createSession(ip);
     return json({ ok: true, token: sess.token, expiresAt: sess.expires_at });
   }
@@ -172,7 +176,7 @@ Deno.serve(async (req: Request): Promise<Response> => {
       return json({ error: "현재 비밀번호가 올바르지 않습니다" }, 401);
     }
     const np = (body.newPassword || "").toString();
-    if (np.length < 6) return json({ error: "새 비밀번호는 6자 이상" }, 400);
+    if (np.length < 8) return json({ error: "새 비밀번호는 8자 이상" }, 400);
     await setPassword(np);
     await deleteAllSessions();           // 모든 세션 무효화
     await logAudit("admin_pw_change", ip, "", ua);
