@@ -1,11 +1,16 @@
+import Link from "next/link";
 import {
   Activity,
   AlertTriangle,
   Archive,
+  ArrowRight,
   CheckCircle2,
+  Database,
   ExternalLink,
   Gauge,
   KeyRound,
+  Layers,
+  LayoutGrid,
   RefreshCw,
   Search,
   ShieldCheck,
@@ -14,6 +19,7 @@ import {
 import { dataLineage, type DataLineageSource } from "@/lib/data/generated/dataLineage";
 import { realDataQualityWarnings, realDataSummary } from "@/lib/data/generated/realData";
 import { candidateSources, dataAxisMapping, type ResearchPriority } from "@/lib/data/researchNotes";
+import { dataSources, type DataSourceItem } from "@/lib/data/dataSources";
 import { DataTable, type DataTableColumn } from "@/components/tables/DataTable";
 
 const PRIORITY_LABEL: Record<ResearchPriority, { text: string; tone: string }> = {
@@ -45,6 +51,15 @@ const lineageColumns: DataTableColumn<DataLineageSource>[] = [
   { header: "상태", accessor: (row) => statusBadge(row.status) },
   { header: "행수", accessor: (row) => (row.rowCount != null ? row.rowCount.toLocaleString() : "—"), align: "right" },
   {
+    header: "대시보드 반영",
+    accessor: (row) =>
+      SURFACED[row.id] ? (
+        <span className="font-medium text-emerald-700">✓ {SURFACED[row.id]}</span>
+      ) : (
+        <span className="text-slate-400">미연동</span>
+      )
+  },
+  {
     header: "최근 수집",
     accessor: (row) => (row.fetchedAt ? new Date(row.fetchedAt).toLocaleString("ko-KR") : "—")
   },
@@ -58,6 +73,36 @@ const lineageColumns: DataTableColumn<DataLineageSource>[] = [
       )
   }
 ];
+
+// 출처 정의·한계 테이블 컬럼 (구 /data-sources 흡수) — 데이터명/제공기관/갱신주기/주요 컬럼/한계
+const sourceColumns: DataTableColumn<DataSourceItem>[] = [
+  { header: "데이터명", accessor: (row) => <span className="font-semibold text-ink">{row.name}</span> },
+  { header: "제공기관", accessor: (row) => row.provider },
+  { header: "갱신주기", accessor: (row) => row.refreshCycle },
+  {
+    header: "주요 컬럼",
+    accessor: (row) => (
+      <span className="tag-list">
+        {row.keyColumns.slice(0, 4).map((column) => (
+          <span className="tag" key={column}>
+            {column}
+          </span>
+        ))}
+      </span>
+    )
+  },
+  { header: "한계", accessor: (row) => <span className="text-muted">{row.limitation}</span> }
+];
+
+// 수집 소스 → 현재 반영 중인 대시보드 화면 매핑(커버리지 투명성). 없으면 "수집만(미연동)".
+const SURFACED: Record<string, string> = {
+  moj_foreign_resident_status_2024: "국적·체류자격·기회점수",
+  moj_foreign_stay_data_2024: "지역 분석",
+  moj_foreign_student_stay_2024: "대학/유학생",
+  academyinfo_foreign_student_count: "대학별 랭킹",
+  mois_foreign_resident_region_file: "시군구 외국인주민",
+  kosis_foreigner_economic_activity: "체류자격(보조)"
+};
 
 export default function DataPipelinePage() {
   const { totals, keysPresent, generatedAt, sources, discovery } = dataLineage;
@@ -88,6 +133,21 @@ export default function DataPipelinePage() {
     { label: "검증 확정률", value: verifiedRate, note: `${verifiedCount}/${totals.sources}개 확정`, color: "#b45309" }
   ];
 
+  // ── 수집 데이터 커버리지 (구 /data-sources 흡수) ────────────────────────────────
+  const statusRank = (s: string) => (s === "downloaded" ? 0 : s === "skipped_no_key" ? 2 : 1);
+  const allSources = [...sources].sort(
+    (a, b) => statusRank(a.status) - statusRank(b.status) || (b.rowCount ?? 0) - (a.rowCount ?? 0)
+  );
+  const surfacedCount = sources.filter((s) => SURFACED[s.id]).length;
+  const statusSegments = [
+    { label: "수집 성공", value: totals.downloaded, color: "#0f766e" },
+    { label: "수집 실패", value: totals.failed, color: "#be123c" },
+    { label: "키 없음 스킵", value: totals.skippedNoKey, color: "#b45309" },
+    { label: "캐시 재사용", value: totals.cached, color: "#64748b" }
+  ];
+  const stackTotal = statusSegments.reduce((sum, x) => sum + x.value, 0) || 1;
+  const successRate = Math.round((totals.downloaded / stackTotal) * 100);
+
   return (
     <>
       <section className="page-header">
@@ -95,7 +155,8 @@ export default function DataPipelinePage() {
         <h2 className="page-title">데이터 수집기 관리</h2>
         <p className="page-description">
           공공데이터 자동 수집 배치(매일 18:30 UTC, GitHub Actions)의 실행 상태를 관리합니다.
-          각 출처의 수집 성공·실패, 요청 URL, 신규 데이터셋 발굴 결과, 인증키 상태를 한 화면에서 점검할 수 있습니다.
+          데이터 건강 점수, 각 출처의 수집 성공·실패, 요청 URL, 출처 정의·활용 한계, 대시보드 반영 커버리지,
+          신규 데이터셋 발굴 결과, 인증키 상태를 한 화면에서 점검할 수 있습니다.
         </p>
       </section>
 
@@ -256,20 +317,60 @@ export default function DataPipelinePage() {
         </div>
       </section>
 
-      {/* 수집 이력 테이블 */}
-      <section className="surface mt-4">
-        <div className="surface-header">
-          <div>
-            <h3 className="surface-title">수집 이력 (lineage)</h3>
-            <p className="surface-subtitle">매 배치 실행 시 자동 기록 · git 이력으로 일자별 보존</p>
+      {/* 수집 이력 · 커버리지 (lineage + 대시보드 반영 통합) */}
+      <section className="surface mt-4 p-4">
+        <div className="surface-header pb-2">
+          <div className="flex items-center gap-2">
+            <Layers aria-hidden className="text-teal-700" size={18} />
+            <div>
+              <h3 className="surface-title">수집 이력 · 커버리지</h3>
+              <p className="surface-subtitle">
+                매 배치 자동 기록(git 일자별 보존) · 수집된 {totals.sources}개 출처와 대시보드 반영 {surfacedCount}종을 한 표에서 확인
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="rounded-md bg-teal-50 px-2 py-1 text-xs font-semibold text-teal-700">성공률 {successRate}%</span>
+            <span className="rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-600">{allSources.length} sources</span>
           </div>
         </div>
-        <div className="p-2">
-          <DataTable columns={lineageColumns} rowKey={(row) => row.id} rows={[...sources]} />
+
+        {/* 상태 분포 스택 바 */}
+        <div className="px-1 pb-3">
+          <div className="flex h-4 w-full overflow-hidden rounded-lg bg-slate-100">
+            {statusSegments.map((seg) =>
+              seg.value > 0 ? (
+                <div
+                  key={seg.label}
+                  className="h-full"
+                  style={{ width: `${(seg.value / stackTotal) * 100}%`, background: seg.color }}
+                  title={`${seg.label} ${seg.value}`}
+                />
+              ) : null
+            )}
+          </div>
+          <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1.5">
+            {statusSegments.map((seg) => (
+              <span key={seg.label} className="flex items-center gap-1.5 text-xs">
+                <span aria-hidden className="h-2.5 w-2.5 rounded-full" style={{ background: seg.color }} />
+                <span className="text-muted">{seg.label}</span>
+                <span className="font-mono font-semibold text-ink">{seg.value}</span>
+              </span>
+            ))}
+          </div>
         </div>
+
+        {/* 통합 소스 테이블 — lineage + 대시보드 반영(커버리지) */}
+        <div className="p-1">
+          <DataTable columns={lineageColumns} rowKey={(row) => row.id} rows={allSources} />
+        </div>
+        <p className="px-3 pt-1 text-xs leading-6 text-muted">
+          ※ &lsquo;미연동&rsquo;은 자동 수집은 되지만 아직 화면에 반영되지 않은 출처입니다.
+          대학알리미(대학별 유학생)·시군구 외국인주민 등 대용량 파일은 컬럼 구조 검증 후 단계적으로 연동됩니다.
+        </p>
       </section>
 
-      {/* 출처별 수집 상세 (요청 URL 포함) */}
+      {/* 출처별 수집 상세 (요청 URL·오류 드릴다운) */}
       <section className="grid gap-4 pt-4 md:grid-cols-2">
         {sources.map((source) => (
           <article className="surface p-4" key={source.id}>
@@ -368,6 +469,22 @@ export default function DataPipelinePage() {
         </section>
       )}
 
+      {/* 출처 정의 및 한계 (큐레이션 — 구 출처 정의 페이지 흡수) */}
+      <section className="surface mt-4">
+        <div className="surface-header">
+          <div className="flex items-center gap-2">
+            <Database aria-hidden className="text-teal-700" size={18} />
+            <div>
+              <h3 className="surface-title">출처 정의 및 한계</h3>
+              <p className="surface-subtitle">주요 출처의 컬럼 정의 · 활용 · 한계 큐레이션 (전체 수집 목록은 위 &lsquo;수집 이력 · 커버리지&rsquo; 참조)</p>
+            </div>
+          </div>
+        </div>
+        <div className="p-2">
+          <DataTable columns={sourceColumns} rowKey={(row) => row.name} rows={dataSources} />
+        </div>
+      </section>
+
       {/* 조사 노트 — 후보 출처 (수동 큐레이션) */}
       <section className="surface mt-4">
         <div className="surface-header">
@@ -440,6 +557,23 @@ export default function DataPipelinePage() {
           ))}
         </div>
       </section>
+
+      {/* 분석 화면으로 (소비자 카탈로그) 왕복 링크 */}
+      <Link
+        href="/catalog"
+        className="surface surface-hover mt-4 flex items-center justify-between gap-4 px-5 py-4 no-underline"
+      >
+        <div className="flex items-center gap-4">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white" style={{ background: "#0f766e" }}>
+            <LayoutGrid aria-hidden size={20} />
+          </span>
+          <div>
+            <p className="flex items-center gap-1 text-sm font-bold text-ink">분석 화면에서 보기 <ArrowRight aria-hidden size={15} /></p>
+            <p className="mt-0.5 text-xs text-muted">수집한 데이터를 카테고리별로 탐색하고 분석 차트로 이동 — 데이터 카탈로그(축 2)</p>
+          </div>
+        </div>
+        <ArrowRight aria-hidden className="shrink-0 text-teal-700" size={22} />
+      </Link>
     </>
   );
 }
