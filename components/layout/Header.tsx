@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { CalendarDays } from "lucide-react";
+import { realDataSummary } from "@/lib/data/generated/realData";
 
 const pageNames: Record<string, { title: string; sub: string }> = {
   "/":                    { title: "대시보드",       sub: "핵심 지표 한눈에 보기" },
@@ -19,6 +20,7 @@ const pageNames: Record<string, { title: string; sub: string }> = {
 export function Header() {
   const pathname = usePathname();
   const page = pageNames[pathname] ?? { title: pathname.split("/").at(-1) ?? "페이지", sub: "" };
+  const collectedDate = realDataSummary.generatedAt.slice(0, 10);
 
   return (
     <header className="sticky top-0 z-20 flex min-h-14 items-center justify-between gap-4 border-b border-slate-100 bg-white/90 px-6 backdrop-blur-sm">
@@ -33,15 +35,11 @@ export function Header() {
         )}
       </div>
 
-      {/* 우측 배지 */}
+      {/* 우측 배지 — 데이터 수집일 */}
       <div className="flex items-center gap-2">
-        <span className="hidden items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] font-medium text-slate-500 sm:flex">
+        <span className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] font-medium text-slate-500">
           <CalendarDays size={12} aria-hidden />
-          기준 2025.12
-        </span>
-        <span className="flex items-center gap-1.5 rounded-full border border-teal-200 bg-teal-50 px-3 py-1 text-[11px] font-medium text-teal-700">
-          <span className="h-1.5 w-1.5 rounded-full bg-teal-500" />
-          집계 데이터
+          수집일 {collectedDate}
         </span>
       </div>
     </header>
