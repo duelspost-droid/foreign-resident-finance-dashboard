@@ -129,16 +129,16 @@ export default function AdminPage() {
           </div>
           <ul className="divide-y divide-slate-50">
             {decided.map((c) => (
-              <li key={c.id} className="flex items-center gap-3 px-4 py-2 text-sm">
-                <span className={`rounded px-2 py-0.5 text-xs font-semibold ${STATUS_TONE[c.status]}`}>
+              <li key={c.id} className="flex flex-wrap items-center gap-x-2 gap-y-1 px-4 py-2 text-sm">
+                <span className={`shrink-0 rounded px-2 py-0.5 text-xs font-semibold ${STATUS_TONE[c.status]}`}>
                   {c.status === "approved" ? "승인" : "거부"}
                 </span>
-                <span className="font-medium text-ink">{c.title ?? c.datasetId}</span>
-                <span className="text-xs text-muted">
+                <span className="min-w-0 max-w-full truncate font-medium text-ink">{c.title ?? c.datasetId}</span>
+                <span className="truncate text-xs text-muted">
                   {c.provider} · {c.kind} · {c.datasetId}
                 </span>
                 {c.targetTable && (
-                  <span className="ml-auto text-xs text-teal-700">→ {c.targetTable}</span>
+                  <span className="ml-auto shrink-0 text-xs text-teal-700">→ {c.targetTable}</span>
                 )}
               </li>
             ))}
@@ -189,41 +189,43 @@ function CandidateRow({
   const [target, setTarget] = useState(c.targetTable ?? TARGET_TABLES[0]);
 
   return (
-    <div className="flex flex-wrap items-center gap-3 px-4 py-3">
-      <div className="min-w-0 flex-1">
+    <div className="flex flex-col gap-2 px-4 py-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
+      <div className="min-w-0 sm:flex-1">
         <p className="truncate text-sm font-semibold text-ink">{c.title ?? c.datasetId}</p>
-        <p className="text-xs text-muted">
+        <p className="break-words text-xs text-muted">
           {c.provider} · {c.kind} · {c.datasetId}
           {c.keyword ? ` · 키워드: ${c.keyword}` : ""}
         </p>
-        {c.rationale && <p className="mt-0.5 text-xs text-slate-500">{c.rationale}</p>}
+        {c.rationale && <p className="mt-0.5 break-words text-xs text-slate-500">{c.rationale}</p>}
       </div>
-      <select
-        value={target}
-        onChange={(e) => setTarget(e.target.value)}
-        className="rounded-md border border-slate-200 px-2 py-1 text-xs text-slate-700"
-        aria-label="대상 테이블"
-      >
-        {TARGET_TABLES.map((t) => (
-          <option key={t} value={t}>
-            {t}
-          </option>
-        ))}
-      </select>
-      <button
-        disabled={busy}
-        onClick={() => onDecide(c.id, "approved", target)}
-        className="inline-flex items-center gap-1 rounded-md bg-teal-700 px-3 py-1 text-xs font-semibold text-white hover:bg-teal-800 disabled:opacity-50"
-      >
-        <Check aria-hidden size={14} /> 승인
-      </button>
-      <button
-        disabled={busy}
-        onClick={() => onDecide(c.id, "rejected")}
-        className="inline-flex items-center gap-1 rounded-md border border-slate-200 px-3 py-1 text-xs font-semibold text-slate-600 hover:bg-slate-50 disabled:opacity-50"
-      >
-        <X aria-hidden size={14} /> 거부
-      </button>
+      <div className="flex items-center gap-2">
+        <select
+          value={target}
+          onChange={(e) => setTarget(e.target.value)}
+          className="min-w-0 flex-1 rounded-md border border-slate-200 px-2 py-1.5 text-xs text-slate-700 sm:flex-none"
+          aria-label="대상 테이블"
+        >
+          {TARGET_TABLES.map((t) => (
+            <option key={t} value={t}>
+              {t}
+            </option>
+          ))}
+        </select>
+        <button
+          disabled={busy}
+          onClick={() => onDecide(c.id, "approved", target)}
+          className="inline-flex shrink-0 items-center gap-1 rounded-md bg-teal-700 px-3 py-1.5 text-xs font-semibold text-white hover:bg-teal-800 disabled:opacity-50"
+        >
+          <Check aria-hidden size={14} /> 승인
+        </button>
+        <button
+          disabled={busy}
+          onClick={() => onDecide(c.id, "rejected")}
+          className="inline-flex shrink-0 items-center gap-1 rounded-md border border-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-50 disabled:opacity-50"
+        >
+          <X aria-hidden size={14} /> 거부
+        </button>
+      </div>
     </div>
   );
 }
