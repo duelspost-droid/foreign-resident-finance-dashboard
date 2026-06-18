@@ -70,6 +70,8 @@ jobs:
           # 관리자 승인 페이지(브라우저)용. anon 키만 노출(service_role 금지).
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          # 운영 콘솔 클라이언트 게이트 즉시검증(선택). 패스코드 해시(공개 가능). 미설정 시 빈값=서버만 검증.
+          NEXT_PUBLIC_ADMIN_PASSCODE_HASH: ${{ secrets.NEXT_PUBLIC_ADMIN_PASSCODE_HASH }}
         run: npm run pages:build
 
       - name: Setup Pages
