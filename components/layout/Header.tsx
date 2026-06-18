@@ -1,8 +1,8 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { CalendarDays } from "lucide-react";
 import { realDataSummary } from "@/lib/data/generated/realData";
+import { DataFreshnessChip } from "@/components/ui/DataFreshness";
 
 const pageNames: Record<string, { title: string; sub: string }> = {
   "/":                    { title: "대시보드",       sub: "핵심 지표 한눈에 보기" },
@@ -20,7 +20,6 @@ const pageNames: Record<string, { title: string; sub: string }> = {
 export function Header() {
   const pathname = usePathname();
   const page = pageNames[pathname] ?? { title: pathname.split("/").at(-1) ?? "페이지", sub: "" };
-  const collectedDate = realDataSummary.generatedAt.slice(0, 10);
 
   return (
     <header className="sticky top-0 z-20 flex min-h-14 items-center justify-between gap-4 border-b border-slate-100 bg-white/90 px-6 backdrop-blur-sm">
@@ -35,12 +34,9 @@ export function Header() {
         )}
       </div>
 
-      {/* 우측 배지 — 데이터 수집일 */}
+      {/* 우측 배지 — 데이터 수집일·신선도(뷰 시점 실시간 판정) */}
       <div className="flex items-center gap-2">
-        <span className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] font-medium text-slate-500">
-          <CalendarDays size={12} aria-hidden />
-          수집일 {collectedDate}
-        </span>
+        <DataFreshnessChip generatedAt={realDataSummary.generatedAt} />
       </div>
     </header>
   );

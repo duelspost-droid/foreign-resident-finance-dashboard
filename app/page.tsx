@@ -57,6 +57,7 @@ import {
   realDutyFreeSales
 } from "@/lib/data/generated/realData";
 import { formatNumber } from "@/lib/utils/format";
+import { DataFreshnessBanner } from "@/components/ui/DataFreshness";
 
 // ── 색상 헬퍼 ────────────────────────────────────────────────────────────────────
 function scoreColor(score: number): string {
@@ -99,7 +100,6 @@ function cellStyle(v: number): React.CSSProperties {
 }
 
 export default function DashboardPage() {
-  const freshDate = realDataSummary.generatedAt.slice(0, 10);
   const totalRows = realDataSummary.statusRowCount + realDataSummary.regionRowCount;
   const avg = kpiSummary.averageOpportunityScore;
   const loadedDatasets = [
@@ -259,20 +259,12 @@ export default function DashboardPage() {
         description="공개 통계와 금융 집계 데이터를 지역·국적·체류자격·대학 단위로 시각화한 분석 화면입니다."
       />
 
-      {/* ── 데이터 신선도 배너 ── */}
-      <div
-        className="flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg px-4 py-2.5 text-xs"
-        style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", color: "#166534" }}
-      >
-        <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: "#22c55e" }} />
-        <span>수집 기준일 <strong>{freshDate}</strong></span>
-        <span className="text-green-300">·</span>
-        <span>누적 {totalRows.toLocaleString()}행</span>
-        <span className="text-green-300">·</span>
-        <span>실데이터셋 {loadedDatasets}/8 적재</span>
-        <span className="text-green-300">·</span>
-        <span>매일 01:00 KST 자동 갱신</span>
-      </div>
+      {/* ── 데이터 신선도 배너 (뷰 시점 실시간 판정) ── */}
+      <DataFreshnessBanner
+        generatedAt={realDataSummary.generatedAt}
+        totalRows={totalRows}
+        loadedDatasets={loadedDatasets}
+      />
 
       {/* ── 2축 진입점 ── */}
       <section className="grid grid-cols-1 gap-5 sm:grid-cols-2">

@@ -21,6 +21,7 @@ import { realDataQualityWarnings, realDataSummary } from "@/lib/data/generated/r
 import { candidateSources, dataAxisMapping, type ResearchPriority } from "@/lib/data/researchNotes";
 import { dataSources, type DataSourceItem } from "@/lib/data/dataSources";
 import { DataTable, type DataTableColumn } from "@/components/tables/DataTable";
+import { DataFreshnessPanel } from "@/components/ui/DataFreshness";
 
 const PRIORITY_LABEL: Record<ResearchPriority, { text: string; tone: string }> = {
   high: { text: "높음", tone: "bg-teal-100 text-teal-800" },
@@ -182,6 +183,9 @@ export default function DataPipelinePage() {
           스케줄: 매일 01:00 KST (16:00 UTC) · GitHub Actions
         </span>
       </section>
+
+      {/* 데이터 갱신 상태 (뷰 시점 실시간 판정 — 실제 갱신 여부) */}
+      <DataFreshnessPanel generatedAt={generatedAt} />
 
       {/* 수집 요약 카드 */}
       <section className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
