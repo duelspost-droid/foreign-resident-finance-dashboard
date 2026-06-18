@@ -430,14 +430,14 @@ export default function DataPipelinePage() {
         ))}
       </section>
 
-      {/* 신규 데이터셋 발굴 후보 (배치 자동 탐색) */}
+      {/* 데이터 발굴 에이전트 (배치 자동 탐색) */}
       {discovery.length > 0 && (
         <section className="surface mt-4 p-4">
           <div className="flex items-center gap-2">
             <Search aria-hidden className="text-teal-700" size={16} />
-            <h3 className="surface-title">신규 데이터셋 발굴 후보</h3>
+            <h3 className="surface-title">데이터 발굴 에이전트</h3>
           </div>
-          <p className="surface-subtitle">data.go.kr 키워드 자동 탐색 결과 · 배치마다 갱신</p>
+          <p className="surface-subtitle">키워드를 자동 탐색해 신규 데이터셋 후보를 발굴 · 배치마다 갱신</p>
           <ul className="mt-3 grid gap-2 text-sm text-slate-700 sm:grid-cols-2">
             {discovery.map((d) => (
               <li className="rounded-md border border-slate-200 p-3" key={d.id}>
