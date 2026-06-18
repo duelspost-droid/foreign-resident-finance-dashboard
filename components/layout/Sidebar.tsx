@@ -6,6 +6,7 @@ import {
   BarChart3,
   DatabaseZap,
   Flag,
+  Gauge,
   GraduationCap,
   Landmark,
   LayoutDashboard,
@@ -35,14 +36,16 @@ const analysisNav = [
 
 const system = [
   { href: "/data-pipeline", label: "데이터 관리", icon: DatabaseZap },
+  { href: "/admin/console", label: "운영 콘솔", icon: Gauge },
   { href: "/admin", label: "관리자", icon: ShieldCheck },
 ];
 
 export function Sidebar() {
   const pathname = usePathname();
 
+  // "/" 와 "/admin"(자식 라우트 /admin/console 보유)은 정확 일치로 처리해 중복 하이라이트 방지.
   const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+    href === "/" || href === "/admin" ? pathname === href : pathname.startsWith(href);
 
   return (
     <aside className="flex flex-col border-r border-white/5 bg-[#0d1117] px-3 py-4 lg:min-h-screen">

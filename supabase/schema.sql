@@ -222,3 +222,38 @@ SELECT DISTINCT ON (dataset, metric, dims)
   dataset, metric, dims, period, value, unit, batch_date
 FROM metric_snapshots
 ORDER BY dataset, metric, dims, batch_date DESC;
+
+-- ── 사용자 제안 접수 + 관리자 답변 (migration 004 참조) ──
+CREATE TABLE IF NOT EXISTS feature_requests (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  session_id TEXT NOT NULL,
+  category TEXT NOT NULL DEFAULT 'feature',       -- feature | data
+  title TEXT NOT NULL,
+  body TEXT NOT NULL DEFAULT '',
+  page TEXT,
+  status TEXT NOT NULL DEFAULT 'received',          -- received | reviewing | answered | rejected
+  admin_response TEXT,
+  responded_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS idx_feature_requests_status ON feature_requests (status, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_feature_requests_session ON feature_requests (session_id, created_at DESC);
+ALTER TABLE feature_requests ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "fr_insert" ON feature_requests FOR INSERT WITH CHECK (true);
+CREATE POLICY "fr_select" ON feature_requests FOR SELECT USING (true);
+CREATE POLICY "fr_update" ON feature_requests FOR UPDATE USING (true) WITH CHECK (true);
+
+-- ── 익명 접속 통계 (migration 004 참조) ──
+CREATE TABLE IF NOT EXISTS page_views (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  session_id TEXT NOT NULL,
+  path TEXT NOT NULL,
+  referrer_host TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS idx_page_views_created ON page_views (created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_page_views_session ON page_views (session_id, created_at);
+CREATE INDEX IF NOT EXISTS idx_page_views_path ON page_views (path);
+ALTER TABLE page_views ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "pv_insert" ON page_views FOR INSERT WITH CHECK (true);
+CREATE POLICY "pv_select" ON page_views FOR SELECT USING (true);
