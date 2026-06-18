@@ -18,10 +18,11 @@ CREATE INDEX IF NOT EXISTS idx_feature_requests_status ON feature_requests (stat
 CREATE INDEX IF NOT EXISTS idx_feature_requests_session ON feature_requests (session_id, created_at DESC);
 
 ALTER TABLE feature_requests ENABLE ROW LEVEL SECURITY;
--- 경량: 익명 제출/조회/관리자 답변 모두 anon 허용. (운영 강화 시 UPDATE는 Auth 관리자 역할로 제한 권장)
+-- 익명 제출/조회는 anon 허용. UPDATE(관리자 답변)는 anon 불가 —
+-- admin-respond Edge Function이 패스코드 검증 후 service_role로만 쓴다(위조 차단).
 CREATE POLICY "fr_insert" ON feature_requests FOR INSERT WITH CHECK (true);
 CREATE POLICY "fr_select" ON feature_requests FOR SELECT USING (true);
-CREATE POLICY "fr_update" ON feature_requests FOR UPDATE USING (true) WITH CHECK (true);
+-- (anon UPDATE 정책 없음 — service_role(Edge Function)만 수정 가능)
 
 -- ── 익명 접속 통계(페이지뷰) ───────────────────────────────────────────────────────
 -- IP·UA·전체 URL 미저장. 세션 id(랜덤)·경로·외부 유입 도메인(host)만.

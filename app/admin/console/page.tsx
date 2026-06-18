@@ -23,8 +23,6 @@ import { ADMIN_PASSCODE_HASH, sha256Hex } from "@/lib/adminConfig";
 import { STATUS_ORDER, categoryMeta, statusMeta } from "@/lib/feedback";
 
 const ENABLED = Boolean(SUPABASE_PUBLIC_URL && SUPABASE_PUBLIC_ANON_KEY);
-const UNLOCK_KEY = "jbax-admin-unlocked";
-
 type Tab = "overview" | "requests" | "analytics" | "sessions";
 
 function dayKey(iso: string): string {
@@ -36,22 +34,21 @@ function dayKey(iso: string): string {
 }
 
 // ── 패스코드 게이트 ────────────────────────────────────────────────────────────────
-function PasscodeGate({ onUnlock }: { onUnlock: () => void }) {
+// 패스코드는 콘솔 메모리에만 보관되어 답변 저장 시 admin-respond 함수로 전송·서버 검증된다.
+// 클라이언트 해시가 있으면 즉시 검증(UX), 없으면 통과(쓰기는 서버가 최종 검증).
+function PasscodeGate({ onUnlock }: { onUnlock: (passcode: string) => void }) {
   const [pw, setPw] = useState("");
   const [err, setErr] = useState(false);
   const [busy, setBusy] = useState(false);
 
   async function tryUnlock() {
+    if (!pw) return;
     setBusy(true);
     setErr(false);
-    const ok = (await sha256Hex(pw)) === ADMIN_PASSCODE_HASH;
+    const pass = ADMIN_PASSCODE_HASH ? (await sha256Hex(pw)) === ADMIN_PASSCODE_HASH : true;
     setBusy(false);
-    if (ok) {
-      try { sessionStorage.setItem(UNLOCK_KEY, "1"); } catch { /* ignore */ }
-      onUnlock();
-    } else {
-      setErr(true);
-    }
+    if (pass) onUnlock(pw);
+    else setErr(true);
   }
 
   return (
@@ -84,22 +81,26 @@ function PasscodeGate({ onUnlock }: { onUnlock: () => void }) {
 }
 
 // ── 제안 카드(답변 작성) ───────────────────────────────────────────────────────────
-function RequestCard({ row, onSaved }: { row: FeatureRequestRow; onSaved: (r: FeatureRequestRow) => void }) {
+function RequestCard({ row, passcode, onSaved }: { row: FeatureRequestRow; passcode: string; onSaved: (r: FeatureRequestRow) => void }) {
   const [status, setStatus] = useState(row.status);
   const [response, setResponse] = useState(row.admin_response ?? "");
   const [busy, setBusy] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [failed, setFailed] = useState(false);
   const s = statusMeta(row.status);
   const c = categoryMeta(row.category);
 
   async function save() {
     setBusy(true);
     setSaved(false);
-    const ok = await respondFeatureRequest(row.id, { status, adminResponse: response.trim() || undefined });
+    setFailed(false);
+    const ok = await respondFeatureRequest(row.id, { status, adminResponse: response.trim() || undefined, passcode });
     setBusy(false);
     if (ok) {
       setSaved(true);
       onSaved({ ...row, status, admin_response: response.trim() || null, responded_at: new Date().toISOString() });
+    } else {
+      setFailed(true);
     }
   }
 
@@ -137,6 +138,7 @@ function RequestCard({ row, onSaved }: { row: FeatureRequestRow; onSaved: (r: Fe
           {busy ? "저장 중…" : "답변 저장"}
         </button>
         {saved && <span className="text-[11px] text-teal-600">저장됨</span>}
+        {failed && <span className="text-[11px] text-rose-600">저장 실패 — 패스코드/함수 배포 확인</span>}
       </div>
       <textarea
         value={response}
@@ -150,17 +152,14 @@ function RequestCard({ row, onSaved }: { row: FeatureRequestRow; onSaved: (r: Fe
 }
 
 export default function AdminConsolePage() {
-  const gated = ENABLED && Boolean(ADMIN_PASSCODE_HASH);
-  const [unlocked, setUnlocked] = useState(!gated);
+  // 패스코드는 메모리에만 보관(새로고침 시 재입력) → 답변 저장 때 함수로 전송·서버 검증.
+  const [unlocked, setUnlocked] = useState(false);
+  const [passcode, setPasscode] = useState("");
   const [tab, setTab] = useState<Tab>("overview");
   const [requests, setRequests] = useState<FeatureRequestRow[]>([]);
   const [views, setViews] = useState<PageViewRow[]>([]);
   const [loading, setLoading] = useState(false);
   const [statusFilter, setStatusFilter] = useState<string>("all");
-
-  useEffect(() => {
-    try { if (sessionStorage.getItem(UNLOCK_KEY) === "1") setUnlocked(true); } catch { /* ignore */ }
-  }, []);
 
   async function load() {
     setLoading(true);
@@ -229,7 +228,7 @@ export default function AdminConsolePage() {
       </div>
     );
   }
-  if (!unlocked) return <PasscodeGate onUnlock={() => setUnlocked(true)} />;
+  if (!unlocked) return <PasscodeGate onUnlock={(pw) => { setPasscode(pw); setUnlocked(true); }} />;
 
   const maxDay = Math.max(1, ...analytics.days.map((d) => d.count));
   const maxPath = Math.max(1, ...analytics.topPaths.map((p) => p.count));
@@ -247,9 +246,9 @@ export default function AdminConsolePage() {
         </button>
       </section>
 
-      {!gated && (
+      {!ADMIN_PASSCODE_HASH && (
         <div className="flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2 text-xs text-amber-800">
-          <ShieldAlert size={14} /> 패스코드 미설정 — 게이트 비활성 상태입니다. 운영 시 <code className="rounded bg-amber-100 px-1">NEXT_PUBLIC_ADMIN_PASSCODE_HASH</code> 설정 권장.
+          <ShieldAlert size={14} /> 클라이언트 패스코드 검증 비활성 — 답변 쓰기는 서버(admin-respond 함수)가 검증합니다. UX용 즉시 검증을 원하면 <code className="rounded bg-amber-100 px-1">NEXT_PUBLIC_ADMIN_PASSCODE_HASH</code> 설정.
         </div>
       )}
 
@@ -352,6 +351,7 @@ export default function AdminConsolePage() {
               <RequestCard
                 key={`${r.id}:${r.responded_at ?? "new"}`}
                 row={r}
+                passcode={passcode}
                 onSaved={(updated) => setRequests((list) => list.map((x) => (x.id === updated.id ? updated : x)))}
               />
             ))

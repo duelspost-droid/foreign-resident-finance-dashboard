@@ -239,9 +239,9 @@ CREATE TABLE IF NOT EXISTS feature_requests (
 CREATE INDEX IF NOT EXISTS idx_feature_requests_status ON feature_requests (status, created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_feature_requests_session ON feature_requests (session_id, created_at DESC);
 ALTER TABLE feature_requests ENABLE ROW LEVEL SECURITY;
+-- UPDATE(관리자 답변)는 anon 불가 — admin-respond Edge Function이 service_role로만 수정(위조 차단).
 CREATE POLICY "fr_insert" ON feature_requests FOR INSERT WITH CHECK (true);
 CREATE POLICY "fr_select" ON feature_requests FOR SELECT USING (true);
-CREATE POLICY "fr_update" ON feature_requests FOR UPDATE USING (true) WITH CHECK (true);
 
 -- ── 익명 접속 통계 (migration 004 참조) ──
 CREATE TABLE IF NOT EXISTS page_views (

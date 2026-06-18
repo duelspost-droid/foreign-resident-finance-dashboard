@@ -385,22 +385,32 @@ export async function fetchAllFeatureRequests(limit = 500): Promise<FeatureReque
   return (data ?? []) as FeatureRequestRow[];
 }
 
-// 관리자 답변/상태 처리. 성공 시 true.
+// 관리자 답변/상태 처리. anon UPDATE는 RLS로 차단돼 있고, admin-respond Edge Function이
+// 패스코드를 서버 검증한 뒤 service_role로만 쓴다(위조 차단). 성공 시 true.
 export async function respondFeatureRequest(
   id: number,
-  patch: { status: string; adminResponse?: string }
+  patch: { status: string; adminResponse?: string; passcode: string }
 ): Promise<boolean> {
-  const client = createBrowserSupabaseClient();
-  if (!client) return false;
-  const { error } = await client
-    .from("feature_requests")
-    .update({
-      status: patch.status,
-      admin_response: patch.adminResponse ?? null,
-      responded_at: new Date().toISOString()
-    })
-    .eq("id", id);
-  return !error;
+  if (!SUPABASE_PUBLIC_URL || !SUPABASE_PUBLIC_ANON_KEY) return false;
+  try {
+    const res = await fetch(`${SUPABASE_PUBLIC_URL}/functions/v1/admin-respond`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: SUPABASE_PUBLIC_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_PUBLIC_ANON_KEY}`
+      },
+      body: JSON.stringify({
+        id,
+        status: patch.status,
+        adminResponse: patch.adminResponse ?? null,
+        passcode: patch.passcode
+      })
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
 }
 
 // ── 익명 접속 통계 (page_views) ──────────────────────────────────────────────────
