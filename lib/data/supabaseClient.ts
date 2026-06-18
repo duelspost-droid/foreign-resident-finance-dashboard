@@ -358,21 +358,7 @@ export async function submitFeatureRequest(e: {
   return !error;
 }
 
-// 내 제안 목록(세션 단위). 미연결/오류 시 null.
-export async function fetchMyFeatureRequests(sessionId: string): Promise<FeatureRequestRow[] | null> {
-  const client = createBrowserSupabaseClient();
-  if (!client) return null;
-  const { data, error } = await client
-    .from("feature_requests")
-    .select("*")
-    .eq("session_id", sessionId)
-    .order("created_at", { ascending: false })
-    .limit(100);
-  if (error) return null;
-  return (data ?? []) as FeatureRequestRow[];
-}
-
-// 전체 제안 목록(관리자). 미연결/오류 시 null.
+// 전체 제안 목록(공개 '과거 제안 이력' + 관리자 콘솔 공유). 미연결/오류 시 null.
 export async function fetchAllFeatureRequests(limit = 500): Promise<FeatureRequestRow[] | null> {
   const client = createBrowserSupabaseClient();
   if (!client) return null;
