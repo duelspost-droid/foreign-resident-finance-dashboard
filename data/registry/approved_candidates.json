@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-18T09:26:04.059Z",
+  "generatedAt": "2026-06-18T09:50:12.193Z",
   "approved": [
     {
       "id": 2,
@@ -15,6 +15,23 @@
       "rationale": "시군구 단위 장기거주 외국인주민 규모",
       "discovered_at": "2026-06-18T08:09:00.89898+00:00",
       "decided_at": "2026-06-18T08:57:46.939+00:00",
+      "decided_by": "admin",
+      "notes": null
+    },
+    {
+      "id": 7,
+      "dataset_id": "15057894",
+      "kind": "openapi",
+      "provider": "행정안전부",
+      "title": "경기도_버스정류소 현황",
+      "keyword": "외국인주민 현황",
+      "url": "https://www.data.go.kr/data/15057894/openapi.do",
+      "target_table": "foreign_resident_region_month",
+      "status": "approved",
+      "priority": "mid",
+      "rationale": "시군구 단위 장기거주 외국인주민 규모",
+      "discovered_at": "2026-06-18T08:09:00.89898+00:00",
+      "decided_at": "2026-06-18T09:43:53.737+00:00",
       "decided_by": "admin",
       "notes": null
     }
