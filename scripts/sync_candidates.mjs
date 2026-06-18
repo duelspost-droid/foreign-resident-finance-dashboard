@@ -61,7 +61,7 @@ async function main() {
         dataset_id: String(l.datasetId),
         kind: l.kind,
         provider: d.provider ?? null,
-        title: null,
+        title: l.title ?? null,
         keyword: d.keyword ?? null,
         url: l.url ?? null,
         priority: "mid",
@@ -86,13 +86,19 @@ async function main() {
 
   const client = createClient(supabaseUrl, serviceRoleKey);
 
-  // 신규 후보 upsert (dataset_id+kind 충돌 시 무시 — 기존 승인 상태 보존)
+  // 후보 upsert. 기존 행의 결정(승인/거부)은 보존하되 제목·메타는 갱신(백필).
   if (candidates.length > 0) {
+    const { data: existing } = await client.from("source_candidates").select("dataset_id,kind,status");
+    const statusOf = new Map((existing ?? []).map((r) => [`${r.dataset_id}:${r.kind}`, r.status]));
+    for (const c of candidates) {
+      const prev = statusOf.get(`${c.dataset_id}:${c.kind}`);
+      if (prev) c.status = prev; // 관리자 결정 유지
+    }
     const { error } = await client
       .from("source_candidates")
-      .upsert(candidates, { onConflict: "dataset_id,kind", ignoreDuplicates: true });
+      .upsert(candidates, { onConflict: "dataset_id,kind" });
     if (error) console.error("[sync_candidates] upsert 오류:", error.message);
-    else console.log(`[sync_candidates] ${candidates.length}건 upsert 완료`);
+    else console.log(`[sync_candidates] ${candidates.length}건 upsert 완료(제목·메타 갱신, 결정 보존)`);
   }
 
   // 승인된 후보를 레지스트리 파일로 내려받기 (수집기가 동적 등록에 사용)

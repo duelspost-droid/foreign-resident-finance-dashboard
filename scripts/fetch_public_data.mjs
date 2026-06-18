@@ -692,15 +692,41 @@ async function runConcurrent(tasks, concurrency) {
   return results;
 }
 
+// 검색 결과 HTML의 앵커에서 datasetId·kind·title 추출.
+// 앵커 내부 텍스트는 "CSV 기관_데이터명" 형태(선두 포맷 배지 제거).
+function parseDiscoveryLinks(html) {
+  const re = /<a [^>]*href="\/data\/([0-9]+)\/(fileData|openapi)\.do"[^>]*>([\s\S]*?)<\/a>/g;
+  const seen = new Set();
+  const links = [];
+  for (const m of html.matchAll(re)) {
+    const datasetId = m[1];
+    const kind = m[2];
+    const key = `${datasetId}:${kind}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    let title = m[3]
+      .replace(/<\/?(?:em|strong|b|mark|span)[^>]*>/gi, "") // 검색어 하이라이트 태그는 공백 없이 제거
+      .replace(/<[^>]+>/g, " ")
+      .replace(/&amp;/g, "&")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/\s+/g, " ")
+      .trim()
+      .replace(/^(?:CSV|PDF|HWPX?|XLSX?|XLS|XML|JSON|ZIP|TXT|DOCX?|API|LINK|SHP|GEOJSON|\+|\s)+/i, "")
+      .trim();
+    links.push({ datasetId, kind, url: `https://www.data.go.kr/data/${datasetId}/${kind}.do`, title: title || null });
+    if (links.length >= 20) break;
+  }
+  return links;
+}
+
 async function discoverDataGoKr() {
   const results = [];
   for (const query of discoveryQueries) {
     const url = `https://www.data.go.kr/tcs/dss/selectDataSetList.do?keyword=${encodeURIComponent(query.keyword)}`;
     try {
       const html = await fetchText(url);
-      const links = [...html.matchAll(/\/data\/([0-9]+)\/(fileData|openapi)\.do/g)]
-        .slice(0, 20)
-        .map((m) => ({ datasetId: m[1], kind: m[2], url: `https://www.data.go.kr${m[0]}` }));
+      const links = parseDiscoveryLinks(html);
       results.push({ ...query, status: "ok", foundCount: links.length, links });
     } catch (error) {
       results.push({ ...query, status: "failed", error: error.message });
