@@ -5,9 +5,12 @@ import {
   BarChart3,
   Gauge,
   Inbox,
+  KeyRound,
   Lock,
+  LogOut,
   MessageSquare,
   RefreshCw,
+  Settings,
   ShieldAlert,
   Users
 } from "lucide-react";
@@ -15,15 +18,15 @@ import {
   type FeatureRequestRow,
   type PageViewRow,
   fetchAllFeatureRequests,
-  fetchPageViews,
-  respondFeatureRequest
+  fetchPageViews
 } from "@/lib/data/supabaseClient";
+import { adminChangePassword, adminLogin, adminLogout, adminRespond, adminValidate } from "@/lib/data/adminApi";
 import { SUPABASE_PUBLIC_ANON_KEY, SUPABASE_PUBLIC_URL } from "@/lib/data/supabaseConfig";
-import { ADMIN_PASSCODE_HASH, sha256Hex } from "@/lib/adminConfig";
 import { STATUS_ORDER, categoryMeta, statusMeta } from "@/lib/feedback";
 
 const ENABLED = Boolean(SUPABASE_PUBLIC_URL && SUPABASE_PUBLIC_ANON_KEY);
-type Tab = "overview" | "requests" | "analytics" | "sessions";
+const TOKEN_KEY = "jbax-admin-token";
+type Tab = "overview" | "requests" | "analytics" | "sessions" | "settings";
 
 function dayKey(iso: string): string {
   try {
@@ -33,22 +36,25 @@ function dayKey(iso: string): string {
   }
 }
 
-// ── 패스코드 게이트 ────────────────────────────────────────────────────────────────
-// 패스코드는 콘솔 메모리에만 보관되어 답변 저장 시 admin-respond 함수로 전송·서버 검증된다.
-// 클라이언트 해시가 있으면 즉시 검증(UX), 없으면 통과(쓰기는 서버가 최종 검증).
-function PasscodeGate({ onUnlock }: { onUnlock: (passcode: string) => void }) {
+// ── 관리자 로그인 (비밀번호 → 토큰; 맛집 트래커 방식) ───────────────────────────────
+// 비밀번호는 서버(admin 함수)가 PBKDF2로 검증하고 토큰을 발급. 클라이언트는 토큰만 보관.
+function LoginCard({ onLogin }: { onLogin: (token: string) => void }) {
   const [pw, setPw] = useState("");
-  const [err, setErr] = useState(false);
+  const [err, setErr] = useState("");
   const [busy, setBusy] = useState(false);
 
-  async function tryUnlock() {
-    if (!pw) return;
+  async function submit() {
+    if (!pw || busy) return;
     setBusy(true);
-    setErr(false);
-    const pass = ADMIN_PASSCODE_HASH ? (await sha256Hex(pw)) === ADMIN_PASSCODE_HASH : true;
+    setErr("");
+    const { ok, token, error } = await adminLogin(pw);
     setBusy(false);
-    if (pass) onUnlock(pw);
-    else setErr(true);
+    if (ok && token) {
+      try { localStorage.setItem(TOKEN_KEY, token); } catch { /* ignore */ }
+      onLogin(token);
+    } else {
+      setErr(error || "로그인 실패");
+    }
   }
 
   return (
@@ -56,32 +62,77 @@ function PasscodeGate({ onUnlock }: { onUnlock: (passcode: string) => void }) {
       <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl text-white" style={{ background: "linear-gradient(135deg,#155BFF,#061A40)" }}>
         <Lock size={22} aria-hidden />
       </span>
-      <h2 className="mt-3 text-base font-bold text-slate-900">운영 콘솔</h2>
-      <p className="mt-1 text-xs text-slate-500">관리자 패스코드를 입력하세요.</p>
+      <h2 className="mt-3 text-base font-bold text-slate-900">관리자 로그인</h2>
+      <p className="mt-1 text-xs text-slate-500">운영 콘솔 비밀번호를 입력하세요.</p>
       <input
         type="password"
         value={pw}
         onChange={(e) => setPw(e.target.value)}
-        onKeyDown={(e) => e.key === "Enter" && tryUnlock()}
+        onKeyDown={(e) => e.key === "Enter" && submit()}
         className="mt-4 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-teal-400"
-        placeholder="패스코드"
+        placeholder="비밀번호"
         autoFocus
       />
-      {err && <p className="mt-2 text-xs text-rose-600">패스코드가 올바르지 않습니다.</p>}
+      {err && <p className="mt-2 text-xs text-rose-600">⚠️ {err}</p>}
       <button
         type="button"
-        onClick={tryUnlock}
+        onClick={submit}
         disabled={busy || !pw}
         className="mt-3 w-full rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-40"
       >
-        {busy ? "확인 중…" : "입장"}
+        {busy ? "확인 중…" : "로그인"}
       </button>
     </div>
   );
 }
 
+// ── 비밀번호 변경 (설정) ───────────────────────────────────────────────────────────
+function ChangePasswordCard({ onChanged }: { onChanged: (token: string) => void }) {
+  const [cur, setCur] = useState("");
+  const [next, setNext] = useState("");
+  const [msg, setMsg] = useState<{ kind: "ok" | "err"; text: string } | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  async function submit() {
+    if (busy || !cur || !next) return;
+    setBusy(true);
+    setMsg(null);
+    const { ok, token, error } = await adminChangePassword(cur, next);
+    setBusy(false);
+    if (ok && token) {
+      try { localStorage.setItem(TOKEN_KEY, token); } catch { /* ignore */ }
+      setCur(""); setNext("");
+      setMsg({ kind: "ok", text: "비밀번호가 변경됐습니다. 다른 기기 세션은 모두 로그아웃됩니다." });
+      onChanged(token);
+    } else {
+      setMsg({ kind: "err", text: error || "변경 실패" });
+    }
+  }
+
+  return (
+    <div className="surface max-w-md p-5">
+      <div className="flex items-center gap-2">
+        <KeyRound size={16} className="text-teal-700" aria-hidden />
+        <h3 className="surface-title text-sm">비밀번호 변경</h3>
+      </div>
+      <p className="surface-subtitle mt-0.5">변경 시 모든 기기의 세션이 무효화됩니다(현재 기기는 유지).</p>
+      <div className="mt-3 space-y-2">
+        <input type="password" value={cur} onChange={(e) => setCur(e.target.value)} placeholder="현재 비밀번호"
+          className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-teal-400" />
+        <input type="password" value={next} onChange={(e) => setNext(e.target.value)} placeholder="새 비밀번호 (6자 이상)"
+          className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-teal-400" />
+        {msg && <p className={`text-xs ${msg.kind === "ok" ? "text-teal-700" : "text-rose-600"}`}>{msg.text}</p>}
+        <button type="button" onClick={submit} disabled={busy || !cur || !next}
+          className="rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-40">
+          {busy ? "변경 중…" : "변경"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // ── 제안 카드(답변 작성) ───────────────────────────────────────────────────────────
-function RequestCard({ row, passcode, onSaved }: { row: FeatureRequestRow; passcode: string; onSaved: (r: FeatureRequestRow) => void }) {
+function RequestCard({ row, token, onSaved }: { row: FeatureRequestRow; token: string; onSaved: (r: FeatureRequestRow) => void }) {
   const [status, setStatus] = useState(row.status);
   const [response, setResponse] = useState(row.admin_response ?? "");
   const [busy, setBusy] = useState(false);
@@ -94,7 +145,7 @@ function RequestCard({ row, passcode, onSaved }: { row: FeatureRequestRow; passc
     setBusy(true);
     setSaved(false);
     setFailed(false);
-    const ok = await respondFeatureRequest(row.id, { status, adminResponse: response.trim() || undefined, passcode });
+    const ok = await adminRespond(token, row.id, { status, adminResponse: response.trim() || undefined });
     setBusy(false);
     if (ok) {
       setSaved(true);
@@ -152,14 +203,27 @@ function RequestCard({ row, passcode, onSaved }: { row: FeatureRequestRow; passc
 }
 
 export default function AdminConsolePage() {
-  // 패스코드는 메모리에만 보관(새로고침 시 재입력) → 답변 저장 때 함수로 전송·서버 검증.
-  const [unlocked, setUnlocked] = useState(false);
-  const [passcode, setPasscode] = useState("");
+  // 비번 대신 세션 토큰만 보관. 새로고침 시 서버 검증으로 자동 재로그인.
+  const [token, setToken] = useState("");
+  const [authChecking, setAuthChecking] = useState(true);
   const [tab, setTab] = useState<Tab>("overview");
   const [requests, setRequests] = useState<FeatureRequestRow[]>([]);
   const [views, setViews] = useState<PageViewRow[]>([]);
   const [loading, setLoading] = useState(false);
   const [statusFilter, setStatusFilter] = useState<string>("all");
+
+  // 마운트 시 저장된 토큰 검증 → 유효하면 자동 로그인.
+  useEffect(() => {
+    if (!ENABLED) { setAuthChecking(false); return; }
+    let t = "";
+    try { t = localStorage.getItem(TOKEN_KEY) || ""; } catch { /* ignore */ }
+    if (!t) { setAuthChecking(false); return; }
+    void adminValidate(t).then((ok) => {
+      if (ok) setToken(t);
+      else { try { localStorage.removeItem(TOKEN_KEY); } catch { /* ignore */ } }
+      setAuthChecking(false);
+    });
+  }, []);
 
   async function load() {
     setLoading(true);
@@ -169,8 +233,15 @@ export default function AdminConsolePage() {
     setLoading(false);
   }
   useEffect(() => {
-    if (unlocked && ENABLED) void load();
-  }, [unlocked]);
+    if (token && ENABLED) void load();
+  }, [token]);
+
+  async function logout() {
+    const t = token;
+    setToken("");
+    try { localStorage.removeItem(TOKEN_KEY); } catch { /* ignore */ }
+    await adminLogout(t);
+  }
 
   // ── 집계 ──
   const reqStats = useMemo(() => {
@@ -228,7 +299,10 @@ export default function AdminConsolePage() {
       </div>
     );
   }
-  if (!unlocked) return <PasscodeGate onUnlock={(pw) => { setPasscode(pw); setUnlocked(true); }} />;
+  if (authChecking) {
+    return <p className="mt-16 text-center text-sm text-slate-400">🔄 로그인 확인 중…</p>;
+  }
+  if (!token) return <LoginCard onLogin={(t) => setToken(t)} />;
 
   const maxDay = Math.max(1, ...analytics.days.map((d) => d.count));
   const maxPath = Math.max(1, ...analytics.topPaths.map((p) => p.count));
@@ -241,16 +315,15 @@ export default function AdminConsolePage() {
           <h2 className="page-title">운영 콘솔</h2>
           <p className="page-description">사용자 제안 답변 · 접속통계 · 방문자 세션을 한 곳에서 관리합니다.</p>
         </div>
-        <button type="button" onClick={() => void load()} className="flex items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50">
-          <RefreshCw size={13} className={loading ? "animate-spin" : ""} aria-hidden /> 새로고침
-        </button>
-      </section>
-
-      {!ADMIN_PASSCODE_HASH && (
-        <div className="flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2 text-xs text-amber-800">
-          <ShieldAlert size={14} /> 클라이언트 패스코드 검증 비활성 — 답변 쓰기는 서버(admin-respond 함수)가 검증합니다. UX용 즉시 검증을 원하면 <code className="rounded bg-amber-100 px-1">NEXT_PUBLIC_ADMIN_PASSCODE_HASH</code> 설정.
+        <div className="flex items-center gap-2">
+          <button type="button" onClick={() => void load()} className="flex items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50">
+            <RefreshCw size={13} className={loading ? "animate-spin" : ""} aria-hidden /> 새로고침
+          </button>
+          <button type="button" onClick={() => void logout()} className="flex items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50">
+            <LogOut size={13} aria-hidden /> 로그아웃
+          </button>
         </div>
-      )}
+      </section>
 
       {/* 탭 */}
       <div className="flex flex-wrap gap-1 border-b border-slate-200">
@@ -258,7 +331,8 @@ export default function AdminConsolePage() {
           ["overview", "개요", Gauge],
           ["requests", `제안 관리${reqStats.pending ? ` (${reqStats.pending})` : ""}`, Inbox],
           ["analytics", "접속통계", BarChart3],
-          ["sessions", "방문자/세션", Users]
+          ["sessions", "방문자/세션", Users],
+          ["settings", "설정", Settings]
         ] as const).map(([k, label, Icon]) => (
           <button
             key={k}
@@ -351,7 +425,7 @@ export default function AdminConsolePage() {
               <RequestCard
                 key={`${r.id}:${r.responded_at ?? "new"}`}
                 row={r}
-                passcode={passcode}
+                token={token}
                 onSaved={(updated) => setRequests((list) => list.map((x) => (x.id === updated.id ? updated : x)))}
               />
             ))
@@ -426,6 +500,23 @@ export default function AdminConsolePage() {
                 ))}
               </tbody>
             </table>
+          </div>
+        </div>
+      )}
+
+      {/* ── 설정 ── */}
+      {tab === "settings" && (
+        <div className="space-y-4">
+          <ChangePasswordCard onChanged={(t) => setToken(t)} />
+          <div className="surface max-w-md p-5">
+            <div className="flex items-center gap-2">
+              <LogOut size={16} className="text-slate-500" aria-hidden />
+              <h3 className="surface-title text-sm">세션</h3>
+            </div>
+            <p className="surface-subtitle mt-0.5">세션은 8시간 후 만료됩니다. 공용 PC에서는 사용 후 로그아웃하세요.</p>
+            <button type="button" onClick={() => void logout()} className="mt-3 rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50">
+              로그아웃
+            </button>
           </div>
         </div>
       )}

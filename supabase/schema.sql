@@ -257,3 +257,33 @@ CREATE INDEX IF NOT EXISTS idx_page_views_path ON page_views (path);
 ALTER TABLE page_views ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "pv_insert" ON page_views FOR INSERT WITH CHECK (true);
 CREATE POLICY "pv_select" ON page_views FOR SELECT USING (true);
+
+-- ── 운영 콘솔 인증 (migration 005 참조) — PBKDF2 비번 + 세션 토큰 + 감사로그. service_role만. ──
+CREATE TABLE IF NOT EXISTS admin_config (
+  id INT PRIMARY KEY DEFAULT 1,
+  password_hash TEXT NOT NULL DEFAULT '',
+  salt TEXT,
+  iterations INT,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  CONSTRAINT admin_config_single CHECK (id = 1)
+);
+CREATE TABLE IF NOT EXISTS admin_sessions (
+  token TEXT PRIMARY KEY,
+  ip TEXT,
+  expires_at TIMESTAMPTZ NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS idx_admin_sessions_expires ON admin_sessions (expires_at);
+CREATE TABLE IF NOT EXISTS admin_audit (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  ip TEXT,
+  action TEXT NOT NULL,
+  detail TEXT,
+  user_agent TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS idx_admin_audit_lock ON admin_audit (action, ip, created_at DESC);
+ALTER TABLE admin_config ENABLE ROW LEVEL SECURITY;
+ALTER TABLE admin_sessions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE admin_audit ENABLE ROW LEVEL SECURITY;
+-- 정책 없음 → anon 접근 불가. service_role(admin Edge Function)만.
