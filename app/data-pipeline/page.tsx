@@ -153,7 +153,7 @@ export default function DataPipelinePage() {
     <>
       <section className="page-header">
         <p className="page-kicker">수집 파이프라인</p>
-        <h2 className="page-title">데이터 수집기 관리</h2>
+        <h2 className="page-title">메타데이터 관리</h2>
         <p className="page-description">
           공공데이터 자동 수집 배치(매일 01:00 KST / 16:00 UTC, GitHub Actions)의 실행 상태를 관리합니다.
           데이터 건강 점수, 각 출처의 수집 성공·실패, 요청 URL, 출처 정의·활용 한계, 대시보드 반영 커버리지,

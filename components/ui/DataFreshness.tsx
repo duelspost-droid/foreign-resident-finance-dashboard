@@ -80,7 +80,7 @@ export function DataFreshnessBanner({
   );
 }
 
-// ── 데이터 관리(운영) 상세 패널 ───────────────────────────────────────────────────
+// ── 메타데이터 관리(운영) 상세 패널 ───────────────────────────────────────────────
 export function DataFreshnessPanel({ generatedAt }: { generatedAt: string }) {
   const now = useNow();
   const lastBuild = new Date(generatedAt);

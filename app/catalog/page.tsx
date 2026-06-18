@@ -184,7 +184,7 @@ export default function CatalogPage() {
       })}
 
       <p className="text-xs text-slate-500">
-        수집 출처·이력 상세는 <Link href="/data-pipeline" className="font-semibold text-teal-700 hover:underline">데이터 관리</Link>에서 확인할 수 있습니다.
+        수집 출처·이력 상세는 <Link href="/data-pipeline" className="font-semibold text-teal-700 hover:underline">메타데이터 관리</Link>에서 확인할 수 있습니다.
         모든 데이터는 집계 통계이며 개인식별정보를 포함하지 않습니다.
       </p>
     </div>

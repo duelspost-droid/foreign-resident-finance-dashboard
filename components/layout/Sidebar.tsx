@@ -37,7 +37,7 @@ const analysisNav = [
 ];
 
 const system = [
-  { href: "/data-pipeline", label: "데이터 관리", icon: DatabaseZap },
+  { href: "/data-pipeline", label: "메타데이터 관리", icon: DatabaseZap },
   { href: "/admin/console", label: "운영 콘솔", icon: Gauge },
   { href: "/admin", label: "관리자", icon: ShieldCheck },
 ];
