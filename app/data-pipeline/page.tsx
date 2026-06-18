@@ -433,11 +433,19 @@ export default function DataPipelinePage() {
       {/* 데이터 발굴 에이전트 (배치 자동 탐색) */}
       {discovery.length > 0 && (
         <section className="surface mt-4 p-4">
-          <div className="flex items-center gap-2">
-            <Search aria-hidden className="text-teal-700" size={16} />
-            <h3 className="surface-title">데이터 발굴 에이전트</h3>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <Search aria-hidden className="text-teal-700" size={16} />
+              <h3 className="surface-title">데이터 발굴 에이전트</h3>
+            </div>
+            <Link
+              href="/admin"
+              className="flex items-center gap-1 rounded-lg bg-teal-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-teal-700"
+            >
+              발굴 후보 승인하기 <ArrowRight aria-hidden size={13} />
+            </Link>
           </div>
-          <p className="surface-subtitle">키워드를 자동 탐색해 신규 데이터셋 후보를 발굴 · 배치마다 갱신</p>
+          <p className="surface-subtitle">키워드를 자동 탐색해 신규 데이터셋 후보를 발굴 · 승인은 ‘데이터 발굴 승인’ 메뉴에서</p>
           <ul className="mt-3 grid gap-2 text-sm text-slate-700 sm:grid-cols-2">
             {discovery.map((d) => (
               <li className="rounded-md border border-slate-200 p-3" key={d.id}>

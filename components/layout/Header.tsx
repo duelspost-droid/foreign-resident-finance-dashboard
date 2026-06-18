@@ -18,7 +18,7 @@ const pageNames: Record<string, { title: string; sub: string }> = {
   "/consumption":         { title: "소비·금융거래",   sub: "면세점·부동산·본국송금·환율" },
   "/data-pipeline":       { title: "메타데이터 관리", sub: "수집 파이프라인 및 데이터 발굴 에이전트" },
   "/admin/console":       { title: "운영 콘솔",       sub: "제안 답변 · 접속통계 · 방문자" },
-  "/admin":               { title: "관리자",         sub: "신규 데이터 소스 승인" },
+  "/admin":               { title: "데이터 발굴 승인", sub: "발굴 에이전트가 찾은 신규 데이터셋 후보 승인" },
 };
 
 export function Header() {
