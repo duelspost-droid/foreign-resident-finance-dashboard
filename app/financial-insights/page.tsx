@@ -236,7 +236,7 @@ export default function FinancialInsightsPage() {
             {marketKpis.sourceLabel}
           </span>
         </div>
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
             {
               label: "총 체류외국인",
@@ -292,8 +292,8 @@ export default function FinancialInsightsPage() {
         <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-slate-500">
           주요 국적별 금융 수요
         </h2>
-        <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-          <table className="min-w-full text-xs">
+        <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+          <table className="min-w-[720px] text-xs">
             <thead>
               <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
                 <th className="px-4 py-3 text-left font-semibold">국적</th>
@@ -397,8 +397,8 @@ export default function FinancialInsightsPage() {
             금융 기회 점수 순 · 자동 갱신
           </span>
         </div>
-        <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-          <table className="min-w-full text-xs">
+        <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+          <table className="min-w-[720px] text-xs">
             <thead>
               <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
                 <th className="px-4 py-3 text-left font-semibold">순위</th>
@@ -445,7 +445,7 @@ export default function FinancialInsightsPage() {
           체류자격 × 금융 상품 수요 매트릭스
         </h2>
         <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
-          <table className="min-w-full text-xs">
+          <table className="min-w-[560px] text-xs">
             <thead>
               <tr className="bg-slate-900 text-white">
                 <th className="px-4 py-3 text-left font-semibold">체류자격</th>

@@ -503,7 +503,7 @@ export default function DataPipelinePage() {
           </div>
         </div>
         <div className="table-scroll p-2">
-          <table className="w-full text-sm">
+          <table className="w-full min-w-[820px] text-sm">
             <thead>
               <tr className="border-b border-slate-200 text-left text-xs text-muted">
                 <th className="px-3 py-2">제공기관</th>

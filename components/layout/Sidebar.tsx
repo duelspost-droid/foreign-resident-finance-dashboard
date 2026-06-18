@@ -15,8 +15,10 @@ import {
   ShieldCheck,
   ShoppingBag,
   TrendingUp,
+  X,
 } from "lucide-react";
 import clsx from "clsx";
+import { useMobileNav } from "./MobileNavContext";
 
 // 축 1 · 금융 인사이트 (해석·전략)
 const financeNav = [
@@ -42,13 +44,35 @@ const system = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const { open, setOpen } = useMobileNav();
 
   // "/" 와 "/admin"(자식 라우트 /admin/console 보유)은 정확 일치로 처리해 중복 하이라이트 방지.
   const isActive = (href: string) =>
     href === "/" || href === "/admin" ? pathname === href : pathname.startsWith(href);
 
   return (
-    <aside className="flex flex-col border-r border-white/5 bg-[#0d1117] px-3 py-4 lg:min-h-screen">
+    <>
+      {/* 모바일 드로어 배경(클릭 시 닫힘) */}
+      {open && (
+        <div className="fixed inset-0 z-40 bg-slate-900/50 lg:hidden" onClick={() => setOpen(false)} aria-hidden />
+      )}
+    <aside
+      className={clsx(
+        "flex flex-col border-r border-white/5 bg-[#0d1117] px-3 py-4 lg:min-h-screen",
+        // 모바일: 오프캔버스 드로어 (데스크톱 lg+ 는 영향 없음)
+        "max-lg:fixed max-lg:inset-y-0 max-lg:left-0 max-lg:z-50 max-lg:w-[82%] max-lg:max-w-[300px] max-lg:overflow-y-auto max-lg:shadow-2xl max-lg:transition-transform max-lg:duration-200",
+        open ? "max-lg:translate-x-0" : "max-lg:-translate-x-full"
+      )}
+    >
+      {/* 모바일 닫기 버튼 */}
+      <button
+        type="button"
+        onClick={() => setOpen(false)}
+        className="absolute right-2 top-2 flex h-9 w-9 items-center justify-center rounded-lg text-white/60 hover:bg-white/10 hover:text-white lg:hidden"
+        aria-label="메뉴 닫기"
+      >
+        <X size={18} />
+      </button>
       {/* 로고 — JB×AX 브랜드 마크 (맛집 트래커와 동일 패턴: 골드 그라데이션 ×AX) */}
       <Link href="/" className="mb-6 flex items-center gap-3 rounded-xl px-3 py-2.5 transition hover:bg-white/5">
         <span
@@ -125,5 +149,6 @@ export function Sidebar() {
         </p>
       </div>
     </aside>
+    </>
   );
 }

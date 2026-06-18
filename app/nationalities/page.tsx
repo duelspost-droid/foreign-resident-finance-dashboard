@@ -165,7 +165,7 @@ export default function NationalitiesPage() {
             <VisaDonutChart />
           </div>
           <div className="border-t border-line px-5 py-4">
-            <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
+            <ul className="grid grid-cols-1 gap-x-4 gap-y-2 text-xs sm:grid-cols-2">
               {donutLegend.map((segment) => (
                 <li className="flex items-center justify-between gap-2" key={segment.name}>
                   <span className="flex min-w-0 items-center gap-2">

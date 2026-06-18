@@ -1,9 +1,11 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { Menu } from "lucide-react";
 import { realDataSummary } from "@/lib/data/generated/realData";
 import { DataFreshnessChip } from "@/components/ui/DataFreshness";
 import { FeedbackButton } from "@/components/feedback/FeedbackButton";
+import { useMobileNav } from "@/components/layout/MobileNavContext";
 
 const pageNames: Record<string, { title: string; sub: string }> = {
   "/":                    { title: "대시보드",       sub: "핵심 지표 한눈에 보기" },
@@ -21,23 +23,34 @@ const pageNames: Record<string, { title: string; sub: string }> = {
 
 export function Header() {
   const pathname = usePathname();
+  const { toggle } = useMobileNav();
   const page = pageNames[pathname] ?? { title: pathname.split("/").at(-1) ?? "페이지", sub: "" };
 
   return (
-    <header className="sticky top-0 z-20 flex min-h-14 items-center justify-between gap-4 border-b border-slate-100 bg-white/90 px-6 backdrop-blur-sm">
+    <header className="sticky top-0 z-20 flex min-h-14 flex-wrap items-center gap-x-3 gap-y-2 border-b border-slate-100 bg-white/90 px-3 py-2 backdrop-blur-sm sm:px-6">
+      {/* 모바일 햄버거 */}
+      <button
+        type="button"
+        onClick={toggle}
+        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-slate-600 hover:bg-slate-100 lg:hidden"
+        aria-label="메뉴 열기"
+      >
+        <Menu size={20} />
+      </button>
+
       {/* 페이지 제목 */}
-      <div className="flex items-baseline gap-3">
-        <h1 className="text-[15px] font-bold text-slate-900">{page.title}</h1>
+      <div className="flex min-w-0 items-baseline gap-3">
+        <h1 className="truncate text-[15px] font-bold text-slate-900">{page.title}</h1>
         {page.sub && (
           <>
             <span className="text-slate-300">/</span>
-            <span className="hidden text-xs text-slate-400 sm:block">{page.sub}</span>
+            <span className="hidden truncate text-xs text-slate-400 sm:block">{page.sub}</span>
           </>
         )}
       </div>
 
       {/* 우측: 제안하기 버튼 + 데이터 수집일·신선도(뷰 시점 실시간 판정) */}
-      <div className="flex items-center gap-2">
+      <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
         <FeedbackButton />
         <DataFreshnessChip generatedAt={realDataSummary.generatedAt} />
       </div>

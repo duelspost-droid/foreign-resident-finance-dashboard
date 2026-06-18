@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { AnalyticsBeacon } from "@/components/analytics/AnalyticsBeacon";
+import { MobileNavProvider } from "@/components/layout/MobileNavContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,13 +20,15 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <AnalyticsBeacon />
-        <div className="app-shell">
-          <Sidebar />
-          <main className="main-shell">
-            <Header />
-            <div className="content-shell">{children}</div>
-          </main>
-        </div>
+        <MobileNavProvider>
+          <div className="app-shell">
+            <Sidebar />
+            <main className="main-shell">
+              <Header />
+              <div className="content-shell">{children}</div>
+            </main>
+          </div>
+        </MobileNavProvider>
       </body>
     </html>
   );

@@ -446,15 +446,17 @@ export default function AdminConsolePage() {
         <div className="space-y-5">
           <section className="surface p-4">
             <h3 className="surface-title mb-3 text-sm">일자별 방문 (최근 14일)</h3>
-            <div className="flex h-40 items-end gap-1.5">
-              {analytics.days.map((d) => (
-                <div key={d.day} className="flex flex-1 flex-col items-center gap-1" title={`${d.day} · ${d.count}`}>
-                  <div className="flex w-full items-end" style={{ height: 130 }}>
-                    <div className="w-full rounded-t bg-teal-500" style={{ height: `${Math.round((d.count / maxDay) * 100)}%`, minHeight: d.count ? 3 : 0 }} />
+            <div className="overflow-x-auto">
+              <div className="flex h-40 min-w-[480px] items-end gap-1.5">
+                {analytics.days.map((d) => (
+                  <div key={d.day} className="flex flex-1 flex-col items-center gap-1" title={`${d.day} · ${d.count}`}>
+                    <div className="flex w-full items-end" style={{ height: 130 }}>
+                      <div className="w-full rounded-t bg-teal-500" style={{ height: `${Math.round((d.count / maxDay) * 100)}%`, minHeight: d.count ? 3 : 0 }} />
+                    </div>
+                    <span className="text-[9px] text-slate-400">{d.day.slice(5)}</span>
                   </div>
-                  <span className="text-[9px] text-slate-400">{d.day.slice(5)}</span>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </section>
           <section className="surface p-4">

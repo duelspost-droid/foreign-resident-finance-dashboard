@@ -21,7 +21,7 @@ export function DataFreshnessChip({ generatedAt }: { generatedAt: string }) {
   const date = generatedAt.slice(0, 10);
   if (now == null) {
     return (
-      <span className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] font-medium text-slate-500">
+      <span className="flex items-center gap-1.5 whitespace-nowrap rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] font-medium text-slate-500">
         <CalendarDays size={12} aria-hidden /> 수집일 {date}
       </span>
     );
@@ -29,13 +29,13 @@ export function DataFreshnessChip({ generatedAt }: { generatedAt: string }) {
   const f = computeFreshness(generatedAt, now);
   return (
     <span
-      className="flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-semibold"
+      className="flex items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-1 text-[11px] font-semibold"
       style={{ color: f.color, borderColor: f.border, background: f.bg }}
       title={`${f.detail} (마지막 수집: ${new Date(generatedAt).toLocaleString("ko-KR")})`}
     >
       <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: f.color }} aria-hidden />
       수집일 {date}
-      <span className="font-medium opacity-80">· {f.level === "fresh" ? f.ageText : f.label}</span>
+      <span className="hidden font-medium opacity-80 sm:inline">· {f.level === "fresh" ? f.ageText : f.label}</span>
     </span>
   );
 }

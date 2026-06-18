@@ -320,7 +320,7 @@ export default function DashboardPage() {
                 </span>
               </div>
               <div className="flex items-end gap-1.5">
-                <span className="text-[2.1rem] font-black leading-none text-ink">{kpi.display}</span>
+                <span className="text-[1.6rem] font-black leading-none text-ink sm:text-[2.1rem]">{kpi.display}</span>
                 <span className="mb-0.5 text-sm text-muted">{kpi.unit}</span>
               </div>
               <div className="flex items-center justify-between">
@@ -358,7 +358,7 @@ export default function DashboardPage() {
                   </span>
                 </div>
                 <div className="flex items-end gap-1.5">
-                  <span className="text-[1.9rem] font-black leading-none text-ink">{s.value}</span>
+                  <span className="truncate text-[1.5rem] font-black leading-none text-ink sm:text-[1.9rem]">{s.value}</span>
                   {s.unit && <span className="mb-0.5 text-sm text-muted">{s.unit}</span>}
                 </div>
                 <div className="flex items-center justify-between gap-2">
@@ -450,7 +450,7 @@ export default function DashboardPage() {
           {epsLatest ? (
             <>
               <div className="mt-3 flex items-end gap-1.5">
-                <span className="text-[2.1rem] font-black leading-none text-ink">{formatNumber(epsLatest.value)}</span>
+                <span className="text-[1.6rem] font-black leading-none text-ink sm:text-[2.1rem]">{formatNumber(epsLatest.value)}</span>
                 <span className="mb-0.5 text-sm text-muted">{realEpsIntroduction.unit}</span>
               </div>
               {epsTopCountry && (
@@ -489,7 +489,7 @@ export default function DashboardPage() {
           {studentTop ? (
             <>
               <div className="mt-3 flex items-end gap-1.5">
-                <span className="text-[1.7rem] font-black leading-none text-ink">{studentTop.nationality}</span>
+                <span className="truncate text-[1.3rem] font-black leading-none text-ink sm:text-[1.7rem]">{studentTop.nationality}</span>
               </div>
               <div className="mt-1 flex items-center gap-2 text-xs">
                 <span className="font-bold" style={{ color: "#b45309" }}>{formatNumber(studentTop.value)} 명</span>
@@ -783,7 +783,7 @@ export default function DashboardPage() {
             </div>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+            <table className="w-full min-w-[560px] text-sm">
               <thead>
                 <tr style={{ background: "#f8fafc", borderBottom: "2px solid #e2e8f0" }}>
                   <th className="px-4 py-2.5 text-left text-xs font-bold text-muted">세그먼트</th>

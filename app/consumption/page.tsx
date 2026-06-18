@@ -63,7 +63,7 @@ export default function ConsumptionPage() {
 
         {/* 최신 환율 카드 */}
         {fxHasData && (
-          <div className="mb-5 grid grid-cols-2 gap-4 lg:grid-cols-4">
+          <div className="mb-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {fxCards.map((c) => (
               <div key={c.label} className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
                 <p className="text-xs font-semibold text-slate-500">{c.label}</p>

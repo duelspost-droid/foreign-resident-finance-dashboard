@@ -92,7 +92,7 @@ export default function EconomyPage() {
               <div className="space-y-2.5">
                 {latestRows.sort((a, b) => b.value - a.value).map((row, i) => (
                   <div key={`${row.period}-${row.category}-${i}`} className="flex items-center gap-3">
-                    <span className="w-36 shrink-0 truncate text-xs text-ink" title={row.category}>{row.category}</span>
+                    <span className="w-20 shrink-0 truncate text-xs text-ink sm:w-36" title={row.category}>{row.category}</span>
                     <div className="flex flex-1 items-center gap-2">
                       <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-slate-100">
                         <div
@@ -131,7 +131,7 @@ export default function EconomyPage() {
               <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">국민건강보험공단 · 2022</span>
             </div>
             <div className="surface p-5">
-              <div className="mb-4 grid grid-cols-3 gap-4 text-center">
+              <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-3 text-center">
                 <div><p className="text-lg font-black text-ink">{grandTotal.toLocaleString()}</p><p className="text-xs text-muted">전체 적용인원</p></div>
                 <div><p className="text-lg font-black" style={{ color: "#0f766e" }}>{workplaceTotal.toLocaleString()}</p><p className="text-xs text-muted">직장가입</p></div>
                 <div><p className="text-lg font-black" style={{ color: "#3157a4" }}>{regionalTotal.toLocaleString()}</p><p className="text-xs text-muted">지역가입</p></div>
@@ -139,7 +139,7 @@ export default function EconomyPage() {
               <div className="space-y-2">
                 {sorted.slice(0, 15).map((row) => (
                   <div key={row.region} className="flex items-center gap-3">
-                    <span className="w-24 shrink-0 truncate text-xs text-ink">{row.region}</span>
+                    <span className="w-16 shrink-0 truncate text-xs text-ink sm:w-24">{row.region}</span>
                     <div className="flex flex-1 items-center gap-1">
                       <div
                         className="h-2 rounded-l"
@@ -178,7 +178,7 @@ export default function EconomyPage() {
               <div className="space-y-2">
                 {sorted.map((row, i) => (
                   <div key={`${row.region}-${i}`} className="flex items-center gap-3">
-                    <span className="w-32 shrink-0 truncate text-xs text-ink">{row.region}</span>
+                    <span className="w-20 shrink-0 truncate text-xs text-ink sm:w-32">{row.region}</span>
                     <div className="flex flex-1 items-center gap-2">
                       <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100">
                         <div
@@ -333,7 +333,7 @@ export default function EconomyPage() {
             right={<span className="eyebrow">실데이터 · KOSIS</span>}
             bodyClassName="p-0"
           >
-            <div className="grid grid-cols-3 gap-4 border-b border-line px-5 py-4 text-center">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 border-b border-line px-5 py-4 text-center">
               <div>
                 <p className="text-lg font-black text-ink">{formatNumber(contractTotal)}</p>
                 <p className="text-xs text-muted">전체 ({contractSummary.unit})</p>

@@ -67,7 +67,7 @@ export function FeedbackButton() {
       </button>
 
       {open && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center bg-slate-900/40 p-4 pt-20 backdrop-blur-sm" onClick={() => setOpen(false)}>
+        <div className="fixed inset-0 z-[60] flex items-start justify-center bg-slate-900/40 p-4 pt-12 backdrop-blur-sm sm:pt-20" onClick={() => setOpen(false)}>
           <div className="w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
             {/* 헤더 */}
             <div className="flex items-center justify-between border-b border-slate-100 px-5 py-3.5">
