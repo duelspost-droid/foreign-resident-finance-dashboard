@@ -358,13 +358,27 @@ export async function submitFeatureRequest(e: {
   return !error;
 }
 
-// 전체 제안 목록(공개 '과거 제안 이력' + 관리자 콘솔 공유). 미연결/오류 시 null.
+// 전체 제안 목록(관리자 콘솔 전용 — 모든 컬럼). 미연결/오류 시 null.
 export async function fetchAllFeatureRequests(limit = 500): Promise<FeatureRequestRow[] | null> {
   const client = createBrowserSupabaseClient();
   if (!client) return null;
   const { data, error } = await client
     .from("feature_requests")
     .select("*")
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  if (error) return null;
+  return (data ?? []) as FeatureRequestRow[];
+}
+
+// 공개 '과거 제안 이력'용 — 표시에 필요한 컬럼만 반환(session_id·page 등 미반환, 데이터 최소화).
+// RLS는 anon 전체 SELECT를 허용하지만, 익명 응답에 식별·추적 소지 값이 섞이지 않도록 조회 단계에서 좁힌다.
+export async function fetchPublicFeatureRequests(limit = 300): Promise<FeatureRequestRow[] | null> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return null;
+  const { data, error } = await client
+    .from("feature_requests")
+    .select("id,category,title,body,status,admin_response,created_at")
     .order("created_at", { ascending: false })
     .limit(limit);
   if (error) return null;

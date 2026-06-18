@@ -201,9 +201,10 @@ function RequestCard({ row, token, onSaved, onAuthExpired }: { row: FeatureReque
         value={response}
         onChange={(e) => setResponse(e.target.value)}
         rows={2}
-        placeholder="답변 내용 (제안자가 ‘내 제안’에서 확인)"
+        placeholder="답변 내용 (제안자가 ‘과거 제안 이력’에서 확인)"
         className="mt-2 w-full resize-none rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-teal-400"
       />
+      <p className="mt-1 text-[10px] text-amber-600">⚠ 이 답변은 ‘과거 제안 이력’에서 누구나 볼 수 있습니다. 비공개 내용은 적지 마세요.</p>
     </div>
   );
 }

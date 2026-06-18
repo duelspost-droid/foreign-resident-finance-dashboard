@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Database, Lightbulb, MessageSquarePlus, Send, X } from "lucide-react";
 import { getSessionId } from "@/lib/utils/session";
 import { categoryMeta, statusMeta } from "@/lib/feedback";
 import {
   type FeatureRequestRow,
-  fetchAllFeatureRequests,
+  fetchPublicFeatureRequests,
   submitFeatureRequest
 } from "@/lib/data/supabaseClient";
 import { SUPABASE_PUBLIC_ANON_KEY, SUPABASE_PUBLIC_URL } from "@/lib/data/supabaseConfig";
@@ -24,17 +24,30 @@ export function FeedbackButton() {
   const [busy, setBusy] = useState(false);
   const [result, setResult] = useState<null | "ok" | "fail">(null);
   const [history, setHistory] = useState<FeatureRequestRow[] | null>(null);
-  const [myId, setMyId] = useState("");
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const titleRef = useRef<HTMLInputElement>(null);
 
+  // 모달 열림 동안: Esc 닫기 + 배경 스크롤 잠금 + 제목 입력 초기 포커스, 닫을 때 트리거로 포커스 복귀.
   useEffect(() => {
-    if (open) setMyId(getSessionId());
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const focusTimer = window.setTimeout(() => titleRef.current?.focus(), 0);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+      window.clearTimeout(focusTimer);
+      triggerRef.current?.focus();
+    };
   }, [open]);
 
   useEffect(() => {
-    // 과거 제안 이력 = 전체 공개(로그인 없음). RLS anon SELECT 허용.
+    // 과거 제안 이력 = 전체 공개(로그인 없음). 표시용 컬럼만 조회(데이터 최소화).
     if (open && tab === "history") {
       setHistory(null); // 로딩 표시
-      void fetchAllFeatureRequests(300).then((r) => setHistory(r ?? []));
+      void fetchPublicFeatureRequests(300).then((r) => setHistory(r ?? []));
     }
   }, [open, tab]);
 
@@ -64,6 +77,7 @@ export function FeedbackButton() {
   return (
     <>
       <button
+        ref={triggerRef}
         type="button"
         onClick={() => { setOpen(true); setTab("new"); setResult(null); }}
         className="flex items-center gap-1.5 rounded-full border border-teal-200 bg-teal-50 px-3 py-1.5 text-[12px] font-semibold text-teal-700 transition hover:bg-teal-100"
@@ -74,8 +88,15 @@ export function FeedbackButton() {
       </button>
 
       {open && (
-        <div className="fixed inset-0 z-[60] flex items-start justify-center bg-slate-900/40 p-4 pt-8 backdrop-blur-sm sm:pt-20" onClick={() => setOpen(false)}>
-          <div className="flex max-h-[88vh] w-full max-w-lg flex-col overflow-hidden rounded-2xl bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
+        // 오버레이 자체를 스크롤 가능하게(overflow-y-auto) → 짧은 뷰포트·낮은 노트북에서도 하단 '제안 접수' 버튼에 항상 도달.
+        <div className="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto bg-slate-900/40 p-4 pt-8 backdrop-blur-sm sm:pt-16" onClick={() => setOpen(false)}>
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="frfd-feedback-title"
+            className="flex max-h-[calc(100dvh-4rem)] w-full max-w-lg flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* 헤더 */}
             <div className="flex shrink-0 items-center justify-between border-b border-slate-100 px-5 py-3.5">
               <div className="flex items-center gap-2">
@@ -83,7 +104,7 @@ export function FeedbackButton() {
                   <MessageSquarePlus size={16} aria-hidden />
                 </span>
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900">기능·데이터 제안</h3>
+                  <h3 id="frfd-feedback-title" className="text-sm font-bold text-slate-900">기능·데이터 제안</h3>
                   <p className="text-[11px] text-slate-500">원하는 기능이나 추가했으면 하는 데이터를 알려주세요.</p>
                 </div>
               </div>
@@ -109,7 +130,7 @@ export function FeedbackButton() {
             {tab === "new" ? (
               // 입력 영역은 스크롤, '제안 접수' 버튼은 하단 고정 → 작은 화면에서도 버튼이 항상 보임
               <div className="flex min-h-0 flex-1 flex-col">
-                <div className="space-y-3 overflow-y-auto px-5 py-4">
+                <div className="min-h-0 flex-1 space-y-3 overflow-y-auto px-5 py-4">
                   {/* 카테고리 */}
                   <div className="flex gap-2">
                     {([["feature", "기능 제안", Lightbulb], ["data", "데이터 요청", Database]] as const).map(([k, label, Icon]) => (
@@ -124,6 +145,7 @@ export function FeedbackButton() {
                     ))}
                   </div>
                   <input
+                    ref={titleRef}
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     maxLength={120}
@@ -165,13 +187,11 @@ export function FeedbackButton() {
                   history.map((r) => {
                     const s = statusMeta(r.status);
                     const c = categoryMeta(r.category);
-                    const mine = Boolean(myId) && r.session_id === myId;
                     return (
                       <div key={r.id} className="rounded-lg border border-slate-200 p-3">
                         <div className="flex flex-wrap items-center gap-1.5">
                           <span className={`rounded px-1.5 py-0.5 text-[10px] font-bold ${s.tone}`}>{s.label}</span>
                           <span className={`rounded px-1.5 py-0.5 text-[10px] font-semibold ${c.tone}`}>{c.label}</span>
-                          {mine && <span className="rounded bg-teal-600 px-1.5 py-0.5 text-[10px] font-bold text-white">내 제안</span>}
                           <span className="min-w-0 flex-1 truncate text-sm font-semibold text-slate-800">{r.title}</span>
                           <span className="shrink-0 text-[10px] text-slate-400">
                             {new Date(r.created_at).toLocaleDateString("ko-KR", { month: "short", day: "numeric" })}
