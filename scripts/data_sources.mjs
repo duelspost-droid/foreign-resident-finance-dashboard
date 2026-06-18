@@ -850,5 +850,48 @@ export const discoveryQueries = [
     provider: "한국관광공사",
     keyword: "외래관광객 입국 월별 국적별",
     purpose: "월별 국적별 외국인 입국(단기 외국인 금융·환전 수요 규모)"
+  },
+  // ── 전방위 외부 리서치(docs/source-research-external.md) 기반 신규 발굴 키워드 ──
+  {
+    id: "foreign_realestate_trade",
+    provider: "한국부동산원/지자체",
+    keyword: "외국인 부동산 거래 토지 주택 취득",
+    purpose: "외국인 부동산 자산·거래(자산·신용·대출 직결 금융지표)"
+  },
+  {
+    id: "customs_dutyfree_foreigner",
+    provider: "관세청",
+    keyword: "면세점 내외국인 매출 품목별",
+    purpose: "외국인 면세 소비(고가품·기호품) 규모"
+  },
+  {
+    id: "nts_foreign_income_tax",
+    provider: "국세청",
+    keyword: "외국인근로자 연말정산 소득세 신고현황",
+    purpose: "외국인 국적별 근로소득·결정세액(소득 베이스)"
+  },
+  {
+    id: "mogef_multicultural_survey",
+    provider: "여성가족부",
+    keyword: "다문화가족 실태조사 소득 경제활동",
+    purpose: "결혼이민·다문화가구 소득·주거·경제활동(가구 금융)"
+  },
+  {
+    id: "comwel_foreign_injury",
+    provider: "근로복지공단",
+    keyword: "외국인근로자 산재 보험급여 처리현황",
+    purpose: "외국인 산재·보험 청구(보험 행태 보조지표)"
+  },
+  {
+    id: "motie_fdi_trend",
+    provider: "산업통상자원부",
+    keyword: "외국인직접투자 FDI 동향 통계",
+    purpose: "외국인 자본 유입(법인 중심·약연관, 거시 맥락)"
+  },
+  {
+    id: "nhis_foreigner_premium",
+    provider: "국민건강보험공단",
+    keyword: "내외국인 건강보험료 부과 급여 현황",
+    purpose: "외국인 보험료 부담·가입유형(소득 프록시)"
   }
 ];
