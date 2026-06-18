@@ -192,3 +192,33 @@ CREATE POLICY "allow_insert_ai_insight_chat"
   ON ai_insight_chat FOR INSERT WITH CHECK (true);
 CREATE POLICY "allow_delete_ai_insight_chat"
   ON ai_insight_chat FOR DELETE USING (true);
+
+-- ── 분석용 웨어하우스: 제네릭 메트릭 스냅샷(이력 누적) — migration 003 참조 ──
+-- 수집 배치마다 batch_date를 찍어 append → 지표 시계열·추세 보존(정적 realData.ts는 최신값만).
+CREATE TABLE IF NOT EXISTS metric_snapshots (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  batch_date DATE NOT NULL,
+  source TEXT NOT NULL,          -- 수집 소스 id
+  dataset TEXT NOT NULL,         -- 논리 지표 그룹 (exchange_rate, employment_status ...)
+  metric TEXT NOT NULL,          -- 지표명 (usd, count, transfer_income ...)
+  dims JSONB NOT NULL DEFAULT '{}'::jsonb,  -- 차원 (nationality, status, industry, band ...)
+  period TEXT,                   -- 기간 라벨 (연/월/일)
+  value DOUBLE PRECISION,
+  unit TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS idx_metric_snapshots_dataset ON metric_snapshots (dataset, metric, batch_date);
+CREATE INDEX IF NOT EXISTS idx_metric_snapshots_source ON metric_snapshots (source, batch_date);
+CREATE INDEX IF NOT EXISTS idx_metric_snapshots_period ON metric_snapshots (dataset, period);
+CREATE INDEX IF NOT EXISTS idx_metric_snapshots_dims ON metric_snapshots USING gin (dims);
+
+-- 적재는 (batch_date, source) 단위 delete 후 insert(멱등) → 별도 유니크 제약 불필요.
+-- RLS 기본 잠금(service_role 로더만). 분석 결과를 브라우저/AI에 노출하려면 아래 정책을 소유자가 추가.
+ALTER TABLE metric_snapshots ENABLE ROW LEVEL SECURITY;
+-- CREATE POLICY "read_metric_snapshots" ON metric_snapshots FOR SELECT USING (true);
+
+CREATE OR REPLACE VIEW metric_latest AS
+SELECT DISTINCT ON (dataset, metric, dims)
+  dataset, metric, dims, period, value, unit, batch_date
+FROM metric_snapshots
+ORDER BY dataset, metric, dims, batch_date DESC;
