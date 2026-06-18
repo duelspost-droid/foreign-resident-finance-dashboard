@@ -22,6 +22,7 @@ import { candidateSources, dataAxisMapping, type ResearchPriority } from "@/lib/
 import { dataSources, type DataSourceItem } from "@/lib/data/dataSources";
 import { DataTable, type DataTableColumn } from "@/components/tables/DataTable";
 import { DataFreshnessPanel } from "@/components/ui/DataFreshness";
+import { SourceApprovalQueue } from "@/components/admin/SourceApprovalQueue";
 
 const PRIORITY_LABEL: Record<ResearchPriority, { text: string; tone: string }> = {
   high: { text: "높음", tone: "bg-teal-100 text-teal-800" },
@@ -430,56 +431,65 @@ export default function DataPipelinePage() {
         ))}
       </section>
 
-      {/* 데이터 발굴 에이전트 (배치 자동 탐색) */}
-      {discovery.length > 0 && (
-        <section className="surface mt-4 p-4">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <Search aria-hidden className="text-teal-700" size={16} />
-              <h3 className="surface-title">데이터 발굴 에이전트</h3>
-            </div>
-            <Link
-              href="/admin"
-              className="flex items-center gap-1 rounded-lg bg-teal-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-teal-700"
-            >
-              발굴 후보 승인하기 <ArrowRight aria-hidden size={13} />
-            </Link>
+      {/* 데이터 발굴 에이전트 + 승인 큐(인라인) */}
+      <section className="mt-4">
+        <div className="mb-2 flex flex-wrap items-center justify-between gap-2 px-1">
+          <div className="flex items-center gap-2">
+            <Search aria-hidden className="text-teal-700" size={16} />
+            <h3 className="surface-title">데이터 발굴 에이전트</h3>
           </div>
-          <p className="surface-subtitle">키워드를 자동 탐색해 신규 데이터셋 후보를 발굴 · 승인은 ‘데이터 발굴 승인’ 메뉴에서</p>
-          <ul className="mt-3 grid gap-2 text-sm text-slate-700 sm:grid-cols-2">
-            {discovery.map((d) => (
-              <li className="rounded-md border border-slate-200 p-3" key={d.id}>
-                <p className="font-semibold text-ink">
-                  {d.provider} · {d.keyword}
-                </p>
-                <p className="text-muted">{d.purpose}</p>
-                <p className="mt-1 text-xs">
-                  상태: {d.status} · 후보 {d.foundCount}건
-                </p>
-                {d.links.length > 0 && (
-                  <details className="mt-2 text-xs text-slate-500">
-                    <summary className="cursor-pointer">발견된 데이터셋 ({d.links.length})</summary>
-                    <ul className="mt-1 space-y-1">
-                      {d.links.map((l) => (
-                        <li key={l.datasetId + l.kind}>
-                          <a
-                            className="inline-flex items-center gap-1 text-teal-700 hover:underline"
-                            href={l.url}
-                            rel="noreferrer"
-                            target="_blank"
-                          >
-                            [{l.kind}] {l.datasetId} <ExternalLink aria-hidden size={11} />
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </details>
-                )}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+          <Link href="/admin" className="flex items-center gap-1 text-xs font-semibold text-teal-700 hover:underline">
+            전체 승인 화면 <ArrowRight aria-hidden size={13} />
+          </Link>
+        </div>
+        <p className="mb-1 px-1 text-sm text-muted">
+          키워드를 자동 탐색해 신규 데이터셋 후보를 발굴 · 아래에서 바로 승인/거부하세요
+        </p>
+
+        {/* 라이브 승인 큐 (버튼 인라인) */}
+        <SourceApprovalQueue compact />
+
+        {/* 최근 키워드 탐색 결과(원본 링크) */}
+        {discovery.length > 0 && (
+          <details className="surface mt-4 p-4">
+            <summary className="cursor-pointer text-sm font-bold text-ink">
+              최근 키워드 탐색 결과 · 원본 ({discovery.length})
+            </summary>
+            <ul className="mt-3 grid gap-2 text-sm text-slate-700 sm:grid-cols-2">
+              {discovery.map((d) => (
+                <li className="rounded-md border border-slate-200 p-3" key={d.id}>
+                  <p className="font-semibold text-ink">
+                    {d.provider} · {d.keyword}
+                  </p>
+                  <p className="text-muted">{d.purpose}</p>
+                  <p className="mt-1 text-xs">
+                    상태: {d.status} · 후보 {d.foundCount}건
+                  </p>
+                  {d.links.length > 0 && (
+                    <details className="mt-2 text-xs text-slate-500">
+                      <summary className="cursor-pointer">발견된 데이터셋 ({d.links.length})</summary>
+                      <ul className="mt-1 space-y-1">
+                        {d.links.map((l) => (
+                          <li key={l.datasetId + l.kind}>
+                            <a
+                              className="inline-flex items-center gap-1 text-teal-700 hover:underline"
+                              href={l.url}
+                              rel="noreferrer"
+                              target="_blank"
+                            >
+                              [{l.kind}] {l.datasetId} <ExternalLink aria-hidden size={11} />
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
+      </section>
 
       {/* 출처 정의 및 한계 (큐레이션 — 구 출처 정의 페이지 흡수) */}
       <section className="surface mt-4">
