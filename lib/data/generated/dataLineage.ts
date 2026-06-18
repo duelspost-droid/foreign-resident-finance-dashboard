@@ -47,7 +47,7 @@ export type DataLineage = {
 };
 
 export const dataLineage: DataLineage = {
-  "generatedAt": "2026-06-18T06:18:00.496Z",
+  "generatedAt": "2026-06-18T09:24:06.401Z",
   "keysPresent": {
     "DATA_GO_KR_SERVICE_KEY": true,
     "KOSIS_API_KEY": true,
@@ -75,7 +75,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "국적×체류자격 집계. 세그먼트 산출의 1차 소스.",
-      "fetchedAt": "2026-06-18T06:18:48.797Z",
+      "fetchedAt": "2026-06-18T09:25:07.486Z",
       "status": "downloaded",
       "rowCount": 400,
       "savedFile": "moj_foreign_resident_status_2024_2026-06-18.csv",
@@ -97,7 +97,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "지역 단위 체류 현황.",
-      "fetchedAt": "2026-06-18T06:18:49.315Z",
+      "fetchedAt": "2026-06-18T09:25:07.709Z",
       "status": "downloaded",
       "rowCount": 380,
       "savedFile": "moj_foreign_stay_data_2024_2026-06-18.csv",
@@ -119,7 +119,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "유학(D-2)·연수(D-4) 체류 추세.",
-      "fetchedAt": "2026-06-18T06:18:49.429Z",
+      "fetchedAt": "2026-06-18T09:25:07.647Z",
       "status": "downloaded",
       "rowCount": 42,
       "savedFile": "moj_foreign_student_stay_2024_2026-06-18.csv",
@@ -141,7 +141,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "결혼이민자·다문화가구 집계. 금융 상품 수요 보조 지표.",
-      "fetchedAt": "2026-06-18T06:18:49.465Z",
+      "fetchedAt": "2026-06-18T09:25:08.025Z",
       "status": "downloaded",
       "rowCount": 16,
       "savedFile": "mogef_multicultural_family_2024_2026-06-18.csv",
@@ -163,7 +163,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "국적별 보험료 부과액·급여비. 외국인 소득수준·지불능력 대리지표(금융 세그먼트 보조).",
-      "fetchedAt": "2026-06-18T06:18:50.793Z",
+      "fetchedAt": "2026-06-18T09:25:09.500Z",
       "status": "downloaded",
       "rowCount": 1,
       "savedFile": "nhis_foreigner_premium_2023_2026-06-18.xlsx",
@@ -185,7 +185,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "외국인 직장/지역 가입자 구분. 취업형태(급여계좌 수요) 보조 지표.",
-      "fetchedAt": "2026-06-18T06:18:50.986Z",
+      "fetchedAt": "2026-06-18T09:25:09.870Z",
       "status": "downloaded",
       "rowCount": 17,
       "savedFile": "nhis_foreigner_coverage_2022_2026-06-18.csv",
@@ -207,7 +207,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "법무부 출입국 월별 통계. 발굴 자동화로 식별됨.",
-      "fetchedAt": "2026-06-18T06:18:51.110Z",
+      "fetchedAt": "2026-06-18T09:25:09.559Z",
       "status": "downloaded",
       "rowCount": 400,
       "savedFile": "moj_immigration_monthly_2024_2026-06-18.csv",
@@ -229,7 +229,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 시군구 단위 외국인주민. openapi 대체용 파일 수집(발굴 자동화).",
-      "fetchedAt": "2026-06-18T06:18:52.261Z",
+      "fetchedAt": "2026-06-18T09:25:10.376Z",
       "status": "downloaded",
       "rowCount": 1692,
       "savedFile": "mois_foreign_resident_region_file_2026-06-18.csv",
@@ -251,7 +251,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "월별(2022~2026.4) 국적지역×구분(유학D2/한국어연수D41/외국어연수D47) 유학생 스톡. '유학생 추이'의 1차 소스 — 연도말 단독표 15100038의 2024 행 손상(D-2 절반)을 대체. build에서 연도별 최신월 스냅샷으로 집계(2024=263,775 등, e-나라지표·통계월보 교차검증). 2026-06-16 라벨 정정(교육부→법무부, 연→월).",
-      "fetchedAt": "2026-06-18T06:18:54.165Z",
+      "fetchedAt": "2026-06-18T09:25:12.574Z",
       "status": "downloaded",
       "rowCount": 17486,
       "savedFile": "moe_foreign_student_region_2026-06-18.csv",
@@ -273,7 +273,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "주의: 발굴 자동화가 '교육부 유학생'으로 오식별했으나 실제 data.go.kr 15149964는 '세종시 고등학교' 외국인학생 파일(대학 0개, 65행 대부분 0명). 대학 랭킹 1차 소스에서 제외하고 academyinfo(3069982)를 1차로 사용. 폴백으로만 남김.",
-      "fetchedAt": "2026-06-18T06:18:52.799Z",
+      "fetchedAt": "2026-06-18T09:25:11.461Z",
       "status": "downloaded",
       "rowCount": 65,
       "savedFile": "moe_foreign_student_latest_2026-06-18.csv",
@@ -295,7 +295,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "data.go.kr 3069982. 실제 데이터는 성별·국적·체류자격·학교명 학생단위 레코드(약 30만행, 라이브 빈티지 2025) — 대학별 외국인유학생 top30 랭킹의 1차 소스. build에서 학교명을 대학 패턴으로 필터 후 집계(한양대 7.7천 등). 정의 라벨이 '대학알리미'였으나 실제는 법무부 유학생관리정보로 정정(2026-06-16).",
-      "fetchedAt": "2026-06-18T06:18:57.815Z",
+      "fetchedAt": "2026-06-18T09:25:17.021Z",
       "status": "downloaded",
       "rowCount": 304360,
       "savedFile": "academyinfo_foreign_student_count_2026-06-18.csv",
@@ -317,7 +317,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "대학알리미 고등교육기관 기본정보(위치·유형). 대학 외국인 유학생 지도 구축 보조.",
-      "fetchedAt": "2026-06-18T06:18:55.065Z",
+      "fetchedAt": "2026-06-18T09:25:13.549Z",
       "status": "downloaded",
       "rowCount": 6364,
       "savedFile": "academyinfo_university_stats_2026-06-18.csv",
@@ -339,7 +339,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "국적(내국인/일·중·미·러·태·홍·필/기타 9종)×판매년월×매출. 면세점 국적별 소비=외국인 결제·환전 수요 직접 지표. CSV 3차원, 차기등록 2026-11.",
-      "fetchedAt": "2026-06-18T06:18:54.777Z",
+      "fetchedAt": "2026-06-18T09:25:13.985Z",
       "status": "downloaded",
       "rowCount": 120,
       "savedFile": "jdc_dutyfree_sales_by_nationality_2026-06-18.csv",
@@ -361,7 +361,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "연도×국적별×월별 취득필지·취득면적(㎡)·취득금액(백만원). 외국인 부동산 매입=대출·자산관리 수요 대리지표. 취득금액(실금액) 차원 보유. 제주 한정.",
-      "fetchedAt": "2026-06-18T06:18:56.383Z",
+      "fetchedAt": "2026-06-18T09:25:14.091Z",
       "status": "downloaded",
       "rowCount": 26,
       "savedFile": "jeju_foreign_land_acquisition_2026-06-18.csv",
@@ -383,7 +383,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 시도별 외국인주민. newEstPrdCnt로 최신 N기 자동 수집. 첫 성공 응답으로 필드명 확정.",
-      "fetchedAt": "2026-06-18T06:19:02.083Z",
+      "fetchedAt": "2026-06-18T09:25:20.342Z",
       "status": "downloaded",
       "rowCount": 5580,
       "savedFile": "kosis_registered_foreigner_by_region_2026-06-18.json",
@@ -405,7 +405,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "법무부 시군구×체류자격 등록외국인. endPrdDe=CY 동적 갱신.",
-      "fetchedAt": "2026-06-18T06:19:08.577Z",
+      "fetchedAt": "2026-06-18T09:25:25.189Z",
       "status": "downloaded",
       "rowCount": 24210,
       "savedFile": "kosis_registered_foreigner_sigungu_visa_2026-06-18.json",
@@ -427,7 +427,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "통계청 이민자 체류실태·고용조사. 취업/소득 = 급여계좌·신용 수요 직결. 2단계 호출.",
-      "fetchedAt": "2026-06-18T06:18:58.555Z",
+      "fetchedAt": "2026-06-18T09:25:16.731Z",
       "status": "downloaded",
       "rowCount": 429,
       "savedFile": "kosis_foreigner_economic_activity_2026-06-18.json",
@@ -449,7 +449,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "유학생 국적(227)×성별(3)×학위과정/체류자격(15: 유학D-2·전문학사·학사·석사·박사·연구·교환·연수D-4). 2026-06-16 검증 7,007행. 폐기된 교육부 file 15050054(국적별) 대체.",
-      "fetchedAt": "2026-06-18T06:19:08.574Z",
+      "fetchedAt": "2026-06-18T09:25:26.554Z",
       "status": "downloaded",
       "rowCount": 18188,
       "savedFile": "kosis_foreign_student_nationality_visa_2026-06-18.json",
@@ -471,7 +471,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "KEDI 교육기본통계 고등교육기관 개황(시도별×학교현황별, 외국인 학생수 학위과정 포함). 2026-06-16 검증 612행. 대학유형 분해: 동일 시리즈 DT_1963003_011_S(전문대)·013_S(대학)·014_S(대학원) 등. 폐기된 교육부 file 15050055(대학유형별) 대체.",
-      "fetchedAt": "2026-06-18T06:19:01.704Z",
+      "fetchedAt": "2026-06-18T09:25:19.939Z",
       "status": "downloaded",
       "rowCount": 1224,
       "savedFile": "kosis_kedi_higher_edu_foreign_students_2026-06-18.json",
@@ -493,7 +493,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "고용허가제 E-9 신규 도입 인원(국가별, 단위 명). 2026-06-16 검증 169행(2016~2025). data.go.kr EPS는 연계형(파일없음)이라 KOSIS로 대체. C1_NM='합계' 행 포함(집계 시 제외). 신규 입국 근로자=급여계좌·송금 수요 선행지표.",
-      "fetchedAt": "2026-06-18T06:19:02.939Z",
+      "fetchedAt": "2026-06-18T09:25:21.065Z",
       "status": "downloaded",
       "rowCount": 169,
       "savedFile": "kosis_eps_introduction_by_country_2026-06-18.json",
@@ -515,7 +515,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "고용허가제 E-9 신규 도입 인원(업종별: 제조/건설/농축산/서비스/어업 등). 2026-06-16 검증 64행.",
-      "fetchedAt": "2026-06-18T06:19:02.999Z",
+      "fetchedAt": "2026-06-18T09:25:21.245Z",
       "status": "downloaded",
       "rowCount": 64,
       "savedFile": "kosis_eps_introduction_by_industry_2026-06-18.json",
@@ -537,7 +537,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "외국인/귀화 임금근로자 월평균 임금구간(100만 미만~300만 이상)×대상별×성별×체류자격(E-9/H-2/F-4/F-5/D-2 등). 소득=급여계좌·신용·대출·적금 수요 직결 핵심 지표. 2026-06-16 검증 863행(2017~2025).",
-      "fetchedAt": "2026-06-18T06:19:04.596Z",
+      "fetchedAt": "2026-06-18T09:25:22.499Z",
       "status": "downloaded",
       "rowCount": 863,
       "savedFile": "kosis_immigrant_wage_distribution_2026-06-18.json",
@@ -559,7 +559,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "외국인 고용계약기간(1개월 미만~3년 이상/미정)별 임금근로자×대상별×성별. 고용 안정성=정규 급여계좌·자동이체 모집단 대리지표. 2026-06-16 검증 624행.",
-      "fetchedAt": "2026-06-18T06:19:05.331Z",
+      "fetchedAt": "2026-06-18T09:25:23.555Z",
       "status": "downloaded",
       "rowCount": 624,
       "savedFile": "kosis_immigrant_contract_period_2026-06-18.json",
@@ -581,7 +581,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "대상별(이민자/외국인/귀화)×성별×종사상지위(상용/임시·일용/자영업주/무급가족). 상용근로자 비중=안정 급여소득→신용·대출 적격 모집단 대리지표. 2026-06-16 검증 672행(2016~2025).",
-      "fetchedAt": "2026-06-18T06:19:06.291Z",
+      "fetchedAt": "2026-06-18T09:25:23.919Z",
       "status": "downloaded",
       "rowCount": 672,
       "savedFile": "kosis_immigrant_employment_status_2026-06-18.json",
@@ -603,7 +603,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "대상별×성별×산업(농림어업/광업·제조/건설/도소매·숙박·음식/전기·운수·통신·금융/서비스). 금융은 '전기·운수·통신·금융'에 묶여 보고됨(단독 분리 불가). 업종 구성=소득 안정성·소비 패턴 대리지표. 2026-06-16 검증 672행.",
-      "fetchedAt": "2026-06-18T06:19:07.935Z",
+      "fetchedAt": "2026-06-18T09:25:26.256Z",
       "status": "downloaded",
       "rowCount": 672,
       "savedFile": "kosis_immigrant_employment_by_industry_2026-06-18.json",
@@ -625,7 +625,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "대상별×연령계층(15~29/30~39/40~49/50~59/60+)×경활지표(경제활동인구/취업자/참가율/고용률). 연령 분포=생애주기 금융상품(적금·대출·송금) 타깃팅 대리지표. 2026-06-16 검증 1,008행.",
-      "fetchedAt": "2026-06-18T06:19:08.567Z",
+      "fetchedAt": "2026-06-18T09:25:25.792Z",
       "status": "downloaded",
       "rowCount": 1008,
       "savedFile": "kosis_immigrant_econ_activity_by_age_2026-06-18.json",
@@ -647,7 +647,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "이전소득수지(ITEM_CODE 4B1000)=개인이전 포함 본국송금 거시 대리지표. 301Y013 전체 국제수지 표를 받아 build에서 4B1000만 필터. 2026-06-16 라이브 검증: 연간 1980~2025(2025=10,273.7백만달러). ECOS_API_KEY로 동작.",
-      "fetchedAt": "2026-06-18T06:19:13.071Z",
+      "fetchedAt": "2026-06-18T09:25:31.001Z",
       "status": "downloaded",
       "rowCount": 2272,
       "savedFile": "ecos_bop_transfer_income_2026-06-18.json",
@@ -671,7 +671,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "원/달러·엔·유로·위안 일별 환율(731Y001). 환율 급등락 시 외국인 본국송금·환전 수요 급증 → 송금/환전 캠페인 타이밍. 2026-06-16 라이브 검증: 25,714행, 원/미국달러 매매기준율 포함.",
-      "fetchedAt": "2026-06-18T06:19:46.366Z",
+      "fetchedAt": "2026-06-18T09:26:01.890Z",
       "status": "downloaded",
       "rowCount": 25800,
       "savedFile": "ecos_exchange_rate_daily_2026-06-18.json",
@@ -718,7 +718,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "이전소득수지(ITEM 4B1000) 월별 흐름. 외국인 본국송금 거시 추세 월별 추적. 2026-06-16 라이브 검증: 월간 198001~202604 동작(build에서 4B1000 필터).",
-      "fetchedAt": "2026-06-18T06:19:34.773Z",
+      "fetchedAt": "2026-06-18T09:25:52.265Z",
       "status": "downloaded",
       "rowCount": 18176,
       "savedFile": "ecos_bop_transfer_monthly_2026-06-18.json",
@@ -758,7 +758,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "서울 25개 자치구×국적별 외국인 월별 통계. serviceName 실제 값 확인 필요. SEOUL_OPENAPI_KEY GitHub Secret 등록 필요.",
-      "fetchedAt": "2026-06-18T06:19:08.577Z",
+      "fetchedAt": "2026-06-18T09:25:26.554Z",
       "status": "skipped_no_key",
       "rowCount": null,
       "savedFile": null,
@@ -1533,6 +1533,168 @@ export const dataLineage: DataLineage = {
       "provider": "한국관광공사",
       "keyword": "외래관광객 입국 월별 국적별",
       "purpose": "월별 국적별 외국인 입국(단기 외국인 금융·환전 수요 규모)",
+      "status": "ok",
+      "foundCount": 0,
+      "links": []
+    },
+    {
+      "id": "foreign_realestate_trade",
+      "provider": "한국부동산원/지자체",
+      "keyword": "외국인 부동산 거래 토지 주택 취득",
+      "purpose": "외국인 부동산 자산·거래(자산·신용·대출 직결 금융지표)",
+      "status": "ok",
+      "foundCount": 0,
+      "links": []
+    },
+    {
+      "id": "customs_dutyfree_foreigner",
+      "provider": "관세청",
+      "keyword": "면세점 내외국인 매출 품목별",
+      "purpose": "외국인 면세 소비(고가품·기호품) 규모",
+      "status": "ok",
+      "foundCount": 2,
+      "links": [
+        {
+          "datasetId": "15123277",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15123277/fileData.do"
+        },
+        {
+          "datasetId": "15148728",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15148728/fileData.do"
+        }
+      ]
+    },
+    {
+      "id": "nts_foreign_income_tax",
+      "provider": "국세청",
+      "keyword": "외국인근로자 연말정산 소득세 신고현황",
+      "purpose": "외국인 국적별 근로소득·결정세액(소득 베이스)",
+      "status": "ok",
+      "foundCount": 0,
+      "links": []
+    },
+    {
+      "id": "mogef_multicultural_survey",
+      "provider": "여성가족부",
+      "keyword": "다문화가족 실태조사 소득 경제활동",
+      "purpose": "결혼이민·다문화가구 소득·주거·경제활동(가구 금융)",
+      "status": "ok",
+      "foundCount": 2,
+      "links": [
+        {
+          "datasetId": "3072047",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3072047/fileData.do"
+        },
+        {
+          "datasetId": "15033841",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15033841/fileData.do"
+        }
+      ]
+    },
+    {
+      "id": "comwel_foreign_injury",
+      "provider": "근로복지공단",
+      "keyword": "외국인근로자 산재 보험급여 처리현황",
+      "purpose": "외국인 산재·보험 청구(보험 행태 보조지표)",
+      "status": "ok",
+      "foundCount": 10,
+      "links": [
+        {
+          "datasetId": "15002150",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15002150/fileData.do"
+        },
+        {
+          "datasetId": "15104688",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15104688/fileData.do"
+        },
+        {
+          "datasetId": "3044320",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3044320/fileData.do"
+        },
+        {
+          "datasetId": "3051249",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3051249/fileData.do"
+        },
+        {
+          "datasetId": "3073001",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3073001/fileData.do"
+        },
+        {
+          "datasetId": "15059256",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15059256/openapi.do"
+        },
+        {
+          "datasetId": "15058644",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15058644/openapi.do"
+        },
+        {
+          "datasetId": "15144645",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15144645/openapi.do"
+        },
+        {
+          "datasetId": "15058716",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15058716/openapi.do"
+        },
+        {
+          "datasetId": "15057864",
+          "kind": "openapi",
+          "url": "https://www.data.go.kr/data/15057864/openapi.do"
+        }
+      ]
+    },
+    {
+      "id": "motie_fdi_trend",
+      "provider": "산업통상자원부",
+      "keyword": "외국인직접투자 FDI 동향 통계",
+      "purpose": "외국인 자본 유입(법인 중심·약연관, 거시 맥락)",
+      "status": "ok",
+      "foundCount": 5,
+      "links": [
+        {
+          "datasetId": "3040164",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/3040164/fileData.do"
+        },
+        {
+          "datasetId": "15054400",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15054400/fileData.do"
+        },
+        {
+          "datasetId": "15054395",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15054395/fileData.do"
+        },
+        {
+          "datasetId": "15054399",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15054399/fileData.do"
+        },
+        {
+          "datasetId": "15054393",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15054393/fileData.do"
+        }
+      ]
+    },
+    {
+      "id": "nhis_foreigner_premium",
+      "provider": "국민건강보험공단",
+      "keyword": "내외국인 건강보험료 부과 급여 현황",
+      "purpose": "외국인 보험료 부담·가입유형(소득 프록시)",
       "status": "ok",
       "foundCount": 0,
       "links": []
