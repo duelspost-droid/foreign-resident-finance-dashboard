@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import { Database, Lightbulb, MessageSquarePlus, Send, X } from "lucide-react";
 import { getSessionId } from "@/lib/utils/session";
@@ -25,16 +26,17 @@ export function FeedbackButton() {
   const [result, setResult] = useState<null | "ok" | "fail">(null);
   const [history, setHistory] = useState<FeatureRequestRow[] | null>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const titleRef = useRef<HTMLInputElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
-  // 모달 열림 동안: Esc 닫기 + 배경 스크롤 잠금 + 제목 입력 초기 포커스, 닫을 때 트리거로 포커스 복귀.
+  // 모달 열림 동안: Esc 닫기 + 배경 스크롤 잠금 + 다이얼로그로 초기 포커스(입력칸이 아니라
+  // 카드에 포커스 → 모바일 키보드 자동 팝업/스크롤 점프 없이 접근성만 확보), 닫을 때 트리거로 복귀.
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
     document.addEventListener("keydown", onKey);
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    const focusTimer = window.setTimeout(() => titleRef.current?.focus(), 0);
+    const focusTimer = window.setTimeout(() => cardRef.current?.focus(), 0);
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevOverflow;
@@ -84,17 +86,21 @@ export function FeedbackButton() {
         title="기능·데이터 제안하기"
       >
         <MessageSquarePlus size={14} aria-hidden />
-        <span className="hidden sm:inline">제안하기</span>
+        <span>제안하기</span>
       </button>
 
-      {open && (
-        // 오버레이 자체를 스크롤 가능하게(overflow-y-auto) → 짧은 뷰포트·낮은 노트북에서도 하단 '제안 접수' 버튼에 항상 도달.
-        <div className="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto bg-slate-900/40 p-4 pt-8 backdrop-blur-sm sm:pt-16" onClick={() => setOpen(false)}>
+      {open && createPortal(
+        // Portal로 document.body에 렌더 → 헤더의 backdrop-blur가 만드는 containing block을 벗어나
+        // fixed inset-0가 헤더가 아닌 '뷰포트' 기준이 되게 함(이걸 안 하면 모달이 헤더 영역에 갇혀 잘림).
+        // 중앙 정렬 + 카드를 뷰포트 높이로 캡(max-h) + 내부만 스크롤 + 푸터 고정 → 버튼 항상 보임.
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm" onClick={() => setOpen(false)}>
           <div
+            ref={cardRef}
             role="dialog"
             aria-modal="true"
             aria-labelledby="frfd-feedback-title"
-            className="flex max-h-[calc(100dvh-4rem)] w-full max-w-lg flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
+            tabIndex={-1}
+            className="flex max-h-[calc(100dvh-2rem)] w-full max-w-lg flex-col overflow-hidden rounded-2xl bg-white shadow-2xl outline-none"
             onClick={(e) => e.stopPropagation()}
           >
             {/* 헤더 */}
@@ -145,7 +151,6 @@ export function FeedbackButton() {
                     ))}
                   </div>
                   <input
-                    ref={titleRef}
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     maxLength={120}
@@ -215,7 +220,8 @@ export function FeedbackButton() {
               </div>
             )}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
