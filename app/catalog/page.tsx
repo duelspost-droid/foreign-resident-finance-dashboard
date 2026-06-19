@@ -15,11 +15,16 @@ import { CollectedSourcesTable } from "@/components/data/CollectedSourcesTable";
 
 // 축 2 카테고리 → 분석 페이지 + 소속 데이터셋(수집 소스 id) + 해당 섹션 앵커
 type CatItem = { id: string; anchor?: string };
-type CatGroup = { label: string; href: string; icon: typeof Users; desc: string; items: CatItem[] };
+type CatView = { label: string; href: string };
+type CatGroup = { label: string; views: CatView[]; icon: typeof Users; desc: string; items: CatItem[] };
 const CATEGORIES: CatGroup[] = [
   {
     label: "인구·체류",
-    href: "/nationalities",
+    views: [
+      { label: "국적 분석", href: "/nationalities" },
+      { label: "지역 분석", href: "/regions" },
+      { label: "비자 세그먼트", href: "/visa-segments" }
+    ],
     icon: Users,
     desc: "국적·체류자격·지역 분포",
     items: [
@@ -35,7 +40,7 @@ const CATEGORIES: CatGroup[] = [
   },
   {
     label: "경제활동·소득",
-    href: "/economy",
+    views: [{ label: "경제활동·소득", href: "/economy" }],
     icon: BarChart3,
     desc: "임금·고용·산업·연령·EPS·건강보험·다문화",
     items: [
@@ -53,7 +58,7 @@ const CATEGORIES: CatGroup[] = [
   },
   {
     label: "유학생",
-    href: "/universities",
+    views: [{ label: "유학생", href: "/universities" }],
     icon: GraduationCap,
     desc: "추이·국적·대학·시도",
     items: [
@@ -68,7 +73,7 @@ const CATEGORIES: CatGroup[] = [
   },
   {
     label: "소비·금융거래",
-    href: "/consumption",
+    views: [{ label: "소비·금융거래", href: "/consumption" }],
     icon: ShoppingBag,
     desc: "면세점·부동산·본국송금·환율",
     items: [
@@ -137,16 +142,21 @@ export default function CatalogPage() {
                 <h2 className="text-sm font-bold text-slate-900">{cat.label}</h2>
                 <span className="hidden text-xs text-slate-400 sm:inline">{cat.desc}</span>
               </div>
-              <Link
-                href={cat.href}
-                className="flex shrink-0 items-center gap-1 text-xs font-semibold text-teal-700 hover:underline"
-              >
-                전체 분석 <ArrowRight size={13} aria-hidden />
-              </Link>
+              <div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-1">
+                {cat.views.map((v) => (
+                  <Link
+                    key={v.href}
+                    href={v.href}
+                    className="flex shrink-0 items-center gap-0.5 text-xs font-semibold text-teal-700 hover:underline"
+                  >
+                    {v.label} <ArrowRight size={12} aria-hidden />
+                  </Link>
+                ))}
+              </div>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {items.map(({ source: s, anchor }) => {
-                const target = anchor ? `${cat.href}#${anchor}` : cat.href;
+                const target = anchor ? `${cat.views[0].href}#${anchor}` : cat.views[0].href;
                 return (
                   <div key={s.id} className="flex flex-col rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
                     <div className="flex items-start justify-between gap-2">
@@ -183,6 +193,15 @@ export default function CatalogPage() {
           </section>
         );
       })}
+
+      {/* 파생 분석 안내: 기회 점수는 여러 분류의 합성 */}
+      <div className="flex flex-wrap items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-xs text-slate-600">
+        <span className="rounded bg-slate-200 px-1.5 py-0.5 font-semibold text-slate-700">합성</span>
+        <span>
+          <Link href="/opportunity-scores" className="font-semibold text-teal-700 hover:underline">기회 점수</Link>는
+          ‘인구·체류’·‘유학생’ 데이터를 합성한 파생 분석 화면이라 별도 데이터 분류가 없습니다.
+        </span>
+      </div>
 
       {/* 전체 수집 원본 — 카테고리에 안 묶인 것(승인·미분류 포함)까지 모두 */}
       <CollectedSourcesTable
