@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-19T04:26:59.187Z",
+  "generatedAt": "2026-06-19T04:33:56.467Z",
   "approved": [
     {
       "id": 2,
@@ -36,23 +36,6 @@
       "notes": null
     },
     {
-      "id": 19,
-      "dataset_id": "15112636",
-      "kind": "fileData",
-      "provider": "법무부",
-      "title": "법무부_불법체류 외국인 현황",
-      "keyword": "출입국 외국인 체류",
-      "url": "https://www.data.go.kr/data/15112636/fileData.do",
-      "target_table": "foreign_resident_status",
-      "status": "approved",
-      "priority": "mid",
-      "rationale": "체류자격·국적·지역 추가 통계 발굴",
-      "discovered_at": "2026-06-18T08:09:00.89898+00:00",
-      "decided_at": "2026-06-18T09:56:23.273+00:00",
-      "decided_by": "admin",
-      "notes": null
-    },
-    {
       "id": 24,
       "dataset_id": "15032256",
       "kind": "fileData",
@@ -66,6 +49,23 @@
       "rationale": "E-9/E-7 등 취업 외국인 규모(급여계좌 수요)",
       "discovered_at": "2026-06-18T08:09:00.89898+00:00",
       "decided_at": "2026-06-18T09:56:27.114+00:00",
+      "decided_by": "admin",
+      "notes": null
+    },
+    {
+      "id": 19,
+      "dataset_id": "15112636",
+      "kind": "fileData",
+      "provider": "법무부",
+      "title": "법무부_불법체류 외국인 현황",
+      "keyword": "출입국 외국인 체류",
+      "url": "https://www.data.go.kr/data/15112636/fileData.do",
+      "target_table": "foreign_resident_status",
+      "status": "approved",
+      "priority": "mid",
+      "rationale": "체류자격·국적·지역 추가 통계 발굴",
+      "discovered_at": "2026-06-18T08:09:00.89898+00:00",
+      "decided_at": "2026-06-18T09:56:23.273+00:00",
       "decided_by": "admin",
       "notes": null
     }
