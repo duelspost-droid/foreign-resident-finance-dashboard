@@ -11,7 +11,6 @@ import {
   MessageSquare,
   RefreshCw,
   Settings,
-  ShieldAlert,
   Users
 } from "lucide-react";
 import {
@@ -21,10 +20,8 @@ import {
   fetchPageViews
 } from "@/lib/data/supabaseClient";
 import { adminChangePassword, adminLogin, adminLogout, adminRespond, adminValidate } from "@/lib/data/adminApi";
-import { SUPABASE_PUBLIC_ANON_KEY, SUPABASE_PUBLIC_URL } from "@/lib/data/supabaseConfig";
 import { STATUS_ORDER, categoryMeta, statusMeta } from "@/lib/feedback";
 
-const ENABLED = Boolean(SUPABASE_PUBLIC_URL && SUPABASE_PUBLIC_ANON_KEY);
 const TOKEN_KEY = "jbax-admin-token";
 type Tab = "overview" | "requests" | "analytics" | "sessions" | "settings";
 
@@ -221,7 +218,6 @@ export default function AdminConsolePage() {
 
   // 마운트 시 저장된 토큰 검증 → 유효하면 자동 로그인.
   useEffect(() => {
-    if (!ENABLED) { setAuthChecking(false); return; }
     let t = "";
     try { t = localStorage.getItem(TOKEN_KEY) || ""; } catch { /* ignore */ }
     if (!t) { setAuthChecking(false); return; }
@@ -241,7 +237,7 @@ export default function AdminConsolePage() {
     setLoading(false);
   }
   useEffect(() => {
-    if (token && ENABLED) void load();
+    if (token) void load();
   }, [token]);
 
   async function logout() {
@@ -298,15 +294,6 @@ export default function AdminConsolePage() {
     [requests, statusFilter]
   );
 
-  if (!ENABLED) {
-    return (
-      <div className="mx-auto mt-16 max-w-md rounded-2xl border border-amber-200 bg-amber-50 p-6 text-center">
-        <ShieldAlert className="mx-auto text-amber-600" size={28} />
-        <h2 className="mt-2 text-base font-bold text-amber-900">Supabase 미연결</h2>
-        <p className="mt-1 text-sm text-amber-800">운영 콘솔은 Supabase 연결이 필요합니다. 환경변수를 설정하세요.</p>
-      </div>
-    );
-  }
   if (authChecking) {
     return <p className="mt-16 text-center text-sm text-slate-400">🔄 로그인 확인 중…</p>;
   }
@@ -447,6 +434,9 @@ export default function AdminConsolePage() {
         <div className="space-y-5">
           <section className="surface p-4">
             <h3 className="surface-title mb-3 text-sm">일자별 방문 (최근 14일)</h3>
+            {analytics.days.every((d) => d.count === 0) && (
+              <p className="mb-2 text-xs text-muted">최근 14일 방문 기록이 없습니다.</p>
+            )}
             <div className="overflow-x-auto">
               <div className="flex h-40 min-w-[480px] items-end gap-1.5">
                 {analytics.days.map((d) => (

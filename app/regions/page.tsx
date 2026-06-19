@@ -11,15 +11,12 @@ import {
   regionResidentSummary,
   sampleOpportunityRows
 } from "@/lib/data/mockData";
-import { formatNumber, formatPercent, formatScore } from "@/lib/utils/format";
-
-// 점수 구간별 브랜드 컬러 — 랭킹 원형 배지와 타일 색상에 공통 사용.
-function scoreColor(score: number): string {
-  if (score >= 72) return "#0f766e"; // teal
-  if (score >= 55) return "#3157a4"; // cobalt
-  if (score >= 40) return "#b45309"; // amber
-  return "#be123c"; // berry
-}
+import {
+  hasSidoForeignerStats,
+  sidoForeignerLatestYear,
+  sidoForeignerTotal
+} from "@/lib/data/regionAggregates";
+import { formatNumber, formatPercent, formatScore, scoreColor } from "@/lib/utils/format";
 
 export default function RegionsPage() {
   const rows = sampleOpportunityRows;
@@ -46,12 +43,23 @@ export default function RegionsPage() {
         description="시도·시군구 단위의 집계 데이터를 기준으로 외국인 밀집도, 세그먼트, 송금·유학생·급여계좌 수요를 비교해 우선 공략 지역을 도출합니다."
       />
 
+      {/* 실데이터 시도 분포 요약(있을 때) */}
+      {hasSidoForeignerStats && (
+        <div className="flex flex-wrap items-center gap-2 rounded-lg border border-teal-200 bg-teal-50 px-4 py-2.5 text-xs leading-5 text-teal-800">
+          <span className="rounded bg-teal-200 px-1.5 py-0.5 font-bold">실데이터</span>
+          <span>
+            지도는 <strong>행안부 시도별 외국인주민 현황{sidoForeignerLatestYear ? ` ${sidoForeignerLatestYear}` : ""}</strong>
+            (전국 {formatNumber(sidoForeignerTotal)}명) 실집계로 표시됩니다.
+          </span>
+        </div>
+      )}
+
       {/* 표본 안내: 기회점수·순위·레이더는 아직 시뮬레이션 표본 기반 */}
       <div className="flex flex-wrap items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5 text-xs leading-5 text-amber-800">
         <span className="rounded bg-amber-200 px-1.5 py-0.5 font-bold">표본</span>
         <span>
-          아래 <strong>기회 점수·순위·레이더·지도</strong>는 6개 시군구 <strong>시뮬레이션 표본</strong>으로
-          산출된 값입니다(실 집계 점수 산출 전). 실데이터 지역 분포는 하단 “실데이터” 패널에서 확인하세요.
+          아래 <strong>기회 점수·순위·레이더</strong>는 6개 시군구 <strong>시뮬레이션 표본</strong>으로
+          산출된 값입니다(실 집계 점수 산출 전). {hasSidoForeignerStats ? "지도는 실데이터입니다." : "지도도 현재 표본 기준입니다."}
         </span>
       </div>
 

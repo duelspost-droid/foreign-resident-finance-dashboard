@@ -6,22 +6,13 @@ import { PageHero } from "@/components/ui/PageHero";
 import { StatTile } from "@/components/ui/StatTile";
 import { sampleOpportunityRows } from "@/lib/data/mockData";
 import type { RegionOpportunityRow } from "@/lib/types/foreignResident";
-import { formatNumber, formatPercent, formatScore } from "@/lib/utils/format";
-
-// 점수 구간별 티어 색상 — 랭크 배지와 전체 점수 바에 사용.
-function tierColor(score: number): string {
-  if (score >= 72) return "#0f766e"; // teal
-  if (score >= 55) return "#3157a4"; // cobalt
-  if (score >= 40) return "#b45309"; // amber
-  return "#be123c"; // berry
-}
-
-function tierLabel(score: number): string {
-  if (score >= 72) return "최우선";
-  if (score >= 55) return "우선";
-  if (score >= 40) return "관찰";
-  return "후순위";
-}
+import {
+  formatNumber,
+  formatPercent,
+  formatScore,
+  scoreColor as tierColor,
+  scoreTierLabel as tierLabel
+} from "@/lib/utils/format";
 
 // 리더보드 카드의 4개 미니 지표 — 각각 고유 색상.
 const METRIC_BARS: {

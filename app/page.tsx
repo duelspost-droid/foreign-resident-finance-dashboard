@@ -57,16 +57,9 @@ import {
   realForeignEmploymentStatus,
   realDutyFreeSales
 } from "@/lib/data/generated/realData";
-import { formatNumber } from "@/lib/utils/format";
+import { formatNumber, scoreColor } from "@/lib/utils/format";
+import { hasSidoForeignerStats } from "@/lib/data/regionAggregates";
 import { DataFreshnessBanner } from "@/components/ui/DataFreshness";
-
-// ── 색상 헬퍼 ────────────────────────────────────────────────────────────────────
-function scoreColor(score: number): string {
-  if (score >= 72) return "#0f766e";
-  if (score >= 55) return "#3157a4";
-  if (score >= 40) return "#b45309";
-  return "#be123c";
-}
 
 const SEG_COLORS: Record<string, string> = {
   "비전문취업 근로자": "#0f766e",
@@ -530,9 +523,14 @@ export default function DashboardPage() {
           <div className="surface-header pb-1">
             <div>
               <h3 className="surface-title flex items-center gap-1.5">
-                <MapPin size={16} style={{ color: "#0f766e" }} /> 지역별 금융 기회 지도
+                <MapPin size={16} style={{ color: "#0f766e" }} />
+                {hasSidoForeignerStats ? "지역별 외국인주민 분포 지도" : "지역별 금융 기회 지도"}
               </h3>
-              <p className="surface-subtitle">거품 크기 = 외국인 규모 · 색상 = 기회 점수</p>
+              <p className="surface-subtitle">
+                {hasSidoForeignerStats
+                  ? "거품 크기·색상 = 시도별 외국인주민 규모 (행안부 실데이터)"
+                  : "거품 크기 = 외국인 규모 · 색상 = 기회 점수(표본)"}
+              </p>
             </div>
             <Link href="/regions" className="text-xs font-semibold" style={{ color: "#0f766e" }}>
               지역 분석 →
@@ -540,19 +538,6 @@ export default function DashboardPage() {
           </div>
           <div className="flex items-center justify-center px-2 pb-2">
             <RegionMap />
-          </div>
-          {/* 색상 범례 */}
-          <div className="flex flex-wrap items-center justify-center gap-4 border-t border-slate-100 py-3 text-xs text-muted">
-            {[
-              { c: "#0f766e", l: "72+ 매우 높음" },
-              { c: "#3157a4", l: "55–71 높음" },
-              { c: "#b45309", l: "40–54 보통" },
-              { c: "#be123c", l: "~39 낮음" }
-            ].map((x) => (
-              <span key={x.l} className="flex items-center gap-1.5">
-                <span className="h-3 w-3 rounded-full" style={{ background: x.c }} />{x.l}
-              </span>
-            ))}
           </div>
         </div>
 

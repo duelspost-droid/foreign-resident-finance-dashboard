@@ -75,6 +75,7 @@ export function SourceApprovalQueue({ compact = false }: { compact?: boolean }) 
           )}
         </div>
         <button
+          type="button"
           onClick={load}
           className="ml-auto inline-flex items-center gap-1 rounded-md border border-slate-200 px-3 py-1 text-sm text-slate-700 hover:bg-slate-50"
         >
@@ -87,10 +88,11 @@ export function SourceApprovalQueue({ compact = false }: { compact?: boolean }) 
         <section className="surface mt-4 flex gap-3 p-4">
           <AlertCircle aria-hidden className="mt-0.5 shrink-0 text-amber-600" size={18} />
           <div className="text-sm leading-6 text-slate-700">
-            <p className="font-semibold text-ink">Supabase에 연결되지 않았습니다.</p>
+            <p className="font-semibold text-ink">Supabase 데이터를 불러오지 못했습니다.</p>
             <p className="mt-1 text-muted">
-              <code>NEXT_PUBLIC_SUPABASE_URL</code>·<code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code> 설정과{" "}
-              <code>source_candidates</code> 테이블 적용을 확인하세요.
+              공개 연결 설정은 기본값으로 적용돼 있으므로, 대개{" "}
+              <code>source_candidates</code> 테이블 미적용·RLS 권한·네트워크 문제입니다. 스키마 적용과 anon
+              SELECT 정책을 확인하세요.
             </p>
           </div>
         </section>

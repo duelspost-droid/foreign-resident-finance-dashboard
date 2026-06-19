@@ -99,7 +99,12 @@ export default function EconomyPage() {
               <p className="mb-4 text-xs text-muted">{latestRows[0]?.provider} {latestRows[0]?.title} · 체류자격별 15세이상 인구(천명)</p>
               <div className="space-y-2.5">
                 {latestRows.sort((a, b) => b.value - a.value).map((row, i) => (
-                  <div key={`${row.period}-${row.category}-${i}`} className="flex items-center gap-3">
+                  <div
+                    key={`${row.period}-${row.category}-${i}`}
+                    className="flex items-center gap-3"
+                    role="img"
+                    aria-label={`${row.category}: ${row.value.toLocaleString()}천명`}
+                  >
                     <span className="w-20 shrink-0 truncate text-xs text-ink sm:w-36" title={row.category}>{row.category}</span>
                     <div className="flex flex-1 items-center gap-2">
                       <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-slate-100">
@@ -146,7 +151,12 @@ export default function EconomyPage() {
               </div>
               <div className="space-y-2">
                 {sorted.slice(0, 15).map((row) => (
-                  <div key={row.region} className="flex items-center gap-3">
+                  <div
+                    key={row.region}
+                    className="flex items-center gap-3"
+                    role="img"
+                    aria-label={`${row.region}: 직장가입 ${row.workplace.toLocaleString()}, 지역가입 ${row.regional.toLocaleString()}, 합계 ${row.total.toLocaleString()}명`}
+                  >
                     <span className="w-16 shrink-0 truncate text-xs text-ink sm:w-24">{row.region}</span>
                     <div className="flex flex-1 items-center gap-1">
                       <div
@@ -186,7 +196,12 @@ export default function EconomyPage() {
               </p>
               <div className="space-y-2">
                 {sorted.map((row, i) => (
-                  <div key={`${row.region}-${i}`} className="flex items-center gap-3">
+                  <div
+                    key={`${row.region}-${i}`}
+                    className="flex items-center gap-3"
+                    role="img"
+                    aria-label={`${row.region}: ${row.total.toLocaleString()}명`}
+                  >
                     <span className="w-20 shrink-0 truncate text-xs text-ink sm:w-32">{row.region}</span>
                     <div className="flex flex-1 items-center gap-2">
                       <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100">
