@@ -58,7 +58,11 @@ import {
   realDutyFreeSales
 } from "@/lib/data/generated/realData";
 import { formatNumber, scoreColor } from "@/lib/utils/format";
-import { hasSidoForeignerStats } from "@/lib/data/regionAggregates";
+import {
+  hasSidoForeignerStats,
+  hasSidoForeignerTrend,
+  sidoForeignerTrend
+} from "@/lib/data/regionAggregates";
 import { DataFreshnessBanner } from "@/components/ui/DataFreshness";
 
 const SEG_COLORS: Record<string, string> = {
@@ -539,6 +543,23 @@ export default function DashboardPage() {
           <div className="flex items-center justify-center px-2 pb-2">
             <RegionMap />
           </div>
+          {hasSidoForeignerTrend && (
+            <div className="border-t border-slate-100 px-4 py-3">
+              <div className="flex items-center justify-between">
+                <p className="text-[11px] font-semibold text-slate-500">전국 외국인주민 연도별 추이</p>
+                <p className="text-[10px] text-muted">
+                  {sidoForeignerTrend[0].year}~{sidoForeignerTrend.at(-1)!.year} · {(sidoForeignerTrend.at(-1)!.total / 10000).toFixed(0)}만명
+                </p>
+              </div>
+              <div style={{ height: 70 }}>
+                <SparkLineChart
+                  data={sidoForeignerTrend.map((p) => ({ label: p.year, value: p.total }))}
+                  color="#0f766e"
+                  unit="명"
+                />
+              </div>
+            </div>
+          )}
         </div>
 
         {/* 체류자격 도넛 + 순위 */}

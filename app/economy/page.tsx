@@ -87,6 +87,15 @@ export default function EconomyPage() {
         }
         const latestRows = [...byCat.values()];
         const maxVal = Math.max(...latestRows.map((r) => r.value), 1);
+        // 연도별 총계(계 첫-ITM = 15세이상 인구, 천명) 추이.
+        const totalByYear = new Map<string, number>();
+        for (const r of econActivityData.filter((r) => r.sourceId === ECON_SRC && r.category === "계")) {
+          if (!totalByYear.has(r.period)) totalByYear.set(r.period, r.value);
+        }
+        const econTrend = [...totalByYear.entries()]
+          .map(([y, v]) => ({ year: Number(y), value: v }))
+          .sort((a, b) => a.year - b.year);
+        const econTrendMax = Math.max(...econTrend.map((p) => p.value), 1);
         return (
           <section id="econ-activity" className="scroll-mt-20">
             <div className="mb-3 flex items-center gap-2">
@@ -120,6 +129,33 @@ export default function EconomyPage() {
                   </div>
                 ))}
               </div>
+              {econTrend.length >= 3 && (
+                <div className="mt-5 border-t border-line pt-4">
+                  <p className="mb-2 text-xs font-semibold text-slate-600">
+                    총계(15세이상 인구) 연도별 추이 · {econTrend[0].year}~{econTrend.at(-1)!.year}
+                  </p>
+                  <div className="flex items-end gap-1.5" style={{ height: 110 }}>
+                    {econTrend.map((p) => {
+                      const h = Math.max(4, Math.round((p.value / econTrendMax) * 84));
+                      const isLast = p.year === econTrend.at(-1)!.year;
+                      return (
+                        <div
+                          key={p.year}
+                          className="flex min-w-[24px] flex-1 flex-col items-center gap-1"
+                          role="img"
+                          aria-label={`${p.year}년 ${p.value.toLocaleString()}천명`}
+                        >
+                          <span className="text-[9px] font-semibold text-slate-500">{(p.value / 10).toFixed(0)}만</span>
+                          <div className="flex w-full max-w-[34px] items-end" style={{ height: 84 }}>
+                            <div className="w-full rounded-t" style={{ height: h, background: isLast ? "#0f766e" : "#94a3b8" }} />
+                          </div>
+                          <span className="text-[9px] text-muted">{String(p.year).slice(2)}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
               {periods.length > 1 && (
                 <p className="mt-3 text-[11px] text-muted">
                   수집 기간: {periods.at(-1)}~{periods[0]}년 · 연도별 데이터 {periods.length}개

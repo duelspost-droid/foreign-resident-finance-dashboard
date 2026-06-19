@@ -33,20 +33,36 @@ function build() {
   // 행안부 외국인주민 시도별 소스만 사용(법무부 시군구·KEDI 유학생 등 다른 혼합 소스 제외).
   const rows = realApiRegionData.filter((r) => (r.sourceName ?? "").includes("행정안전부 외국인주민"));
   if (rows.length === 0) {
-    return { latestMonth: null as string | null, stats: {} as Record<string, number>, total: 0, trend: [] as { year: number; total: number }[] };
+    return {
+      latestMonth: null as string | null,
+      stats: {} as Record<string, number>,
+      total: 0,
+      trend: [] as { year: number; total: number }[],
+      yoy: {} as Record<string, number>
+    };
   }
 
   const months = [...new Set(rows.map((r) => r.baseMonth))].sort();
   const latestMonth = months.at(-1) ?? null;
+  const prevMonth = months.at(-2) ?? null;
   const stats = latestMonth ? statsForMonth(rows, latestMonth) : {};
   const total = Object.values(stats).reduce((a, b) => a + b, 0);
+
+  // 시도별 전년 대비 증가율(%) — 최신연도 vs 직전연도.
+  const prevStats = prevMonth ? statsForMonth(rows, prevMonth) : {};
+  const yoy: Record<string, number> = {};
+  for (const sido of Object.keys(stats)) {
+    const cur = stats[sido];
+    const prev = prevStats[sido];
+    if (prev && prev > 0) yoy[sido] = ((cur - prev) / prev) * 100;
+  }
 
   // 연도별 전국 합계 추이(정합성 범위 밖 연도는 제외).
   const trend = months
     .map((mo) => ({ year: Number(mo.slice(0, 4)), total: Object.values(statsForMonth(rows, mo)).reduce((a, b) => a + b, 0) }))
     .filter((p) => p.total >= 1_000_000 && p.total <= 6_000_000);
 
-  return { latestMonth, stats, total, trend };
+  return { latestMonth, stats, total, trend, yoy };
 }
 
 const agg = build();
@@ -64,3 +80,6 @@ export const sidoForeignerLatestYear =
 export type SidoForeignerTrendPoint = { year: number; total: number };
 export const sidoForeignerTrend: SidoForeignerTrendPoint[] = agg.trend;
 export const hasSidoForeignerTrend = sidoForeignerTrend.length >= 3;
+
+// 시도별 전년 대비 외국인주민 증가율(%). 기회 점수 모델의 '성장' 신호로 사용.
+export const sidoForeignerYoY: Record<string, number> = SANE ? agg.yoy : {};
