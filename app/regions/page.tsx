@@ -3,6 +3,7 @@ import { Globe, MapPin, TrendingUp, Users } from "lucide-react";
 import { RegionMap } from "@/components/charts/RegionMap";
 import { RealSidoOpportunityTable } from "@/components/data/RealSidoOpportunityTable";
 import { ScoreRadarChart } from "@/components/charts/ScoreRadarChart";
+import { SigunguBarChart } from "@/components/charts/SigunguBarChart";
 import { PageHero } from "@/components/ui/PageHero";
 import { Panel } from "@/components/ui/Panel";
 import { StatTile } from "@/components/ui/StatTile";
@@ -240,26 +241,10 @@ export default function RegionsPage() {
         <Panel
           title="시군구별 등록외국인 TOP 20 (실데이터)"
           subtitle={`KOSIS 법무부 시군구별·체류자격별 등록외국인 현황 · ${realSigunguResidents.length}개 시군구 · 합계 기준`}
-          bodyClassName="p-5 pt-3"
+          bodyClassName="p-0"
         >
-          <div className="grid gap-2.5 md:grid-cols-2">
-            {realSigunguResidents.slice(0, 20).map((r, i) => {
-              const max = realSigunguResidents[0]?.count || 1;
-              return (
-                <div key={r.sigungu} className="flex items-center gap-3">
-                  <span className="w-5 shrink-0 text-right text-xs font-bold text-muted">{i + 1}</span>
-                  <div className="min-w-0 flex-1">
-                    <div className="mb-1 flex items-center justify-between gap-2 text-xs">
-                      <span className="truncate font-semibold text-ink">{r.sigungu}</span>
-                      <span className="shrink-0 font-mono text-muted">{formatNumber(r.count)}명</span>
-                    </div>
-                    <div className="barlist-track">
-                      <div className="barlist-fill" style={{ width: `${Math.max(4, Math.round((r.count / max) * 100))}%`, background: "#3157a4" }} />
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+          <div style={{ height: 560 }} className="px-2 py-3">
+            <SigunguBarChart />
           </div>
         </Panel>
       )}

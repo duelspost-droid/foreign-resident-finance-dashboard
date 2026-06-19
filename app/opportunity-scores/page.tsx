@@ -6,6 +6,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { StatTile } from "@/components/ui/StatTile";
 import { sampleOpportunityRows } from "@/lib/data/mockData";
 import { RealSidoOpportunityTable } from "@/components/data/RealSidoOpportunityTable";
+import { SidoScoreCompositionChart } from "@/components/charts/SidoScoreCompositionChart";
 import {
   hasRealSidoOpportunity,
   realSidoOpportunity
@@ -104,6 +105,26 @@ export default function OpportunityScoresPage() {
 
       {/* 실데이터 시도 기회 점수 (행안부 외국인주민 + KEDI 유학생 + 증가율) */}
       <RealSidoOpportunityTable />
+
+      {/* 기회점수 구성 차트 — 규모·유학생·성장 가중 기여도 */}
+      {hasRealSidoOpportunity && (
+        <Panel
+          title="시도별 기회점수 구성 분해"
+          subtitle="각 막대 = 규모(×50%) + 유학생(×30%) + 성장(×20%) 가중 기여도 합산 · 끝의 숫자는 종합 점수"
+          right={
+            <div className="flex items-center gap-3 text-[11px] text-muted">
+              <span className="flex items-center gap-1"><span className="inline-block h-2.5 w-3 rounded-sm" style={{ background: "#0f766e" }} />규모</span>
+              <span className="flex items-center gap-1"><span className="inline-block h-2.5 w-3 rounded-sm" style={{ background: "#3157a4" }} />유학생</span>
+              <span className="flex items-center gap-1"><span className="inline-block h-2.5 w-3 rounded-sm" style={{ background: "#be123c" }} />성장</span>
+            </div>
+          }
+          bodyClassName="p-0"
+        >
+          <div style={{ height: 560 }} className="px-4 py-4">
+            <SidoScoreCompositionChart />
+          </div>
+        </Panel>
+      )}
 
       {/* 표본 안내: 아래 시군구 상세는 시뮬레이션 표본 */}
       <div className="flex flex-wrap items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5 text-xs leading-5 text-amber-800">
