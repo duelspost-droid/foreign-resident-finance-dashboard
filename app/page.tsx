@@ -16,9 +16,7 @@ import {
 import { PageHero } from "@/components/ui/PageHero";
 import { InsightCard } from "@/components/cards/InsightCard";
 import { NationalityBarChart } from "@/components/charts/NationalityBarChart";
-import { TrendLineChart } from "@/components/charts/TrendLineChart";
 import { VisaDonutChart } from "@/components/charts/VisaDonutChart";
-import { ScoreRadarChart } from "@/components/charts/ScoreRadarChart";
 import { RegionMap } from "@/components/charts/RegionMap";
 import { SparkLineChart } from "@/components/charts/SparkLineChart";
 import { MiniBarChart } from "@/components/charts/MiniBarChart";
@@ -35,7 +33,6 @@ import {
   multiculturalFamilyData,
   multiculturalFamilySummary,
   nationalityAgeTotals,
-  sampleRegionInsights,
   stayVisaTypes,
   visaDistributionData
 } from "@/lib/data/mockData";
@@ -58,6 +55,7 @@ import {
   sidoForeignerTrend
 } from "@/lib/data/regionAggregates";
 import { DataFreshnessBanner } from "@/components/ui/DataFreshness";
+import { realSidoOpportunity, hasRealSidoOpportunity } from "@/lib/data/opportunityReal";
 
 const SEG_COLORS: Record<string, string> = {
   "비전문취업 근로자": "#0f766e",
@@ -107,7 +105,9 @@ export default function DashboardPage() {
 
   // 국적별 TOP3 (실데이터)
   const top3Nationalities = realNationalityDistribution.slice(0, 3);
-  const avg = 66.4; // 기회 점수 — 지역 실데이터 확보 시 실데이터로 교체 예정
+  const avg = hasRealSidoOpportunity
+    ? Math.round(realSidoOpportunity.reduce((s, r) => s + r.overallScore, 0) / realSidoOpportunity.length * 10) / 10
+    : 66.4;
 
   // delta = 실데이터 기반 YoY(있을 때만 녹색 칩), note = YoY가 아닌 보조 설명(중립 표기).
   const kpis: {
@@ -602,56 +602,21 @@ export default function DashboardPage() {
         </div>
       </section>
 
-      {/* ── 국적별 분포 + 지역 역량 레이더 ── */}
-      <section className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-
-        {/* 국적별 분포 막대 차트 */}
-        <div className="surface flex flex-col">
+      {/* ── 국적별 분포 (실데이터) ── */}
+      {realNationalityDistribution.length > 0 && (
+        <section className="surface flex flex-col">
           <div className="surface-header pb-0">
             <div>
               <h3 className="surface-title">국적별 분포 TOP {Math.min(10, realNationalityDistribution.length)}</h3>
-              <p className="surface-subtitle">{realNationalityDistribution.length > 0 ? "법무부 국적별 현황 2024" : "표본 지역 기준"}</p>
+              <p className="surface-subtitle">법무부 국적별 현황 2024 · 실데이터</p>
             </div>
           </div>
           <div style={{ height: 340 }} className="px-2 pb-3 pt-2">
             <NationalityBarChart data={realNationalityDistribution.slice(0, 10)} />
           </div>
-        </div>
+        </section>
+      )}
 
-        {/* 지역 역량 레이더 */}
-        <div className="surface flex flex-col">
-          <div className="surface-header pb-0">
-            <div>
-              <h3 className="surface-title">지역 금융 역량 비교</h3>
-              <p className="surface-subtitle">송금 · 유학생 · 급여계좌 · 다국어 5개 축 (안산 / 구로 / 동대문)</p>
-            </div>
-          </div>
-          <div style={{ height: 340 }} className="px-2 pb-3 pt-2">
-            <ScoreRadarChart />
-          </div>
-        </div>
-      </section>
-
-      {/* ── 월별 추세 라인차트 (full width) ── */}
-      <section className="surface">
-        <div className="surface-header pb-0">
-          <div>
-            <h3 className="surface-title">주요 국적별 월별 체류 추세</h3>
-            <p className="surface-subtitle">최근 6개월 · 중국 / 우즈베키스탄 / 베트남 / 몽골</p>
-          </div>
-          <div className="hidden gap-3 text-xs sm:flex">
-            {["중국", "우즈베키스탄", "베트남", "몽골"].map((n, i) => (
-              <span key={n} className="flex items-center gap-1">
-                <span className="h-2 w-4 rounded-sm" style={{ background: ["#0f766e", "#3157a4", "#b45309", "#be123c"][i] }} />
-                <span className="text-muted">{n}</span>
-              </span>
-            ))}
-          </div>
-        </div>
-        <div className="chart-box" style={{ height: 300 }}>
-          <TrendLineChart />
-        </div>
-      </section>
 
       {/* ── 체류자격별 실인원 (실데이터) ── */}
       {hasRealVisaData && stayVisaTypes.length > 0 && (
@@ -828,20 +793,23 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* 인사이트 카드 */}
+        {/* 인사이트 카드 — 실데이터 상위 시도 기반 */}
         <div className="flex flex-col gap-4">
           <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "#697586" }}>
-            자동 생성 지역 인사이트
+            실데이터 시도 인사이트 TOP 3
           </p>
-          {sampleRegionInsights.slice(0, 3).map((insight) => (
-            <InsightCard
-              key={insight.id}
-              title={insight.title}
-              body={insight.body}
-              score={insight.score}
-            />
-          ))}
-          <p className="text-xs text-muted">* 수집 데이터 기반 매일 자동 생성됩니다.</p>
+          {hasRealSidoOpportunity
+            ? realSidoOpportunity.slice(0, 3).map((r) => (
+                <InsightCard
+                  key={`real-${r.sido}`}
+                  title={r.sido}
+                  body={`외국인주민 ${formatNumber(r.residentCount)}명 · 유학생 ${formatNumber(r.studentCount)}명 · 기회점수 ${r.overallScore}점 (규모 ${r.sizeScore} · 유학생 ${r.studentScore} · 성장 ${r.growthScore})`}
+                  score={r.overallScore}
+                />
+              ))
+            : <p className="text-sm text-muted">실데이터 수집 후 자동 생성됩니다.</p>
+          }
+          <p className="text-xs text-muted">행안부 외국인주민 + KEDI 유학생 실데이터 기반 · 매일 배치 갱신</p>
         </div>
       </section>
 

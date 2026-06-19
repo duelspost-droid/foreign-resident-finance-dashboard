@@ -2,17 +2,10 @@ import { Globe, MapPin, TrendingUp, Users } from "lucide-react";
 
 import { RegionMap } from "@/components/charts/RegionMap";
 import { RealSidoOpportunityTable } from "@/components/data/RealSidoOpportunityTable";
-import { ScoreRadarChart } from "@/components/charts/ScoreRadarChart";
 import { SigunguBarChart } from "@/components/charts/SigunguBarChart";
 import { PageHero } from "@/components/ui/PageHero";
 import { Panel } from "@/components/ui/Panel";
 import { StatTile } from "@/components/ui/StatTile";
-import {
-  hasRealRegionResidents,
-  regionResidents,
-  regionResidentSummary,
-  sampleOpportunityRows
-} from "@/lib/data/mockData";
 import {
   hasSidoForeignerStats,
   hasSidoForeignerTrend,
@@ -28,17 +21,9 @@ import {
   hasRealSigunguResidents,
   realSigunguResidents
 } from "@/lib/data/regionAggregates";
-import { formatNumber, formatPercent, formatScore, scoreColor } from "@/lib/utils/format";
+import { formatNumber } from "@/lib/utils/format";
 
 export default function RegionsPage() {
-  const rows = sampleOpportunityRows;
-  const maxScore = Math.max(...rows.map((row) => row.overallOpportunityScore), 1);
-
-  // 표본 기준 1위 시군구 (추천 액션 패널용)
-  const topMockRegion = rows.reduce((best, row) =>
-    row.overallOpportunityScore > best.overallOpportunityScore ? row : best
-  );
-
   // 실데이터 시도 통계
   const topSido = realSidoOpportunity[0];
   const fastestSido = hasRealSidoOpportunity
@@ -74,35 +59,27 @@ export default function RegionsPage() {
         </div>
       )}
 
-      {/* 표본 안내: 기회점수·순위·레이더는 아직 시뮬레이션 표본 기반 */}
-      <div className="flex flex-wrap items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5 text-xs leading-5 text-amber-800">
-        <span className="rounded bg-amber-200 px-1.5 py-0.5 font-bold">표본</span>
-        <span>
-          아래 <strong>기회 점수·순위·레이더</strong>는 6개 시군구 <strong>시뮬레이션 표본</strong>으로
-          산출된 값입니다(실 집계 점수 산출 전). {hasSidoForeignerStats ? "지도는 실데이터입니다." : "지도도 현재 표본 기준입니다."}
-        </span>
-      </div>
 
       <div className="stat-grid">
         <StatTile
           label="분석 시도 수"
-          value={hasRealSidoOpportunity ? realSidoOpportunity.length : rows.length}
-          unit={hasRealSidoOpportunity ? "개 시도" : "개 시군구 (표본)"}
+          value={hasRealSidoOpportunity ? realSidoOpportunity.length : "—"}
+          unit={hasRealSidoOpportunity ? "개 시도" : ""}
           icon={<MapPin size={18} />}
           accent="#0f766e"
-          sub={hasRealSidoOpportunity ? "행안부 실데이터" : "시뮬레이션 표본"}
+          sub={hasRealSidoOpportunity ? "행안부 실데이터" : "실데이터 수집 전"}
         />
         <StatTile
-          label={hasRealSidoOpportunity ? "1위 시도 (외국인주민)" : "1위 지역 (표본)"}
-          value={hasRealSidoOpportunity && topSido ? topSido.sido : `${rows[0]?.sido ?? ""} ${rows[0]?.sigungu ?? ""}`}
+          label="1위 시도 (외국인주민)"
+          value={hasRealSidoOpportunity && topSido ? topSido.sido : "—"}
           icon={<Globe size={18} />}
           accent="#b45309"
           trend={hasRealSidoOpportunity && topSido
             ? { label: `종합 기회점수 ${topSido.overallScore}`, dir: "up" }
-            : { label: `기회점수 ${formatScore(rows[0]?.overallOpportunityScore ?? 0)}`, dir: "up" }}
+            : undefined}
           sub={hasRealSidoOpportunity && topSido
             ? `외국인주민 ${formatNumber(topSido.residentCount)}명`
-            : `대표 국적 ${rows[0]?.topNationality ?? ""}`}
+            : "실데이터 수집 전"}
         />
         <StatTile
           label="전국 외국인주민 합계"
@@ -115,16 +92,16 @@ export default function RegionsPage() {
             : "실데이터 수집 전"}
         />
         <StatTile
-          label={hasRealSidoOpportunity ? "최고 성장 시도" : "최고 성장 지역 (표본)"}
-          value={hasRealSidoOpportunity && fastestSido
-            ? fastestSido.sido
-            : `${rows.reduce((b, r) => r.yoyChangeRate > b.yoyChangeRate ? r : b, rows[0])?.sido ?? ""}`}
+          label="최고 성장 시도"
+          value={hasRealSidoOpportunity && fastestSido ? fastestSido.sido : "—"}
           icon={<TrendingUp size={18} />}
           accent="#be123c"
-          trend={{ label: "전년 대비", dir: "up" }}
+          trend={hasRealSidoOpportunity && fastestSido && fastestSido.yoy != null
+            ? { label: "전년 대비", dir: "up" }
+            : undefined}
           sub={hasRealSidoOpportunity && fastestSido && fastestSido.yoy != null
             ? `YoY +${fastestSido.yoy.toFixed(1)}%`
-            : formatPercent(rows.reduce((b, r) => r.yoyChangeRate > b.yoyChangeRate ? r : b, rows[0])?.yoyChangeRate ?? 0)}
+            : "실데이터 수집 전"}
         />
       </div>
 
@@ -172,70 +149,6 @@ export default function RegionsPage() {
       {/* 실데이터 시도 기회 점수 (행안부+KEDI) */}
       <RealSidoOpportunityTable />
 
-      <Panel
-        title="지역 기회 점수 순위 (표본)"
-        subtitle="송금·유학생·급여계좌·다국어 상담 수요를 합산한 종합 기회 점수 — 6개 시군구 시뮬레이션 표본."
-        bodyClassName="p-5 pt-3"
-      >
-        <div className="space-y-2.5">
-          {rows.map((row) => {
-            const color = scoreColor(row.overallOpportunityScore);
-            const width = Math.max(4, Math.round((row.overallOpportunityScore / maxScore) * 100));
-            const up = row.yoyChangeRate >= 0;
-            return (
-              <div
-                key={row.id}
-                className="surface surface-hover flex flex-col gap-3 p-4 md:flex-row md:items-center md:gap-4"
-              >
-                <div className="flex items-center gap-3 md:w-auto">
-                  <span
-                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white"
-                    style={{ background: color }}
-                  >
-                    {row.rank}
-                  </span>
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-bold text-ink">
-                      {row.sido} {row.sigungu}
-                    </p>
-                    <div className="tag-list mt-1">
-                      <span className="tag">{row.dominantSegment}</span>
-                      <span className="tag">{row.topNationality}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex-1 md:px-2">
-                  <div className="mb-1 flex items-center justify-between text-[11px] text-muted">
-                    <span>종합 기회 점수</span>
-                    <span className="font-mono">
-                      거주 {formatNumber(row.residentCount)}명
-                    </span>
-                  </div>
-                  <div className="barlist-track">
-                    <div
-                      className="barlist-fill"
-                      style={{
-                        width: `${width}%`,
-                        background: `linear-gradient(90deg, ${color}cc, ${color})`
-                      }}
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between gap-3 md:w-44 md:justify-end">
-                  <span className="text-xl font-bold tabular-nums" style={{ color }}>
-                    {formatScore(row.overallOpportunityScore)}
-                  </span>
-                  <span className={up ? "chip chip-up" : "chip chip-down"}>
-                    {up ? "▲" : "▼"} {formatPercent(Math.abs(row.yoyChangeRate))}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </Panel>
 
       {hasRealSigunguResidents && (
         <Panel
@@ -249,45 +162,20 @@ export default function RegionsPage() {
         </Panel>
       )}
 
-      <div className="two-column">
-        <Panel
-          title="점수 유형별 비교 (표본)"
-          subtitle="대표 지역 3곳의 송금·유학생·급여계좌·다국어 상담 니즈 구조 — 시뮬레이션 표본."
-          right={<span className="eyebrow">표본</span>}
-          bodyClassName="p-0"
-        >
-          <div className="chart-box">
-            <ScoreRadarChart />
-          </div>
-        </Panel>
-
-        <Panel
-          title={hasSidoForeignerStats ? "대한민국 시도별 외국인주민 지도" : "대한민국 지역 기회 지도"}
-          subtitle={
-            hasSidoForeignerStats
-              ? "버블 크기·색상 = 시도별 외국인주민 규모 (행안부 실데이터)"
-              : "버블 크기는 외국인 수, 색상은 시도 평균 기회 점수(표본)"
-          }
-          bodyClassName="p-3 pt-2"
-        >
-          <div className="h-[460px]">
-            <RegionMap />
-          </div>
-        </Panel>
-      </div>
-
       <Panel
-        title={`추천 액션 (표본) · ${topMockRegion.sido} ${topMockRegion.sigungu}`}
-        subtitle={`표본 1위 지역 · 기회 점수 ${formatScore(topMockRegion.overallOpportunityScore)} · 세그먼트 ${topMockRegion.dominantSegment}`}
-        bodyClassName="p-5 pt-3"
+        title={hasSidoForeignerStats ? "대한민국 시도별 외국인주민 지도" : "대한민국 지역 기회 지도"}
+        subtitle={
+          hasSidoForeignerStats
+            ? "버블 크기·색상 = 시도별 외국인주민 규모 (행안부 실데이터)"
+            : "버블 크기는 외국인 수, 색상은 시도 평균 기회 점수"
+        }
+        bodyClassName="p-3 pt-2"
       >
-        <div
-          className="rounded-xl border-l-4 bg-slate-50 p-4 text-sm leading-relaxed text-ink"
-          style={{ borderColor: scoreColor(topMockRegion.overallOpportunityScore) }}
-        >
-          {topMockRegion.recommendedAction}
+        <div className="h-[460px]">
+          <RegionMap />
         </div>
       </Panel>
+
     </div>
   );
 }

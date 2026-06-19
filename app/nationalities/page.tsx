@@ -1,6 +1,5 @@
 import { Flag, Globe, Layers, Users } from "lucide-react";
 import { NationalityBarChart } from "@/components/charts/NationalityBarChart";
-import { TrendLineChart } from "@/components/charts/TrendLineChart";
 import { VisaDonutChart } from "@/components/charts/VisaDonutChart";
 import { DataTable, type DataTableColumn } from "@/components/tables/DataTable";
 import { BarList } from "@/components/ui/BarList";
@@ -185,16 +184,6 @@ export default function NationalitiesPage() {
         </Panel>
       </div>
 
-      <Panel
-        title="월별 증가 추세"
-        subtitle="주요 국적 체류외국인 월별 추세 · 추세 패턴 예시(표본)"
-        right={<span className="eyebrow">표본 · 실수치 아님</span>}
-        bodyClassName="p-0"
-      >
-        <div className="chart-box">
-          <TrendLineChart />
-        </div>
-      </Panel>
 
       {hasNationalityByAge && (() => {
         const TOP = nationalityAgeTotals.slice(0, 10);
