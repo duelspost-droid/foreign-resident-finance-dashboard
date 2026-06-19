@@ -13,7 +13,9 @@ const TARGET_TABLES = [
   "foreign_resident_region_month",
   "foreign_resident_status",
   "foreign_student_university",
-  "finance_segment_aggregate"
+  "finance_segment_aggregate",
+  "foreign_consumption_aggregate",
+  "unclassified"
 ];
 
 // 대상 테이블 → 사람이 읽는 한글 라벨(긴 영문 테이블명 대신 표시).
@@ -21,7 +23,9 @@ const TABLE_LABELS: Record<string, string> = {
   foreign_resident_region_month: "지역·월별 외국인",
   foreign_resident_status: "체류자격 현황",
   foreign_student_university: "유학생·대학",
-  finance_segment_aggregate: "금융 세그먼트"
+  finance_segment_aggregate: "금융 세그먼트",
+  foreign_consumption_aggregate: "소비·금융거래",
+  unclassified: "기타·미분류 (수집·보관)"
 };
 
 const STATUS_TONE: Record<string, string> = {
@@ -243,6 +247,13 @@ function CandidateRow({
           </button>
         </div>
       </div>
+
+      {/* 대상 안내: 분류 태그이며, 맞는 도메인이 없으면 '기타·미분류'로 둬도 수집은 진행됨 */}
+      <p className="mt-2 text-[11px] leading-5 text-slate-400">
+        ‘대상’은 이 데이터가 들어갈 도메인 분류입니다. 맞는 도메인이 없으면 <strong className="text-slate-500">기타·미분류</strong>로
+        두세요 — 승인하면 다음 배치에서 <strong className="text-slate-500">원본 수집·카탈로그 등록</strong>까지 진행되고,
+        전용 화면 연동은 변환 로직 추가 후 활성화됩니다.
+      </p>
     </div>
   );
 }
