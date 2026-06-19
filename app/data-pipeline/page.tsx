@@ -485,12 +485,12 @@ export default function DataPipelinePage() {
         ))}
       </section>
 
-      {/* 데이터 발굴 에이전트 + 승인 큐(인라인) */}
+      {/* 데이터 에이전트 + 승인 큐(인라인) */}
       <section className="mt-4">
         <div className="mb-2 flex flex-wrap items-center justify-between gap-2 px-1">
           <div className="flex items-center gap-2">
             <Search aria-hidden className="text-teal-700" size={16} />
-            <h3 className="surface-title">데이터 발굴 에이전트</h3>
+            <h3 className="surface-title">데이터 에이전트</h3>
           </div>
           <Link href="/admin" className="flex items-center gap-1 text-xs font-semibold text-teal-700 hover:underline">
             전체 승인 화면 <ArrowRight aria-hidden size={13} />
