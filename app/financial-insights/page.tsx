@@ -2,14 +2,20 @@ import {
   AlertCircle,
   ArrowRight,
   BarChart2,
+  BarChart3,
   Clock,
   CreditCard,
   Database,
+  Flag,
   GraduationCap,
+  Layers,
+  Map,
   MapPin,
   RefreshCw,
   Send,
   ShieldCheck,
+  ShoppingBag,
+  Target,
   TrendingUp,
   Users,
   Wallet
@@ -213,15 +219,49 @@ function FreshnessTag() {
   );
 }
 
+const DATA_SHORTCUTS = [
+  { href: "/regions", icon: Map, color: "#0f766e", bg: "#f0fdf4", border: "#bbf7d0", label: "지역 분석", desc: "시도·시군구별 외국인 밀집도·기회점수" },
+  { href: "/nationalities", icon: Flag, color: "#3157a4", bg: "#eff6ff", border: "#bfdbfe", label: "국적 분석", desc: "국적별 체류 규모·연령·금융 니즈 태그" },
+  { href: "/visa-segments", icon: Layers, color: "#b45309", bg: "#fffbeb", border: "#fde68a", label: "비자 세그먼트", desc: "체류자격별 금융 상품 매트릭스" },
+  { href: "/opportunity-scores", icon: Target, color: "#be123c", bg: "#fff1f2", border: "#fecdd3", label: "기회 점수", desc: "지역별 종합 금융 기회 점수 순위" },
+  { href: "/economy", icon: BarChart3, color: "#0369a1", bg: "#f0f9ff", border: "#bae6fd", label: "경제활동·소득", desc: "임금구간·고용형태·EPS 도입 실데이터" },
+  { href: "/universities", icon: GraduationCap, color: "#7c3aed", bg: "#f5f3ff", border: "#ddd6fe", label: "유학생", desc: "국적·학위과정·시도별 유학생 현황" },
+  { href: "/consumption", icon: ShoppingBag, color: "#0f766e", bg: "#f0fdf4", border: "#bbf7d0", label: "소비·금융거래", desc: "면세소비·환율·BOP 송금수지 추이" },
+];
+
 export default function FinancialInsightsPage() {
   return (
     <div className="space-y-7 pb-14">
       <PageHero
         kicker="금융 인사이트"
-        title="금융회사 활용 인사이트"
-        description="외국인 체류·경제활동 공공 통계를 은행·캐피탈 비즈니스 전략에 활용하는 방법을 분석합니다. 시장 KPI와 지역 순위는 수집 배치 완료 시 자동 갱신됩니다."
+        title="금융회사 활용 전략 해석"
+        description="외국인 체류·경제활동 공공 통계를 은행·캐피탈 비즈니스 전략에 활용하는 방법을 분석합니다. 원본 데이터는 좌측 사이드바 각 분석 메뉴에서 직접 탐색할 수 있습니다."
       />
       <FreshnessTag />
+
+      {/* ── 데이터 탐색 바로가기 ── */}
+      <section>
+        <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-muted">원본 데이터 탐색</p>
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
+          {DATA_SHORTCUTS.map((s) => {
+            const Icon = s.icon;
+            return (
+              <Link
+                key={s.href}
+                href={s.href}
+                className="group flex flex-col gap-1.5 rounded-xl border p-3 transition hover:shadow-sm"
+                style={{ background: s.bg, borderColor: s.border }}
+              >
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg text-white" style={{ background: s.color }}>
+                  <Icon size={15} aria-hidden />
+                </span>
+                <span className="text-xs font-bold text-ink">{s.label}</span>
+                <span className="text-[10px] leading-snug text-muted">{s.desc}</span>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
 
       {/* ── AI 인사이트 질의 ──────────────────────────────────── */}
       <section>

@@ -6,8 +6,6 @@ import {
   Briefcase,
   DollarSign,
   GraduationCap,
-  Landmark,
-  LayoutGrid,
   MapPin,
   Send,
   ShoppingBag,
@@ -275,9 +273,9 @@ export default function DashboardPage() {
     <div className="space-y-6 pb-14">
 
       <PageHero
-        kicker="외국인 금융 인사이트"
-        title="외국인 금융 시장 대시보드"
-        description="공개 통계와 금융 집계 데이터를 지역·국적·체류자격·대학 단위로 시각화한 분석 화면입니다."
+        kicker="데이터 현황"
+        title="외국인 금융 시장 데이터"
+        description="공개 통계와 금융 집계 데이터를 지역·국적·체류자격·대학 단위로 실시간 시각화합니다. 전략 해석은 사이드바 → 금융 인사이트에서 확인하세요."
       />
 
       {/* ── 데이터 신선도 배너 (뷰 시점 실시간 판정) ── */}
@@ -287,39 +285,7 @@ export default function DashboardPage() {
         loadedDatasets={loadedDatasets}
       />
 
-      {/* ── 2축 진입점 ── */}
-      <section className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-        <Link href="/financial-insights" className="surface surface-hover group flex flex-col gap-2 p-6">
-          <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white" style={{ background: "linear-gradient(135deg, #f6b23c, #b45309)" }}>
-              <Landmark aria-hidden size={20} />
-            </span>
-            <div className="min-w-0">
-              <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: "#b45309" }}>축 1</p>
-              <h3 className="text-lg font-black text-ink">금융 인사이트</h3>
-            </div>
-            <ArrowUpRight aria-hidden size={18} className="ml-auto shrink-0 text-muted transition group-hover:-translate-y-0.5 group-hover:text-amber-600" />
-          </div>
-          <p className="text-sm leading-relaxed text-muted">
-            시장 기회·지역 전략·체류자격×상품 매트릭스·유스케이스·로드맵 — 은행·캐피탈이 데이터를 어떻게 활용할지 해석합니다.
-          </p>
-        </Link>
-        <Link href="/catalog" className="surface surface-hover group flex flex-col gap-2 p-6">
-          <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white" style={{ background: "linear-gradient(135deg, #2dd4bf, #0f766e)" }}>
-              <LayoutGrid aria-hidden size={20} />
-            </span>
-            <div className="min-w-0">
-              <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: "#0f766e" }}>축 2</p>
-              <h3 className="text-lg font-black text-ink">분석 데이터 활용</h3>
-            </div>
-            <ArrowUpRight aria-hidden size={18} className="ml-auto shrink-0 text-muted transition group-hover:-translate-y-0.5 group-hover:text-teal-600" />
-          </div>
-          <p className="text-sm leading-relaxed text-muted">
-            인구·체류 · 경제활동·소득 · 유학생 · 소비·금융거래 — 수집한 30여 종 데이터를 카테고리별로 직접 탐색·분석합니다.
-          </p>
-        </Link>
-      </section>
+
 
       {/* ── KPI 스트립 ── */}
       <section className="metric-grid">

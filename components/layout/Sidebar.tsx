@@ -25,8 +25,12 @@ import { useMobileNav } from "./MobileNavContext";
 
 // 축 1 · 금융 인사이트 (해석·전략)
 const financeNav = [
-  { href: "/", label: "대시보드", icon: LayoutDashboard },
   { href: "/financial-insights", label: "금융 인사이트", icon: Landmark },
+];
+
+// 데이터 현황 (원본 데이터 뷰어)
+const dataNav = [
+  { href: "/", label: "데이터 현황", icon: LayoutDashboard },
 ];
 
 // 축 2 · 분석 데이터 활용 (데이터 탐색)
@@ -108,8 +112,9 @@ export function Sidebar() {
 
       {/* 2축 메뉴: 금융 인사이트 / 분석 데이터 활용 / 시스템 */}
       {[
-        { title: "금융 인사이트", axis: "축 1", items: financeNav, accent: "text-amber-300/80" },
-        { title: "분석 데이터 활용", axis: "축 2", items: analysisNav, accent: "text-teal-300/80" },
+        { title: "금융 인사이트", axis: "전략 해석", items: financeNav, accent: "text-amber-300/80" },
+        { title: "데이터 현황", axis: "원본 데이터", items: dataNav, accent: "text-teal-300/80" },
+        { title: "데이터 탐색", axis: "", items: analysisNav, accent: "text-teal-300/80" },
         { title: "시스템", axis: "", items: system, accent: "text-white/25" }
       ].map((group, gi) => (
         <div key={group.title} className={gi === 0 ? "" : "mt-5"}>
