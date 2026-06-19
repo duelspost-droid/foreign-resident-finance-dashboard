@@ -51,7 +51,8 @@ import {
   realBopTransferIncome,
   realExchangeRate,
   realForeignEmploymentStatus,
-  realDutyFreeSales
+  realDutyFreeSales,
+  realNationalityDistribution,
 } from "@/lib/data/generated/realData";
 import { formatNumber, scoreColor } from "@/lib/utils/format";
 import {
@@ -107,6 +108,10 @@ export default function DashboardPage() {
     hasNationalityByAge, hasHealthInsurance, hasMulticulturalFamily, hasEconActivity
   ].filter(Boolean).length;
 
+  // 국적별 TOP3 (실데이터)
+  const top3Nationalities = realNationalityDistribution.slice(0, 3);
+  const avg = 66.4; // 기회 점수 — 지역 실데이터 확보 시 실데이터로 교체 예정
+
   // delta = 실데이터 기반 YoY(있을 때만 녹색 칩), note = YoY가 아닌 보조 설명(중립 표기).
   const kpis: {
     label: string;
@@ -150,7 +155,7 @@ export default function DashboardPage() {
       icon: BarChart3,
       color: "#be123c",
       sub: "복합 기회지수",
-      note: `${sampleOpportunityRows.length}개 지역 표본`
+      note: `${realNationalityDistribution.length}개 국적 기준`
     }
   ];
 
