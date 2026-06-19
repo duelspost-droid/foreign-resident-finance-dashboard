@@ -98,6 +98,75 @@ export async function updateCandidateStatus(
   return true;
 }
 
+// ── 대시보드 반영 설정 (surface_config) ───────────────────────────────────────────
+export type SurfaceConfigRow = {
+  sourceId: string;
+  screen: string | null;
+  displayLabel: string | null;
+  enabled: boolean;
+  targetTable: string | null;
+  note: string | null;
+  updatedAt: string | null;
+  updatedBy: string | null;
+};
+
+function mapSurface(row: Record<string, unknown>): SurfaceConfigRow {
+  return {
+    sourceId: String(row.source_id),
+    screen: (row.screen as string) ?? null,
+    displayLabel: (row.display_label as string) ?? null,
+    enabled: row.enabled !== false,
+    targetTable: (row.target_table as string) ?? null,
+    note: (row.note as string) ?? null,
+    updatedAt: (row.updated_at as string) ?? null,
+    updatedBy: (row.updated_by as string) ?? null,
+  };
+}
+
+// 반영 설정 전체 조회. 미연결/오류 시 null(호출부에서 하드코딩 기본값으로 폴백).
+export async function fetchSurfaceConfig(): Promise<SurfaceConfigRow[] | null> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return null;
+  const { data, error } = await client.from("surface_config").select("*");
+  if (error) {
+    console.error("fetchSurfaceConfig error:", error.message);
+    return null;
+  }
+  return (data ?? []).map(mapSurface);
+}
+
+// 반영 설정 1건 저장(upsert). 성공 시 true.
+export async function upsertSurfaceConfig(row: {
+  sourceId: string;
+  screen?: string | null;
+  displayLabel?: string | null;
+  enabled?: boolean;
+  targetTable?: string | null;
+  note?: string | null;
+  updatedBy?: string;
+}): Promise<boolean> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return false;
+  const { error } = await client.from("surface_config").upsert(
+    {
+      source_id: row.sourceId,
+      screen: row.screen ?? null,
+      display_label: row.displayLabel ?? null,
+      enabled: row.enabled ?? true,
+      target_table: row.targetTable ?? null,
+      note: row.note ?? null,
+      updated_at: new Date().toISOString(),
+      updated_by: row.updatedBy ?? "admin",
+    },
+    { onConflict: "source_id" }
+  );
+  if (error) {
+    console.error("upsertSurfaceConfig error:", error.message);
+    return false;
+  }
+  return true;
+}
+
 export type RegionFilter = {
   baseMonth?: string;
   sido?: string;

@@ -11,6 +11,7 @@ import {
   MessageSquare,
   RefreshCw,
   Settings,
+  SlidersHorizontal,
   Users
 } from "lucide-react";
 import {
@@ -21,9 +22,10 @@ import {
 } from "@/lib/data/supabaseClient";
 import { adminChangePassword, adminLogin, adminLogout, adminRespond, adminValidate } from "@/lib/data/adminApi";
 import { STATUS_ORDER, categoryMeta, statusMeta } from "@/lib/feedback";
+import { SurfaceConfigManager } from "@/components/admin/SurfaceConfigManager";
 
 const TOKEN_KEY = "jbax-admin-token";
-type Tab = "overview" | "requests" | "analytics" | "sessions" | "settings";
+type Tab = "overview" | "requests" | "analytics" | "sessions" | "surface" | "settings";
 
 function dayKey(iso: string): string {
   try {
@@ -327,6 +329,7 @@ export default function AdminConsolePage() {
           ["requests", `제안 관리${reqStats.pending ? ` (${reqStats.pending})` : ""}`, Inbox],
           ["analytics", "접속통계", BarChart3],
           ["sessions", "방문자/세션", Users],
+          ["surface", "대시보드 반영", SlidersHorizontal],
           ["settings", "설정", Settings]
         ] as const).map(([k, label, Icon]) => (
           <button
@@ -502,6 +505,18 @@ export default function AdminConsolePage() {
               </tbody>
             </table>
           </div>
+        </div>
+      )}
+
+      {/* ── 대시보드 반영 ── */}
+      {tab === "surface" && (
+        <div className="space-y-4">
+          <p className="text-xs leading-5 text-muted">
+            수집 소스를 어느 화면에 어떤 라벨로 반영할지 관리합니다. 연동 화면·표시·라벨은 <strong>저장 즉시</strong> 공개
+            화면(데이터 카탈로그의 수집 원본 뷰어)에 반영됩니다. 실제 차트 변환이 필요한 변경은 다음 일배치(또는 GitHub
+            Actions <code>Run workflow</code> 수동 실행) 시 적용됩니다.
+          </p>
+          <SurfaceConfigManager />
         </div>
       )}
 
