@@ -19,6 +19,7 @@ import {
 import { dataLineage, type DataLineageSource } from "@/lib/data/generated/dataLineage";
 import { realDataQualityWarnings, realDataSummary } from "@/lib/data/generated/realData";
 import { dataVintages, type Cadence } from "@/lib/data/dataVintage";
+import { SURFACED } from "@/lib/data/sourceMeta";
 import { candidateSources, dataAxisMapping, type ResearchPriority } from "@/lib/data/researchNotes";
 import { dataSources, type DataSourceItem } from "@/lib/data/dataSources";
 import { DataTable, type DataTableColumn } from "@/components/tables/DataTable";
@@ -104,16 +105,6 @@ const sourceColumns: DataTableColumn<DataSourceItem>[] = [
   },
   { header: "한계", accessor: (row) => <span className="text-muted">{row.limitation}</span> }
 ];
-
-// 수집 소스 → 현재 반영 중인 대시보드 화면 매핑(커버리지 투명성). 없으면 "수집만(미연동)".
-const SURFACED: Record<string, string> = {
-  moj_foreign_resident_status_2024: "국적·체류자격·기회점수",
-  moj_foreign_stay_data_2024: "지역 분석",
-  moj_foreign_student_stay_2024: "대학/유학생",
-  academyinfo_foreign_student_count: "대학별 랭킹",
-  mois_foreign_resident_region_file: "시군구 외국인주민",
-  kosis_foreigner_economic_activity: "체류자격(보조)"
-};
 
 export default function DataPipelinePage() {
   const { totals, keysPresent, generatedAt, sources, discovery } = dataLineage;

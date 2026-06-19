@@ -8,25 +8,7 @@ import {
   type SourceCandidate
 } from "@/lib/data/supabaseClient";
 import { candidateSources } from "@/lib/data/researchNotes";
-
-const TARGET_TABLES = [
-  "foreign_resident_region_month",
-  "foreign_resident_status",
-  "foreign_student_university",
-  "finance_segment_aggregate",
-  "foreign_consumption_aggregate",
-  "unclassified"
-];
-
-// 대상 테이블 → 사람이 읽는 한글 라벨(긴 영문 테이블명 대신 표시).
-const TABLE_LABELS: Record<string, string> = {
-  foreign_resident_region_month: "지역·월별 외국인",
-  foreign_resident_status: "체류자격 현황",
-  foreign_student_university: "유학생·대학",
-  finance_segment_aggregate: "금융 세그먼트",
-  foreign_consumption_aggregate: "소비·금융거래",
-  unclassified: "기타·미분류 (수집·보관)"
-};
+import { TARGET_TABLES, TARGET_TABLE_LABELS as TABLE_LABELS } from "@/lib/data/sourceMeta";
 
 const STATUS_TONE: Record<string, string> = {
   pending: "bg-amber-100 text-amber-800",

@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { dataLineage, type DataLineageSource } from "@/lib/data/generated/dataLineage";
 import { PageHero } from "@/components/ui/PageHero";
+import { CollectedSourcesTable } from "@/components/data/CollectedSourcesTable";
 
 // 축 2 카테고리 → 분석 페이지 + 소속 데이터셋(수집 소스 id) + 해당 섹션 앵커
 type CatItem = { id: string; anchor?: string };
@@ -182,6 +183,12 @@ export default function CatalogPage() {
           </section>
         );
       })}
+
+      {/* 전체 수집 원본 — 카테고리에 안 묶인 것(승인·미분류 포함)까지 모두 */}
+      <CollectedSourcesTable
+        sources={[...dataLineage.sources]}
+        categorizedIds={CATEGORIES.flatMap((c) => c.items.map((it) => it.id))}
+      />
 
       <p className="text-xs text-slate-500">
         수집 출처·이력 상세는 <Link href="/data-pipeline" className="font-semibold text-teal-700 hover:underline">메타데이터 관리</Link>에서 확인할 수 있습니다.
