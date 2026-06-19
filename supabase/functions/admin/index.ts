@@ -7,7 +7,11 @@
 //   supabase secrets set ADMIN_PASSWORD=<최초 비밀번호>   # 첫 로그인 시 PBKDF2로 시드. 이후 콘솔에서 변경.
 //   (SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY 는 Supabase가 함수에 자동 주입)
 //
-// 액션: login / validate / logout / change_password / respond
+// 재빌드 버튼(trigger_rebuild) 활성화 시 추가 시크릿(소유자):
+//   supabase secrets set GH_DISPATCH_TOKEN=<GitHub PAT, Actions read/write 권한>
+//   (선택) GH_REPO=duelspost-droid/foreign-resident-finance-dashboard · GH_WORKFLOW=pages.yml · GH_REF=main
+//
+// 액션: login / validate / logout / change_password / respond / trigger_rebuild
 // 주의: Deno 런타임 전용 — Next tsconfig 타입체크 제외.
 
 const CORS = {
@@ -199,6 +203,36 @@ Deno.serve(async (req: Request): Promise<Response> => {
     });
     if (!res.ok) return json({ error: `update failed ${res.status}`, detail: (await res.text()).slice(0, 300) }, 502);
     return json({ ok: true });
+  }
+
+  // 대시보드 재빌드 트리거(토큰 검증 후 GitHub workflow_dispatch)
+  if (action === "trigger_rebuild") {
+    if (!(await validSession((body.token || "").toString()))) return json({ error: "unauthorized" }, 401);
+    // @ts-ignore Deno
+    const ghToken = Deno.env.get("GH_DISPATCH_TOKEN");
+    if (!ghToken) return json({ error: "GH_DISPATCH_TOKEN 미설정(소유자 시크릿 등록 필요)" }, 500);
+    // @ts-ignore Deno
+    const repo = Deno.env.get("GH_REPO") || "duelspost-droid/foreign-resident-finance-dashboard";
+    // @ts-ignore Deno
+    const workflow = Deno.env.get("GH_WORKFLOW") || "pages.yml";
+    // @ts-ignore Deno
+    const ref = Deno.env.get("GH_REF") || "main";
+    const ghRes = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/${workflow}/dispatches`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${ghToken}`,
+        Accept: "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+        "User-Agent": "frfd-admin-console",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ ref })
+    });
+    if (ghRes.status === 204) {
+      await logAudit("admin_rebuild", ip, workflow, ua);
+      return json({ ok: true });
+    }
+    return json({ error: `재빌드 실패 ${ghRes.status}`, detail: (await ghRes.text()).slice(0, 300) }, 502);
   }
 
   return json({ error: "unknown action" }, 400);

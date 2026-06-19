@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Check, RefreshCw, Save, Search } from "lucide-react";
+import { Check, RefreshCw, RotateCw, Save, Search } from "lucide-react";
 import { dataLineage, type DataLineageSource } from "@/lib/data/generated/dataLineage";
 import { SURFACED, TARGET_TABLES, targetLabel } from "@/lib/data/sourceMeta";
 import {
@@ -9,12 +9,13 @@ import {
   upsertSurfaceConfig,
   type SurfaceConfigRow
 } from "@/lib/data/supabaseClient";
+import { adminTriggerRebuild } from "@/lib/data/adminApi";
 
 type Draft = { screen: string; label: string; enabled: boolean; target: string };
 
 // 소스별 "대시보드 반영 설정"을 편집해 Supabase(surface_config)에 저장하는 관리 UI.
 // 저장 즉시 공개 화면(수집 원본 뷰어 등)이 런타임에 읽어 반영한다.
-export function SurfaceConfigManager() {
+export function SurfaceConfigManager({ token }: { token: string }) {
   const sources = useMemo(() => [...dataLineage.sources], []);
   const [config, setConfig] = useState<Record<string, SurfaceConfigRow> | null>(null);
   const [connected, setConnected] = useState<boolean | null>(null);
@@ -23,6 +24,21 @@ export function SurfaceConfigManager() {
   const [savingId, setSavingId] = useState<string | null>(null);
   const [savedId, setSavedId] = useState<string | null>(null);
   const [drafts, setDrafts] = useState<Record<string, Draft>>({});
+  const [rebuild, setRebuild] = useState<"idle" | "working" | "done" | "error">("idle");
+  const [rebuildMsg, setRebuildMsg] = useState("");
+
+  async function triggerRebuild() {
+    setRebuild("working");
+    setRebuildMsg("");
+    const { ok, authExpired, error } = await adminTriggerRebuild(token);
+    if (ok) {
+      setRebuild("done");
+      setRebuildMsg("재빌드를 시작했습니다 · 몇 분 뒤 반영됩니다.");
+    } else {
+      setRebuild("error");
+      setRebuildMsg(authExpired ? "세션 만료 — 재로그인이 필요합니다." : error ?? "재빌드 트리거 실패");
+    }
+  }
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -95,13 +111,28 @@ export function SurfaceConfigManager() {
         ) : (
           <span className="text-sm text-amber-700">surface_config 테이블 미적용 (006 마이그레이션 필요)</span>
         )}
-        <button
-          type="button"
-          onClick={load}
-          className="ml-auto inline-flex items-center gap-1 rounded-md border border-slate-200 px-3 py-1 text-sm text-slate-700 hover:bg-slate-50"
-        >
-          <RefreshCw aria-hidden size={14} className={loading ? "animate-spin" : ""} /> 새로고침
-        </button>
+        <div className="ml-auto flex items-center gap-2">
+          <button
+            type="button"
+            onClick={triggerRebuild}
+            disabled={rebuild === "working"}
+            className="inline-flex items-center gap-1 rounded-md bg-slate-800 px-3 py-1 text-sm font-semibold text-white hover:bg-slate-900 disabled:opacity-50"
+            title="차트 변환이 필요한 변경을 지금 빌드에 반영(GitHub Actions 재실행)"
+          >
+            <RotateCw aria-hidden size={14} className={rebuild === "working" ? "animate-spin" : ""} />
+            {rebuild === "working" ? "요청 중…" : "지금 반영(재빌드)"}
+          </button>
+          <button
+            type="button"
+            onClick={load}
+            className="inline-flex items-center gap-1 rounded-md border border-slate-200 px-3 py-1 text-sm text-slate-700 hover:bg-slate-50"
+          >
+            <RefreshCw aria-hidden size={14} className={loading ? "animate-spin" : ""} /> 새로고침
+          </button>
+        </div>
+        {rebuildMsg && (
+          <p className={`w-full text-xs ${rebuild === "error" ? "text-rose-600" : "text-teal-700"}`}>{rebuildMsg}</p>
+        )}
       </section>
 
       <label className="flex items-center gap-1.5 rounded-md border border-slate-200 px-2.5 py-1.5">

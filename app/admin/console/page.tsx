@@ -514,9 +514,10 @@ export default function AdminConsolePage() {
           <p className="text-xs leading-5 text-muted">
             수집 소스를 어느 화면에 어떤 라벨로 반영할지 관리합니다. 연동 화면·표시·라벨은 <strong>저장 즉시</strong> 공개
             화면(데이터 카탈로그의 수집 원본 뷰어)에 반영됩니다. 실제 차트 변환이 필요한 변경은 다음 일배치(또는 GitHub
-            Actions <code>Run workflow</code> 수동 실행) 시 적용됩니다.
+            Actions <code>Run workflow</code> 수동 실행) 시 적용됩니다. 아래 <strong>‘지금 반영(재빌드)’</strong>로 바로
+            트리거할 수 있습니다(엣지함수 GH 토큰 설정 시).
           </p>
-          <SurfaceConfigManager />
+          <SurfaceConfigManager token={token} />
         </div>
       )}
 
