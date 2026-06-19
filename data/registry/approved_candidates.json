@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-19T07:38:15.778Z",
+  "generatedAt": "2026-06-19T14:37:57.055Z",
   "approved": [
     {
       "id": 2,
@@ -15,6 +15,23 @@
       "rationale": "시군구 단위 장기거주 외국인주민 규모",
       "discovered_at": "2026-06-18T08:09:00.89898+00:00",
       "decided_at": "2026-06-18T08:57:46.939+00:00",
+      "decided_by": "admin",
+      "notes": null
+    },
+    {
+      "id": 67,
+      "dataset_id": "15059612",
+      "kind": "openapi",
+      "provider": "법무부",
+      "title": "금융위원회_주식대차정보",
+      "keyword": "체류외국인 월별 통계",
+      "url": "https://www.data.go.kr/data/15059612/openapi.do",
+      "target_table": "finance_segment_aggregate",
+      "status": "approved",
+      "priority": "mid",
+      "rationale": "월별 체류외국인 총계·국적별 추이(시장 규모 월 단위 모니터링)",
+      "discovered_at": "2026-06-18T08:09:00.89898+00:00",
+      "decided_at": "2026-06-19T12:33:19.531+00:00",
       "decided_by": "admin",
       "notes": null
     },
