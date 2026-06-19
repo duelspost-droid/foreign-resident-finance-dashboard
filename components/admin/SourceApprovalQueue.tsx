@@ -181,6 +181,11 @@ function CandidateRow({
         <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-600">{c.kind}</span>
         <span className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-slate-500">{c.datasetId}</span>
         {c.keyword && <span className="rounded bg-teal-50 px-1.5 py-0.5 text-teal-700">🔍 {c.keyword}</span>}
+        {c.discoveredAt && (
+          <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-500" title="데이터 에이전트 발굴 시각">
+            🗓 발굴 {c.discoveredAt.slice(0, 10)}
+          </span>
+        )}
         {c.url && (
           <a
             href={c.url}

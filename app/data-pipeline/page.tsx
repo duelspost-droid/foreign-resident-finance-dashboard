@@ -490,6 +490,13 @@ export default function DataPipelinePage() {
         <p className="mb-1 px-1 text-sm text-muted">
           키워드를 자동 탐색해 신규 데이터셋 후보를 발굴 · 아래에서 바로 승인/거부하세요
         </p>
+        <p className="mb-1 flex flex-wrap items-center gap-x-2 px-1 text-xs text-slate-500">
+          <span className="inline-flex items-center gap-1 rounded bg-slate-100 px-1.5 py-0.5">
+            <Activity aria-hidden size={11} className="text-teal-700" />
+            마지막 발굴 실행: <strong className="text-slate-700">{new Date(generatedAt).toLocaleString("ko-KR")}</strong>
+          </span>
+          <span>키워드 {discovery.length}개 스캔 · 매일 01:00 KST 배치 시 자동 발굴</span>
+        </p>
 
         {/* 라이브 승인 큐 (버튼 인라인) */}
         <SourceApprovalQueue compact />
