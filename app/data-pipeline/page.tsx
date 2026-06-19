@@ -18,11 +18,20 @@ import {
 } from "lucide-react";
 import { dataLineage, type DataLineageSource } from "@/lib/data/generated/dataLineage";
 import { realDataQualityWarnings, realDataSummary } from "@/lib/data/generated/realData";
+import { dataVintages, type Cadence } from "@/lib/data/dataVintage";
 import { candidateSources, dataAxisMapping, type ResearchPriority } from "@/lib/data/researchNotes";
 import { dataSources, type DataSourceItem } from "@/lib/data/dataSources";
 import { DataTable, type DataTableColumn } from "@/components/tables/DataTable";
 import { DataFreshnessPanel } from "@/components/ui/DataFreshness";
 import { SourceApprovalQueue } from "@/components/admin/SourceApprovalQueue";
+
+// 공표 주기별 배지 색상.
+const CADENCE_TONE: Record<Cadence, string> = {
+  실시간: "bg-teal-100 text-teal-800",
+  월별: "bg-blue-100 text-blue-800",
+  연간: "bg-amber-100 text-amber-800",
+  부정기: "bg-slate-200 text-slate-600"
+};
 
 const PRIORITY_LABEL: Record<ResearchPriority, { text: string; tone: string }> = {
   high: { text: "높음", tone: "bg-teal-100 text-teal-800" },
@@ -193,6 +202,45 @@ export default function DataPipelinePage() {
 
       {/* 데이터 갱신 상태 (뷰 시점 실시간 판정 — 실제 갱신 여부) */}
       <DataFreshnessPanel generatedAt={generatedAt} />
+
+      {/* 데이터 기준시점·공표 주기 — '수집일 ≠ 기준연월' 오해 방지 */}
+      <section className="surface mt-4">
+        <div className="surface-header">
+          <div>
+            <h3 className="surface-title">데이터 기준시점 · 공표 주기</h3>
+            <p className="surface-subtitle">
+              수집은 매일 돌지만, 화면의 기준연월은 원 통계의 공표 시점을 따릅니다. 연간 통계는 보통 기준연도 1~1.5년 뒤
+              공표되며, 새 시점이 공표되면 다음 배치에서 자동 반영됩니다.
+            </p>
+          </div>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[640px] text-sm">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
+                <th className="px-4 py-2.5 text-left text-xs font-bold">데이터 · 출처</th>
+                <th className="px-4 py-2.5 text-left text-xs font-bold">기준시점</th>
+                <th className="px-4 py-2.5 text-left text-xs font-bold">공표 주기</th>
+                <th className="px-4 py-2.5 text-left text-xs font-bold">최신성 설명</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dataVintages.map((v) => (
+                <tr key={v.label} className="border-b border-slate-100 last:border-0 align-top">
+                  <td className="px-4 py-2.5 font-medium text-ink">{v.label}</td>
+                  <td className="px-4 py-2.5 whitespace-nowrap font-mono font-semibold text-slate-700">{v.asOf}</td>
+                  <td className="px-4 py-2.5">
+                    <span className={`rounded px-1.5 py-0.5 text-xs font-semibold ${CADENCE_TONE[v.cadence]}`}>
+                      {v.cadence}
+                    </span>
+                  </td>
+                  <td className="px-4 py-2.5 text-xs leading-5 text-muted">{v.reason}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       {/* 수집 요약 카드 */}
       <section className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
