@@ -104,7 +104,7 @@ export default function CatalogPage() {
     <div className="space-y-7 pb-14">
       <PageHero
         kicker="분석 데이터 활용"
-        title="분석 데이터 카탈로그"
+        title="데이터 카탈로그"
         description="수집 중인 외국인 데이터셋을 카테고리별로 한눈에 보고, 각 분석 차트로 바로 이동합니다. 수집 상태·행수는 매일 자동 갱신됩니다."
       />
 

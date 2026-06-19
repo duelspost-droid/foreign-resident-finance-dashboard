@@ -1,6 +1,7 @@
 import { Gauge, MapPin, TrendingUp, Trophy } from "lucide-react";
 
 import { RegionMap } from "@/components/charts/RegionMap";
+import { RealSidoOpportunityTable } from "@/components/data/RealSidoOpportunityTable";
 import { ScoreRadarChart } from "@/components/charts/ScoreRadarChart";
 import { PageHero } from "@/components/ui/PageHero";
 import { Panel } from "@/components/ui/Panel";
@@ -151,9 +152,12 @@ export default function RegionsPage() {
         </Panel>
       )}
 
+      {/* 실데이터 시도 기회 점수 (행안부+KEDI) */}
+      <RealSidoOpportunityTable />
+
       <Panel
-        title="지역 기회 점수 순위"
-        subtitle="송금·유학생·급여계좌·다국어 상담 수요를 합산한 종합 기회 점수 순위입니다."
+        title="지역 기회 점수 순위 (표본)"
+        subtitle="송금·유학생·급여계좌·다국어 상담 수요를 합산한 종합 기회 점수 — 6개 시군구 시뮬레이션 표본."
         bodyClassName="p-5 pt-3"
       >
         <div className="space-y-2.5">
@@ -246,8 +250,9 @@ export default function RegionsPage() {
 
       <div className="two-column">
         <Panel
-          title="점수 유형별 비교"
-          subtitle="대표 지역 3곳의 송금·유학생·급여계좌·다국어 상담 니즈 구조"
+          title="점수 유형별 비교 (표본)"
+          subtitle="대표 지역 3곳의 송금·유학생·급여계좌·다국어 상담 니즈 구조 — 시뮬레이션 표본."
+          right={<span className="eyebrow">표본</span>}
           bodyClassName="p-0"
         >
           <div className="chart-box">
