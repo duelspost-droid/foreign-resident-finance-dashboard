@@ -9,6 +9,7 @@ import { useMobileNav } from "@/components/layout/MobileNavContext";
 
 const pageNames: Record<string, { title: string; sub: string }> = {
   "/":                    { title: "대시보드",       sub: "핵심 지표 한눈에 보기" },
+  "/dashboard":           { title: "대시보드",       sub: "핵심 지표 한눈에 보기" },
   "/financial-insights":  { title: "금융 인사이트",   sub: "시장 기회·지역 전략·유스케이스" },
   "/catalog":             { title: "데이터 카탈로그", sub: "수집 데이터셋 색인 · 카테고리별" },
   "/nationalities":       { title: "국적 분석",      sub: "국적·연령별 체류 현황" },
@@ -16,6 +17,9 @@ const pageNames: Record<string, { title: string; sub: string }> = {
   "/economy":             { title: "경제활동·소득",   sub: "임금·고용·산업·연령·EPS·건강보험" },
   "/universities":        { title: "유학생",         sub: "유학생 추이·국적·대학·시도" },
   "/consumption":         { title: "소비·금융거래",   sub: "면세점·부동산·본국송금·환율" },
+  "/visa-segments":       { title: "비자 세그먼트",   sub: "체류자격별 인원·금융 니즈 세그먼트" },
+  "/opportunity-scores":  { title: "기회 점수",      sub: "지역별 금융 기회 점수 순위·상세" },
+  "/compliance":          { title: "컴플라이언스",   sub: "집계 통계·개인정보 비식별 원칙" },
   "/data-pipeline":       { title: "메타데이터 관리", sub: "수집 파이프라인 및 데이터 발굴 에이전트" },
   "/admin/console":       { title: "운영 콘솔",       sub: "제안 답변 · 접속통계 · 방문자" },
   "/admin":               { title: "데이터 발굴 승인", sub: "발굴 에이전트가 찾은 신규 데이터셋 후보 승인" },

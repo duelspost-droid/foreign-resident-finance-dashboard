@@ -38,8 +38,8 @@ const donutLegend = visaDistributionData.map((segment, index) => ({
   color: donutColors[index % donutColors.length]
 }));
 
-const topSixTotal = nationalityDistributionData
-  .slice(0, 6)
+const topFifteenTotal = nationalityDistributionData
+  .slice(0, 15)
   .reduce((sum, row) => sum + row.residents, 0);
 
 const distinctSegments = new Set(
@@ -121,11 +121,11 @@ export default function NationalitiesPage() {
         />
         <StatTile
           label="상위 15개국 합계"
-          value={formatNumber(topSixTotal)}
+          value={formatNumber(topFifteenTotal)}
           unit="명"
           icon={<Users size={18} />}
           accent="#b45309"
-          sub={hasRealNationalityData ? "전체 체류외국인의 상위 15개국" : "국적별 분포 상위 6개국 합산"}
+          sub={hasRealNationalityData ? "전체 체류외국인의 상위 15개국" : "국적별 분포 상위 15개국 합산"}
         />
         <StatTile
           label="세그먼트 수"
@@ -187,7 +187,8 @@ export default function NationalitiesPage() {
 
       <Panel
         title="월별 증가 추세"
-        subtitle="주요 국적 체류외국인 월별 추세"
+        subtitle="주요 국적 체류외국인 월별 추세 · 추세 패턴 예시(표본)"
+        right={<span className="eyebrow">표본 · 실수치 아님</span>}
         bodyClassName="p-0"
       >
         <div className="chart-box">

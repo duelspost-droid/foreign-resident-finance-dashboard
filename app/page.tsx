@@ -51,6 +51,7 @@ import {
   realForeignWage,
   realEpsIntroduction,
   realForeignStudentNationality,
+  realStudentSummary,
   realBopTransferIncome,
   realExchangeRate,
   realForeignEmploymentStatus,
@@ -107,12 +108,21 @@ export default function DashboardPage() {
     hasNationalityByAge, hasHealthInsurance, hasMulticulturalFamily, hasEconActivity
   ].filter(Boolean).length;
 
-  const kpis = [
+  // delta = 실데이터 기반 YoY(있을 때만 녹색 칩), note = YoY가 아닌 보조 설명(중립 표기).
+  const kpis: {
+    label: string;
+    display: string;
+    unit: string;
+    icon: typeof Users;
+    color: string;
+    sub: string;
+    delta?: string;
+    note?: string;
+  }[] = [
     {
       label: "총 체류외국인",
       display: formatNumber(kpiSummary.totalResidents > 0 ? kpiSummary.totalResidents : 2_459_883),
       unit: "명",
-      trend: "+4.2%",
       icon: Users,
       color: "#0f766e",
       sub: kpiSummary.totalResidents > 0 ? "법무부 실데이터 2024" : "법무부 체류통계"
@@ -121,28 +131,27 @@ export default function DashboardPage() {
       label: "등록외국인",
       display: formatNumber(kpiSummary.registeredResidents > 0 ? kpiSummary.registeredResidents : 1_320_540),
       unit: "명",
-      trend: "+3.8%",
       icon: Banknote,
       color: "#3157a4",
-      sub: "장기체류 · 금융 주고객"
+      sub: "장기체류 비자 합계 · 금융 주고객"
     },
     {
       label: "외국인 유학생",
       display: formatNumber(kpiSummary.foreignStudents > 0 ? kpiSummary.foreignStudents : 173_490),
       unit: "명",
-      trend: "+12.3%",
       icon: GraduationCap,
       color: "#b45309",
-      sub: "D-2 / D-4 체류"
+      sub: "D-2 / D-4 체류",
+      delta: hasRealStudentData ? `+${realStudentSummary.yoy}%` : undefined
     },
     {
       label: "평균 금융기회점수",
       display: avg.toFixed(1),
       unit: "/ 100",
-      trend: `${sampleOpportunityRows.length}개 지역`,
       icon: BarChart3,
       color: "#be123c",
-      sub: "복합 기회지수"
+      sub: "복합 기회지수",
+      note: `${sampleOpportunityRows.length}개 지역 표본`
     }
   ];
 
@@ -324,9 +333,15 @@ export default function DashboardPage() {
                 <span className="mb-0.5 text-sm text-muted">{kpi.unit}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="flex items-center gap-0.5 text-xs font-bold" style={{ color: "#059669" }}>
-                  <ArrowUpRight size={13} />{kpi.trend} YoY
-                </span>
+                {kpi.delta ? (
+                  <span className="flex items-center gap-0.5 text-xs font-bold" style={{ color: "#059669" }}>
+                    <ArrowUpRight size={13} />{kpi.delta} YoY
+                  </span>
+                ) : kpi.note ? (
+                  <span className="text-xs font-semibold text-muted">{kpi.note}</span>
+                ) : (
+                  <span />
+                )}
                 <span className="text-[10px] text-muted">{kpi.sub}</span>
               </div>
             </div>

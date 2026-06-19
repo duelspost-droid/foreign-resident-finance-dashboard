@@ -110,6 +110,15 @@ export default function OpportunityScoresPage() {
         description="외국인 규모, 송금 수요, 유학생 수요, 급여계좌 수요, 다국어 상담 필요도를 0~100으로 정규화하고 설명 가능한 가중치로 전체 기회 점수를 산출합니다."
       />
 
+      {/* 표본 안내: 현재 리더보드는 시뮬레이션 표본 기반 */}
+      <div className="flex flex-wrap items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5 text-xs leading-5 text-amber-800">
+        <span className="rounded bg-amber-200 px-1.5 py-0.5 font-bold">표본</span>
+        <span>
+          이 리더보드의 점수·순위는 6개 시군구 <strong>시뮬레이션 표본</strong>으로 산출된 값입니다.
+          실 집계(KOSIS 시군구 23,477행) 기반 점수 산출은 후속 단계로 연동 예정입니다.
+        </span>
+      </div>
+
       <div className="stat-grid">
         <StatTile
           label="분석 지역 수"

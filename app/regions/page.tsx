@@ -46,6 +46,15 @@ export default function RegionsPage() {
         description="시도·시군구 단위의 집계 데이터를 기준으로 외국인 밀집도, 세그먼트, 송금·유학생·급여계좌 수요를 비교해 우선 공략 지역을 도출합니다."
       />
 
+      {/* 표본 안내: 기회점수·순위·레이더는 아직 시뮬레이션 표본 기반 */}
+      <div className="flex flex-wrap items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5 text-xs leading-5 text-amber-800">
+        <span className="rounded bg-amber-200 px-1.5 py-0.5 font-bold">표본</span>
+        <span>
+          아래 <strong>기회 점수·순위·레이더·지도</strong>는 6개 시군구 <strong>시뮬레이션 표본</strong>으로
+          산출된 값입니다(실 집계 점수 산출 전). 실데이터 지역 분포는 하단 “실데이터” 패널에서 확인하세요.
+        </span>
+      </div>
+
       <div className="stat-grid">
         <StatTile
           label="분석 지역 수"

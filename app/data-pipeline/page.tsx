@@ -169,16 +169,22 @@ export default function DataPipelinePage() {
           <span className="font-semibold text-ink">최근 배치</span>
           <span className="text-muted">{new Date(generatedAt).toLocaleString("ko-KR")}</span>
         </div>
-        <div className="flex items-center gap-2 text-sm">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
           <KeyRound aria-hidden className="text-slate-500" size={16} />
           <span className="text-muted">인증키</span>
-          <span className={keysPresent.DATA_GO_KR_SERVICE_KEY ? "text-teal-700" : "text-red-700"}>
-            data.go.kr {keysPresent.DATA_GO_KR_SERVICE_KEY ? "있음" : "없음"}
-          </span>
-          <span className="text-slate-300">|</span>
-          <span className={keysPresent.KOSIS_API_KEY ? "text-teal-700" : "text-red-700"}>
-            KOSIS {keysPresent.KOSIS_API_KEY ? "있음" : "없음"}
-          </span>
+          {[
+            { key: "DATA_GO_KR_SERVICE_KEY", label: "data.go.kr" },
+            { key: "KOSIS_API_KEY", label: "KOSIS" },
+            { key: "ECOS_API_KEY", label: "ECOS" },
+            { key: "SEOUL_OPENAPI_KEY", label: "서울" }
+          ].map((k, i) => (
+            <span key={k.key} className="flex items-center gap-2">
+              {i > 0 && <span className="text-slate-300">|</span>}
+              <span className={keysPresent[k.key] ? "text-teal-700" : "text-red-700"}>
+                {k.label} {keysPresent[k.key] ? "있음" : "없음"}
+              </span>
+            </span>
+          ))}
         </div>
         <span className="ml-auto rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-600">
           스케줄: 매일 01:00 KST (16:00 UTC) · GitHub Actions
@@ -463,7 +469,8 @@ export default function DataPipelinePage() {
                   </p>
                   <p className="text-muted">{d.purpose}</p>
                   <p className="mt-1 text-xs">
-                    상태: {d.status} · 후보 {d.foundCount}건
+                    상태: {d.status === "ok" ? "정상 탐색" : d.status} ·{" "}
+                    {d.foundCount > 0 ? `후보 ${d.foundCount}건` : "신규 후보 없음"}
                   </p>
                   {d.links.length > 0 && (
                     <details className="mt-2 text-xs text-slate-500">

@@ -57,7 +57,7 @@ export default function ConsumptionPage() {
             거시 금융지표 — 본국송금·환율
           </h2>
           <span className="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-semibold text-blue-700">
-            한국은행 ECOS · 실시간
+            한국은행 ECOS · 일배치 수집
           </span>
         </div>
 
@@ -146,7 +146,7 @@ export default function ConsumptionPage() {
 
         <p className="mt-3 text-xs text-slate-500">
           데이터 출처: 한국은행 경제통계시스템(ECOS) — 국제수지 이전소득수지(301Y013·ITEM 4B1000), 주요국 대원화환율(731Y001).
-          매일 18:30 UTC 수집 배치 완료 시 자동 갱신.
+          매일 01:00 KST 수집 배치 완료 시 자동 갱신.
         </p>
       </section>
 
@@ -229,7 +229,7 @@ export default function ConsumptionPage() {
 
       <p className="text-[11px] leading-5 text-muted">
         출처: 한국은행 경제통계시스템(ECOS) · 공공데이터포털(data.go.kr). 집계 통계 기반(개인 식별정보 미포함)이며,
-        매일 18:30 UTC 수집 배치 완료 시 자동 갱신됩니다.
+        매일 01:00 KST 수집 배치 완료 시 자동 갱신됩니다.
       </p>
     </div>
   );

@@ -9,11 +9,14 @@ import {
   Gauge,
   GraduationCap,
   Landmark,
+  Layers,
   LayoutDashboard,
   LayoutGrid,
+  Lock,
   Map,
   ShieldCheck,
   ShoppingBag,
+  Target,
   TrendingUp,
   X,
 } from "lucide-react";
@@ -30,7 +33,9 @@ const financeNav = [
 const analysisNav = [
   { href: "/catalog", label: "데이터 카탈로그", icon: LayoutGrid },
   { href: "/nationalities", label: "국적 분석", icon: Flag },
+  { href: "/visa-segments", label: "비자 세그먼트", icon: Layers },
   { href: "/regions", label: "지역 분석", icon: Map },
+  { href: "/opportunity-scores", label: "기회 점수", icon: Target },
   { href: "/economy", label: "경제활동·소득", icon: BarChart3 },
   { href: "/universities", label: "유학생", icon: GraduationCap },
   { href: "/consumption", label: "소비·금융거래", icon: ShoppingBag },
@@ -40,6 +45,7 @@ const system = [
   { href: "/data-pipeline", label: "메타데이터 관리", icon: DatabaseZap },
   { href: "/admin/console", label: "운영 콘솔", icon: Gauge },
   { href: "/admin", label: "데이터 발굴 승인", icon: ShieldCheck },
+  { href: "/compliance", label: "컴플라이언스·개인정보", icon: Lock },
 ];
 
 export function Sidebar() {

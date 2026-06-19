@@ -75,9 +75,17 @@ export default function EconomyPage() {
 
       {/* ── 외국인 경제활동인구 (KOSIS 수집 시 표시) ──────────── */}
       {hasEconActivity && (() => {
-        const periods = [...new Set(econActivityData.map((r) => r.period))].sort().reverse();
+        // 경제활동인구 표(천명 단위)만 사용 — EPS 산업표(명 단위) 등 타 소스·합계행을 제외해 단위 혼합 제거.
+        const ECON_SRC = "kosis_foreigner_economic_activity";
+        const econRows = econActivityData.filter((r) => r.sourceId === ECON_SRC && r.category !== "계");
+        const periods = [...new Set(econRows.map((r) => r.period))].sort().reverse();
         const latestPeriod = periods[0] ?? "";
-        const latestRows = econActivityData.filter((r) => r.period === latestPeriod);
+        // 같은 체류자격이 ITM(15세이상인구·경활인구·취업자·참가율…)별로 중복 → 첫 측정값(15세이상 인구·천명)만 사용.
+        const byCat = new Map<string, (typeof econRows)[number]>();
+        for (const r of econRows.filter((r) => r.period === latestPeriod)) {
+          if (!byCat.has(r.category)) byCat.set(r.category, r);
+        }
+        const latestRows = [...byCat.values()];
         const maxVal = Math.max(...latestRows.map((r) => r.value), 1);
         return (
           <section id="econ-activity" className="scroll-mt-20">
@@ -88,7 +96,7 @@ export default function EconomyPage() {
               </span>
             </div>
             <div className="surface p-5">
-              <p className="mb-4 text-xs text-muted">{latestRows[0]?.provider} {latestRows[0]?.title} · 체류자격별 취업·경제활동 분포</p>
+              <p className="mb-4 text-xs text-muted">{latestRows[0]?.provider} {latestRows[0]?.title} · 체류자격별 15세이상 인구(천명)</p>
               <div className="space-y-2.5">
                 {latestRows.sort((a, b) => b.value - a.value).map((row, i) => (
                   <div key={`${row.period}-${row.category}-${i}`} className="flex items-center gap-3">
@@ -100,8 +108,8 @@ export default function EconomyPage() {
                           style={{ width: `${Math.round((row.value / maxVal) * 100)}%` }}
                         />
                       </div>
-                      <span className="w-20 shrink-0 text-right font-mono text-xs text-muted">
-                        {row.value.toLocaleString()}명
+                      <span className="w-24 shrink-0 text-right font-mono text-xs text-muted">
+                        {row.value.toLocaleString()}천명
                       </span>
                     </div>
                   </div>
@@ -167,13 +175,14 @@ export default function EconomyPage() {
           <section id="welfare" className="scroll-mt-20">
             <div className="mb-3 flex items-center gap-2">
               <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">다문화가족 현황</h2>
-              <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">
-                여성가족부{multiculturalFamilySummary.latestYear ? ` · ${multiculturalFamilySummary.latestYear}` : ""}
+              <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-700">
+                여성가족부 · 부산 표본{multiculturalFamilySummary.latestYear ? ` · ${multiculturalFamilySummary.latestYear}` : ""}
               </span>
             </div>
             <div className="surface p-5">
               <p className="mb-3 text-xs text-muted">
-                총 다문화가족 {multiculturalFamilySummary.totalCount.toLocaleString()}명 · 결혼이민자·귀화자 가족의 금융 서비스 수요 기반
+                부산광역시 시군구 표본 · 총 다문화가족 {multiculturalFamilySummary.totalCount.toLocaleString()}명 · 결혼이민자·귀화자 가족의 금융 서비스 수요 기반
+                <span className="ml-1 text-amber-700">(전국 일반화 시 유의)</span>
               </p>
               <div className="space-y-2">
                 {sorted.map((row, i) => (
@@ -369,7 +378,7 @@ export default function EconomyPage() {
 
         <p className="mt-3 text-xs text-slate-500">
           데이터 출처: KOSIS(국가통계포털) — 외국인 임금구간·고용계약기간(통계청 이민자체류실태·고용조사),
-          고용허가제 E-9 국가별·업종별 도입(고용노동부). 매일 18:30 UTC 수집 배치 완료 시 자동 갱신.
+          고용허가제 E-9 국가별·업종별 도입(고용노동부). 매일 01:00 KST 수집 배치 완료 시 자동 갱신.
         </p>
       </section>
 
@@ -474,7 +483,7 @@ export default function EconomyPage() {
 
         <p className="mt-3 text-xs text-slate-500">
           데이터 출처: KOSIS(국가통계포털) — 통계청 이민자체류실태조사(종사상지위 DT_2FB007F·산업별 취업 DT_2FB021F·
-          연령계층별 경제활동 DT_2FA005F). 매일 18:30 UTC 수집 배치 완료 시 자동 갱신.
+          연령계층별 경제활동 DT_2FA005F). 매일 01:00 KST 수집 배치 완료 시 자동 갱신.
         </p>
       </section>
 

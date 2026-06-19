@@ -207,7 +207,7 @@ function FreshnessTag() {
       </span>
       <span className="flex items-center gap-1.5 text-xs text-teal-600">
         <RefreshCw size={13} />
-        매일 18:30 UTC 자동 갱신
+        매일 01:00 KST 자동 갱신
       </span>
     </div>
   );
@@ -241,7 +241,7 @@ export default function FinancialInsightsPage() {
             {
               label: "총 체류외국인",
               value: formatNumber(marketKpis.totalForeignResidents) + "명",
-              delta: marketKpis.totalForeignResidentsYoy + " YoY",
+              delta: marketKpis.totalForeignResidentsYoy ? marketKpis.totalForeignResidentsYoy + " YoY" : "법무부 체류통계",
               sub: "법무부 2024.12",
               color: "bg-teal-700",
               icon: Users
@@ -249,16 +249,16 @@ export default function FinancialInsightsPage() {
             {
               label: "외국인 유학생",
               value: formatNumber(marketKpis.foreignStudents) + "명",
-              delta: marketKpis.foreignStudentsYoy + " YoY",
+              delta: marketKpis.foreignStudentsYoy ? marketKpis.foreignStudentsYoy + " YoY" : "법무부 체류현황",
               sub: "D-2·D-4 비자",
               color: "bg-violet-700",
               icon: GraduationCap
             },
             {
-              label: "연간 해외 송금 추정",
-              value: marketKpis.remittanceEstimateKrw,
-              delta: "한국은행 이전소득수지",
-              sub: "외국인 본국 송금",
+              label: "이전소득수지(송금 대리지표)",
+              value: marketKpis.remittanceProxy,
+              delta: `한국은행 ECOS · ${marketKpis.remittanceProxyYear ?? "—"}`,
+              sub: "개인이전수지 기준",
               color: "bg-blue-700",
               icon: Send
             },
@@ -334,7 +334,7 @@ export default function FinancialInsightsPage() {
             </tbody>
           </table>
           <p className="border-t border-slate-100 bg-slate-50 px-4 py-2 text-xs text-slate-500">
-            데이터 출처: 법무부 체류외국인 현황. 매일 18:30 UTC 수집 배치 완료 시 자동 갱신.
+            데이터 출처: 법무부 체류외국인 현황. 매일 01:00 KST 수집 배치 완료 시 자동 갱신.
           </p>
         </div>
       </section>

@@ -1,4 +1,4 @@
-import { GraduationCap, Globe2, Languages, MapPin, TrendingUp, Users } from "lucide-react";
+import { GraduationCap, Languages, TrendingUp, Users } from "lucide-react";
 import { StudentDegreeDonutChart } from "@/components/charts/StudentDegreeDonutChart";
 import { StudentHorizontalBarChart } from "@/components/charts/StudentHorizontalBarChart";
 import { Panel } from "@/components/ui/Panel";
@@ -69,7 +69,15 @@ export default function UniversitiesPage() {
   const topStudentNationality = studentNationality[0];
 
   // 학위과정별 분포(유학 D-2·석사·박사·어학연수 등): 도넛 + 범례용.
-  const degreeDist = realForeignStudentNationality.byDegree ?? [];
+  // 주의: byDegree에는 상위 롤업(예: "유학(D-2)", "일반연수(D-4)")과 그 하위 세부코드(D-2-2 등)가
+  // 함께 들어와 단순 합산 시 이중계산(약 2배)된다. 하위 코드를 가진 상위 코드는 제외해 상호배타 잎(leaf)만 사용.
+  const degreeDistRaw = realForeignStudentNationality.byDegree ?? [];
+  const degreeCode = (label: string) => label.match(/\(([^)]+)\)/)?.[1] ?? label;
+  const allDegreeCodes = degreeDistRaw.map((d) => degreeCode(d.degree));
+  const degreeDist = degreeDistRaw.filter((d) => {
+    const code = degreeCode(d.degree);
+    return !allDegreeCodes.some((c) => c !== code && c.startsWith(code + "-"));
+  });
   const degreeTotal = degreeDist.reduce((s, d) => s + d.value, 0);
 
   // KEDI 시도별 외국인 유학생: 막대용(상위→하위 정렬은 원자료 순서 유지).
@@ -95,7 +103,7 @@ export default function UniversitiesPage() {
         <span>
           출처: <strong>법무부 출입국·외국인정책본부</strong> · 수집 기준일 <strong>{freshDate}</strong> ·
           {series.length > 0 ? ` ${series[0].year}~${asOf} 시계열` : " 데이터 준비 중"} ·
-          매일 18:30 UTC 자동 갱신
+          매일 01:00 KST 자동 갱신
         </span>
       </div>
 
@@ -207,7 +215,7 @@ export default function UniversitiesPage() {
                 <div>
                   <h3 className="surface-title">대학별 외국인 유학생 TOP 30</h3>
                   <p className="surface-subtitle">
-                    대학알리미 고등교육기관 외국인유학생수
+                    법무부 유학생관리정보(data.go.kr) 학교별 집계
                     {universitySummary.latestYear ? ` · ${universitySummary.latestYear}년` : ""} · 전체 {formatNumber(universitySummary.universityCount)}개교 집계
                   </p>
                 </div>
@@ -249,7 +257,7 @@ export default function UniversitiesPage() {
             <section className="surface p-5">
               <h3 className="surface-title mb-1">대학·캠퍼스별 세분화 (수집 대기)</h3>
               <p className="text-sm leading-6 text-muted">
-                대학별·캠퍼스별 유학생 수는 <strong>대학알리미(고등교육기관 외국인유학생 수)</strong> 소스가
+                대학별·캠퍼스별 유학생 수는 <strong>법무부 유학생관리정보(data.go.kr 3069982)</strong> 소스가
                 정상 수집되면 자동으로 TOP 30 랭킹이 표시됩니다. 파서는 연동 완료 상태이며, 공공데이터포털 응답이
                 안정화되는 즉시 채워집니다.
               </p>
