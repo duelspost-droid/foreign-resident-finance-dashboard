@@ -40,7 +40,7 @@ export function SourceApprovalQueue({ compact = false }: { compact?: boolean }) 
     load();
   }, [load]);
 
-  async function decide(id: number, status: "approved" | "rejected", targetTable?: string) {
+  async function decide(id: number, status: "approved" | "rejected" | "pending", targetTable?: string) {
     setBusyId(id);
     const ok = await updateCandidateStatus(id, status, { targetTable });
     if (ok) await load();
@@ -116,7 +116,7 @@ export function SourceApprovalQueue({ compact = false }: { compact?: boolean }) 
           <div className="surface-header">
             <div>
               <h3 className="surface-title">처리 이력 ({decided.length})</h3>
-              <p className="surface-subtitle">승인·거부 결정 기록</p>
+              <p className="surface-subtitle">승인·거부 결정 기록 · 수집 중단/되돌리기 가능(삭제 아님)</p>
             </div>
           </div>
           <ul className="divide-y divide-slate-50">
@@ -130,8 +130,30 @@ export function SourceApprovalQueue({ compact = false }: { compact?: boolean }) 
                   {c.provider} · {c.kind} · {c.datasetId}
                 </span>
                 {c.targetTable && (
-                  <span className="ml-auto shrink-0 text-xs text-teal-700">→ {TABLE_LABELS[c.targetTable] ?? c.targetTable}</span>
+                  <span className="shrink-0 text-xs text-teal-700">→ {TABLE_LABELS[c.targetTable] ?? c.targetTable}</span>
                 )}
+                <div className="ml-auto flex shrink-0 items-center gap-1.5">
+                  {c.status === "approved" && (
+                    <button
+                      type="button"
+                      disabled={busyId === c.id}
+                      onClick={() => decide(c.id, "rejected")}
+                      className="rounded border border-rose-200 px-2 py-0.5 text-[11px] font-semibold text-rose-700 hover:bg-rose-50 disabled:opacity-40"
+                      title="이 소스를 거부로 바꿔 다음 배치부터 수집을 중단합니다"
+                    >
+                      수집 중단
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    disabled={busyId === c.id}
+                    onClick={() => decide(c.id, "pending")}
+                    className="rounded border border-slate-200 px-2 py-0.5 text-[11px] font-medium text-slate-600 hover:bg-slate-50 disabled:opacity-40"
+                    title="결정을 취소하고 승인 대기 큐로 되돌립니다"
+                  >
+                    대기로 되돌리기
+                  </button>
+                </div>
               </li>
             ))}
           </ul>

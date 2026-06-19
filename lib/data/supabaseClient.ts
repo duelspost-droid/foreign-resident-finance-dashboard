@@ -71,25 +71,29 @@ export async function fetchSourceCandidates(): Promise<SourceCandidate[] | null>
   return data.map(mapCandidate);
 }
 
-// 관리자 승인/거부 처리. 성공 시 true.
+// 관리자 승인/거부/되돌리기 처리. 성공 시 true.
+// pending 으로 되돌리면 결정 메타(decided_*)를 비우고 다시 대기 큐로 보낸다.
+// target_table·notes 는 명시했을 때만 갱신(되돌리기 시 기존 값 보존).
 export async function updateCandidateStatus(
   id: number,
-  status: "approved" | "rejected",
+  status: "approved" | "rejected" | "pending",
   options: { targetTable?: string; decidedBy?: string; notes?: string } = {}
 ): Promise<boolean> {
   const client = createBrowserSupabaseClient();
   if (!client) return false;
 
-  const { error } = await client
-    .from("source_candidates")
-    .update({
-      status,
-      target_table: options.targetTable ?? null,
-      decided_by: options.decidedBy ?? "admin",
-      decided_at: new Date().toISOString(),
-      notes: options.notes ?? null,
-    })
-    .eq("id", id);
+  const patch: Record<string, unknown> = { status };
+  if (status === "pending") {
+    patch.decided_at = null;
+    patch.decided_by = null;
+  } else {
+    patch.decided_at = new Date().toISOString();
+    patch.decided_by = options.decidedBy ?? "admin";
+  }
+  if (options.targetTable !== undefined) patch.target_table = options.targetTable;
+  if (options.notes !== undefined) patch.notes = options.notes;
+
+  const { error } = await client.from("source_candidates").update(patch).eq("id", id);
 
   if (error) {
     console.error("updateCandidateStatus error:", error.message);
