@@ -17,22 +17,36 @@ const SIDO_NAMES = new Set([
   "경상남도", "제주특별자치도"
 ]);
 
-function build() {
-  // 행안부 외국인주민 시도별 소스만 사용(법무부 시군구·KEDI 유학생 등 다른 혼합 소스 제외).
-  const rows = realApiRegionData.filter((r) => (r.sourceName ?? "").includes("행정안전부 외국인주민"));
-  if (rows.length === 0) return { latestMonth: null as string | null, stats: {} as Record<string, number>, total: 0 };
-
-  // latestMonth는 "필터된 행안부 행"에서만 산출(다른 소스의 더 최신 월에 휘둘리지 않도록).
-  const latestMonth = [...new Set(rows.map((r) => r.baseMonth))].sort().at(-1) ?? null;
+// 한 기준월의 시도별 외국인주민 총수(시도별 첫 행 = 외국인주민수 ITM)를 집계.
+function statsForMonth(rows: typeof realApiRegionData, month: string): Record<string, number> {
   const stats: Record<string, number> = {};
   for (const r of rows) {
-    if (r.baseMonth !== latestMonth) continue;
+    if (r.baseMonth !== month) continue;
     if (!SIDO_NAMES.has(r.sido)) continue; // 17개 시도만(합계·시군구 행 제외)
     if (r.sido in stats) continue; // 시도별 첫 행 = 외국인주민 총수(계) ITM 만 사용
     stats[r.sido] = r.residentCount;
   }
+  return stats;
+}
+
+function build() {
+  // 행안부 외국인주민 시도별 소스만 사용(법무부 시군구·KEDI 유학생 등 다른 혼합 소스 제외).
+  const rows = realApiRegionData.filter((r) => (r.sourceName ?? "").includes("행정안전부 외국인주민"));
+  if (rows.length === 0) {
+    return { latestMonth: null as string | null, stats: {} as Record<string, number>, total: 0, trend: [] as { year: number; total: number }[] };
+  }
+
+  const months = [...new Set(rows.map((r) => r.baseMonth))].sort();
+  const latestMonth = months.at(-1) ?? null;
+  const stats = latestMonth ? statsForMonth(rows, latestMonth) : {};
   const total = Object.values(stats).reduce((a, b) => a + b, 0);
-  return { latestMonth, stats, total };
+
+  // 연도별 전국 합계 추이(정합성 범위 밖 연도는 제외).
+  const trend = months
+    .map((mo) => ({ year: Number(mo.slice(0, 4)), total: Object.values(statsForMonth(rows, mo)).reduce((a, b) => a + b, 0) }))
+    .filter((p) => p.total >= 1_000_000 && p.total <= 6_000_000);
+
+  return { latestMonth, stats, total, trend };
 }
 
 const agg = build();
@@ -45,3 +59,8 @@ export const sidoForeignerStats: Record<string, number> = SANE ? agg.stats : {};
 export const sidoForeignerTotal = SANE ? agg.total : 0;
 export const sidoForeignerLatestYear =
   SANE && agg.latestMonth ? Number(agg.latestMonth.slice(0, 4)) : null;
+
+// 연도별 전국 외국인주민 추이(행안부). 화면에서 최근 N년 추이로 사용.
+export type SidoForeignerTrendPoint = { year: number; total: number };
+export const sidoForeignerTrend: SidoForeignerTrendPoint[] = agg.trend;
+export const hasSidoForeignerTrend = sidoForeignerTrend.length >= 3;
