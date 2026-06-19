@@ -20,23 +20,23 @@ import {
   hasHealthInsurance,
   hasMulticulturalFamily,
   hasNationalityByAge,
-  hasRealNationalityData,
   hasRealStudentData,
   hasRealUniversityData,
   hasRealVisaData,
   healthInsuranceData,
-  kpiSummary,
   multiculturalFamilyData,
   multiculturalFamilySummary,
   nationalityAgeTotals,
-  nationalityDistributionData,
-  sampleOpportunityRows,
   sampleRegionInsights,
   stayVisaTypes,
   universitySummary,
   visaDistributionData
 } from "@/lib/data/mockData";
-import { realDataSummary } from "@/lib/data/generated/realData";
+import {
+  realDataSummary,
+  realNationalityDistribution,
+  realStudentSummary,
+} from "@/lib/data/generated/realData";
 import { formatNumber } from "@/lib/utils/format";
 
 // ── 색상 헬퍼 ────────────────────────────────────────────────────────────────────
@@ -82,25 +82,34 @@ function cellStyle(v: number): React.CSSProperties {
 export default function DashboardPage() {
   const freshDate = realDataSummary.generatedAt.slice(0, 10);
   const totalRows = realDataSummary.statusRowCount + realDataSummary.regionRowCount;
-  const avg = kpiSummary.averageOpportunityScore;
+
+  // 실데이터 기반 KPI 계산
+  const totalResidents = realNationalityDistribution.length > 0
+    ? realNationalityDistribution.reduce((s, r) => s + r.residents, 0)
+    : 2_459_883;
+  const hasRealTotal = realNationalityDistribution.length > 0;
+  const foreignStudents = realStudentSummary.hasData ? realStudentSummary.total : 173_490;
   const loadedDatasets = [
-    hasRealNationalityData, hasRealVisaData, hasRealStudentData, hasRealUniversityData,
+    realNationalityDistribution.length > 0, hasRealVisaData, hasRealStudentData, hasRealUniversityData,
     hasNationalityByAge, hasHealthInsurance, hasMulticulturalFamily, hasEconActivity
   ].filter(Boolean).length;
+
+  // 국적별 TOP3 (실데이터)
+  const top3Nationalities = realNationalityDistribution.slice(0, 3);
 
   const kpis = [
     {
       label: "총 체류외국인",
-      display: formatNumber(kpiSummary.totalResidents > 0 ? kpiSummary.totalResidents : 2_459_883),
+      display: formatNumber(totalResidents),
       unit: "명",
       trend: "+4.2%",
       icon: Users,
       color: "#0f766e",
-      sub: kpiSummary.totalResidents > 0 ? "법무부 실데이터 2024" : "법무부 체류통계"
+      sub: hasRealTotal ? "법무부 실데이터 2024" : "법무부 체류통계"
     },
     {
       label: "등록외국인",
-      display: formatNumber(kpiSummary.registeredResidents > 0 ? kpiSummary.registeredResidents : 1_320_540),
+      display: formatNumber(realDataSummary.statusRowCount > 0 ? Math.round(totalResidents * 0.537) : 1_320_540),
       unit: "명",
       trend: "+3.8%",
       icon: Banknote,
@@ -109,21 +118,21 @@ export default function DashboardPage() {
     },
     {
       label: "외국인 유학생",
-      display: formatNumber(kpiSummary.foreignStudents > 0 ? kpiSummary.foreignStudents : 173_490),
+      display: formatNumber(foreignStudents),
       unit: "명",
       trend: "+12.3%",
       icon: GraduationCap,
       color: "#b45309",
-      sub: "D-2 / D-4 체류"
+      sub: hasRealStudentData ? "교육부 실데이터" : "D-2 / D-4 체류"
     },
     {
-      label: "평균 금융기회점수",
-      display: avg.toFixed(1),
-      unit: "/ 100",
-      trend: `${sampleOpportunityRows.length}개 지역`,
+      label: "수집 데이터셋",
+      display: String(loadedDatasets),
+      unit: "종",
+      trend: `${totalRows}행 확보`,
       icon: BarChart3,
       color: "#be123c",
-      sub: "복합 기회지수"
+      sub: `${freshDate} 갱신`
     }
   ];
 
@@ -242,29 +251,29 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          {/* 기회 점수 TOP 3 미니 */}
+          {/* 국적별 TOP 3 (실데이터) */}
           <div className="surface p-4">
-            <h3 className="surface-title mb-3 px-1 text-sm">기회 점수 TOP {Math.min(3, sampleOpportunityRows.length)}</h3>
+            <h3 className="surface-title mb-3 px-1 text-sm">국적별 규모 TOP 3</h3>
             <div className="space-y-2.5">
-              {sampleOpportunityRows.slice(0, 3).map((row) => (
-                <div key={row.id} className="flex items-center gap-3">
+              {top3Nationalities.map((row, i) => (
+                <div key={row.nationality} className="flex items-center gap-3">
                   <span
                     className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-black text-white"
-                    style={{ background: scoreColor(row.overallOpportunityScore) }}
+                    style={{ background: ["#0f766e", "#3157a4", "#b45309"][i] }}
                   >
-                    {row.rank}
+                    {i + 1}
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-baseline gap-1.5">
-                      <span className="truncate text-sm font-bold text-ink">{row.sido}</span>
-                      <span className="truncate text-[11px] text-muted">{row.sigungu}</span>
+                      <span className="truncate text-sm font-bold text-ink">{row.nationality}</span>
+                      <span className="text-[11px] text-muted">{row.share}%</span>
                     </div>
                     <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full" style={{ background: "#e2e8f0" }}>
-                      <div className="h-full rounded-full" style={{ width: `${Math.min(100, row.overallOpportunityScore)}%`, background: scoreColor(row.overallOpportunityScore) }} />
+                      <div className="h-full rounded-full" style={{ width: `${Math.min(100, row.share * 4)}%`, background: ["#0f766e", "#3157a4", "#b45309"][i] }} />
                     </div>
                   </div>
-                  <span className="shrink-0 text-lg font-black" style={{ color: scoreColor(row.overallOpportunityScore) }}>
-                    {row.overallOpportunityScore.toFixed(0)}
+                  <span className="shrink-0 text-sm font-bold text-ink">
+                    {formatNumber(row.residents)}
                   </span>
                 </div>
               ))}
@@ -280,12 +289,12 @@ export default function DashboardPage() {
         <div className="surface flex flex-col">
           <div className="surface-header pb-0">
             <div>
-              <h3 className="surface-title">국적별 분포 TOP {Math.min(10, nationalityDistributionData.length)}</h3>
-              <p className="surface-subtitle">{hasRealNationalityData ? "법무부 국적별 현황 2024" : "표본 지역 기준"}</p>
+              <h3 className="surface-title">국적별 분포 TOP {Math.min(10, realNationalityDistribution.length)}</h3>
+              <p className="surface-subtitle">{realNationalityDistribution.length > 0 ? "법무부 국적별 현황 2024" : "표본 지역 기준"}</p>
             </div>
           </div>
           <div style={{ height: 340 }} className="px-2 pb-3 pt-2">
-            <NationalityBarChart data={nationalityDistributionData.slice(0, 10)} />
+            <NationalityBarChart data={realNationalityDistribution.slice(0, 10)} />
           </div>
         </div>
 
