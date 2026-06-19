@@ -1,4 +1,4 @@
-import { BarChart3, Gauge, Trophy, TrendingUp } from "lucide-react";
+import { BarChart3, Globe, MapPin, TrendingUp } from "lucide-react";
 
 import { DataTable, type DataTableColumn } from "@/components/tables/DataTable";
 import { Panel } from "@/components/ui/Panel";
@@ -6,6 +6,11 @@ import { PageHero } from "@/components/ui/PageHero";
 import { StatTile } from "@/components/ui/StatTile";
 import { sampleOpportunityRows } from "@/lib/data/mockData";
 import { RealSidoOpportunityTable } from "@/components/data/RealSidoOpportunityTable";
+import {
+  hasRealSidoOpportunity,
+  realSidoOpportunity
+} from "@/lib/data/opportunityReal";
+import { sidoForeignerTotal, sidoForeignerLatestYear } from "@/lib/data/regionAggregates";
 import type { RegionOpportunityRow } from "@/lib/types/foreignResident";
 import {
   formatNumber,
@@ -83,16 +88,11 @@ export default function OpportunityScoresPage() {
     (a, b) => b.overallOpportunityScore - a.overallOpportunityScore
   );
 
-  const regionCount = rows.length;
-  const averageScore =
-    regionCount > 0
-      ? rows.reduce((sum, row) => sum + row.overallOpportunityScore, 0) / regionCount
-      : 0;
-  const topScoreRow = rows[0];
-  const topGrowthRow = rows.reduce(
-    (best, row) => (row.yoyChangeRate > best.yoyChangeRate ? row : best),
-    rows[0]
-  );
+  // 실데이터 시도 통계
+  const topSido = realSidoOpportunity[0];
+  const fastestSido = hasRealSidoOpportunity
+    ? [...realSidoOpportunity].filter((r) => r.yoy != null).sort((a, b) => (b.yoy ?? 0) - (a.yoy ?? 0))[0]
+    : null;
 
   return (
     <div className="space-y-7 pb-14">
@@ -110,42 +110,50 @@ export default function OpportunityScoresPage() {
         <span className="rounded bg-amber-200 px-1.5 py-0.5 font-bold">표본</span>
         <span>
           아래 <strong>시군구 리더보드·상세</strong>는 6개 시군구 <strong>시뮬레이션 표본</strong>입니다(송금·급여계좌·다국어
-          세부 점수 포함). 시도 단위 실데이터 랭킹은 위 “실데이터 기회 점수” 표를 참고하세요.
+          세부 점수 포함). 시도 단위 실데이터 랭킹은 위 "실데이터 기회 점수" 표를 참고하세요.
         </span>
       </div>
 
       <div className="stat-grid">
         <StatTile
-          label="분석 지역 수"
-          value={formatNumber(regionCount)}
-          unit="개 지역"
+          label="분석 시도 수"
+          value={hasRealSidoOpportunity ? realSidoOpportunity.length : rows.length}
+          unit={hasRealSidoOpportunity ? "개 시도" : "개 시군구 (표본)"}
           accent="#0f766e"
-          icon={<BarChart3 size={18} />}
-          sub="시군구 단위 집계"
+          icon={<MapPin size={18} />}
+          sub={hasRealSidoOpportunity ? "행안부 실데이터 17개 시도" : "시뮬레이션 표본"}
         />
         <StatTile
-          label="평균 전체 기회점수"
-          value={formatScore(averageScore)}
-          unit="/ 100"
+          label="1위 시도 (기회점수)"
+          value={hasRealSidoOpportunity && topSido ? topSido.sido : `${rows[0]?.sido ?? ""} ${rows[0]?.sigungu ?? ""}`}
           accent="#3157a4"
-          icon={<Gauge size={18} />}
-          sub="가중 합성 점수 평균"
+          icon={<Globe size={18} />}
+          trend={hasRealSidoOpportunity && topSido
+            ? { label: `종합 ${topSido.overallScore}점`, dir: "up" }
+            : { label: `${formatScore(rows[0]?.overallOpportunityScore ?? 0)}점`, dir: "up" }}
+          sub={hasRealSidoOpportunity && topSido
+            ? `외국인주민 ${formatNumber(topSido.residentCount)}명 · 유학생 ${formatNumber(topSido.studentCount)}명`
+            : "표본 기준"}
         />
         <StatTile
-          label="최고 점수 지역"
-          value={formatScore(topScoreRow.overallOpportunityScore)}
-          unit="점"
+          label="전국 외국인주민"
+          value={hasRealSidoOpportunity ? formatNumber(sidoForeignerTotal) : "—"}
+          unit={hasRealSidoOpportunity ? "명" : ""}
           accent="#b45309"
-          icon={<Trophy size={18} />}
-          trend={{ label: `${topScoreRow.sido} ${topScoreRow.sigungu}`, dir: "up" }}
+          icon={<BarChart3 size={18} />}
+          sub={hasRealSidoOpportunity
+            ? `행안부 시도별${sidoForeignerLatestYear ? ` ${sidoForeignerLatestYear}년` : ""}`
+            : "실데이터 수집 전"}
         />
         <StatTile
-          label="최고 성장 지역"
-          value={formatPercent(topGrowthRow.yoyChangeRate)}
+          label="최고 성장 시도"
+          value={hasRealSidoOpportunity && fastestSido ? fastestSido.sido : rows[0]?.sido ?? "—"}
           accent="#be123c"
           icon={<TrendingUp size={18} />}
-          trend={{ label: `${topGrowthRow.sido} ${topGrowthRow.sigungu}`, dir: "up" }}
-          sub="전년 대비 외국인 증가율"
+          trend={{ label: "전년 대비", dir: "up" }}
+          sub={hasRealSidoOpportunity && fastestSido?.yoy != null
+            ? `YoY +${fastestSido.yoy.toFixed(1)}%`
+            : formatPercent(rows.reduce((b, r) => r.yoyChangeRate > b.yoyChangeRate ? r : b, rows[0])?.yoyChangeRate ?? 0)}
         />
       </div>
 

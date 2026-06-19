@@ -83,3 +83,54 @@ export const hasSidoForeignerTrend = sidoForeignerTrend.length >= 3;
 
 // 시도별 전년 대비 외국인주민 증가율(%). 기회 점수 모델의 '성장' 신호로 사용.
 export const sidoForeignerYoY: Record<string, number> = SANE ? agg.yoy : {};
+
+// ── 시군구별 등록외국인 집계 (KOSIS 법무부 DT_1B040A11) ─────────────────────
+//
+// DT_1B040A11 행은 region(C1_NM)=시군구명, 체류자격 차원은 별도로 캡처되지 않아
+// sido 필드에 시군구명이 들어있다. 합계 행(최대값)을 시군구별로 채택해 이중계산 방지.
+
+export type SigunguForeignerRow = { sido: string; sigungu: string; count: number };
+
+function buildSigungu(): SigunguForeignerRow[] {
+  const SIGUNGU_SOURCE = "시군구별 및 체류자격별 등록외국인";
+  const rows = realApiRegionData.filter((r) => (r.sourceName ?? "").includes(SIGUNGU_SOURCE));
+  if (rows.length === 0) return [];
+
+  // 최신 기준월만 사용.
+  const months = [...new Set(rows.map((r) => r.baseMonth))].sort();
+  const latestMonth = months.at(-1);
+  if (!latestMonth) return [];
+
+  const latest = rows.filter((r) => r.baseMonth === latestMonth);
+
+  // sido 필드가 실제로는 시군구명·시도명·합계를 혼용. 시도 이름·합계·총계 행 제외.
+  const EXCLUDE = new Set([...SIDO_NAMES, "총계", "합계", "전국", "소계"]);
+
+  // 시군구명별 최대값(= 합계 行) 채택 — 체류자격 소계가 여럿 있어도 합계가 최대.
+  const byName = new Map<string, { name: string; count: number }>();
+  for (const r of latest) {
+    const name = r.sido.trim();
+    if (!name || EXCLUDE.has(name)) continue;
+    const prev = byName.get(name);
+    if (!prev || r.residentCount > prev.count) byName.set(name, { name, count: r.residentCount });
+  }
+
+  // 시도 소속 추론: sido_source(행안부)에서 시도별 최대 행을 찾아 매핑.
+  // 단순화: "구"로 끝나는 지명은 특별·광역시 관할, "시"/"군"은 도 관할.
+  const result: SigunguForeignerRow[] = [];
+  for (const { name, count } of byName.values()) {
+    result.push({ sido: inferSido(name), sigungu: name, count });
+  }
+  result.sort((a, b) => b.count - a.count);
+  return result;
+}
+
+function inferSido(sigungu: string): string {
+  if (sigungu.endsWith("구") && !sigungu.includes("시")) return "특별/광역시";
+  return "경기도 외"; // 단순 fallback — 지도 표시에는 미사용
+}
+
+const sigunguData = buildSigungu();
+
+export const realSigunguResidents: readonly SigunguForeignerRow[] = sigunguData;
+export const hasRealSigunguResidents = sigunguData.length >= 50;

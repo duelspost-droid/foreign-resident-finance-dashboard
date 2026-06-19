@@ -16,9 +16,9 @@ import {
   nationalityAgeTotals,
   nationalityByAge,
   nationalityDistributionData,
-  sampleResidentStatus,
   visaDistributionData
 } from "@/lib/data/mockData";
+import { realForeignResidentStatus } from "@/lib/data/generated/realData";
 import type { ForeignResidentStatus } from "@/lib/types/foreignResident";
 import { formatNumber } from "@/lib/utils/format";
 
@@ -42,9 +42,9 @@ const topFifteenTotal = nationalityDistributionData
   .slice(0, 15)
   .reduce((sum, row) => sum + row.residents, 0);
 
-const distinctSegments = new Set(
-  sampleResidentStatus.map((row) => row.segmentType)
-).size;
+// 실데이터 우선, 없으면 0
+const statusRows: readonly ForeignResidentStatus[] = realForeignResidentStatus;
+const distinctSegments = new Set(statusRows.map((row) => row.segmentType)).size;
 
 const topNationality = nationalityDistributionData[0];
 
@@ -241,14 +241,14 @@ export default function NationalitiesPage() {
 
       <Panel
         title="체류자격별 인원 및 금융 니즈"
-        subtitle={sampleResidentStatus[0]?.nationality === "전체" ? "법무부 외국인체류데이터(2024) · 장기체류 비자타입별 집계" : "체류자격은 금융행동의 직접 증거가 아닌 세그먼트 가설입니다."}
-        right={<span className="chip chip-neutral">{sampleResidentStatus[0]?.nationality === "전체" ? "실데이터" : "가설 기반"}</span>}
+        subtitle={statusRows.length > 0 ? `법무부 체류외국인 국적·자격별 현황(2024) · 국적별 집계 ${statusRows.length}건` : "체류자격은 금융행동의 직접 증거가 아닌 세그먼트 가설입니다."}
+        right={<span className="chip chip-neutral">{statusRows.length > 0 ? "실데이터" : "가설 기반"}</span>}
         bodyClassName="p-2"
       >
         <DataTable
           columns={statusColumns}
           rowKey={(row) => row.id}
-          rows={sampleResidentStatus}
+          rows={statusRows.slice(0, 100)}
         />
       </Panel>
     </div>

@@ -5,7 +5,8 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Panel } from "@/components/ui/Panel";
 import { StatTile } from "@/components/ui/StatTile";
 import { segmentRecommendationMap } from "@/lib/data/insights";
-import { hasRealVisaData, sampleResidentStatus, stayVisaTypes } from "@/lib/data/mockData";
+import { hasRealVisaData, stayVisaTypes } from "@/lib/data/mockData";
+import { realForeignResidentStatus } from "@/lib/data/generated/realData";
 import type {
   ForeignResidentSegment,
   ForeignResidentStatus
@@ -18,30 +19,27 @@ const segmentOrder = Object.keys(
   segmentRecommendationMap
 ) as ForeignResidentSegment[];
 
-// 세그먼트별 인원 집계 (sampleResidentStatus의 residentCount를 segmentType 기준으로 합산).
-const countBySegment = sampleResidentStatus.reduce<Record<string, number>>(
+// 세그먼트별 인원 집계: stayVisaTypes(실데이터) 우선, 없으면 0.
+const countBySegment = stayVisaTypes.reduce<Record<string, number>>(
   (acc, row) => {
-    acc[row.segmentType] = (acc[row.segmentType] ?? 0) + row.residentCount;
+    acc[row.segment] = (acc[row.segment] ?? 0) + row.count;
     return acc;
   },
   {}
 );
 
-// 세그먼트별 대표 체류자격·주요 국적: 인원이 가장 많은 행을 채택.
-const representativeBySegment = sampleResidentStatus.reduce<
+// 세그먼트별 대표 체류자격·주요 국적: realForeignResidentStatus에서 세그먼트별 최다 국적.
+const representativeBySegment = realForeignResidentStatus.reduce<
   Record<string, ForeignResidentStatus>
 >((acc, row) => {
   const current = acc[row.segmentType];
   if (!current || row.residentCount > current.residentCount) {
-    acc[row.segmentType] = row;
+    acc[row.segmentType] = row as ForeignResidentStatus;
   }
   return acc;
 }, {});
 
-const totalAnalyzed = sampleResidentStatus.reduce(
-  (sum, row) => sum + row.residentCount,
-  0
-);
+const totalAnalyzed = stayVisaTypes.reduce((sum, row) => sum + row.count, 0);
 
 const topSegment = Object.entries(countBySegment).sort(
   (a, b) => b[1] - a[1]
@@ -65,7 +63,7 @@ const matrixProducts = Array.from(new Set(distinctProducts))
   .sort((a, b) => productFrequency[b] - productFrequency[a])
   .slice(0, 8);
 
-// 데이터테이블: 대표 행이 있는 세그먼트만 (집계 분류 가설).
+// 데이터테이블: 세그먼트별 대표 행(실데이터 기준).
 const mappedRows = segmentOrder
   .map((segment) => representativeBySegment[segment])
   .filter((row): row is ForeignResidentStatus => Boolean(row));
