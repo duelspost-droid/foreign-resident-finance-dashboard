@@ -39,7 +39,6 @@ import {
   nationalityAgeTotals,
   sampleRegionInsights,
   stayVisaTypes,
-  universitySummary,
   visaDistributionData
 } from "@/lib/data/mockData";
 import {
