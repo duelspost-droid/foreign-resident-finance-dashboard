@@ -8,7 +8,12 @@ import {
   type SourceCandidate
 } from "@/lib/data/supabaseClient";
 import { candidateSources } from "@/lib/data/researchNotes";
-import { TARGET_TABLES, TARGET_TABLE_LABELS as TABLE_LABELS } from "@/lib/data/sourceMeta";
+import {
+  TARGET_TABLES,
+  TARGET_TABLE_LABELS as TABLE_LABELS,
+  suggestTarget,
+  targetLabel
+} from "@/lib/data/sourceMeta";
 
 const STATUS_TONE: Record<string, string> = {
   pending: "bg-amber-100 text-amber-800",
@@ -168,7 +173,9 @@ function CandidateRow({
   busy: boolean;
   onDecide: (id: number, status: "approved" | "rejected", targetTable?: string) => void;
 }) {
-  const [target, setTarget] = useState(c.targetTable ?? TARGET_TABLES[0]);
+  // 제목·키워드로 대상 도메인 자동 추천 → 기본 선택값으로 사용(사용자는 확인/수정만).
+  const suggestion = suggestTarget(c);
+  const [target, setTarget] = useState(c.targetTable ?? suggestion.table);
 
   return (
     <div className="px-4 py-3.5">
@@ -200,6 +207,27 @@ function CandidateRow({
 
       {c.rationale && <p className="mt-1.5 break-words text-xs text-slate-500">{c.rationale}</p>}
 
+      {/* 대상 자동 추천 */}
+      <div className="mt-2 flex flex-wrap items-center gap-1.5 text-[11px]">
+        <span className="rounded bg-teal-50 px-1.5 py-0.5 font-semibold text-teal-700">
+          ✨ 추천 대상: {targetLabel(suggestion.table)}
+        </span>
+        {suggestion.confidence === "low" ? (
+          <span className="rounded bg-amber-100 px-1.5 py-0.5 font-medium text-amber-800">분류 애매 — 검토 권장</span>
+        ) : suggestion.matched.length > 0 ? (
+          <span className="text-slate-400">근거: {suggestion.matched.join(", ")}</span>
+        ) : null}
+        {target !== suggestion.table && (
+          <button
+            type="button"
+            onClick={() => setTarget(suggestion.table)}
+            className="rounded border border-slate-200 px-1.5 py-0.5 font-medium text-teal-700 hover:bg-slate-50"
+          >
+            추천 적용
+          </button>
+        )}
+      </div>
+
       {/* 액션 */}
       <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
         <label className="flex min-w-0 flex-1 items-center gap-1.5 text-xs text-muted">
@@ -212,7 +240,7 @@ function CandidateRow({
           >
             {TARGET_TABLES.map((t) => (
               <option key={t} value={t}>
-                {TABLE_LABELS[t] ?? t}
+                {t === suggestion.table ? "✨ " : ""}{TABLE_LABELS[t] ?? t}
               </option>
             ))}
           </select>
