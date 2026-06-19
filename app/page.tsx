@@ -205,6 +205,9 @@ export default function DashboardPage() {
   const dutyTop = realDutyFreeSales.byNationality.length ? realDutyFreeSales.byNationality[0] : null;
   const dutyTopPct = dutyTop && realDutyFreeSales.foreignTotal ? (dutyTop.value / realDutyFreeSales.foreignTotal) * 100 : 0;
 
+  const bopSparkData = bopAnnual.map((p) => ({ label: p.year, value: p.value }));
+  const fxSparkData = fxMonthly.slice(-12).map((p) => ({ label: p.month as string | number, value: (p.usd as number | null) ?? 0 }));
+
   const signals: {
     label: string;
     value: string;
@@ -215,6 +218,8 @@ export default function DashboardPage() {
     deltaInverse: boolean;
     icon: typeof Send;
     color: string;
+    sparkData?: { label: string | number; value: number }[];
+    sparkUnit?: string;
   }[] = [
     {
       label: "본국송금 (이전소득수지)",
@@ -225,7 +230,9 @@ export default function DashboardPage() {
       deltaSuffix: "YoY",
       deltaInverse: false,
       icon: Send,
-      color: "#0f766e"
+      color: "#0f766e",
+      sparkData: bopSparkData.length >= 2 ? bopSparkData : undefined,
+      sparkUnit: "백만$"
     },
     {
       label: "원/달러 환율",
@@ -234,9 +241,11 @@ export default function DashboardPage() {
       sub: fxUsd ? `${fxDate} 기준 · ECOS 일별` : "데이터 없음",
       delta: fxMoM,
       deltaSuffix: "MoM",
-      deltaInverse: true, // 환율 상승 = 원화 약세
+      deltaInverse: true,
       icon: DollarSign,
-      color: "#3157a4"
+      color: "#3157a4",
+      sparkData: fxSparkData.length >= 2 ? fxSparkData : undefined,
+      sparkUnit: "원"
     },
     {
       label: "외국인 상용직 비중",
@@ -379,6 +388,11 @@ export default function DashboardPage() {
                   <span className="truncate text-[1.5rem] font-black leading-none text-ink sm:text-[1.9rem]">{s.value}</span>
                   {s.unit && <span className="mb-0.5 text-sm text-muted">{s.unit}</span>}
                 </div>
+                {s.sparkData && (
+                  <div style={{ height: 52 }} className="-mx-1">
+                    <SparkLineChart data={s.sparkData} color={s.color} unit={s.sparkUnit ?? ""} />
+                  </div>
+                )}
                 <div className="flex items-center justify-between gap-2">
                   {s.delta != null ? (
                     <span className="flex items-center gap-0.5 text-xs font-bold" style={{ color: deltaColor }}>

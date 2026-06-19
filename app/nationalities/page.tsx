@@ -196,48 +196,97 @@ export default function NationalitiesPage() {
         </div>
       </Panel>
 
-      {hasNationalityByAge && (
-        <Panel
-          title="국적별 연령대 분포"
-          subtitle="행안부 외국인주민 국적×연령대 현황 · 상위 10개 국적의 연령구조 비교"
-          right={<span className="eyebrow">실데이터 · {nationalityAgeTotals.length}개 국적</span>}
-        >
-          <div className="space-y-3">
-            {nationalityAgeTotals.slice(0, 10).map(({ nationality, total }) => {
-              const ageRow = nationalityAgeGroups.map((ag) => {
-                const item = nationalityByAge.find(
-                  (i) => i.nationality === nationality && i.ageGroup === ag
-                );
-                return { ageGroup: ag, count: item?.count ?? 0 };
-              });
-              const maxCount = Math.max(...ageRow.map((a) => a.count), 1);
-              return (
-                <div key={nationality} className="border-b border-line pb-3 last:border-0 last:pb-0">
-                  <div className="mb-1.5 flex items-center justify-between text-xs">
-                    <span className="font-semibold text-ink">{nationality}</span>
-                    <span className="font-mono text-muted">{formatNumber(total)}명</span>
-                  </div>
-                  <div className="flex items-end gap-0.5">
-                    {ageRow.map(({ ageGroup, count }) => (
-                      <div key={ageGroup} className="flex flex-1 flex-col items-center gap-0.5">
-                        <div
-                          className="w-full rounded-t-sm"
-                          style={{
-                            height: Math.max(2, Math.round((count / maxCount) * 40)),
-                            background: "#0f766e",
-                            opacity: count > 0 ? 0.7 + (count / maxCount) * 0.3 : 0.1
-                          }}
-                        />
-                        <span className="text-[9px] leading-none text-muted">{ageGroup.replace("세", "")}</span>
-                      </div>
+      {hasNationalityByAge && (() => {
+        const TOP = nationalityAgeTotals.slice(0, 10);
+        // 전체 최대값(히트맵 색상 기준 — 국적 간 절대 비교)
+        const absMax = Math.max(
+          ...TOP.flatMap(({ nationality }) =>
+            nationalityAgeGroups.map((ag) => {
+              const item = nationalityByAge.find((i) => i.nationality === nationality && i.ageGroup === ag);
+              return item?.count ?? 0;
+            })
+          ),
+          1
+        );
+        function cellBg(count: number): string {
+          if (count === 0) return "#f8fafc";
+          const t = count / absMax;
+          if (t >= 0.75) return "#0f766e";
+          if (t >= 0.5)  return "#1a9c90";
+          if (t >= 0.3)  return "#5eada4";
+          if (t >= 0.15) return "#a8d8d4";
+          return "#d9f0ee";
+        }
+        function cellFg(count: number): string {
+          const t = count / absMax;
+          return t >= 0.5 ? "#ffffff" : "#0f4c41";
+        }
+        return (
+          <Panel
+            title="국적별 연령대 히트맵"
+            subtitle="행안부 외국인주민 국적×연령대 현황 · 색상 강도 = 해당 셀 인원 규모 (절대값 기준)"
+            right={<span className="eyebrow">실데이터 · {nationalityAgeTotals.length}개 국적</span>}
+          >
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[560px] border-collapse text-xs">
+                <thead>
+                  <tr>
+                    <th className="sticky left-0 z-10 bg-white px-3 py-2 text-left text-[11px] font-bold text-muted">국적</th>
+                    {nationalityAgeGroups.map((ag) => (
+                      <th key={ag} className="px-1 py-2 text-center text-[11px] font-semibold text-muted">
+                        {ag.replace("세", "")}
+                      </th>
                     ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </Panel>
-      )}
+                    <th className="px-3 py-2 text-right text-[11px] font-bold text-muted">합계</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {TOP.map(({ nationality, total }) => {
+                    const ageRow = nationalityAgeGroups.map((ag) => {
+                      const item = nationalityByAge.find((i) => i.nationality === nationality && i.ageGroup === ag);
+                      return item?.count ?? 0;
+                    });
+                    return (
+                      <tr key={nationality} className="border-t border-slate-100">
+                        <td className="sticky left-0 z-10 whitespace-nowrap bg-white px-3 py-1.5 font-semibold text-ink">
+                          {nationality}
+                        </td>
+                        {ageRow.map((count, ci) => (
+                          <td key={nationalityAgeGroups[ci]} className="px-0.5 py-0.5 text-center">
+                            <div
+                              className="mx-auto flex h-8 min-w-[32px] items-center justify-center rounded text-[10px] font-semibold transition-colors"
+                              style={{ background: cellBg(count), color: cellFg(count) }}
+                              title={`${nationality} · ${nationalityAgeGroups[ci]}: ${formatNumber(count)}명`}
+                            >
+                              {count > 0 ? (count >= 1000 ? `${(count / 1000).toFixed(1)}k` : count) : "·"}
+                            </div>
+                          </td>
+                        ))}
+                        <td className="px-3 py-1.5 text-right font-mono font-bold text-ink">
+                          {formatNumber(total)}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <div className="mt-3 flex items-center gap-4 px-3 pb-1 text-[11px] text-muted">
+              {[
+                { bg: "#0f766e", fg: "#fff", label: "최고 밀도" },
+                { bg: "#5eada4", fg: "#fff", label: "중간" },
+                { bg: "#d9f0ee", fg: "#0f4c41", label: "낮음" },
+                { bg: "#f8fafc", fg: "#64748b", label: "없음" },
+              ].map((s) => (
+                <span key={s.label} className="flex items-center gap-1">
+                  <span className="inline-block h-3 w-5 rounded text-center text-[9px] leading-3" style={{ background: s.bg, color: s.fg }} />
+                  {s.label}
+                </span>
+              ))}
+            </div>
+          </Panel>
+        );
+      })()}
 
       <Panel
         title="체류자격별 인원 및 금융 니즈"
