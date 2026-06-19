@@ -20,16 +20,9 @@ import {
   regionStrategy,
   topNationalities
 } from "@/lib/data/financialInsightsData";
-import {
-  econActivityData,
-  hasEconActivity,
-  hasHealthInsurance,
-  hasMulticulturalFamily,
-  healthInsuranceData,
-  multiculturalFamilyData,
-  multiculturalFamilySummary
-} from "@/lib/data/mockData";
+import Link from "next/link";
 import { PageHero } from "@/components/ui/PageHero";
+import { InsightChat } from "@/components/ai/InsightChat";
 import { formatNumber } from "@/lib/utils/format";
 
 // ── 유스케이스 카드 (전략 큐레이션 = 정적 콘텐츠) ─────────────────────────────
@@ -214,7 +207,7 @@ function FreshnessTag() {
       </span>
       <span className="flex items-center gap-1.5 text-xs text-teal-600">
         <RefreshCw size={13} />
-        매일 18:30 UTC 자동 갱신
+        매일 01:00 KST 자동 갱신
       </span>
     </div>
   );
@@ -230,6 +223,11 @@ export default function FinancialInsightsPage() {
       />
       <FreshnessTag />
 
+      {/* ── AI 인사이트 질의 ──────────────────────────────────── */}
+      <section>
+        <InsightChat />
+      </section>
+
       {/* ── 시장 규모 KPI ──────────────────────────────────────── */}
       <section>
         <div className="mb-3 flex items-center gap-2">
@@ -238,12 +236,12 @@ export default function FinancialInsightsPage() {
             {marketKpis.sourceLabel}
           </span>
         </div>
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
             {
               label: "총 체류외국인",
               value: formatNumber(marketKpis.totalForeignResidents) + "명",
-              delta: marketKpis.totalForeignResidentsYoy + " YoY",
+              delta: marketKpis.totalForeignResidentsYoy ? marketKpis.totalForeignResidentsYoy + " YoY" : "법무부 체류통계",
               sub: "법무부 2024.12",
               color: "bg-teal-700",
               icon: Users
@@ -251,16 +249,16 @@ export default function FinancialInsightsPage() {
             {
               label: "외국인 유학생",
               value: formatNumber(marketKpis.foreignStudents) + "명",
-              delta: marketKpis.foreignStudentsYoy + " YoY",
+              delta: marketKpis.foreignStudentsYoy ? marketKpis.foreignStudentsYoy + " YoY" : "법무부 체류현황",
               sub: "D-2·D-4 비자",
               color: "bg-violet-700",
               icon: GraduationCap
             },
             {
-              label: "연간 해외 송금 추정",
-              value: marketKpis.remittanceEstimateKrw,
-              delta: "한국은행 이전소득수지",
-              sub: "외국인 본국 송금",
+              label: "이전소득수지(송금 대리지표)",
+              value: marketKpis.remittanceProxy,
+              delta: `한국은행 ECOS · ${marketKpis.remittanceProxyYear ?? "—"}`,
+              sub: "개인이전수지 기준",
               color: "bg-blue-700",
               icon: Send
             },
@@ -294,8 +292,8 @@ export default function FinancialInsightsPage() {
         <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-slate-500">
           주요 국적별 금융 수요
         </h2>
-        <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-          <table className="min-w-full text-xs">
+        <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+          <table className="min-w-[720px] text-xs">
             <thead>
               <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
                 <th className="px-4 py-3 text-left font-semibold">국적</th>
@@ -336,7 +334,7 @@ export default function FinancialInsightsPage() {
             </tbody>
           </table>
           <p className="border-t border-slate-100 bg-slate-50 px-4 py-2 text-xs text-slate-500">
-            데이터 출처: 법무부 체류외국인 현황. 매일 18:30 UTC 수집 배치 완료 시 자동 갱신.
+            데이터 출처: 법무부 체류외국인 현황. 매일 01:00 KST 수집 배치 완료 시 자동 갱신.
           </p>
         </div>
       </section>
@@ -399,8 +397,8 @@ export default function FinancialInsightsPage() {
             금융 기회 점수 순 · 자동 갱신
           </span>
         </div>
-        <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-          <table className="min-w-full text-xs">
+        <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+          <table className="min-w-[720px] text-xs">
             <thead>
               <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
                 <th className="px-4 py-3 text-left font-semibold">순위</th>
@@ -447,7 +445,7 @@ export default function FinancialInsightsPage() {
           체류자격 × 금융 상품 수요 매트릭스
         </h2>
         <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
-          <table className="min-w-full text-xs">
+          <table className="min-w-[560px] text-xs">
             <thead>
               <tr className="bg-slate-900 text-white">
                 <th className="px-4 py-3 text-left font-semibold">체류자격</th>
@@ -513,128 +511,26 @@ export default function FinancialInsightsPage() {
         </div>
       </section>
 
-      {/* ── 외국인 경제활동인구 (KOSIS 수집 시 표시) ──────────── */}
-      {hasEconActivity && (() => {
-        const periods = [...new Set(econActivityData.map((r) => r.period))].sort().reverse();
-        const latestPeriod = periods[0] ?? "";
-        const latestRows = econActivityData.filter((r) => r.period === latestPeriod);
-        const maxVal = Math.max(...latestRows.map((r) => r.value), 1);
-        return (
-          <section>
-            <div className="mb-3 flex items-center gap-2">
-              <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">외국인 경제활동인구</h2>
-              <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">
-                KOSIS · {latestPeriod}년
-              </span>
+      {/* ── 분석 데이터 활용 바로가기 ─────────── */}
+      <section>
+        <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-slate-500">분석 데이터 활용</h2>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Link href="/economy" className="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-teal-300 hover:shadow-md">
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-bold text-slate-900">경제활동·소득</h3>
+              <ArrowRight size={16} className="text-slate-400 transition group-hover:translate-x-0.5 group-hover:text-teal-600" />
             </div>
-            <div className="surface p-5">
-              <p className="mb-4 text-xs text-muted">{latestRows[0]?.provider} {latestRows[0]?.title} · 체류자격별 취업·경제활동 분포</p>
-              <div className="space-y-2.5">
-                {latestRows.sort((a, b) => b.value - a.value).map((row, i) => (
-                  <div key={`${row.period}-${row.category}-${i}`} className="flex items-center gap-3">
-                    <span className="w-36 shrink-0 truncate text-xs text-ink" title={row.category}>{row.category}</span>
-                    <div className="flex flex-1 items-center gap-2">
-                      <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-slate-100">
-                        <div
-                          className="h-full rounded-full bg-teal-600"
-                          style={{ width: `${Math.round((row.value / maxVal) * 100)}%` }}
-                        />
-                      </div>
-                      <span className="w-20 shrink-0 text-right font-mono text-xs text-muted">
-                        {row.value.toLocaleString()}명
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              {periods.length > 1 && (
-                <p className="mt-3 text-[11px] text-muted">
-                  수집 기간: {periods.at(-1)}~{periods[0]}년 · 연도별 데이터 {periods.length}개
-                </p>
-              )}
+            <p className="mt-1.5 text-xs leading-relaxed text-slate-600">임금분포·종사상지위·산업·연령·고용계약·EPS 도입·건강보험 — 외국인 경제활동·소득 데이터를 차트로 분석합니다.</p>
+          </Link>
+          <Link href="/consumption" className="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-teal-300 hover:shadow-md">
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-bold text-slate-900">소비·금융거래</h3>
+              <ArrowRight size={16} className="text-slate-400 transition group-hover:translate-x-0.5 group-hover:text-teal-600" />
             </div>
-          </section>
-        );
-      })()}
-
-      {/* ── 건강보험 외국인 적용인구 (수집 시 표시) ─────────────── */}
-      {hasHealthInsurance && (() => {
-        const sorted = [...healthInsuranceData].sort((a, b) => b.total - a.total);
-        const maxTotal = sorted[0]?.total || 1;
-        const grandTotal = sorted.reduce((s, r) => s + r.total, 0);
-        const workplaceTotal = sorted.reduce((s, r) => s + r.workplace, 0);
-        const regionalTotal = sorted.reduce((s, r) => s + r.regional, 0);
-        return (
-          <section>
-            <div className="mb-3 flex items-center gap-2">
-              <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">외국인 건강보험 적용인구</h2>
-              <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">국민건강보험공단 · 2022</span>
-            </div>
-            <div className="surface p-5">
-              <div className="mb-4 grid grid-cols-3 gap-4 text-center">
-                <div><p className="text-lg font-black text-ink">{grandTotal.toLocaleString()}</p><p className="text-xs text-muted">전체 적용인원</p></div>
-                <div><p className="text-lg font-black" style={{ color: "#0f766e" }}>{workplaceTotal.toLocaleString()}</p><p className="text-xs text-muted">직장가입</p></div>
-                <div><p className="text-lg font-black" style={{ color: "#3157a4" }}>{regionalTotal.toLocaleString()}</p><p className="text-xs text-muted">지역가입</p></div>
-              </div>
-              <div className="space-y-2">
-                {sorted.slice(0, 15).map((row) => (
-                  <div key={row.region} className="flex items-center gap-3">
-                    <span className="w-24 shrink-0 truncate text-xs text-ink">{row.region}</span>
-                    <div className="flex flex-1 items-center gap-1">
-                      <div
-                        className="h-2 rounded-l"
-                        style={{ width: `${Math.round((row.workplace / maxTotal) * 50)}%`, background: "#0f766e", minWidth: row.workplace > 0 ? 2 : 0 }}
-                      />
-                      <div
-                        className="h-2 rounded-r"
-                        style={{ width: `${Math.round((row.regional / maxTotal) * 50)}%`, background: "#3157a4", minWidth: row.regional > 0 ? 2 : 0 }}
-                      />
-                    </div>
-                    <span className="w-16 shrink-0 text-right font-mono text-xs text-muted">{row.total.toLocaleString()}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        );
-      })()}
-
-      {/* ── 다문화가족 현황 (수집 시 표시) ──────────────────────── */}
-      {hasMulticulturalFamily && (() => {
-        const sorted = [...multiculturalFamilyData].sort((a, b) => b.total - a.total);
-        const maxTotal = sorted[0]?.total || 1;
-        return (
-          <section>
-            <div className="mb-3 flex items-center gap-2">
-              <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">다문화가족 현황</h2>
-              <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">
-                여성가족부{multiculturalFamilySummary.latestYear ? ` · ${multiculturalFamilySummary.latestYear}` : ""}
-              </span>
-            </div>
-            <div className="surface p-5">
-              <p className="mb-3 text-xs text-muted">
-                총 다문화가족 {multiculturalFamilySummary.totalCount.toLocaleString()}명 · 결혼이민자·귀화자 가족의 금융 서비스 수요 기반
-              </p>
-              <div className="space-y-2">
-                {sorted.map((row, i) => (
-                  <div key={`${row.region}-${i}`} className="flex items-center gap-3">
-                    <span className="w-32 shrink-0 truncate text-xs text-ink">{row.region}</span>
-                    <div className="flex flex-1 items-center gap-2">
-                      <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100">
-                        <div
-                          className="h-full rounded-full"
-                          style={{ width: `${Math.round((row.total / maxTotal) * 100)}%`, background: "#be123c" }}
-                        />
-                      </div>
-                      <span className="w-20 shrink-0 text-right font-mono text-xs text-muted">{row.total.toLocaleString()}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        );
-      })()}
+            <p className="mt-1.5 text-xs leading-relaxed text-slate-600">면세점 국적별 소비·외국인 부동산 취득·본국송금(이전소득수지)·환율 — 소비·금융거래 데이터를 차트로 분석합니다.</p>
+          </Link>
+        </div>
+      </section>
 
       {/* ── 컴플라이언스 주의사항 ────────────────────────────────── */}
       <section>

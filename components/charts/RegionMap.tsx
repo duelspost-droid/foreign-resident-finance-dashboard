@@ -2,6 +2,12 @@
 
 import { useState } from "react";
 import { sampleOpportunityRows } from "@/lib/data/mockData";
+import {
+  hasSidoForeignerStats,
+  sidoForeignerLatestYear,
+  sidoForeignerStats
+} from "@/lib/data/regionAggregates";
+import { scoreColor } from "@/lib/utils/format";
 
 const SIDO_CENTROIDS = [
   { code: "11", name: "서울특별시", lon: 126.977, lat: 37.566 },
@@ -37,11 +43,14 @@ function project(lon: number, lat: number): [number, number] {
   return [x, y];
 }
 
-function scoreColor(score: number): string {
-  if (score >= 80) return "#0d9488";
-  if (score >= 60) return "#2563eb";
-  if (score >= 40) return "#f59e0b";
-  return "#64748b";
+// 인구 규모(실데이터 모드) 색상 — 최댓값 대비 비율 구간.
+function populationColor(count: number, max: number): string {
+  if (count <= 0) return "#cbd5e1";
+  const f = count / max;
+  if (f >= 0.5) return "#0f766e"; // 매우 많음
+  if (f >= 0.25) return "#3157a4"; // 많음
+  if (f >= 0.1) return "#b45309"; // 보통
+  return "#64748b"; // 적음
 }
 
 const LABEL_ABBR: Record<string, string> = {
@@ -76,7 +85,14 @@ type Tooltip = {
 export function RegionMap() {
   const [tooltip, setTooltip] = useState<Tooltip | null>(null);
 
+  // 실데이터(행안부 시도별 외국인주민)가 있으면 인구 규모 지도, 없으면 표본 기회점수 지도.
+  const realMode = hasSidoForeignerStats;
+
   const sidoStats = SIDO_CENTROIDS.map((sido) => {
+    if (realMode) {
+      const count = sidoForeignerStats[sido.name] ?? 0;
+      return { ...sido, score: 0, count, hasData: count > 0 };
+    }
     const rows = sampleOpportunityRows.filter((r) => r.sido === sido.name);
     const score =
       rows.length > 0
@@ -88,12 +104,45 @@ export function RegionMap() {
 
   const maxCount = Math.max(...sidoStats.map((s) => s.count), 1);
 
+  // realMode=true: 색상=인구 규모 비율(populationColor). realMode=false: 색상=표본 기회점수(scoreColor 0~100).
+  const fillFor = (s: { hasData: boolean; score: number; count: number }) => {
+    if (!s.hasData) return "#94a3b8";
+    return realMode ? populationColor(s.count, maxCount) : scoreColor(s.score);
+  };
+
+  const ariaFor = (s: { name: string; score: number; count: number; hasData: boolean }) =>
+    realMode
+      ? `${s.name}. 외국인주민 ${s.count.toLocaleString()}명`
+      : `${s.name}. 기회 점수 ${s.score > 0 ? s.score.toFixed(1) : "데이터없음"}, 외국인 ${s.count.toLocaleString()}명`;
+
+  // 범례 스와치는 실제 색상 함수와 동일한 hex 사용(버블과 일치).
+  const legend = realMode
+    ? [
+        { c: "#0f766e", label: "매우 많음" },
+        { c: "#3157a4", label: "많음" },
+        { c: "#b45309", label: "보통" },
+        { c: "#64748b", label: "적음" },
+        { c: "#cbd5e1", label: "데이터 없음" },
+      ]
+    : [
+        { c: "#0f766e", label: "72+ (최우선)" },
+        { c: "#3157a4", label: "55~71 (우선)" },
+        { c: "#b45309", label: "40~54 (관찰)" },
+        { c: "#be123c", label: "~39 (후순위)" },
+        { c: "#94a3b8", label: "데이터 없음" },
+      ];
+
   return (
     <div className="flex flex-col">
       <svg
         viewBox={`0 0 ${W} ${H}`}
         className="w-full max-h-[460px]"
-        aria-label="대한민국 시도별 외국인 금융 기회 지도"
+        role="group"
+        aria-label={
+          realMode
+            ? "대한민국 시도별 외국인주민 인구 규모 지도"
+            : "대한민국 시도별 외국인 금융 기회 표본 지도"
+        }
       >
         {/* Mainland outline */}
         <path
@@ -117,8 +166,10 @@ export function RegionMap() {
         {sidoStats.map((sido) => {
           const [cx, cy] = project(sido.lon, sido.lat);
           const r = sido.count > 0 ? 8 + (sido.count / maxCount) * 22 : 8;
-          const color = sido.hasData ? scoreColor(sido.score) : "#94a3b8";
+          const color = fillFor(sido);
           const label = LABEL_ABBR[sido.name] ?? sido.name;
+          const show = () =>
+            setTooltip({ name: sido.name, score: sido.score, count: sido.count, cx, cy, r });
 
           return (
             <g key={sido.code}>
@@ -130,11 +181,20 @@ export function RegionMap() {
                 fillOpacity={tooltip?.name === sido.name ? 1 : 0.78}
                 stroke="white"
                 strokeWidth={tooltip?.name === sido.name ? 2.5 : 1.5}
-                className="cursor-pointer"
-                onMouseEnter={() =>
-                  setTooltip({ name: sido.name, score: sido.score, count: sido.count, cx, cy, r })
-                }
+                className="cursor-pointer focus:outline-none focus-visible:stroke-slate-900"
+                tabIndex={0}
+                role="img"
+                aria-label={ariaFor(sido)}
+                onMouseEnter={show}
                 onMouseLeave={() => setTooltip(null)}
+                onFocus={show}
+                onBlur={() => setTooltip(null)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    show();
+                  }
+                }}
               />
               <text
                 x={cx}
@@ -170,14 +230,20 @@ export function RegionMap() {
                 {tooltip.name}
               </text>
               <text x={tx + 8} y={ty + 32} fontSize="9.5" fill="#475569">
-                {tooltip.score > 0
-                  ? `기회 점수 ${tooltip.score.toFixed(1)}`
-                  : "데이터 없음"}
+                {realMode
+                  ? tooltip.count > 0
+                    ? `외국인주민 ${tooltip.count.toLocaleString()}명`
+                    : "집계 없음"
+                  : tooltip.score > 0
+                    ? `기회 점수 ${tooltip.score.toFixed(1)}`
+                    : "데이터 없음"}
               </text>
               <text x={tx + 8} y={ty + 48} fontSize="9.5" fill="#475569">
-                {tooltip.count > 0
-                  ? `외국인 ${tooltip.count.toLocaleString()}명`
-                  : "집계 없음"}
+                {realMode
+                  ? "행안부 외국인주민"
+                  : tooltip.count > 0
+                    ? `외국인 ${tooltip.count.toLocaleString()}명`
+                    : "집계 없음"}
               </text>
             </g>
           );
@@ -185,18 +251,16 @@ export function RegionMap() {
       </svg>
 
       <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 px-3 pb-2 text-xs text-slate-500">
-        {[
-          { color: "bg-teal-600", label: "80+ (고기회)" },
-          { color: "bg-blue-600", label: "60~79" },
-          { color: "bg-amber-500", label: "40~59" },
-          { color: "bg-slate-400", label: "데이터 없음" },
-        ].map(({ color, label }) => (
+        {legend.map(({ c, label }) => (
           <span key={label} className="flex items-center gap-1">
-            <span className={`inline-block h-2.5 w-2.5 rounded-full ${color}`} />
+            <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ background: c }} />
             {label}
           </span>
         ))}
-        <span className="ml-auto text-slate-400">버블 크기 = 외국인 수</span>
+        <span className="ml-auto text-slate-400">
+          버블 크기 = 외국인 수
+          {realMode && sidoForeignerLatestYear ? ` · 실데이터 ${sidoForeignerLatestYear}` : " · 표본"}
+        </span>
       </div>
     </div>
   );

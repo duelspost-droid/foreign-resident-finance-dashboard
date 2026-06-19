@@ -3,8 +3,16 @@ import {
   ArrowUpRight,
   BarChart3,
   Banknote,
+  Briefcase,
+  DollarSign,
   GraduationCap,
+  Landmark,
+  LayoutGrid,
   MapPin,
+  Send,
+  ShoppingBag,
+  TrendingDown,
+  TrendingUp,
   Users
 } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
@@ -14,6 +22,8 @@ import { TrendLineChart } from "@/components/charts/TrendLineChart";
 import { VisaDonutChart } from "@/components/charts/VisaDonutChart";
 import { ScoreRadarChart } from "@/components/charts/ScoreRadarChart";
 import { RegionMap } from "@/components/charts/RegionMap";
+import { SparkLineChart } from "@/components/charts/SparkLineChart";
+import { MiniBarChart } from "@/components/charts/MiniBarChart";
 import {
   econActivityData,
   hasEconActivity,
@@ -34,18 +44,22 @@ import {
 } from "@/lib/data/mockData";
 import {
   realDataSummary,
-  realNationalityDistribution,
+  realForeignWage,
+  realEpsIntroduction,
+  realForeignStudentNationality,
   realStudentSummary,
+  realBopTransferIncome,
+  realExchangeRate,
+  realForeignEmploymentStatus,
+  realDutyFreeSales
 } from "@/lib/data/generated/realData";
-import { formatNumber } from "@/lib/utils/format";
-
-// ── 색상 헬퍼 ────────────────────────────────────────────────────────────────────
-function scoreColor(score: number): string {
-  if (score >= 72) return "#0f766e";
-  if (score >= 55) return "#3157a4";
-  if (score >= 40) return "#b45309";
-  return "#be123c";
-}
+import { formatNumber, scoreColor } from "@/lib/utils/format";
+import {
+  hasSidoForeignerStats,
+  hasSidoForeignerTrend,
+  sidoForeignerTrend
+} from "@/lib/data/regionAggregates";
+import { DataFreshnessBanner } from "@/components/ui/DataFreshness";
 
 const SEG_COLORS: Record<string, string> = {
   "비전문취업 근로자": "#0f766e",
@@ -80,7 +94,6 @@ function cellStyle(v: number): React.CSSProperties {
 }
 
 export default function DashboardPage() {
-  const freshDate = realDataSummary.generatedAt.slice(0, 10);
   const totalRows = realDataSummary.statusRowCount + realDataSummary.regionRowCount;
 
   // 실데이터 기반 KPI 계산
@@ -94,15 +107,21 @@ export default function DashboardPage() {
     hasNationalityByAge, hasHealthInsurance, hasMulticulturalFamily, hasEconActivity
   ].filter(Boolean).length;
 
-  // 국적별 TOP3 (실데이터)
-  const top3Nationalities = realNationalityDistribution.slice(0, 3);
-
-  const kpis = [
+  // delta = 실데이터 기반 YoY(있을 때만 녹색 칩), note = YoY가 아닌 보조 설명(중립 표기).
+  const kpis: {
+    label: string;
+    display: string;
+    unit: string;
+    icon: typeof Users;
+    color: string;
+    sub: string;
+    delta?: string;
+    note?: string;
+  }[] = [
     {
       label: "총 체류외국인",
       display: formatNumber(totalResidents),
       unit: "명",
-      trend: "+4.2%",
       icon: Users,
       color: "#0f766e",
       sub: hasRealTotal ? "법무부 실데이터 2024" : "법무부 체류통계"
@@ -111,28 +130,131 @@ export default function DashboardPage() {
       label: "등록외국인",
       display: formatNumber(realDataSummary.statusRowCount > 0 ? Math.round(totalResidents * 0.537) : 1_320_540),
       unit: "명",
-      trend: "+3.8%",
       icon: Banknote,
       color: "#3157a4",
-      sub: "장기체류 · 금융 주고객"
+      sub: "장기체류 비자 합계 · 금융 주고객"
     },
     {
       label: "외국인 유학생",
       display: formatNumber(foreignStudents),
       unit: "명",
-      trend: "+12.3%",
       icon: GraduationCap,
       color: "#b45309",
-      sub: hasRealStudentData ? "교육부 실데이터" : "D-2 / D-4 체류"
+      sub: "D-2 / D-4 체류",
+      delta: hasRealStudentData ? `+${realStudentSummary.yoy}%` : undefined
     },
     {
-      label: "수집 데이터셋",
-      display: String(loadedDatasets),
-      unit: "종",
-      trend: `${totalRows}행 확보`,
+      label: "평균 금융기회점수",
+      display: avg.toFixed(1),
+      unit: "/ 100",
       icon: BarChart3,
       color: "#be123c",
-      sub: `${freshDate} 갱신`
+      sub: "복합 기회지수",
+      note: `${sampleOpportunityRows.length}개 지역 표본`
+    }
+  ];
+
+  // ── 신규 실데이터 파생 지표 ────────────────────────────────────────────────────
+  // 외국인 월평균 임금구간 분포(단위 천명) — band 중복 제거 후 최다 구간 산출
+  const wageBands = Array.from(
+    new Map(realForeignWage.distribution.map((d) => [d.band, d])).values()
+  );
+  const wageTotal = wageBands.reduce((sum, b) => sum + b.value, 0);
+  const wageTop = wageBands.length
+    ? wageBands.reduce((max, b) => (b.value > max.value ? b : max), wageBands[0])
+    : null;
+  const wageTopPct = wageTop && wageTotal > 0 ? (wageTop.value / wageTotal) * 100 : 0;
+
+  // E-9 도입(고용허가제) — 최신연도 합계(trend 마지막) + 1위 국가 + 연도 추세 스파크
+  const epsTrend = Array.from(
+    new Map(realEpsIntroduction.trend.map((t) => [t.year, t])).values()
+  ).sort((a, b) => a.year - b.year);
+  const epsLatest = epsTrend.length ? epsTrend[epsTrend.length - 1] : null;
+  const epsTopCountry = realEpsIntroduction.byCountry.length
+    ? realEpsIntroduction.byCountry[0]
+    : null;
+  const epsSpark = epsTrend.map((t) => ({ label: t.year, value: t.value }));
+
+  // 유학생 1위 국적 + 국적 TOP5 미니 막대
+  const studentNats = realForeignStudentNationality.byNationality;
+  const studentTop = studentNats.length ? studentNats[0] : null;
+  const studentTotalTop = studentNats.reduce((sum, n) => sum + n.value, 0);
+  const studentTopPct =
+    studentTop && studentTotalTop > 0 ? (studentTop.value / studentTotalTop) * 100 : 0;
+  const studentBars = studentNats
+    .slice(0, 5)
+    .map((n) => ({ label: n.nationality, value: n.value }));
+
+  // ── 실데이터 금융 시그널 (본국송금 · 환율 · 상용직 · 면세소비) ────────────────────
+  const bopAnnual = [...realBopTransferIncome.annual].sort((a, b) => a.year - b.year);
+  const bopLatest = bopAnnual.length ? bopAnnual[bopAnnual.length - 1] : null;
+  const bopPrev = bopAnnual.length > 1 ? bopAnnual[bopAnnual.length - 2] : null;
+  const bopYoY = bopLatest && bopPrev && bopPrev.value ? ((bopLatest.value - bopPrev.value) / bopPrev.value) * 100 : null;
+
+  const fxUsd = realExchangeRate.latest?.usd ?? null;
+  const fxMonthly = realExchangeRate.monthly;
+  const fxLastMonth = fxMonthly.length ? fxMonthly[fxMonthly.length - 1] : null;
+  const fxPrevMonth = fxMonthly.length > 1 ? fxMonthly[fxMonthly.length - 2] : null;
+  const fxMoM = fxLastMonth && fxPrevMonth && fxPrevMonth.usd ? ((fxLastMonth.usd - fxPrevMonth.usd) / fxPrevMonth.usd) * 100 : null;
+  const fxDate = fxUsd ? `${fxUsd.date.slice(0, 4)}.${fxUsd.date.slice(4, 6)}.${fxUsd.date.slice(6, 8)}` : "";
+
+  const dutyTop = realDutyFreeSales.byNationality.length ? realDutyFreeSales.byNationality[0] : null;
+  const dutyTopPct = dutyTop && realDutyFreeSales.foreignTotal ? (dutyTop.value / realDutyFreeSales.foreignTotal) * 100 : 0;
+
+  const signals: {
+    label: string;
+    value: string;
+    unit: string;
+    sub: string;
+    delta: number | null;
+    deltaSuffix: string;
+    deltaInverse: boolean;
+    icon: typeof Send;
+    color: string;
+  }[] = [
+    {
+      label: "본국송금 (이전소득수지)",
+      value: bopLatest ? (bopLatest.value / 100).toFixed(1) : "—",
+      unit: "억$",
+      sub: bopLatest ? `${bopLatest.year} 연간 · 한국은행 ECOS` : "데이터 없음",
+      delta: bopYoY,
+      deltaSuffix: "YoY",
+      deltaInverse: false,
+      icon: Send,
+      color: "#0f766e"
+    },
+    {
+      label: "원/달러 환율",
+      value: fxUsd ? formatNumber(Math.round(fxUsd.value)) : "—",
+      unit: "원",
+      sub: fxUsd ? `${fxDate} 기준 · ECOS 일별` : "데이터 없음",
+      delta: fxMoM,
+      deltaSuffix: "MoM",
+      deltaInverse: true, // 환율 상승 = 원화 약세
+      icon: DollarSign,
+      color: "#3157a4"
+    },
+    {
+      label: "외국인 상용직 비중",
+      value: realForeignEmploymentStatus.regularShare.toFixed(1),
+      unit: "%",
+      sub: `상용 ${formatNumber(realForeignEmploymentStatus.regular)}천명 / 취업 ${formatNumber(realForeignEmploymentStatus.total)}천명 · ${realForeignEmploymentStatus.latestYear}`,
+      delta: null,
+      deltaSuffix: "",
+      deltaInverse: false,
+      icon: Briefcase,
+      color: "#b45309"
+    },
+    {
+      label: "면세 소비 1위 국적",
+      value: dutyTop ? dutyTop.nationality : "—",
+      unit: "",
+      sub: dutyTop ? `외국인 면세매출의 ${dutyTopPct.toFixed(1)}% · ${realDutyFreeSales.latestYear} JDC` : "데이터 없음",
+      delta: null,
+      deltaSuffix: "",
+      deltaInverse: false,
+      icon: ShoppingBag,
+      color: "#be123c"
     }
   ];
 
@@ -145,20 +267,46 @@ export default function DashboardPage() {
         description="공개 통계와 금융 집계 데이터를 지역·국적·체류자격·대학 단위로 시각화한 분석 화면입니다."
       />
 
-      {/* ── 데이터 신선도 배너 ── */}
-      <div
-        className="flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg px-4 py-2.5 text-xs"
-        style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", color: "#166534" }}
-      >
-        <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: "#22c55e" }} />
-        <span>수집 기준일 <strong>{freshDate}</strong></span>
-        <span className="text-green-300">·</span>
-        <span>누적 {totalRows.toLocaleString()}행</span>
-        <span className="text-green-300">·</span>
-        <span>실데이터셋 {loadedDatasets}/8 적재</span>
-        <span className="text-green-300">·</span>
-        <span>매일 01:00 KST 자동 갱신</span>
-      </div>
+      {/* ── 데이터 신선도 배너 (뷰 시점 실시간 판정) ── */}
+      <DataFreshnessBanner
+        generatedAt={realDataSummary.generatedAt}
+        totalRows={totalRows}
+        loadedDatasets={loadedDatasets}
+      />
+
+      {/* ── 2축 진입점 ── */}
+      <section className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <Link href="/financial-insights" className="surface surface-hover group flex flex-col gap-2 p-6">
+          <div className="flex items-center gap-3">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white" style={{ background: "linear-gradient(135deg, #f6b23c, #b45309)" }}>
+              <Landmark aria-hidden size={20} />
+            </span>
+            <div className="min-w-0">
+              <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: "#b45309" }}>축 1</p>
+              <h3 className="text-lg font-black text-ink">금융 인사이트</h3>
+            </div>
+            <ArrowUpRight aria-hidden size={18} className="ml-auto shrink-0 text-muted transition group-hover:-translate-y-0.5 group-hover:text-amber-600" />
+          </div>
+          <p className="text-sm leading-relaxed text-muted">
+            시장 기회·지역 전략·체류자격×상품 매트릭스·유스케이스·로드맵 — 은행·캐피탈이 데이터를 어떻게 활용할지 해석합니다.
+          </p>
+        </Link>
+        <Link href="/catalog" className="surface surface-hover group flex flex-col gap-2 p-6">
+          <div className="flex items-center gap-3">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white" style={{ background: "linear-gradient(135deg, #2dd4bf, #0f766e)" }}>
+              <LayoutGrid aria-hidden size={20} />
+            </span>
+            <div className="min-w-0">
+              <p className="text-[11px] font-bold uppercase tracking-widest" style={{ color: "#0f766e" }}>축 2</p>
+              <h3 className="text-lg font-black text-ink">분석 데이터 활용</h3>
+            </div>
+            <ArrowUpRight aria-hidden size={18} className="ml-auto shrink-0 text-muted transition group-hover:-translate-y-0.5 group-hover:text-teal-600" />
+          </div>
+          <p className="text-sm leading-relaxed text-muted">
+            인구·체류 · 경제활동·소득 · 유학생 · 소비·금융거래 — 수집한 30여 종 데이터를 카테고리별로 직접 탐색·분석합니다.
+          </p>
+        </Link>
+      </section>
 
       {/* ── KPI 스트립 ── */}
       <section className="metric-grid">
@@ -180,18 +328,197 @@ export default function DashboardPage() {
                 </span>
               </div>
               <div className="flex items-end gap-1.5">
-                <span className="text-[2.1rem] font-black leading-none text-ink">{kpi.display}</span>
+                <span className="text-[1.6rem] font-black leading-none text-ink sm:text-[2.1rem]">{kpi.display}</span>
                 <span className="mb-0.5 text-sm text-muted">{kpi.unit}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="flex items-center gap-0.5 text-xs font-bold" style={{ color: "#059669" }}>
-                  <ArrowUpRight size={13} />{kpi.trend} YoY
-                </span>
+                {kpi.delta ? (
+                  <span className="flex items-center gap-0.5 text-xs font-bold" style={{ color: "#059669" }}>
+                    <ArrowUpRight size={13} />{kpi.delta} YoY
+                  </span>
+                ) : kpi.note ? (
+                  <span className="text-xs font-semibold text-muted">{kpi.note}</span>
+                ) : (
+                  <span />
+                )}
                 <span className="text-[10px] text-muted">{kpi.sub}</span>
               </div>
             </div>
           );
         })}
+      </section>
+
+      {/* ── 실데이터 금융 시그널 (본국송금 · 환율 · 상용직 · 면세소비) ── */}
+      <section>
+        <div className="mb-3 flex items-center gap-2">
+          <span className="text-xs font-bold uppercase tracking-widest" style={{ color: "#697586" }}>
+            실데이터 금융 시그널
+          </span>
+          <span className="text-[11px] text-muted">한국은행 ECOS · 통계청 · JDC 면세 — 매 배치 자동 갱신</span>
+        </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {signals.map((s) => {
+            const Icon = s.icon;
+            const good = s.delta == null ? null : s.deltaInverse ? s.delta < 0 : s.delta >= 0;
+            const deltaColor = good == null ? "#697586" : good ? "#059669" : "#dc2626";
+            const DeltaIcon = s.delta != null && s.delta < 0 ? TrendingDown : TrendingUp;
+            return (
+              <div key={s.label} className="surface relative flex flex-col gap-2 overflow-hidden p-5">
+                <span className="absolute left-0 top-0 h-1 w-full" style={{ background: s.color }} />
+                <div className="flex items-start justify-between gap-2">
+                  <span className="text-sm font-medium text-muted">{s.label}</span>
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-white" style={{ background: s.color }}>
+                    <Icon aria-hidden size={18} />
+                  </span>
+                </div>
+                <div className="flex items-end gap-1.5">
+                  <span className="truncate text-[1.5rem] font-black leading-none text-ink sm:text-[1.9rem]">{s.value}</span>
+                  {s.unit && <span className="mb-0.5 text-sm text-muted">{s.unit}</span>}
+                </div>
+                <div className="flex items-center justify-between gap-2">
+                  {s.delta != null ? (
+                    <span className="flex items-center gap-0.5 text-xs font-bold" style={{ color: deltaColor }}>
+                      <DeltaIcon size={13} />
+                      {s.delta >= 0 ? "+" : ""}{s.delta.toFixed(1)}% {s.deltaSuffix}
+                    </span>
+                  ) : (
+                    <span />
+                  )}
+                  <span className="truncate text-[10px] text-muted">{s.sub}</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ── 신규 실데이터 인사이트 카드 (임금대역 · E-9 도입 · 유학생 국적) ── */}
+      <section className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+
+        {/* 외국인 임금 중앙대역 / 최다 구간 */}
+        <div className="surface flex flex-col p-5">
+          <div className="flex items-start justify-between gap-2">
+            <div>
+              <h3 className="surface-title text-sm">외국인 임금 최다 구간</h3>
+              <p className="surface-subtitle">통계청 · {realForeignWage.latestYear} · 월평균 임금분포</p>
+            </div>
+            <span
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-white"
+              style={{ background: "#0369a1" }}
+            >
+              <Banknote aria-hidden size={18} />
+            </span>
+          </div>
+          {wageTop ? (
+            <>
+              <div className="mt-3 flex items-end gap-1.5">
+                <span className="text-[1.5rem] font-black leading-tight text-ink">{wageTop.band}</span>
+              </div>
+              <div className="mt-1 flex items-center gap-2 text-xs">
+                <span className="font-bold" style={{ color: "#0369a1" }}>
+                  {formatNumber(wageTop.value)} {realForeignWage.unit}
+                </span>
+                <span className="text-muted">· 전체의 {wageTopPct.toFixed(1)}%</span>
+              </div>
+              {/* 구간 분포 미니 막대 */}
+              <div className="mt-4 space-y-2">
+                {wageBands.map((b) => {
+                  const max = wageTop.value || 1;
+                  return (
+                    <div key={b.band} className="flex items-center gap-2 text-[11px]">
+                      <span className="w-28 shrink-0 truncate text-slate-600">{b.band}</span>
+                      <div className="h-2 flex-1 overflow-hidden rounded-full" style={{ background: "#f1f5f9" }}>
+                        <div
+                          className="h-2 rounded-full"
+                          style={{ width: `${Math.max(3, Math.round((b.value / max) * 100))}%`, background: b === wageTop ? "#0369a1" : "#93c5fd" }}
+                        />
+                      </div>
+                      <span className="w-12 shrink-0 text-right font-mono text-muted">{formatNumber(b.value)}</span>
+                    </div>
+                  );
+                })}
+              </div>
+              <p className="mt-3 text-[10px] text-muted">단위: {realForeignWage.unit} · 200~300만원대가 임금 중앙대역</p>
+            </>
+          ) : (
+            <p className="mt-4 text-sm text-muted">임금분포 데이터 없음</p>
+          )}
+        </div>
+
+        {/* 최신연도 E-9 도입 합계 + top 국가 + 추세 스파크 */}
+        <div className="surface flex flex-col p-5">
+          <div className="flex items-start justify-between gap-2">
+            <div>
+              <h3 className="surface-title text-sm">E-9 도입 (고용허가제)</h3>
+              <p className="surface-subtitle">
+                {epsLatest ? `${epsLatest.year} 도입 합계` : "도입 추세"} · {realEpsIntroduction.unit}
+              </p>
+            </div>
+            <span
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-white"
+              style={{ background: "#0f766e" }}
+            >
+              <Users aria-hidden size={18} />
+            </span>
+          </div>
+          {epsLatest ? (
+            <>
+              <div className="mt-3 flex items-end gap-1.5">
+                <span className="text-[1.6rem] font-black leading-none text-ink sm:text-[2.1rem]">{formatNumber(epsLatest.value)}</span>
+                <span className="mb-0.5 text-sm text-muted">{realEpsIntroduction.unit}</span>
+              </div>
+              {epsTopCountry && (
+                <div className="mt-1.5 flex items-center gap-1.5 text-xs">
+                  <span className="rounded-full px-2 py-0.5 text-[11px] font-bold text-white" style={{ background: "#0f766e" }}>
+                    1위 {epsTopCountry.country}
+                  </span>
+                  <span className="text-muted">{formatNumber(epsTopCountry.value)} {realEpsIntroduction.unit}</span>
+                </div>
+              )}
+              {/* 연도별 도입 추세 스파크라인 */}
+              <div className="mt-3" style={{ height: 80 }}>
+                <SparkLineChart data={epsSpark} color="#0f766e" unit={`${realEpsIntroduction.unit}`} />
+              </div>
+              <p className="mt-2 text-[10px] text-muted">연도별 도입 추세 ({epsTrend.length ? `${epsTrend[0].year}–${epsLatest.year}` : "-"})</p>
+            </>
+          ) : (
+            <p className="mt-4 text-sm text-muted">E-9 도입 데이터 없음</p>
+          )}
+        </div>
+
+        {/* 유학생 1위 국적 + TOP5 미니 막대 */}
+        <div className="surface flex flex-col p-5">
+          <div className="flex items-start justify-between gap-2">
+            <div>
+              <h3 className="surface-title text-sm">유학생 1위 국적</h3>
+              <p className="surface-subtitle">법무부 · {realForeignStudentNationality.latestYear} · 국적별 유학생(명)</p>
+            </div>
+            <span
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-white"
+              style={{ background: "#b45309" }}
+            >
+              <GraduationCap aria-hidden size={18} />
+            </span>
+          </div>
+          {studentTop ? (
+            <>
+              <div className="mt-3 flex items-end gap-1.5">
+                <span className="truncate text-[1.3rem] font-black leading-none text-ink sm:text-[1.7rem]">{studentTop.nationality}</span>
+              </div>
+              <div className="mt-1 flex items-center gap-2 text-xs">
+                <span className="font-bold" style={{ color: "#b45309" }}>{formatNumber(studentTop.value)} 명</span>
+                <span className="text-muted">· 상위국 합계의 {studentTopPct.toFixed(1)}%</span>
+              </div>
+              {/* 국적 TOP5 미니 막대 차트 */}
+              <div className="mt-3" style={{ height: 96 }}>
+                <MiniBarChart data={studentBars} unit="명" />
+              </div>
+              <p className="mt-2 text-[10px] text-muted">국적별 유학생 TOP {studentBars.length} · 단위: 명</p>
+            </>
+          ) : (
+            <p className="mt-4 text-sm text-muted">유학생 국적 데이터 없음</p>
+          )}
+        </div>
       </section>
 
       {/* ── 시각화 히어로: 지역 지도 + 체류자격 도넛 ── */}
@@ -202,9 +529,14 @@ export default function DashboardPage() {
           <div className="surface-header pb-1">
             <div>
               <h3 className="surface-title flex items-center gap-1.5">
-                <MapPin size={16} style={{ color: "#0f766e" }} /> 지역별 금융 기회 지도
+                <MapPin size={16} style={{ color: "#0f766e" }} />
+                {hasSidoForeignerStats ? "지역별 외국인주민 분포 지도" : "지역별 금융 기회 지도"}
               </h3>
-              <p className="surface-subtitle">거품 크기 = 외국인 규모 · 색상 = 기회 점수</p>
+              <p className="surface-subtitle">
+                {hasSidoForeignerStats
+                  ? "거품 크기·색상 = 시도별 외국인주민 규모 (행안부 실데이터)"
+                  : "거품 크기 = 외국인 규모 · 색상 = 기회 점수(표본)"}
+              </p>
             </div>
             <Link href="/regions" className="text-xs font-semibold" style={{ color: "#0f766e" }}>
               지역 분석 →
@@ -213,19 +545,23 @@ export default function DashboardPage() {
           <div className="flex items-center justify-center px-2 pb-2">
             <RegionMap />
           </div>
-          {/* 색상 범례 */}
-          <div className="flex flex-wrap items-center justify-center gap-4 border-t border-slate-100 py-3 text-xs text-muted">
-            {[
-              { c: "#0f766e", l: "72+ 매우 높음" },
-              { c: "#3157a4", l: "55–71 높음" },
-              { c: "#b45309", l: "40–54 보통" },
-              { c: "#be123c", l: "~39 낮음" }
-            ].map((x) => (
-              <span key={x.l} className="flex items-center gap-1.5">
-                <span className="h-3 w-3 rounded-full" style={{ background: x.c }} />{x.l}
-              </span>
-            ))}
-          </div>
+          {hasSidoForeignerTrend && (
+            <div className="border-t border-slate-100 px-4 py-3">
+              <div className="flex items-center justify-between">
+                <p className="text-[11px] font-semibold text-slate-500">전국 외국인주민 연도별 추이</p>
+                <p className="text-[10px] text-muted">
+                  {sidoForeignerTrend[0].year}~{sidoForeignerTrend.at(-1)!.year} · {(sidoForeignerTrend.at(-1)!.total / 10000).toFixed(0)}만명
+                </p>
+              </div>
+              <div style={{ height: 70 }}>
+                <SparkLineChart
+                  data={sidoForeignerTrend.map((p) => ({ label: p.year, value: p.total }))}
+                  color="#0f766e"
+                  unit="명"
+                />
+              </div>
+            </div>
+          )}
         </div>
 
         {/* 체류자격 도넛 + 순위 */}
@@ -394,7 +730,7 @@ export default function DashboardPage() {
             </Link>
           )}
           {hasHealthInsurance && (
-            <Link href="/financial-insights" className="surface surface-hover p-5">
+            <Link href="/economy#health" className="surface surface-hover p-5">
               <h3 className="surface-title mb-1">건강보험 적용인구 (소득 대리지표)</h3>
               <p className="surface-subtitle mb-3">건보공단 · 지역별 가입 상위 5</p>
               <div className="space-y-2">
@@ -414,7 +750,7 @@ export default function DashboardPage() {
             </Link>
           )}
           {hasMulticulturalFamily && (
-            <Link href="/financial-insights" className="surface surface-hover p-5">
+            <Link href="/economy#welfare" className="surface surface-hover p-5">
               <h3 className="surface-title mb-1">다문화가족 현황</h3>
               <p className="surface-subtitle mb-3">여가부 · 총 {formatNumber(multiculturalFamilySummary.totalCount)}명 · 지역별 상위 5</p>
               <div className="space-y-2">
@@ -434,7 +770,7 @@ export default function DashboardPage() {
             </Link>
           )}
           {hasEconActivity && (
-            <Link href="/financial-insights" className="surface surface-hover p-5">
+            <Link href="/economy#econ-activity" className="surface surface-hover p-5">
               <h3 className="surface-title mb-1">외국인 경제활동인구</h3>
               <p className="surface-subtitle mb-3">통계청 · 체류자격별 취업·경제활동</p>
               <div className="space-y-2">
@@ -470,7 +806,7 @@ export default function DashboardPage() {
             </div>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+            <table className="w-full min-w-[560px] text-sm">
               <thead>
                 <tr style={{ background: "#f8fafc", borderBottom: "2px solid #e2e8f0" }}>
                   <th className="px-4 py-2.5 text-left text-xs font-bold text-muted">세그먼트</th>

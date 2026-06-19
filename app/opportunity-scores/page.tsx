@@ -5,23 +5,15 @@ import { Panel } from "@/components/ui/Panel";
 import { PageHero } from "@/components/ui/PageHero";
 import { StatTile } from "@/components/ui/StatTile";
 import { sampleOpportunityRows } from "@/lib/data/mockData";
+import { RealSidoOpportunityTable } from "@/components/data/RealSidoOpportunityTable";
 import type { RegionOpportunityRow } from "@/lib/types/foreignResident";
-import { formatNumber, formatPercent, formatScore } from "@/lib/utils/format";
-
-// 점수 구간별 티어 색상 — 랭크 배지와 전체 점수 바에 사용.
-function tierColor(score: number): string {
-  if (score >= 72) return "#0f766e"; // teal
-  if (score >= 55) return "#3157a4"; // cobalt
-  if (score >= 40) return "#b45309"; // amber
-  return "#be123c"; // berry
-}
-
-function tierLabel(score: number): string {
-  if (score >= 72) return "최우선";
-  if (score >= 55) return "우선";
-  if (score >= 40) return "관찰";
-  return "후순위";
-}
+import {
+  formatNumber,
+  formatPercent,
+  formatScore,
+  scoreColor as tierColor,
+  scoreTierLabel as tierLabel
+} from "@/lib/utils/format";
 
 // 리더보드 카드의 4개 미니 지표 — 각각 고유 색상.
 const METRIC_BARS: {
@@ -109,6 +101,18 @@ export default function OpportunityScoresPage() {
         title="전략 실행 우선순위 랭킹"
         description="외국인 규모, 송금 수요, 유학생 수요, 급여계좌 수요, 다국어 상담 필요도를 0~100으로 정규화하고 설명 가능한 가중치로 전체 기회 점수를 산출합니다."
       />
+
+      {/* 실데이터 시도 기회 점수 (행안부 외국인주민 + KEDI 유학생 + 증가율) */}
+      <RealSidoOpportunityTable />
+
+      {/* 표본 안내: 아래 시군구 상세는 시뮬레이션 표본 */}
+      <div className="flex flex-wrap items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5 text-xs leading-5 text-amber-800">
+        <span className="rounded bg-amber-200 px-1.5 py-0.5 font-bold">표본</span>
+        <span>
+          아래 <strong>시군구 리더보드·상세</strong>는 6개 시군구 <strong>시뮬레이션 표본</strong>입니다(송금·급여계좌·다국어
+          세부 점수 포함). 시도 단위 실데이터 랭킹은 위 “실데이터 기회 점수” 표를 참고하세요.
+        </span>
+      </div>
 
       <div className="stat-grid">
         <StatTile

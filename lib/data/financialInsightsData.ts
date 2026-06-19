@@ -1,9 +1,14 @@
 // 금융 인사이트 페이지용 파생 데이터.
 // 모든 값은 realData.ts + mockData.ts에서 계산한다.
-// realData.ts는 CI 배치(매일 18:30 UTC)가 새 데이터를 수집할 때마다 자동 재생성된다.
+// realData.ts는 CI 배치(매일 01:00 KST)가 새 데이터를 수집할 때마다 자동 재생성된다.
 // 따라서 이 파일에서 파생된 값도 배치 완료 시 자동 갱신된다.
 
-import { realDataSummary, realRegionData } from "./generated/realData";
+import {
+  realBopTransferIncome,
+  realDataSummary,
+  realRegionData,
+  realStudentSummary
+} from "./generated/realData";
 import {
   kpiSummary,
   nationalityDistributionData,
@@ -25,12 +30,19 @@ const e9Count = stayVisaTypes.find((v) => v.visaCode === "E-9")?.count ?? 0;
 
 export const marketKpis = {
   totalForeignResidents: kpiSummary.totalResidents > 0 ? kpiSummary.totalResidents : 2_459_883,
-  totalForeignResidentsYoy: "+5.2%",
+  // 실 전년 데이터가 없어 총·등록 외국인 YoY는 표기하지 않는다(가짜 수치 제거).
+  totalForeignResidentsYoy: null as string | null,
   registeredForeignResidents: kpiSummary.registeredResidents > 0 ? kpiSummary.registeredResidents : 1_277_945,
   foreignStudents: kpiSummary.foreignStudents > 0 ? kpiSummary.foreignStudents : 185_010,
-  foreignStudentsYoy: "+8.7%",
+  // 유학생 YoY는 실데이터(realStudentSummary.yoy) 단일 출처를 사용한다.
+  foreignStudentsYoy: realStudentSummary.hasData ? `+${realStudentSummary.yoy}%` : (null as string | null),
   averageOpportunityScore: Math.round(kpiSummary.averageOpportunityScore),
-  remittanceEstimateKrw: "약 15조원",
+  // 송금 KRW 추정치(하드코딩)를 폐기하고 한국은행 이전소득수지 실측값(억달러 환산)을 대리지표로 노출.
+  remittanceProxy:
+    realBopTransferIncome.latestValue != null
+      ? `약 ${Math.round(realBopTransferIncome.latestValue / 100).toLocaleString()}억달러`
+      : "집계 대기",
+  remittanceProxyYear: realBopTransferIncome.latestYear,
   e9WorkerEstimate: e9Count > 0 ? `${(e9Count / 10000).toFixed(0)}만명` : "약 30만명",
   sourceLabel: kpiSummary.totalResidents > 0 ? "법무부 실데이터(2024) 기준" : "법무부 2024.12 공식통계 기준",
   collectedRowCount: realDataSummary.statusRowCount

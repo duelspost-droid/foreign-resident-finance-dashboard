@@ -37,6 +37,13 @@ export function DataTable<T>({
           </tr>
         </thead>
         <tbody>
+          {rows.length === 0 && (
+            <tr>
+              <td className="px-4 py-8 text-center text-sm text-muted" colSpan={columns.length}>
+                표시할 데이터가 없습니다.
+              </td>
+            </tr>
+          )}
           {rows.map((row) => (
             <tr className="border-b border-slate-100 last:border-0" key={rowKey(row)}>
               {columns.map((column) => (

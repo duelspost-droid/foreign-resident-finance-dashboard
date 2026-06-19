@@ -61,7 +61,8 @@ npm run build
 - `/universities`: 대학/유학생 분석
 - `/visa-segments`: 체류자격 분석
 - `/opportunity-scores`: 금융 기회 점수
-- `/data-sources`: 데이터 소스
+- `/catalog`: 분석 데이터 카탈로그 (축 2 탐색)
+- `/data-pipeline`: 메타데이터 관리 (수집 건강·이력·커버리지·출처 정의·발굴)
 - `/compliance`: 개인정보/컴플라이언스
 
 ## 데이터 구조
@@ -112,7 +113,7 @@ npm run data:all     # fetch → build → typecheck → build 일괄 (일배치
 - 수집 출처 정의: `scripts/data_sources.mjs`
 - 수집 이력(성공·실패·요청 URL·행수)은 `data/catalog/latest_fetch_catalog.json` 과
   `lib/data/generated/dataLineage.ts` 에 기록되며, git 커밋 이력으로 일자별 보존됩니다.
-- `/data-sources` 페이지에서 수집 이력과 출처별 상세를 확인할 수 있습니다.
+- `/data-pipeline`(메타데이터 관리) 페이지에서 데이터 건강 점수, 수집 이력·커버리지, 출처 정의·한계, 출처별 상세를 확인할 수 있습니다.
 
 ### API 키 설정
 

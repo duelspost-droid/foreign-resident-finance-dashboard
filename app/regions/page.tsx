@@ -1,6 +1,7 @@
 import { Gauge, MapPin, TrendingUp, Trophy } from "lucide-react";
 
 import { RegionMap } from "@/components/charts/RegionMap";
+import { RealSidoOpportunityTable } from "@/components/data/RealSidoOpportunityTable";
 import { ScoreRadarChart } from "@/components/charts/ScoreRadarChart";
 import { PageHero } from "@/components/ui/PageHero";
 import { Panel } from "@/components/ui/Panel";
@@ -11,15 +12,14 @@ import {
   regionResidentSummary,
   sampleOpportunityRows
 } from "@/lib/data/mockData";
-import { formatNumber, formatPercent, formatScore } from "@/lib/utils/format";
-
-// 점수 구간별 브랜드 컬러 — 랭킹 원형 배지와 타일 색상에 공통 사용.
-function scoreColor(score: number): string {
-  if (score >= 72) return "#0f766e"; // teal
-  if (score >= 55) return "#3157a4"; // cobalt
-  if (score >= 40) return "#b45309"; // amber
-  return "#be123c"; // berry
-}
+import {
+  hasSidoForeignerStats,
+  hasSidoForeignerTrend,
+  sidoForeignerLatestYear,
+  sidoForeignerTotal,
+  sidoForeignerTrend
+} from "@/lib/data/regionAggregates";
+import { formatNumber, formatPercent, formatScore, scoreColor } from "@/lib/utils/format";
 
 export default function RegionsPage() {
   const rows = sampleOpportunityRows;
@@ -38,6 +38,16 @@ export default function RegionsPage() {
 
   const maxScore = Math.max(...rows.map((row) => row.overallOpportunityScore), 1);
 
+  // 전국 외국인주민 연도별 추이(행안부 실데이터)
+  const trend = sidoForeignerTrend;
+  const trendMax = Math.max(...trend.map((p) => p.total), 1);
+  const trendLatest = trend.at(-1);
+  const trendPrev = trend.at(-2);
+  const trendYoy =
+    trendLatest && trendPrev && trendPrev.total
+      ? ((trendLatest.total - trendPrev.total) / trendPrev.total) * 100
+      : null;
+
   return (
     <div className="space-y-7 pb-14">
       <PageHero
@@ -45,6 +55,26 @@ export default function RegionsPage() {
         title="지역별 외국인 분포와 금융 기회"
         description="시도·시군구 단위의 집계 데이터를 기준으로 외국인 밀집도, 세그먼트, 송금·유학생·급여계좌 수요를 비교해 우선 공략 지역을 도출합니다."
       />
+
+      {/* 실데이터 시도 분포 요약(있을 때) */}
+      {hasSidoForeignerStats && (
+        <div className="flex flex-wrap items-center gap-2 rounded-lg border border-teal-200 bg-teal-50 px-4 py-2.5 text-xs leading-5 text-teal-800">
+          <span className="rounded bg-teal-200 px-1.5 py-0.5 font-bold">실데이터</span>
+          <span>
+            지도는 <strong>행안부 시도별 외국인주민 현황{sidoForeignerLatestYear ? ` ${sidoForeignerLatestYear}` : ""}</strong>
+            (전국 {formatNumber(sidoForeignerTotal)}명) 실집계로 표시됩니다.
+          </span>
+        </div>
+      )}
+
+      {/* 표본 안내: 기회점수·순위·레이더는 아직 시뮬레이션 표본 기반 */}
+      <div className="flex flex-wrap items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5 text-xs leading-5 text-amber-800">
+        <span className="rounded bg-amber-200 px-1.5 py-0.5 font-bold">표본</span>
+        <span>
+          아래 <strong>기회 점수·순위·레이더</strong>는 6개 시군구 <strong>시뮬레이션 표본</strong>으로
+          산출된 값입니다(실 집계 점수 산출 전). {hasSidoForeignerStats ? "지도는 실데이터입니다." : "지도도 현재 표본 기준입니다."}
+        </span>
+      </div>
 
       <div className="stat-grid">
         <StatTile
@@ -81,9 +111,53 @@ export default function RegionsPage() {
         />
       </div>
 
+      {/* 전국 외국인주민 연도별 추이 (행안부 실데이터) */}
+      {hasSidoForeignerTrend && trendLatest && (
+        <Panel
+          title="전국 외국인주민 연도별 추이"
+          subtitle={`행안부 시도별 외국인주민 합계 · ${trend[0].year}~${trendLatest.year}`}
+          right={
+            trendYoy != null ? (
+              <span className="eyebrow">전년 대비 {trendYoy >= 0 ? "+" : ""}{trendYoy.toFixed(1)}%</span>
+            ) : undefined
+          }
+          bodyClassName="p-5 pt-4"
+        >
+          <div className="flex items-end gap-2 overflow-x-auto" style={{ height: 200 }}>
+            {trend.map((p) => {
+              const h = Math.max(4, Math.round((p.total / trendMax) * 150));
+              const isLast = p.year === trendLatest.year;
+              return (
+                <div
+                  key={p.year}
+                  className="flex min-w-[30px] flex-1 flex-col items-center gap-1"
+                  role="img"
+                  aria-label={`${p.year}년 외국인주민 ${p.total.toLocaleString()}명`}
+                >
+                  <span className="text-[10px] font-semibold text-slate-500">{(p.total / 10000).toFixed(0)}만</span>
+                  <div className="flex w-full max-w-[40px] items-end" style={{ height: 150 }}>
+                    <div
+                      className="w-full rounded-t"
+                      style={{ height: h, background: isLast ? "#0f766e" : "#94a3b8" }}
+                    />
+                  </div>
+                  <span className="text-[10px] text-muted">{String(p.year).slice(2)}</span>
+                </div>
+              );
+            })}
+          </div>
+          <p className="mt-3 text-[11px] leading-5 text-muted">
+            행정안전부 「지방자치단체 외국인주민 현황」(매년 11/1 기준) 시도 합계. 2020~21년은 코로나로 일시 감소 후 회복했습니다.
+          </p>
+        </Panel>
+      )}
+
+      {/* 실데이터 시도 기회 점수 (행안부+KEDI) */}
+      <RealSidoOpportunityTable />
+
       <Panel
-        title="지역 기회 점수 순위"
-        subtitle="송금·유학생·급여계좌·다국어 상담 수요를 합산한 종합 기회 점수 순위입니다."
+        title="지역 기회 점수 순위 (표본)"
+        subtitle="송금·유학생·급여계좌·다국어 상담 수요를 합산한 종합 기회 점수 — 6개 시군구 시뮬레이션 표본."
         bodyClassName="p-5 pt-3"
       >
         <div className="space-y-2.5">
@@ -176,8 +250,9 @@ export default function RegionsPage() {
 
       <div className="two-column">
         <Panel
-          title="점수 유형별 비교"
-          subtitle="대표 지역 3곳의 송금·유학생·급여계좌·다국어 상담 니즈 구조"
+          title="점수 유형별 비교 (표본)"
+          subtitle="대표 지역 3곳의 송금·유학생·급여계좌·다국어 상담 니즈 구조 — 시뮬레이션 표본."
+          right={<span className="eyebrow">표본</span>}
           bodyClassName="p-0"
         >
           <div className="chart-box">
@@ -186,8 +261,12 @@ export default function RegionsPage() {
         </Panel>
 
         <Panel
-          title="대한민국 지역 기회 지도"
-          subtitle="버블 크기는 외국인 수, 색상은 시도 평균 기회 점수"
+          title={hasSidoForeignerStats ? "대한민국 시도별 외국인주민 지도" : "대한민국 지역 기회 지도"}
+          subtitle={
+            hasSidoForeignerStats
+              ? "버블 크기·색상 = 시도별 외국인주민 규모 (행안부 실데이터)"
+              : "버블 크기는 외국인 수, 색상은 시도 평균 기회 점수(표본)"
+          }
           bodyClassName="p-3 pt-2"
         >
           <div className="h-[460px]">

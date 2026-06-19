@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-16T00:15:23.288Z",
+  "generatedAt": "2026-06-18T06:19:46.450Z",
   "candidates": [
     {
       "dataset_id": "15047604",
@@ -98,6 +98,28 @@
       "url": "https://www.data.go.kr/data/15058374/openapi.do",
       "priority": "mid",
       "rationale": "시군구 단위 장기거주 외국인주민 규모",
+      "status": "pending"
+    },
+    {
+      "dataset_id": "15050054",
+      "kind": "fileData",
+      "provider": "교육부",
+      "title": null,
+      "keyword": "외국인 유학생 현황",
+      "url": "https://www.data.go.kr/data/15050054/fileData.do",
+      "priority": "mid",
+      "rationale": "대학·국적·과정별 유학생 금융 수요",
+      "status": "pending"
+    },
+    {
+      "dataset_id": "15050055",
+      "kind": "fileData",
+      "provider": "교육부",
+      "title": null,
+      "keyword": "외국인 유학생 현황",
+      "url": "https://www.data.go.kr/data/15050055/fileData.do",
+      "priority": "mid",
+      "rationale": "대학·국적·과정별 유학생 금융 수요",
       "status": "pending"
     },
     {
@@ -228,6 +250,17 @@
       "title": null,
       "keyword": "외국인 고용 취업",
       "url": "https://www.data.go.kr/data/15137115/fileData.do",
+      "priority": "mid",
+      "rationale": "E-9/E-7 등 취업 외국인 규모(급여계좌 수요)",
+      "status": "pending"
+    },
+    {
+      "dataset_id": "15032256",
+      "kind": "fileData",
+      "provider": "고용노동부",
+      "title": null,
+      "keyword": "외국인 고용 취업",
+      "url": "https://www.data.go.kr/data/15032256/fileData.do",
       "priority": "mid",
       "rationale": "E-9/E-7 등 취업 외국인 규모(급여계좌 수요)",
       "status": "pending"

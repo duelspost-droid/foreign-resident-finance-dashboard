@@ -71,28 +71,101 @@ export async function fetchSourceCandidates(): Promise<SourceCandidate[] | null>
   return data.map(mapCandidate);
 }
 
-// 관리자 승인/거부 처리. 성공 시 true.
+// 관리자 승인/거부/되돌리기 처리. 성공 시 true.
+// pending 으로 되돌리면 결정 메타(decided_*)를 비우고 다시 대기 큐로 보낸다.
+// target_table·notes 는 명시했을 때만 갱신(되돌리기 시 기존 값 보존).
 export async function updateCandidateStatus(
   id: number,
-  status: "approved" | "rejected",
+  status: "approved" | "rejected" | "pending",
   options: { targetTable?: string; decidedBy?: string; notes?: string } = {}
 ): Promise<boolean> {
   const client = createBrowserSupabaseClient();
   if (!client) return false;
 
-  const { error } = await client
-    .from("source_candidates")
-    .update({
-      status,
-      target_table: options.targetTable ?? null,
-      decided_by: options.decidedBy ?? "admin",
-      decided_at: new Date().toISOString(),
-      notes: options.notes ?? null,
-    })
-    .eq("id", id);
+  const patch: Record<string, unknown> = { status };
+  if (status === "pending") {
+    patch.decided_at = null;
+    patch.decided_by = null;
+  } else {
+    patch.decided_at = new Date().toISOString();
+    patch.decided_by = options.decidedBy ?? "admin";
+  }
+  if (options.targetTable !== undefined) patch.target_table = options.targetTable;
+  if (options.notes !== undefined) patch.notes = options.notes;
+
+  const { error } = await client.from("source_candidates").update(patch).eq("id", id);
 
   if (error) {
     console.error("updateCandidateStatus error:", error.message);
+    return false;
+  }
+  return true;
+}
+
+// ── 대시보드 반영 설정 (surface_config) ───────────────────────────────────────────
+export type SurfaceConfigRow = {
+  sourceId: string;
+  screen: string | null;
+  displayLabel: string | null;
+  enabled: boolean;
+  targetTable: string | null;
+  note: string | null;
+  updatedAt: string | null;
+  updatedBy: string | null;
+};
+
+function mapSurface(row: Record<string, unknown>): SurfaceConfigRow {
+  return {
+    sourceId: String(row.source_id),
+    screen: (row.screen as string) ?? null,
+    displayLabel: (row.display_label as string) ?? null,
+    enabled: row.enabled !== false,
+    targetTable: (row.target_table as string) ?? null,
+    note: (row.note as string) ?? null,
+    updatedAt: (row.updated_at as string) ?? null,
+    updatedBy: (row.updated_by as string) ?? null,
+  };
+}
+
+// 반영 설정 전체 조회. 미연결/오류 시 null(호출부에서 하드코딩 기본값으로 폴백).
+export async function fetchSurfaceConfig(): Promise<SurfaceConfigRow[] | null> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return null;
+  const { data, error } = await client.from("surface_config").select("*");
+  if (error) {
+    console.error("fetchSurfaceConfig error:", error.message);
+    return null;
+  }
+  return (data ?? []).map(mapSurface);
+}
+
+// 반영 설정 1건 저장(upsert). 성공 시 true.
+export async function upsertSurfaceConfig(row: {
+  sourceId: string;
+  screen?: string | null;
+  displayLabel?: string | null;
+  enabled?: boolean;
+  targetTable?: string | null;
+  note?: string | null;
+  updatedBy?: string;
+}): Promise<boolean> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return false;
+  const { error } = await client.from("surface_config").upsert(
+    {
+      source_id: row.sourceId,
+      screen: row.screen ?? null,
+      display_label: row.displayLabel ?? null,
+      enabled: row.enabled ?? true,
+      target_table: row.targetTable ?? null,
+      note: row.note ?? null,
+      updated_at: new Date().toISOString(),
+      updated_by: row.updatedBy ?? "admin",
+    },
+    { onConflict: "source_id" }
+  );
+  if (error) {
+    console.error("upsertSurfaceConfig error:", error.message);
     return false;
   }
   return true;
@@ -269,4 +342,158 @@ export async function fetchUniversityData(
     studentCount: row.student_count,
     sourceName: row.source_name ?? undefined,
   }));
+}
+
+// ── AI 인사이트 질의 이력 (ai_insight_chat) ──────────────────────────────────────
+export type ChatRow = {
+  id: number;
+  session_id: string;
+  question: string;
+  answer: string;
+  source: string;
+  pages: string[];
+  created_at: string;
+};
+
+// 이력 1건 삽입(best-effort). Supabase 미연결/테이블 없음/오류 시 false.
+export async function insertChatEntry(e: {
+  sessionId: string;
+  question: string;
+  answer: string;
+  source: string;
+  pages: string[];
+}): Promise<boolean> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return false;
+  const { error } = await client.from("ai_insight_chat").insert({
+    session_id: e.sessionId,
+    question: e.question,
+    answer: e.answer,
+    source: e.source,
+    pages: e.pages
+  });
+  return !error;
+}
+
+// 세션 이력 조회. 미연결/오류 시 null(호출부에서 localStorage 폴백).
+export async function fetchChatHistory(sessionId: string, limit = 100): Promise<ChatRow[] | null> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return null;
+  const { data, error } = await client
+    .from("ai_insight_chat")
+    .select("*")
+    .eq("session_id", sessionId)
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  if (error) return null;
+  return (data ?? []) as ChatRow[];
+}
+
+// 세션 이력 전체 삭제(best-effort).
+export async function deleteChatHistory(sessionId: string): Promise<boolean> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return false;
+  const { error } = await client.from("ai_insight_chat").delete().eq("session_id", sessionId);
+  return !error;
+}
+
+// ── 사용자 제안 접수 + 관리자 답변 (feature_requests) ────────────────────────────────
+export type FeatureRequestRow = {
+  id: number;
+  session_id: string;
+  category: string; // feature | data
+  title: string;
+  body: string;
+  page: string | null;
+  status: string; // received | reviewing | answered | rejected
+  admin_response: string | null;
+  responded_at: string | null;
+  created_at: string;
+};
+
+// 제안 1건 제출(best-effort). 미연결/오류 시 false.
+export async function submitFeatureRequest(e: {
+  sessionId: string;
+  category: string;
+  title: string;
+  body: string;
+  page: string;
+}): Promise<boolean> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return false;
+  const { error } = await client.from("feature_requests").insert({
+    session_id: e.sessionId,
+    category: e.category,
+    title: e.title,
+    body: e.body,
+    page: e.page
+  });
+  return !error;
+}
+
+// 전체 제안 목록(관리자 콘솔 전용 — 모든 컬럼). 미연결/오류 시 null.
+export async function fetchAllFeatureRequests(limit = 500): Promise<FeatureRequestRow[] | null> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return null;
+  const { data, error } = await client
+    .from("feature_requests")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  if (error) return null;
+  return (data ?? []) as FeatureRequestRow[];
+}
+
+// 공개 '과거 제안 이력'용 — 표시에 필요한 컬럼만 반환(session_id·page 등 미반환, 데이터 최소화).
+// RLS는 anon 전체 SELECT를 허용하지만, 익명 응답에 식별·추적 소지 값이 섞이지 않도록 조회 단계에서 좁힌다.
+export async function fetchPublicFeatureRequests(limit = 300): Promise<FeatureRequestRow[] | null> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return null;
+  const { data, error } = await client
+    .from("feature_requests")
+    .select("id,category,title,body,status,admin_response,created_at")
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  if (error) return null;
+  return (data ?? []) as FeatureRequestRow[];
+}
+
+// 관리자 답변/상태 처리는 admin Edge Function(토큰 검증)로 이전 → lib/data/adminApi.ts 의 adminRespond.
+
+// ── 익명 접속 통계 (page_views) ──────────────────────────────────────────────────
+export type PageViewRow = {
+  id: number;
+  session_id: string;
+  path: string;
+  referrer_host: string | null;
+  created_at: string;
+};
+
+// 페이지뷰 1건 기록(best-effort, fire-and-forget).
+export async function logPageView(e: {
+  sessionId: string;
+  path: string;
+  referrerHost: string | null;
+}): Promise<boolean> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return false;
+  const { error } = await client.from("page_views").insert({
+    session_id: e.sessionId,
+    path: e.path,
+    referrer_host: e.referrerHost
+  });
+  return !error;
+}
+
+// 접속 통계 원시 로그(관리자 집계용). 미연결/오류 시 null.
+export async function fetchPageViews(limit = 3000): Promise<PageViewRow[] | null> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return null;
+  const { data, error } = await client
+    .from("page_views")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  if (error) return null;
+  return (data ?? []) as PageViewRow[];
 }
