@@ -1,6 +1,7 @@
 import { Panel } from "@/components/ui/Panel";
 import {
   OPPORTUNITY_WEIGHTS,
+  bopNationalLatest,
   hasRealSidoOpportunity,
   realSidoOpportunity
 } from "@/lib/data/opportunityReal";
@@ -16,11 +17,20 @@ export function RealSidoOpportunityTable({ limit }: { limit?: number }) {
     <Panel
       title="실데이터 기회 점수 · 시도"
       subtitle={`외국인주민 규모(${OPPORTUNITY_WEIGHTS.size}) · 유학생(${OPPORTUNITY_WEIGHTS.student}) · 증가율(${OPPORTUNITY_WEIGHTS.growth}) 가중 — 행안부·KEDI 17개 시도 실집계`}
-      right={<span className="eyebrow">실데이터</span>}
+      right={
+        <div className="flex items-center gap-2">
+          {bopNationalLatest > 0 && (
+            <span className="rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-bold text-emerald-700">
+              ECOS BOP {(bopNationalLatest / 1000).toFixed(1)}십억$
+            </span>
+          )}
+          <span className="eyebrow">실데이터</span>
+        </div>
+      }
       bodyClassName="p-0"
     >
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[680px] text-sm">
+        <table className="w-full min-w-[820px] text-sm">
           <thead>
             <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
               <th className="px-3 py-2.5 text-left text-xs font-bold">#</th>
@@ -29,6 +39,9 @@ export function RealSidoOpportunityTable({ limit }: { limit?: number }) {
               <th className="px-3 py-2.5 text-right text-xs font-bold">유학생</th>
               <th className="px-3 py-2.5 text-right text-xs font-bold">증가율</th>
               <th className="px-3 py-2.5 text-left text-xs font-bold">규모·유학·성장</th>
+              <th className="px-3 py-2.5 text-right text-xs font-bold" title="ECOS 이전소득수지(301Y013) × 시도 거주비중 추정">
+                송금시장 추정
+              </th>
               <th className="px-3 py-2.5 text-right text-xs font-bold">종합</th>
             </tr>
           </thead>
@@ -50,6 +63,17 @@ export function RealSidoOpportunityTable({ limit }: { limit?: number }) {
                   </span>
                 </td>
                 <td className="px-3 py-2.5 text-right">
+                  {r.bopMarketEst > 0 ? (
+                    <span className="font-mono text-emerald-700 font-semibold">
+                      ${r.bopMarketEst >= 1000
+                        ? `${(r.bopMarketEst / 1000).toFixed(1)}B`
+                        : `${r.bopMarketEst.toFixed(0)}M`}
+                    </span>
+                  ) : (
+                    <span className="text-muted">—</span>
+                  )}
+                </td>
+                <td className="px-3 py-2.5 text-right">
                   <span className="font-bold" style={{ color: scoreColor(r.overallScore) }}>{r.overallScore}</span>
                 </td>
               </tr>
@@ -58,8 +82,8 @@ export function RealSidoOpportunityTable({ limit }: { limit?: number }) {
         </table>
       </div>
       <p className="border-t border-slate-100 px-4 py-2.5 text-[11px] leading-5 text-muted">
-        점수=각 신호를 17개 시도 내 최댓값 대비 0~100 정규화 후 가중합(증가율은 −5~+15% 구간 매핑). 송금·급여계좌 등
-        세부 수요는 시도 단위 실데이터가 없어 제외했습니다.
+        종합점수 = 각 신호를 17개 시도 내 최댓값 대비 0~100 정규화 후 가중합 (증가율은 −5~+15% 구간 매핑).
+        송금시장 추정 = 한국은행 ECOS 이전소득수지(301Y013) 전국합 × 시도 거주비중 — 시도별 실측치 없어 비례 배분한 추정값입니다.
       </p>
     </Panel>
   );

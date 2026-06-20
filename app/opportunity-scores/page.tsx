@@ -1,15 +1,18 @@
-import { BarChart3, Globe, MapPin, TrendingUp } from "lucide-react";
+import { BarChart3, Globe, MapPin, Send, TrendingDown, TrendingUp } from "lucide-react";
 
 import { Panel } from "@/components/ui/Panel";
 import { PageHero } from "@/components/ui/PageHero";
 import { StatTile } from "@/components/ui/StatTile";
 import { RealSidoOpportunityTable } from "@/components/data/RealSidoOpportunityTable";
 import { SidoScoreCompositionChart } from "@/components/charts/SidoScoreCompositionChart";
+import { SparkLineChart } from "@/components/charts/SparkLineChart";
 import {
+  bopNationalLatest,
   hasRealSidoOpportunity,
   realSidoOpportunity
 } from "@/lib/data/opportunityReal";
 import { sidoForeignerTotal, sidoForeignerLatestYear } from "@/lib/data/regionAggregates";
+import { realBopTransferIncome } from "@/lib/data/generated/realData";
 import { formatNumber } from "@/lib/utils/format";
 
 export default function OpportunityScoresPage() {
@@ -19,13 +22,118 @@ export default function OpportunityScoresPage() {
     ? [...realSidoOpportunity].filter((r) => r.yoy != null).sort((a, b) => (b.yoy ?? 0) - (a.yoy ?? 0))[0]
     : null;
 
+  // BOP 이전소득수지 지표 계산 (한국은행 ECOS 301Y013)
+  const bopAnnual = [...realBopTransferIncome.annual].sort((a, b) => a.year - b.year);
+  const bopLatest = bopAnnual.at(-1);
+  const bopPrev = bopAnnual.at(-2);
+  const bopYoY = bopLatest && bopPrev && bopPrev.value
+    ? ((bopLatest.value - bopPrev.value) / bopPrev.value) * 100
+    : null;
+  const bopSparkData = bopAnnual.map((p) => ({ label: p.year, value: p.value }));
+  const bopPerCapita = bopNationalLatest > 0 && sidoForeignerTotal > 0
+    ? Math.round((bopNationalLatest * 1_000_000) / sidoForeignerTotal)
+    : null;
+  // 1위 시도 BOP 추정
+  const topSidoBop = topSido?.bopMarketEst ?? 0;
+
   return (
     <div className="space-y-7 pb-14">
       <PageHero
         kicker="금융 기회 점수"
         title="전략 실행 우선순위 랭킹"
-        description="외국인 규모, 송금 수요, 유학생 수요, 급여계좌 수요, 다국어 상담 필요도를 0~100으로 정규화하고 설명 가능한 가중치로 전체 기회 점수를 산출합니다."
+        description="외국인 규모, 유학생, 성장률 실데이터로 0~100 기회점수를 산출합니다. 한국은행 ECOS 이전소득수지(301Y013)로 시도별 송금시장 규모도 함께 표시합니다."
       />
+
+      {/* BOP 거시지표 컨텍스트 (ECOS 이전소득수지 301Y013) */}
+      {bopNationalLatest > 0 && (
+        <Panel
+          title="전국 외국인 송금시장 규모 (이전소득수지)"
+          subtitle={`한국은행 ECOS 301Y013 · ${bopLatest?.year ?? ""} 연간 · 이 시장 규모가 아래 기회점수의 경제적 맥락입니다`}
+          right={
+            <span className="rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-bold text-emerald-700">
+              ECOS 실데이터
+            </span>
+          }
+          bodyClassName="p-0"
+        >
+          <div className="grid grid-cols-1 gap-0 divide-y divide-slate-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+            {/* 좌: 전국 합계 + 스파크라인 */}
+            <div className="flex flex-col gap-3 p-5">
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <p className="text-xs font-semibold text-muted">전국 이전소득수지</p>
+                  <p className="mt-1 text-[1.8rem] font-black leading-none text-ink">
+                    ${(bopNationalLatest / 1000).toFixed(1)}<span className="text-base font-semibold text-muted">십억</span>
+                  </p>
+                  {bopYoY != null && (
+                    <div className="mt-1 flex items-center gap-1 text-xs font-bold" style={{ color: bopYoY >= 0 ? "#059669" : "#dc2626" }}>
+                      {bopYoY >= 0 ? <TrendingUp size={13} /> : <TrendingDown size={13} />}
+                      {bopYoY >= 0 ? "+" : ""}{bopYoY.toFixed(1)}% YoY
+                    </div>
+                  )}
+                </div>
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white" style={{ background: "#059669" }}>
+                  <Send size={18} aria-hidden />
+                </span>
+              </div>
+              <div style={{ height: 72 }}>
+                <SparkLineChart data={bopSparkData} color="#059669" unit="백만$" />
+              </div>
+              <p className="text-[10px] text-muted">{bopAnnual[0]?.year}~{bopLatest?.year} 연간 추이 · 단위 백만달러</p>
+            </div>
+
+            {/* 중: 1인당 추정 + 외국인 인구 */}
+            <div className="flex flex-col justify-center gap-4 p-5">
+              <div>
+                <p className="text-xs font-semibold text-muted">외국인 1인당 연간 추정</p>
+                <p className="mt-1 text-[1.5rem] font-black leading-none text-ink">
+                  {bopPerCapita ? `$${formatNumber(bopPerCapita)}` : "—"}
+                </p>
+                <p className="mt-1 text-[11px] text-muted">전국 BOP ÷ 행안부 외국인주민 합계</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-muted">분석 대상 인구</p>
+                <p className="mt-1 text-[1.2rem] font-bold text-ink">{formatNumber(sidoForeignerTotal)}<span className="ml-1 text-xs text-muted">명</span></p>
+                <p className="mt-0.5 text-[11px] text-muted">행안부 {sidoForeignerLatestYear}년 기준</p>
+              </div>
+            </div>
+
+            {/* 우: 1위 시도 BOP 추정 + 상위 시도 */}
+            <div className="flex flex-col gap-3 p-5">
+              <div>
+                <p className="text-xs font-semibold text-muted">1위 시도 송금시장 추정</p>
+                <p className="mt-1 text-[1.5rem] font-black leading-none text-ink">
+                  {topSidoBop > 0
+                    ? topSidoBop >= 1000
+                      ? `$${(topSidoBop / 1000).toFixed(1)}B`
+                      : `$${topSidoBop.toFixed(0)}M`
+                    : "—"}
+                </p>
+                <p className="mt-1 text-[11px] text-muted">{topSido?.sido ?? ""} · 전국 BOP × 거주비중</p>
+              </div>
+              <div className="space-y-1.5">
+                {realSidoOpportunity.slice(0, 5).map((r) => {
+                  const pct = topSidoBop > 0 ? Math.round((r.bopMarketEst / topSidoBop) * 100) : 0;
+                  return (
+                    <div key={r.sido} className="flex items-center gap-2 text-[11px]">
+                      <span className="w-20 shrink-0 truncate font-semibold text-ink">{r.sido}</span>
+                      <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100">
+                        <div className="h-1.5 rounded-full bg-emerald-500" style={{ width: `${pct}%` }} />
+                      </div>
+                      <span className="w-14 shrink-0 text-right font-mono text-emerald-700">
+                        ${r.bopMarketEst >= 1000
+                          ? `${(r.bopMarketEst / 1000).toFixed(1)}B`
+                          : `${r.bopMarketEst.toFixed(0)}M`}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+              <p className="text-[10px] text-muted">송금시장 추정 상위 5개 시도 · ECOS BOP 비례 배분</p>
+            </div>
+          </div>
+        </Panel>
+      )}
 
       {/* 실데이터 시도 기회 점수 (행안부 외국인주민 + KEDI 유학생 + 증가율) */}
       <RealSidoOpportunityTable />
