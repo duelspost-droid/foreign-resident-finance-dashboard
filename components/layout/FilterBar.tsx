@@ -1,36 +1,93 @@
-type FilterOption = {
+"use client";
+
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useCallback, useTransition } from "react";
+import { SlidersHorizontal } from "lucide-react";
+
+type FilterKey = "sido" | "nationality" | "segment";
+
+type FilterDef = {
+  key: FilterKey;
   label: string;
   options: string[];
 };
 
-const defaultFilters: FilterOption[] = [
-  { label: "기준연도", options: ["2025", "2024", "2023"] },
-  { label: "기준월", options: ["12월", "11월", "10월"] },
-  { label: "시도", options: ["전체", "서울특별시", "경기도", "충청남도", "부산광역시"] },
-  { label: "국적", options: ["전체", "중국", "베트남", "우즈베키스탄", "몽골"] },
-  {
-    label: "세그먼트",
-    options: ["전체", "유학생", "비전문취업 근로자", "재외동포", "전문인력"]
-  }
-];
-
 export function FilterBar({
-  filters = defaultFilters
+  sidoOptions,
+  nationalityOptions,
+  segmentOptions,
 }: {
-  filters?: FilterOption[];
+  sidoOptions: string[];
+  nationalityOptions: string[];
+  segmentOptions: string[];
 }) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const [isPending, startTransition] = useTransition();
+
+  const filters: FilterDef[] = [
+    { key: "sido",        label: "시도",      options: sidoOptions },
+    { key: "nationality", label: "국적",      options: nationalityOptions },
+    { key: "segment",     label: "세그먼트",  options: segmentOptions },
+  ];
+
+  const handleChange = useCallback(
+    (key: FilterKey, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (!value || value === "전체") {
+        params.delete(key);
+      } else {
+        params.set(key, value);
+      }
+      const qs = params.toString();
+      startTransition(() => {
+        router.push(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+      });
+    },
+    [router, searchParams, pathname]
+  );
+
   return (
-    <div className="surface mb-4 grid gap-3 p-4 md:grid-cols-3 xl:grid-cols-5">
-      {filters.map((filter) => (
-        <label className="grid gap-1 text-sm font-medium text-slate-700" key={filter.label}>
-          <span>{filter.label}</span>
-          <select className="h-10 rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-900 outline-none focus:border-teal-700 focus:ring-2 focus:ring-teal-100">
-            {filter.options.map((option) => (
-              <option key={option}>{option}</option>
-            ))}
-          </select>
-        </label>
-      ))}
+    <div
+      className={[
+        "flex flex-wrap items-center gap-x-4 gap-y-1.5 border-b border-slate-100 bg-slate-50/70 px-4 py-2 sm:px-6",
+        "transition-opacity duration-150",
+        isPending ? "opacity-60" : "opacity-100",
+      ].join(" ")}
+    >
+      <span className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-slate-400">
+        <SlidersHorizontal size={12} />
+        필터
+      </span>
+
+      {filters.map((f) => {
+        const current = searchParams.get(f.key) ?? "전체";
+        const isActive = current !== "전체";
+        return (
+          <label key={f.key} className="flex items-center gap-1.5 text-xs">
+            <span className="text-[11px] text-slate-500">{f.label}</span>
+            <select
+              value={current}
+              onChange={(e) => handleChange(f.key, e.target.value)}
+              className={[
+                "h-7 cursor-pointer rounded-md border px-2 text-[12px] font-medium outline-none",
+                "transition-all duration-150",
+                "focus:outline-none focus:ring-1",
+                isActive
+                  ? "border-teal-400 bg-teal-50 text-teal-800 ring-teal-200 focus:ring-teal-300"
+                  : "border-slate-200 bg-white text-slate-600 focus:border-teal-400 focus:ring-teal-100",
+              ].join(" ")}
+            >
+              {f.options.map((opt) => (
+                <option key={opt} value={opt}>
+                  {opt}
+                </option>
+              ))}
+            </select>
+          </label>
+        );
+      })}
     </div>
   );
 }

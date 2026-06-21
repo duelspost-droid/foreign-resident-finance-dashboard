@@ -23,15 +23,19 @@ const COLORS = [
   "#7a8da0", "#047857", "#059669", "#854d0e", "#92530f"
 ];
 
-const chartData = realSigunguResidents.slice(0, TOP_N).map((r, i) => ({
-  sigungu: r.sigungu,
-  count: r.count,
-  color: COLORS[i % COLORS.length],
-}));
-
-export function SigunguBarChart() {
+export function SigunguBarChart({ filterSido }: { filterSido?: string }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
+
+  const source = filterSido
+    ? realSigunguResidents.filter((r) => r.sido === filterSido)
+    : realSigunguResidents;
+
+  const chartData = source.slice(0, TOP_N).map((r, i) => ({
+    sigungu: r.sigungu,
+    count: r.count,
+    color: COLORS[i % COLORS.length],
+  }));
 
   if (!mounted) {
     return <div className="flex h-full items-center justify-center text-sm text-muted">차트 준비 중</div>;

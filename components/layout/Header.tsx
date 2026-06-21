@@ -1,11 +1,13 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { Suspense } from "react";
 import { Menu } from "lucide-react";
 import { realDataSummary } from "@/lib/data/generated/realData";
 import { DataFreshnessChip } from "@/components/ui/DataFreshness";
 import { FeedbackButton } from "@/components/feedback/FeedbackButton";
 import { useMobileNav } from "@/components/layout/MobileNavContext";
+import { ActiveFilterChips } from "@/components/layout/ActiveFilterChips";
 
 const pageNames: Record<string, { title: string; sub: string }> = {
   "/":                    { title: "대시보드",       sub: "핵심 지표 한눈에 보기" },
@@ -53,8 +55,11 @@ export function Header() {
         )}
       </div>
 
-      {/* 우측: 제안하기 버튼 + 데이터 수집일·신선도(뷰 시점 실시간 판정) */}
+      {/* 우측: 활성 필터 칩 + 제안하기 + 데이터 신선도 */}
       <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
+        <Suspense>
+          <ActiveFilterChips />
+        </Suspense>
         <FeedbackButton />
         <DataFreshnessChip generatedAt={realDataSummary.generatedAt} />
       </div>

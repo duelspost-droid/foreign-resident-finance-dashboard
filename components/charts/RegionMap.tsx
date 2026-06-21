@@ -82,7 +82,7 @@ type Tooltip = {
   r: number;
 };
 
-export function RegionMap() {
+export function RegionMap({ highlightSido }: { highlightSido?: string }) {
   const [tooltip, setTooltip] = useState<Tooltip | null>(null);
 
   // 실데이터(행안부 시도별 외국인주민)가 있으면 인구 규모 지도, 없으면 표본 기회점수 지도.
@@ -171,16 +171,31 @@ export function RegionMap() {
           const show = () =>
             setTooltip({ name: sido.name, score: sido.score, count: sido.count, cx, cy, r });
 
+          const isHighlighted = highlightSido === sido.name;
+          const isDimmed = !!highlightSido && !isHighlighted;
+
           return (
             <g key={sido.code}>
+              {isHighlighted && (
+                <circle
+                  cx={cx}
+                  cy={cy}
+                  r={r + 6}
+                  fill="none"
+                  stroke="#0f766e"
+                  strokeWidth={2}
+                  strokeDasharray="4 2"
+                  opacity={0.7}
+                />
+              )}
               <circle
                 cx={cx}
                 cy={cy}
                 r={r}
                 fill={color}
-                fillOpacity={tooltip?.name === sido.name ? 1 : 0.78}
-                stroke="white"
-                strokeWidth={tooltip?.name === sido.name ? 2.5 : 1.5}
+                fillOpacity={isDimmed ? 0.25 : tooltip?.name === sido.name ? 1 : 0.78}
+                stroke={isHighlighted ? "#0f766e" : "white"}
+                strokeWidth={isHighlighted ? 2.5 : tooltip?.name === sido.name ? 2.5 : 1.5}
                 className="cursor-pointer focus:outline-none focus-visible:stroke-slate-900"
                 tabIndex={0}
                 role="img"
