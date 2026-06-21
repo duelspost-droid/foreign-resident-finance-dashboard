@@ -470,48 +470,35 @@ export default function DataPipelinePage() {
             </div>
           </div>
         </div>
-        <div className="table-scroll p-2">
-          <table className="w-full min-w-[820px] text-sm">
-            <thead>
-              <tr className="border-b border-slate-200 text-left text-xs text-muted">
-                <th className="px-3 py-2">제공기관</th>
-                <th className="px-3 py-2">데이터</th>
-                <th className="px-3 py-2">식별자</th>
-                <th className="px-3 py-2">인증키</th>
-                <th className="px-3 py-2">우선순위</th>
-                <th className="px-3 py-2">상태</th>
-                <th className="px-3 py-2">활용 근거</th>
-              </tr>
-            </thead>
-            <tbody>
-              {candidateSources.map((c) => {
-                const pr = PRIORITY_LABEL[c.priority];
-                return (
-                  <tr className="border-b border-slate-50 align-top" key={c.provider + c.ref}>
-                    <td className="px-3 py-2 text-slate-600">{c.provider}</td>
-                    <td className="px-3 py-2 font-medium text-ink">
-                      <a className="hover:text-teal-700" href={c.sourceUrl} rel="noreferrer" target="_blank">
-                        {c.title}
-                      </a>
-                    </td>
-                    <td className="px-3 py-2 font-mono text-xs text-slate-500">{c.ref}</td>
-                    <td className="px-3 py-2 text-xs text-slate-500">{c.keyEnv ?? "불필요"}</td>
-                    <td className="px-3 py-2">
-                      <span className={`inline-block whitespace-nowrap rounded px-2 py-0.5 text-xs font-semibold ${pr.tone}`}>{pr.text}</span>
-                    </td>
-                    <td className="px-3 py-2">
-                      {c.registered ? (
-                        <span className="text-xs font-semibold text-teal-700">등록됨</span>
-                      ) : (
-                        <span className="text-xs text-amber-700">후속 검토</span>
-                      )}
-                    </td>
-                    <td className="px-3 py-2 text-xs text-slate-600">{c.rationale}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+        <div className="grid gap-2.5 p-2 sm:grid-cols-2 xl:grid-cols-3">
+          {candidateSources.map((c) => {
+            const pr = PRIORITY_LABEL[c.priority];
+            return (
+              <div key={c.provider + c.ref} className="rounded-xl border border-slate-200 p-3">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <span className={`whitespace-nowrap rounded px-1.5 py-0.5 text-[10px] font-bold ${pr.tone}`}>{pr.text}</span>
+                  {c.registered ? (
+                    <span className="rounded bg-teal-100 px-1.5 py-0.5 text-[10px] font-bold text-teal-800">등록됨</span>
+                  ) : (
+                    <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold text-amber-800">후속 검토</span>
+                  )}
+                  <span className="ml-auto whitespace-nowrap text-[10px] text-slate-400">{c.keyEnv ?? "키 불필요"}</span>
+                </div>
+                <a
+                  href={c.sourceUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-1.5 block break-words text-[13px] font-semibold leading-snug text-ink hover:text-teal-700"
+                >
+                  {c.title}
+                </a>
+                <p className="text-[11px] text-muted">
+                  {c.provider} · <span className="font-mono">{c.ref}</span>
+                </p>
+                {c.rationale && <p className="mt-1.5 break-words text-xs text-slate-500">{c.rationale}</p>}
+              </div>
+            );
+          })}
         </div>
       </section>
 

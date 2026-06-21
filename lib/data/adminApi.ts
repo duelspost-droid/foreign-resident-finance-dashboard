@@ -53,14 +53,6 @@ export async function adminRespond(
   return { ok, authExpired: status === 401 };
 }
 
-// 대시보드 재빌드 트리거(토큰 검증 후 GitHub workflow_dispatch). authExpired=true(401)면 재로그인.
-export async function adminTriggerRebuild(
-  token: string
-): Promise<{ ok: boolean; authExpired: boolean; error?: string }> {
-  const { ok, status, data } = await call({ action: "trigger_rebuild", token });
-  return { ok, authExpired: status === 401, error: typeof data.error === "string" ? data.error : undefined };
-}
-
 export async function adminChangePassword(
   currentPassword: string,
   newPassword: string
