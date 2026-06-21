@@ -51,6 +51,7 @@ import {
   realDutyFreeSales,
   realNationalityDistribution,
 } from "@/lib/data/generated/realData";
+import { HomeExtraData } from "@/components/data/HomeExtraData";
 import { formatNumber, scoreColor } from "@/lib/utils/format";
 import {
   hasSidoForeignerStats,
@@ -845,6 +846,7 @@ export default function DashboardPage() {
         </div>
       </section>
 
+      <HomeExtraData />
     </div>
   );
 }

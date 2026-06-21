@@ -154,7 +154,7 @@ export async function fetchSurfaceDispositions(): Promise<Record<string, SourceD
 // 트리아지 1건 저장(upsert). disposition=null 이면 '미정'으로 되돌림. 성공 시 true.
 export async function setSourceDisposition(
   sourceId: string,
-  disposition: "planned" | "archived" | "excluded" | null,
+  disposition: "shown" | "planned" | "archived" | "excluded" | null,
   targetTable?: string | null
 ): Promise<boolean> {
   const client = createBrowserSupabaseClient();

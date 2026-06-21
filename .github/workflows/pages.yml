@@ -55,6 +55,7 @@ jobs:
           file_pattern: >-
             lib/data/generated/realData.ts
             lib/data/generated/dataLineage.ts
+            lib/data/generated/genericData.ts
             data/catalog/latest_fetch_catalog.json
             data/registry/approved_candidates.json
             data/registry/pending_candidates.json

@@ -10,9 +10,10 @@ import {
   type SourceDisposition
 } from "@/lib/data/supabaseClient";
 
-type StatusKey = "surfaced" | "planned" | "archived" | "excluded" | "none";
+type StatusKey = "surfaced" | "shown" | "planned" | "archived" | "excluded" | "none";
 const REFLECT_TONE: Record<StatusKey, string> = {
   surfaced: "bg-teal-100 text-teal-800",
+  shown: "bg-cyan-100 text-cyan-800",
   planned: "bg-blue-100 text-blue-800",
   archived: "bg-slate-200 text-slate-600",
   excluded: "bg-slate-200 text-slate-500",
@@ -20,12 +21,13 @@ const REFLECT_TONE: Record<StatusKey, string> = {
 };
 const REFLECT_LABEL: Record<StatusKey, string> = {
   surfaced: "✓ 연동됨",
+  shown: "홈 표시중",
   planned: "연동 예정",
   archived: "보관",
   excluded: "제외",
   none: "미연동"
 };
-const STATUS_RANK: Record<StatusKey, number> = { none: 0, planned: 1, surfaced: 2, archived: 3, excluded: 4 };
+const STATUS_RANK: Record<StatusKey, number> = { none: 0, shown: 1, planned: 2, surfaced: 3, archived: 4, excluded: 5 };
 
 // 메타데이터 관리 '수집 이력·커버리지' + 미연동 1클릭 트리아지(surface_config.disposition).
 // 연동됨(SURFACED) = 코드로 차트 연결된 출처. 미연동은 관리자가 연동예정/보관/제외로 분류 → 개발 백로그.
@@ -49,7 +51,7 @@ export function CoverageSection() {
     (s: DataLineageSource): StatusKey => {
       if (SURFACED[s.id]) return "surfaced";
       const d = disp[s.id]?.disposition;
-      if (d === "planned" || d === "archived" || d === "excluded") return d;
+      if (d === "shown" || d === "planned" || d === "archived" || d === "excluded") return d;
       return "none";
     },
     [disp]
@@ -57,7 +59,7 @@ export function CoverageSection() {
 
   async function decide(s: DataLineageSource, value: string) {
     setBusyId(s.id);
-    const d = value === "" ? null : (value as "planned" | "archived" | "excluded");
+    const d = value === "" ? null : (value as "shown" | "planned" | "archived" | "excluded");
     const target = d === "planned" ? disp[s.id]?.targetTable ?? suggestTarget(s).table : undefined;
     const ok = await setSourceDisposition(s.id, d, target);
     if (ok) {
@@ -82,7 +84,7 @@ export function CoverageSection() {
   );
 
   const counts = useMemo(() => {
-    const c: Record<StatusKey, number> = { surfaced: 0, planned: 0, archived: 0, excluded: 0, none: 0 };
+    const c: Record<StatusKey, number> = { surfaced: 0, shown: 0, planned: 0, archived: 0, excluded: 0, none: 0 };
     for (const s of sources) c[statusOf(s)]++;
     return c;
   }, [sources, statusOf]);
@@ -134,6 +136,7 @@ export function CoverageSection() {
       <div className="mb-2 flex flex-wrap items-center gap-x-2 gap-y-1.5 px-1 text-xs">
         <span className="text-muted">대시보드 반영</span>
         <span className={`rounded px-1.5 py-0.5 font-semibold ${REFLECT_TONE.surfaced}`}>연동됨 {counts.surfaced}</span>
+        <span className={`rounded px-1.5 py-0.5 font-semibold ${REFLECT_TONE.shown}`}>홈 표시 {counts.shown}</span>
         <span className={`rounded px-1.5 py-0.5 font-semibold ${REFLECT_TONE.planned}`}>연동 예정 {counts.planned}</span>
         <span className={`rounded px-1.5 py-0.5 font-semibold ${REFLECT_TONE.none}`}>미연동 {counts.none}</span>
         <span className={`rounded px-1.5 py-0.5 font-semibold ${REFLECT_TONE.archived}`}>보관·제외 {counts.archived + counts.excluded}</span>
@@ -183,7 +186,8 @@ export function CoverageSection() {
                       aria-label="반영 처리"
                     >
                       <option value="">미연동(미정)</option>
-                      <option value="planned">연동 예정</option>
+                      <option value="shown">홈에 표시(자동 차트)</option>
+                      <option value="planned">연동 예정(개발)</option>
                       <option value="archived">보관(raw)</option>
                       <option value="excluded">제외</option>
                     </select>
@@ -210,9 +214,9 @@ export function CoverageSection() {
       </div>
 
       <p className="px-1 pt-3 text-xs leading-6 text-muted">
-        ※ ‘연동됨’은 화면에 실제 차트로 연결된 출처입니다. <strong className="text-amber-700">미연동</strong> 카드에서
-        <strong className="text-slate-600"> 연동 예정 / 보관 / 제외</strong>로 1클릭 분류하세요 — ‘연동 예정’은 개발 백로그로
-        잡혀 차트 연결 후 ‘연동됨’이 됩니다.
+        ※ <strong className="text-cyan-700">‘홈에 표시’</strong>를 누르면 개발 없이 홈 대시보드 ‘추가 데이터’에 자동 차트로 바로 떠요.
+        <strong className="text-blue-700"> ‘연동 예정’</strong>은 맞춤 차트가 필요할 때 개발 백로그로 잡혀 차트 연결 후 ‘연동됨’이 됩니다.
+        나머지는 <strong className="text-slate-600">보관 / 제외</strong>.
       </p>
     </section>
   );
