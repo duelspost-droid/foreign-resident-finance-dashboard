@@ -1,39 +1,29 @@
-# 다음 작업 (백로그) — 2026-06-16 기준
+# 다음 작업 (백로그) — 2026-06-22 기준
 
-국내거주 외국인 금융 인사이트 대시보드 후속 작업. 우선순위·의존성 표기.
-(이번 세션: KOSIS objL 근본수정 + 검증 소스 8종 추가 + 앱 화면 연동 7차트 완료·푸시)
+전체 현재 상태는 `docs/latest-handoff.md` 참조. 이전 06-16 백로그 항목(ECOS 키·KOSIS objL·DNS/HTTPS·유학생 데이터 감사·data.go.kr file 소스 2종 등)은 대부분 완료됨.
 
-## 🔑 키·권한 (소유자 작업 → 이후 수집·검증·화면연결은 Claude)
-1. **ECOS_API_KEY 발급 + GitHub Secret 등록** → 외국인 송금·환율 거시지표 활성화.
-   statCode 확정·등록 완료(이전소득수지 `301Y013` A/M, 환율 `731Y001`/`731Y004`). 키만 대기. ★금융 핵심.
-   발급: https://ecos.bok.or.kr/api/  (인증키 신청)
-2. **data.go.kr 활용신청** — 행안부 openapi(15107331 `ForeignLocalGovernmentsYear`, 현재 403 미구독). 신청 시 동작 / 안 하면 비활성화. (시군구는 file 3079542로 이미 커버)
-3. **SEOUL_OPENAPI_KEY** — 서울 자치구별·국적별 외국인주민(선택)
-4. **GitHub Secret 키 유효성 확인** — KOSIS/DATA_GO_KR 키가 CI Secret과 동일·유효한지(과거 노출 이력 → 재발급 검토)
+## 🔑 소유자/자격증명 (코드로 해결 불가)
+1. **일부 공공데이터 수집 실패** — 예 `nhis_foreigner_premium_2023`. data.go.kr 파일 다운로드가 실제 파일 대신 **HTML 반환**(`data/catalog/latest_fetch_catalog.json` headerLine="<!DOCTYPE html>") → **활용신청(구독)** 필요. 일부는 **.xlsx 저장**(빌드는 CSV만 파싱 → 아래 3번).
+2. **`npm run supabase:load`** — 수집 실데이터를 Supabase 적재(SERVICE_ROLE_KEY). 사이트는 정적 realData로 동작하므로 선택.
+3. **관리자 콘솔 첫 로그인 비번**(ADMIN_PASSWORD) — `admin` Edge Function 배포됨. `docs/admin-console.md`.
+4. **송금 직접표**(KOSIS `DT_2FI004F/005F/001F`) — 격년·statHtml 전용이라 Param API 미노출 → 파일/수동 수집 경로 필요.
 
-## 📊 데이터 확장 (키 불필요 — 바로 가능)
-5. 🔶 **data.go.kr file 금융 소스 — 부분완료(2026-06-16)**. 발굴 워크플로(21개 데이터셋 검증) 후 2종 등록+수집+화면 연동: ✅ JDC 면세점 국적별 매출(15070346, 중국인 35억 등)·✅ 제주 외국인 토지취득 국적별 금액(15010289, 중국 527억 등). financial-insights '외국인 소비·거래' 섹션. 미완: 유성구 카드소비(15098191)=토큰 만료 download_failed+지수값이라 비활성화; **근로복지공단 '국가별' 보험급여=data.go.kr file 미존재**(외국인 산재 15104688은 국적차원 없음, 건보 15095076/15138933만 근접). XLSX 면세점(15140207 ~2026.4·15148728 품목별)은 XLSX 파서 필요 → 후속.
-6. ✅ **추가 KOSIS 소득/경제 표 — 완료(2026-06-16)**. 종사상지위 `DT_2FB007F`(672행)·산업별 취업 `DT_2FB021F`(672행, 금융업 포함)·연령별 경제활동 `DT_2FA005F`(1,008행) 3종 수집기+build 파서+financial-insights 차트 연동 완료. (외국인 평균임금 `DT_111014_*`는 미확인 — 추후)
-7. **외국인 송금 직접표** (`DT_2FI004F` 송금여부·`DT_2FI005F` 송금액·`DT_2FI001F` 월총소득) — getMeta는 존재하나 Param/getList 데이터는 `err 30 데이터 없음`(2026-06-16 4종 조합 재확인: realcodes/ALL × Y/IR × 단일연도/범위 모두 실패). 격년(2년) 주기·statHtml 전용 → 파일/수동 수집 경로 별도 구현 필요
-8. **읍면동 외국인주민** `DT_110025` 페이지네이션 — 분류 3,957개 URL 초과(granular, 우선순위 낮음)
-
-## 🖥️ 앱·시각화
-9. 신규 소스 → build 전용 파서 + export + 화면 차트 연결. (6번=완료: EmploymentStatus/Industry/AgeActivity 3차트 financial-insights 연동. 5번 data.go.kr file 소스는 미연동)
-10. **ECOS 송금·환율 차트** → financial-insights (1번 키 들어오면 바로)
-11. 홈/대시보드 KPI 보강 + 신규 차트 반응형·다크모드 확인 / `realForeignContract` 2022년 갭 점검
-
-## 🎓 유학생 데이터 감사 (2026-06-16, 다중에이전트 감사로 발견·수정 완료)
-- ✅ **top30 대학 랭킹 버그 수정**: 1차 소스가 잘못 지정된 '세종시 고등학교 파일'(15149964)이라 랭킹이 '세종미래고 1명'으로 깨져 있었음 → 진짜 학생단위 데이터(academyinfo 3069982, 30만행)를 1차로 승격. 대학명 패턴 필터로 비대학 노이즈 제거(23,317→578개교). 한양대 7,724 … 아주대 2,090(2025).
-- ✅ **유학생 추이 손상+낡음 수정**: 연도말 단독표(15100038)의 2024 행이 손상(유학 D-2가 실제 178,519의 절반인 85,256, YoY가 +17%인데 -24.7%로 표시) → 월별표(15100039, 2022~2026.4)를 1차로 교체. 2024=263,775로 정정·2025(308,838)·2026.4(323,714)까지 최신화. e-나라지표·통계월보 교차검증.
-- ✅ **소스 라벨 정정**: academyinfo(교육부→법무부 유학생관리정보), moe_foreign_student_latest(교육부→세종시교육청·대학아님), moe_foreign_student_region(교육부 연→법무부 월).
-- 변경불필요(최신 확인): KOSIS 국적·비자(DT_1B040A14, 2024 발행최신), KEDI 시도별(DT_1963003_010_S, 2025).
-- (후속) 손상 방어 가드: 단일 체류자격 YoY가 비정상 급락(예: -40%↓)이면 stale/품질경고 플래그 — 추후.
-
-## ✅ 검증·운영
-12. 푸시분 **CI 빌드·배포 확인** (GitHub Actions + data.jbax.co.kr 반영)
-13. **노출된 PAT 폐기** (2026-06-16 푸시용 토큰)
-14. HTTPS enforcement 확인 / `stash@{0}`(6/15 Supabase 스캐폴드) 유지·폐기 결정
-15. Supabase **backend:batch** — Supabase secret 제공 시
+## 🛠 개발 (claude 가능)
+5. **xlsx 파서** — `scripts/build_real_data.mjs`/`build_generic_data.mjs`가 .csv만 처리. .xlsx 소스(premium·면세점 15140207/15148728 등) 받아와도 미파싱. xlsx 파싱 추가 시 활성화.
+6. **맞춤 차트** — '연동 예정'으로 둔 소스(건보·다문화 등)를 전용 페이지에 큐레이션 차트로 연결 + `SURFACED` 등록(자동 '홈에 표시'보다 정교).
+7. **GenericSourceChart 엣지케이스**(다차원 감사 부분결과):
+   - 자동 수치-컬럼 추론이 '번호/일련번호/id' 컬럼을 값으로 선택 → 무의미 차트. ID성 컬럼 제외 휴리스틱.
+   - `config.cat`/`config.val` 음수·범위초과 가드(현재 `< columns.length`만).
+   - chartData 전부 0/빈값일 때 차트 대신 표 폴백 보장.
+   - `build_generic_data.mjs` 수치 판별이 연도/코드 문자열을 수치로 오인 여지.
+8. **문서 stale 일원화** — `CLAUDE.md` 세션이력·`docs/work-log.md`·`docs/claude-handoff.md`가 06-16 상태. latest-handoff 기준 갱신/중복정리.
+9. **명칭 일관성** — 홈 hero kicker '데이터 현황' vs 사이드바/헤더 '대시보드'(`app/page.tsx`) 통일 여부.
+10. **읍면동 외국인주민** `DT_110025` 페이지네이션(분류 3,957개 URL 초과, 우선순위 낮음).
+11. (방어) 단일 체류자격 YoY 비정상 급락(예 -40%↓) 시 stale/품질경고 플래그.
 
 ## 🔒 규정
-16. **소형 셀 마스킹 검토** — 인원 적은 국적/지역 셀(유학생 등) CLAUDE.md 개인정보 제약 적용 여부
+12. **소형 셀 마스킹 검토** — 인원 적은 국적/지역 셀(유학생 등)에 CLAUDE.md 개인정보 제약 적용 여부.
+
+## ⏸ 보류 (세션 한도)
+- 다차원 코드 감사 워크플로 `find-next-work`가 2026-06-22 세션 한도(1:40am Asia/Seoul 리셋)로 중단. 한도 회복 후 재실행:
+  `Workflow({ scriptPath:"<session>/workflows/scripts/find-next-work-wf_d7847c2e-34e.js", resumeFromRunId:"wf_d7847c2e-34e" })` — 완료분 캐시 반환. (※ runId는 세션 한정)

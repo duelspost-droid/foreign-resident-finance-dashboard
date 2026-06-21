@@ -1,5 +1,7 @@
 # Claude Code Handoff
 
+> **최신 상태(2026-06-22)는 `docs/latest-handoff.md` + `docs/next-tasks.md`를 먼저 보세요.** 아래 세션 이력은 ~06-16 기준이라 일부 stale입니다(이후 작업: 제안위젯 공개이력·미연동 1클릭 트리아지·홈 '추가 데이터' 범용 자동차트·SURFACED 정확도 감사·9페이지 모바일 감사·Supabase 마이그레이션 002~007 전부 적용+Edge Function 활성화 — latest-handoff 참조).
+
 ## 프로젝트
 
 - 이름: 국내거주 외국인 금융 인사이트 대시보드
