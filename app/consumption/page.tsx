@@ -52,7 +52,7 @@ export default function ConsumptionPage() {
 
       {/* ── 거시 금융지표 (한국은행 ECOS): 이전소득수지·환율 ─────────── */}
       <section id="macro" className="scroll-mt-20">
-        <div className="mb-3 flex items-center gap-2">
+        <div className="mb-3 flex flex-wrap items-center gap-2">
           <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">
             거시 금융지표 — 본국송금·환율
           </h2>
@@ -153,7 +153,7 @@ export default function ConsumptionPage() {
       {/* ── 외국인 소비·거래 (data.go.kr): 면세점 국적별 매출 · 외국인 토지취득 ───── */}
       {(dutyFreeHasData || landHasData) && (
         <section id="trade" className="scroll-mt-20">
-          <div className="mb-3 flex items-center gap-2">
+          <div className="mb-3 flex flex-wrap items-center gap-2">
             <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">
               외국인 소비·거래 — 국적별
             </h2>

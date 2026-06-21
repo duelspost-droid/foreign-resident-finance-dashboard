@@ -109,6 +109,7 @@ select {
 
 .surface-header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
@@ -152,6 +153,7 @@ select {
   color: #334155;
   font-size: 0.78rem;
   background: #f8fafc;
+  white-space: nowrap;
 }
 
 .two-column {
@@ -328,6 +330,7 @@ select {
   border-radius: 999px;
   font-size: 0.72rem;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .chip-up { background: #ecfdf5; color: #059669; }
@@ -341,6 +344,7 @@ select {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--teal);
+  white-space: nowrap;
 }
 
 /* Bar-list rows */

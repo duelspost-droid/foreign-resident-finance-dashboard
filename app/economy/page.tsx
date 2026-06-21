@@ -98,7 +98,7 @@ export default function EconomyPage() {
         const econTrendMax = Math.max(...econTrend.map((p) => p.value), 1);
         return (
           <section id="econ-activity" className="scroll-mt-20">
-            <div className="mb-3 flex items-center gap-2">
+            <div className="mb-3 flex flex-wrap items-center gap-2">
               <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">외국인 경제활동인구</h2>
               <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">
                 KOSIS · {latestPeriod}년
@@ -122,7 +122,7 @@ export default function EconomyPage() {
                           style={{ width: `${Math.round((row.value / maxVal) * 100)}%` }}
                         />
                       </div>
-                      <span className="w-24 shrink-0 text-right font-mono text-xs text-muted">
+                      <span className="w-24 shrink-0 whitespace-nowrap text-right font-mono text-xs text-muted">
                         {row.value.toLocaleString()}천명
                       </span>
                     </div>
@@ -175,7 +175,7 @@ export default function EconomyPage() {
         const regionalTotal = sorted.reduce((s, r) => s + r.regional, 0);
         return (
           <section id="health" className="scroll-mt-20">
-            <div className="mb-3 flex items-center gap-2">
+            <div className="mb-3 flex flex-wrap items-center gap-2">
               <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">외국인 건강보험 적용인구</h2>
               <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">국민건강보험공단 · 2022</span>
             </div>
@@ -219,7 +219,7 @@ export default function EconomyPage() {
         const maxTotal = sorted[0]?.total || 1;
         return (
           <section id="welfare" className="scroll-mt-20">
-            <div className="mb-3 flex items-center gap-2">
+            <div className="mb-3 flex flex-wrap items-center gap-2">
               <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">다문화가족 현황</h2>
               <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-700">
                 여성가족부 · 부산 표본{multiculturalFamilySummary.latestYear ? ` · ${multiculturalFamilySummary.latestYear}` : ""}
@@ -258,7 +258,7 @@ export default function EconomyPage() {
 
       {/* ── 실데이터 차트: 소득·도입·계약 (KOSIS) ─────────────────── */}
       <section id="income" className="scroll-mt-20">
-        <div className="mb-3 flex items-center gap-2">
+        <div className="mb-3 flex flex-wrap items-center gap-2">
           <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">
             실데이터 금융 선행지표
           </h2>
@@ -435,7 +435,7 @@ export default function EconomyPage() {
 
       {/* ── 실데이터 차트: 종사상지위·산업·연령 (KOSIS 이민자체류실태조사) ───── */}
       <section id="employment" className="scroll-mt-20">
-        <div className="mb-3 flex items-center gap-2">
+        <div className="mb-3 flex flex-wrap items-center gap-2">
           <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">
             외국인 취업 구조 — 종사상지위·산업·연령
           </h2>

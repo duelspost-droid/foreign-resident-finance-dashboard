@@ -271,14 +271,14 @@ export default function NationalitiesPage() {
                 </tbody>
               </table>
             </div>
-            <div className="mt-3 flex items-center gap-4 px-3 pb-1 text-[11px] text-muted">
+            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 px-3 pb-1 text-[11px] text-muted">
               {[
                 { bg: "#0f766e", fg: "#fff", label: "최고 밀도" },
                 { bg: "#5eada4", fg: "#fff", label: "중간" },
                 { bg: "#d9f0ee", fg: "#0f4c41", label: "낮음" },
                 { bg: "#f8fafc", fg: "#64748b", label: "없음" },
               ].map((s) => (
-                <span key={s.label} className="flex items-center gap-1">
+                <span key={s.label} className="flex items-center gap-1 whitespace-nowrap">
                   <span className="inline-block h-3 w-5 rounded text-center text-[9px] leading-3" style={{ background: s.bg, color: s.fg }} />
                   {s.label}
                 </span>

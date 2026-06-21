@@ -17,12 +17,12 @@ export function Panel({
   return (
     <section className="surface surface-hover">
       {title ? (
-        <div className="flex items-start justify-between gap-3 px-5 pt-5">
+        <div className="flex flex-col gap-3 px-5 pt-5 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0">
             <h3 className="text-base font-bold text-ink">{title}</h3>
             {subtitle ? <p className="mt-1 text-sm text-muted">{subtitle}</p> : null}
           </div>
-          {right ? <div className="shrink-0">{right}</div> : null}
+          {right ? <div className="shrink-0 max-sm:w-full">{right}</div> : null}
         </div>
       ) : null}
       <div className={bodyClassName}>{children}</div>

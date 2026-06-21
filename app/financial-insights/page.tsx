@@ -270,7 +270,7 @@ export default function FinancialInsightsPage() {
 
       {/* ── 시장 규모 KPI ──────────────────────────────────────── */}
       <section>
-        <div className="mb-3 flex items-center gap-2">
+        <div className="mb-3 flex flex-wrap items-center gap-2">
           <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">시장 규모</h2>
           <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">
             {marketKpis.sourceLabel}
@@ -429,7 +429,7 @@ export default function FinancialInsightsPage() {
 
       {/* ── 지역 전략 우선순위 (기회 점수 기반, 자동 갱신) ────────── */}
       <section>
-        <div className="mb-3 flex items-center gap-2">
+        <div className="mb-3 flex flex-wrap items-center gap-2">
           <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">
             지역별 금융 전략 우선순위
           </h2>
@@ -575,7 +575,7 @@ export default function FinancialInsightsPage() {
       {/* ── 컴플라이언스 주의사항 ────────────────────────────────── */}
       <section>
         <div className="rounded-xl border border-amber-200 bg-amber-50 p-5">
-          <div className="mb-3 flex items-center gap-2">
+          <div className="mb-3 flex flex-wrap items-center gap-2">
             <AlertCircle size={18} className="text-amber-600" />
             <h2 className="text-sm font-bold text-amber-900">컴플라이언스 주의사항</h2>
           </div>
