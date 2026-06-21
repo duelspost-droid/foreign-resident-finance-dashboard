@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-21T07:44:56.890Z",
+  "generatedAt": "2026-06-21T09:02:41.782Z",
   "keysPresent": {
     "DATA_GO_KR_SERVICE_KEY": true,
     "KOSIS_API_KEY": true,
@@ -20,7 +20,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "국적×체류자격 집계. 세그먼트 산출의 1차 소스.",
-      "fetchedAt": "2026-06-21T07:45:52.958Z",
+      "fetchedAt": "2026-06-21T09:03:29.640Z",
       "result": {
         "status": "downloaded",
         "rowCount": 400,
@@ -59,7 +59,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "지역 단위 체류 현황.",
-      "fetchedAt": "2026-06-21T07:45:53.661Z",
+      "fetchedAt": "2026-06-21T09:03:30.302Z",
       "result": {
         "status": "downloaded",
         "rowCount": 380,
@@ -98,7 +98,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "유학(D-2)·연수(D-4) 체류 추세.",
-      "fetchedAt": "2026-06-21T07:45:53.546Z",
+      "fetchedAt": "2026-06-21T09:03:30.090Z",
       "result": {
         "status": "downloaded",
         "rowCount": 42,
@@ -137,7 +137,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "결혼이민자·다문화가구 집계. 금융 상품 수요 보조 지표.",
-      "fetchedAt": "2026-06-21T07:45:54.167Z",
+      "fetchedAt": "2026-06-21T09:03:30.288Z",
       "result": {
         "status": "downloaded",
         "rowCount": 16,
@@ -176,7 +176,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "국적별 보험료 부과액·급여비. 외국인 소득수준·지불능력 대리지표(금융 세그먼트 보조).",
-      "fetchedAt": "2026-06-21T07:45:54.716Z",
+      "fetchedAt": "2026-06-21T09:03:31.343Z",
       "result": {
         "status": "downloaded",
         "rowCount": 1,
@@ -214,7 +214,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "외국인 직장/지역 가입자 구분. 취업형태(급여계좌 수요) 보조 지표.",
-      "fetchedAt": "2026-06-21T07:45:55.175Z",
+      "fetchedAt": "2026-06-21T09:03:31.394Z",
       "result": {
         "status": "downloaded",
         "rowCount": 17,
@@ -253,7 +253,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "법무부 출입국 월별 통계. 발굴 자동화로 식별됨.",
-      "fetchedAt": "2026-06-21T07:45:55.893Z",
+      "fetchedAt": "2026-06-21T09:03:32.024Z",
       "result": {
         "status": "downloaded",
         "rowCount": 400,
@@ -292,7 +292,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 시군구 단위 외국인주민. openapi 대체용 파일 수집(발굴 자동화).",
-      "fetchedAt": "2026-06-21T07:45:56.709Z",
+      "fetchedAt": "2026-06-21T09:03:32.555Z",
       "result": {
         "status": "downloaded",
         "rowCount": 1692,
@@ -331,7 +331,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "월별(2022~2026.4) 국적지역×구분(유학D2/한국어연수D41/외국어연수D47) 유학생 스톡. '유학생 추이'의 1차 소스 — 연도말 단독표 15100038의 2024 행 손상(D-2 절반)을 대체. build에서 연도별 최신월 스냅샷으로 집계(2024=263,775 등, e-나라지표·통계월보 교차검증). 2026-06-16 라벨 정정(교육부→법무부, 연→월).",
-      "fetchedAt": "2026-06-21T07:45:57.992Z",
+      "fetchedAt": "2026-06-21T09:03:34.210Z",
       "result": {
         "status": "downloaded",
         "rowCount": 17486,
@@ -370,7 +370,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "주의: 발굴 자동화가 '교육부 유학생'으로 오식별했으나 실제 data.go.kr 15149964는 '세종시 고등학교' 외국인학생 파일(대학 0개, 65행 대부분 0명). 대학 랭킹 1차 소스에서 제외하고 academyinfo(3069982)를 1차로 사용. 폴백으로만 남김.",
-      "fetchedAt": "2026-06-21T07:45:57.045Z",
+      "fetchedAt": "2026-06-21T09:03:32.650Z",
       "result": {
         "status": "downloaded",
         "rowCount": 65,
@@ -409,7 +409,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "data.go.kr 3069982. 실제 데이터는 성별·국적·체류자격·학교명 학생단위 레코드(약 30만행, 라이브 빈티지 2025) — 대학별 외국인유학생 top30 랭킹의 1차 소스. build에서 학교명을 대학 패턴으로 필터 후 집계(한양대 7.7천 등). 정의 라벨이 '대학알리미'였으나 실제는 법무부 유학생관리정보로 정정(2026-06-16).",
-      "fetchedAt": "2026-06-21T07:46:02.014Z",
+      "fetchedAt": "2026-06-21T09:03:36.717Z",
       "result": {
         "status": "downloaded",
         "rowCount": 304360,
@@ -448,7 +448,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "대학알리미 고등교육기관 기본정보(위치·유형). 대학 외국인 유학생 지도 구축 보조.",
-      "fetchedAt": "2026-06-21T07:45:59.809Z",
+      "fetchedAt": "2026-06-21T09:03:35.333Z",
       "result": {
         "status": "downloaded",
         "rowCount": 6364,
@@ -487,7 +487,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "국적(내국인/일·중·미·러·태·홍·필/기타 9종)×판매년월×매출. 면세점 국적별 소비=외국인 결제·환전 수요 직접 지표. CSV 3차원, 차기등록 2026-11.",
-      "fetchedAt": "2026-06-21T07:45:58.953Z",
+      "fetchedAt": "2026-06-21T09:03:34.126Z",
       "result": {
         "status": "downloaded",
         "rowCount": 120,
@@ -526,7 +526,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "연도×국적별×월별 취득필지·취득면적(㎡)·취득금액(백만원). 외국인 부동산 매입=대출·자산관리 수요 대리지표. 취득금액(실금액) 차원 보유. 제주 한정.",
-      "fetchedAt": "2026-06-21T07:45:59.676Z",
+      "fetchedAt": "2026-06-21T09:03:35.966Z",
       "result": {
         "status": "downloaded",
         "rowCount": 26,
@@ -565,7 +565,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 시도별 외국인주민. newEstPrdCnt로 최신 N기 자동 수집. 첫 성공 응답으로 필드명 확정.",
-      "fetchedAt": "2026-06-21T07:46:05.441Z",
+      "fetchedAt": "2026-06-21T09:03:39.614Z",
       "result": {
         "status": "downloaded",
         "rowCount": 5580,
@@ -604,7 +604,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "법무부 시군구×체류자격 등록외국인. endPrdDe=CY 동적 갱신.",
-      "fetchedAt": "2026-06-21T07:46:10.297Z",
+      "fetchedAt": "2026-06-21T09:03:45.176Z",
       "result": {
         "status": "downloaded",
         "rowCount": 24210,
@@ -643,7 +643,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "통계청 이민자 체류실태·고용조사. 취업/소득 = 급여계좌·신용 수요 직결. 2단계 호출.",
-      "fetchedAt": "2026-06-21T07:46:02.644Z",
+      "fetchedAt": "2026-06-21T09:03:37.413Z",
       "result": {
         "status": "downloaded",
         "rowCount": 429,
@@ -682,7 +682,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "유학생 국적(227)×성별(3)×학위과정/체류자격(15: 유학D-2·전문학사·학사·석사·박사·연구·교환·연수D-4). 2026-06-16 검증 7,007행. 폐기된 교육부 file 15050054(국적별) 대체.",
-      "fetchedAt": "2026-06-21T07:46:12.545Z",
+      "fetchedAt": "2026-06-21T09:03:44.085Z",
       "result": {
         "status": "downloaded",
         "rowCount": 18188,
@@ -721,7 +721,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "KEDI 교육기본통계 고등교육기관 개황(시도별×학교현황별, 외국인 학생수 학위과정 포함). 2026-06-16 검증 612행. 대학유형 분해: 동일 시리즈 DT_1963003_011_S(전문대)·013_S(대학)·014_S(대학원) 등. 폐기된 교육부 file 15050055(대학유형별) 대체.",
-      "fetchedAt": "2026-06-21T07:46:05.121Z",
+      "fetchedAt": "2026-06-21T09:03:39.540Z",
       "result": {
         "status": "downloaded",
         "rowCount": 1224,
@@ -760,7 +760,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "고용허가제 E-9 신규 도입 인원(국가별, 단위 명). 2026-06-16 검증 169행(2016~2025). data.go.kr EPS는 연계형(파일없음)이라 KOSIS로 대체. C1_NM='합계' 행 포함(집계 시 제외). 신규 입국 근로자=급여계좌·송금 수요 선행지표.",
-      "fetchedAt": "2026-06-21T07:46:06.073Z",
+      "fetchedAt": "2026-06-21T09:03:40.433Z",
       "result": {
         "status": "downloaded",
         "rowCount": 169,
@@ -799,7 +799,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "고용허가제 E-9 신규 도입 인원(업종별: 제조/건설/농축산/서비스/어업 등). 2026-06-16 검증 64행.",
-      "fetchedAt": "2026-06-21T07:46:06.366Z",
+      "fetchedAt": "2026-06-21T09:03:40.602Z",
       "result": {
         "status": "downloaded",
         "rowCount": 64,
@@ -838,7 +838,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "외국인/귀화 임금근로자 월평균 임금구간(100만 미만~300만 이상)×대상별×성별×체류자격(E-9/H-2/F-4/F-5/D-2 등). 소득=급여계좌·신용·대출·적금 수요 직결 핵심 지표. 2026-06-16 검증 863행(2017~2025).",
-      "fetchedAt": "2026-06-21T07:46:08.253Z",
+      "fetchedAt": "2026-06-21T09:03:41.926Z",
       "result": {
         "status": "downloaded",
         "rowCount": 863,
@@ -877,7 +877,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "외국인 고용계약기간(1개월 미만~3년 이상/미정)별 임금근로자×대상별×성별. 고용 안정성=정규 급여계좌·자동이체 모집단 대리지표. 2026-06-16 검증 624행.",
-      "fetchedAt": "2026-06-21T07:46:08.110Z",
+      "fetchedAt": "2026-06-21T09:03:42.206Z",
       "result": {
         "status": "downloaded",
         "rowCount": 624,
@@ -916,7 +916,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "대상별(이민자/외국인/귀화)×성별×종사상지위(상용/임시·일용/자영업주/무급가족). 상용근로자 비중=안정 급여소득→신용·대출 적격 모집단 대리지표. 2026-06-16 검증 672행(2016~2025).",
-      "fetchedAt": "2026-06-21T07:46:09.830Z",
+      "fetchedAt": "2026-06-21T09:03:43.271Z",
       "result": {
         "status": "downloaded",
         "rowCount": 672,
@@ -955,7 +955,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "대상별×성별×산업(농림어업/광업·제조/건설/도소매·숙박·음식/전기·운수·통신·금융/서비스). 금융은 '전기·운수·통신·금융'에 묶여 보고됨(단독 분리 불가). 업종 구성=소득 안정성·소비 패턴 대리지표. 2026-06-16 검증 672행.",
-      "fetchedAt": "2026-06-21T07:46:10.505Z",
+      "fetchedAt": "2026-06-21T09:03:43.808Z",
       "result": {
         "status": "downloaded",
         "rowCount": 672,
@@ -994,7 +994,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "대상별×연령계층(15~29/30~39/40~49/50~59/60+)×경활지표(경제활동인구/취업자/참가율/고용률). 연령 분포=생애주기 금융상품(적금·대출·송금) 타깃팅 대리지표. 2026-06-16 검증 1,008행.",
-      "fetchedAt": "2026-06-21T07:46:12.659Z",
+      "fetchedAt": "2026-06-21T09:03:45.291Z",
       "result": {
         "status": "downloaded",
         "rowCount": 1008,
@@ -1033,7 +1033,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "이전소득수지(ITEM_CODE 4B1000)=개인이전 포함 본국송금 거시 대리지표. 301Y013 전체 국제수지 표를 받아 build에서 4B1000만 필터. 2026-06-16 라이브 검증: 연간 1980~2025(2025=10,273.7백만달러). ECOS_API_KEY로 동작.",
-      "fetchedAt": "2026-06-21T07:46:15.795Z",
+      "fetchedAt": "2026-06-21T09:03:48.114Z",
       "result": {
         "status": "downloaded",
         "rowCount": 2272,
@@ -1058,7 +1058,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "원/달러·엔·유로·위안 일별 환율(731Y001). 환율 급등락 시 외국인 본국송금·환전 수요 급증 → 송금/환전 캠페인 타이밍. 2026-06-16 라이브 검증: 25,714행, 원/미국달러 매매기준율 포함.",
-      "fetchedAt": "2026-06-21T07:46:43.522Z",
+      "fetchedAt": "2026-06-21T09:04:12.202Z",
       "result": {
         "status": "downloaded",
         "rowCount": 25843,
@@ -1106,7 +1106,7 @@
       "personalDataSafe": true,
       "verified": true,
       "notes": "이전소득수지(ITEM 4B1000) 월별 흐름. 외국인 본국송금 거시 추세 월별 추적. 2026-06-16 라이브 검증: 월간 198001~202604 동작(build에서 4B1000 필터).",
-      "fetchedAt": "2026-06-21T07:46:36.761Z",
+      "fetchedAt": "2026-06-21T09:04:05.515Z",
       "result": {
         "status": "downloaded",
         "rowCount": 18176,
@@ -1147,7 +1147,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "서울 25개 자치구×국적별 외국인 월별 통계. serviceName 실제 값 확인 필요. SEOUL_OPENAPI_KEY GitHub Secret 등록 필요.",
-      "fetchedAt": "2026-06-21T07:46:12.659Z",
+      "fetchedAt": "2026-06-21T09:03:45.291Z",
       "result": {
         "status": "skipped_no_key",
         "reason": "SEOUL_OPENAPI_KEY not set",
@@ -1167,7 +1167,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "관리자 승인 등록(admin). 키워드: 외국인주민 현황",
-      "fetchedAt": "2026-06-21T07:46:14.889Z",
+      "fetchedAt": "2026-06-21T09:03:47.037Z",
       "result": {
         "status": "downloaded",
         "rowCount": 5,
@@ -1206,7 +1206,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "관리자 승인 등록(admin). 키워드: 체류외국인 월별 통계",
-      "fetchedAt": "2026-06-21T07:46:16.571Z",
+      "fetchedAt": "2026-06-21T09:03:48.340Z",
       "result": {
         "status": "no_data",
         "requestUrls": [
@@ -1238,7 +1238,7 @@
       "personalDataSafe": true,
       "verified": false,
       "notes": "관리자 승인 등록(admin). 키워드: 출입국 외국인 체류",
-      "fetchedAt": "2026-06-21T07:46:17.531Z",
+      "fetchedAt": "2026-06-21T09:03:49.733Z",
       "result": {
         "status": "downloaded",
         "rowCount": 1,

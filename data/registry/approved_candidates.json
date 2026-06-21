@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-21T07:46:45.607Z",
+  "generatedAt": "2026-06-21T09:04:15.024Z",
   "approved": [
     {
       "id": 2,
@@ -19,23 +19,6 @@
       "notes": null
     },
     {
-      "id": 67,
-      "dataset_id": "15059612",
-      "kind": "openapi",
-      "provider": "법무부",
-      "title": "금융위원회_주식대차정보",
-      "keyword": "체류외국인 월별 통계",
-      "url": "https://www.data.go.kr/data/15059612/openapi.do",
-      "target_table": "finance_segment_aggregate",
-      "status": "approved",
-      "priority": "mid",
-      "rationale": "월별 체류외국인 총계·국적별 추이(시장 규모 월 단위 모니터링)",
-      "discovered_at": "2026-06-18T08:09:00.89898+00:00",
-      "decided_at": "2026-06-19T12:33:19.531+00:00",
-      "decided_by": "admin",
-      "notes": null
-    },
-    {
       "id": 19,
       "dataset_id": "15112636",
       "kind": "fileData",
@@ -49,6 +32,23 @@
       "rationale": "체류자격·국적·지역 추가 통계 발굴",
       "discovered_at": "2026-06-18T08:09:00.89898+00:00",
       "decided_at": "2026-06-18T09:56:23.273+00:00",
+      "decided_by": "admin",
+      "notes": null
+    },
+    {
+      "id": 67,
+      "dataset_id": "15059612",
+      "kind": "openapi",
+      "provider": "법무부",
+      "title": "금융위원회_주식대차정보",
+      "keyword": "체류외국인 월별 통계",
+      "url": "https://www.data.go.kr/data/15059612/openapi.do",
+      "target_table": "finance_segment_aggregate",
+      "status": "approved",
+      "priority": "mid",
+      "rationale": "월별 체류외국인 총계·국적별 추이(시장 규모 월 단위 모니터링)",
+      "discovered_at": "2026-06-18T08:09:00.89898+00:00",
+      "decided_at": "2026-06-19T12:33:19.531+00:00",
       "decided_by": "admin",
       "notes": null
     }
