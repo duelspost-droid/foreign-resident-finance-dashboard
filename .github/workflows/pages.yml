@@ -27,6 +27,7 @@ jobs:
       KOSIS_API_KEY: ${{ secrets.KOSIS_API_KEY }}
       ECOS_API_KEY: ${{ secrets.ECOS_API_KEY }}
       SEOUL_OPENAPI_KEY: ${{ secrets.SEOUL_OPENAPI_KEY }}
+      HIBP_API_KEY: ${{ secrets.HIBP_API_KEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -56,9 +57,12 @@ jobs:
             lib/data/generated/realData.ts
             lib/data/generated/dataLineage.ts
             lib/data/generated/genericData.ts
+            lib/data/generated/breachMonitor.ts
             data/catalog/latest_fetch_catalog.json
             data/registry/approved_candidates.json
             data/registry/pending_candidates.json
+            data/security/latest_breach_scan.json
+            data/security/history/*.json
             data/raw/*.csv
 
       - name: Load Supabase data

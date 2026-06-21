@@ -48,6 +48,7 @@ async function main() {
   const steps = [
     ["node", ["scripts/fetch_public_data.mjs"]],
     ["node", ["scripts/sync_candidates.mjs"]],
+    ["node", ["scripts/monitor_breaches.mjs"]],
     ["node", ["scripts/build_real_data.mjs"]],
     ["node", ["scripts/build_warehouse_snapshots.mjs"]],
     [npmCommand, ["run", "typecheck"]],

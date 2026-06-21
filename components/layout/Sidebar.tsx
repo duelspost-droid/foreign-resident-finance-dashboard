@@ -14,6 +14,7 @@ import {
   LayoutGrid,
   Lock,
   Map,
+  ShieldAlert,
   ShieldCheck,
   ShoppingBag,
   Target,
@@ -49,6 +50,7 @@ const system = [
   { href: "/data-pipeline", label: "메타데이터 관리", icon: DatabaseZap },
   { href: "/admin/console", label: "운영 콘솔", icon: Gauge },
   { href: "/admin", label: "데이터 에이전트 승인", icon: ShieldCheck },
+  { href: "/security", label: "유출 모니터링", icon: ShieldAlert },
   { href: "/compliance", label: "컴플라이언스·개인정보", icon: Lock },
 ];
 
