@@ -49,10 +49,31 @@ export function suggestTarget(c: { title?: string | null; keyword?: string | nul
 
 // 수집 소스 id → 현재 반영 중인 대시보드 화면(커버리지 투명성). 없으면 "수집만(미연동)".
 export const SURFACED: Record<string, string> = {
-  moj_foreign_resident_status_2024: "국적·체류자격·기회점수",
-  moj_foreign_stay_data_2024: "지역 분석",
-  moj_foreign_student_stay_2024: "대학/유학생",
-  academyinfo_foreign_student_count: "대학별 랭킹",
-  mois_foreign_resident_region_file: "시군구 외국인주민",
-  kosis_foreigner_economic_activity: "체류자격(보조)"
+  // 법무부
+  moj_foreign_resident_status_2024:  "국적 분석 · 비자 세그먼트",
+  moj_foreign_stay_data_2024:        "지역 분석 (시도별)",
+  moj_foreign_student_stay_2024:     "유학생 (연도별 추이)",
+  moj_immigration_monthly_2024:      "유학생 (보조)",
+  // 행안부
+  mois_foreign_resident_region_file: "지역 분석 (시군구)",
+  mois_foreign_residents:            "지역 분석 (시도·추이)",
+  // 대학알리미
+  academyinfo_foreign_student_count: "유학생 (대학별 랭킹)",
+  // 교육부·KEDI 유학생
+  kosis_foreign_student_nationality_visa:   "유학생 · 홈",
+  kosis_kedi_higher_edu_foreign_students:   "유학생 · 기회 점수",
+  // 경제활동·소득 (경제활동·소득 페이지)
+  kosis_foreigner_economic_activity:        "경제활동·소득",
+  kosis_immigrant_econ_activity_by_age:     "경제활동·소득",
+  kosis_immigrant_wage_distribution:        "경제활동·소득 · 홈",
+  kosis_immigrant_employment_status:        "경제활동·소득 · 홈",
+  kosis_immigrant_employment_by_industry:   "경제활동·소득",
+  kosis_eps_introduction_by_country:        "경제활동·소득 · 홈",
+  kosis_eps_introduction_by_industry:       "경제활동·소득",
+  // 소비·금융거래 (소비·금융거래 페이지)
+  jdc_dutyfree_sales_by_nationality:        "소비·금융거래 · 홈",
+  jeju_foreign_land_acquisition:            "소비·금융거래",
+  ecos_bop_transfer_income:                 "기회 점수 · 소비·금융거래 · 홈",
+  ecos_exchange_rate_daily:                 "소비·금융거래 · 홈",
+  ecos_bop_transfer_monthly:                "소비·금융거래",
 };
