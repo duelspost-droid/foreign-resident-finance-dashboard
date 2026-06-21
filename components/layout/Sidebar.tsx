@@ -28,9 +28,9 @@ const financeNav = [
   { href: "/financial-insights", label: "금융 인사이트", icon: Landmark },
 ];
 
-// 데이터 현황 (원본 데이터 뷰어)
+// 대시보드 (홈/개요) — 메뉴 최상단 standalone 항목
 const dataNav = [
-  { href: "/", label: "데이터 현황", icon: LayoutDashboard },
+  { href: "/", label: "대시보드", icon: LayoutDashboard },
 ];
 
 // 축 2 · 분석 데이터 활용 (데이터 탐색)
@@ -112,18 +112,20 @@ export function Sidebar() {
 
       {/* 2축 메뉴: 금융 인사이트 / 분석 데이터 활용 / 시스템 */}
       {[
+        { title: "", axis: "", items: dataNav, accent: "" },
         { title: "금융 인사이트", axis: "전략 해석", items: financeNav, accent: "text-amber-300/80" },
-        { title: "데이터 현황", axis: "원본 데이터", items: dataNav, accent: "text-teal-300/80" },
         { title: "데이터 탐색", axis: "", items: analysisNav, accent: "text-teal-300/80" },
         { title: "시스템", axis: "", items: system, accent: "text-white/25" }
       ].map((group, gi) => (
-        <div key={group.title} className={gi === 0 ? "" : "mt-5"}>
-          <div className="mb-1 flex items-center gap-1.5 px-3 pb-1">
-            {group.axis && (
-              <span className={clsx("text-[9px] font-bold uppercase tracking-widest", group.accent)}>{group.axis}</span>
-            )}
-            <span className="text-[10px] font-semibold uppercase tracking-widest text-white/30">{group.title}</span>
-          </div>
+        <div key={group.title || group.items[0]?.href || gi} className={gi === 0 ? "" : "mt-5"}>
+          {(group.title || group.axis) && (
+            <div className="mb-1 flex items-center gap-1.5 px-3 pb-1">
+              {group.axis && (
+                <span className={clsx("text-[9px] font-bold uppercase tracking-widest", group.accent)}>{group.axis}</span>
+              )}
+              <span className="text-[10px] font-semibold uppercase tracking-widest text-white/30">{group.title}</span>
+            </div>
+          )}
           <nav className="grid gap-0.5" aria-label={group.title}>
             {group.items.map((item) => {
               const Icon = item.icon;
