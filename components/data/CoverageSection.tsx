@@ -18,6 +18,13 @@ const REFLECT_TONE: Record<StatusKey, string> = {
   excluded: "bg-slate-200 text-slate-500",
   none: "bg-amber-100 text-amber-800"
 };
+const REFLECT_LABEL: Record<StatusKey, string> = {
+  surfaced: "✓ 연동됨",
+  planned: "연동 예정",
+  archived: "보관",
+  excluded: "제외",
+  none: "미연동"
+};
 const STATUS_RANK: Record<StatusKey, number> = { none: 0, planned: 1, surfaced: 2, archived: 3, excluded: 4 };
 
 // 메타데이터 관리 '수집 이력·커버리지' + 미연동 1클릭 트리아지(surface_config.disposition).
@@ -141,79 +148,71 @@ export function CoverageSection() {
         </span>
       </div>
 
-      <div className="table-scroll p-1">
-        <table className="w-full min-w-[680px] text-sm">
-          <thead>
-            <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
-              <th className="px-3 py-2.5 text-left text-xs font-bold">출처</th>
-              <th className="whitespace-nowrap px-3 py-2.5 text-right text-xs font-bold">행수</th>
-              <th className="whitespace-nowrap px-3 py-2.5 text-left text-xs font-bold">검증</th>
-              <th className="px-3 py-2.5 text-left text-xs font-bold">대시보드 반영</th>
-            </tr>
-          </thead>
-          <tbody>
-            {ordered.map((s) => {
-              const key = statusOf(s);
-              const busy = busyId === s.id;
-              return (
-                <tr key={s.id} className="border-b border-slate-100 align-top last:border-0">
-                  <td className="px-3 py-2.5">
-                    <p className="font-medium text-ink">{s.title}</p>
-                    <p className="text-[11px] text-muted">{s.provider}</p>
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-2.5 text-right tabular-nums text-slate-700">
-                    {s.rowCount != null ? s.rowCount.toLocaleString() : "—"}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-2.5">
-                    {s.verified ? <span className="text-teal-700">확정</span> : <span className="text-amber-700">미확정</span>}
-                  </td>
-                  <td className="px-3 py-2.5">
-                    {key === "surfaced" ? (
-                      <span className="inline-flex items-center gap-1">
-                        <span className={`whitespace-nowrap rounded px-1.5 py-0.5 text-xs font-semibold ${REFLECT_TONE.surfaced}`}>✓ 연동됨</span>
-                        <span className="text-[11px] text-muted">{SURFACED[s.id]}</span>
-                      </span>
-                    ) : (
-                      <div className="flex flex-wrap items-center gap-1.5">
-                        <select
-                          value={disp[s.id]?.disposition ?? ""}
-                          disabled={busy || connected === false}
-                          onChange={(e) => decide(s, e.target.value)}
-                          className={`rounded-md border px-2 py-1 text-xs ${key === "none" ? "border-amber-300 bg-amber-50 text-amber-800" : "border-slate-200 text-slate-700"} disabled:opacity-50`}
-                          aria-label="반영 처리"
-                        >
-                          <option value="">미연동(미정)</option>
-                          <option value="planned">연동 예정</option>
-                          <option value="archived">보관(raw)</option>
-                          <option value="excluded">제외</option>
-                        </select>
-                        {key === "planned" && (
-                          <select
-                            value={disp[s.id]?.targetTable ?? suggestTarget(s).table}
-                            disabled={busy || connected === false}
-                            onChange={(e) => retarget(s, e.target.value)}
-                            className="rounded-md border border-slate-200 px-2 py-1 text-xs text-slate-700 disabled:opacity-50"
-                            aria-label="대상 도메인"
-                            title="연동 대상 도메인(개발 참고)"
-                          >
-                            {TARGET_TABLES.map((t) => (
-                              <option key={t} value={t}>{targetLabel(t)}</option>
-                            ))}
-                          </select>
-                        )}
-                      </div>
+      <div className="grid gap-2.5 sm:grid-cols-2 xl:grid-cols-3">
+        {ordered.map((s) => {
+          const key = statusOf(s);
+          const busy = busyId === s.id;
+          return (
+            <div
+              key={s.id}
+              className={`flex flex-col rounded-xl border p-3 ${key === "none" ? "border-amber-200 bg-amber-50/40" : "border-slate-200"}`}
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className={`whitespace-nowrap rounded px-1.5 py-0.5 text-[11px] font-bold ${REFLECT_TONE[key]}`}>
+                  {REFLECT_LABEL[key]}
+                </span>
+                <span className="shrink-0 text-[11px] text-muted">
+                  {s.rowCount != null ? `${s.rowCount.toLocaleString()}행` : "—"}
+                  {s.verified ? " · 확정" : " · 미확정"}
+                </span>
+              </div>
+
+              <p className="mt-1.5 break-words text-[13px] font-semibold leading-snug text-ink">{s.title}</p>
+              <p className="text-[11px] text-muted">{s.provider}</p>
+
+              <div className="mt-auto pt-2.5">
+                {key === "surfaced" ? (
+                  <p className="text-[11px] font-medium text-teal-700">→ {SURFACED[s.id]}</p>
+                ) : (
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <select
+                      value={disp[s.id]?.disposition ?? ""}
+                      disabled={busy || connected === false}
+                      onChange={(e) => decide(s, e.target.value)}
+                      className={`min-w-0 flex-1 rounded-md border px-2 py-1.5 text-xs ${key === "none" ? "border-amber-300 bg-white text-amber-800" : "border-slate-200 text-slate-700"} disabled:opacity-50`}
+                      aria-label="반영 처리"
+                    >
+                      <option value="">미연동(미정)</option>
+                      <option value="planned">연동 예정</option>
+                      <option value="archived">보관(raw)</option>
+                      <option value="excluded">제외</option>
+                    </select>
+                    {key === "planned" && (
+                      <select
+                        value={disp[s.id]?.targetTable ?? suggestTarget(s).table}
+                        disabled={busy || connected === false}
+                        onChange={(e) => retarget(s, e.target.value)}
+                        className="min-w-0 flex-1 rounded-md border border-slate-200 px-2 py-1.5 text-xs text-slate-700 disabled:opacity-50"
+                        aria-label="대상 도메인"
+                        title="연동 대상 도메인(개발 참고)"
+                      >
+                        {TARGET_TABLES.map((t) => (
+                          <option key={t} value={t}>{targetLabel(t)}</option>
+                        ))}
+                      </select>
                     )}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
 
-      <p className="px-3 pt-1.5 text-xs leading-6 text-muted">
-        ※ ‘연동됨’은 화면에 실제 차트로 연결된 출처입니다. ‘미연동’은 <strong className="text-slate-600">연동 예정 / 보관 / 제외</strong>로 1클릭
-        분류하세요 — ‘연동 예정’은 개발 백로그로 잡혀 차트 연결 후 ‘연동됨’이 됩니다.
+      <p className="px-1 pt-3 text-xs leading-6 text-muted">
+        ※ ‘연동됨’은 화면에 실제 차트로 연결된 출처입니다. <strong className="text-amber-700">미연동</strong> 카드에서
+        <strong className="text-slate-600"> 연동 예정 / 보관 / 제외</strong>로 1클릭 분류하세요 — ‘연동 예정’은 개발 백로그로
+        잡혀 차트 연결 후 ‘연동됨’이 됩니다.
       </p>
     </section>
   );
