@@ -56,7 +56,7 @@ export function SourceApprovalQueue({ compact = false }: { compact?: boolean }) 
       <section className="surface flex flex-wrap items-center gap-x-4 gap-y-2 px-4 py-3">
         <div className="flex items-center gap-2 text-sm">
           <ShieldCheck aria-hidden className="text-teal-700" size={16} />
-          <span className="font-semibold text-ink">승인 대기 {connected ? `(${pending.length})` : ""}</span>
+          <span className="font-semibold text-ink">데이터 에이전트 승인</span>
           {connected === null ? (
             <span className="text-muted">확인 중…</span>
           ) : connected ? (

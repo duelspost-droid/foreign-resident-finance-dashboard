@@ -24,7 +24,7 @@ import { candidateSources, dataAxisMapping, type ResearchPriority } from "@/lib/
 import { dataSources, type DataSourceItem } from "@/lib/data/dataSources";
 import { DataTable, type DataTableColumn } from "@/components/tables/DataTable";
 import { DataFreshnessPanel } from "@/components/ui/DataFreshness";
-import { SourceApprovalQueue } from "@/components/admin/SourceApprovalQueue";
+import { ApprovalSummaryLink } from "@/components/admin/ApprovalSummaryLink";
 
 // 공표 주기별 배지 색상.
 const CADENCE_TONE: Record<Cadence, string> = {
@@ -476,21 +476,16 @@ export default function DataPipelinePage() {
         ))}
       </section>
 
-      {/* 데이터 에이전트 + 승인 큐(인라인) */}
+      {/* 데이터 에이전트 — 발굴 현황 + 승인 화면 링크(승인 액션은 전용 페이지 /admin 한 곳) */}
       <section className="mt-4">
-        <div className="mb-2 flex flex-wrap items-center justify-between gap-2 px-1">
-          <div className="flex items-center gap-2">
-            <Search aria-hidden className="text-teal-700" size={16} />
-            <h3 className="surface-title">데이터 에이전트</h3>
-          </div>
-          <Link href="/admin" className="flex items-center gap-1 text-xs font-semibold text-teal-700 hover:underline">
-            전체 승인 화면 <ArrowRight aria-hidden size={13} />
-          </Link>
+        <div className="mb-2 flex items-center gap-2 px-1">
+          <Search aria-hidden className="text-teal-700" size={16} />
+          <h3 className="surface-title">데이터 에이전트</h3>
         </div>
         <p className="mb-1 px-1 text-sm text-muted">
-          키워드를 자동 탐색해 신규 데이터셋 후보를 발굴 · 아래에서 바로 승인/거부하세요
+          키워드를 자동 탐색해 신규 데이터셋 후보를 발굴합니다. 승인/거부는 ‘데이터 에이전트 승인’ 화면에서 처리합니다.
         </p>
-        <p className="mb-1 flex flex-wrap items-center gap-x-2 px-1 text-xs text-slate-500">
+        <p className="mb-2 flex flex-wrap items-center gap-x-2 px-1 text-xs text-slate-500">
           <span className="inline-flex items-center gap-1 rounded bg-slate-100 px-1.5 py-0.5">
             <Activity aria-hidden size={11} className="text-teal-700" />
             마지막 발굴 실행: <strong className="text-slate-700">{new Date(generatedAt).toLocaleString("ko-KR")}</strong>
@@ -498,8 +493,8 @@ export default function DataPipelinePage() {
           <span>키워드 {discovery.length}개 스캔 · 매일 01:00 KST 배치 시 자동 발굴</span>
         </p>
 
-        {/* 라이브 승인 큐 (버튼 인라인) */}
-        <SourceApprovalQueue compact />
+        {/* 발굴 승인 요약 + 전용 페이지 링크 (인라인 승인 큐 중복 제거) */}
+        <ApprovalSummaryLink />
 
         {/* 최근 키워드 탐색 결과(원본 링크) */}
         {discovery.length > 0 && (
