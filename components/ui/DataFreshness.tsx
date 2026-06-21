@@ -133,16 +133,8 @@ export function DataFreshnessPanel({ generatedAt }: { generatedAt: string }) {
         <p className="font-semibold text-ink">매일 01:00 KST</p>
       </div>
 
-      <p className="ml-auto max-w-xs text-xs leading-5" style={{ color: f.color }}>
+      <p className="w-full text-xs leading-5 sm:ml-auto sm:w-auto sm:max-w-xs sm:text-right" style={{ color: f.color }}>
         {f.detail}
-      </p>
-
-      {/* 수집일 ≠ 기준연도 안내: 정부 통계 공표 지연 설명 */}
-      <p className="w-full border-t border-black/5 pt-2.5 text-[11px] leading-5 text-muted">
-        ‘마지막 수집’은 배치가 돌아간 날짜입니다. 화면의 <strong className="text-slate-600">기준연도(예: 2024)</strong>는
-        정부 통계의 <strong className="text-slate-600">공표 지연</strong> 때문이며, 연간 통계는 보통 기준연도 1~1.5년 뒤
-        공표됩니다(예: 행안부 외국인주민·KOSIS 시도/시군구 = 2024가 최신). 환율·유학생 월별 등은 2025~2026까지 반영되어
-        있고, 새 연도가 공표되면 다음 배치에서 자동 갱신됩니다.
       </p>
     </section>
   );

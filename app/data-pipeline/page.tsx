@@ -156,9 +156,7 @@ export default function DataPipelinePage() {
         <p className="page-kicker">수집 파이프라인</p>
         <h2 className="page-title">메타데이터 관리</h2>
         <p className="page-description">
-          공공데이터 자동 수집 배치(매일 01:00 KST / 16:00 UTC, GitHub Actions)의 실행 상태를 관리합니다.
-          데이터 건강 점수, 각 출처의 수집 성공·실패, 요청 URL, 출처 정의·활용 한계, 대시보드 반영 커버리지,
-          신규 데이터셋 발굴 결과, 인증키 상태를 한 화면에서 점검할 수 있습니다.
+          매일 자동 수집되는 공공데이터 배치의 상태·건강·발굴을 한 화면에서 점검합니다.
         </p>
       </section>
 
@@ -186,8 +184,8 @@ export default function DataPipelinePage() {
             </span>
           ))}
         </div>
-        <span className="ml-auto rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-600">
-          스케줄: 매일 01:00 KST (16:00 UTC) · GitHub Actions
+        <span className="rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-600 sm:ml-auto">
+          매일 01:00 KST · GitHub Actions
         </span>
       </section>
 
@@ -200,8 +198,7 @@ export default function DataPipelinePage() {
           <div>
             <h3 className="surface-title">데이터 기준시점 · 공표 주기</h3>
             <p className="surface-subtitle">
-              수집은 매일 돌지만, 화면의 기준연월은 원 통계의 공표 시점을 따릅니다. 연간 통계는 보통 기준연도 1~1.5년 뒤
-              공표되며, 새 시점이 공표되면 다음 배치에서 자동 반영됩니다.
+              ‘마지막 수집’은 배치 실행일이고, 화면의 기준연월은 원 통계의 공표 시점을 따릅니다(연간 통계는 보통 1~1.5년 뒤 공표).
             </p>
           </div>
         </div>
@@ -234,7 +231,7 @@ export default function DataPipelinePage() {
       </section>
 
       {/* 수집 요약 카드 */}
-      <section className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+      <section className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-5">
         {[
           { label: "등록 출처", value: totals.sources, tone: "text-ink" },
           { label: "수집 성공", value: totals.downloaded, tone: "text-teal-700" },
@@ -242,9 +239,9 @@ export default function DataPipelinePage() {
           { label: "키 대기", value: totals.skippedNoKey, tone: "text-slate-600" },
           { label: "실패", value: totals.failed, tone: "text-red-700" }
         ].map((card) => (
-          <div className="surface p-4" key={card.label}>
-            <p className="text-sm text-muted">{card.label}</p>
-            <p className={`mt-1 text-2xl font-bold ${card.tone}`}>{card.value}</p>
+          <div className="surface p-3 sm:p-4" key={card.label}>
+            <p className="text-xs text-muted sm:text-sm">{card.label}</p>
+            <p className={`mt-1 text-xl font-bold sm:text-2xl ${card.tone}`}>{card.value}</p>
           </div>
         ))}
       </section>
@@ -375,7 +372,7 @@ export default function DataPipelinePage() {
             <div>
               <h3 className="surface-title">수집 이력 · 커버리지</h3>
               <p className="surface-subtitle">
-                매 배치 자동 기록(git 일자별 보존) · 수집된 {totals.sources}개 출처와 대시보드 반영 {surfacedCount}종을 한 표에서 확인
+                출처 {totals.sources}개 · 대시보드 반영 {surfacedCount}종 · 매 배치 자동 기록
               </p>
             </div>
           </div>
@@ -415,8 +412,7 @@ export default function DataPipelinePage() {
           <DataTable columns={lineageColumns} rowKey={(row) => row.id} rows={allSources} />
         </div>
         <p className="px-3 pt-1 text-xs leading-6 text-muted">
-          ※ &lsquo;미연동&rsquo;은 자동 수집은 되지만 아직 화면에 반영되지 않은 출처입니다.
-          대학알리미(대학별 유학생)·시군구 외국인주민 등 대용량 파일은 컬럼 구조 검증 후 단계적으로 연동됩니다.
+          ※ &lsquo;미연동&rsquo;은 자동 수집되지만 아직 화면에 반영되지 않은 출처입니다(대용량 파일은 컬럼 검증 후 단계 연동).
         </p>
       </section>
 
@@ -546,7 +542,7 @@ export default function DataPipelinePage() {
             <Database aria-hidden className="text-teal-700" size={18} />
             <div>
               <h3 className="surface-title">출처 정의 및 한계</h3>
-              <p className="surface-subtitle">주요 출처의 컬럼 정의 · 활용 · 한계 큐레이션 (전체 수집 목록은 위 &lsquo;수집 이력 · 커버리지&rsquo; 참조)</p>
+              <p className="surface-subtitle">주요 출처의 컬럼·활용·한계 큐레이션 (전체 목록은 위 ‘수집 이력·커버리지’)</p>
             </div>
           </div>
         </div>
