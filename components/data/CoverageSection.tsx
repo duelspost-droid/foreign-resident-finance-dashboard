@@ -6,9 +6,12 @@ import { dataLineage, type DataLineageSource } from "@/lib/data/generated/dataLi
 import { SURFACED, TARGET_TABLES, suggestTarget, targetLabel } from "@/lib/data/sourceMeta";
 import {
   fetchSurfaceDispositions,
+  setSourceChartConfig,
   setSourceDisposition,
   type SourceDisposition
 } from "@/lib/data/supabaseClient";
+import { genericSources, type GenericSource } from "@/lib/data/generated/genericData";
+import { type ChartConfig, parseChartConfig } from "@/components/data/GenericSourceChart";
 
 type StatusKey = "surfaced" | "shown" | "planned" | "archived" | "excluded" | "none";
 const REFLECT_TONE: Record<StatusKey, string> = {
@@ -63,7 +66,10 @@ export function CoverageSection() {
     const target = d === "planned" ? disp[s.id]?.targetTable ?? suggestTarget(s).table : undefined;
     const ok = await setSourceDisposition(s.id, d, target);
     if (ok) {
-      setDisp((m) => ({ ...m, [s.id]: { disposition: d, targetTable: target ?? m[s.id]?.targetTable ?? null } }));
+      setDisp((m) => ({
+        ...m,
+        [s.id]: { disposition: d, targetTable: target ?? m[s.id]?.targetTable ?? null, note: m[s.id]?.note ?? null }
+      }));
     }
     setBusyId(null);
   }
@@ -71,7 +77,20 @@ export function CoverageSection() {
   async function retarget(s: DataLineageSource, target: string) {
     setBusyId(s.id);
     const ok = await setSourceDisposition(s.id, "planned", target);
-    if (ok) setDisp((m) => ({ ...m, [s.id]: { disposition: "planned", targetTable: target } }));
+    if (ok) setDisp((m) => ({ ...m, [s.id]: { disposition: "planned", targetTable: target, note: m[s.id]?.note ?? null } }));
+    setBusyId(null);
+  }
+
+  // '홈에 표시' 차트 설정(note=JSON) 저장.
+  async function saveNote(id: string, note: string) {
+    setBusyId(id);
+    const ok = await setSourceChartConfig(id, note);
+    if (ok) {
+      setDisp((m) => ({
+        ...m,
+        [id]: { disposition: m[id]?.disposition ?? "shown", targetTable: m[id]?.targetTable ?? null, note }
+      }));
+    }
     setBusyId(null);
   }
 
@@ -177,33 +196,43 @@ export function CoverageSection() {
                 {key === "surfaced" ? (
                   <p className="text-[11px] font-medium text-teal-700">→ {SURFACED[s.id]}</p>
                 ) : (
-                  <div className="flex flex-wrap items-center gap-1.5">
-                    <select
-                      value={disp[s.id]?.disposition ?? ""}
-                      disabled={busy || connected === false}
-                      onChange={(e) => decide(s, e.target.value)}
-                      className={`min-w-0 flex-1 rounded-md border px-2 py-1.5 text-xs ${key === "none" ? "border-amber-300 bg-white text-amber-800" : "border-slate-200 text-slate-700"} disabled:opacity-50`}
-                      aria-label="반영 처리"
-                    >
-                      <option value="">미연동(미정)</option>
-                      <option value="shown">홈에 표시(자동 차트)</option>
-                      <option value="planned">연동 예정(개발)</option>
-                      <option value="archived">보관(raw)</option>
-                      <option value="excluded">제외</option>
-                    </select>
-                    {key === "planned" && (
+                  <div className="space-y-1.5">
+                    <div className="flex flex-wrap items-center gap-1.5">
                       <select
-                        value={disp[s.id]?.targetTable ?? suggestTarget(s).table}
+                        value={disp[s.id]?.disposition ?? ""}
                         disabled={busy || connected === false}
-                        onChange={(e) => retarget(s, e.target.value)}
-                        className="min-w-0 flex-1 rounded-md border border-slate-200 px-2 py-1.5 text-xs text-slate-700 disabled:opacity-50"
-                        aria-label="대상 도메인"
-                        title="연동 대상 도메인(개발 참고)"
+                        onChange={(e) => decide(s, e.target.value)}
+                        className={`min-w-0 flex-1 rounded-md border px-2 py-1.5 text-xs ${key === "none" ? "border-amber-300 bg-white text-amber-800" : "border-slate-200 text-slate-700"} disabled:opacity-50`}
+                        aria-label="반영 처리"
                       >
-                        {TARGET_TABLES.map((t) => (
-                          <option key={t} value={t}>{targetLabel(t)}</option>
-                        ))}
+                        <option value="">미연동(미정)</option>
+                        <option value="shown">홈에 표시(자동 차트)</option>
+                        <option value="planned">연동 예정(개발)</option>
+                        <option value="archived">보관(raw)</option>
+                        <option value="excluded">제외</option>
                       </select>
+                      {key === "planned" && (
+                        <select
+                          value={disp[s.id]?.targetTable ?? suggestTarget(s).table}
+                          disabled={busy || connected === false}
+                          onChange={(e) => retarget(s, e.target.value)}
+                          className="min-w-0 flex-1 rounded-md border border-slate-200 px-2 py-1.5 text-xs text-slate-700 disabled:opacity-50"
+                          aria-label="대상 도메인"
+                          title="연동 대상 도메인(개발 참고)"
+                        >
+                          {TARGET_TABLES.map((t) => (
+                            <option key={t} value={t}>{targetLabel(t)}</option>
+                          ))}
+                        </select>
+                      )}
+                    </div>
+                    {key === "shown" && (
+                      <ShowConfig
+                        source={genericSources[s.id]}
+                        note={disp[s.id]?.note ?? null}
+                        disabled={busy || connected === false}
+                        onSave={(note) => saveNote(s.id, note)}
+                      />
                     )}
                   </div>
                 )}
@@ -214,10 +243,95 @@ export function CoverageSection() {
       </div>
 
       <p className="px-1 pt-3 text-xs leading-6 text-muted">
-        ※ <strong className="text-cyan-700">‘홈에 표시’</strong>를 누르면 개발 없이 홈 대시보드 ‘추가 데이터’에 자동 차트로 바로 떠요.
-        <strong className="text-blue-700"> ‘연동 예정’</strong>은 맞춤 차트가 필요할 때 개발 백로그로 잡혀 차트 연결 후 ‘연동됨’이 됩니다.
-        나머지는 <strong className="text-slate-600">보관 / 제외</strong>.
+        ※ <strong className="text-cyan-700">‘홈에 표시’</strong>를 누르면 개발 없이 홈 대시보드 ‘추가 데이터’에 자동 차트로 떠요 —
+        바로 아래에서 <strong className="text-slate-600">차트 종류·컬럼·제목</strong>도 직접 고를 수 있습니다.
+        <strong className="text-blue-700"> ‘연동 예정’</strong>은 맞춤 차트가 필요할 때 개발 백로그로 잡힙니다. 나머지는 보관 / 제외.
       </p>
     </section>
+  );
+}
+
+// '홈에 표시' 차트 설정(종류·범주/수치 컬럼·제목). surface_config.note(JSON)에 저장.
+function ShowConfig({
+  source,
+  note,
+  disabled,
+  onSave
+}: {
+  source: GenericSource | undefined;
+  note: string | null;
+  disabled: boolean;
+  onSave: (note: string) => void;
+}) {
+  const cfg = parseChartConfig(note);
+  const [title, setTitle] = useState(cfg.title ?? "");
+  useEffect(() => {
+    setTitle(parseChartConfig(note).title ?? "");
+  }, [note]);
+
+  if (!source) {
+    return (
+      <p className="rounded-md bg-slate-50 px-2 py-1 text-[11px] leading-4 text-slate-400">
+        범용 미리보기 데이터가 없어 자동 차트를 만들 수 없어요(데이터 경로 보강 필요).
+      </p>
+    );
+  }
+
+  const set = (patch: Partial<ChartConfig>) => onSave(JSON.stringify({ ...cfg, ...patch }));
+  const sel = "min-w-0 rounded border border-cyan-200 bg-white px-1.5 py-1 text-[11px] text-slate-700 disabled:opacity-50";
+
+  return (
+    <div className="flex flex-wrap items-center gap-1.5 rounded-md bg-cyan-50/70 p-1.5">
+      <span className="text-[11px] font-semibold text-cyan-700">홈 차트</span>
+      <select
+        value={cfg.type ?? "bar"}
+        disabled={disabled}
+        onChange={(e) => set({ type: e.target.value as ChartConfig["type"] })}
+        className={sel}
+        aria-label="차트 종류"
+      >
+        <option value="bar">막대</option>
+        <option value="line">선</option>
+        <option value="table">표</option>
+      </select>
+      {cfg.type !== "table" && (
+        <>
+          <select
+            value={cfg.cat ?? ""}
+            disabled={disabled}
+            onChange={(e) => set({ cat: e.target.value === "" ? undefined : Number(e.target.value) })}
+            className={sel}
+            aria-label="범주 컬럼"
+          >
+            <option value="">범주(자동)</option>
+            {source.columns.map((c, i) => (
+              <option key={i} value={i}>{c}</option>
+            ))}
+          </select>
+          <select
+            value={cfg.val ?? ""}
+            disabled={disabled}
+            onChange={(e) => set({ val: e.target.value === "" ? undefined : Number(e.target.value) })}
+            className={sel}
+            aria-label="수치 컬럼"
+          >
+            <option value="">수치(자동)</option>
+            {source.columns.map((c, i) => (
+              <option key={i} value={i}>{c}{source.numericCols.includes(i) ? " ✓" : ""}</option>
+            ))}
+          </select>
+        </>
+      )}
+      <input
+        value={title}
+        disabled={disabled}
+        placeholder="제목(선택)"
+        onChange={(e) => setTitle(e.target.value)}
+        onBlur={() => {
+          if ((cfg.title ?? "") !== title) set({ title: title.trim() || undefined });
+        }}
+        className="min-w-0 flex-1 rounded border border-cyan-200 px-1.5 py-1 text-[11px] text-slate-700 disabled:opacity-50"
+      />
+    </div>
   );
 }

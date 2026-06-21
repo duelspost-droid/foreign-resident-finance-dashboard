@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { Sparkles } from "lucide-react";
 import { fetchSurfaceDispositions } from "@/lib/data/supabaseClient";
 import { dataLineage } from "@/lib/data/generated/dataLineage";
-import { GenericSourceChart } from "@/components/data/GenericSourceChart";
+import { type ChartConfig, GenericSourceChart, parseChartConfig } from "@/components/data/GenericSourceChart";
 import type { GenericSource } from "@/lib/data/generated/genericData";
 
-type Item = { id: string; title: string; provider?: string; source: GenericSource };
+type Item = { id: string; title: string; provider?: string; source: GenericSource; config: ChartConfig };
 
 // 홈 '추가 데이터' 섹션 — 관리자가 메타데이터 관리에서 '홈에 표시'(disposition='shown')한
 // 소스를 범용 차트/표로 자동 렌더한다. 토글이 없으면 섹션 자체가 보이지 않는다(개발 불필요).
@@ -38,7 +38,8 @@ export function HomeExtraData() {
             id,
             title: meta.get(id)?.title ?? id,
             provider: meta.get(id)?.provider,
-            source: genericSources[id]
+            source: genericSources[id],
+            config: parseChartConfig(disp[id]?.note)
           }))
       );
     })();
@@ -55,7 +56,7 @@ export function HomeExtraData() {
       </div>
       <div className="grid gap-3 lg:grid-cols-2">
         {items.map((s) => (
-          <GenericSourceChart key={s.id} title={s.title} provider={s.provider} source={s.source} />
+          <GenericSourceChart key={s.id} title={s.title} provider={s.provider} source={s.source} config={s.config} />
         ))}
       </div>
     </section>

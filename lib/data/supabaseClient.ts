@@ -130,13 +130,14 @@ function mapSurface(row: Record<string, unknown>): SurfaceConfigRow {
 }
 
 // ── 미연동 소스 트리아지 (surface_config.disposition) ───────────────────────────────
-export type SourceDisposition = { disposition: string | null; targetTable: string | null };
+// note: '홈에 표시' 차트 설정 JSON({type,cat,val,title})을 담는다(별도 컬럼 대신 재사용).
+export type SourceDisposition = { disposition: string | null; targetTable: string | null; note: string | null };
 
 // 소스별 트리아지 상태 조회. 미연결/오류 시 null(호출부에서 '미연결' 표시).
 export async function fetchSurfaceDispositions(): Promise<Record<string, SourceDisposition> | null> {
   const client = createBrowserSupabaseClient();
   if (!client) return null;
-  const { data, error } = await client.from("surface_config").select("source_id,disposition,target_table");
+  const { data, error } = await client.from("surface_config").select("source_id,disposition,target_table,note");
   if (error) {
     console.error("fetchSurfaceDispositions error:", error.message);
     return null;
@@ -146,9 +147,25 @@ export async function fetchSurfaceDispositions(): Promise<Record<string, SourceD
     map[String(r.source_id)] = {
       disposition: (r.disposition as string) ?? null,
       targetTable: (r.target_table as string) ?? null,
+      note: (r.note as string) ?? null,
     };
   }
   return map;
+}
+
+// '홈에 표시' 차트 설정 저장(note=JSON). 성공 시 true.
+export async function setSourceChartConfig(sourceId: string, note: string | null): Promise<boolean> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return false;
+  const { error } = await client.from("surface_config").upsert(
+    { source_id: sourceId, note, updated_at: new Date().toISOString(), updated_by: "admin" },
+    { onConflict: "source_id" }
+  );
+  if (error) {
+    console.error("setSourceChartConfig error:", error.message);
+    return false;
+  }
+  return true;
 }
 
 // 트리아지 1건 저장(upsert). disposition=null 이면 '미정'으로 되돌림. 성공 시 true.
