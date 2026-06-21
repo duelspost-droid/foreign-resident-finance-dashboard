@@ -1,6 +1,5 @@
 import { Flag, Globe, Layers, Users } from "lucide-react";
 import { NationalityBarChart } from "@/components/charts/NationalityBarChart";
-import { VisaDonutChart } from "@/components/charts/VisaDonutChart";
 import { DataTable, type DataTableColumn } from "@/components/tables/DataTable";
 import { BarList } from "@/components/ui/BarList";
 import { PageHero } from "@/components/ui/PageHero";
@@ -9,13 +8,11 @@ import { StatTile } from "@/components/ui/StatTile";
 import {
   hasNationalityByAge,
   hasRealNationalityData,
-  hasRealVisaData,
   kpiSummary,
   nationalityAgeGroups,
   nationalityAgeTotals,
   nationalityByAge,
   nationalityDistributionData,
-  visaDistributionData
 } from "@/lib/data/mockData";
 import { realForeignResidentStatus } from "@/lib/data/generated/realData";
 import type { ForeignResidentStatus } from "@/lib/types/foreignResident";
@@ -27,14 +24,6 @@ const distributionItems = nationalityDistributionData.map((row) => ({
   value: row.residents,
   display: formatNumber(row.residents),
   sublabel: `${row.share}%`
-}));
-
-// 체류자격 도넛 차트와 동일한 팔레트(레전드용).
-const donutColors = ["#0f766e", "#3157a4", "#b45309", "#be123c", "#64748b", "#7c3aed"];
-const donutLegend = visaDistributionData.map((segment, index) => ({
-  name: segment.name,
-  value: segment.value,
-  color: donutColors[index % donutColors.length]
 }));
 
 const topFifteenTotal = nationalityDistributionData
@@ -86,8 +75,8 @@ export default function NationalitiesPage() {
     <div className="space-y-7 pb-14">
       <PageHero
         kicker="국적 분석"
-        title="국적별 체류 구조와 금융 니즈"
-        description="국적별 거주 규모와 체류자격 구성, 월별 증가 추세를 비교하고 계좌개설·송금·체크카드·자산관리 같은 니즈 태그를 한눈에 확인합니다."
+        title="어느 나라 사람이 얼마나 있는가"
+        description="국적별 거주 규모·점유율·연령 구조를 확인합니다. 세그먼트별 금융 니즈 프로파일은 사이드바 → 비자 세그먼트에서 확인하세요."
         right={
           <div className="flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-white">
             <Flag aria-hidden size={18} />
@@ -144,45 +133,15 @@ export default function NationalitiesPage() {
         <BarList items={distributionItems} unit="명" />
       </Panel>
 
-      <div className="two-column">
-        <Panel
-          title="국적별 분포 차트"
-          subtitle="거주 규모 상위 국적 비교"
-          bodyClassName="p-0"
-        >
-          <div className="chart-box">
-            <NationalityBarChart data={nationalityDistributionData} />
-          </div>
-        </Panel>
-
-        <Panel
-          title="체류자격 구성"
-          subtitle={hasRealVisaData ? "법무부 외국인체류데이터(2024) · 장기체류 기준 세그먼트 분포" : "세그먼트별 비중 샘플"}
-          bodyClassName="p-0"
-        >
-          <div className="chart-box">
-            <VisaDonutChart />
-          </div>
-          <div className="border-t border-line px-5 py-4">
-            <ul className="grid grid-cols-1 gap-x-4 gap-y-2 text-xs sm:grid-cols-2">
-              {donutLegend.map((segment) => (
-                <li className="flex items-center justify-between gap-2" key={segment.name}>
-                  <span className="flex min-w-0 items-center gap-2">
-                    <span
-                      className="h-2.5 w-2.5 shrink-0 rounded-full"
-                      style={{ background: segment.color }}
-                    />
-                    <span className="truncate text-ink">{segment.name}</span>
-                  </span>
-                  <span className="shrink-0 font-mono font-semibold text-muted">
-                    {segment.value}%
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Panel>
-      </div>
+      <Panel
+        title="국적별 분포 차트"
+        subtitle="거주 규모 상위 국적 비교"
+        bodyClassName="p-0"
+      >
+        <div className="chart-box">
+          <NationalityBarChart data={nationalityDistributionData} />
+        </div>
+      </Panel>
 
 
       {hasNationalityByAge && (() => {

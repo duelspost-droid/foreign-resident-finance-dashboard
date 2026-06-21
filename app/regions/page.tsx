@@ -1,7 +1,6 @@
-import { Globe, MapPin, TrendingUp, Users } from "lucide-react";
+import { BarChart2, Globe, MapPin, Users } from "lucide-react";
 
 import { RegionMap } from "@/components/charts/RegionMap";
-import { RealSidoOpportunityTable } from "@/components/data/RealSidoOpportunityTable";
 import { SigunguBarChart } from "@/components/charts/SigunguBarChart";
 import { PageHero } from "@/components/ui/PageHero";
 import { Panel } from "@/components/ui/Panel";
@@ -9,26 +8,21 @@ import { StatTile } from "@/components/ui/StatTile";
 import {
   hasSidoForeignerStats,
   hasSidoForeignerTrend,
+  hasRealSigunguResidents,
+  realSigunguResidents,
   sidoForeignerLatestYear,
+  sidoForeignerStats,
   sidoForeignerTotal,
   sidoForeignerTrend
-} from "@/lib/data/regionAggregates";
-import {
-  hasRealSidoOpportunity,
-  realSidoOpportunity
-} from "@/lib/data/opportunityReal";
-import {
-  hasRealSigunguResidents,
-  realSigunguResidents
 } from "@/lib/data/regionAggregates";
 import { formatNumber } from "@/lib/utils/format";
 
 export default function RegionsPage() {
-  // 실데이터 시도 통계
-  const topSido = realSidoOpportunity[0];
-  const fastestSido = hasRealSidoOpportunity
-    ? [...realSidoOpportunity].filter((r) => r.yoy != null).sort((a, b) => (b.yoy ?? 0) - (a.yoy ?? 0))[0]
-    : null;
+  // 시도별 거주 통계 — sidoForeignerStats에서 직접 계산
+  const sidoEntries = Object.entries(sidoForeignerStats).sort((a, b) => b[1] - a[1]);
+  const topSidoName = sidoEntries[0]?.[0] ?? "—";
+  const topSidoCount = sidoEntries[0]?.[1] ?? 0;
+  const sidoCount = sidoEntries.length;
 
   // 전국 외국인주민 연도별 추이(행안부 실데이터)
   const trend = sidoForeignerTrend;
@@ -44,8 +38,8 @@ export default function RegionsPage() {
     <div className="space-y-7 pb-14">
       <PageHero
         kicker="지역 분석"
-        title="지역별 외국인 분포와 금융 기회"
-        description="시도·시군구 단위의 집계 데이터를 기준으로 외국인 밀집도, 세그먼트, 송금·유학생·급여계좌 수요를 비교해 우선 공략 지역을 도출합니다."
+        title="외국인이 어디에 얼마나 사는가"
+        description="시도·시군구 단위 지리적 분포 현황입니다. 외국인주민 밀집도, 연도별 추이, 시군구별 집계를 확인하세요. 우선 공략 지역 랭킹은 사이드바 → 기회 점수에서 확인하세요."
       />
 
       {/* 실데이터 시도 분포 요약(있을 때) */}
@@ -62,46 +56,38 @@ export default function RegionsPage() {
 
       <div className="stat-grid">
         <StatTile
-          label="분석 시도 수"
-          value={hasRealSidoOpportunity ? realSidoOpportunity.length : "—"}
-          unit={hasRealSidoOpportunity ? "개 시도" : ""}
-          icon={<MapPin size={18} />}
+          label="전국 외국인주민"
+          value={sidoCount > 0 ? formatNumber(sidoForeignerTotal) : "—"}
+          unit={sidoCount > 0 ? "명" : ""}
+          icon={<Users size={18} />}
           accent="#0f766e"
-          sub={hasRealSidoOpportunity ? "행안부 실데이터" : "실데이터 수집 전"}
+          sub={sidoCount > 0
+            ? `행안부 시도별 집계${sidoForeignerLatestYear ? ` ${sidoForeignerLatestYear}년` : ""}`
+            : "실데이터 수집 전"}
         />
         <StatTile
-          label="1위 시도 (외국인주민)"
-          value={hasRealSidoOpportunity && topSido ? topSido.sido : "—"}
+          label="가장 많은 시도"
+          value={sidoCount > 0 ? topSidoName : "—"}
           icon={<Globe size={18} />}
           accent="#b45309"
-          trend={hasRealSidoOpportunity && topSido
-            ? { label: `종합 기회점수 ${topSido.overallScore}`, dir: "up" }
-            : undefined}
-          sub={hasRealSidoOpportunity && topSido
-            ? `외국인주민 ${formatNumber(topSido.residentCount)}명`
-            : "실데이터 수집 전"}
+          trend={sidoCount > 0 ? { label: "외국인주민 최다", dir: "up" } : undefined}
+          sub={sidoCount > 0 ? `${formatNumber(topSidoCount)}명 거주` : "실데이터 수집 전"}
         />
         <StatTile
-          label="전국 외국인주민 합계"
-          value={hasRealSidoOpportunity ? formatNumber(sidoForeignerTotal) : "—"}
-          unit={hasRealSidoOpportunity ? "명" : ""}
-          icon={<Users size={18} />}
+          label="분석 시도 수"
+          value={sidoCount > 0 ? sidoCount : "—"}
+          unit={sidoCount > 0 ? "개 시도" : ""}
+          icon={<MapPin size={18} />}
           accent="#3157a4"
-          sub={hasRealSidoOpportunity
-            ? `행안부 시도별 외국인주민${sidoForeignerLatestYear ? ` ${sidoForeignerLatestYear}년` : ""}`
-            : "실데이터 수집 전"}
+          sub="행안부 시도별 외국인주민 현황"
         />
         <StatTile
-          label="최고 성장 시도"
-          value={hasRealSidoOpportunity && fastestSido ? fastestSido.sido : "—"}
-          icon={<TrendingUp size={18} />}
+          label="집계 시군구 수"
+          value={hasRealSigunguResidents ? realSigunguResidents.length : "—"}
+          unit={hasRealSigunguResidents ? "개" : ""}
+          icon={<BarChart2 size={18} />}
           accent="#be123c"
-          trend={hasRealSidoOpportunity && fastestSido && fastestSido.yoy != null
-            ? { label: "전년 대비", dir: "up" }
-            : undefined}
-          sub={hasRealSidoOpportunity && fastestSido && fastestSido.yoy != null
-            ? `YoY +${fastestSido.yoy.toFixed(1)}%`
-            : "실데이터 수집 전"}
+          sub={hasRealSigunguResidents ? "KOSIS 법무부 시군구별 등록외국인" : "실데이터 수집 전"}
         />
       </div>
 
@@ -145,10 +131,6 @@ export default function RegionsPage() {
           </p>
         </Panel>
       )}
-
-      {/* 실데이터 시도 기회 점수 (행안부+KEDI) */}
-      <RealSidoOpportunityTable />
-
 
       {hasRealSigunguResidents && (
         <Panel

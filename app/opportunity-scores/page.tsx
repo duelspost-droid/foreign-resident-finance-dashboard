@@ -11,8 +11,8 @@ import {
   hasRealSidoOpportunity,
   realSidoOpportunity
 } from "@/lib/data/opportunityReal";
-import { sidoForeignerTotal, sidoForeignerLatestYear } from "@/lib/data/regionAggregates";
 import { realBopTransferIncome } from "@/lib/data/generated/realData";
+import { sidoForeignerTotal, sidoForeignerLatestYear } from "@/lib/data/regionAggregates";
 import { formatNumber } from "@/lib/utils/format";
 
 export default function OpportunityScoresPage() {
@@ -41,7 +41,7 @@ export default function OpportunityScoresPage() {
       <PageHero
         kicker="금융 기회 점수"
         title="전략 실행 우선순위 랭킹"
-        description="외국인 규모, 유학생, 성장률 실데이터로 0~100 기회점수를 산출합니다. 한국은행 ECOS 이전소득수지(301Y013)로 시도별 송금시장 규모도 함께 표시합니다."
+        description="어느 지역을 먼저 공략해야 하는가. 외국인 규모·유학생·성장률로 0~100 기회점수를 산출하고, ECOS 이전소득수지(301Y013)로 시도별 송금시장 규모를 추정합니다. 지리적 분포는 사이드바 → 지역 분석에서 확인하세요."
       />
 
       {/* BOP 거시지표 컨텍스트 (ECOS 이전소득수지 301Y013) */}
@@ -160,17 +160,9 @@ export default function OpportunityScoresPage() {
 
       <div className="stat-grid">
         <StatTile
-          label="분석 시도 수"
-          value={hasRealSidoOpportunity ? realSidoOpportunity.length : "—"}
-          unit={hasRealSidoOpportunity ? "개 시도" : ""}
-          accent="#0f766e"
-          icon={<MapPin size={18} />}
-          sub={hasRealSidoOpportunity ? "행안부 실데이터 17개 시도" : "실데이터 수집 전"}
-        />
-        <StatTile
           label="1위 시도 (기회점수)"
           value={hasRealSidoOpportunity && topSido ? topSido.sido : "—"}
-          accent="#3157a4"
+          accent="#0f766e"
           icon={<Globe size={18} />}
           trend={hasRealSidoOpportunity && topSido
             ? { label: `종합 ${topSido.overallScore}점`, dir: "up" }
@@ -180,19 +172,9 @@ export default function OpportunityScoresPage() {
             : "실데이터 수집 전"}
         />
         <StatTile
-          label="전국 외국인주민"
-          value={hasRealSidoOpportunity ? formatNumber(sidoForeignerTotal) : "—"}
-          unit={hasRealSidoOpportunity ? "명" : ""}
-          accent="#b45309"
-          icon={<BarChart3 size={18} />}
-          sub={hasRealSidoOpportunity
-            ? `행안부 시도별${sidoForeignerLatestYear ? ` ${sidoForeignerLatestYear}년` : ""}`
-            : "실데이터 수집 전"}
-        />
-        <StatTile
           label="최고 성장 시도"
           value={hasRealSidoOpportunity && fastestSido ? fastestSido.sido : "—"}
-          accent="#be123c"
+          accent="#3157a4"
           icon={<TrendingUp size={18} />}
           trend={hasRealSidoOpportunity && fastestSido?.yoy != null
             ? { label: "전년 대비", dir: "up" }
@@ -200,6 +182,23 @@ export default function OpportunityScoresPage() {
           sub={hasRealSidoOpportunity && fastestSido?.yoy != null
             ? `YoY +${fastestSido.yoy.toFixed(1)}%`
             : "실데이터 수집 전"}
+        />
+        <StatTile
+          label="전국 송금시장 추정"
+          value={bopNationalLatest > 0 ? `$${(bopNationalLatest / 1000).toFixed(1)}십억` : "—"}
+          accent="#b45309"
+          icon={<BarChart3 size={18} />}
+          sub={bopLatest ? `ECOS 이전소득수지 ${bopLatest.year}년 · 301Y013` : "ECOS 데이터 없음"}
+        />
+        <StatTile
+          label="시도 평균 기회점수"
+          value={hasRealSidoOpportunity
+            ? (realSidoOpportunity.reduce((s, r) => s + r.overallScore, 0) / realSidoOpportunity.length).toFixed(1)
+            : "—"}
+          unit={hasRealSidoOpportunity ? "/ 100" : ""}
+          accent="#be123c"
+          icon={<MapPin size={18} />}
+          sub={hasRealSidoOpportunity ? `${realSidoOpportunity.length}개 시도 가중 평균` : "실데이터 수집 전"}
         />
       </div>
 
