@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-21T09:04:15.024Z",
+  "generatedAt": "2026-06-21T17:45:52.235Z",
   "approved": [
     {
       "id": 2,
@@ -15,6 +15,40 @@
       "rationale": "시군구 단위 장기거주 외국인주민 규모",
       "discovered_at": "2026-06-18T08:09:00.89898+00:00",
       "decided_at": "2026-06-18T08:57:46.939+00:00",
+      "decided_by": "admin",
+      "notes": null
+    },
+    {
+      "id": 62,
+      "dataset_id": "15100016",
+      "kind": "fileData",
+      "provider": "법무부",
+      "title": "법무부_24(장단기체류외국인) 월별 체류자격별 체류외국인 현황",
+      "keyword": "체류외국인 월별 통계",
+      "url": "https://www.data.go.kr/data/15100016/fileData.do",
+      "target_table": "foreign_resident_status",
+      "status": "approved",
+      "priority": "mid",
+      "rationale": "월별 체류외국인 총계·국적별 추이(시장 규모 월 단위 모니터링)",
+      "discovered_at": "2026-06-18T08:09:00.89898+00:00",
+      "decided_at": "2026-06-21T15:53:40.962+00:00",
+      "decided_by": "admin",
+      "notes": null
+    },
+    {
+      "id": 45,
+      "dataset_id": "3046074",
+      "kind": "fileData",
+      "provider": "국민연금공단",
+      "title": "국민연금공단_자격 외국인체류자격별 가입현황",
+      "keyword": "외국인 국민연금 가입",
+      "url": "https://www.data.go.kr/data/3046074/fileData.do",
+      "target_table": "foreign_resident_status",
+      "status": "approved",
+      "priority": "mid",
+      "rationale": "사업장 가입 외국인 규모(정규 취업·급여계좌 수요)",
+      "discovered_at": "2026-06-18T08:09:00.89898+00:00",
+      "decided_at": "2026-06-21T15:53:47.162+00:00",
       "decided_by": "admin",
       "notes": null
     },
