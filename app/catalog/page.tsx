@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import { dataLineage, type DataLineageSource } from "@/lib/data/generated/dataLineage";
 import { PageHero } from "@/components/ui/PageHero";
-import { CollectedSourcesTable } from "@/components/data/CollectedSourcesTable";
 
 // 축 2 카테고리 → 분석 페이지 + 소속 데이터셋(수집 소스 id) + 해당 섹션 앵커
 type CatItem = { id: string; anchor?: string };
@@ -86,20 +85,20 @@ const CATEGORIES: CatGroup[] = [
   }
 ];
 
-const STATUS_BADGE: Record<string, { text: string; cls: string }> = {
-  downloaded: { text: "수집 성공", cls: "bg-teal-100 text-teal-800" },
-  cached: { text: "캐시 유지", cls: "bg-amber-100 text-amber-800" },
+// 카탈로그는 소비자용 색인 — 운영 상태(수집 성공/실패/캐시)는 '메타데이터 관리'로 일원화.
+// 여기선 '가용성'만: 분석 가능한 건(downloaded·cached) 배지 없이 깔끔하게, 아직 못 쓰는 것만 표시.
+const PENDING_BADGE: Record<string, { text: string; cls: string }> = {
   skipped_no_key: { text: "키 대기", cls: "bg-slate-100 text-slate-600" }
 };
 
-function StatusBadge({ status }: { status: string }) {
-  const info = STATUS_BADGE[status] ?? { text: "대기", cls: "bg-slate-100 text-slate-600" };
+function AvailabilityBadge({ status }: { status: string }) {
+  if (status === "downloaded" || status === "cached") return null;
+  const info = PENDING_BADGE[status] ?? { text: "준비중", cls: "bg-slate-100 text-slate-600" };
   return <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold ${info.cls}`}>{info.text}</span>;
 }
 
 export default function CatalogPage() {
   const byId = new Map<string, DataLineageSource>(dataLineage.sources.map((s) => [s.id, s]));
-  const { totals } = dataLineage;
   const updated = dataLineage.generatedAt
     ? new Date(dataLineage.generatedAt).toLocaleDateString("ko-KR", { year: "numeric", month: "short", day: "numeric" })
     : "—";
@@ -110,7 +109,7 @@ export default function CatalogPage() {
       <PageHero
         kicker="분석 데이터 활용"
         title="데이터 카탈로그"
-        description="수집 중인 외국인 데이터셋을 카테고리별로 한눈에 보고, 각 분석 차트로 바로 이동합니다. 수집 상태·행수는 매일 자동 갱신됩니다."
+        description="수집 중인 외국인 데이터셋을 카테고리별로 한눈에 보고, 각 분석 차트로 바로 이동합니다. 각 데이터셋의 행수·갱신주기를 함께 표시합니다."
       />
 
       {/* 요약 */}
@@ -118,9 +117,6 @@ export default function CatalogPage() {
         <span className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700">
           <Database size={13} className="text-teal-600" />
           데이터셋 {cataloged}종
-        </span>
-        <span className="flex items-center gap-1.5 rounded-lg border border-teal-200 bg-teal-50 px-4 py-2 text-xs font-semibold text-teal-700">
-          수집 성공 {totals.downloaded} · 캐시 {totals.cached} · 실패 {totals.failed}
         </span>
         <span className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-4 py-2 text-xs text-slate-500">
           <RefreshCw size={13} />
@@ -161,7 +157,7 @@ export default function CatalogPage() {
                   <div key={s.id} className="flex flex-col rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
                     <div className="flex items-start justify-between gap-2">
                       <h3 className="text-[13px] font-bold leading-snug text-slate-900">{s.title}</h3>
-                      <StatusBadge status={s.status} />
+                      <AvailabilityBadge status={s.status} />
                     </div>
                     <p className="mt-1 text-xs text-slate-500">{s.provider}</p>
                     <div className="mt-2 flex items-center justify-between text-xs">
@@ -203,14 +199,8 @@ export default function CatalogPage() {
         </span>
       </div>
 
-      {/* 전체 수집 원본 — 카테고리에 안 묶인 것(승인·미분류 포함)까지 모두 */}
-      <CollectedSourcesTable
-        sources={[...dataLineage.sources]}
-        categorizedIds={CATEGORIES.flatMap((c) => c.items.map((it) => it.id))}
-      />
-
       <p className="text-xs text-slate-500">
-        수집 출처·이력 상세는 <Link href="/data-pipeline" className="font-semibold text-teal-700 hover:underline">메타데이터 관리</Link>에서 확인할 수 있습니다.
+        전체 수집 원본·수집 상태·이력 상세는 <Link href="/data-pipeline" className="font-semibold text-teal-700 hover:underline">메타데이터 관리</Link>에서 확인할 수 있습니다.
         모든 데이터는 집계 통계이며 개인식별정보를 포함하지 않습니다.
       </p>
     </div>
