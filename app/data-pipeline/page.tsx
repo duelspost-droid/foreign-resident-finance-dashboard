@@ -54,7 +54,7 @@ const STATUS_LABEL: Record<string, { text: string; tone: string }> = {
 
 function statusBadge(status: string) {
   const info = STATUS_LABEL[status] ?? { text: status, tone: "bg-slate-200 text-slate-700" };
-  return <span className={`rounded-md px-2 py-0.5 text-xs font-semibold ${info.tone}`}>{info.text}</span>;
+  return <span className={`inline-block whitespace-nowrap rounded-md px-2 py-0.5 text-xs font-semibold ${info.tone}`}>{info.text}</span>;
 }
 
 const lineageColumns: DataTableColumn<DataLineageSource>[] = [
@@ -208,7 +208,7 @@ export default function DataPipelinePage() {
               <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
                 <th className="px-4 py-2.5 text-left text-xs font-bold">데이터 · 출처</th>
                 <th className="px-4 py-2.5 text-left text-xs font-bold">기준시점</th>
-                <th className="px-4 py-2.5 text-left text-xs font-bold">공표 주기</th>
+                <th className="whitespace-nowrap px-4 py-2.5 text-left text-xs font-bold">공표 주기</th>
                 <th className="px-4 py-2.5 text-left text-xs font-bold">최신성 설명</th>
               </tr>
             </thead>
@@ -218,7 +218,7 @@ export default function DataPipelinePage() {
                   <td className="px-4 py-2.5 font-medium text-ink">{v.label}</td>
                   <td className="px-4 py-2.5 whitespace-nowrap font-mono font-semibold text-slate-700">{v.asOf}</td>
                   <td className="px-4 py-2.5">
-                    <span className={`rounded px-1.5 py-0.5 text-xs font-semibold ${CADENCE_TONE[v.cadence]}`}>
+                    <span className={`inline-block whitespace-nowrap rounded px-1.5 py-0.5 text-xs font-semibold ${CADENCE_TONE[v.cadence]}`}>
                       {v.cadence}
                     </span>
                   </td>
@@ -591,7 +591,7 @@ export default function DataPipelinePage() {
                     <td className="px-3 py-2 font-mono text-xs text-slate-500">{c.ref}</td>
                     <td className="px-3 py-2 text-xs text-slate-500">{c.keyEnv ?? "불필요"}</td>
                     <td className="px-3 py-2">
-                      <span className={`rounded px-2 py-0.5 text-xs font-semibold ${pr.tone}`}>{pr.text}</span>
+                      <span className={`inline-block whitespace-nowrap rounded px-2 py-0.5 text-xs font-semibold ${pr.tone}`}>{pr.text}</span>
                     </td>
                     <td className="px-3 py-2">
                       {c.registered ? (
