@@ -48,11 +48,33 @@ export function suggestTarget(c: { title?: string | null; keyword?: string | nul
 }
 
 // 수집 소스 id → 현재 반영 중인 대시보드 화면(커버리지 투명성). 없으면 "수집만(미연동)".
+// 화면 렌더 여부는 build_real_data 의 real* export → 페이지 import/render 체인으로 검증해 등록한다.
 export const SURFACED: Record<string, string> = {
+  // 인구·체류 / 지역
   moj_foreign_resident_status_2024: "국적·체류자격·기회점수",
   moj_foreign_stay_data_2024: "지역 분석",
+  mois_foreign_resident_region_file: "시군구 외국인주민",
+  kosis_registered_foreigner_by_region: "지역 분석 · 시도",
+  kosis_registered_foreigner_sigungu_visa: "지역 분석 · 시군구·자격",
+  kosis_foreigner_economic_activity: "체류자격(보조)",
+  // 유학생
   moj_foreign_student_stay_2024: "대학/유학생",
   academyinfo_foreign_student_count: "대학별 랭킹",
-  mois_foreign_resident_region_file: "시군구 외국인주민",
-  kosis_foreigner_economic_activity: "체류자격(보조)"
+  kosis_foreign_student_nationality_visa: "유학생 · 국적·학위",
+  kosis_kedi_higher_edu_foreign_students: "유학생 · 시도·학위",
+  moe_foreign_student_region: "유학생 추이(홈)",
+  // 경제활동·소득
+  kosis_immigrant_wage_distribution: "경제활동·소득 · 임금분포",
+  kosis_immigrant_contract_period: "경제활동·소득 · 고용계약기간",
+  kosis_immigrant_employment_status: "경제활동·소득 · 종사상지위",
+  kosis_immigrant_employment_by_industry: "경제활동·소득 · 산업별",
+  kosis_immigrant_econ_activity_by_age: "경제활동·소득 · 연령별",
+  kosis_eps_introduction_by_country: "경제활동·소득 · EPS 국가별",
+  kosis_eps_introduction_by_industry: "경제활동·소득 · EPS 업종별",
+  // 소비·금융거래
+  ecos_bop_transfer_income: "소비·금융거래 · 송금",
+  ecos_bop_transfer_monthly: "소비·금융거래 · 월별 송금",
+  ecos_exchange_rate_daily: "소비·금융거래 · 환율",
+  jdc_dutyfree_sales_by_nationality: "소비·금융거래 · 면세점",
+  jeju_foreign_land_acquisition: "소비·금융거래 · 부동산"
 };
