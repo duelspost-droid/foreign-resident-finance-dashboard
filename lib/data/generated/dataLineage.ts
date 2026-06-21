@@ -47,7 +47,7 @@ export type DataLineage = {
 };
 
 export const dataLineage: DataLineage = {
-  "generatedAt": "2026-06-19T14:36:25.190Z",
+  "generatedAt": "2026-06-21T07:44:56.890Z",
   "keysPresent": {
     "DATA_GO_KR_SERVICE_KEY": true,
     "KOSIS_API_KEY": true,
@@ -55,11 +55,11 @@ export const dataLineage: DataLineage = {
     "SEOUL_OPENAPI_KEY": false
   },
   "totals": {
-    "sources": 32,
+    "sources": 33,
     "downloaded": 31,
     "cached": 0,
     "skippedNoKey": 1,
-    "failed": 0
+    "failed": 1
   },
   "sources": [
     {
@@ -75,10 +75,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "국적×체류자격 집계. 세그먼트 산출의 1차 소스.",
-      "fetchedAt": "2026-06-19T14:37:11.502Z",
+      "fetchedAt": "2026-06-21T07:45:52.958Z",
       "status": "downloaded",
       "rowCount": 400,
-      "savedFile": "moj_foreign_resident_status_2024_2026-06-19.csv",
+      "savedFile": "moj_foreign_resident_status_2024_2026-06-21.csv",
       "requestUrls": [
         "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003562210&fileDetailSn=1"
       ],
@@ -97,10 +97,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "지역 단위 체류 현황.",
-      "fetchedAt": "2026-06-19T14:37:11.953Z",
+      "fetchedAt": "2026-06-21T07:45:53.661Z",
       "status": "downloaded",
       "rowCount": 380,
-      "savedFile": "moj_foreign_stay_data_2024_2026-06-19.csv",
+      "savedFile": "moj_foreign_stay_data_2024_2026-06-21.csv",
       "requestUrls": [
         "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003580938&fileDetailSn=1"
       ],
@@ -119,10 +119,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "유학(D-2)·연수(D-4) 체류 추세.",
-      "fetchedAt": "2026-06-19T14:37:11.901Z",
+      "fetchedAt": "2026-06-21T07:45:53.546Z",
       "status": "downloaded",
       "rowCount": 42,
-      "savedFile": "moj_foreign_student_stay_2024_2026-06-19.csv",
+      "savedFile": "moj_foreign_student_stay_2024_2026-06-21.csv",
       "requestUrls": [
         "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003175552&fileDetailSn=1"
       ],
@@ -141,10 +141,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "결혼이민자·다문화가구 집계. 금융 상품 수요 보조 지표.",
-      "fetchedAt": "2026-06-19T14:37:12.158Z",
+      "fetchedAt": "2026-06-21T07:45:54.167Z",
       "status": "downloaded",
       "rowCount": 16,
-      "savedFile": "mogef_multicultural_family_2024_2026-06-19.csv",
+      "savedFile": "mogef_multicultural_family_2024_2026-06-21.csv",
       "requestUrls": [
         "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003526233&fileDetailSn=1"
       ],
@@ -163,10 +163,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "국적별 보험료 부과액·급여비. 외국인 소득수준·지불능력 대리지표(금융 세그먼트 보조).",
-      "fetchedAt": "2026-06-19T14:37:13.073Z",
+      "fetchedAt": "2026-06-21T07:45:54.716Z",
       "status": "downloaded",
       "rowCount": 1,
-      "savedFile": "nhis_foreigner_premium_2023_2026-06-19.xlsx",
+      "savedFile": "nhis_foreigner_premium_2023_2026-06-21.xlsx",
       "requestUrls": [
         "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003190542&fileDetailSn=1"
       ],
@@ -185,10 +185,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "외국인 직장/지역 가입자 구분. 취업형태(급여계좌 수요) 보조 지표.",
-      "fetchedAt": "2026-06-19T14:37:13.332Z",
+      "fetchedAt": "2026-06-21T07:45:55.175Z",
       "status": "downloaded",
       "rowCount": 17,
-      "savedFile": "nhis_foreigner_coverage_2022_2026-06-19.csv",
+      "savedFile": "nhis_foreigner_coverage_2022_2026-06-21.csv",
       "requestUrls": [
         "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003517522&fileDetailSn=1"
       ],
@@ -207,10 +207,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "법무부 출입국 월별 통계. 발굴 자동화로 식별됨.",
-      "fetchedAt": "2026-06-19T14:37:13.630Z",
+      "fetchedAt": "2026-06-21T07:45:55.893Z",
       "status": "downloaded",
       "rowCount": 400,
-      "savedFile": "moj_immigration_monthly_2024_2026-06-19.csv",
+      "savedFile": "moj_immigration_monthly_2024_2026-06-21.csv",
       "requestUrls": [
         "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003531546&fileDetailSn=1"
       ],
@@ -229,10 +229,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 시군구 단위 외국인주민. openapi 대체용 파일 수집(발굴 자동화).",
-      "fetchedAt": "2026-06-19T14:37:14.191Z",
+      "fetchedAt": "2026-06-21T07:45:56.709Z",
       "status": "downloaded",
       "rowCount": 1692,
-      "savedFile": "mois_foreign_resident_region_file_2026-06-19.csv",
+      "savedFile": "mois_foreign_resident_region_file_2026-06-21.csv",
       "requestUrls": [
         "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003655053&fileDetailSn=1"
       ],
@@ -251,10 +251,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "월별(2022~2026.4) 국적지역×구분(유학D2/한국어연수D41/외국어연수D47) 유학생 스톡. '유학생 추이'의 1차 소스 — 연도말 단독표 15100038의 2024 행 손상(D-2 절반)을 대체. build에서 연도별 최신월 스냅샷으로 집계(2024=263,775 등, e-나라지표·통계월보 교차검증). 2026-06-16 라벨 정정(교육부→법무부, 연→월).",
-      "fetchedAt": "2026-06-19T14:37:15.846Z",
+      "fetchedAt": "2026-06-21T07:45:57.992Z",
       "status": "downloaded",
       "rowCount": 17486,
-      "savedFile": "moe_foreign_student_region_2026-06-19.csv",
+      "savedFile": "moe_foreign_student_region_2026-06-21.csv",
       "requestUrls": [
         "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003645680&fileDetailSn=1"
       ],
@@ -273,10 +273,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "주의: 발굴 자동화가 '교육부 유학생'으로 오식별했으나 실제 data.go.kr 15149964는 '세종시 고등학교' 외국인학생 파일(대학 0개, 65행 대부분 0명). 대학 랭킹 1차 소스에서 제외하고 academyinfo(3069982)를 1차로 사용. 폴백으로만 남김.",
-      "fetchedAt": "2026-06-19T14:37:14.681Z",
+      "fetchedAt": "2026-06-21T07:45:57.045Z",
       "status": "downloaded",
       "rowCount": 65,
-      "savedFile": "moe_foreign_student_latest_2026-06-19.csv",
+      "savedFile": "moe_foreign_student_latest_2026-06-21.csv",
       "requestUrls": [
         "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003254817&fileDetailSn=1"
       ],
@@ -295,10 +295,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "data.go.kr 3069982. 실제 데이터는 성별·국적·체류자격·학교명 학생단위 레코드(약 30만행, 라이브 빈티지 2025) — 대학별 외국인유학생 top30 랭킹의 1차 소스. build에서 학교명을 대학 패턴으로 필터 후 집계(한양대 7.7천 등). 정의 라벨이 '대학알리미'였으나 실제는 법무부 유학생관리정보로 정정(2026-06-16).",
-      "fetchedAt": "2026-06-19T14:37:18.308Z",
+      "fetchedAt": "2026-06-21T07:46:02.014Z",
       "status": "downloaded",
       "rowCount": 304360,
-      "savedFile": "academyinfo_foreign_student_count_2026-06-19.csv",
+      "savedFile": "academyinfo_foreign_student_count_2026-06-21.csv",
       "requestUrls": [
         "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003578044&fileDetailSn=1"
       ],
@@ -317,10 +317,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "대학알리미 고등교육기관 기본정보(위치·유형). 대학 외국인 유학생 지도 구축 보조.",
-      "fetchedAt": "2026-06-19T14:37:16.642Z",
+      "fetchedAt": "2026-06-21T07:45:59.809Z",
       "status": "downloaded",
       "rowCount": 6364,
-      "savedFile": "academyinfo_university_stats_2026-06-19.csv",
+      "savedFile": "academyinfo_university_stats_2026-06-21.csv",
       "requestUrls": [
         "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003220926&fileDetailSn=1"
       ],
@@ -339,10 +339,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "국적(내국인/일·중·미·러·태·홍·필/기타 9종)×판매년월×매출. 면세점 국적별 소비=외국인 결제·환전 수요 직접 지표. CSV 3차원, 차기등록 2026-11.",
-      "fetchedAt": "2026-06-19T14:37:16.462Z",
+      "fetchedAt": "2026-06-21T07:45:58.953Z",
       "status": "downloaded",
       "rowCount": 120,
-      "savedFile": "jdc_dutyfree_sales_by_nationality_2026-06-19.csv",
+      "savedFile": "jdc_dutyfree_sales_by_nationality_2026-06-21.csv",
       "requestUrls": [
         "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003511883&fileDetailSn=1"
       ],
@@ -361,10 +361,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "연도×국적별×월별 취득필지·취득면적(㎡)·취득금액(백만원). 외국인 부동산 매입=대출·자산관리 수요 대리지표. 취득금액(실금액) 차원 보유. 제주 한정.",
-      "fetchedAt": "2026-06-19T14:37:17.414Z",
+      "fetchedAt": "2026-06-21T07:45:59.676Z",
       "status": "downloaded",
       "rowCount": 26,
-      "savedFile": "jeju_foreign_land_acquisition_2026-06-19.csv",
+      "savedFile": "jeju_foreign_land_acquisition_2026-06-21.csv",
       "requestUrls": [
         "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003141788&fileDetailSn=1"
       ],
@@ -383,10 +383,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "행안부 시도별 외국인주민. newEstPrdCnt로 최신 N기 자동 수집. 첫 성공 응답으로 필드명 확정.",
-      "fetchedAt": "2026-06-19T14:37:21.141Z",
+      "fetchedAt": "2026-06-21T07:46:05.441Z",
       "status": "downloaded",
       "rowCount": 5580,
-      "savedFile": "kosis_registered_foreigner_by_region_2026-06-19.json",
+      "savedFile": "kosis_registered_foreigner_by_region_2026-06-21.json",
       "requestUrls": [
         "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=110&tblId=TX_11025_A000_A&itmId=16110AAA0&objL1=1110100A00%2B1110100A11%2B1110100A21%2B1110100A22%2B1110100A23%2B1110100A24%2B1110100A25%2B1110100A26%2B1110100A27%2B1110100A31%2B1110100A32%2B1110100A33%2B1110100A34%2B1110100A35%2B1110100A36%2B1110100A37%2B1110100A38%2B1110100A39&objL2=15110AA0AA%2B15110AA000%2B15110AA0AD%2B15110AA0ADAA%2B15110AA0ADAK%2B15110AA0ADAC%2B15110AA0ADAL%2B15110AA0ADAD%2B15110AA0AF%2B15110AA0AFAA%2B15110AA0AFAB%2B15110AA0AM%2B15110AA0AMA3%2B15110AA0AMA4%2B15110AA0AMA5%2B15110AA0AN&objL3=A001A%2BA001B%2BA001C&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2015&endPrdDe=2024"
       ],
@@ -405,10 +405,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "법무부 시군구×체류자격 등록외국인. endPrdDe=CY 동적 갱신.",
-      "fetchedAt": "2026-06-19T14:37:27.487Z",
+      "fetchedAt": "2026-06-21T07:46:10.297Z",
       "status": "downloaded",
       "rowCount": 24210,
-      "savedFile": "kosis_registered_foreigner_sigungu_visa_2026-06-19.json",
+      "savedFile": "kosis_registered_foreigner_sigungu_visa_2026-06-21.json",
       "requestUrls": [
         "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=111&tblId=DT_1B040A11&itmId=13103870964T1&objL1=AC000%2BAC132%2BAC133%2BAC134%2BAC135%2BAC136%2BAC137%2BAC138%2BAC139%2BAC140%2BAC141%2BAC142%2BAC143%2BAC144%2BAC145%2BAC146%2BAC147%2BAC148%2BAC149%2BAC150%2BAC083%2BAC117%2BAC084%2BA01%2BAC085%2BAC086%2BAC087%2BAC088%2BAC089%2BAC090%2BAC091%2BAC092%2BAC093%2BAC094%2BAC095%2BAC096%2BAC097%2BAC098%2BAC099%2BAC100%2BAC101%2BAC102%2BAC103%2BAC0103%2BAC104%2BAC105%2BAC106%2BAC107%2BAC108%2BAC109%2BAC110%2BAC111%2BAC112%2BAC113%2BAC114%2BAC115%2BAC116%2BAC1171%2BAC118%2BAC119%2BA02%2BAC120%2BAC121%2BAC122%2BAC123%2BAC124%2BAC125%2BAC126%2BAC127%2BAC128%2BAC129%2BAC130%2BAC131%2BAC249%2BAC2541%2BAC261%2BAC250%2BAC251%2BAC252%2BAC253%2BAC254%2BAC255%2BAC256%2BAC257%2BAC258%2BAC259%2BAC260%2BAC262%2BAC263%2BAC264%2BAC265%2BAC266%2BAC267%2BAC268%2BAC269%2BAC270%2BAC271%2BAC272%2BAC273%2BAC224%2BAC225%2BAC226%2BAC227%2BAC228%2BAC229%2BAC230%2BAC231%2BAC232%2BAC233%2BAC234%2BAC235%2BAC236%2BAC237%2BAC238%2BAC239%2BAC240%2BAC241%2BAC242%2BAC243%2BAC244%2BAC245%2BAC246%2BAC247%2BAC248%2BAC064%2BAC065%2BAC066%2BAC067%2BAC068%2BAC069%2BAC044%2BAC04401%2BAC045%2BAC046%2BAC047%2BAC048%2BAC049%2BAC050%2BAC051%2BAC052%2BAC070%2BAC071%2BAC072%2BAC073%2BAC074%2BAC075%2BAC027%2BAC028%2BAC029%2BAC030%2BAC031%2BAC032%2BAC033%2BAC034%2BAC035%2BAC036%2BAC037%2BAC038%2BAC039%2BAC040%2BAC041%2BAC042%2BAC043%2BAC001%2BAC002%2BAC003%2BAC004%2BAC005%2BAC006%2BAC007%2BAC008%2BAC009%2BAC010%2BAC011%2BAC012%2BAC013%2BAC014%2BAC015%2BAC016%2BAC017%2BAC018%2BAC019%2BAC020%2BAC021%2BAC022%2BAC023%2BAC024%2BAC025%2BAC026%2BAC082%2BAC076%2BAC077%2BAC078%2BAC079%2BAC080%2BAC081%2BAC053%2BAC056%2BAC054%2BAC055%2BAC057%2BAC058%2BAC279%2BAC059%2BAC060%2BAC061%2BAC062%2BAC063%2BAC201%2BAC202%2BAC203%2BAC204%2BAC205%2BAC206%2BAC207%2BAC208%2BAC209%2BAC210%2BAC211%2BAC212%2BAC213%2BAC214%2BAC215%2BAC216%2BAC217%2BAC218%2BAC219%2BAC220%2BAC221%2BAC222%2BAC223%2BAC185%2BAC186%2BAC187%2BAC188%2BAC189%2BAC190%2BAC191%2BAC192%2BAC193%2BAC194%2BAC195%2BAC196%2BAC197%2BAC198%2BAC199%2BAC200%2BAC274%2BAC275%2BAC276%2BAC166%2BAC171%2BAC178%2BAC167%2BAC168%2BAC169%2BAC170%2BAC172%2BAC173%2BAC174%2BAC175%2BAC176%2BAC177%2BAC179%2BAC1791%2BAC180%2BAC181%2BAC182%2BAC183%2BAC184%2BAC151%2BAC152%2BAC153%2BAC154%2BAC155%2BAC156%2BAC157%2BAC158%2BAC159%2BAC160%2BAC161%2BAC162%2BAC163%2BAC163A%2BAC163B%2BAC164%2BAC165&objL2=13102870964B.0%2B13102870964B.M%2B13102870964B.F&objL3=AAA0000%2BAAA001%2BAAA002%2BAAB001%2BAAB002%2BAAB003%2BAAB004%2BAAB005%2BAAB006%2BAAB007%2BAAB008%2BAAB009%2BAAB010%2BAAB011%2BAAB012%2BAAB013%2BAAB014%2BAAB015%2BAAB016%2BAAB017%2BAAB018%2BAAB030%2BAAB019%2BAAB020%2BAAB021%2BAAB022%2BAAB023%2BAAB024%2BAAB025%2BAAB026%2BAAB027%2BAAB028%2BAAB029&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2024&endPrdDe=2024"
       ],
@@ -427,10 +427,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "통계청 이민자 체류실태·고용조사. 취업/소득 = 급여계좌·신용 수요 직결. 2단계 호출.",
-      "fetchedAt": "2026-06-19T14:37:18.905Z",
+      "fetchedAt": "2026-06-21T07:46:02.644Z",
       "status": "downloaded",
       "rowCount": 429,
-      "savedFile": "kosis_foreigner_economic_activity_2026-06-19.json",
+      "savedFile": "kosis_foreigner_economic_activity_2026-06-21.json",
       "requestUrls": [
         "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=101&tblId=DT_2FA002F&itmId=T100%2BT110%2BT111%2BT120%2BT210%2BT220&objL1=200%2B210%2B220%2B230%2B240%2B250%2B260%2B270%2B280&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2018&endPrdDe=2025"
       ],
@@ -449,10 +449,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "유학생 국적(227)×성별(3)×학위과정/체류자격(15: 유학D-2·전문학사·학사·석사·박사·연구·교환·연수D-4). 2026-06-16 검증 7,007행. 폐기된 교육부 file 15050054(국적별) 대체.",
-      "fetchedAt": "2026-06-19T14:37:25.566Z",
+      "fetchedAt": "2026-06-21T07:46:12.545Z",
       "status": "downloaded",
       "rowCount": 18188,
-      "savedFile": "kosis_foreign_student_nationality_visa_2026-06-19.json",
+      "savedFile": "kosis_foreign_student_nationality_visa_2026-06-21.json",
       "requestUrls": [
         "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=111&tblId=DT_1B040A14&itmId=13103870964T1&objL1=AAC000%2BD001%2BBBC001%2BBBC003%2BBBC008%2BBBC010%2BBBC004%2BBBC013%2BBBC015%2BBBC007%2BBBC017%2BBBC014%2BBBC002%2BBBC009%2BBBC016%2BBBC022%2BBBC019%2BBBC018%2BBBC005%2BBBC006%2BBBC012%2BBBC011%2BBBC021%2BBBC026%2BBBC023%2BBBC020%2BBBC025%2BBBC031%2BBBC027%2BBBC030%2BBBC032%2BBBC035%2BBBC039%2BBBC029%2BBBC024%2BBBC033%2BBBC041%2BBBC037%2BBBC036%2BBBC034%2BBBC043%2BBBC040%2BBBC028%2BBBC1592%2BBBC038%2BBBC044%2BBBC0441%2BBBC045%2BBBC042%2BBBC042A%2BD002%2BBBC046%2BBBC047%2BD003%2BBBC049%2BBBC048%2BBBC056%2BBBC052%2BBBC050%2BBBC055%2BBBC060%2BBBC053%2BBBC058%2BBBC062%2BBBC057%2BBBC064%2BBBC054%2BBBC059%2BBBC0711%2BBBC051%2BBBC068%2BBBC0681%2BBBC061%2BBBC067%2BBBC065%2BBBC1596%2BBBC063%2BBBC066%2BBBC1594%2BB0001%2BBBC1598%2BBBC1593%2BBBC1597%2BBBC1599%2BB0002%2BB0003%2BBBC069%2BBBC1595%2BBBC1600%2BB1%2BB2%2BD004%2BBBC202408%2BBBC202407%2BBBC073%2BBBC070%2BBBC074%2BBBC072%2BBBC078%2BBBC080%2BBBC079%2BBBC081%2BBBC077%2BBBC075%2BBBC083%2BBBC087%2BBBC086%2BBBC084%2BBBC094%2BBBC082%2BBBC092%2BBBC095%2BBBC089%2BBBC096%2BBBC088%2BBBC091%2BBBC100%2BBBC090%2BBBC106%2BBBC076%2BBBC105%2BBBC101%2BBBC098%2BBBC097%2BBBC099%2BBBC071%2BBBC103%2BBBC107%2BBBC085%2BBBC108%2BBBC093%2BBBC1081%2BBBC104%2BBBC102%2BBBC1603%2BBBC1622B%2BB0007%2BBBC1601%2BBBC1622A%2BB0004%2BBBC1082%2BB0005%2BBBC1602%2BBBC1604%2BBBC1605%2BBBC1606%2BBBC1607%2BBBC1608%2BB3%2BB4%2BD005%2BBBC109%2BBBC111%2BBBC110%2BBBC113%2BBBC114%2BBBC112%2BBBC1609%2BBBC1614%2BB0006%2BBBC115%2BBBC1151%2BBBC1610%2BBBC1611%2BBBC1612%2BBBC1613%2BD006%2BBBC119%2BBBC117%2BBBC120%2BBBC121%2BBBC125%2BBBC123%2BBBC135%2BBBC118%2BBBC124%2BBBC127%2BBBC128%2BBBC133%2BBBC1481%2BBBC126%2BBBC132%2BBBC136%2BBBC142%2BBBC129%2BBBC139%2BBBC134%2BBBC137%2BBBC116%2BBBC138%2BBBC131%2BBBC122%2BBBC130%2BBBC146%2BBBC143%2BBBC152%2BBBC145%2BBBC140%2BBBC1591%2BBBC151%2BBBC1501%2BBBC144%2BBBC157%2BBBC154%2BBBC147%2BA000014%2BBBC153%2BBBC149%2BBBC159%2BBBC150%2BBBC1617%2BBBC141%2BBBC158%2BBBC156%2BBBC1615%2BBBC1620%2BBBC1618%2BBBC148%2BBBC155%2BBBC1616%2BBBC1622%2BBBC1619%2BBBC1621%2BBBC1623%2BB000123%2BB5%2BB6&objL2=13102870964B.0%2B13102870964B.M%2B13102870964B.F&objL3=AAB000%2BAAB0001%2BAAB001%2BAAB002%2BAAB003%2BAAB004%2BAAB005%2BAAB006%2BAAB00011%2BAAB00012%2BAAB007%2BAAB008A%2BAAB009%2BAAB010%2BAAB011&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2022&endPrdDe=2024"
       ],
@@ -471,10 +471,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "KEDI 교육기본통계 고등교육기관 개황(시도별×학교현황별, 외국인 학생수 학위과정 포함). 2026-06-16 검증 612행. 대학유형 분해: 동일 시리즈 DT_1963003_011_S(전문대)·013_S(대학)·014_S(대학원) 등. 폐기된 교육부 file 15050055(대학유형별) 대체.",
-      "fetchedAt": "2026-06-19T14:37:21.075Z",
+      "fetchedAt": "2026-06-21T07:46:05.121Z",
       "status": "downloaded",
       "rowCount": 1224,
-      "savedFile": "kosis_kedi_higher_edu_foreign_students_2026-06-19.json",
+      "savedFile": "kosis_kedi_higher_edu_foreign_students_2026-06-21.json",
       "requestUrls": [
         "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=334&tblId=DT_1963003_010_S&itmId=00&objL1=00%2B01%2B02%2B03%2B04%2B05%2B06%2B07%2B07a%2B08%2B09%2B10%2B11%2B12%2B13%2B14%2B15%2B16&objL2=A1%2BA001%2BB1%2B001%2BB002%2BC1%2BC002%2BC003%2BD1%2BD002%2BD003%2BE1%2BE002%2BE003%2BF1%2BF002%2BF003&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2016&endPrdDe=2025"
       ],
@@ -493,10 +493,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "고용허가제 E-9 신규 도입 인원(국가별, 단위 명). 2026-06-16 검증 169행(2016~2025). data.go.kr EPS는 연계형(파일없음)이라 KOSIS로 대체. C1_NM='합계' 행 포함(집계 시 제외). 신규 입국 근로자=급여계좌·송금 수요 선행지표.",
-      "fetchedAt": "2026-06-19T14:37:21.892Z",
+      "fetchedAt": "2026-06-21T07:46:06.073Z",
       "status": "downloaded",
       "rowCount": 169,
-      "savedFile": "kosis_eps_introduction_by_country_2026-06-19.json",
+      "savedFile": "kosis_eps_introduction_by_country_2026-06-21.json",
       "requestUrls": [
         "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=118&tblId=DT_11827_N001&itmId=DT_11827_N001&objL1=DT_11827_N000%2BDT_11827_N001%2BDT_11827_N002%2BDT_11827_N003%2BDT_11827_N004%2BDT_11827_N005%2BDT_11827_N006%2BDT_11827_N007%2BDT_11827_N008%2BDT_11827_N009%2BDT_11827_N010%2BDT_11827_N011%2BDT_11827_N012%2BDT_11827_N013%2BDT_11827_N014%2BDT_11827_N015%2BDT_11827_N016%2BDT_11827_N017&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2016&endPrdDe=2025"
       ],
@@ -515,10 +515,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "고용허가제 E-9 신규 도입 인원(업종별: 제조/건설/농축산/서비스/어업 등). 2026-06-16 검증 64행.",
-      "fetchedAt": "2026-06-19T14:37:22.052Z",
+      "fetchedAt": "2026-06-21T07:46:06.366Z",
       "status": "downloaded",
       "rowCount": 64,
-      "savedFile": "kosis_eps_introduction_by_industry_2026-06-19.json",
+      "savedFile": "kosis_eps_introduction_by_industry_2026-06-21.json",
       "requestUrls": [
         "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=118&tblId=DT_11827_I001&itmId=DT_11827_I01&objL1=dt_11827_i001%2BDT_11827_I002%2BDT_11827_I003%2BDT_11827_I004%2BDT_11827_I005%2BDT_11827_I006%2BDT_11827_I007%2BDT_11827_I008&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2016&endPrdDe=2025"
       ],
@@ -537,10 +537,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "외국인/귀화 임금근로자 월평균 임금구간(100만 미만~300만 이상)×대상별×성별×체류자격(E-9/H-2/F-4/F-5/D-2 등). 소득=급여계좌·신용·대출·적금 수요 직결 핵심 지표. 2026-06-16 검증 863행(2017~2025).",
-      "fetchedAt": "2026-06-19T14:37:23.388Z",
+      "fetchedAt": "2026-06-21T07:46:08.253Z",
       "status": "downloaded",
       "rowCount": 863,
-      "savedFile": "kosis_immigrant_wage_distribution_2026-06-19.json",
+      "savedFile": "kosis_immigrant_wage_distribution_2026-06-21.json",
       "requestUrls": [
         "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=101&tblId=DT_2FC001F&itmId=T100%2BT200%2BT300%2BT400%2BT500&objL1=00%2B10%2B20&objL2=B01%2B100%2B110%2B120%2BB02%2B200%2B210%2B220%2B230%2B240%2B250%2B260%2B270%2B280&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2016&endPrdDe=2025"
       ],
@@ -559,10 +559,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "외국인 고용계약기간(1개월 미만~3년 이상/미정)별 임금근로자×대상별×성별. 고용 안정성=정규 급여계좌·자동이체 모집단 대리지표. 2026-06-16 검증 624행.",
-      "fetchedAt": "2026-06-19T14:37:23.889Z",
+      "fetchedAt": "2026-06-21T07:46:08.110Z",
       "status": "downloaded",
       "rowCount": 624,
-      "savedFile": "kosis_immigrant_contract_period_2026-06-19.json",
+      "savedFile": "kosis_immigrant_contract_period_2026-06-21.json",
       "requestUrls": [
         "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=101&tblId=DT_2FC002F&itmId=T100%2BT200%2BT210%2BT220%2BT230%2BT240%2BT250%2BT300&objL1=00%2B10%2B20&objL2=B01%2B100%2B110%2B120&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2016&endPrdDe=2025"
       ],
@@ -581,10 +581,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "대상별(이민자/외국인/귀화)×성별×종사상지위(상용/임시·일용/자영업주/무급가족). 상용근로자 비중=안정 급여소득→신용·대출 적격 모집단 대리지표. 2026-06-16 검증 672행(2016~2025).",
-      "fetchedAt": "2026-06-19T14:37:25.011Z",
+      "fetchedAt": "2026-06-21T07:46:09.830Z",
       "status": "downloaded",
       "rowCount": 672,
-      "savedFile": "kosis_immigrant_employment_status_2026-06-19.json",
+      "savedFile": "kosis_immigrant_employment_status_2026-06-21.json",
       "requestUrls": [
         "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=101&tblId=DT_2FB007F&itmId=T100%2BT200%2BT210%2BT220%2BT300%2BT310%2BT320%2BT330&objL1=00%2B10%2B20&objL2=B01%2B100%2B110%2B120&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2016&endPrdDe=2025"
       ],
@@ -603,10 +603,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "대상별×성별×산업(농림어업/광업·제조/건설/도소매·숙박·음식/전기·운수·통신·금융/서비스). 금융은 '전기·운수·통신·금융'에 묶여 보고됨(단독 분리 불가). 업종 구성=소득 안정성·소비 패턴 대리지표. 2026-06-16 검증 672행.",
-      "fetchedAt": "2026-06-19T14:37:25.559Z",
+      "fetchedAt": "2026-06-21T07:46:10.505Z",
       "status": "downloaded",
       "rowCount": 672,
-      "savedFile": "kosis_immigrant_employment_by_industry_2026-06-19.json",
+      "savedFile": "kosis_immigrant_employment_by_industry_2026-06-21.json",
       "requestUrls": [
         "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=101&tblId=DT_2FB021F&itmId=T100%2BT200%2BT300%2BT310%2BT400%2BT500%2BT600%2BT700&objL1=00%2B10%2B20&objL2=B01%2B100%2B110%2B120&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2016&endPrdDe=2025"
       ],
@@ -625,10 +625,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "대상별×연령계층(15~29/30~39/40~49/50~59/60+)×경활지표(경제활동인구/취업자/참가율/고용률). 연령 분포=생애주기 금융상품(적금·대출·송금) 타깃팅 대리지표. 2026-06-16 검증 1,008행.",
-      "fetchedAt": "2026-06-19T14:37:26.928Z",
+      "fetchedAt": "2026-06-21T07:46:12.659Z",
       "status": "downloaded",
       "rowCount": 1008,
-      "savedFile": "kosis_immigrant_econ_activity_by_age_2026-06-19.json",
+      "savedFile": "kosis_immigrant_econ_activity_by_age_2026-06-21.json",
       "requestUrls": [
         "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=MzQ1…ODM=&orgId=101&tblId=DT_2FA005F&itmId=T100%2BT110%2BT111%2BT120%2BT210%2BT220&objL1=00%2B10%2B20&objL2=100%2B510%2B520%2B530%2B540%2B550&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2016&endPrdDe=2025"
       ],
@@ -647,10 +647,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "이전소득수지(ITEM_CODE 4B1000)=개인이전 포함 본국송금 거시 대리지표. 301Y013 전체 국제수지 표를 받아 build에서 4B1000만 필터. 2026-06-16 라이브 검증: 연간 1980~2025(2025=10,273.7백만달러). ECOS_API_KEY로 동작.",
-      "fetchedAt": "2026-06-19T14:37:30.042Z",
+      "fetchedAt": "2026-06-21T07:46:15.795Z",
       "status": "downloaded",
       "rowCount": 2272,
-      "savedFile": "ecos_bop_transfer_income_2026-06-19.json",
+      "savedFile": "ecos_bop_transfer_income_2026-06-21.json",
       "requestUrls": [
         "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/1/1000/301Y013/A/2018/2026",
         "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/1001/2000/301Y013/A/2018/2026",
@@ -671,37 +671,37 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "원/달러·엔·유로·위안 일별 환율(731Y001). 환율 급등락 시 외국인 본국송금·환전 수요 급증 → 송금/환전 캠페인 타이밍. 2026-06-16 라이브 검증: 25,714행, 원/미국달러 매매기준율 포함.",
-      "fetchedAt": "2026-06-19T14:37:54.502Z",
+      "fetchedAt": "2026-06-21T07:46:43.522Z",
       "status": "downloaded",
       "rowCount": 25843,
-      "savedFile": "ecos_exchange_rate_daily_2026-06-19.json",
+      "savedFile": "ecos_exchange_rate_daily_2026-06-21.json",
       "requestUrls": [
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/1/1000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/1001/2000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/2001/3000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/3001/4000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/4001/5000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/5001/6000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/6001/7000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/7001/8000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/8001/9000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/9001/10000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/10001/11000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/11001/12000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/12001/13000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/13001/14000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/14001/15000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/15001/16000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/16001/17000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/17001/18000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/18001/19000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/19001/20000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/20001/21000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/21001/22000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/22001/23000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/23001/24000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/24001/25000/731Y001/D/20240101/20260619",
-        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/25001/26000/731Y001/D/20240101/20260619"
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/1/1000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/1001/2000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/2001/3000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/3001/4000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/4001/5000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/5001/6000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/6001/7000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/7001/8000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/8001/9000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/9001/10000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/10001/11000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/11001/12000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/12001/13000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/13001/14000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/14001/15000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/15001/16000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/16001/17000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/17001/18000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/18001/19000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/19001/20000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/20001/21000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/21001/22000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/22001/23000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/23001/24000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/24001/25000/731Y001/D/20240101/20260621",
+        "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/25001/26000/731Y001/D/20240101/20260621"
       ],
       "reason": null
     },
@@ -718,10 +718,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": true,
       "notes": "이전소득수지(ITEM 4B1000) 월별 흐름. 외국인 본국송금 거시 추세 월별 추적. 2026-06-16 라이브 검증: 월간 198001~202604 동작(build에서 4B1000 필터).",
-      "fetchedAt": "2026-06-19T14:37:47.467Z",
+      "fetchedAt": "2026-06-21T07:46:36.761Z",
       "status": "downloaded",
       "rowCount": 18176,
-      "savedFile": "ecos_bop_transfer_monthly_2026-06-19.json",
+      "savedFile": "ecos_bop_transfer_monthly_2026-06-21.json",
       "requestUrls": [
         "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/1/1000/301Y013/M/202101/202606",
         "https://ecos.bok.or.kr/api/StatisticSearch/3QOW…J2Z3/json/kr/1001/2000/301Y013/M/202101/202606",
@@ -758,7 +758,7 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "서울 25개 자치구×국적별 외국인 월별 통계. serviceName 실제 값 확인 필요. SEOUL_OPENAPI_KEY GitHub Secret 등록 필요.",
-      "fetchedAt": "2026-06-19T14:37:27.488Z",
+      "fetchedAt": "2026-06-21T07:46:12.659Z",
       "status": "skipped_no_key",
       "rowCount": null,
       "savedFile": null,
@@ -778,14 +778,36 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "관리자 승인 등록(admin). 키워드: 외국인주민 현황",
-      "fetchedAt": "2026-06-19T14:37:29.176Z",
+      "fetchedAt": "2026-06-21T07:46:14.889Z",
       "status": "downloaded",
       "rowCount": 5,
-      "savedFile": "approved_fileData_15047603_2026-06-19.csv",
+      "savedFile": "approved_fileData_15047603_2026-06-21.csv",
       "requestUrls": [
         "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003549722&fileDetailSn=1"
       ],
       "reason": null
+    },
+    {
+      "id": "approved_openapi_15059612",
+      "provider": "법무부",
+      "title": "금융위원회_주식대차정보",
+      "category": "관리자 승인 등록",
+      "type": "openapi",
+      "targetTable": "finance_segment_aggregate",
+      "sourceUrl": "https://www.data.go.kr/data/15059612/openapi.do",
+      "license": "공공데이터 이용허락",
+      "updateCycle": "—",
+      "personalDataSafe": true,
+      "verified": false,
+      "notes": "관리자 승인 등록(admin). 키워드: 체류외국인 월별 통계",
+      "fetchedAt": "2026-06-21T07:46:16.571Z",
+      "status": "no_data",
+      "rowCount": null,
+      "savedFile": null,
+      "requestUrls": [
+        "https://www.data.go.kr/data/15059612/openapi.do?serviceKey=3811…ce88&pageNo=1&numOfRows=1000"
+      ],
+      "reason": "0 rows (verify endpoint/params)"
     },
     {
       "id": "approved_fileData_15112636",
@@ -800,10 +822,10 @@ export const dataLineage: DataLineage = {
       "personalDataSafe": true,
       "verified": false,
       "notes": "관리자 승인 등록(admin). 키워드: 출입국 외국인 체류",
-      "fetchedAt": "2026-06-19T14:37:30.737Z",
+      "fetchedAt": "2026-06-21T07:46:17.531Z",
       "status": "downloaded",
       "rowCount": 1,
-      "savedFile": "approved_fileData_15112636_2026-06-19.csv",
+      "savedFile": "approved_fileData_15112636_2026-06-21.csv",
       "requestUrls": [
         "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000002859754&fileDetailSn=1"
       ],
@@ -890,14 +912,14 @@ export const dataLineage: DataLineage = {
           "url": "https://www.data.go.kr/data/15050055/fileData.do"
         },
         {
-          "datasetId": "15100039",
-          "kind": "fileData",
-          "url": "https://www.data.go.kr/data/15100039/fileData.do"
-        },
-        {
           "datasetId": "15149964",
           "kind": "fileData",
           "url": "https://www.data.go.kr/data/15149964/fileData.do"
+        },
+        {
+          "datasetId": "15100039",
+          "kind": "fileData",
+          "url": "https://www.data.go.kr/data/15100039/fileData.do"
         },
         {
           "datasetId": "15100038",
