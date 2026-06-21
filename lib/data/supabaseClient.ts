@@ -110,6 +110,7 @@ export type SurfaceConfigRow = {
   enabled: boolean;
   targetTable: string | null;
   note: string | null;
+  disposition: string | null;
   updatedAt: string | null;
   updatedBy: string | null;
 };
@@ -122,9 +123,55 @@ function mapSurface(row: Record<string, unknown>): SurfaceConfigRow {
     enabled: row.enabled !== false,
     targetTable: (row.target_table as string) ?? null,
     note: (row.note as string) ?? null,
+    disposition: (row.disposition as string) ?? null,
     updatedAt: (row.updated_at as string) ?? null,
     updatedBy: (row.updated_by as string) ?? null,
   };
+}
+
+// ── 미연동 소스 트리아지 (surface_config.disposition) ───────────────────────────────
+export type SourceDisposition = { disposition: string | null; targetTable: string | null };
+
+// 소스별 트리아지 상태 조회. 미연결/오류 시 null(호출부에서 '미연결' 표시).
+export async function fetchSurfaceDispositions(): Promise<Record<string, SourceDisposition> | null> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return null;
+  const { data, error } = await client.from("surface_config").select("source_id,disposition,target_table");
+  if (error) {
+    console.error("fetchSurfaceDispositions error:", error.message);
+    return null;
+  }
+  const map: Record<string, SourceDisposition> = {};
+  for (const r of data ?? []) {
+    map[String(r.source_id)] = {
+      disposition: (r.disposition as string) ?? null,
+      targetTable: (r.target_table as string) ?? null,
+    };
+  }
+  return map;
+}
+
+// 트리아지 1건 저장(upsert). disposition=null 이면 '미정'으로 되돌림. 성공 시 true.
+export async function setSourceDisposition(
+  sourceId: string,
+  disposition: "planned" | "archived" | "excluded" | null,
+  targetTable?: string | null
+): Promise<boolean> {
+  const client = createBrowserSupabaseClient();
+  if (!client) return false;
+  const patch: Record<string, unknown> = {
+    source_id: sourceId,
+    disposition,
+    updated_at: new Date().toISOString(),
+    updated_by: "admin",
+  };
+  if (targetTable !== undefined) patch.target_table = targetTable;
+  const { error } = await client.from("surface_config").upsert(patch, { onConflict: "source_id" });
+  if (error) {
+    console.error("setSourceDisposition error:", error.message);
+    return false;
+  }
+  return true;
 }
 
 // 반영 설정 전체 조회. 미연결/오류 시 null(호출부에서 하드코딩 기본값으로 폴백).

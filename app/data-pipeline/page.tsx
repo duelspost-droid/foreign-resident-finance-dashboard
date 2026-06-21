@@ -9,7 +9,6 @@ import {
   ExternalLink,
   Gauge,
   KeyRound,
-  Layers,
   LayoutGrid,
   RefreshCw,
   Search,
@@ -19,7 +18,7 @@ import {
 import { dataLineage, type DataLineageSource } from "@/lib/data/generated/dataLineage";
 import { realDataQualityWarnings, realDataSummary } from "@/lib/data/generated/realData";
 import { dataVintages, type Cadence } from "@/lib/data/dataVintage";
-import { SURFACED } from "@/lib/data/sourceMeta";
+import { CoverageSection } from "@/components/data/CoverageSection";
 import { candidateSources, dataAxisMapping, type ResearchPriority } from "@/lib/data/researchNotes";
 import { dataSources, type DataSourceItem } from "@/lib/data/dataSources";
 import { DataTable, type DataTableColumn } from "@/components/tables/DataTable";
@@ -56,35 +55,6 @@ function statusBadge(status: string) {
   const info = STATUS_LABEL[status] ?? { text: status, tone: "bg-slate-200 text-slate-700" };
   return <span className={`inline-block whitespace-nowrap rounded-md px-2 py-0.5 text-xs font-semibold ${info.tone}`}>{info.text}</span>;
 }
-
-const lineageColumns: DataTableColumn<DataLineageSource>[] = [
-  { header: "출처", accessor: (row) => `${row.provider} · ${row.title}` },
-  { header: "방식", accessor: (row) => row.type },
-  { header: "상태", accessor: (row) => statusBadge(row.status) },
-  { header: "행수", accessor: (row) => (row.rowCount != null ? row.rowCount.toLocaleString() : "—"), align: "right" },
-  {
-    header: "대시보드 반영",
-    accessor: (row) =>
-      SURFACED[row.id] ? (
-        <span className="font-medium text-emerald-700">✓ {SURFACED[row.id]}</span>
-      ) : (
-        <span className="text-slate-400">미연동</span>
-      )
-  },
-  {
-    header: "최근 수집",
-    accessor: (row) => (row.fetchedAt ? new Date(row.fetchedAt).toLocaleString("ko-KR") : "—")
-  },
-  {
-    header: "검증",
-    accessor: (row) =>
-      row.verified ? (
-        <span className="text-teal-700">확정</span>
-      ) : (
-        <span className="text-amber-700">미확정</span>
-      )
-  }
-];
 
 // 출처 정의·한계 테이블 컬럼 (구 /data-sources 흡수) — 데이터명/제공기관/갱신주기/주요 컬럼/한계
 const sourceColumns: DataTableColumn<DataSourceItem>[] = [
@@ -134,21 +104,6 @@ export default function DataPipelinePage() {
     { label: "신규 수집률", value: freshRate, note: `${totals.downloaded}/${totals.sources}개 최신 수집`, color: "#3157a4" },
     { label: "검증 확정률", value: verifiedRate, note: `${verifiedCount}/${totals.sources}개 확정`, color: "#b45309" }
   ];
-
-  // ── 수집 데이터 커버리지 (구 /data-sources 흡수) ────────────────────────────────
-  const statusRank = (s: string) => (s === "downloaded" ? 0 : s === "skipped_no_key" ? 2 : 1);
-  const allSources = [...sources].sort(
-    (a, b) => statusRank(a.status) - statusRank(b.status) || (b.rowCount ?? 0) - (a.rowCount ?? 0)
-  );
-  const surfacedCount = sources.filter((s) => SURFACED[s.id]).length;
-  const statusSegments = [
-    { label: "수집 성공", value: totals.downloaded, color: "#0f766e" },
-    { label: "수집 실패", value: totals.failed, color: "#be123c" },
-    { label: "키 없음 스킵", value: totals.skippedNoKey, color: "#b45309" },
-    { label: "캐시 재사용", value: totals.cached, color: "#64748b" }
-  ];
-  const stackTotal = statusSegments.reduce((sum, x) => sum + x.value, 0) || 1;
-  const successRate = Math.round((totals.downloaded / stackTotal) * 100);
 
   return (
     <>
@@ -364,57 +319,8 @@ export default function DataPipelinePage() {
         </div>
       </section>
 
-      {/* 수집 이력 · 커버리지 (lineage + 대시보드 반영 통합) */}
-      <section className="surface mt-4 p-4">
-        <div className="surface-header pb-2">
-          <div className="flex items-center gap-2">
-            <Layers aria-hidden className="text-teal-700" size={18} />
-            <div>
-              <h3 className="surface-title">수집 이력 · 커버리지</h3>
-              <p className="surface-subtitle">
-                출처 {totals.sources}개 · 대시보드 반영 {surfacedCount}종 · 매 배치 자동 기록
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="rounded-md bg-teal-50 px-2 py-1 text-xs font-semibold text-teal-700">성공률 {successRate}%</span>
-            <span className="rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-600">{allSources.length} sources</span>
-          </div>
-        </div>
-
-        {/* 상태 분포 스택 바 */}
-        <div className="px-1 pb-3">
-          <div className="flex h-4 w-full overflow-hidden rounded-lg bg-slate-100">
-            {statusSegments.map((seg) =>
-              seg.value > 0 ? (
-                <div
-                  key={seg.label}
-                  className="h-full"
-                  style={{ width: `${(seg.value / stackTotal) * 100}%`, background: seg.color }}
-                  title={`${seg.label} ${seg.value}`}
-                />
-              ) : null
-            )}
-          </div>
-          <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1.5">
-            {statusSegments.map((seg) => (
-              <span key={seg.label} className="flex items-center gap-1.5 text-xs">
-                <span aria-hidden className="h-2.5 w-2.5 rounded-full" style={{ background: seg.color }} />
-                <span className="text-muted">{seg.label}</span>
-                <span className="font-mono font-semibold text-ink">{seg.value}</span>
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* 통합 소스 테이블 — lineage + 대시보드 반영(커버리지) */}
-        <div className="p-1">
-          <DataTable columns={lineageColumns} rowKey={(row) => row.id} rows={allSources} />
-        </div>
-        <p className="px-3 pt-1 text-xs leading-6 text-muted">
-          ※ &lsquo;미연동&rsquo;은 자동 수집되지만 아직 화면에 반영되지 않은 출처입니다(대용량 파일은 컬럼 검증 후 단계 연동).
-        </p>
-      </section>
+      {/* 수집 이력 · 커버리지 + 미연동 1클릭 트리아지 (클라이언트) */}
+      <CoverageSection />
 
       {/* 출처별 수집 상세 (요청 URL·오류 드릴다운) */}
       <section className="grid gap-4 pt-4 md:grid-cols-2">
