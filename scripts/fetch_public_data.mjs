@@ -484,6 +484,96 @@ async function getKosisLatestPeriod(apiKey, orgId, tblId) {
 
 const KOSIS_CELL_LIMIT = 38000;       // KOSIS 응답 셀 상한(40,000)의 안전 마진
 const KOSIS_OBJ_URL_LIMIT = 6000;     // objL 파라미터 총 길이 상한(HTTP 414 방지)
+const KOSIS_MAX_PAGES = 40;           // 페이지네이션 청크 상한(런어웨이 방지)
+
+// 분류 코드 배열을 'code+code+...' 길이가 budgetChars 이하가 되도록 청크 분할(순수 함수, 오프라인 검증 가능).
+function splitCodesByBudget(codes, budgetChars) {
+  const chunks = [];
+  let cur = [];
+  let curLen = 0;
+  for (const c of codes) {
+    const add = String(c).length + 1; // 코드 + '+'
+    if (cur.length > 0 && curLen + add > budgetChars) {
+      chunks.push(cur);
+      cur = [];
+      curLen = 0;
+    }
+    cur.push(c);
+    curLen += add;
+  }
+  if (cur.length) chunks.push(cur);
+  return chunks;
+}
+
+// objL 코드가 URL/셀 한도를 넘는 표(읍면동 등)를 가장 큰 분류 레벨 기준으로 청크 분할해 여러 번 호출 후 병합.
+// 셀 폭증 방지로 최신 1개 기간만 조회한다. (skipped_too_large 였던 경로 전용 — 기존 동작 경로엔 영향 없음)
+async function collectKosisPaginated(source, apiKey, { itmId, objLevels, attempts, requestUrls }) {
+  const sizes = objLevels.map((lv) => lv.length);
+  const bi = sizes.indexOf(Math.max(...sizes)); // 가장 큰 분류 레벨
+  const otherProduct = objLevels.reduce((a, lv, i) => (i === bi ? a : a * Math.max(lv.length, 1)), 1);
+  const otherLen = objLevels.reduce((a, lv, i) => (i === bi ? a : a + lv.join("+").length + 8), 0);
+  const urlBudget = Math.max(200, KOSIS_OBJ_URL_LIMIT - otherLen);
+  const cellBudgetCodes = Math.max(1, Math.floor(KOSIS_CELL_LIMIT / Math.max(otherProduct, 1)));
+
+  // URL 길이 기준 청크 → 셀 한도 기준으로 더 잘게.
+  let chunks = splitCodesByBudget(objLevels[bi], urlBudget);
+  chunks = chunks.flatMap((ch) =>
+    ch.length > cellBudgetCodes
+      ? Array.from({ length: Math.ceil(ch.length / cellBudgetCodes) }, (_, k) =>
+          ch.slice(k * cellBudgetCodes, (k + 1) * cellBudgetCodes))
+      : [ch]
+  );
+
+  if (chunks.length > KOSIS_MAX_PAGES) {
+    return {
+      status: "skipped_too_large", requestUrls, attempts,
+      reason: `페이지네이션 청크 ${chunks.length} > 상한 ${KOSIS_MAX_PAGES} — 추가 분할 필요.`
+    };
+  }
+
+  const latestPeriod = await getKosisLatestPeriod(apiKey, source.orgId, source.tblId);
+  const endYear = Number(String(latestPeriod ?? "").slice(0, 4)) || (new Date().getFullYear() - 1);
+
+  const merged = [];
+  for (let p = 0; p < chunks.length; p += 1) {
+    const dataUrl = new URL(source.dataEndpoint ?? KOSIS_DATA_ENDPOINT);
+    dataUrl.searchParams.set("method", "getList");
+    dataUrl.searchParams.set("apiKey", apiKey);
+    dataUrl.searchParams.set("orgId", source.orgId);
+    dataUrl.searchParams.set("tblId", source.tblId);
+    dataUrl.searchParams.set("itmId", itmId);
+    objLevels.forEach((codes, i) =>
+      dataUrl.searchParams.set(`objL${i + 1}`, (i === bi ? chunks[p] : codes).join("+")));
+    dataUrl.searchParams.set("format", "json");
+    dataUrl.searchParams.set("jsonVD", "Y");
+    dataUrl.searchParams.set("prdSe", source.params?.prdSe ?? "Y");
+    dataUrl.searchParams.set("startPrdDe", String(endYear));
+    dataUrl.searchParams.set("endPrdDe", String(endYear));
+    const safe = maskUrl(dataUrl, apiKey);
+    if (p < 3) requestUrls.push(safe);
+    try {
+      const res = await fetchWithRetry(dataUrl);
+      attempts.push({ step: `page ${p + 1}/${chunks.length}`, url: safe, status: res.status });
+      if (!res.ok) continue;
+      const body = parseKosisJson(await res.text());
+      if (body == null || (!Array.isArray(body) && (body.err || body.errMsg))) continue;
+      merged.push(...(Array.isArray(body) ? body : extractItems(body)));
+    } catch (error) {
+      attempts.push({ step: `page ${p + 1}`, error: error.message });
+    }
+  }
+
+  if (merged.length === 0) {
+    return { status: "no_data", requestUrls, attempts, reason: "페이지네이션 0행" };
+  }
+  const fileName = `${source.outputBaseName}_${todayStamp()}.json`;
+  await writeFile(join(rawDir, fileName), JSON.stringify(merged, null, 2), "utf8");
+  return {
+    status: "downloaded", rowCount: merged.length, savedFile: fileName, requestUrls, attempts,
+    itmIdSource: "getMeta", detectedLatestPeriod: latestPeriod ?? null,
+    paginated: chunks.length, reason: `페이지네이션 ${chunks.length}회 병합`
+  };
+}
 
 async function collectKosisSource(source) {
   const apiKey = process.env[source.apiKeyEnv];
@@ -512,12 +602,15 @@ async function collectKosisSource(source) {
     }
   }
 
-  // URL 길이 가드: 분류 코드가 너무 많으면(읍면동 등) HTTP 414가 나므로 건너뛴다(페이지네이션 미지원).
+  // URL 길이 가드: 분류 코드가 너무 많으면(읍면동 등) HTTP 414가 나므로 페이지네이션으로 분할 수집한다.
   const objLen = Object.values(objParams).join("&").length;
   if (objLen > KOSIS_OBJ_URL_LIMIT) {
+    if (objLevels.length > 0) {
+      return await collectKosisPaginated(source, apiKey, { itmId, objLevels, attempts, requestUrls });
+    }
     return {
       status: "skipped_too_large", requestUrls, attempts,
-      reason: `분류 코드 과다(objL ${objLen}자) — KOSIS URL 길이 제한. 페이지네이션 필요.`
+      reason: `분류 코드 과다(objL ${objLen}자) — objLevels 메타 없음(ALL 폴백)이라 분할 불가.`
     };
   }
 
