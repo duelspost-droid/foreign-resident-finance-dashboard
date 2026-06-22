@@ -206,7 +206,7 @@ export function CoverageSection() {
                         aria-label="반영 처리"
                       >
                         <option value="">미연동(미정)</option>
-                        <option value="shown">홈에 표시(자동 차트)</option>
+                        <option value="shown">홈에 표시(자동 차트){genericSources[s.id] ? "" : " — 미리보기 없음"}</option>
                         <option value="planned">연동 예정(개발)</option>
                         <option value="archived">보관(raw)</option>
                         <option value="excluded">제외</option>
@@ -271,8 +271,8 @@ function ShowConfig({
 
   if (!source) {
     return (
-      <p className="rounded-md bg-slate-50 px-2 py-1 text-[11px] leading-4 text-slate-400">
-        범용 미리보기 데이터가 없어 자동 차트를 만들 수 없어요(데이터 경로 보강 필요).
+      <p className="rounded-md border border-amber-200 bg-amber-50 px-2 py-1 text-[11px] leading-4 text-amber-700">
+        ⚠ 범용 미리보기 데이터가 없어 <strong>홈에 표시되지 않습니다</strong>(데이터 경로 보강 필요). ‘연동 예정’으로 두는 것을 권장.
       </p>
     );
   }
