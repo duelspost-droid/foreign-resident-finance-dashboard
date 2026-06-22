@@ -72,6 +72,8 @@ export function GenericSourceChart({
   const chartData = useMemo(() => {
     if (chartKind === "table" || valIdx < 0 || rows.length === 0) return [];
     const mapped = rows
+      // 표와 동일하게 소수 셀(1~4)은 마스킹 대상 → 차트로 정확값이 노출되지 않도록 데이터 포인트에서 제외.
+      .filter((r) => !maskSmallCell(r[valIdx]).masked)
       .map((r) => ({ name: r[catIdx] || "—", value: Number(String(r[valIdx] ?? "").replace(/,/g, "")) || 0 }))
       .filter((d) => Number.isFinite(d.value));
     // 막대: 값 큰 순 상위 12 / 선: 행 순서(추이) 상위 40

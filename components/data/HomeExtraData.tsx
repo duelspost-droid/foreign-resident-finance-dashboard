@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Sparkles } from "lucide-react";
 import { fetchSurfaceDispositions } from "@/lib/data/supabaseClient";
+import { SURFACED } from "@/lib/data/sourceMeta";
 import { dataLineage } from "@/lib/data/generated/dataLineage";
 import { type ChartConfig, GenericSourceChart, parseChartConfig } from "@/components/data/GenericSourceChart";
 import type { GenericSource } from "@/lib/data/generated/genericData";
@@ -23,7 +24,9 @@ export function HomeExtraData() {
       }
       const ids = Object.entries(disp)
         .filter(([, v]) => v.disposition === "shown")
-        .map(([id]) => id);
+        .map(([id]) => id)
+        // 이미 전용 화면이 있는(SURFACED) 소스는 '추가 데이터'에 중복 노출하지 않는다.
+        .filter((id) => !SURFACED[id]);
       if (ids.length === 0) {
         setItems([]);
         return;
