@@ -60,6 +60,7 @@ import {
   sidoForeignerTrend
 } from "@/lib/data/regionAggregates";
 import { DataFreshnessBanner } from "@/components/ui/DataFreshness";
+import { DONUT_PALETTE } from "@/lib/theme/chartPalette";
 
 const SEG_COLORS: Record<string, string> = {
   "비전문취업 근로자": "#0f766e",
@@ -72,7 +73,7 @@ const SEG_COLORS: Record<string, string> = {
   "기타": "#94a3b8"
 };
 
-const DONUT_COLORS = ["#0f766e", "#3157a4", "#b45309", "#be123c", "#64748b", "#7c3aed"];
+const DONUT_COLORS = DONUT_PALETTE;
 
 // ── 금융 상품 수요 히트맵 ──────────────────────────────────────────────────────────
 const PRODUCTS = ["급여계좌", "본국송금", "체크카드", "신용카드", "소액저축", "보험·연금"];

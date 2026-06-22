@@ -9,8 +9,7 @@ import {
   Tooltip
 } from "recharts";
 import { visaDistributionData } from "@/lib/data/mockData";
-
-const colors = ["#0f766e", "#3157a4", "#b45309", "#be123c", "#64748b", "#7c3aed"];
+import { DONUT_PALETTE as colors } from "@/lib/theme/chartPalette";
 
 export function VisaDonutChart({
   data = visaDistributionData

@@ -20,6 +20,7 @@ import {
 } from "@/lib/data/mockData";
 import { realForeignResidentStatus } from "@/lib/data/generated/realData";
 import type { ForeignResidentStatus } from "@/lib/types/foreignResident";
+import { DONUT_PALETTE } from "@/lib/theme/chartPalette";
 import { formatNumber } from "@/lib/utils/format";
 
 // 국적별 분포 BarList 항목 — 라벨/거주자 수/비중 서브라벨.
@@ -30,8 +31,8 @@ const distributionItems = nationalityDistributionData.map((row) => ({
   sublabel: `${row.share}%`
 }));
 
-// 체류자격 도넛 차트와 동일한 팔레트(레전드용).
-const donutColors = ["#0f766e", "#3157a4", "#b45309", "#be123c", "#64748b", "#7c3aed"];
+// 체류자격 도넛 차트와 동일한 팔레트(레전드용) — 단일출처.
+const donutColors = DONUT_PALETTE;
 const donutLegend = visaDistributionData.map((segment, index) => ({
   name: segment.name,
   value: segment.value,
