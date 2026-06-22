@@ -14,6 +14,7 @@ import {
 } from "recharts";
 import { BarChart3, Table2 } from "lucide-react";
 import type { GenericSource } from "@/lib/data/generated/genericData";
+import { maskSmallCell } from "@/lib/utils/format";
 
 // 관리자가 '홈에 표시' 시 고르는 차트 설정(surface_config.note 에 JSON 저장). 없으면 자동 추론.
 export type ChartConfig = {
@@ -81,6 +82,12 @@ export function GenericSourceChart({
 
   // 차트 데이터가 비었거나 전부 0이면 차트 대신 표로 폴백.
   const canChart = chartData.length > 0 && chartData.some((d) => d.value !== 0);
+
+  // 표에 소수 셀(1~4) 마스킹이 적용됐는지(규정 안내문 표시용).
+  const anyMasked = useMemo(
+    () => rows.some((r) => numericCols.some((ci) => maskSmallCell(r[ci]).masked)),
+    [rows, numericCols]
+  );
 
   const [view, setView] = useState<"chart" | "table">(chartKind === "table" ? "table" : "chart");
   const effectiveView = canChart ? view : "table";
@@ -166,13 +173,18 @@ export function GenericSourceChart({
                       key={ci}
                       className={`whitespace-nowrap px-2 py-1 text-slate-700 ${numericCols.includes(ci) ? "text-right tabular-nums" : "text-left"}`}
                     >
-                      {r[ci]}
+                      {numericCols.includes(ci) ? maskSmallCell(r[ci]).text : r[ci]}
                     </td>
                   ))}
                 </tr>
               ))}
             </tbody>
           </table>
+          {anyMasked && (
+            <p className="px-2 py-1.5 text-[10px] text-slate-400">
+              개인정보 보호를 위해 1~4명 소수 셀은 ‘&lt;5’로 마스킹했습니다.
+            </p>
+          )}
         </div>
       )}
     </div>

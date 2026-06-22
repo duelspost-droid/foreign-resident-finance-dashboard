@@ -26,6 +26,16 @@ export function scoreTierLabel(score: number): string {
   return "후순위";
 }
 
+// 소수 셀 마스킹(개인정보 규정 방어): 1~4의 정수 count 셀은 재식별 방지로 '<5' 표시.
+// 큐레이션 페이지(공표된 정부 집계)엔 적용하지 않고, 미큐레이션 '범용 원본 뷰어'에만 적용한다.
+// 연도(2024)·코드(11 등)·소수(3.5%)는 그대로 둔다(정수 1~4만 대상).
+export function maskSmallCell(raw: string): { text: string; masked: boolean } {
+  const s = String(raw ?? "").replace(/,/g, "").trim();
+  if (!/^\d+$/.test(s)) return { text: raw, masked: false };
+  const n = Number(s);
+  return n >= 1 && n <= 4 ? { text: "<5", masked: true } : { text: raw, masked: false };
+}
+
 export function formatCurrencyKrw(value: number): string {
   if (value >= 100000000) {
     return `${(value / 100000000).toFixed(1)}억원`;
