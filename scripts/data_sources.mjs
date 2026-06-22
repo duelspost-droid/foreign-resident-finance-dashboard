@@ -263,9 +263,9 @@ export const publicDataSources = [
     sourceUrl: "https://www.data.go.kr/data/3050000/fileData.do",
     updateCycle: "연",
     license: "공공데이터 이용허락(제1유형)",
-    personalDataSafe: true,
+    personalDataSafe: false,
     verified: false,
-    notes: "대학알리미 고등교육기관 기본정보(위치·유형). 대학 외국인 유학생 지도 구축 보조."
+    notes: "⚠️ 실제 파일은 사업자 명부형(상호명·대표자명·주소 포함, 외국인 개인 실명 다수)이라 PII. 집계 가치 낮음 → build_generic_data PII_SOURCE_SKIP으로 범용 뷰어 제외. 화면 연동 시 비식별 컬럼(상호명·지역·유형)만 큐레이션할 것."
   },
 
   // ── 외국인 소비·거래 (data.go.kr file, 인증키 불필요 — 2026-06-16 발굴 워크플로 검증) ──
