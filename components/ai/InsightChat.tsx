@@ -9,12 +9,13 @@ import { SUPABASE_PUBLIC_ANON_KEY, SUPABASE_PUBLIC_URL } from "@/lib/data/supaba
 
 type Msg = { role: "user" | "assistant"; content: string; source?: "ai" | "data"; pages?: string[] };
 
+// 전략 어시스턴트 예시 — 데이터 질의를 '전략' 질문으로 표현(엔진 키워드와 그대로 매칭).
 const EXAMPLES = [
-  "유학생 국적 1위는?",
-  "외국인 임금 분포 알려줘",
-  "본국송금 추세는?",
-  "면세점 소비 최대 국적은?",
-  "어느 지역에 외국인이 밀집해 있나?"
+  "송금 수요 큰 국적과 공략 전략은?",
+  "E-9 근로자에 맞는 금융 상품은?",
+  "외국인 밀집 지역 우선 진출지는?",
+  "임금 구간별 신용·대출 타깃은?",
+  "유학생 타깃 캠퍼스는 어디?"
 ];
 
 const AI_ENABLED = Boolean(SUPABASE_PUBLIC_URL && SUPABASE_PUBLIC_ANON_KEY);

@@ -235,9 +235,20 @@ export default function FinancialInsightsPage() {
       <PageHero
         kicker="금융 인사이트"
         title="금융회사 활용 전략 해석"
-        description="외국인 체류·경제활동 공공 통계를 은행·캐피탈 비즈니스 전략에 활용하는 방법을 분석합니다. 원본 데이터는 좌측 사이드바 각 분석 메뉴에서 직접 탐색할 수 있습니다."
+        description="외국인 체류·경제활동 공공 통계를 은행·캐피탈 비즈니스 전략에 활용하는 방법을 분석합니다. 전략이 궁금하면 아래 ‘전략 어시스턴트’에 먼저 물어보세요 — 원본 데이터는 좌측 사이드바 각 분석 메뉴에서 직접 탐색할 수 있습니다."
       />
       <FreshnessTag />
+
+      {/* ── 전략 어시스턴트 (최상단 진입점) ─────────────────────── */}
+      <section>
+        <div className="mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <h2 className="text-sm font-bold uppercase tracking-wider text-slate-500">전략 어시스턴트</h2>
+          <p className="text-xs text-muted">
+            수집 데이터에 근거해 세그먼트·지역·상품 전략으로 연결되는 답을 드립니다. 무엇이든 먼저 물어보세요.
+          </p>
+        </div>
+        <InsightChat />
+      </section>
 
       {/* ── 데이터 탐색 바로가기 ── */}
       <section>
@@ -261,11 +272,6 @@ export default function FinancialInsightsPage() {
             );
           })}
         </div>
-      </section>
-
-      {/* ── AI 인사이트 질의 ──────────────────────────────────── */}
-      <section>
-        <InsightChat />
       </section>
 
       {/* ── 시장 규모 KPI ──────────────────────────────────────── */}
