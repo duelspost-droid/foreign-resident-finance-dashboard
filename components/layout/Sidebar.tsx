@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -55,6 +56,53 @@ const system = [
 export function Sidebar() {
   const pathname = usePathname();
   const { open, setOpen } = useMobileNav();
+  const asideRef = useRef<HTMLElement>(null);
+
+  // 모바일 드로어가 열리면 모달처럼 동작: Esc 닫기 · 배경 스크롤 잠금 · 포커스 이동/트랩/복원.
+  // (데스크톱 lg+ 는 open=false 이므로 이 효과가 동작하지 않음 — 정적 사이드바 유지)
+  useEffect(() => {
+    if (!open) return;
+    const aside = asideRef.current;
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const focusables = () =>
+      Array.from(
+        aside?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        ) ?? []
+      ).filter((el) => el.getClientRects().length > 0);
+
+    focusables()[0]?.focus();
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const items = focusables();
+      if (items.length === 0) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = prevOverflow;
+      previouslyFocused?.focus?.();
+    };
+  }, [open, setOpen]);
 
   // "/" 와 "/admin"(자식 라우트 /admin/console 보유)은 정확 일치로 처리해 중복 하이라이트 방지.
   const isActive = (href: string) =>
@@ -67,6 +115,10 @@ export function Sidebar() {
         <div className="fixed inset-0 z-40 bg-slate-900/50 lg:hidden" onClick={() => setOpen(false)} aria-hidden />
       )}
     <aside
+      ref={asideRef}
+      role={open ? "dialog" : undefined}
+      aria-modal={open ? true : undefined}
+      aria-label={open ? "주 메뉴" : undefined}
       className={clsx(
         "flex flex-col border-r border-white/5 bg-[#0d1117] px-3 py-4 lg:min-h-screen",
         // 모바일: 오프캔버스 드로어 (데스크톱 lg+ 는 영향 없음)

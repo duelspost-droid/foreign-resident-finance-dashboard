@@ -158,7 +158,14 @@ export function InsightChat() {
         </div>
       )}
 
-      <div ref={threadRef} className="max-h-[420px] min-h-[180px] flex-1 space-y-3 overflow-y-auto px-4 py-4">
+      <div
+        ref={threadRef}
+        role="log"
+        aria-live="polite"
+        aria-label="AI 대화 내역"
+        aria-busy={loading || undefined}
+        className="max-h-[420px] min-h-[180px] flex-1 space-y-3 overflow-y-auto px-4 py-4"
+      >
         {messages.length === 0 && (
           <div className="flex flex-col gap-3">
             <p className="text-sm text-muted">외국인 금융 데이터에 대해 질문해 보세요. 예시:</p>
