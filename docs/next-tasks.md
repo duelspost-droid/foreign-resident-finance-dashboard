@@ -49,7 +49,16 @@
 - ✅ [LOW] 007 마이그레이션 'shown' 주석 보정.
 - (확인) admin trigger_rebuild '死프론트' → 프론트 호출 코드 실재 없음(백엔드 액션만 존재 = 정상, 제거 불필요).
 
+### 🔐 surface_config 익명쓰기 차단 [HIGH] — 2026-06-23 (커밋 1e77832, 프론트 배포됨 · DB 마이그레이션 대기)
+- **설계 변경**: Edge Function 재배포 불필요. SECURITY DEFINER 함수(admin_set_surface_config)로 토큰 검증 후 쓰기 → 마이그레이션만으로 백엔드 완결.
+- **완료(코드·프론트)**: supabaseClient `.rpc` 전환, CoverageSection 토큰 게이팅(미인증 시 운영콘솔 로그인 안내), adminApi ADMIN_TOKEN_KEY. 5렌즈 적대적 보안검토 통과 + 지적 반영(008/009 분리·인증/입력 구분·토큰형식·note캡·감사로그·statement_timeout).
+- **⏳ 남은 1스텝(소유자 DB 실행)**: Supabase SQL 편집기 **새 탭**(기존 비번리셋 쿼리 건드리지 말 것)에서
+  1. `supabase/migrations/008_surface_config_lockdown.sql` 전체 실행(추가형·즉시 안전). **이걸 실행해야 신 프론트의 트리아지 쓰기가 동작**(미실행 시 rpc 없음→관리자 트리아지 실패).
+  2. GitHub Pages 배포 완료 + 하드리프레시 후 `009_surface_config_drop_anon_writes.sql` 실행(anon 쓰기 정책 제거 = 취약점 완전 차단).
+  3. 검증: `SELECT polname FROM pg_policies WHERE tablename='surface_config';` → allow_read_surface_config 만 남아야. anon 직접 INSERT/UPDATE 시도 → 거부 확인. (관리자 로그인 후 /data-pipeline 트리아지 정상 동작 확인)
+  - ※ 자동모드 분류기가 claude의 프로덕션 DB 쓰기를 차단 → 소유자가 직접 실행하거나 크롬 실행을 명시 재인가해야 함.
+
 ### 남은 항목
-- ⚠️ [HIGH·소유자] surface_config anon INSERT/UPDATE 차단 — 위 '남은 최우선' 참조(마이그레이션+Edge Function 배포 필요).
 - [MED·소유자/RLS] page_views/feature_requests/ai_insight_chat 공유 session_id anon SELECT 상관(RLS 강화+함수 경유 필요).
+- [LOW·잔여하드닝(검토 지적)] 관리자 토큰이 localStorage(JS접근)에 있고 공개 /data-pipeline에서 읽힘 → XSS/기기탈취 시 토큰 재생(2차침해 전제, 핵심 잠금엔 영향X). 근본 완화는 HttpOnly 쿠키 인증 전환(admin 인증모델 전반 개편) — 별도 과제. (note는 JSON.parse·escaped 렌더라 stored-XSS 싱크 아님 확인)
 - [LOW·데이터파이프라인] EPS 산업 합계가 byCountry 합산 / 다문화·status 변환에 '계'(합계행) 가드 부재 → `build_real_data.mjs` 수정 + 데이터 재생성·검증 필요(최저 우선).
