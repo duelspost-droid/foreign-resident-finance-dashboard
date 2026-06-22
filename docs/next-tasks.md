@@ -41,8 +41,15 @@
 ### ⚠️ 남은 HIGH — 소유자 작업 필요 (마이그레이션 실행 + Edge Function 배포)
 - **surface_config anon 쓰기 차단** — 현재 anon 키로 누구나 `surface_config`에 INSERT/UPDATE 가능 → 임의 소스를 공개 홈('추가 데이터')에 강제 노출/조작 가능. 조치: (1) anon INSERT/UPDATE 정책 DROP 마이그레이션, (2) `admin` Edge Function에 `surface` 액션(service_role) 추가, (3) `adminApi` 래퍼 + `setSourceDisposition`/`setSourceChartConfig`를 함수 경유로 재배선. ※ 마이그레이션 실행·함수 배포는 소유자(자동모드 분류기가 permissive-RLS·prod write 차단).
 
-### 남은 MED/LOW (claude 가능)
-- [MED] '홈에 표시' 토글했으나 generic 번들 없는 소스 → 관리자에 무피드백(메타데이터 관리 UI에 경고).
-- [MED] page_views/feature_requests/ai_insight_chat 공유 session_id anon SELECT 상관(RLS+함수 필요).
-- [MED] 모바일 사이드바 드로어 모달 a11y(Esc·스크롤락·포커스·inert).
-- [LOW] EPS 산업 합계 byCountry 합산 / 다문화·status 변환 합계행 가드 / admin trigger_rebuild 死프론트 / 007 마이그레이션 'shown' 주석 / AI챗 live region / 도넛 팔레트 리터럴 중복(×3).
+### 폴리시 마무리 — 2026-06-23 (claude 단독 완료)
+- ✅ [MED] 모바일 사이드바 드로어 모달 a11y (b813308) — Esc·스크롤락·포커스 이동/트랩/복원·role=dialog.
+- ✅ [MED] '홈에 표시' 무데이터 mismatch 가시화 (777c0a2) — 드롭다운 '미리보기 없음' 표기 + 안내 앰버 경고 격상.
+- ✅ [LOW] AI챗 live region (b813308) — role=log·aria-live=polite·aria-busy.
+- ✅ [LOW] 도넛 팔레트 단일출처 (cc85b6d) — `lib/theme/chartPalette.DONUT_PALETTE` 로 3곳 통합.
+- ✅ [LOW] 007 마이그레이션 'shown' 주석 보정.
+- (확인) admin trigger_rebuild '死프론트' → 프론트 호출 코드 실재 없음(백엔드 액션만 존재 = 정상, 제거 불필요).
+
+### 남은 항목
+- ⚠️ [HIGH·소유자] surface_config anon INSERT/UPDATE 차단 — 위 '남은 최우선' 참조(마이그레이션+Edge Function 배포 필요).
+- [MED·소유자/RLS] page_views/feature_requests/ai_insight_chat 공유 session_id anon SELECT 상관(RLS 강화+함수 경유 필요).
+- [LOW·데이터파이프라인] EPS 산업 합계가 byCountry 합산 / 다문화·status 변환에 '계'(합계행) 가드 부재 → `build_real_data.mjs` 수정 + 데이터 재생성·검증 필요(최저 우선).
