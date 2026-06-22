@@ -23,3 +23,26 @@
 ## ⏸ 보류 (세션 한도)
 - 다차원 코드 감사 워크플로 `find-next-work`가 2026-06-22 세션 한도(1:40am Asia/Seoul 리셋)로 중단. 한도 회복 후 재실행:
   `Workflow({ scriptPath:"<session>/workflows/scripts/find-next-work-wf_d7847c2e-34e.js", resumeFromRunId:"wf_d7847c2e-34e" })` — 완료분 캐시 반환. (※ runId는 세션 한정)
+
+---
+
+## 🔍 감사(find-next-work-2) 후속 수정 — 2026-06-23
+
+### ✅ 완료 (커밋·푸시)
+- **[HIGH] 개인정보 노출 차단** (150e2c5) — 범용 데이터 번들(`genericData.ts`)이 정적 export로 외국인 개인 성명·주소를 공개 배포하던 문제. `build_generic_data.mjs`에 PII 컬럼 정규식 + academyinfo 명부성 소스 통째 제외. 일일배치 재생성 후에도 PII 0건 검증.
+- **[MED] 홈 등록외국인 KPI** (bf769b1) — `totalResidents*0.537` 추정치 → `kpiSummary.registeredResidents`(장기체류 비자 합계) 단일출처.
+- **[MED] 홈 경제활동 TOP5 단위혼합** (bf769b1) — EPS 산업표(명)·합계행 혼입 제거, economy 페이지와 동일 로직(경활표 천명·체류자격별 첫 ITM).
+- **[MED] 홈 FX 스파크라인/비정규직 비중** (bf769b1) — usd null 필터, regularShare null 가드.
+- **[MED] 홈 '추가 데이터' 중복** (0eee294) — 이미 전용화면(SURFACED) 있는 소스를 generic 섹션에 중복 노출 안 함.
+- **[MED] 범용 차트 소수셀 마스킹** (0eee294) — 표는 '<5' 마스킹하나 차트는 정확값 노출 → 차트 데이터에서도 마스킹 셀 제외.
+- **[MED] visa-segments 매핑표 붕괴** (8e32a3b) — 국적 소스(segmentType 전부'기타'·visaCode 공백)로 1행 붕괴·빈 체류자격 → `stayVisaTypes` 실비자데이터에서 세그먼트별 대표 비자로 재구성.
+- **[MED] nationalities 세그먼트 수/빈 컬럼** (8e32a3b) — '세그먼트 수' 항상 1 → 도넛과 일치하는 `visaDistributionData.length`. 공백 체류자격·세그먼트 컬럼 제거, 제목 '국적별…'로 정정.
+
+### ⚠️ 남은 HIGH — 소유자 작업 필요 (마이그레이션 실행 + Edge Function 배포)
+- **surface_config anon 쓰기 차단** — 현재 anon 키로 누구나 `surface_config`에 INSERT/UPDATE 가능 → 임의 소스를 공개 홈('추가 데이터')에 강제 노출/조작 가능. 조치: (1) anon INSERT/UPDATE 정책 DROP 마이그레이션, (2) `admin` Edge Function에 `surface` 액션(service_role) 추가, (3) `adminApi` 래퍼 + `setSourceDisposition`/`setSourceChartConfig`를 함수 경유로 재배선. ※ 마이그레이션 실행·함수 배포는 소유자(자동모드 분류기가 permissive-RLS·prod write 차단).
+
+### 남은 MED/LOW (claude 가능)
+- [MED] '홈에 표시' 토글했으나 generic 번들 없는 소스 → 관리자에 무피드백(메타데이터 관리 UI에 경고).
+- [MED] page_views/feature_requests/ai_insight_chat 공유 session_id anon SELECT 상관(RLS+함수 필요).
+- [MED] 모바일 사이드바 드로어 모달 a11y(Esc·스크롤락·포커스·inert).
+- [LOW] EPS 산업 합계 byCountry 합산 / 다문화·status 변환 합계행 가드 / admin trigger_rebuild 死프론트 / 007 마이그레이션 'shown' 주석 / AI챗 live region / 도넛 팔레트 리터럴 중복(×3).
