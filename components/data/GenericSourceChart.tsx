@@ -33,6 +33,10 @@ export function parseChartConfig(note: string | null | undefined): ChartConfig {
   }
 }
 
+// ID성/연도성 컬럼명 — 값(측정치)으로 자동 선택하면 무의미하므로 제외.
+const ID_LIKE_RE = /번호|일련|순번|연번|코드|행번|연도|year|^년$|^no\.?$|^id$|seq|index|rownum/i;
+const isIdLike = (name: string | undefined) => ID_LIKE_RE.test((name ?? "").trim());
+
 // 어떤 수집 소스든 범용으로 차트/표 렌더. config 가 있으면 그대로, 없으면 자동 추론. 차트 부적합 시 표 폴백.
 export function GenericSourceChart({
   title,
@@ -51,27 +55,35 @@ export function GenericSourceChart({
     const i = columns.findIndex((_, idx) => !numericCols.includes(idx));
     return i >= 0 ? i : 0;
   }, [columns, numericCols]);
-  const autoVal = numericCols.find((i) => i !== autoCat) ?? numericCols[0] ?? -1;
+  // 값 컬럼: ID/연도성 컬럼은 제외하고 고름(없으면 일반 수치 컬럼으로 폴백).
+  const autoVal = useMemo(() => {
+    const valueCols = numericCols.filter((i) => i !== autoCat && !isIdLike(columns[i]));
+    return valueCols[0] ?? numericCols.find((i) => i !== autoCat) ?? numericCols[0] ?? -1;
+  }, [numericCols, autoCat, columns]);
 
-  const catIdx = config.cat != null && config.cat < columns.length ? config.cat : autoCat;
-  const valIdx = config.val != null && config.val < columns.length ? config.val : autoVal;
+  // config 인덱스는 0 이상 & 범위 내일 때만 사용(음수·범위초과 가드).
+  const inRange = (n: number | undefined) => n != null && n >= 0 && n < columns.length;
+  const catIdx = inRange(config.cat) ? (config.cat as number) : autoCat;
+  const valIdx = inRange(config.val) ? (config.val as number) : autoVal;
   const heading = config.title?.trim() || title;
   const chartKind = config.type ?? "bar";
-  const canChart = chartKind !== "table" && valIdx >= 0 && rows.length > 0;
-
-  const [view, setView] = useState<"chart" | "table">(chartKind === "table" ? "table" : "chart");
-  const effectiveView = canChart ? view : "table";
 
   const chartData = useMemo(() => {
-    if (!canChart) return [];
+    if (chartKind === "table" || valIdx < 0 || rows.length === 0) return [];
     const mapped = rows
-      .map((r) => ({ name: r[catIdx] || "—", value: Number(String(r[valIdx]).replace(/,/g, "")) || 0 }))
+      .map((r) => ({ name: r[catIdx] || "—", value: Number(String(r[valIdx] ?? "").replace(/,/g, "")) || 0 }))
       .filter((d) => Number.isFinite(d.value));
     // 막대: 값 큰 순 상위 12 / 선: 행 순서(추이) 상위 40
     return chartKind === "line"
       ? mapped.slice(0, 40)
       : mapped.filter((d) => d.value !== 0).sort((a, b) => b.value - a.value).slice(0, 12);
-  }, [rows, catIdx, valIdx, canChart, chartKind]);
+  }, [rows, catIdx, valIdx, chartKind]);
+
+  // 차트 데이터가 비었거나 전부 0이면 차트 대신 표로 폴백.
+  const canChart = chartData.length > 0 && chartData.some((d) => d.value !== 0);
+
+  const [view, setView] = useState<"chart" | "table">(chartKind === "table" ? "table" : "chart");
+  const effectiveView = canChart ? view : "table";
 
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-4">

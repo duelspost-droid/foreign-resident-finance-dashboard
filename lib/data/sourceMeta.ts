@@ -71,6 +71,8 @@ export const SURFACED: Record<string, string> = {
   kosis_immigrant_econ_activity_by_age: "경제활동·소득 · 연령별",
   kosis_eps_introduction_by_country: "경제활동·소득 · EPS 국가별",
   kosis_eps_introduction_by_industry: "경제활동·소득 · EPS 업종별",
+  nhis_foreigner_coverage_2022: "경제활동·소득 · 건강보험",
+  mogef_multicultural_family_2024: "경제활동·소득 · 다문화가족",
   // 소비·금융거래
   ecos_bop_transfer_income: "소비·금융거래 · 송금",
   ecos_bop_transfer_monthly: "소비·금융거래 · 월별 송금",

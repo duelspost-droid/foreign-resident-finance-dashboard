@@ -50,6 +50,11 @@ const isNum = (v) => {
   return s !== "" && Number.isFinite(Number(s));
 };
 
+// 측정값(차트 Y) 후보에서 제외할 컬럼: 이름이 연도/코드/번호/일련번호 등.
+const ID_OR_YEAR_RE = /번호|일련|순번|연번|코드|행번|연도|year|^년$|^no\.?$|^id$|seq|index|rownum/i;
+// 값이 대부분 4자리 연도(19xx/20xx)면 측정값이 아니라 범주(연도축).
+const looksYear = (v) => /^(19|20)\d{2}$/.test(String(v ?? "").trim());
+
 const files = (await readdir(RAW_DIR)).filter((f) => f.endsWith(".csv"));
 const byId = new Map();
 for (const f of files) {
@@ -71,7 +76,15 @@ for (const [id, { file }] of [...byId.entries()].sort()) {
     const body = rowsAll.slice(1);
     const sample = body.slice(0, 30);
     const numericCols = header
-      .map((_, i) => (sample.filter((r) => isNum(r[i])).length >= Math.max(1, sample.length * 0.7) ? i : -1))
+      .map((h, i) => {
+        if (ID_OR_YEAR_RE.test(h)) return -1; // 이름이 연도/코드/번호 → 측정값 아님
+        const vals = sample.map((r) => r[i]);
+        const numCount = vals.filter((v) => isNum(v)).length;
+        if (numCount < Math.max(1, sample.length * 0.7)) return -1;
+        const yearCount = vals.filter(looksYear).length;
+        if (numCount > 0 && yearCount >= numCount * 0.8) return -1; // 값이 대부분 연도 → 범주
+        return i;
+      })
       .filter((i) => i >= 0);
     const rows = body.slice(0, MAX_ROWS).map((r) => header.map((_, i) => String(r[i] ?? "").trim()));
     out[id] = { columns: header, rows, numericCols, rowCount: body.length };

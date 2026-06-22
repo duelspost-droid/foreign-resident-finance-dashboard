@@ -1104,6 +1104,30 @@ function detectTrendAnomalies(series, { valueKey = "value", dropPct = 20, label 
   return out;
 }
 
+// 단일 체류자격(E-9·H-2·전문인력 등) 경제활동인구(스톡)의 연도별 비정상 급락 감지(#11 방어).
+// apiEconActivity 의 경제활동 소스만, 합계행 제외, (체류자격,연도) 첫 측정값(15세이상인구·스톡)으로 시계열 구성.
+function detectVisaActivityAnomalies(rows) {
+  const ECON_SRC = "kosis_foreigner_economic_activity";
+  const TOTAL = new Set(["계", "합계", "총계", "전체", "소계"]);
+  const byCatYear = new Map();
+  for (const r of rows ?? []) {
+    if (r?.sourceId !== ECON_SRC) continue;
+    const cat = String(r.category ?? "").trim();
+    if (!cat || TOTAL.has(cat)) continue;
+    const year = Number(String(r.period ?? "").slice(0, 4));
+    if (!Number.isFinite(year) || typeof r.value !== "number") continue;
+    let ym = byCatYear.get(cat);
+    if (!ym) { ym = new Map(); byCatYear.set(cat, ym); }
+    if (!ym.has(year)) ym.set(year, r.value); // 연도별 첫 ITM(=15세이상인구 스톡)
+  }
+  const out = [];
+  for (const [cat, ym] of byCatYear) {
+    const series = [...ym.entries()].map(([year, value]) => ({ year, value }));
+    out.push(...detectTrendAnomalies(series, { valueKey: "value", dropPct: 30, label: `체류자격 경제활동(${cat})` }));
+  }
+  return out;
+}
+
 // 수집 이력(catalog)을 앱이 읽는 커밋 대상 TS 파일로 변환한다.
 // 파일이 git에 커밋되므로 git 이력으로 일자별 수집 이력이 영구 보존된다.
 async function buildLineage() {
@@ -1401,7 +1425,8 @@ async function main() {
     ...detectTrendAnomalies(studentByYear, { valueKey: "degree", dropPct: 30, label: "유학생 추이(학위 D-2)" }),
     ...detectTrendAnomalies(bopTransferIncome.annual ?? [], { valueKey: "value", dropPct: 35, label: "이전소득수지(ECOS)" }),
     ...detectTrendAnomalies(foreignWage.trend ?? [], { valueKey: "value", dropPct: 30, label: "외국인 임금 합계" }),
-    ...detectTrendAnomalies(foreignEmploymentStatus.trend ?? [], { valueKey: "value", dropPct: 25, label: "외국인 취업자 합계" })
+    ...detectTrendAnomalies(foreignEmploymentStatus.trend ?? [], { valueKey: "value", dropPct: 25, label: "외국인 취업자 합계" }),
+    ...detectVisaActivityAnomalies(apiEconActivity)
   ];
   if (dataQualityWarnings.length) {
     console.error(`\n[DATA-QUALITY] 비정상 급락 ${dataQualityWarnings.length}건 감지 — 소스 점검 필요:`);

@@ -274,7 +274,7 @@ export default function DashboardPage() {
     <div className="space-y-6 pb-14">
 
       <PageHero
-        kicker="데이터 현황"
+        kicker="대시보드"
         title="외국인 금융 시장 데이터"
         description="공개 통계와 금융 집계 데이터를 지역·국적·체류자격·대학 단위로 실시간 시각화합니다. 전략 해석은 사이드바 → 금융 인사이트에서 확인하세요."
       />
