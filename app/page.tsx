@@ -32,6 +32,7 @@ import {
   hasRealUniversityData,
   hasRealVisaData,
   healthInsuranceData,
+  kpiSummary,
   multiculturalFamilyData,
   multiculturalFamilySummary,
   nationalityAgeTotals,
@@ -131,7 +132,7 @@ export default function DashboardPage() {
     },
     {
       label: "등록외국인",
-      display: formatNumber(realDataSummary.statusRowCount > 0 ? Math.round(totalResidents * 0.537) : 1_320_540),
+      display: formatNumber(kpiSummary.registeredResidents > 0 ? kpiSummary.registeredResidents : 1_320_540),
       unit: "명",
       icon: Banknote,
       color: "#3157a4",
@@ -205,7 +206,10 @@ export default function DashboardPage() {
   const dutyTopPct = dutyTop && realDutyFreeSales.foreignTotal ? (dutyTop.value / realDutyFreeSales.foreignTotal) * 100 : 0;
 
   const bopSparkData = bopAnnual.map((p) => ({ label: p.year, value: p.value }));
-  const fxSparkData = fxMonthly.slice(-12).map((p) => ({ label: p.month as string | number, value: (p.usd as number | null) ?? 0 }));
+  const fxSparkData = fxMonthly
+    .slice(-12)
+    .filter((p) => (p.usd as number | null) != null)
+    .map((p) => ({ label: p.month as string | number, value: p.usd as number }));
 
   const signals: {
     label: string;
@@ -248,9 +252,11 @@ export default function DashboardPage() {
     },
     {
       label: "외국인 상용직 비중",
-      value: realForeignEmploymentStatus.regularShare.toFixed(1),
+      value: realForeignEmploymentStatus.regularShare != null ? realForeignEmploymentStatus.regularShare.toFixed(1) : "—",
       unit: "%",
-      sub: `상용 ${formatNumber(realForeignEmploymentStatus.regular)}천명 / 취업 ${formatNumber(realForeignEmploymentStatus.total)}천명 · ${realForeignEmploymentStatus.latestYear}`,
+      sub: realForeignEmploymentStatus.regularShare != null
+        ? `상용 ${formatNumber(realForeignEmploymentStatus.regular)}천명 / 취업 ${formatNumber(realForeignEmploymentStatus.total)}천명 · ${realForeignEmploymentStatus.latestYear}`
+        : "데이터 없음",
       delta: null,
       deltaSuffix: "",
       deltaInverse: false,
@@ -760,8 +766,15 @@ export default function DashboardPage() {
               <p className="surface-subtitle mb-3">통계청 · 체류자격별 취업·경제활동</p>
               <div className="space-y-2">
                 {(() => {
-                  const latest = [...econActivityData].sort((a, b) => b.period.localeCompare(a.period))[0]?.period ?? "";
-                  const rows = econActivityData.filter((r) => r.period === latest).sort((a, b) => b.value - a.value).slice(0, 5);
+                  // economy 페이지와 동일 로직: 경제활동인구 표(천명)만 사용, 합계행 제외, 체류자격별 첫 ITM만 dedup.
+                  const ECON_SRC = "kosis_foreigner_economic_activity";
+                  const econRows = econActivityData.filter((r) => r.sourceId === ECON_SRC && r.category !== "계");
+                  const latest = [...econRows].sort((a, b) => b.period.localeCompare(a.period))[0]?.period ?? "";
+                  const byCat = new Map<string, (typeof econRows)[number]>();
+                  for (const r of econRows.filter((r) => r.period === latest)) {
+                    if (!byCat.has(r.category)) byCat.set(r.category, r);
+                  }
+                  const rows = [...byCat.values()].sort((a, b) => b.value - a.value).slice(0, 5);
                   const max = rows[0]?.value ?? 1;
                   return rows.map((r, i) => (
                     <div key={`${r.category}-${i}`} className="flex items-center gap-2 text-xs">
