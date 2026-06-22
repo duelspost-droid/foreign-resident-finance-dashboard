@@ -19,10 +19,10 @@ import {
   fetchAllFeatureRequests,
   fetchPageViews
 } from "@/lib/data/supabaseClient";
-import { adminChangePassword, adminLogin, adminLogout, adminRespond, adminValidate } from "@/lib/data/adminApi";
+import { ADMIN_TOKEN_KEY, adminChangePassword, adminLogin, adminLogout, adminRespond, adminValidate } from "@/lib/data/adminApi";
 import { STATUS_ORDER, categoryMeta, statusMeta } from "@/lib/feedback";
 
-const TOKEN_KEY = "jbax-admin-token";
+const TOKEN_KEY = ADMIN_TOKEN_KEY;
 type Tab = "overview" | "requests" | "analytics" | "sessions" | "settings";
 
 function dayKey(iso: string): string {

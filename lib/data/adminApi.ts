@@ -1,6 +1,9 @@
 // 운영 콘솔 ↔ admin Edge Function 클라이언트. 비밀번호는 저장하지 않고 토큰만 보관.
 import { SUPABASE_PUBLIC_ANON_KEY, SUPABASE_PUBLIC_URL } from "./supabaseConfig";
 
+// 관리자 세션 토큰 localStorage 키 — 운영 콘솔 로그인 시 저장, 메타데이터 관리(트리아지)에서 재사용.
+export const ADMIN_TOKEN_KEY = "jbax-admin-token";
+
 const ADMIN_FN = `${SUPABASE_PUBLIC_URL}/functions/v1/admin`;
 
 // status=0 → 전송 실패(오프라인/CORS/미배포). 그 외는 HTTP 상태.

@@ -126,42 +126,58 @@ export async function fetchSurfaceDispositions(): Promise<Record<string, SourceD
   return map;
 }
 
-// '홈에 표시' 차트 설정 저장(note=JSON). 성공 시 true.
-export async function setSourceChartConfig(sourceId: string, note: string | null): Promise<boolean> {
+// 쓰기는 익명 직접쓰기 대신 관리자 토큰을 검증하는 보안 함수(admin_set_surface_config, 마이그레이션 008)
+// 경유로만 처리한다. 토큰은 운영 콘솔 로그인 시 localStorage 에 저장된 값을 호출부가 전달한다.
+// 반환: { ok, authExpired } — authExpired=true 면 토큰 만료/무효 → 호출부가 재로그인 유도.
+export type SurfaceWriteResult = { ok: boolean; authExpired: boolean };
+
+// '홈에 표시' 차트 설정 저장(note=JSON).
+export async function setSourceChartConfig(
+  sourceId: string,
+  note: string | null,
+  token: string
+): Promise<SurfaceWriteResult> {
   const client = createBrowserSupabaseClient();
-  if (!client) return false;
-  const { error } = await client.from("surface_config").upsert(
-    { source_id: sourceId, note, updated_at: new Date().toISOString(), updated_by: "admin" },
-    { onConflict: "source_id" }
-  );
+  if (!client) return { ok: false, authExpired: false };
+  if (!token) return { ok: false, authExpired: true };
+  const { data, error } = await client.rpc("admin_set_surface_config", {
+    p_token: token,
+    p_source_id: sourceId,
+    p_note: note,
+    p_set_note: true,
+  });
   if (error) {
+    // 입력 거부(source_id/disposition/note)는 함수가 RAISE EXCEPTION → 여기로. 로그아웃 없이 실패 처리.
     console.error("setSourceChartConfig error:", error.message);
-    return false;
+    return { ok: false, authExpired: false };
   }
-  return true;
+  // 함수 false = 토큰 무효/만료(인증 실패) → 재로그인 유도. true = 성공.
+  return data === true ? { ok: true, authExpired: false } : { ok: false, authExpired: true };
 }
 
-// 트리아지 1건 저장(upsert). disposition=null 이면 '미정'으로 되돌림. 성공 시 true.
+// 트리아지 1건 저장(upsert). disposition=null 이면 '미정'으로 되돌림.
 export async function setSourceDisposition(
   sourceId: string,
   disposition: "shown" | "planned" | "archived" | "excluded" | null,
+  token: string,
   targetTable?: string | null
-): Promise<boolean> {
+): Promise<SurfaceWriteResult> {
   const client = createBrowserSupabaseClient();
-  if (!client) return false;
-  const patch: Record<string, unknown> = {
-    source_id: sourceId,
-    disposition,
-    updated_at: new Date().toISOString(),
-    updated_by: "admin",
-  };
-  if (targetTable !== undefined) patch.target_table = targetTable;
-  const { error } = await client.from("surface_config").upsert(patch, { onConflict: "source_id" });
+  if (!client) return { ok: false, authExpired: false };
+  if (!token) return { ok: false, authExpired: true };
+  const { data, error } = await client.rpc("admin_set_surface_config", {
+    p_token: token,
+    p_source_id: sourceId,
+    p_disposition: disposition,
+    p_target_table: targetTable ?? null,
+    p_set_note: false,
+  });
   if (error) {
+    // 입력 거부는 RAISE EXCEPTION → 여기로(로그아웃 없이 실패). 인증 실패만 아래 false 경로.
     console.error("setSourceDisposition error:", error.message);
-    return false;
+    return { ok: false, authExpired: false };
   }
-  return true;
+  return data === true ? { ok: true, authExpired: false } : { ok: false, authExpired: true };
 }
 
 export type RegionFilter = {

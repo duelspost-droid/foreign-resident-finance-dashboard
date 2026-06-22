@@ -4,12 +4,14 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Layers } from "lucide-react";
 import { dataLineage, type DataLineageSource } from "@/lib/data/generated/dataLineage";
 import { SURFACED, TARGET_TABLES, suggestTarget, targetLabel } from "@/lib/data/sourceMeta";
+import Link from "next/link";
 import {
   fetchSurfaceDispositions,
   setSourceChartConfig,
   setSourceDisposition,
   type SourceDisposition
 } from "@/lib/data/supabaseClient";
+import { ADMIN_TOKEN_KEY, adminValidate } from "@/lib/data/adminApi";
 import { genericSources, type GenericSource } from "@/lib/data/generated/genericData";
 import { type ChartConfig, parseChartConfig } from "@/components/data/GenericSourceChart";
 
@@ -40,6 +42,10 @@ export function CoverageSection() {
   const [disp, setDisp] = useState<Record<string, SourceDisposition>>({});
   const [connected, setConnected] = useState<boolean | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
+  // 쓰기는 관리자 토큰 검증 후에만 가능(운영 콘솔 로그인 시 저장된 토큰 재사용). 읽기/표시는 무인증.
+  const [token, setToken] = useState("");
+  const [authState, setAuthState] = useState<"checking" | "authed" | "unauthed">("checking");
+  const canWrite = connected !== false && authState === "authed";
 
   const load = useCallback(async () => {
     const m = await fetchSurfaceDispositions();
@@ -49,6 +55,24 @@ export function CoverageSection() {
   useEffect(() => {
     void load();
   }, [load]);
+
+  // 관리자 토큰 확인: localStorage → 서버 검증. 만료/무효면 미인증(쓰기 잠금), 연결 블립이면 토큰 보존.
+  useEffect(() => {
+    let t = "";
+    try { t = localStorage.getItem(ADMIN_TOKEN_KEY) || ""; } catch { /* ignore */ }
+    if (!t) { setAuthState("unauthed"); return; }
+    void adminValidate(t).then((state) => {
+      if (state === "valid") { setToken(t); setAuthState("authed"); }
+      else if (state === "unreachable") { setAuthState("unauthed"); } // 토큰은 보존(다음 진입 시 재검증)
+      else { setAuthState("unauthed"); try { localStorage.removeItem(ADMIN_TOKEN_KEY); } catch { /* ignore */ } }
+    });
+  }, []);
+
+  function handleAuthExpired() {
+    setToken("");
+    setAuthState("unauthed");
+    try { localStorage.removeItem(ADMIN_TOKEN_KEY); } catch { /* ignore */ }
+  }
 
   const statusOf = useCallback(
     (s: DataLineageSource): StatusKey => {
@@ -61,35 +85,43 @@ export function CoverageSection() {
   );
 
   async function decide(s: DataLineageSource, value: string) {
+    if (!canWrite) return;
     setBusyId(s.id);
     const d = value === "" ? null : (value as "shown" | "planned" | "archived" | "excluded");
     const target = d === "planned" ? disp[s.id]?.targetTable ?? suggestTarget(s).table : undefined;
-    const ok = await setSourceDisposition(s.id, d, target);
-    if (ok) {
+    const res = await setSourceDisposition(s.id, d, token, target);
+    if (res.ok) {
       setDisp((m) => ({
         ...m,
         [s.id]: { disposition: d, targetTable: target ?? m[s.id]?.targetTable ?? null, note: m[s.id]?.note ?? null }
       }));
+    } else if (res.authExpired) {
+      handleAuthExpired();
     }
     setBusyId(null);
   }
 
   async function retarget(s: DataLineageSource, target: string) {
+    if (!canWrite) return;
     setBusyId(s.id);
-    const ok = await setSourceDisposition(s.id, "planned", target);
-    if (ok) setDisp((m) => ({ ...m, [s.id]: { disposition: "planned", targetTable: target, note: m[s.id]?.note ?? null } }));
+    const res = await setSourceDisposition(s.id, "planned", token, target);
+    if (res.ok) setDisp((m) => ({ ...m, [s.id]: { disposition: "planned", targetTable: target, note: m[s.id]?.note ?? null } }));
+    else if (res.authExpired) handleAuthExpired();
     setBusyId(null);
   }
 
   // '홈에 표시' 차트 설정(note=JSON) 저장.
   async function saveNote(id: string, note: string) {
+    if (!canWrite) return;
     setBusyId(id);
-    const ok = await setSourceChartConfig(id, note);
-    if (ok) {
+    const res = await setSourceChartConfig(id, note, token);
+    if (res.ok) {
       setDisp((m) => ({
         ...m,
         [id]: { disposition: m[id]?.disposition ?? "shown", targetTable: m[id]?.targetTable ?? null, note }
       }));
+    } else if (res.authExpired) {
+      handleAuthExpired();
     }
     setBusyId(null);
   }
@@ -160,12 +192,16 @@ export function CoverageSection() {
         <span className={`rounded px-1.5 py-0.5 font-semibold ${REFLECT_TONE.none}`}>미연동 {counts.none}</span>
         <span className={`rounded px-1.5 py-0.5 font-semibold ${REFLECT_TONE.archived}`}>보관·제외 {counts.archived + counts.excluded}</span>
         <span className="ml-auto text-[11px]">
-          {connected === null ? (
+          {connected === null || authState === "checking" ? (
             <span className="text-muted">확인 중…</span>
-          ) : connected ? (
-            <span className="text-teal-700">Supabase 연결됨 · 즉시 저장</span>
-          ) : (
+          ) : connected === false ? (
             <span className="text-amber-700">Supabase 미연결 — 처리하려면 연결 필요</span>
+          ) : authState === "authed" ? (
+            <span className="text-teal-700">관리자 인증됨 · 즉시 저장</span>
+          ) : (
+            <Link href="/admin/console" className="font-semibold text-amber-700 underline">
+              관리자 로그인 필요 — 운영 콘솔에서 로그인 후 처리
+            </Link>
           )}
         </span>
       </div>
@@ -200,7 +236,7 @@ export function CoverageSection() {
                     <div className="flex flex-wrap items-center gap-1.5">
                       <select
                         value={disp[s.id]?.disposition ?? ""}
-                        disabled={busy || connected === false}
+                        disabled={busy || !canWrite}
                         onChange={(e) => decide(s, e.target.value)}
                         className={`min-w-0 flex-1 rounded-md border px-2 py-1.5 text-xs ${key === "none" ? "border-amber-300 bg-white text-amber-800" : "border-slate-200 text-slate-700"} disabled:opacity-50`}
                         aria-label="반영 처리"
@@ -214,7 +250,7 @@ export function CoverageSection() {
                       {key === "planned" && (
                         <select
                           value={disp[s.id]?.targetTable ?? suggestTarget(s).table}
-                          disabled={busy || connected === false}
+                          disabled={busy || !canWrite}
                           onChange={(e) => retarget(s, e.target.value)}
                           className="min-w-0 flex-1 rounded-md border border-slate-200 px-2 py-1.5 text-xs text-slate-700 disabled:opacity-50"
                           aria-label="대상 도메인"
@@ -230,7 +266,7 @@ export function CoverageSection() {
                       <ShowConfig
                         source={genericSources[s.id]}
                         note={disp[s.id]?.note ?? null}
-                        disabled={busy || connected === false}
+                        disabled={busy || !canWrite}
                         onSave={(note) => saveNote(s.id, note)}
                       />
                     )}
