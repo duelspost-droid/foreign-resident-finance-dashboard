@@ -62,3 +62,9 @@ function build(): RealSidoOpportunity[] {
 
 export const realSidoOpportunity = build();
 export const hasRealSidoOpportunity = realSidoOpportunity.length >= 10;
+
+// 전국 시도 기회점수 평균(실데이터). 홈·금융인사이트의 '평균 금융기회점수' KPI 단일 출처.
+export const realAvgOpportunityScore =
+  realSidoOpportunity.length > 0
+    ? Math.round(realSidoOpportunity.reduce((s, r) => s + r.overallScore, 0) / realSidoOpportunity.length)
+    : null;

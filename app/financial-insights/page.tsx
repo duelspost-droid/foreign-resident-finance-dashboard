@@ -440,7 +440,7 @@ export default function FinancialInsightsPage() {
             지역별 금융 전략 우선순위
           </h2>
           <span className="rounded-full bg-teal-100 px-2 py-0.5 text-xs font-semibold text-teal-700">
-            금융 기회 점수 순 · 자동 갱신
+            기회 점수 순 · 행안부·KEDI 실데이터
           </span>
         </div>
         <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
@@ -449,29 +449,28 @@ export default function FinancialInsightsPage() {
               <tr className="border-b border-slate-200 bg-slate-50 text-slate-600">
                 <th className="px-4 py-3 text-left font-semibold">순위</th>
                 <th className="px-4 py-3 text-left font-semibold">시·도</th>
-                <th className="px-4 py-3 text-left font-semibold">핵심 지역</th>
-                <th className="px-4 py-3 text-left font-semibold">주요 세그먼트</th>
-                <th className="px-4 py-3 text-left font-semibold">추정 외국인</th>
-                <th className="px-4 py-3 text-left font-semibold">주력 국적</th>
-                <th className="px-4 py-3 text-left font-semibold">전략 방향</th>
+                <th className="px-4 py-3 text-right font-semibold">외국인주민</th>
+                <th className="px-4 py-3 text-right font-semibold">유학생</th>
+                <th className="px-4 py-3 text-right font-semibold">증가율(YoY)</th>
+                <th className="px-4 py-3 text-left font-semibold">전략 포커스</th>
                 <th className="px-4 py-3 text-left font-semibold">기회 점수</th>
               </tr>
             </thead>
             <tbody>
               {regionStrategy.map((r) => (
-                <tr key={r.rank} className="border-b border-slate-100 hover:bg-slate-50">
+                <tr key={r.sido} className="border-b border-slate-100 hover:bg-slate-50">
                   <td className="px-4 py-3 font-bold text-slate-400">#{r.rank}</td>
                   <td className="px-4 py-3 font-semibold text-slate-900">{r.sido}</td>
-                  <td className="px-4 py-3 text-slate-600">{r.sigungu}</td>
-                  <td className="px-4 py-3 text-slate-600">{r.dominant}</td>
-                  <td className="px-4 py-3 font-medium text-slate-800">
-                    {r.residentCount.toLocaleString()}명
-                    {r.yoyChangeRate > 0 && (
-                      <span className="ml-1 text-teal-600">+{r.yoyChangeRate}%</span>
+                  <td className="px-4 py-3 text-right font-medium text-slate-800">{r.residentCount.toLocaleString()}명</td>
+                  <td className="px-4 py-3 text-right text-slate-600">{r.studentCount > 0 ? r.studentCount.toLocaleString() + "명" : "—"}</td>
+                  <td className="px-4 py-3 text-right font-medium">
+                    {r.yoy == null ? (
+                      <span className="text-slate-400">—</span>
+                    ) : (
+                      <span className={r.yoy > 0 ? "text-teal-600" : "text-rose-600"}>{r.yoy > 0 ? "+" : ""}{r.yoy}%</span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-slate-600">{r.topNationality}</td>
-                  <td className="px-4 py-3 text-slate-600">{r.priority}</td>
+                  <td className="px-4 py-3 text-slate-600">{r.focus}</td>
                   <td className="px-4 py-3">
                     <ScoreBar score={r.score} />
                   </td>
@@ -480,7 +479,7 @@ export default function FinancialInsightsPage() {
             </tbody>
           </table>
           <p className="border-t border-slate-100 bg-slate-50 px-4 py-2 text-xs text-slate-500">
-            기회 점수 = 외국인 규모 × 세그먼트 수요 × 성장률 × 다국적성 가중 합산. 수집 배치 완료 시 자동 재계산.
+            기회 점수 = 외국인주민 규모(50) + 유학생 규모(30) + 전년 대비 증가율(20) 가중. 행안부 시도별 외국인주민 · KEDI 유학생 실집계 17개 시도 · 매 배치 자동 재계산.
           </p>
         </div>
       </section>

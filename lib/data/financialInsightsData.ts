@@ -12,10 +12,10 @@ import {
 import {
   kpiSummary,
   nationalityDistributionData,
-  sampleOpportunityRows,
   sampleResidentStatus,
   stayVisaTypes
 } from "./mockData";
+import { realAvgOpportunityScore, realSidoOpportunity } from "./opportunityReal";
 
 // ── 데이터 수집 신선도 ─────────────────────────────────────────────────────────
 export const dataFreshness = {
@@ -36,7 +36,7 @@ export const marketKpis = {
   foreignStudents: kpiSummary.foreignStudents > 0 ? kpiSummary.foreignStudents : 185_010,
   // 유학생 YoY는 실데이터(realStudentSummary.yoy) 단일 출처를 사용한다.
   foreignStudentsYoy: realStudentSummary.hasData ? `+${realStudentSummary.yoy}%` : (null as string | null),
-  averageOpportunityScore: Math.round(kpiSummary.averageOpportunityScore),
+  averageOpportunityScore: realAvgOpportunityScore ?? Math.round(kpiSummary.averageOpportunityScore),
   // 송금 KRW 추정치(하드코딩)를 폐기하고 한국은행 이전소득수지 실측값(억달러 환산)을 대리지표로 노출.
   remittanceProxy:
     realBopTransferIncome.latestValue != null
@@ -48,31 +48,25 @@ export const marketKpis = {
   collectedRowCount: realDataSummary.statusRowCount
 } as const;
 
-// ── 지역별 금융 전략 (기회 점수 상위 지역, CI 배치 갱신 시 자동 변경) ────────────
-// sampleOpportunityRows 는 calculateRegionScores()로 계산되며 실데이터 우선이다.
-const STRATEGY_DIRECTION: Record<string, string> = {
-  "비전문취업 근로자": "E-9 급여계좌 + 해외송금 패키지",
-  "유학생": "캠퍼스 연계 학생 계좌 + 해외송금",
-  "재외동포": "다국어 종합 금융 서비스",
-  "전문인력": "급여계좌 + 신용카드 + 자산관리",
-  "결혼이민": "가계 금융 패키지 + 다문화 특화",
-  "단기체류": "환전·선불카드 위주",
-  "기타": "기본 계좌 + 다국어 상담"
-};
+// ── 지역별 금융 전략 (실데이터: 행안부 시도별 외국인주민 + KEDI 유학생 + 증가율 가중 기회점수) ──
+// 표본 6개 시군구가 아니라 17개 시도 실집계 상위 5개. CI 배치 갱신 시 자동 변경.
+function strategyFocus(r: (typeof realSidoOpportunity)[number]): string {
+  if (r.studentScore >= r.sizeScore && r.studentScore >= r.growthScore)
+    return "유학생 밀집 — 캠퍼스 계좌·등록금 송금";
+  if (r.growthScore >= r.sizeScore)
+    return "고성장 권역 — 선제 진입·다국어 인프라";
+  return "대규모 외국인 권역 — 지점·ATM·급여계좌";
+}
 
-export const regionStrategy = sampleOpportunityRows
-  .slice(0, 5)
-  .map((row, i) => ({
-    rank: i + 1,
-    sido: row.sido,
-    sigungu: row.sigungu,
-    dominant: row.dominantSegment,
-    residentCount: row.residentCount,
-    yoyChangeRate: row.yoyChangeRate,
-    topNationality: row.topNationality,
-    priority: STRATEGY_DIRECTION[row.dominantSegment] ?? "기본 계좌 + 다국어 상담",
-    score: Math.round(row.overallOpportunityScore)
-  }));
+export const regionStrategy = realSidoOpportunity.slice(0, 5).map((r) => ({
+  rank: r.rank,
+  sido: r.sido,
+  residentCount: r.residentCount,
+  studentCount: r.studentCount,
+  yoy: r.yoy,
+  score: r.overallScore,
+  focus: strategyFocus(r)
+}));
 
 // ── 국적별 상위 분포 (실데이터 갱신 시 자동 변경) ───────────────────────────────
 // 참조 테이블은 topNationalities 평가 전에 선언되어야 한다(모듈 로드 시 .map 즉시 실행 → TDZ 방지).
