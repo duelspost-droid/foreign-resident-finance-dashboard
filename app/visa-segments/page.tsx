@@ -6,11 +6,7 @@ import { Panel } from "@/components/ui/Panel";
 import { StatTile } from "@/components/ui/StatTile";
 import { segmentRecommendationMap } from "@/lib/data/insights";
 import { hasRealVisaData, stayVisaTypes } from "@/lib/data/mockData";
-import { realForeignResidentStatus } from "@/lib/data/generated/realData";
-import type {
-  ForeignResidentSegment,
-  ForeignResidentStatus
-} from "@/lib/types/foreignResident";
+import type { ForeignResidentSegment } from "@/lib/types/foreignResident";
 import { formatNumber } from "@/lib/utils/format";
 
 const ACCENTS = ["#0f766e", "#3157a4", "#b45309", "#be123c"] as const;
@@ -28,14 +24,19 @@ const countBySegment = stayVisaTypes.reduce<Record<string, number>>(
   {}
 );
 
-// 세그먼트별 대표 체류자격·주요 국적: realForeignResidentStatus에서 세그먼트별 최다 국적.
-const representativeBySegment = realForeignResidentStatus.reduce<
-  Record<string, ForeignResidentStatus>
->((acc, row) => {
-  const current = acc[row.segmentType];
-  if (!current || row.residentCount > current.residentCount) {
-    acc[row.segmentType] = row as ForeignResidentStatus;
-  }
+// 세그먼트별 대표 체류자격: stayVisaTypes(실 비자데이터)에서 세그먼트별 최다 인원 비자.
+// (realForeignResidentStatus는 국적 기준 소스라 segmentType이 전부 '기타'·visaCode 공백 → 매핑 표에 부적합)
+type SegmentMapRow = {
+  segment: ForeignResidentSegment;
+  visaLabel: string;
+  count: number;
+};
+
+const representativeVisaBySegment = stayVisaTypes.reduce<
+  Record<string, (typeof stayVisaTypes)[number]>
+>((acc, v) => {
+  const current = acc[v.segment];
+  if (!current || v.count > current.count) acc[v.segment] = v;
   return acc;
 }, {});
 
@@ -63,27 +64,30 @@ const matrixProducts = Array.from(new Set(distinctProducts))
   .sort((a, b) => productFrequency[b] - productFrequency[a])
   .slice(0, 8);
 
-// 데이터테이블: 세그먼트별 대표 행(실데이터 기준).
-const mappedRows = segmentOrder
-  .map((segment) => representativeBySegment[segment])
-  .filter((row): row is ForeignResidentStatus => Boolean(row));
+// 데이터테이블: 세그먼트별 대표 비자·인원(실데이터 기준). 인원 있는 세그먼트만.
+const mappedRows: SegmentMapRow[] = segmentOrder
+  .map((segment) => {
+    const visa = representativeVisaBySegment[segment];
+    return {
+      segment,
+      visaLabel: visa ? `${visa.visaCode} ${visa.visaName}`.trim() : "—",
+      count: countBySegment[segment] ?? 0
+    };
+  })
+  .filter((row) => row.count > 0)
+  .sort((a, b) => b.count - a.count);
 
-const columns: DataTableColumn<ForeignResidentStatus>[] = [
-  { header: "세그먼트", accessor: (row) => row.segmentType },
-  {
-    header: "대표 체류자격",
-    accessor: (row) => `${row.visaCode ?? ""} ${row.visaName ?? ""}`.trim()
-  },
-  { header: "주요 국적", accessor: (row) => row.nationality },
+const columns: DataTableColumn<SegmentMapRow>[] = [
+  { header: "세그먼트", accessor: (row) => row.segment },
+  { header: "대표 체류자격", accessor: (row) => row.visaLabel },
   {
     header: "인원",
-    accessor: (row) => `${formatNumber(countBySegment[row.segmentType] ?? 0)}명`,
+    accessor: (row) => `${formatNumber(row.count)}명`,
     align: "right"
   },
   {
     header: "추천 상품",
-    accessor: (row) =>
-      segmentRecommendationMap[row.segmentType].products.join(", ")
+    accessor: (row) => segmentRecommendationMap[row.segment].products.join(", ")
   }
 ];
 
@@ -322,7 +326,7 @@ export default function VisaSegmentsPage() {
       >
         <DataTable
           columns={columns}
-          rowKey={(row) => row.id}
+          rowKey={(row) => row.segment}
           rows={mappedRows}
         />
       </Panel>

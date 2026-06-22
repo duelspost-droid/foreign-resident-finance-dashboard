@@ -42,27 +42,21 @@ const topFifteenTotal = nationalityDistributionData
   .slice(0, 15)
   .reduce((sum, row) => sum + row.residents, 0);
 
-// 실데이터 우선, 없으면 0
-const statusRows: readonly ForeignResidentStatus[] = realForeignResidentStatus;
-const distinctSegments = new Set(statusRows.map((row) => row.segmentType)).size;
+// 국적별 집계(실데이터). 인원 내림차순으로 정렬해 상위 국적부터 표시.
+const statusRows: readonly ForeignResidentStatus[] = [...realForeignResidentStatus].sort(
+  (a, b) => b.residentCount - a.residentCount
+);
+// 세그먼트 수: 국적 소스의 segmentType은 전부 '기타'라 무의미 → 도넛에 표시되는 체류자격 세그먼트 수를 사용.
+const distinctSegments = visaDistributionData.length;
 
 const topNationality = nationalityDistributionData[0];
 
+// 국적 소스는 체류자격(visaCode/visaName 공백)·세그먼트(전부 '기타') 정보가 없어 해당 컬럼 제외.
 const statusColumns: DataTableColumn<ForeignResidentStatus>[] = [
   {
     header: "국적",
     accessor: (row) => <span className="font-semibold text-ink">{row.nationality}</span>
   },
-  {
-    header: "체류자격",
-    accessor: (row) => (
-      <span className="flex items-center gap-2">
-        <span className="chip chip-neutral font-mono">{row.visaCode}</span>
-        <span className="text-muted">{row.visaName}</span>
-      </span>
-    )
-  },
-  { header: "세그먼트", accessor: (row) => row.segmentType },
   {
     header: "인원",
     accessor: (row) => `${formatNumber(row.residentCount)}명`,
@@ -289,8 +283,8 @@ export default function NationalitiesPage() {
       })()}
 
       <Panel
-        title="체류자격별 인원 및 금융 니즈"
-        subtitle={statusRows.length > 0 ? `법무부 체류외국인 국적·자격별 현황(2024) · 국적별 집계 ${statusRows.length}건` : "체류자격은 금융행동의 직접 증거가 아닌 세그먼트 가설입니다."}
+        title="국적별 인원 및 금융 니즈"
+        subtitle={statusRows.length > 0 ? `법무부 체류외국인 국적별 현황(2024) · 국적별 집계 ${statusRows.length}건` : "국적별 집계 데이터가 아직 없습니다."}
         right={<span className="chip chip-neutral">{statusRows.length > 0 ? "실데이터" : "가설 기반"}</span>}
         bodyClassName="p-2"
       >
