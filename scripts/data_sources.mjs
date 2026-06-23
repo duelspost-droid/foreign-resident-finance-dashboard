@@ -711,6 +711,46 @@ export const publicDataSources = [
     notes: "서울 25개 자치구×국적별 외국인 월별 통계. serviceName 실제 값 확인 필요. SEOUL_OPENAPI_KEY GitHub Secret 등록 필요."
   },
 
+  // ── 발굴 후보 승격(fileData, datasetId 자동수집 경로) — 단일지역 통계 보강 ──
+  // openapi 후보(15149911 등)는 수집기가 XML 미지원 + 활용신청 필요로 부적합 → fileData 로 승격.
+  // (서울 15046960 은 metadata_without_file=다운로드 파일 미제공/활용신청 필요로 제외. 활용신청 후 추가 가능.)
+  {
+    id: "jeju_foreign_resident_status_district",
+    type: "file",
+    datasetId: "15045324",
+    detailPk: null,
+    provider: "제주특별자치도",
+    title: "제주특별자치도 체류자격별 외국인주민현황",
+    category: "외국인 직접 통계",
+    baseDate: "2024-12-31",
+    targetTable: "foreign_resident_region",
+    outputBaseName: "jeju_foreign_resident_status_district",
+    sourceUrl: "https://www.data.go.kr/data/15045324/fileData.do",
+    updateCycle: "연",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "제주 체류자격별 외국인주민. 발굴 후보 15045324 승격."
+  },
+  {
+    id: "chungnam_foreign_resident_nationality",
+    type: "file",
+    datasetId: "15047604",
+    detailPk: null,
+    provider: "충청남도",
+    title: "충청남도 외국인주민 현황(국적별)",
+    category: "외국인 직접 통계",
+    baseDate: "2024-12-31",
+    targetTable: "foreign_resident_region",
+    outputBaseName: "chungnam_foreign_resident_nationality",
+    sourceUrl: "https://www.data.go.kr/data/15047604/fileData.do",
+    updateCycle: "연",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "충남 국적별 외국인주민. 발굴 후보 15047604 승격."
+  },
+
   // [비활성화 2026-06-17] mois_foreign_resident_by_region_api: apis.data.go.kr 응답 HTTP 500(no_data),
   // 미구독 openapi라 동작 안 함. 시군구 외국인주민은 file 소스(mois_foreign_resident_region_file, 1,692행)로
   // 이미 커버 → 영구 제외(수집기 실패 목록에서 제거).

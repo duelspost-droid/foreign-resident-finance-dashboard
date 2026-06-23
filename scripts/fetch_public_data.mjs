@@ -881,6 +881,17 @@ async function main() {
   }
   const allSources = [...publicDataSources, ...approvedSources];
 
+  // 개발·검증용 단일/부분 소스 필터. ONLY_SOURCE=id1,id2(또는 datasetId) 콤마구분.
+  // 설정 시 발굴(discovery)을 건너뛰고 결과를 latest_fetch_catalog.partial.json 으로만 써서 운영 카탈로그를 보존한다.
+  const onlyFilter = (process.env.ONLY_SOURCE ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+  const isPartialRun = onlyFilter.length > 0;
+  const selectedSources = isPartialRun
+    ? allSources.filter((s) => onlyFilter.includes(s.id) || onlyFilter.includes(String(s.datasetId)))
+    : allSources;
+  if (isPartialRun) {
+    console.log(`[main] ONLY_SOURCE 필터: ${selectedSources.length}/${allSources.length}건만 수집(발굴·운영카탈로그 갱신 생략)`);
+  }
+
   const catalog = {
     generatedAt: new Date().toISOString(),
     keysPresent: {
@@ -890,11 +901,11 @@ async function main() {
       SEOUL_OPENAPI_KEY: Boolean(process.env.SEOUL_OPENAPI_KEY)
     },
     sources: [],
-    discovery: await discoverDataGoKr()
+    discovery: isPartialRun ? [] : await discoverDataGoKr()
   };
 
   // 승인된 후보를 포함한 전체 소스를 동시성 제한 병렬로 수집.
-  const tasks = allSources.map((source) => async () => {
+  const tasks = selectedSources.map((source) => async () => {
     const collector = COLLECTORS[source.type];
     const registry = {
       id: source.id,
@@ -924,9 +935,13 @@ async function main() {
 
   catalog.sources = await runConcurrent(tasks, COLLECT_CONCURRENCY);
 
-  const catalogPath = join(catalogDir, `fetch_catalog_${todayStamp()}.json`);
+  const catalogPath = isPartialRun
+    ? join(catalogDir, "latest_fetch_catalog.partial.json")
+    : join(catalogDir, `fetch_catalog_${todayStamp()}.json`);
   await writeFile(catalogPath, JSON.stringify(catalog, null, 2), "utf8");
-  await writeFile(join(catalogDir, "latest_fetch_catalog.json"), JSON.stringify(catalog, null, 2), "utf8");
+  if (!isPartialRun) {
+    await writeFile(join(catalogDir, "latest_fetch_catalog.json"), JSON.stringify(catalog, null, 2), "utf8");
+  }
 
   console.log(JSON.stringify({ ok: true, catalogPath, sourceCount: catalog.sources.length }, null, 2));
 }
