@@ -29,6 +29,7 @@ import {
 import Link from "next/link";
 import { PageHero } from "@/components/ui/PageHero";
 import { InsightChat } from "@/components/ai/InsightChat";
+import { InsightDigest } from "@/components/ai/InsightDigest";
 import { formatNumber } from "@/lib/utils/format";
 
 // ── 유스케이스 카드 (전략 큐레이션 = 정적 콘텐츠) ─────────────────────────────
@@ -249,6 +250,9 @@ export default function FinancialInsightsPage() {
         </div>
         <InsightChat />
       </section>
+
+      {/* ── 오늘의 금융 인사이트 제안 (매일 자동 생성: 수집데이터 + 웹 동향) ── */}
+      <InsightDigest />
 
       {/* ── 데이터 탐색 바로가기 ── */}
       <section>

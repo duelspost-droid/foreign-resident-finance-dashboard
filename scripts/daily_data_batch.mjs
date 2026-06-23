@@ -50,6 +50,7 @@ async function main() {
     ["node", ["scripts/sync_candidates.mjs"]],
     ["node", ["scripts/build_real_data.mjs"]],
     ["node", ["scripts/build_warehouse_snapshots.mjs"]],
+    ["node", ["scripts/build_insight_digest.mjs"]],
     [npmCommand, ["run", "typecheck"]],
     [npmCommand, ["run", "build"]]
   ];
