@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
-import { realDataSummary } from "@/lib/data/generated/realData";
 import { DataFreshnessChip } from "@/components/ui/DataFreshness";
 import { FeedbackButton } from "@/components/feedback/FeedbackButton";
 import { useMobileNav } from "@/components/layout/MobileNavContext";
@@ -25,7 +24,8 @@ const pageNames: Record<string, { title: string; sub: string }> = {
   "/admin":               { title: "데이터 에이전트 승인", sub: "데이터 에이전트가 찾은 신규 데이터셋 후보 승인" },
 };
 
-export function Header() {
+// generatedAt 은 서버(layout)에서 주입 — 거대 realData 모듈을 클라이언트 번들에서 끊기 위함.
+export function Header({ generatedAt }: { generatedAt: string }) {
   const pathname = usePathname();
   const { toggle } = useMobileNav();
   const page = pageNames[pathname] ?? { title: pathname.split("/").at(-1) ?? "페이지", sub: "" };
@@ -56,7 +56,7 @@ export function Header() {
       {/* 우측: 제안하기 버튼 + 데이터 수집일·신선도(뷰 시점 실시간 판정) */}
       <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
         <FeedbackButton />
-        <DataFreshnessChip generatedAt={realDataSummary.generatedAt} />
+        <DataFreshnessChip generatedAt={generatedAt} />
       </div>
     </header>
   );

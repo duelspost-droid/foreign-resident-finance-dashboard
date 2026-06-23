@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { realDataSummary } from "@/lib/data/generated/realData";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { AnalyticsBeacon } from "@/components/analytics/AnalyticsBeacon";
@@ -24,7 +25,7 @@ export default function RootLayout({
           <div className="app-shell">
             <Sidebar />
             <main className="main-shell">
-              <Header />
+              <Header generatedAt={realDataSummary.generatedAt} />
               <div className="content-shell">{children}</div>
             </main>
           </div>
