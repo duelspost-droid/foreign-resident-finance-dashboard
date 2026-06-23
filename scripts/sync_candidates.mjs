@@ -116,6 +116,24 @@ async function main() {
     "utf8"
   );
   console.log(`[sync_candidates] 승인된 후보 ${approved?.length ?? 0}건 레지스트리 기록`);
+
+  // 미결정(pending) 후보도 최신 스냅샷으로 기록 — 레포에서 발굴 큐를 제목과 함께 가시화.
+  // (CI는 Supabase 경로라 이 갱신이 없으면 pending_candidates.json 이 옛 로컬 스냅샷으로 stale 됨)
+  const { data: pending, error: pendErr } = await client
+    .from("source_candidates")
+    .select("dataset_id,kind,provider,title,keyword,url,priority,rationale,status,discovered_at")
+    .eq("status", "pending")
+    .order("provider", { ascending: true });
+  if (pendErr) {
+    console.error("[sync_candidates] 미결정 목록 조회 오류:", pendErr.message);
+    return;
+  }
+  await writeFile(
+    join(registryDir, "pending_candidates.json"),
+    JSON.stringify({ generatedAt: new Date().toISOString(), candidates: pending ?? [] }, null, 2),
+    "utf8"
+  );
+  console.log(`[sync_candidates] 미결정 후보 ${pending?.length ?? 0}건 레지스트리 기록`);
 }
 
 main().catch((error) => {
