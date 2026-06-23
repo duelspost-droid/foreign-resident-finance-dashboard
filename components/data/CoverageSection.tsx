@@ -42,6 +42,7 @@ export function CoverageSection() {
   const [disp, setDisp] = useState<Record<string, SourceDisposition>>({});
   const [connected, setConnected] = useState<boolean | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
+  const [failedId, setFailedId] = useState<string | null>(null); // 저장 실패(인증 외) 표시용
   // 쓰기는 관리자 토큰 검증 후에만 가능(운영 콘솔 로그인 시 저장된 토큰 재사용). 읽기/표시는 무인증.
   const [token, setToken] = useState("");
   const [authState, setAuthState] = useState<"checking" | "authed" | "unauthed">("checking");
@@ -87,6 +88,7 @@ export function CoverageSection() {
   async function decide(s: DataLineageSource, value: string) {
     if (!canWrite) return;
     setBusyId(s.id);
+    setFailedId(null);
     const d = value === "" ? null : (value as "shown" | "planned" | "archived" | "excluded");
     const target = d === "planned" ? disp[s.id]?.targetTable ?? suggestTarget(s).table : undefined;
     const res = await setSourceDisposition(s.id, d, token, target);
@@ -97,6 +99,8 @@ export function CoverageSection() {
       }));
     } else if (res.authExpired) {
       handleAuthExpired();
+    } else {
+      setFailedId(s.id); // 저장 실패(예: 백엔드 함수 미배포) — 조용한 스냅백 대신 표시
     }
     setBusyId(null);
   }
@@ -104,9 +108,11 @@ export function CoverageSection() {
   async function retarget(s: DataLineageSource, target: string) {
     if (!canWrite) return;
     setBusyId(s.id);
+    setFailedId(null);
     const res = await setSourceDisposition(s.id, "planned", token, target);
     if (res.ok) setDisp((m) => ({ ...m, [s.id]: { disposition: "planned", targetTable: target, note: m[s.id]?.note ?? null } }));
     else if (res.authExpired) handleAuthExpired();
+    else setFailedId(s.id);
     setBusyId(null);
   }
 
@@ -114,6 +120,7 @@ export function CoverageSection() {
   async function saveNote(id: string, note: string) {
     if (!canWrite) return;
     setBusyId(id);
+    setFailedId(null);
     const res = await setSourceChartConfig(id, note, token);
     if (res.ok) {
       setDisp((m) => ({
@@ -122,6 +129,8 @@ export function CoverageSection() {
       }));
     } else if (res.authExpired) {
       handleAuthExpired();
+    } else {
+      setFailedId(id);
     }
     setBusyId(null);
   }
@@ -233,6 +242,11 @@ export function CoverageSection() {
                   <p className="text-[11px] font-medium text-teal-700">→ {SURFACED[s.id]}</p>
                 ) : (
                   <div className="space-y-1.5">
+                    {failedId === s.id && (
+                      <p className="rounded bg-rose-50 px-2 py-1 text-[11px] font-semibold text-rose-700">
+                        저장 실패 — 백엔드 함수가 아직 배포되지 않았거나 일시 오류일 수 있어요. 잠시 후 다시 시도하세요.
+                      </p>
+                    )}
                     <div className="flex flex-wrap items-center gap-1.5">
                       <select
                         value={disp[s.id]?.disposition ?? ""}

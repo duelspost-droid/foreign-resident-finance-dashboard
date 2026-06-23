@@ -142,27 +142,27 @@ export default function CompliancePage() {
       {/* 소수 셀 처리 기준 */}
       <Panel
         title="소수 셀 처리 기준"
-        subtitle="재식별 위험을 낮추기 위한 임계값 기반 마스킹·병합 규칙."
+        subtitle="재식별 위험을 낮추기 위한 소수 셀 마스킹."
         right={
           <div className="flex flex-wrap items-center gap-2">
-            <span className="chip chip-down">count &lt; 5 → 비공개</span>
-            <span className="chip chip-neutral">count &lt; 10 → 병합</span>
+            <span className="chip chip-down">현재 적용: count 1~4 → “&lt;5”</span>
+            <span className="chip chip-neutral">예시 정책: 상위 지역 병합</span>
           </div>
         }
       >
         <div className="grid gap-3 md:grid-cols-2">
           <div className="overflow-hidden rounded-xl border border-slate-800 bg-slate-950">
             <div className="flex items-center gap-2 border-b border-slate-800 px-4 py-2 text-xs font-semibold text-rose-300">
-              <EyeOff size={13} aria-hidden /> 비공개 마스킹
+              <EyeOff size={13} aria-hidden /> 소수 셀 마스킹 <span className="ml-auto rounded bg-teal-900/60 px-1.5 py-0.5 text-[10px] text-teal-300">적용 중</span>
             </div>
             <pre className="overflow-x-auto p-4 text-sm text-slate-100">
-{`if count < 5:
-  display = "비공개"`}
+{`if 1 <= count <= 4:
+  display = "<5"`}
             </pre>
           </div>
           <div className="overflow-hidden rounded-xl border border-slate-800 bg-slate-950">
             <div className="flex items-center gap-2 border-b border-slate-800 px-4 py-2 text-xs font-semibold text-sky-300">
-              <Layers size={13} aria-hidden /> 상위 지역 병합
+              <Layers size={13} aria-hidden /> 상위 지역 병합 <span className="ml-auto rounded bg-slate-700 px-1.5 py-0.5 text-[10px] text-slate-300">예시(미적용)</span>
             </div>
             <pre className="overflow-x-auto p-4 text-sm text-slate-100">
 {`if count < 10:
@@ -171,8 +171,8 @@ export default function CompliancePage() {
           </div>
         </div>
         <p className="mt-4 text-sm leading-6 text-slate-700">
-          실제 운영에서는 금융기관 내부 규정, 개인정보보호법, 신용정보법, 데이터 결합 심사
-          기준에 맞춰 임계값과 병합 정책을 조정해야 합니다.
+          현재 구현은 <strong>범용 원본 뷰어</strong>에서 1~4명 소수 셀을 “&lt;5”로 마스킹합니다(정부 공표 집계는 이미 소수 셀이 없어 미적용).
+          상위 지역 병합은 예시 정책이며, 실제 운영에서는 금융기관 내부 규정·개인정보보호법·신용정보법·데이터 결합 심사 기준에 맞춰 임계값과 병합 정책을 도입·조정해야 합니다.
         </p>
       </Panel>
     </div>

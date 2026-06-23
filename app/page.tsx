@@ -123,12 +123,12 @@ export default function DashboardPage() {
       sub: hasRealTotal ? "법무부 실데이터 2024" : "법무부 체류통계"
     },
     {
-      label: "등록외국인",
+      label: "장기체류 외국인",
       display: formatNumber(kpiSummary.registeredResidents > 0 ? kpiSummary.registeredResidents : 1_320_540),
       unit: "명",
       icon: Banknote,
       color: "#3157a4",
-      sub: "장기체류 비자 합계 · 금융 주고객"
+      sub: "주요 비자타입 합계 · 금융 주고객"
     },
     {
       label: "외국인 유학생",
