@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-22T15:58:29.151Z",
+  "generatedAt": "2026-06-23T05:40:36.101Z",
   "approved": [
     {
       "id": 2,
@@ -24,12 +24,12 @@
       "kind": "fileData",
       "provider": "법무부",
       "title": "법무부_24(장단기체류외국인) 월별 체류자격별 체류외국인 현황",
-      "keyword": "체류외국인 월별 통계",
+      "keyword": "출입국 외국인 체류",
       "url": "https://www.data.go.kr/data/15100016/fileData.do",
       "target_table": "foreign_resident_status",
       "status": "approved",
       "priority": "mid",
-      "rationale": "월별 체류외국인 총계·국적별 추이(시장 규모 월 단위 모니터링)",
+      "rationale": "체류자격·국적·지역 추가 통계 발굴",
       "discovered_at": "2026-06-18T08:09:00.89898+00:00",
       "decided_at": "2026-06-21T15:53:40.962+00:00",
       "decided_by": "admin",
