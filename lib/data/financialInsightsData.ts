@@ -44,7 +44,7 @@ export const marketKpis = {
       : "집계 대기",
   remittanceProxyYear: realBopTransferIncome.latestYear,
   e9WorkerEstimate: e9Count > 0 ? `${(e9Count / 10000).toFixed(0)}만명` : "약 30만명",
-  sourceLabel: kpiSummary.totalResidents > 0 ? "법무부 실데이터(2024) 기준" : "법무부 2024.12 공식통계 기준",
+  sourceLabel: kpiSummary.totalResidents > 0 ? "법무부 국적별 현황 2024" : "법무부 공식통계",
   collectedRowCount: realDataSummary.statusRowCount
 } as const;
 

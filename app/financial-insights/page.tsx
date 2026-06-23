@@ -292,7 +292,7 @@ export default function FinancialInsightsPage() {
               label: "총 체류외국인",
               value: formatNumber(marketKpis.totalForeignResidents) + "명",
               delta: marketKpis.totalForeignResidentsYoy ? marketKpis.totalForeignResidentsYoy + " YoY" : "법무부 체류통계",
-              sub: "법무부 2024.12",
+              sub: "법무부 국적별 현황 2024",
               color: "bg-teal-700",
               icon: Users
             },

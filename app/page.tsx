@@ -120,7 +120,7 @@ export default function DashboardPage() {
       unit: "명",
       icon: Users,
       color: "#0f766e",
-      sub: hasRealTotal ? "법무부 실데이터 2024" : "법무부 체류통계"
+      sub: hasRealTotal ? "법무부 국적별 현황 2024" : "법무부 체류통계"
     },
     {
       label: "장기체류 외국인",

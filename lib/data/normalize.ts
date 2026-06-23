@@ -7,6 +7,7 @@ export function normalizeCollection<T>(
   rows: T[],
   selector: (row: T) => number
 ): Map<T, number> {
+  if (rows.length === 0) return new Map(); // 빈 배열 시 Math.min/max(...[])=±Infinity→NaN 전파 방지
   const values = rows.map(selector);
   const min = Math.min(...values);
   const max = Math.max(...values);
