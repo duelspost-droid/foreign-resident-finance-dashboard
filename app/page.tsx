@@ -32,7 +32,6 @@ import {
   healthInsuranceData,
   kpiSummary,
   multiculturalFamilyData,
-  multiculturalFamilySummary,
   nationalityAgeTotals,
   sampleOpportunityRows,
   stayVisaTypes,
@@ -259,7 +258,7 @@ export default function DashboardPage() {
       label: "면세 소비 1위 국적",
       value: dutyTop ? dutyTop.nationality : "—",
       unit: "",
-      sub: dutyTop ? `외국인 면세매출의 ${dutyTopPct.toFixed(1)}% · ${realDutyFreeSales.latestYear} JDC` : "데이터 없음",
+      sub: dutyTop ? `외국인 면세매출의 ${dutyTopPct.toFixed(1)}% · ${realDutyFreeSales.latestYear} JDC(제주)` : "데이터 없음",
       delta: null,
       deltaSuffix: "",
       deltaInverse: false,
@@ -744,7 +743,7 @@ export default function DashboardPage() {
           {hasMulticulturalFamily && (
             <Link href="/economy#welfare" className="surface surface-hover p-5">
               <h3 className="surface-title mb-1">다문화가족 현황</h3>
-              <p className="surface-subtitle mb-3">여가부 · 총 {formatNumber(multiculturalFamilySummary.totalCount)}명 · 지역별 상위 5</p>
+              <p className="surface-subtitle mb-3">여가부 · 부산 표본 · 자치구 상위 5</p>
               <div className="space-y-2">
                 {[...multiculturalFamilyData].sort((a, b) => b.total - a.total).slice(0, 5).map((m, i) => {
                   const max = [...multiculturalFamilyData].sort((a, b) => b.total - a.total)[0]?.total ?? 1;
