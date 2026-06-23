@@ -62,3 +62,11 @@
 - [MED·소유자/RLS] page_views/feature_requests/ai_insight_chat 공유 session_id anon SELECT 상관(RLS 강화+함수 경유 필요).
 - [LOW·잔여하드닝(검토 지적)] 관리자 토큰이 localStorage(JS접근)에 있고 공개 /data-pipeline에서 읽힘 → XSS/기기탈취 시 토큰 재생(2차침해 전제, 핵심 잠금엔 영향X). 근본 완화는 HttpOnly 쿠키 인증 전환(admin 인증모델 전반 개편) — 별도 과제. (note는 JSON.parse·escaped 렌더라 stored-XSS 싱크 아님 확인)
 - [LOW·데이터파이프라인] EPS 산업 합계가 byCountry 합산 / 다문화·status 변환에 '계'(합계행) 가드 부재 → `build_real_data.mjs` 수정 + 데이터 재생성·검증 필요(최저 우선).
+
+### 📰 매일 금융 인사이트 제안 [2026-06-23, 커밋 5fbce0d] — 프론트/생성기 완료 · 소유자 2스텝
+- `scripts/build_insight_digest.mjs`: 수집 catalog 인벤토리 + Claude(opus-4-8) 웹검색 → 은행·캐피탈 인사이트 4~6건/일 → `lib/data/generated/insightDigest.json`(최근 30일 누적). 키 없으면 데이터 폴백, 항상 exit 0. `data:ci`·`daily_data_batch`에 단계 추가.
+- `components/ai/InsightDigest.tsx` → 금융 인사이트 페이지 '오늘 + 지난 인사이트(히스토리)'.
+- **⏳ 소유자 2스텝**:
+  1. **GitHub Actions 시크릿에 `ANTHROPIC_API_KEY` 추가** (Settings→Secrets→Actions). 없으면 CI는 수집데이터 폴백만 생성.
+  2. **`.github/workflows/pages.yml` 변경 적용** — OAuth workflow 스코프 제한으로 claude가 푸시 못함. 로컬 워킹트리에 diff 대기 중(env에 `ANTHROPIC_API_KEY` 줄 + commit file_pattern에 `lib/data/generated/insightDigest.json`). 소유자가 직접 커밋·푸시.
+  - 로컬 수동 생성/테스트: `ANTHROPIC_API_KEY=... npm run data:digest`.
