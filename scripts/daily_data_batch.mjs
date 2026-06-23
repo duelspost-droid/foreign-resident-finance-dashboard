@@ -49,6 +49,7 @@ async function main() {
     ["node", ["scripts/fetch_public_data.mjs"]],
     ["node", ["scripts/sync_candidates.mjs"]],
     ["node", ["scripts/build_real_data.mjs"]],
+    ["node", ["scripts/build_monthly_residents.mjs"]],
     ["node", ["scripts/build_warehouse_snapshots.mjs"]],
     ["node", ["scripts/build_insight_digest.mjs"]],
     [npmCommand, ["run", "typecheck"]],

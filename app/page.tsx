@@ -20,6 +20,7 @@ import { VisaDonutChart } from "@/components/charts/VisaDonutChart";
 import { RegionMap } from "@/components/charts/RegionMap";
 import { SparkLineChart } from "@/components/charts/SparkLineChart";
 import { MiniBarChart } from "@/components/charts/MiniBarChart";
+import { MonthlyResidentsChart } from "@/components/charts/MonthlyResidentsChart";
 import {
   econActivityData,
   hasEconActivity,
@@ -61,6 +62,7 @@ import {
 import { DataFreshnessBanner } from "@/components/ui/DataFreshness";
 import { DONUT_PALETTE } from "@/lib/theme/chartPalette";
 import { realAvgOpportunityScore, realSidoOpportunity } from "@/lib/data/opportunityReal";
+import { realMonthlyResidents } from "@/lib/data/generated/monthlyResidents";
 
 const SEG_COLORS: Record<string, string> = {
   "비전문취업 근로자": "#0f766e",
@@ -659,6 +661,35 @@ export default function DashboardPage() {
           </div>
         </div>
       </section>
+
+      {/* ── 월별 체류외국인 추이 (실데이터: 법무부 월별 체류자격별 체류외국인 15100016) ── */}
+      {realMonthlyResidents.hasData && (
+        <section className="surface">
+          <div className="surface-header flex items-start justify-between">
+            <div>
+              <h3 className="surface-title">월별 체류외국인 추이</h3>
+              <p className="surface-subtitle">
+                법무부 월별 체류자격별 · {realMonthlyResidents.firstMonth}~{realMonthlyResidents.latestMonth} · 실데이터
+              </p>
+            </div>
+            <div className="text-right">
+              <p className="text-lg font-black text-ink">{formatNumber(realMonthlyResidents.latestTotal ?? 0)}명</p>
+              {realMonthlyResidents.yoyPct != null && (
+                <p
+                  className="text-[11px] font-semibold"
+                  style={{ color: realMonthlyResidents.yoyPct >= 0 ? "#0f766e" : "#be123c" }}
+                >
+                  전년동월比 {realMonthlyResidents.yoyPct >= 0 ? "+" : ""}
+                  {realMonthlyResidents.yoyPct}%
+                </p>
+              )}
+            </div>
+          </div>
+          <div style={{ height: 300 }}>
+            <MonthlyResidentsChart data={realMonthlyResidents.months} />
+          </div>
+        </section>
+      )}
 
       {/* ── 체류자격별 실인원 (실데이터) ── */}
       {hasRealVisaData && stayVisaTypes.length > 0 && (
