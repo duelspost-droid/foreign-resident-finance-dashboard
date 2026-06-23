@@ -1,12 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { sampleOpportunityRows } from "@/lib/data/mockData";
-import {
-  hasSidoForeignerStats,
-  sidoForeignerLatestYear,
-  sidoForeignerStats
-} from "@/lib/data/regionAggregates";
 import { scoreColor } from "@/lib/utils/format";
 
 const SIDO_CENTROIDS = [
@@ -82,18 +76,26 @@ type Tooltip = {
   r: number;
 };
 
-export function RegionMap() {
+// 데이터는 서버(페이지)에서 regionAggregates·mockData 에서 주입 — 거대 realData 모듈을 클라 번들에서 분리.
+export function RegionMap({
+  stats,
+  realMode,
+  latestYear,
+  fallbackRows
+}: {
+  stats: Record<string, number>;
+  realMode: boolean;
+  latestYear: number | null;
+  fallbackRows: readonly { sido: string; overallOpportunityScore: number; residentCount: number }[];
+}) {
   const [tooltip, setTooltip] = useState<Tooltip | null>(null);
-
-  // 실데이터(행안부 시도별 외국인주민)가 있으면 인구 규모 지도, 없으면 표본 기회점수 지도.
-  const realMode = hasSidoForeignerStats;
 
   const sidoStats = SIDO_CENTROIDS.map((sido) => {
     if (realMode) {
-      const count = sidoForeignerStats[sido.name] ?? 0;
+      const count = stats[sido.name] ?? 0;
       return { ...sido, score: 0, count, hasData: count > 0 };
     }
-    const rows = sampleOpportunityRows.filter((r) => r.sido === sido.name);
+    const rows = fallbackRows.filter((r) => r.sido === sido.name);
     const score =
       rows.length > 0
         ? rows.reduce((s, r) => s + r.overallOpportunityScore, 0) / rows.length
@@ -259,7 +261,7 @@ export function RegionMap() {
         ))}
         <span className="ml-auto text-slate-400">
           버블 크기 = 외국인 수
-          {realMode && sidoForeignerLatestYear ? ` · 실데이터 ${sidoForeignerLatestYear}` : " · 표본"}
+          {realMode && latestYear ? ` · 실데이터 ${latestYear}` : " · 표본"}
         </span>
       </div>
     </div>

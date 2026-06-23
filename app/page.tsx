@@ -34,6 +34,7 @@ import {
   multiculturalFamilyData,
   multiculturalFamilySummary,
   nationalityAgeTotals,
+  sampleOpportunityRows,
   stayVisaTypes,
   visaDistributionData
 } from "@/lib/data/mockData";
@@ -54,6 +55,8 @@ import { formatNumber, scoreColor } from "@/lib/utils/format";
 import {
   hasSidoForeignerStats,
   hasSidoForeignerTrend,
+  sidoForeignerLatestYear,
+  sidoForeignerStats,
   sidoForeignerTrend
 } from "@/lib/data/regionAggregates";
 import { DataFreshnessBanner } from "@/components/ui/DataFreshness";
@@ -523,7 +526,12 @@ export default function DashboardPage() {
             </Link>
           </div>
           <div className="flex items-center justify-center px-2 pb-2">
-            <RegionMap />
+            <RegionMap
+              stats={sidoForeignerStats}
+              realMode={hasSidoForeignerStats}
+              latestYear={sidoForeignerLatestYear}
+              fallbackRows={sampleOpportunityRows}
+            />
           </div>
           {hasSidoForeignerTrend && (
             <div className="border-t border-slate-100 px-4 py-3">

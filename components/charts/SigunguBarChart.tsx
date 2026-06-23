@@ -12,7 +12,6 @@ import {
   XAxis,
   YAxis
 } from "recharts";
-import { realSigunguResidents } from "@/lib/data/regionAggregates";
 import { formatNumber } from "@/lib/utils/format";
 
 const TOP_N = 20;
@@ -23,15 +22,15 @@ const COLORS = [
   "#7a8da0", "#047857", "#059669", "#854d0e", "#92530f"
 ];
 
-const chartData = realSigunguResidents.slice(0, TOP_N).map((r, i) => ({
-  sigungu: r.sigungu,
-  count: r.count,
-  color: COLORS[i % COLORS.length],
-}));
-
-export function SigunguBarChart() {
+// data 는 서버(페이지)에서 regionAggregates.realSigunguResidents 를 주입 — 거대 realData 모듈을 클라 번들에서 분리.
+export function SigunguBarChart({ data }: { data: readonly { sigungu: string; count: number }[] }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
+  const chartData = data.slice(0, TOP_N).map((r, i) => ({
+    sigungu: r.sigungu,
+    count: r.count,
+    color: COLORS[i % COLORS.length],
+  }));
 
   if (!mounted) {
     return <div className="flex h-full items-center justify-center text-sm text-muted">차트 준비 중</div>;

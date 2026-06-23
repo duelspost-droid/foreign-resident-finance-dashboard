@@ -17,6 +17,7 @@ import {
   hasSidoForeignerStats,
   hasSidoForeignerTrend,
   sidoForeignerLatestYear,
+  sidoForeignerStats,
   sidoForeignerTotal,
   sidoForeignerTrend
 } from "@/lib/data/regionAggregates";
@@ -244,7 +245,7 @@ export default function RegionsPage() {
           bodyClassName="p-0"
         >
           <div style={{ height: 560 }} className="px-2 py-3">
-            <SigunguBarChart />
+            <SigunguBarChart data={realSigunguResidents} />
           </div>
         </Panel>
       )}
@@ -271,7 +272,12 @@ export default function RegionsPage() {
           bodyClassName="p-3 pt-2"
         >
           <div className="h-[460px]">
-            <RegionMap />
+            <RegionMap
+              stats={sidoForeignerStats}
+              realMode={hasSidoForeignerStats}
+              latestYear={sidoForeignerLatestYear}
+              fallbackRows={sampleOpportunityRows}
+            />
           </div>
         </Panel>
       </div>

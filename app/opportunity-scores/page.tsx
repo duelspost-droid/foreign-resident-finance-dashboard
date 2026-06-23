@@ -8,6 +8,7 @@ import { sampleOpportunityRows } from "@/lib/data/mockData";
 import { RealSidoOpportunityTable } from "@/components/data/RealSidoOpportunityTable";
 import { SidoScoreCompositionChart } from "@/components/charts/SidoScoreCompositionChart";
 import {
+  OPPORTUNITY_WEIGHTS,
   hasRealSidoOpportunity,
   realSidoOpportunity
 } from "@/lib/data/opportunityReal";
@@ -121,7 +122,7 @@ export default function OpportunityScoresPage() {
           bodyClassName="p-0"
         >
           <div style={{ height: 560 }} className="px-4 py-4">
-            <SidoScoreCompositionChart />
+            <SidoScoreCompositionChart rows={realSidoOpportunity} weights={OPPORTUNITY_WEIGHTS} />
           </div>
         </Panel>
       )}

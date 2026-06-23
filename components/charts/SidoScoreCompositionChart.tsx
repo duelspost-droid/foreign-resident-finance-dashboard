@@ -11,7 +11,7 @@ import {
   XAxis,
   YAxis
 } from "recharts";
-import { OPPORTUNITY_WEIGHTS, realSidoOpportunity } from "@/lib/data/opportunityReal";
+import type { RealSidoOpportunity } from "@/lib/data/opportunityReal";
 
 const SHORT: Record<string, string> = {
   "서울특별시": "서울", "부산광역시": "부산", "대구광역시": "대구",
@@ -22,25 +22,31 @@ const SHORT: Record<string, string> = {
   "경상남도": "경남", "제주특별자치도": "제주",
 };
 
-const chartData = [...realSidoOpportunity]
-  .sort((a, b) => b.overallScore - a.overallScore)
-  .map((r) => ({
-    sido: SHORT[r.sido] ?? r.sido,
-    sizeContrib: Math.round((r.sizeScore * OPPORTUNITY_WEIGHTS.size) / 100),
-    studentContrib: Math.round((r.studentScore * OPPORTUNITY_WEIGHTS.student) / 100),
-    growthContrib: Math.round((r.growthScore * OPPORTUNITY_WEIGHTS.growth) / 100),
-    overall: r.overallScore,
-  }));
-
 const LABEL_MAP: Record<string, string> = {
   sizeContrib: "규모 기여 (×50%)",
   studentContrib: "유학생 기여 (×30%)",
   growthContrib: "성장 기여 (×20%)",
 };
 
-export function SidoScoreCompositionChart() {
+// rows·weights 는 서버(페이지)에서 opportunityReal 에서 주입 — 거대 realData 모듈을 클라 번들에서 분리.
+export function SidoScoreCompositionChart({
+  rows,
+  weights
+}: {
+  rows: readonly RealSidoOpportunity[];
+  weights: { size: number; student: number; growth: number };
+}) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
+  const chartData = [...rows]
+    .sort((a, b) => b.overallScore - a.overallScore)
+    .map((r) => ({
+      sido: SHORT[r.sido] ?? r.sido,
+      sizeContrib: Math.round((r.sizeScore * weights.size) / 100),
+      studentContrib: Math.round((r.studentScore * weights.student) / 100),
+      growthContrib: Math.round((r.growthScore * weights.growth) / 100),
+      overall: r.overallScore,
+    }));
 
   if (!mounted) {
     return <div className="flex h-full items-center justify-center text-sm text-muted">차트 준비 중</div>;
