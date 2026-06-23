@@ -63,6 +63,15 @@
 - [LOW·잔여하드닝(검토 지적)] 관리자 토큰이 localStorage(JS접근)에 있고 공개 /data-pipeline에서 읽힘 → XSS/기기탈취 시 토큰 재생(2차침해 전제, 핵심 잠금엔 영향X). 근본 완화는 HttpOnly 쿠키 인증 전환(admin 인증모델 전반 개편) — 별도 과제. (note는 JSON.parse·escaped 렌더라 stored-XSS 싱크 아님 확인)
 - [LOW·데이터파이프라인] EPS 산업 합계가 byCountry 합산 / 다문화·status 변환에 '계'(합계행) 가드 부재 → `build_real_data.mjs` 수정 + 데이터 재생성·검증 필요(최저 우선).
 
+### 🔍 5영역 개선 감사 [2026-06-23] — 우선순위 로드맵
+- ✅ **[성능 완료] realData 클라 번들 7.7M→303K** (커밋 bb06019·d45f7ce): Header prop화 + RegionMap·SigunguBarChart·SidoScoreCompositionChart를 prop 기반으로 전환해 regionAggregates/opportunityReal 서버 전용화 → 거대 배열 트리셰이킹. 빌드 검증.
+- **[보안·HIGH]** ① insight-ai Edge Function 인증·레이트리밋 전무(금전적 DoS) ② `source_candidates` anon 쓰기→승인 주입→배치 SSRF. (③ ai_insight_chat anon DELETE/SELECT, ④ page_views/feature_requests anon SELECT 익명추적 — MED). surface_config 락다운(008/009)과 같은 패턴으로 확장 필요.
+- **[신뢰성·HIGH]** ① 자동화 테스트 0개(maskSmallCell·normalize·score·build_real_data 순수함수부터 Vitest) ② CI(pages.yml)에 typecheck 단계 없음 + data:ci continue-on-error → 오데이터/타입깨짐 배포 가능(build 앞 `npm run typecheck` 1줄).
+- **[데이터파이프라인·MED]** ① build_real_data 단일 transform 예외→배치 전면중단(per-source 가드) ② HTML→CSV 오저장이 거짓 성공 기록. ('계' 합계행 가드 부재는 LOW·현재 무증상. ※docs의 'EPS byCountry 합산'은 부정확—실제는 산업측 독립합계·연도정합 검증부재).
+- **[SEO/a11y·HIGH]** 라우트별 metadata 전무(Header.pageNames 재사용)·favicon/OG/sitemap 없음·차트 SVG 대체텍스트 없음(~24개)·error/not-found 페이지 없음.
+- **[코드품질·MED]** ESLint 전무, xlsx@0.18.5 취약점(devDep 이동), 죽은 export(sampleFinanceAggregates·sampleRegionInsights), 고아 .ts 4종, page.tsx 806줄+BarList 저활용 중복.
+- (잔여 성능: recharts 280K 동적import·genericData lazy — 8MB 해결로 우선순위 낮아짐)
+
 ### 📰 매일 금융 인사이트 제안 [2026-06-23, 커밋 5fbce0d] — 프론트/생성기 완료 · 소유자 2스텝
 - `scripts/build_insight_digest.mjs`: 수집 catalog 인벤토리 + Claude(opus-4-8) 웹검색 → 은행·캐피탈 인사이트 4~6건/일 → `lib/data/generated/insightDigest.json`(최근 30일 누적). 키 없으면 데이터 폴백, 항상 exit 0. `data:ci`·`daily_data_batch`에 단계 추가.
 - `components/ai/InsightDigest.tsx` → 금융 인사이트 페이지 '오늘 + 지난 인사이트(히스토리)'.
