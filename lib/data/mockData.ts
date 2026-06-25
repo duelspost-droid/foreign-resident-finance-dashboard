@@ -1,4 +1,3 @@
-import type { FinanceSegmentAggregate } from "@/lib/types/finance";
 import type {
   ForeignResidentRegionMonth,
   ForeignResidentSegment,
@@ -15,7 +14,6 @@ import {
 } from "./score";
 import {
   generateOpportunityAction,
-  generateRegionInsight,
   generateUniversityCampaign
 } from "./insights";
 import {
@@ -362,63 +360,6 @@ export const sampleUniversityData: ForeignStudentUniversity[] = [
   }
 ];
 
-export const sampleFinanceAggregates: FinanceSegmentAggregate[] = [
-  {
-    id: "f1",
-    baseMonth: "2025-12-01",
-    sido: "경기도",
-    sigungu: "안산시",
-    nationality: "우즈베키스탄",
-    segmentType: "비전문취업 근로자",
-    accountOpenCount: 920,
-    debitCardIssueCount: 780,
-    remittanceCount: 3400,
-    remittanceAmount: 1750000000,
-    fxExchangeCount: 610,
-    payrollAccountCount: 1100,
-    mobileForeignLanguageUserCount: 2400,
-    averageBalance: 980000,
-    delinquencyRate: 1.7,
-    sourceName: "내부 금융 집계 샘플"
-  },
-  {
-    id: "f2",
-    baseMonth: "2025-12-01",
-    sido: "서울특별시",
-    sigungu: "동대문구",
-    nationality: "몽골",
-    segmentType: "유학생",
-    accountOpenCount: 620,
-    debitCardIssueCount: 590,
-    remittanceCount: 1280,
-    remittanceAmount: 480000000,
-    fxExchangeCount: 450,
-    payrollAccountCount: 120,
-    mobileForeignLanguageUserCount: 980,
-    averageBalance: 430000,
-    delinquencyRate: 0.6,
-    sourceName: "내부 금융 집계 샘플"
-  },
-  {
-    id: "f3",
-    baseMonth: "2025-12-01",
-    sido: "충청남도",
-    sigungu: "아산시",
-    nationality: "베트남",
-    segmentType: "비전문취업 근로자",
-    accountOpenCount: 710,
-    debitCardIssueCount: 650,
-    remittanceCount: 2600,
-    remittanceAmount: 1220000000,
-    fxExchangeCount: 520,
-    payrollAccountCount: 870,
-    mobileForeignLanguageUserCount: 1780,
-    averageBalance: 760000,
-    delinquencyRate: 1.4,
-    sourceName: "내부 금융 집계 샘플"
-  }
-];
-
 const scoreSources: RegionScoreSource[] = [
   {
     id: "score-ansan",
@@ -546,13 +487,6 @@ export const sampleOpportunityRows: RegionOpportunityRow[] = calculateRegionScor
       recommendedAction: generateOpportunityAction(base)
     };
   });
-
-export const sampleRegionInsights = sampleOpportunityRows.map((row) => ({
-  id: row.id,
-  title: `${row.sido} ${row.sigungu}`,
-  body: generateRegionInsight(row),
-  score: row.overallOpportunityScore
-}));
 
 export const sampleUniversityOpportunities: UniversityOpportunity[] =
   sampleUniversityData.map((university) => {

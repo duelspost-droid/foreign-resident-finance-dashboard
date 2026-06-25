@@ -1,5 +1,6 @@
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
+import { pathToFileURL } from "node:url";
 import { publicDataSources } from "./data_sources.mjs";
 
 const root = process.cwd();
@@ -72,7 +73,7 @@ function decodeCsv(buffer) {
   return scored.sort((a, b) => b.score - a.score)[0].text;
 }
 
-function toNumber(value) {
+export function toNumber(value) {
   if (typeof value !== "string") return Number(value ?? 0);
   const normalized = value.replace(/,/g, "").trim();
   const parsed = Number(normalized);
@@ -89,7 +90,7 @@ function firstValue(row, candidates) {
   return "";
 }
 
-function inferSegment(visaCode, visaName) {
+export function inferSegment(visaCode, visaName) {
   const v = `${visaCode} ${visaName}`.toUpperCase();
   if (/D-?2|유학/.test(v)) return "유학생";
   if (/D-?4|어학연수|일반연수/.test(v)) return "어학연수생";
@@ -116,7 +117,7 @@ function needsForSegment(segment) {
 }
 
 // 열 헤더에서 "D2(유학)" → { code: "D-2", name: "유학" } 추출.
-function parseVisaColHeader(col) {
+export function parseVisaColHeader(col) {
   const m = col.match(/^([A-Z]+\d+[a-z]?\d*)\((.+)\)$/);
   if (m) {
     const rawCode = m[1];
@@ -127,7 +128,7 @@ function parseVisaColHeader(col) {
 }
 
 // 가로형(wide) MOJ CSV 감지 — 국적 컬럼은 있으나 체류외국인수 컬럼이 없으면 wide.
-function isWideFormat(rows) {
+export function isWideFormat(rows) {
   if (!rows.length) return false;
   const headers = Object.keys(rows[0]).filter((k) => k !== "__rowNumber");
   return headers.includes("국적") && !headers.includes("체류외국인수") && headers.length > 6;
@@ -726,6 +727,12 @@ function transformUniversityStats(rows) {
     .filter((r) => r.name);
 }
 
+// 수집기가 data.go.kr 활용신청 미구독 등으로 CSV 대신 HTML 에러페이지를 .csv 로 저장하는
+// 경우가 있다. 이를 CSV 로 파싱하면 거짓 성공(쓰레기 1행)이 되므로 HTML 응답은 데이터 없음으로 처리.
+function looksLikeHtml(text) {
+  return /^\s*(<!doctype html|<html|<\?xml|<head[\s>]|<body[\s>])/i.test(String(text ?? "").slice(0, 600));
+}
+
 async function readLatestRaw(prefix) {
   const files = await readdir(rawDir).catch(() => []);
   const target = files
@@ -734,7 +741,12 @@ async function readLatestRaw(prefix) {
     .at(-1);
   if (!target) return null;
   const path = join(rawDir, target);
-  return { path, text: decodeCsv(await readFile(path)) };
+  const text = decodeCsv(await readFile(path));
+  if (looksLikeHtml(text)) {
+    console.error(`[GUARD] ${target}: HTML 응답이 CSV로 저장됨 — 데이터 아님으로 스킵(last-good 유지)`);
+    return null;
+  }
+  return { path, text };
 }
 
 // 경제활동 시계열 파서: nationality 없는 KOSIS 집계 (취업자·실업자·비경활 등).
@@ -780,7 +792,7 @@ function pickField(row, mapping) {
   return "";
 }
 
-function periodToMonth(period) {
+export function periodToMonth(period) {
   const p = String(period ?? "").trim();
   if (/^\d{6}$/.test(p)) return `${p.slice(0, 4)}-${p.slice(4, 6)}-01`;
   if (/^\d{4}$/.test(p)) return `${p}-12-01`;
@@ -873,7 +885,7 @@ async function buildApiSources() {
 // 신규 KOSIS 소스는 PRD_DE(연도)·C1~C3_NM(분류)·ITM_NM(항목)·DT(값) 구조라 제네릭 버킷이 아닌
 // 소스별 전용 집계로 차트용 export를 만든다.
 const KOSIS_TOTAL_LABELS = ["합계", "총계", "계", "전체", "소계"];
-function readKosisDimRows(rows) {
+export function readKosisDimRows(rows) {
   // 분류 키(연도+C1~C3+ITM)로 중복 제거 — 일부 KOSIS 표가 동일 셀을 2회 반환한다.
   const seen = new Set();
   const out = [];
@@ -965,7 +977,7 @@ function buildKediRegion(raw) {
   return { latestYear: ly, byRegion };
 }
 // ITM 계층 표기('- 상용근로자','· 취업자' 등)에서 들여쓰기·기호 제거.
-const cleanItm = (s) => String(s ?? "").replace(/^[\s·\-]+/, "").replace(/\s+/g, " ").trim();
+export const cleanItm = (s) => String(s ?? "").replace(/^[\s·\-]+/, "").replace(/\s+/g, " ").trim();
 // 종사상지위 (DT_2FB007F): c1=대상, c2=성별, itm=종사상지위. 외국인·계 기준 종사상지위 leaf 분포 + 합계 추세.
 function buildEmploymentStatus(raw, targetC1 = "외국인") {
   const rows = readKosisDimRows(raw).filter((r) => r.c1 === targetC1 && r.c2 === "계");
@@ -1079,7 +1091,7 @@ function buildExchangeRate(dailyRaw) {
 // 단일 기간/항목이 직전 대비 dropPct% 이상 급락하면 손상·집계기준 변동 의심으로 플래그.
 // (예: 유학생 추이 2024 행이 D-2 절반으로 손상돼 total -24.7% 급락한 사례를 잡아낸다.
 //  참고: COVID 2020 유학생 -14.9%는 정상이므로 dropPct 기본 20%는 이를 오탐하지 않는다.)
-function detectTrendAnomalies(series, { valueKey = "value", dropPct = 20, label = "series", periodKey = "year" } = {}) {
+export function detectTrendAnomalies(series, { valueKey = "value", dropPct = 20, label = "series", periodKey = "year" } = {}) {
   const out = [];
   const sorted = [...(series ?? [])]
     .filter((r) => r && typeof r[valueKey] === "number" && Number.isFinite(r[valueKey]))
@@ -1106,7 +1118,7 @@ function detectTrendAnomalies(series, { valueKey = "value", dropPct = 20, label 
 
 // 단일 체류자격(E-9·H-2·전문인력 등) 경제활동인구(스톡)의 연도별 비정상 급락 감지(#11 방어).
 // apiEconActivity 의 경제활동 소스만, 합계행 제외, (체류자격,연도) 첫 측정값(15세이상인구·스톡)으로 시계열 구성.
-function detectVisaActivityAnomalies(rows) {
+export function detectVisaActivityAnomalies(rows) {
   const ECON_SRC = "kosis_foreigner_economic_activity";
   const TOTAL = new Set(["계", "합계", "총계", "전체", "소계"]);
   const byCatYear = new Map();
@@ -1242,6 +1254,19 @@ async function main() {
   await ensureDir(processedDir);
   await ensureDir(generatedDir);
 
+  // per-source 변환 가드: 한 소스의 변환 예외가 배치 전체를 중단시키지 않도록 격리한다.
+  // 실패 시 fallback(빈 기본값)을 반환 → 이후 lastGood()가 직전 커밋값을 복원한다.
+  const transformErrors = [];
+  const safe = (label, fn, fallback) => {
+    try {
+      return fn();
+    } catch (e) {
+      transformErrors.push({ label, message: String(e?.message ?? e) });
+      console.error(`[GUARD] ${label} 변환 실패 — 기본값/last-good 유지: ${e?.message ?? e}`);
+      return fallback;
+    }
+  };
+
   // 법무부 체류외국인 국적별 현황 (전체, 단기+장기 포함) — 국적 분포 집계
   const statusRaw = await readLatestRaw("moj_foreign_resident_status_2024");
   let statusRows = [];
@@ -1249,13 +1274,17 @@ async function main() {
   let allVisaSegments = [];
   if (statusRaw) {
     const parsed = parseCsv(statusRaw.text);
-    statusRows = transformStatus(parsed);
-    const agg = aggregateStatusWide(parsed, "법무부 체류외국인 국적 및 체류자격별 현황", "https://www.data.go.kr/data/3045188/fileData.do");
+    statusRows = safe("법무부 국적별현황(status)", () => transformStatus(parsed), []);
+    const agg = safe(
+      "법무부 국적별현황(분포)",
+      () => aggregateStatusWide(parsed, "법무부 체류외국인 국적 및 체류자격별 현황", "https://www.data.go.kr/data/3045188/fileData.do"),
+      { nationals: [], visaTypes: [], visaSegments: [] }
+    );
     nationalityDistribution = agg.nationals;
     allVisaSegments = agg.visaSegments;
   }
 
-  const regionRows = summarizeStatus(statusRows).slice(0, 200);
+  const regionRows = safe("국적별 지역 요약", () => summarizeStatus(statusRows).slice(0, 200), []);
 
   // 법무부 외국인체류데이터 (장기체류 중심) — 비자/세그먼트 분포 집계
   const stayRaw = await readLatestRaw("moj_foreign_stay_data_2024");
@@ -1263,7 +1292,11 @@ async function main() {
   let stayVisaTypes = [];
   if (stayRaw) {
     const parsed = parseCsv(stayRaw.text);
-    const agg = aggregateStatusWide(parsed, "법무부 외국인체류데이터", "https://www.data.go.kr/data/3069963/fileData.do");
+    const agg = safe(
+      "법무부 외국인체류데이터",
+      () => aggregateStatusWide(parsed, "법무부 외국인체류데이터", "https://www.data.go.kr/data/3069963/fileData.do"),
+      { nationals: [], visaTypes: [], visaSegments: [] }
+    );
     stayVisaSegments = agg.visaSegments;
     stayVisaTypes = agg.visaTypes;
   }
@@ -1278,13 +1311,17 @@ async function main() {
   let studentByYear = [];
   let studentByVisa = [];
   let studentSummary = { hasData: false, latestYear: null, total: 0, degree: 0, language: 0, yoy: 0 };
-  const monthlyAgg = studentMonthlyRaw ? summarizeStudentsMonthly(parseCsv(studentMonthlyRaw.text)) : null;
+  const monthlyAgg = safe("유학생 월별 추이", () => (studentMonthlyRaw ? summarizeStudentsMonthly(parseCsv(studentMonthlyRaw.text)) : null), null);
   if (monthlyAgg) {
     studentByYear = monthlyAgg.yearSeries;
     studentByVisa = monthlyAgg.byVisa;
     studentSummary = monthlyAgg.summary;
   } else if (studentRaw) {
-    const agg = summarizeStudents(transformStudentStay(parseCsv(studentRaw.text)));
+    const agg = safe(
+      "유학생 연도별 추이",
+      () => summarizeStudents(transformStudentStay(parseCsv(studentRaw.text))),
+      { yearSeries: [], byVisa: [], summary: { hasData: false, latestYear: null, total: 0, degree: 0, language: 0, yoy: 0 } }
+    );
     studentByYear = agg.yearSeries;
     studentByVisa = agg.byVisa;
     studentSummary = agg.summary;
@@ -1295,7 +1332,11 @@ async function main() {
   let monthlyNationalityDist = [];
   if (monthlyRaw) {
     const parsed = parseCsv(monthlyRaw.text);
-    const agg = aggregateStatusWide(parsed, "법무부 출입국 외국인 통계월보", "https://www.data.go.kr/data/3069975/fileData.do");
+    const agg = safe(
+      "법무부 통계월보",
+      () => aggregateStatusWide(parsed, "법무부 출입국 외국인 통계월보", "https://www.data.go.kr/data/3069975/fileData.do"),
+      { nationals: [], visaTypes: [], visaSegments: [] }
+    );
     monthlyNationalityDist = agg.nationals;
   }
   // 월보 합계가 연간 현황보다 크면(더 최신) 월보 우선 사용.
@@ -1311,7 +1352,7 @@ async function main() {
   let universityRanking = { latestYear: null, universities: [], universityCount: 0, totalForeignStudents: 0 };
   if (academyRaw) {
     // baseYear 2025: academyinfo(3069982) 학생단위 레코드는 연도 컬럼이 없음. 라이브 확인 결과 데이터 빈티지=2025년 기준.
-    universityRanking = transformAcademyUniversities(parseCsv(academyRaw.text), 2025);
+    universityRanking = safe("대학알리미 유학생 랭킹", () => transformAcademyUniversities(parseCsv(academyRaw.text), 2025), universityRanking);
   }
   // moe_foreign_student_latest(세종 고교 파일) fallback 제거: academyinfo 미수집 시 빈값으로 두고,
   // 아래 last-good 보존이 직전 커밋 랭킹을 유지한다(고교 오데이터로 회귀 금지). transformMoeStudentsBySchool는 미사용.
@@ -1322,8 +1363,8 @@ async function main() {
   let nationalityByAge = { ageGroups: [], nationalities: [], items: [] };
   if (moisRaw) {
     const moisParsed = parseCsv(moisRaw.text);
-    regionResidents = transformRegionResidents(moisParsed);
-    nationalityByAge = transformNationalityByAge(moisParsed);
+    regionResidents = safe("행안부 시군구 외국인주민", () => transformRegionResidents(moisParsed), regionResidents);
+    nationalityByAge = safe("행안부 국적×연령", () => transformNationalityByAge(moisParsed), nationalityByAge);
   }
 
   // 국민건강보험공단 외국인 건강보험 적용인구.
@@ -1339,39 +1380,46 @@ async function main() {
   const universityStats = uniStatsRaw ? transformUniversityStats(parseCsv(uniStatsRaw.text)) : [];
 
   // API(KOSIS/openapi) 보조 데이터. 키 없으면 빈 배열. MOJ 1차 데이터와 분리 유지.
-  const { apiStatus, apiRegion, apiEconActivity, parsedFiles } = await buildApiSources();
+  let apiBundle = { apiStatus: [], apiRegion: [], apiEconActivity: [], parsedFiles: [] };
+  try {
+    apiBundle = await buildApiSources();
+  } catch (e) {
+    transformErrors.push({ label: "API 소스(KOSIS/openapi)", message: String(e?.message ?? e) });
+    console.error(`[GUARD] API 소스 변환 실패 — 빈값 유지: ${e?.message ?? e}`);
+  }
+  const { apiStatus, apiRegion, apiEconActivity, parsedFiles } = apiBundle;
 
   // KOSIS 외국인 금융/소득·EPS 도입·유학생 국적/학위 (신규, JSON 직접 전용 파싱).
   const wageRaw = await readLatestRawJson("kosis_immigrant_wage_distribution");
-  let foreignWage = wageRaw ? buildBandDist(wageRaw.rows, "외국인") : { latestYear: null, unit: "", distribution: [], trend: [] };
+  let foreignWage = safe("외국인 임금분포", () => (wageRaw ? buildBandDist(wageRaw.rows, "외국인") : null), null) ?? { latestYear: null, unit: "", distribution: [], trend: [] };
   const contractRaw = await readLatestRawJson("kosis_immigrant_contract_period");
-  let foreignContract = contractRaw ? buildBandDist(contractRaw.rows, "외국인") : { latestYear: null, unit: "", distribution: [], trend: [] };
+  let foreignContract = safe("외국인 고용계약기간", () => (contractRaw ? buildBandDist(contractRaw.rows, "외국인") : null), null) ?? { latestYear: null, unit: "", distribution: [], trend: [] };
   const epsCountryRaw = await readLatestRawJson("kosis_eps_introduction_by_country");
   const epsIndustryRaw = await readLatestRawJson("kosis_eps_introduction_by_industry");
-  let epsIntroduction = buildEps(epsCountryRaw?.rows ?? [], epsIndustryRaw?.rows ?? []);
+  let epsIntroduction = safe("EPS 도입", () => buildEps(epsCountryRaw?.rows ?? [], epsIndustryRaw?.rows ?? []), { latestYear: null, unit: "명", byCountry: [], byIndustry: [], trend: [] });
   const studentNatRaw = await readLatestRawJson("kosis_foreign_student_nationality_visa");
-  let studentNationality = studentNatRaw ? buildStudentNationality(studentNatRaw.rows) : { latestYear: null, byNationality: [], byDegree: [] };
+  let studentNationality = safe("유학생 국적/학위", () => (studentNatRaw ? buildStudentNationality(studentNatRaw.rows) : null), null) ?? { latestYear: null, byNationality: [], byDegree: [] };
   const kediRaw = await readLatestRawJson("kosis_kedi_higher_edu_foreign_students");
-  let kediStudentRegion = kediRaw ? buildKediRegion(kediRaw.rows) : { latestYear: null, byRegion: [], byDegree: [] };
+  let kediStudentRegion = safe("KEDI 고등교육 유학생", () => (kediRaw ? buildKediRegion(kediRaw.rows) : null), null) ?? { latestYear: null, byRegion: [], byDegree: [] };
   const empStatusRaw = await readLatestRawJson("kosis_immigrant_employment_status");
-  let foreignEmploymentStatus = empStatusRaw ? buildEmploymentStatus(empStatusRaw.rows) : { latestYear: null, unit: "", distribution: [], trend: [], regularShare: null };
+  let foreignEmploymentStatus = safe("외국인 종사상지위", () => (empStatusRaw ? buildEmploymentStatus(empStatusRaw.rows) : null), null) ?? { latestYear: null, unit: "", distribution: [], trend: [], regularShare: null };
   const industryRaw = await readLatestRawJson("kosis_immigrant_employment_by_industry");
-  let foreignIndustry = industryRaw ? buildIndustryEmployment(industryRaw.rows) : { latestYear: null, unit: "", distribution: [], trend: [] };
+  let foreignIndustry = safe("외국인 산업별 취업", () => (industryRaw ? buildIndustryEmployment(industryRaw.rows) : null), null) ?? { latestYear: null, unit: "", distribution: [], trend: [] };
   const ageRaw = await readLatestRawJson("kosis_immigrant_econ_activity_by_age");
-  let foreignAgeActivity = ageRaw ? buildAgeActivity(ageRaw.rows) : { latestYear: null, unit: "", distribution: [] };
+  let foreignAgeActivity = safe("외국인 연령별 경제활동", () => (ageRaw ? buildAgeActivity(ageRaw.rows) : null), null) ?? { latestYear: null, unit: "", distribution: [] };
 
   // 한국은행 ECOS: 이전소득수지(본국송금 대리)·환율.
   const ecosTransferARaw = await readLatestRawJson("ecos_bop_transfer_income");
   const ecosTransferMRaw = await readLatestRawJson("ecos_bop_transfer_monthly");
-  let bopTransferIncome = buildBopTransferIncome(ecosTransferARaw?.rows ?? [], ecosTransferMRaw?.rows ?? []);
+  let bopTransferIncome = safe("ECOS 이전소득수지", () => buildBopTransferIncome(ecosTransferARaw?.rows ?? [], ecosTransferMRaw?.rows ?? []), { unit: "백만달러", latestYear: null, latestValue: null, annual: [], monthly: [] });
   const ecosFxRaw = await readLatestRawJson("ecos_exchange_rate_daily");
-  let exchangeRate = ecosFxRaw ? buildExchangeRate(ecosFxRaw.rows) : { latest: {}, monthly: [] };
+  let exchangeRate = safe("ECOS 환율", () => (ecosFxRaw ? buildExchangeRate(ecosFxRaw.rows) : null), null) ?? { latest: {}, monthly: [] };
 
   // 외국인 소비·거래 (data.go.kr file): 면세점 국적별 매출 · 제주 외국인 토지취득.
   const dutyFreeRaw = await readLatestRaw("jdc_dutyfree_sales_by_nationality");
-  let dutyFreeSales = dutyFreeRaw ? buildDutyFreeSales(parseCsv(dutyFreeRaw.text)) : { latestYear: null, unit: "원", byNationality: [], monthly: [], foreignTotal: 0, internalTotal: 0 };
+  let dutyFreeSales = safe("면세점 국적별 매출", () => (dutyFreeRaw ? buildDutyFreeSales(parseCsv(dutyFreeRaw.text)) : null), null) ?? { latestYear: null, unit: "원", byNationality: [], monthly: [], foreignTotal: 0, internalTotal: 0 };
   const landRaw = await readLatestRaw("jeju_foreign_land_acquisition");
-  let foreignLandAcquisition = landRaw ? buildForeignLandAcquisition(parseCsv(landRaw.text)) : { latestYear: null, unit: "백만원", byNationality: [], total: 0 };
+  let foreignLandAcquisition = safe("제주 외국인 토지취득", () => (landRaw ? buildForeignLandAcquisition(parseCsv(landRaw.text)) : null), null) ?? { latestYear: null, unit: "백만원", byNationality: [], total: 0 };
 
   // ── last-good 보존: 공공 API(KOSIS·data.go.kr 등) 일시장애로 이번 수집이 빈/열화되면 ──
   // 직전 커밋된 realData.ts의 값을 유지해 배포 데이터가 회귀하지 않게 한다.
@@ -1420,14 +1468,14 @@ async function main() {
   // ── 데이터 품질 가드: 주요 '스톡' 시계열의 비정상 급락 감지(손상/집계기준변동 조기 경보) ──
   // 스톡(누적 인원·잔액) 시계열에만 적용한다. EPS 신규 도입 등 'flow(연간 신규)' 시계열은
   // 본질적으로 변동이 커(2020 COVID 국경폐쇄로 -87% 등 정상적 급변) 가드 대상에서 제외.
-  const dataQualityWarnings = [
+  const dataQualityWarnings = safe("데이터 품질 가드", () => [
     ...detectTrendAnomalies(studentByYear, { valueKey: "total", dropPct: 20, label: "유학생 추이(전체)" }),
     ...detectTrendAnomalies(studentByYear, { valueKey: "degree", dropPct: 30, label: "유학생 추이(학위 D-2)" }),
     ...detectTrendAnomalies(bopTransferIncome.annual ?? [], { valueKey: "value", dropPct: 35, label: "이전소득수지(ECOS)" }),
     ...detectTrendAnomalies(foreignWage.trend ?? [], { valueKey: "value", dropPct: 30, label: "외국인 임금 합계" }),
     ...detectTrendAnomalies(foreignEmploymentStatus.trend ?? [], { valueKey: "value", dropPct: 25, label: "외국인 취업자 합계" }),
     ...detectVisaActivityAnomalies(apiEconActivity)
-  ];
+  ], []);
   if (dataQualityWarnings.length) {
     console.error(`\n[DATA-QUALITY] 비정상 급락 ${dataQualityWarnings.length}건 감지 — 소스 점검 필요:`);
     for (const w of dataQualityWarnings) console.error(`  - ${w.message}`);
@@ -1516,6 +1564,8 @@ async function main() {
     `export const realDataSummary = ${JSON.stringify({
       generatedAt: new Date().toISOString(),
       dataQualityWarningCount: dataQualityWarnings.length,
+      transformErrorCount: transformErrors.length,
+      transformErrors,
       retainedExportCount: retainedExports.length,
       retainedExports,
       statusRowCount: statusRows.length,
@@ -1556,12 +1606,24 @@ async function main() {
   );
   await writeFile(join(generatedDir, "realData.ts"), generated, "utf8");
 
-  const lineageTotals = await buildLineage();
+  let lineageTotals = { sources: 0, downloaded: 0, cached: 0, skippedNoKey: 0, failed: 0 };
+  try {
+    lineageTotals = await buildLineage();
+  } catch (e) {
+    transformErrors.push({ label: "lineage 생성", message: String(e?.message ?? e) });
+    console.error(`[GUARD] lineage 생성 실패: ${e?.message ?? e}`);
+  }
+
+  if (transformErrors.length) {
+    console.error(`\n[GUARD] per-source 변환 실패 ${transformErrors.length}건 — 기본값/last-good로 격리됨(배치는 계속):`);
+    for (const t of transformErrors) console.error(`  - ${t.label}: ${t.message}`);
+  }
 
   console.log(
     JSON.stringify(
       {
         ok: true,
+        transformErrorCount: transformErrors.length,
         statusRowCount: statusRows.length,
         nationalityCount: finalNationalityDist.length,
         visaSegmentCount: visaDistribution.length,
@@ -1579,7 +1641,12 @@ async function main() {
   );
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+// 직접 실행(node build_real_data.mjs)일 때만 배치를 돌린다. 테스트가 순수함수만
+// import 할 때는 main()이 실행되지 않도록 엔트리포인트를 가드한다.
+const isDirectRun = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
+if (isDirectRun) {
+  main().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  });
+}
