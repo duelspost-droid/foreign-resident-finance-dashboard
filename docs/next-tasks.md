@@ -79,3 +79,15 @@
   1. **GitHub Actions 시크릿에 `ANTHROPIC_API_KEY` 추가** (Settings→Secrets→Actions). 없으면 CI는 수집데이터 폴백만 생성.
   2. **`.github/workflows/pages.yml` 변경 적용** — OAuth workflow 스코프 제한으로 claude가 푸시 못함. 로컬 워킹트리에 diff 대기 중(env에 `ANTHROPIC_API_KEY` 줄 + commit file_pattern에 `lib/data/generated/insightDigest.json`). 소유자가 직접 커밋·푸시.
   - 로컬 수동 생성/테스트: `ANTHROPIC_API_KEY=... npm run data:digest`.
+
+### 🌐 AI 웹 발굴 에이전트 [2026-06-25, 커밋 adb71d6] — 프론트/스크립트 완료 · 소유자 2스텝
+- `scripts/discover_web_sources.mjs`: Claude+웹검색으로 data.go.kr 밖(KOSIS·법무부·통계청·OECD·UNESCO·ILO·고용정보원·MDIS 등)까지 외국인 데이터 후보를 발굴 → `lib/data/generated/webDiscoveredSources.json`(시드 58건·9도메인). 키 없으면 기존 유지·exit 0.
+- **안전**: 리드는 '수동 검토용 외부 후보'다. 수집기는 아는 타입(file/openapi/kosis/ecos/seoul)만 수집 → 임의 웹 URL 자동 ingest 안 됨(SSRF 방지). `/data-pipeline` 'AI 웹 발굴 리드' 섹션(`components/data/WebDiscoverySection.tsx`)에 도메인별 렌더. `data:ci`·`data:discover` 배선.
+- **⏳ 소유자 2스텝**(insight digest와 동일 — 묶어 처리 가능):
+  1. GitHub Actions 시크릿 `ANTHROPIC_API_KEY`(insight digest와 공유). 없으면 발굴 폴백(빈/기존 유지).
+  2. `.github/workflows/pages.yml` auto-commit `file_pattern`에 `lib/data/generated/webDiscoveredSources.json` 추가(+ `insightDigest.json`). 미추가 시 매일 발굴 결과가 커밋되지 않음. (OAuth 스코프로 claude가 pages.yml 푸시 불가 → 소유자.)
+
+### ✅ 신뢰성·데이터·코드품질 [2026-06-25, 커밋 adb71d6]
+- **[신뢰성]** `build_real_data` 순수함수 `node:test` 17건(maskSmallCell·normalize·숫자파싱·비자분류·wide감지·KOSIS중복제거·급락감지) + `npm test`(node --test, 추가의존 0). ※ `score.ts`(확장자없는 상대 import)는 TS 로더 필요 → 후속(vitest). CI에 테스트/typecheck 단계 추가는 소유자(pages.yml).
+- **[데이터]** `build_real_data` per-source 변환 가드(`safe`) — 단일 소스 변환 예외가 배치 전면중단시키던 문제 해소(last-good/기본값 격리). HTML→CSV 오저장 감지(거짓 성공 차단). `realDataSummary.transformErrors` 노출.
+- **[코드품질]** 죽은 export 2종(sampleFinanceAggregates·sampleRegionInsights)+연쇄 미사용 import 제거, 고아 .ts 5종 삭제(ingest_* 3·calculate_scores·utils/region).
