@@ -83,8 +83,8 @@ export function WebDiscoverySection() {
       <div className="mx-2 mt-2 flex items-start gap-2 rounded-md bg-amber-50 px-3 py-2 text-xs text-amber-900">
         <ShieldAlert aria-hidden size={14} className="mt-0.5 shrink-0" />
         <p>
-          외부 후보 리드입니다. 수집기는 이 URL을 <strong>자동 수집하지 않습니다</strong>. 집계 데이터 여부·PII 위험·접근 방식을 검토한 뒤
-          정식 출처로 <strong>수동 등록</strong>해야 수집 대상이 됩니다.
+          자동수집 가능(data.go.kr)·PII낮음 리드는 <strong>위 승인 큐에 후보로 자동 적재</strong>되어 승인 시 다음 배치가 수집합니다.
+          그 외(국제기구·대시보드·PDF 등)는 수집기가 <strong>자동 수집하지 않으며</strong>(임의 URL fetch 차단), 아래에서 검토 후 수동 처리합니다.
         </p>
       </div>
 

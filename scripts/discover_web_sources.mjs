@@ -12,7 +12,15 @@
 // ⚠️ ANTHROPIC_API_KEY 가 있을 때만 AI 발굴. 없으면 기존 파일 유지(폴백). 항상 종료코드 0.
 
 import { readFile, writeFile } from "node:fs/promises";
+import { createClient } from "@supabase/supabase-js";
 import { publicDataSources } from "./data_sources.mjs";
+
+// 승인 큐(source_candidates) 적재용 — sync_candidates.mjs 와 동일한 키 규칙.
+const PUBLIC_URL = "https://nrdapzgtibbusvoaceuh.supabase.co";
+const PUBLIC_ANON_KEY = "sb_publishable_DckNy92c8WFGYWNPRsEjag_q-JQs9km";
+const supabaseUrl = process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL ?? PUBLIC_URL;
+const supabaseKey =
+  process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? PUBLIC_ANON_KEY;
 
 const OUT = "lib/data/generated/webDiscoveredSources.json";
 const MODEL = process.env.LLM_MODEL || "claude-opus-4-8";
@@ -186,6 +194,66 @@ function domainCounts(leads) {
   return [...m.entries()].map(([domain, count]) => ({ domain, count })).sort((a, b) => b.count - a.count);
 }
 
+// 이미 등록된 소스(중복 적재 방지).
+function registeredDatasetIds() {
+  const ids = new Set();
+  for (const s of publicDataSources) {
+    if (s.datasetId) ids.add(String(s.datasetId));
+    if (s.tblId) ids.add(String(s.tblId));
+  }
+  return ids;
+}
+
+// 발굴 리드 중 '자동수집 가능' 후보만 승인 큐(source_candidates)에 적재한다.
+// 기준: data.go.kr datasetId URL + PII낮음 + 미등록. 순수 웹 리드(OECD·대시보드 등)는
+// 적재하지 않고 JSON(검토 리드)로만 둔다. kind 는 항상 'fileData'(수집기가 datasetId로 파일 해석).
+// → 임의 웹 URL 이 승인→수집 경로로 자동 fetch 되는 일이 없다(SSRF 방지).
+function collectableCandidates(leads, registered) {
+  const out = [];
+  const seen = new Set();
+  for (const l of leads) {
+    const dm = String(l.url ?? "").match(/data\.go\.kr\/data\/(\d+)\//);
+    if (!dm) continue;
+    const id = dm[1];
+    if (registered.has(id)) continue;
+    if (l.piiRisk !== "낮음") continue; // 집계·저위험만 자동수집 후보로
+    const key = `${id}:fileData`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push({
+      dataset_id: id,
+      kind: "fileData",
+      provider: l.provider ?? null,
+      title: l.title ?? null,
+      keyword: "AI 웹 발굴",
+      url: l.url ?? null,
+      priority: l.confidence === "high" ? "high" : l.confidence === "low" ? "low" : "mid",
+      rationale: l.relevance ?? null,
+      status: "pending"
+    });
+  }
+  return out;
+}
+
+// 후보를 source_candidates 큐에 upsert(기존 관리자 결정 보존). Supabase 미연결/오류 시 무시(JSON은 이미 기록됨).
+async function upsertToApprovalQueue(candidates) {
+  if (candidates.length === 0) return;
+  try {
+    const client = createClient(supabaseUrl, supabaseKey);
+    const { data: existing } = await client.from("source_candidates").select("dataset_id,kind,status");
+    const statusOf = new Map((existing ?? []).map((r) => [`${r.dataset_id}:${r.kind}`, r.status]));
+    for (const c of candidates) {
+      const prev = statusOf.get(`${c.dataset_id}:${c.kind}`);
+      if (prev) c.status = prev; // 관리자 결정 유지
+    }
+    const { error } = await client.from("source_candidates").upsert(candidates, { onConflict: "dataset_id,kind" });
+    if (error) console.warn("webDiscovery: 승인 큐 적재 오류(무시):", error.message);
+    else console.log(`webDiscovery: 자동수집 가능 리드 ${candidates.length}건 → 데이터 에이전트 승인 큐 적재`);
+  } catch (e) {
+    console.warn("webDiscovery: 승인 큐 적재 실패(무시):", e?.message ?? e);
+  }
+}
+
 async function main() {
   const inventory = registeredInventory();
   const existing = await loadExisting();
@@ -216,6 +284,9 @@ async function main() {
   };
   await writeFile(OUT, JSON.stringify(payload, null, 2) + "\n", "utf8");
   console.log(`webDiscovery: ${leads.length}건 리드 발굴(${domainCounts(leads).length}개 도메인) → ${OUT}`);
+
+  // 자동수집 가능 리드는 '데이터 에이전트 승인' 큐로 → 관리자 승인 시 다음 배치가 수집.
+  await upsertToApprovalQueue(collectableCandidates(leads, registeredDatasetIds()));
 }
 
 main().catch((e) => {

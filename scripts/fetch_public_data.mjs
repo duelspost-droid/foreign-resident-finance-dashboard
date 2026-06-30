@@ -847,8 +847,17 @@ async function loadApprovedCandidateSources() {
     return [];
   }
   const kindToType = { fileData: "file", openapi: "openapi", kosis: "kosis", ecos: "ecos" };
-  return (payload.approved ?? []).map((c) => {
-    const type = kindToType[c.kind] ?? "file";
+  // SSRF 방지: 지원하는 kind 만, 그리고 id 형식이 맞는 후보만 수집한다. AI 웹 발굴이 임의 URL
+  // 후보(kind='web' 등)를 승인 큐에 넣더라도 자동 fetch 되지 않게 미지원/비정상은 여기서 제외.
+  return (payload.approved ?? [])
+    .filter((c) => {
+      const type = kindToType[c.kind];
+      if (!type) return false; // 미지원 kind(web 등) → 자동수집 제외
+      const id = String(c.dataset_id ?? "");
+      return type === "kosis" ? /^[A-Za-z0-9_]+$/.test(id) : /^\d+$/.test(id); // data.go.kr=숫자, KOSIS=코드
+    })
+    .map((c) => {
+    const type = kindToType[c.kind];
     return {
       id: `approved_${c.kind}_${c.dataset_id}`,
       type,

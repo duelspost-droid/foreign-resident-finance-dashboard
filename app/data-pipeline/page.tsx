@@ -25,7 +25,6 @@ import { dataSources, type DataSourceItem } from "@/lib/data/dataSources";
 import { DataTable, type DataTableColumn } from "@/components/tables/DataTable";
 import { DataFreshnessPanel } from "@/components/ui/DataFreshness";
 import { ApprovalSummaryLink } from "@/components/admin/ApprovalSummaryLink";
-import { WebDiscoverySection } from "@/components/data/WebDiscoverySection";
 
 // 공표 주기별 배지 색상.
 const CADENCE_TONE: Record<Cadence, string> = {
@@ -446,8 +445,7 @@ export default function DataPipelinePage() {
         )}
       </section>
 
-      {/* AI 웹 발굴 리드 — data.go.kr 밖 전 인터넷(외부 후보, 수동 검토용) */}
-      <WebDiscoverySection />
+      {/* AI 웹 발굴 리드는 '데이터 에이전트 승인' 화면으로 이동됨(발굴 결과 → 승인 흐름 일원화). */}
 
       {/* 출처 정의 및 한계 (큐레이션 — 구 출처 정의 페이지 흡수) */}
       <section className="surface mt-4">
