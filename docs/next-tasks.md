@@ -65,9 +65,9 @@
 
 ### 🔍 5영역 개선 감사 [2026-06-23] — 우선순위 로드맵
 - ✅ **[성능 완료] realData 클라 번들 7.7M→303K** (커밋 bb06019·d45f7ce): Header prop화 + RegionMap·SigunguBarChart·SidoScoreCompositionChart를 prop 기반으로 전환해 regionAggregates/opportunityReal 서버 전용화 → 거대 배열 트리셰이킹. 빌드 검증.
-- **[보안·HIGH]** ① insight-ai Edge Function 인증·레이트리밋 전무(금전적 DoS) ② `source_candidates` anon 쓰기→승인 주입→배치 SSRF. (③ ai_insight_chat anon DELETE/SELECT, ④ page_views/feature_requests anon SELECT 익명추적 — MED). surface_config 락다운(008/009)과 같은 패턴으로 확장 필요.
-- **[신뢰성·HIGH]** ① 자동화 테스트 0개(maskSmallCell·normalize·score·build_real_data 순수함수부터 Vitest) ② CI(pages.yml)에 typecheck 단계 없음 + data:ci continue-on-error → 오데이터/타입깨짐 배포 가능(build 앞 `npm run typecheck` 1줄).
-- **[데이터파이프라인·MED]** ① build_real_data 단일 transform 예외→배치 전면중단(per-source 가드) ② HTML→CSV 오저장이 거짓 성공 기록. ('계' 합계행 가드 부재는 LOW·현재 무증상. ※docs의 'EPS byCountry 합산'은 부정확—실제는 산업측 독립합계·연도정합 검증부재).
+- ✅ **[보안·HIGH 완료, 2026-06-25 커밋 c28d7c0]** ① insight-ai IP 레이트리밋(시간당 20회·010 `insight_ai_rate_check`)+입력상한 ② `source_candidates` 익명쓰기 차단(010 `admin_set_candidate_status` SECURITY DEFINER + 011 anon write/insert DROP + 프론트 `.rpc` 전환). **⏳ 소유자**: 010 적용 → insight-ai 재배포 → 프론트 배포·캐시만료 후 011 적용. (③ ai_insight_chat anon DELETE/SELECT, ④ page_views/feature_requests anon SELECT — MED 잔여.)
+- **[신뢰성·HIGH]** ✅ 순수함수 테스트 도입(maskSmallCell·normalize·score·build_real_data) — node:test 17건(커밋 adb71d6)+`score.ts` vitest 스캐폴드(커밋 47528ab, 소유자 `npm i -D vitest`). ⏳ **잔여(소유자)**: CI(pages.yml)에 `npm run typecheck`/`npm test` 단계 추가 + data:ci continue-on-error 보완.
+- ✅ **[데이터파이프라인·MED 완료, 커밋 adb71d6·a49fb3f]** ① build_real_data per-source 변환 가드(`safe`, 단일 예외→배치 전면중단 해소) ② HTML→CSV 오저장 감지(build_real_data·build_generic_data 양쪽 `looksLikeHtml` 가드). ('계' 합계행 가드는 LOW 잔여.)
 - ✅ **[SEO/a11y·HIGH 완료, 2026-06-25 커밋 a10d6fc]** `lib/seo.ts`(라우트별 title/description 단일 출처)+12개 공개 페이지 metadata·root layout(title template·OG·metadataBase·canonical·`app/icon.svg`)·`app/sitemap.ts`/`robots.ts`(정적 export, /admin 제외)·`app/admin/layout.tsx`(noindex)·`app/not-found.tsx`·`app/error.tsx`·차트 27개 인스턴스 `role="img"`+aria-label. tsc=0.
 - **[코드품질·MED]** ESLint 전무, xlsx@0.18.5 취약점(devDep 이동), 죽은 export(sampleFinanceAggregates·sampleRegionInsights), 고아 .ts 4종, page.tsx 806줄+BarList 저활용 중복.
 - (잔여 성능: recharts 280K 동적import·genericData lazy — 8MB 해결로 우선순위 낮아짐)
@@ -86,6 +86,7 @@
 - **⏳ 소유자 2스텝**(insight digest와 동일 — 묶어 처리 가능):
   1. GitHub Actions 시크릿 `ANTHROPIC_API_KEY`(insight digest와 공유). 없으면 발굴 폴백(빈/기존 유지).
   2. `.github/workflows/pages.yml` auto-commit `file_pattern`에 `lib/data/generated/webDiscoveredSources.json` 추가(+ `insightDigest.json`). 미추가 시 매일 발굴 결과가 커밋되지 않음. (OAuth 스코프로 claude가 pages.yml 푸시 불가 → 소유자.)
+- ✅ **발굴 리드 → 정식 소스 승격 (2026-06-25 커밋 a49fb3f)**: 자동수집 가능·집계·PII낮음 7종(법무부 체류·국적취득 15100013/47/46, 국립국제교육원 TOPIK·HURIK 3059526/15067926/15069776, 근로복지공단 산재 15104688)을 `data_sources.mjs`에 verified:false로 등록 → 다음 CI 배치에서 실수집 검증. 산업재해 마이크로데이터(15127634·식별변수)는 제외. ⏳ **잔여**: CI 수집 성공분 verified:true 승격 + 큐레이션 transform 연동(현재는 범용 뷰어 노출).
 
 ### ✅ 신뢰성·데이터·코드품질 [2026-06-25, 커밋 adb71d6]
 - **[신뢰성]** `build_real_data` 순수함수 `node:test` 17건(maskSmallCell·normalize·숫자파싱·비자분류·wide감지·KOSIS중복제거·급락감지) + `npm test`(node --test, 추가의존 0). ※ `score.ts`(확장자없는 상대 import)는 TS 로더 필요 → 후속(vitest). CI에 테스트/typecheck 단계 추가는 소유자(pages.yml).
