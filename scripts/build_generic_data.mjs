@@ -50,6 +50,11 @@ const isNum = (v) => {
   return s !== "" && Number.isFinite(Number(s));
 };
 
+// 수집기가 활용신청 미구독 등으로 CSV 대신 HTML 에러페이지를 .csv 로 저장하면 파싱 시
+// 쓰레기 행이 범용 뷰어에 노출된다. HTML 응답은 데이터 아님으로 스킵.
+const looksLikeHtml = (text) =>
+  /^\s*(<!doctype html|<html|<\?xml|<head[\s>]|<body[\s>])/i.test(String(text ?? "").slice(0, 600));
+
 // 측정값(차트 Y) 후보에서 제외할 컬럼: 이름이 연도/코드/번호/일련번호 등.
 const ID_OR_YEAR_RE = /번호|일련|순번|연번|코드|행번|연도|year|^년$|^no\.?$|^id$|seq|index|rownum/i;
 // 값이 대부분 4자리 연도(19xx/20xx)면 측정값이 아니라 범주(연도축).
@@ -91,7 +96,14 @@ for (const [id, { file }] of [...byId.entries()].sort()) {
   if (PII_SOURCE_SKIP.has(id)) continue; // 개인/사업자 명부성 소스는 통째 제외
   try {
     const buf = await readFile(join(RAW_DIR, file));
-    const parsed = /\.xlsx?$/i.test(file) ? await xlsxToRows(buf) : parseCsvRows(decodeCsv(buf));
+    let parsed;
+    if (/\.xlsx?$/i.test(file)) {
+      parsed = await xlsxToRows(buf);
+    } else {
+      const text = decodeCsv(buf);
+      if (looksLikeHtml(text)) { console.warn(`skip ${id}: HTML 응답(활용신청 필요/데이터 아님)`); continue; }
+      parsed = parseCsvRows(text);
+    }
     if (!parsed) continue; // xlsx 파싱 실패/라이브러리 없음 → 스킵
     const rowsAll = parsed.filter((r) => r.some((c) => String(c).trim()));
     if (rowsAll.length < 2) continue;
