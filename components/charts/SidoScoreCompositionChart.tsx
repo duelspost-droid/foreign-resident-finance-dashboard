@@ -56,7 +56,7 @@ export function SidoScoreCompositionChart({
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="시도별 기회 점수 구성 누적 막대 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <BarChart
         data={chartData}
         layout="vertical"
@@ -96,6 +96,6 @@ export function SidoScoreCompositionChart({
           />
         </Bar>
       </BarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }

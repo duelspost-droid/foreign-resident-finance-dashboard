@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import {
   ArrowUpRight,
@@ -76,6 +77,9 @@ const SEG_COLORS: Record<string, string> = {
 };
 
 const DONUT_COLORS = DONUT_PALETTE;
+
+
+export const metadata = pageMetadata("/");
 
 export default function DashboardPage() {
   const totalRows = realDataSummary.statusRowCount + realDataSummary.regionRowCount;

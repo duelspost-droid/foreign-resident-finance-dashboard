@@ -40,7 +40,7 @@ export function StudentHorizontalBarChart({
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="유학생 분포 가로 막대 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <BarChart
         data={data}
         layout="vertical"
@@ -62,6 +62,6 @@ export function StudentHorizontalBarChart({
         />
         <Bar dataKey="value" name={seriesName} fill={fill} radius={[0, 4, 4, 0]} />
       </BarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }

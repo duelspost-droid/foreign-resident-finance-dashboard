@@ -40,7 +40,7 @@ export function SigunguBarChart({ data }: { data: readonly { sigungu: string; co
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="시군구별 외국인 규모 막대 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <BarChart
         data={chartData}
         layout="vertical"
@@ -80,6 +80,6 @@ export function SigunguBarChart({ data }: { data: readonly { sigungu: string; co
           />
         </Bar>
       </BarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }

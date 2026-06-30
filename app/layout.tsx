@@ -4,12 +4,27 @@ import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { AnalyticsBeacon } from "@/components/analytics/AnalyticsBeacon";
 import { MobileNavProvider } from "@/components/layout/MobileNavContext";
+import { SITE } from "@/lib/seo";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "외국인 금융 인사이트",
-  description:
-    "집계 단위 외국인 통계와 금융 집계 데이터를 기반으로 시장 기회를 분석하는 B2B 대시보드"
+  metadataBase: new URL(SITE.url),
+  title: {
+    default: `${SITE.name} — 국내 거주 외국인 금융 시장 분석`,
+    template: `%s · ${SITE.name}`
+  },
+  description: SITE.description,
+  applicationName: SITE.name,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    siteName: SITE.name,
+    url: "/",
+    title: `${SITE.name} — 국내 거주 외국인 금융 시장 분석`,
+    description: SITE.description
+  },
+  robots: { index: true, follow: true }
 };
 
 export default function RootLayout({

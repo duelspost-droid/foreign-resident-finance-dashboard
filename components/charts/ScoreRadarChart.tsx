@@ -28,7 +28,7 @@ export function ScoreRadarChart({
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="기회 점수 구성 레이더 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <RadarChart data={data} outerRadius="74%">
         <PolarGrid />
         <PolarAngleAxis dataKey="metric" tick={{ fontSize: 12 }} />
@@ -56,6 +56,6 @@ export function ScoreRadarChart({
           strokeWidth={2}
         />
       </RadarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }

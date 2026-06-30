@@ -45,7 +45,7 @@ export function ForeignContractChart() {
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="외국인 고용계약기간 분포 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <BarChart
         data={subBands}
         layout="vertical"
@@ -64,6 +64,6 @@ export function ForeignContractChart() {
           ))}
         </Bar>
       </BarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }

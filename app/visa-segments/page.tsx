@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import { CreditCard, Layers, Users, Wallet } from "lucide-react";
 
 import { DataTable, type DataTableColumn } from "@/components/tables/DataTable";
@@ -90,6 +91,9 @@ const columns: DataTableColumn<SegmentMapRow>[] = [
     accessor: (row) => segmentRecommendationMap[row.segment].products.join(", ")
   }
 ];
+
+
+export const metadata = pageMetadata("/visa-segments");
 
 export default function VisaSegmentsPage() {
   return (

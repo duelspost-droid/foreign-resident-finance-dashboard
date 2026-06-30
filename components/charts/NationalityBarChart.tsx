@@ -28,7 +28,7 @@ export function NationalityBarChart({
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="국적별 체류 외국인 분포 막대 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <BarChart data={data} margin={{ top: 16, right: 18, bottom: 8, left: 8 }}>
         <CartesianGrid strokeDasharray="3 3" vertical={false} />
         <XAxis dataKey="nationality" tickLine={false} axisLine={false} />
@@ -42,6 +42,6 @@ export function NationalityBarChart({
         />
         <Bar dataKey="residents" name="거주자 수" fill="#0f766e" radius={[4, 4, 0, 0]} />
       </BarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }

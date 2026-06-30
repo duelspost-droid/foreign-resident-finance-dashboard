@@ -24,7 +24,7 @@ export function MonthlyResidentsChart({ data }: { data: readonly { month: string
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="월별 체류 외국인 추이 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <LineChart data={[...data]} margin={{ left: 8, right: 16, top: 8, bottom: 4 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="#eef2f7" />
         <XAxis dataKey="month" tick={{ fontSize: 10 }} interval="preserveStartEnd" minTickGap={28} />
@@ -40,6 +40,6 @@ export function MonthlyResidentsChart({ data }: { data: readonly { month: string
         />
         <Line type="monotone" dataKey="total" stroke="#0f766e" strokeWidth={2} dot={false} name="체류외국인" />
       </LineChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }

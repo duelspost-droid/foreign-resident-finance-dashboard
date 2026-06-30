@@ -35,7 +35,7 @@ export function SparkLineChart({
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="추세 스파크라인 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <LineChart data={data} margin={{ top: 6, right: 6, bottom: 0, left: 6 }}>
         <XAxis dataKey="label" tick={{ fontSize: 10, fill: "#94a3b8" }} tickLine={false} axisLine={false} interval="preserveStartEnd" />
         <Tooltip
@@ -44,6 +44,6 @@ export function SparkLineChart({
         />
         <Line type="monotone" dataKey="value" stroke={color} strokeWidth={2} dot={false} />
       </LineChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }

@@ -34,7 +34,7 @@ export function BopTransferIncomeChart() {
   if (data.length === 0) return <NotReady empty />;
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="이전소득수지(본국송금 대리지표) 연도별 추이 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <BarChart data={data} margin={{ top: 12, right: 16, bottom: 8, left: 4 }}>
         <CartesianGrid strokeDasharray="3 3" vertical={false} />
         <XAxis dataKey="year" tickLine={false} axisLine={false} fontSize={11} />
@@ -49,7 +49,7 @@ export function BopTransferIncomeChart() {
           ))}
         </Bar>
       </BarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }
 
@@ -62,7 +62,7 @@ export function BopTransferMonthlyChart() {
   if (data.length === 0) return <NotReady empty />;
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="이전소득수지 월별 추이 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <AreaChart data={data} margin={{ top: 12, right: 16, bottom: 8, left: 4 }}>
         <defs>
           <linearGradient id="bopFill" x1="0" y1="0" x2="0" y2="1">
@@ -79,7 +79,7 @@ export function BopTransferMonthlyChart() {
         />
         <Area type="monotone" dataKey="value" name="이전소득수지(백만달러)" stroke="#0f766e" strokeWidth={2} fill="url(#bopFill)" />
       </AreaChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }
 
@@ -128,7 +128,7 @@ export function ExchangeRateChart() {
         ))}
       </div>
       <div className="min-h-0 flex-1">
-        <ResponsiveContainer width="100%" height="100%">
+        <div role="img" aria-label="주요 통화 대원화 환율 월별 추이 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
           <LineChart data={data} margin={{ top: 12, right: 16, bottom: 8, left: 4 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
             <XAxis dataKey="month" tickLine={false} axisLine={false} fontSize={10} minTickGap={20} />
@@ -139,7 +139,7 @@ export function ExchangeRateChart() {
             />
             <Line type="monotone" dataKey={currency} name={`${meta.label}(월말)`} stroke={meta.color} strokeWidth={2} dot={false} />
           </LineChart>
-        </ResponsiveContainer>
+        </ResponsiveContainer></div>
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import {
   Activity,
@@ -76,6 +77,9 @@ const sourceColumns: DataTableColumn<DataSourceItem>[] = [
   },
   { header: "한계", accessor: (row) => <span className="text-muted">{row.limitation}</span> }
 ];
+
+
+export const metadata = pageMetadata("/data-pipeline");
 
 export default function DataPipelinePage() {
   const { totals, keysPresent, generatedAt, sources, discovery } = dataLineage;

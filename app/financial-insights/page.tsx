@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import {
   AlertCircle,
   ArrowRight,
@@ -229,6 +230,9 @@ const DATA_SHORTCUTS = [
   { href: "/universities", icon: GraduationCap, color: "#7c3aed", bg: "#f5f3ff", border: "#ddd6fe", label: "유학생", desc: "국적·학위과정·시도별 유학생 현황" },
   { href: "/consumption", icon: ShoppingBag, color: "#0f766e", bg: "#f0fdf4", border: "#bbf7d0", label: "소비·금융거래", desc: "면세소비·환율·BOP 송금수지 추이" },
 ];
+
+
+export const metadata = pageMetadata("/financial-insights");
 
 export default function FinancialInsightsPage() {
   return (

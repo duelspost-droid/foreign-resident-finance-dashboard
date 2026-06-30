@@ -32,7 +32,7 @@ export function DutyFreeNationalityChart() {
   if (data.length === 0) return <NotReady empty />;
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="면세점 국적별 매출 분포 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <BarChart data={data} layout="vertical" margin={{ top: 8, right: 24, bottom: 8, left: 12 }}>
         <CartesianGrid strokeDasharray="3 3" horizontal={false} />
         <XAxis type="number" tickLine={false} axisLine={false} fontSize={11} unit="억" />
@@ -44,7 +44,7 @@ export function DutyFreeNationalityChart() {
           ))}
         </Bar>
       </BarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }
 
@@ -58,7 +58,7 @@ export function ForeignLandNationalityChart() {
   if (data.length === 0) return <NotReady empty />;
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="외국인 부동산(토지) 취득 국적별 분포 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <BarChart data={data} layout="vertical" margin={{ top: 8, right: 24, bottom: 8, left: 12 }}>
         <CartesianGrid strokeDasharray="3 3" horizontal={false} />
         <XAxis type="number" tickLine={false} axisLine={false} fontSize={11} unit="억" />
@@ -70,6 +70,6 @@ export function ForeignLandNationalityChart() {
           ))}
         </Bar>
       </BarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }

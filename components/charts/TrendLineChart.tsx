@@ -29,7 +29,7 @@ export function TrendLineChart({
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="월별 추세 선형 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <LineChart data={data} margin={{ top: 16, right: 20, bottom: 8, left: 8 }}>
         <CartesianGrid strokeDasharray="3 3" vertical={false} />
         <XAxis dataKey="month" tickLine={false} axisLine={false} />
@@ -49,6 +49,6 @@ export function TrendLineChart({
         />
         <Line type="monotone" dataKey="몽골" stroke="#be123c" strokeWidth={2} dot={false} />
       </LineChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }

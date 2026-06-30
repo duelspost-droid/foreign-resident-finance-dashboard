@@ -47,7 +47,7 @@ export function StudentDegreeDonutChart({
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="유학생 학위과정 분포 도넛 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <PieChart>
         <Pie
           data={data}
@@ -65,6 +65,6 @@ export function StudentDegreeDonutChart({
         </Pie>
         <Tooltip formatter={(value, name) => [`${Number(value ?? 0).toLocaleString()}명`, String(name)]} />
       </PieChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }

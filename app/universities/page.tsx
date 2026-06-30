@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import { GraduationCap, Languages, TrendingUp, Users } from "lucide-react";
 import { StudentDegreeDonutChart } from "@/components/charts/StudentDegreeDonutChart";
 import { StudentHorizontalBarChart } from "@/components/charts/StudentHorizontalBarChart";
@@ -48,6 +49,9 @@ const COURSE_COLOR: Record<string, string> = {
   "학위과정(D-2)": "#0f766e",
   "어학연수(D-4)": "#b45309"
 };
+
+
+export const metadata = pageMetadata("/universities");
 
 export default function UniversitiesPage() {
   const series = [...foreignStudentByYear];

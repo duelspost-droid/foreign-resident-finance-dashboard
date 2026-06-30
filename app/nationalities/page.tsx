@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import { Flag, Globe, Layers, Users } from "lucide-react";
 import { NationalityBarChart } from "@/components/charts/NationalityBarChart";
 import { TrendLineChart } from "@/components/charts/TrendLineChart";
@@ -76,6 +77,9 @@ const statusColumns: DataTableColumn<ForeignResidentStatus>[] = [
     )
   }
 ];
+
+
+export const metadata = pageMetadata("/nationalities");
 
 export default function NationalitiesPage() {
   return (

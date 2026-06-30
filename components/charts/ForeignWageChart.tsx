@@ -52,7 +52,7 @@ export function ForeignWageDistributionChart() {
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="외국인 임금 분포 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <BarChart data={distribution} margin={{ top: 16, right: 18, bottom: 8, left: 8 }}>
         <CartesianGrid strokeDasharray="3 3" vertical={false} />
         <XAxis dataKey="shortBand" tickLine={false} axisLine={false} fontSize={12} />
@@ -63,7 +63,7 @@ export function ForeignWageDistributionChart() {
         />
         <Bar dataKey="value" name="취업자(천명)" fill="#0f766e" radius={[4, 4, 0, 0]} />
       </BarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }
 
@@ -80,7 +80,7 @@ export function ForeignWageTrendChart() {
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="외국인 임금 합계 연도별 추이 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <LineChart data={trend} margin={{ top: 16, right: 20, bottom: 8, left: 8 }}>
         <CartesianGrid strokeDasharray="3 3" vertical={false} />
         <XAxis dataKey="year" tickLine={false} axisLine={false} fontSize={12} />
@@ -88,6 +88,6 @@ export function ForeignWageTrendChart() {
         <Tooltip formatter={(value) => [`${Number(value ?? 0).toLocaleString()}천명`, "취업자 총계"]} />
         <Line type="monotone" dataKey="value" name="취업자(천명)" stroke="#0f766e" strokeWidth={2} dot={{ r: 2 }} />
       </LineChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }

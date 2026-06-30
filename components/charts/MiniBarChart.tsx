@@ -38,7 +38,7 @@ export function MiniBarChart({
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="데이터 막대 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <BarChart data={data} margin={{ top: 6, right: 6, bottom: 0, left: 6 }}>
         <XAxis dataKey="label" tick={{ fontSize: 10, fill: "#94a3b8" }} tickLine={false} axisLine={false} interval={0} />
         <Tooltip
@@ -52,6 +52,6 @@ export function MiniBarChart({
           ))}
         </Bar>
       </BarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }

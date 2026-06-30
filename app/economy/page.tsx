@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import { BarChart2 } from "lucide-react";
 import {
   econActivityData,
@@ -36,6 +37,9 @@ import {
   realForeignIndustry,
   realForeignWage
 } from "@/lib/data/generated/realData";
+
+
+export const metadata = pageMetadata("/economy");
 
 export default function EconomyPage() {
   // ── 실데이터(KOSIS) 파생 요약값 ─────────────────────────────────────────

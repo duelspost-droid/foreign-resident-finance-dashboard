@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import {
   Ban,
   CheckCircle2,
@@ -43,6 +44,9 @@ const principles = [
     body: "내부 금융 데이터는 개인 단위가 아닌 지역·월·국적·세그먼트 단위 집계값만 사용합니다. 개인 단위 분석이 필요한 경우에는 데이터전문기관을 통한 가명정보 결합 절차를 별도로 검토해야 합니다."
   }
 ];
+
+
+export const metadata = pageMetadata("/compliance");
 
 export default function CompliancePage() {
   return (

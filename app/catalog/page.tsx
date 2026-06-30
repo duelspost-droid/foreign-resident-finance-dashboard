@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -96,6 +97,9 @@ function AvailabilityBadge({ status }: { status: string }) {
   const info = PENDING_BADGE[status] ?? { text: "준비중", cls: "bg-slate-100 text-slate-600" };
   return <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold ${info.cls}`}>{info.text}</span>;
 }
+
+
+export const metadata = pageMetadata("/catalog");
 
 export default function CatalogPage() {
   const byId = new Map<string, DataLineageSource>(dataLineage.sources.map((s) => [s.id, s]));

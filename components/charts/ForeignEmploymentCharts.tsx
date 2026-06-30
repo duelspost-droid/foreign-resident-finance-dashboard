@@ -39,7 +39,7 @@ export function EmploymentStatusChart() {
   if (data.length === 0) return <NotReady empty />;
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="외국인 종사상지위 분포 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <BarChart data={data} layout="vertical" margin={{ top: 8, right: 24, bottom: 8, left: 12 }}>
         <CartesianGrid strokeDasharray="3 3" horizontal={false} />
         <XAxis type="number" tickLine={false} axisLine={false} fontSize={11} />
@@ -54,7 +54,7 @@ export function EmploymentStatusChart() {
           ))}
         </Bar>
       </BarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }
 
@@ -67,7 +67,7 @@ export function IndustryEmploymentChart() {
   if (data.length === 0) return <NotReady empty />;
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="외국인 산업별 취업 분포 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <BarChart data={data} layout="vertical" margin={{ top: 8, right: 24, bottom: 8, left: 12 }}>
         <CartesianGrid strokeDasharray="3 3" horizontal={false} />
         <XAxis type="number" tickLine={false} axisLine={false} fontSize={11} />
@@ -82,7 +82,7 @@ export function IndustryEmploymentChart() {
           ))}
         </Bar>
       </BarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }
 
@@ -95,7 +95,7 @@ export function AgeActivityChart() {
   if (data.length === 0) return <NotReady empty />;
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="외국인 연령대별 경제활동 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <ComposedChart data={data} margin={{ top: 12, right: 16, bottom: 8, left: 4 }}>
         <CartesianGrid strokeDasharray="3 3" vertical={false} />
         <XAxis dataKey="ageBand" tickLine={false} axisLine={false} fontSize={11} />
@@ -112,6 +112,6 @@ export function AgeActivityChart() {
         <Bar yAxisId="left" dataKey="employed" name="취업자(천명)" fill="#0f766e" radius={[4, 4, 0, 0]} />
         <Line yAxisId="right" type="monotone" dataKey="employmentRate" name="고용률" stroke="#be123c" strokeWidth={2} dot={{ r: 3 }} />
       </ComposedChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }

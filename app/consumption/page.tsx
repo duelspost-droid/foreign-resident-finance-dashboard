@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import {
   BopTransferIncomeChart,
   BopTransferMonthlyChart,
@@ -16,6 +17,9 @@ import {
   realExchangeRate,
   realForeignLandAcquisition
 } from "@/lib/data/generated/realData";
+
+
+export const metadata = pageMetadata("/consumption");
 
 export default function ConsumptionPage() {
   // 한국은행 ECOS (이전소득수지·환율)

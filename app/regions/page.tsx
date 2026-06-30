@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import { Globe, MapPin, TrendingUp, Users } from "lucide-react";
 
 import { RegionMap } from "@/components/charts/RegionMap";
@@ -30,6 +31,9 @@ import {
   realSigunguResidents
 } from "@/lib/data/regionAggregates";
 import { formatNumber, formatPercent, formatScore, scoreColor } from "@/lib/utils/format";
+
+
+export const metadata = pageMetadata("/regions");
 
 export default function RegionsPage() {
   const rows = sampleOpportunityRows;

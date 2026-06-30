@@ -39,7 +39,7 @@ export function EpsByCountryChart() {
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="EPS 국가별 외국인력 도입 분포 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <BarChart data={byCountry} margin={{ top: 16, right: 18, bottom: 8, left: 8 }}>
         <CartesianGrid strokeDasharray="3 3" vertical={false} />
         <XAxis dataKey="country" tickLine={false} axisLine={false} fontSize={11} interval={0} angle={-30} textAnchor="end" height={48} />
@@ -50,7 +50,7 @@ export function EpsByCountryChart() {
         />
         <Bar dataKey="value" name="도입 인원(명)" fill="#3157a4" radius={[4, 4, 0, 0]} />
       </BarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }
 
@@ -67,7 +67,7 @@ export function EpsTrendChart() {
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="EPS 외국인력 도입 연도별 추이 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <LineChart data={trend} margin={{ top: 16, right: 20, bottom: 8, left: 8 }}>
         <CartesianGrid strokeDasharray="3 3" vertical={false} />
         <XAxis dataKey="year" tickLine={false} axisLine={false} fontSize={12} />
@@ -75,7 +75,7 @@ export function EpsTrendChart() {
         <Tooltip formatter={(value) => [`${Number(value ?? 0).toLocaleString()}명`, "연간 도입"]} />
         <Line type="monotone" dataKey="value" name="연간 도입(명)" stroke="#b45309" strokeWidth={2} dot={{ r: 2 }} />
       </LineChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }
 
@@ -92,7 +92,7 @@ export function EpsByIndustryChart() {
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="EPS 업종별 외국인력 도입 분포 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <BarChart
         data={byIndustry}
         layout="vertical"
@@ -108,6 +108,6 @@ export function EpsByIndustryChart() {
           ))}
         </Bar>
       </BarChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }

@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import { BarChart3, Globe, MapPin, TrendingUp } from "lucide-react";
 
 import { DataTable, type DataTableColumn } from "@/components/tables/DataTable";
@@ -84,6 +85,9 @@ const columns: DataTableColumn<RegionOpportunityRow>[] = [
   },
   { header: "추천 액션", accessor: (row) => row.recommendedAction }
 ];
+
+
+export const metadata = pageMetadata("/opportunity-scores");
 
 export default function OpportunityScoresPage() {
   const rows = [...sampleOpportunityRows].sort(

@@ -27,7 +27,7 @@ export function VisaDonutChart({
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div role="img" aria-label="체류자격(비자) 세그먼트 분포 도넛 차트" className="h-full w-full"><ResponsiveContainer width="100%" height="100%">
       <PieChart>
         <Pie
           data={data}
@@ -45,6 +45,6 @@ export function VisaDonutChart({
         </Pie>
         <Tooltip formatter={(value) => [`${Number(value ?? 0)}%`, "비중"]} />
       </PieChart>
-    </ResponsiveContainer>
+    </ResponsiveContainer></div>
   );
 }
