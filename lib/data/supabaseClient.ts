@@ -3,6 +3,7 @@ import type { ForeignResidentRegionMonth, ForeignResidentStatus } from "@/lib/ty
 import type { FinanceSegmentAggregate } from "@/lib/types/finance";
 import type { ForeignStudentUniversity } from "@/lib/types/university";
 import { SUPABASE_PUBLIC_ANON_KEY, SUPABASE_PUBLIC_URL } from "./supabaseConfig";
+import { ADMIN_TOKEN_KEY } from "./adminApi";
 
 export function createBrowserSupabaseClient() {
   const url = SUPABASE_PUBLIC_URL;
@@ -82,21 +83,28 @@ export async function updateCandidateStatus(
   const client = createBrowserSupabaseClient();
   if (!client) return false;
 
-  const patch: Record<string, unknown> = { status };
-  if (status === "pending") {
-    patch.decided_at = null;
-    patch.decided_by = null;
-  } else {
-    patch.decided_at = new Date().toISOString();
-    patch.decided_by = options.decidedBy ?? "admin";
+  // 익명 직접 UPDATE(취약점: 누구나 승인 주입→배치 SSRF) 대신 관리자 토큰 검증
+  // 보안함수 admin_set_candidate_status(마이그레이션 010)를 .rpc 로 호출한다.
+  const token = typeof window !== "undefined" ? window.localStorage.getItem(ADMIN_TOKEN_KEY) : null;
+  if (!token) {
+    console.error("updateCandidateStatus: 관리자 토큰 없음 — 운영 콘솔 로그인 필요");
+    return false;
   }
-  if (options.targetTable !== undefined) patch.target_table = options.targetTable;
-  if (options.notes !== undefined) patch.notes = options.notes;
 
-  const { error } = await client.from("source_candidates").update(patch).eq("id", id);
+  const { data, error } = await client.rpc("admin_set_candidate_status", {
+    p_token: token,
+    p_id: id,
+    p_status: status,
+    p_target_table: options.targetTable ?? null,
+    p_notes: options.notes ?? null
+  });
 
   if (error) {
     console.error("updateCandidateStatus error:", error.message);
+    return false;
+  }
+  if (data === false) {
+    console.error("updateCandidateStatus: 관리자 인증 실패 — 재로그인 필요");
     return false;
   }
   return true;

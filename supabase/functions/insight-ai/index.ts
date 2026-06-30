@@ -41,10 +41,37 @@ Deno.serve(async (req: Request): Promise<Response> => {
     return json({ error: "bad json" }, 400);
   }
 
-  const question = (body.question ?? "").trim();
+  // 입력 상한(과금/프롬프트 남용 방어): 질문 2000자·컨텍스트 20000자·히스토리 4턴.
+  const question = (body.question ?? "").trim().slice(0, 2000);
   if (!question) return json({ error: "question required" }, 400);
-  const context = body.context ?? "";
+  const context = (body.context ?? "").slice(0, 20000);
   const history = Array.isArray(body.history) ? body.history.slice(-4) : [];
+
+  // IP 단위 레이트리밋(시간당 20회) — 무인증 함수의 금전적 DoS 방어(마이그레이션 010 함수).
+  // 레이트리밋 인프라 미설정/장애 시에는 가용성 우선으로 통과한다.
+  // @ts-ignore Deno global
+  const supaUrl = Deno.env.get("SUPABASE_URL");
+  // @ts-ignore Deno global
+  const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  if (supaUrl && serviceKey) {
+    const ip = (req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || "unknown";
+    try {
+      const rl = await fetch(`${supaUrl}/rest/v1/rpc/insight_ai_rate_check`, {
+        method: "POST",
+        headers: {
+          apikey: serviceKey,
+          authorization: `Bearer ${serviceKey}`,
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({ p_ip: ip, p_max: 20, p_window_secs: 3600 })
+      });
+      if (rl.ok && (await rl.json()) === false) {
+        return json({ error: "요청이 많습니다. 잠시 후 다시 시도하세요." }, 429);
+      }
+    } catch {
+      /* 레이트리밋 장애 → 통과(가용성 우선) */
+    }
+  }
 
   const system = `당신은 '외국인 금융 인사이트' B2B 대시보드의 데이터 분석 어시스턴트입니다.
 아래 [데이터 컨텍스트]에 근거해서만 한국어로 간결하고 구체적으로 답하세요.
