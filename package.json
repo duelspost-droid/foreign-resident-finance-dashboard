@@ -15,6 +15,7 @@
     "start": "vinext start",
     "typecheck": "tsc --noEmit",
     "test": "node --test test/*.test.mjs",
+    "test:unit": "vitest run",
     "data:fetch": "node scripts/fetch_public_data.mjs",
     "data:build": "node scripts/build_real_data.mjs && node scripts/build_generic_data.mjs",
     "data:generic": "node scripts/build_generic_data.mjs",
