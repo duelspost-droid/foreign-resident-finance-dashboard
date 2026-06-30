@@ -68,7 +68,7 @@
 - **[보안·HIGH]** ① insight-ai Edge Function 인증·레이트리밋 전무(금전적 DoS) ② `source_candidates` anon 쓰기→승인 주입→배치 SSRF. (③ ai_insight_chat anon DELETE/SELECT, ④ page_views/feature_requests anon SELECT 익명추적 — MED). surface_config 락다운(008/009)과 같은 패턴으로 확장 필요.
 - **[신뢰성·HIGH]** ① 자동화 테스트 0개(maskSmallCell·normalize·score·build_real_data 순수함수부터 Vitest) ② CI(pages.yml)에 typecheck 단계 없음 + data:ci continue-on-error → 오데이터/타입깨짐 배포 가능(build 앞 `npm run typecheck` 1줄).
 - **[데이터파이프라인·MED]** ① build_real_data 단일 transform 예외→배치 전면중단(per-source 가드) ② HTML→CSV 오저장이 거짓 성공 기록. ('계' 합계행 가드 부재는 LOW·현재 무증상. ※docs의 'EPS byCountry 합산'은 부정확—실제는 산업측 독립합계·연도정합 검증부재).
-- **[SEO/a11y·HIGH]** 라우트별 metadata 전무(Header.pageNames 재사용)·favicon/OG/sitemap 없음·차트 SVG 대체텍스트 없음(~24개)·error/not-found 페이지 없음.
+- ✅ **[SEO/a11y·HIGH 완료, 2026-06-25 커밋 a10d6fc]** `lib/seo.ts`(라우트별 title/description 단일 출처)+12개 공개 페이지 metadata·root layout(title template·OG·metadataBase·canonical·`app/icon.svg`)·`app/sitemap.ts`/`robots.ts`(정적 export, /admin 제외)·`app/admin/layout.tsx`(noindex)·`app/not-found.tsx`·`app/error.tsx`·차트 27개 인스턴스 `role="img"`+aria-label. tsc=0.
 - **[코드품질·MED]** ESLint 전무, xlsx@0.18.5 취약점(devDep 이동), 죽은 export(sampleFinanceAggregates·sampleRegionInsights), 고아 .ts 4종, page.tsx 806줄+BarList 저활용 중복.
 - (잔여 성능: recharts 280K 동적import·genericData lazy — 8MB 해결로 우선순위 낮아짐)
 
