@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-30T02:07:17.107Z",
+  "generatedAt": "2026-07-01T07:32:40.938Z",
   "candidates": [
     {
       "dataset_id": "15032256",
@@ -458,18 +458,6 @@
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
-      "dataset_id": "15094809",
-      "kind": "openapi",
-      "provider": "금융위원회",
-      "title": "금융위원회_금융투자협회종합통계정보",
-      "keyword": "금융통계 국내은행",
-      "url": "https://www.data.go.kr/data/15094809/openapi.do",
-      "priority": "mid",
-      "rationale": "지역 은행 인프라·금융 접근성 보조 지표",
-      "status": "pending",
-      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
-    },
-    {
       "dataset_id": "15049694",
       "kind": "fileData",
       "provider": "금융위원회",
@@ -480,6 +468,18 @@
       "rationale": "지역 은행 인프라·금융 접근성 보조 지표",
       "status": "pending",
       "discovered_at": "2026-06-23T05:40:35.170128+00:00"
+    },
+    {
+      "dataset_id": "15094809",
+      "kind": "openapi",
+      "provider": "금융위원회",
+      "title": "금융위원회_금융투자협회종합통계정보",
+      "keyword": "금융통계 국내은행",
+      "url": "https://www.data.go.kr/data/15094809/openapi.do",
+      "priority": "mid",
+      "rationale": "지역 은행 인프라·금융 접근성 보조 지표",
+      "status": "pending",
+      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
       "dataset_id": "15017366",
@@ -770,24 +770,24 @@
       "discovered_at": "2026-06-18T09:26:03.138446+00:00"
     },
     {
-      "dataset_id": "15054393",
-      "kind": "fileData",
-      "provider": "산업통상자원부",
-      "title": ",XLS JSON + XML 산업통상부_외국인직접투자동향_기간 국가별 외국인투자통계",
-      "keyword": "외국인직접투자 FDI 동향 통계",
-      "url": "https://www.data.go.kr/data/15054393/fileData.do",
-      "priority": "mid",
-      "rationale": "외국인 자본 유입(법인 중심·약연관, 거시 맥락)",
-      "status": "pending",
-      "discovered_at": "2026-06-18T09:26:03.138446+00:00"
-    },
-    {
       "dataset_id": "3040164",
       "kind": "fileData",
       "provider": "산업통상자원부",
       "title": ",HWPX,XLS 한국수출입은행_해외직접투자 통계",
       "keyword": "외국인직접투자 FDI 동향 통계",
       "url": "https://www.data.go.kr/data/3040164/fileData.do",
+      "priority": "mid",
+      "rationale": "외국인 자본 유입(법인 중심·약연관, 거시 맥락)",
+      "status": "pending",
+      "discovered_at": "2026-06-18T09:26:03.138446+00:00"
+    },
+    {
+      "dataset_id": "15054393",
+      "kind": "fileData",
+      "provider": "산업통상자원부",
+      "title": ",XLS JSON + XML 산업통상부_외국인직접투자동향_기간 국가별 외국인투자통계",
+      "keyword": "외국인직접투자 FDI 동향 통계",
+      "url": "https://www.data.go.kr/data/15054393/fileData.do",
       "priority": "mid",
       "rationale": "외국인 자본 유입(법인 중심·약연관, 거시 맥락)",
       "status": "pending",
@@ -1094,18 +1094,6 @@
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
-      "dataset_id": "15151656",
-      "kind": "fileData",
-      "provider": "행정안전부",
-      "title": "한국산업인력공단_외국인고용 교육과목 및 공개문항 정보",
-      "keyword": "외국인 정착 지원 사회통합",
-      "url": "https://www.data.go.kr/data/15151656/fileData.do",
-      "priority": "mid",
-      "rationale": "사회통합프로그램 외국인 참여자(장기거주 의향·정주 금융 수요)",
-      "status": "pending",
-      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
-    },
-    {
       "dataset_id": "3077780",
       "kind": "fileData",
       "provider": "행정안전부",
@@ -1116,6 +1104,18 @@
       "rationale": "사회통합프로그램 외국인 참여자(장기거주 의향·정주 금융 수요)",
       "status": "pending",
       "discovered_at": "2026-06-23T05:40:35.170128+00:00"
+    },
+    {
+      "dataset_id": "15151656",
+      "kind": "fileData",
+      "provider": "행정안전부",
+      "title": "한국산업인력공단_외국인고용 교육과목 및 공개문항 정보",
+      "keyword": "외국인 정착 지원 사회통합",
+      "url": "https://www.data.go.kr/data/15151656/fileData.do",
+      "priority": "mid",
+      "rationale": "사회통합프로그램 외국인 참여자(장기거주 의향·정주 금융 수요)",
+      "status": "pending",
+      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
       "dataset_id": "15047604",

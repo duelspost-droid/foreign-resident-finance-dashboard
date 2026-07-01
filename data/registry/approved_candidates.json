@@ -1,6 +1,23 @@
 {
-  "generatedAt": "2026-06-30T02:07:16.809Z",
+  "generatedAt": "2026-07-01T07:32:40.629Z",
   "approved": [
+    {
+      "id": 2,
+      "dataset_id": "15047603",
+      "kind": "fileData",
+      "provider": "행정안전부",
+      "title": "충청남도_외국인주민 현황(유형별)",
+      "keyword": "외국인주민 현황",
+      "url": "https://www.data.go.kr/data/15047603/fileData.do",
+      "target_table": "foreign_resident_region_month",
+      "status": "approved",
+      "priority": "mid",
+      "rationale": "시군구 단위 장기거주 외국인주민 규모",
+      "discovered_at": "2026-06-18T08:09:00.89898+00:00",
+      "decided_at": "2026-06-18T08:57:46.939+00:00",
+      "decided_by": "admin",
+      "notes": null
+    },
     {
       "id": 2124,
       "dataset_id": "15067439",
@@ -32,23 +49,6 @@
       "rationale": "시군구 단위 장기거주 외국인주민 규모",
       "discovered_at": "2026-06-23T05:40:35.170128+00:00",
       "decided_at": "2026-06-25T06:33:19.758+00:00",
-      "decided_by": "admin",
-      "notes": null
-    },
-    {
-      "id": 2,
-      "dataset_id": "15047603",
-      "kind": "fileData",
-      "provider": "행정안전부",
-      "title": "충청남도_외국인주민 현황(유형별)",
-      "keyword": "외국인주민 현황",
-      "url": "https://www.data.go.kr/data/15047603/fileData.do",
-      "target_table": "foreign_resident_region_month",
-      "status": "approved",
-      "priority": "mid",
-      "rationale": "시군구 단위 장기거주 외국인주민 규모",
-      "discovered_at": "2026-06-18T08:09:00.89898+00:00",
-      "decided_at": "2026-06-18T08:57:46.939+00:00",
       "decided_by": "admin",
       "notes": null
     },
