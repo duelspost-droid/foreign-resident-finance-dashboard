@@ -876,6 +876,47 @@ export const publicDataSources = [
     personalDataSafe: true,
     verified: false,
     notes: "AI 웹 발굴 승격. 재해유형별 집계(개인식별 없음). 산업재해 마이크로데이터(15127634)는 식별변수 포함이라 제외."
+  },
+
+  // ── 한국부동산원 R-ONE OpenAPI (크롬 웹발굴 2026-06-30) — 전국 외국인 부동산 거래 ──
+  // data.go.kr '기관자체 다운로드(외부 reb.or.kr URL)'라 파일수집 불가 → 공식 R-ONE OpenAPI(type:reb)로 수집.
+  // ⚠️ 활성화 2스텝: (1) 소유자가 무료 R-ONE API 키 발급 → GitHub 시크릿 REB_API_KEY (+ pages.yml 잡 env),
+  //    (2) params.statblId 확정(키 발급 후 R-ONE 카탈로그 SttsApiTbl.do 에서 조회). 둘 중 하나라도 없으면 skip.
+  {
+    id: "reb_foreign_land_transactions_monthly",
+    type: "reb",
+    apiKeyEnv: "REB_API_KEY",
+    datasetId: "15068462",
+    provider: "한국부동산원",
+    title: "부동산거래현황 토지 거래 월별 외국인거래(전국)",
+    category: "외국인 소비·자산",
+    targetTable: "foreign_real_estate",
+    outputBaseName: "reb_foreign_land_transactions_monthly",
+    sourceUrl: "https://www.data.go.kr/data/15068462/fileData.do",
+    params: { statblId: null, cycle: "MM" },
+    updateCycle: "월",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "국가승인통계(제315003호)·전국·집계. 제주만 있던 외국인 부동산 데이터를 전국화. statblId·REB_API_KEY 확정 후 활성."
+  },
+  {
+    id: "reb_foreign_building_transactions_monthly",
+    type: "reb",
+    apiKeyEnv: "REB_API_KEY",
+    datasetId: "15068093",
+    provider: "한국부동산원",
+    title: "부동산거래현황 건축물(주택) 거래 월별 외국인거래(전국)",
+    category: "외국인 소비·자산",
+    targetTable: "foreign_real_estate",
+    outputBaseName: "reb_foreign_building_transactions_monthly",
+    sourceUrl: "https://www.data.go.kr/data/15068093/fileData.do",
+    params: { statblId: null, cycle: "MM" },
+    updateCycle: "월",
+    license: "공공데이터 이용허락(제1유형)",
+    personalDataSafe: true,
+    verified: false,
+    notes: "외국인 주택·건물 매입 규모(자산·모기지 잠재수요)의 직접 신호. statblId·REB_API_KEY 확정 후 활성."
   }
 ];
 

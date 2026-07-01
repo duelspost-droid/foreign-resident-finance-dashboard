@@ -763,6 +763,54 @@ async function collectSeoulDataSource(source) {
   return { status: "downloaded", rowCount: collected.length, savedFile: fileName, requestUrls };
 }
 
+// 한국부동산원 R-ONE OpenAPI(부동산통계 조회 서비스). 부동산거래현황 외국인거래(토지·건축물, 월/연) 등
+// data.go.kr '기관자체 다운로드(외부 URL)'라 파일수집 불가한 REB 통계를 공식 OpenAPI로 수집한다.
+// 엔드포인트: https://www.reb.or.kr/r-one/openapi/SttsApiTblData.do?KEY=..&Type=json&STATBL_ID=..&DTACYCLE_CD=MM|YY
+// ⚠️ REB_API_KEY(무료 R-ONE 키, 소유자 발급) + source.params.statblId(R-ONE 통계표 ID) 둘 다 있어야 수집.
+async function collectRebSource(source) {
+  const apiKey = process.env[source.apiKeyEnv];
+  if (!apiKey) {
+    return { status: "skipped_no_key", reason: `${source.apiKeyEnv} not set`, requestUrls: [] };
+  }
+  const { statblId, cycle = "MM", rowsPerPage = 1000 } = source.params ?? {};
+  if (!statblId) {
+    // R-ONE 통계표 ID 미확정 — 키 발급 후 R-ONE 카탈로그(SttsApiTbl.do)에서 확정 필요.
+    return { status: "skipped_no_key", reason: "params.statblId 미확정(R-ONE STATBL_ID 필요)", requestUrls: [] };
+  }
+  const safeKey = maskKey(apiKey);
+  const base = "https://www.reb.or.kr/r-one/openapi/SttsApiTblData.do";
+  const collected = [];
+  const requestUrls = [];
+  let pIndex = 1;
+
+  while (true) {
+    const url = `${base}?KEY=${encodeURIComponent(apiKey)}&Type=json&pIndex=${pIndex}&pSize=${rowsPerPage}&STATBL_ID=${encodeURIComponent(statblId)}&DTACYCLE_CD=${encodeURIComponent(cycle)}`;
+    requestUrls.push(url.replace(encodeURIComponent(apiKey), safeKey));
+    try {
+      const res = await fetchWithRetry(url);
+      if (!res.ok) return { status: "request_failed", requestUrls, reason: `HTTP ${res.status}` };
+      const body = await res.json().catch(() => null);
+      const container = body?.SttsApiTblData;
+      const result = container?.[0]?.head?.[1]?.RESULT ?? container?.[0]?.RESULT;
+      if (result?.CODE && result.CODE !== "INFO-000") {
+        return { status: "api_error", requestUrls, reason: result.MESSAGE ?? result.CODE };
+      }
+      const rows = container?.[1]?.row;
+      if (!Array.isArray(rows) || rows.length === 0) break;
+      collected.push(...rows);
+      if (rows.length < rowsPerPage) break;
+      pIndex += 1;
+    } catch (error) {
+      return { status: "request_failed", requestUrls, reason: error.message };
+    }
+  }
+
+  if (collected.length === 0) return { status: "no_data", requestUrls, reason: "0 rows" };
+  const fileName = `${source.outputBaseName}_${todayStamp()}.json`;
+  await writeFile(join(rawDir, fileName), JSON.stringify(collected, null, 2), "utf8");
+  return { status: "downloaded", rowCount: collected.length, savedFile: fileName, requestUrls };
+}
+
 // ── 공통 ────────────────────────────────────────────────────────────────────────
 
 async function findCachedRaw(source) {
@@ -833,7 +881,8 @@ const COLLECTORS = {
   openapi: collectOpenApiSource,
   kosis: collectKosisSource,
   ecos: collectEcosSource,
-  seoul: collectSeoulDataSource
+  seoul: collectSeoulDataSource,
+  reb: collectRebSource
 };
 
 // 관리자 승인 큐(approved_candidates.json)에서 승인된 후보를 동적 소스 설정으로 변환.
@@ -907,7 +956,8 @@ async function main() {
       DATA_GO_KR_SERVICE_KEY: Boolean(process.env.DATA_GO_KR_SERVICE_KEY),
       KOSIS_API_KEY: Boolean(process.env.KOSIS_API_KEY),
       ECOS_API_KEY: Boolean(process.env.ECOS_API_KEY),
-      SEOUL_OPENAPI_KEY: Boolean(process.env.SEOUL_OPENAPI_KEY)
+      SEOUL_OPENAPI_KEY: Boolean(process.env.SEOUL_OPENAPI_KEY),
+      REB_API_KEY: Boolean(process.env.REB_API_KEY)
     },
     sources: [],
     discovery: isPartialRun ? [] : await discoverDataGoKr()

@@ -101,7 +101,9 @@
 - 크롬으로 data.go.kr 직접 탐색(소득/카드/송금/토지/주택). **금융거래(카드·송금) 직접 데이터는 공공포털에 사실상 없음**(민간영역) 재확인.
 - **최대 발견**: **한국부동산원_부동산거래현황_외국인거래** 시리즈 = 전국·국가승인통계(제315003호)·집계, **토지·순수토지·건축물 × 월별/연도별**(datasetId 15068462·15068596·15068321·15068093 등). 외국인 부동산 매입 = 자산·정주형 금융수요의 강한 신호로, 현재 제주만 있는 부동산 데이터를 **전국으로 확장**할 최고 후보.
 - ⚠️ **자동수집 불가**: 전부 `제공형태=기관자체 다운로드(외부 URL, reb.or.kr)` → data.go.kr 직접파일 아님 → 일반 file 수집기는 HTML 받아 가드로 스킵. `webDiscoveredSources.json`에 **검토 리드**로 등록(‘AI 웹 발굴 리드’ 패널 노출).
-- **후속(선택)**: REB(reb.or.kr) statPage 전용 수집기 or 수동 주기 다운로드로 통합 시, 대시보드 ‘소비·금융거래/자산’ 도메인이 크게 강화됨. (직접 다운로드 가능한 건 지자체 조각뿐: 인천 서구·연수구·대구 서구 외국인 부동산 거래 통계 — 커버리지 작아 우선순위 낮음.)
+- ✅ **REB 전용 수집기 구축(2026-06-30)**: 내부 스크래핑은 취약(easyStatList.do POST + TripleDES JS) → 공식 **R-ONE OpenAPI**(`SttsApiTblData.do`) 기반 `type:"reb"` 컬렉터 추가(`fetch_public_data.mjs` `collectRebSource`, COLLECTORS·keysPresent 등록). 소스 2종 등록(reb_foreign_land/building_transactions_monthly, verified:false). 키 없이 graceful skip 검증(무회귀).
+  **⏳ 소유자 활성 2스텝**: (1) **무료 R-ONE API 키** 발급(reb.or.kr R-ONE 회원가입→OpenAPI 신청) → GitHub 시크릿 `REB_API_KEY` + `pages.yml` 잡 env에 `REB_API_KEY: ${{ secrets.REB_API_KEY }}` 1줄. (2) 각 소스 `params.statblId` 확정 — 키 발급 후 R-ONE 카탈로그(`SttsApiTbl.do`)에서 부동산거래현황 외국인거래 표의 STATBL_ID 조회(내가 채워 넣거나 소유자 제공). 둘 다 되면 다음 배치부터 전국 외국인 부동산 거래 자동수집 → build_real_data 전용 transform 후 ‘소비·금융거래/자산’ 도메인 강화.
+- (직접 다운로드 가능한 지자체 조각: 인천 서구·연수구·대구 서구 외국인 부동산 거래 통계 — 커버리지 작아 우선순위 낮음.)
 - ✅ **발굴 리드 → 정식 소스 승격 (2026-06-25 커밋 a49fb3f)**: 자동수집 가능·집계·PII낮음 7종(법무부 체류·국적취득 15100013/47/46, 국립국제교육원 TOPIK·HURIK 3059526/15067926/15069776, 근로복지공단 산재 15104688)을 `data_sources.mjs`에 verified:false로 등록 → 다음 CI 배치에서 실수집 검증. 산업재해 마이크로데이터(15127634·식별변수)는 제외. ⏳ **잔여**: CI 수집 성공분 verified:true 승격 + 큐레이션 transform 연동(현재는 범용 뷰어 노출).
 
 ### ✅ 신뢰성·데이터·코드품질 [2026-06-25, 커밋 adb71d6]
