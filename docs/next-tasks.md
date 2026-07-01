@@ -83,9 +83,19 @@
 ### 🌐 AI 웹 발굴 에이전트 [2026-06-25, 커밋 adb71d6] — 프론트/스크립트 완료 · 소유자 2스텝
 - `scripts/discover_web_sources.mjs`: Claude+웹검색으로 data.go.kr 밖(KOSIS·법무부·통계청·OECD·UNESCO·ILO·고용정보원·MDIS 등)까지 외국인 데이터 후보를 발굴 → `lib/data/generated/webDiscoveredSources.json`(시드 58건·9도메인). 키 없으면 기존 유지·exit 0.
 - **안전**: 리드는 '수동 검토용 외부 후보'다. 수집기는 아는 타입(file/openapi/kosis/ecos/seoul)만 수집 → 임의 웹 URL 자동 ingest 안 됨(SSRF 방지). `/data-pipeline` 'AI 웹 발굴 리드' 섹션(`components/data/WebDiscoverySection.tsx`)에 도메인별 렌더. `data:ci`·`data:discover` 배선.
-- **⏳ 소유자 2스텝**(insight digest와 동일 — 묶어 처리 가능):
-  1. GitHub Actions 시크릿 `ANTHROPIC_API_KEY`(insight digest와 공유). 없으면 발굴 폴백(빈/기존 유지).
-  2. `.github/workflows/pages.yml` auto-commit `file_pattern`에 `lib/data/generated/webDiscoveredSources.json` 추가(+ `insightDigest.json`). 미추가 시 매일 발굴 결과가 커밋되지 않음. (OAuth 스코프로 claude가 pages.yml 푸시 불가 → 소유자.)
+- **⏳ 자동발굴 켜기 = 소유자 3스텝** (코드는 이미 배선 완료 — discover가 `data:ci` cron 01:00 KST에 포함. claude는 pages.yml/시크릿 불가). insight digest와 동일 키라 함께 켜짐:
+  1. **GitHub Actions 시크릿 `ANTHROPIC_API_KEY` 추가** (Settings→Secrets→Actions).
+  2. **`pages.yml` 잡 env(현재 23~29줄)에 1줄 추가** — 이게 있어야 `data:ci`의 discover·digest가 키를 봄:
+     ```yaml
+     ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+     ```
+     (SUPABASE_SERVICE_ROLE_KEY·KOSIS 등은 이미 잡 env에 있음 → 발굴 결과의 승인 큐 적재도 정상. 011 적용 후에도 service_role이라 문제없음.)
+  3. **`pages.yml` auto-commit `file_pattern`에 2줄 추가** — 매일 발굴/인사이트 결과가 커밋되도록:
+     ```
+     lib/data/generated/webDiscoveredSources.json
+     lib/data/generated/insightDigest.json
+     ```
+  → 켜면 매일 01:00 KST에 자동 웹발굴 → JSON + `/admin` 승인 큐 적재. **크롬 수동 발굴 불필요.**
 - ✅ **발굴 리드 → 정식 소스 승격 (2026-06-25 커밋 a49fb3f)**: 자동수집 가능·집계·PII낮음 7종(법무부 체류·국적취득 15100013/47/46, 국립국제교육원 TOPIK·HURIK 3059526/15067926/15069776, 근로복지공단 산재 15104688)을 `data_sources.mjs`에 verified:false로 등록 → 다음 CI 배치에서 실수집 검증. 산업재해 마이크로데이터(15127634·식별변수)는 제외. ⏳ **잔여**: CI 수집 성공분 verified:true 승격 + 큐레이션 transform 연동(현재는 범용 뷰어 노출).
 
 ### ✅ 신뢰성·데이터·코드품질 [2026-06-25, 커밋 adb71d6]
