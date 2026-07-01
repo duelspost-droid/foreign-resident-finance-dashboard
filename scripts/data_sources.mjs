@@ -893,12 +893,12 @@ export const publicDataSources = [
     targetTable: "foreign_real_estate",
     outputBaseName: "reb_foreign_land_transactions_monthly",
     sourceUrl: "https://www.data.go.kr/data/15068462/fileData.do",
-    params: { statblId: null, cycle: "MM" },
+    params: { statblId: "A_2024_00533", cycle: "MM" },
     updateCycle: "월",
     license: "공공데이터 이용허락(제1유형)",
     personalDataSafe: true,
     verified: false,
-    notes: "국가승인통계(제315003호)·전국·집계. 제주만 있던 외국인 부동산 데이터를 전국화. statblId·REB_API_KEY 확정 후 활성."
+    notes: "국가승인통계(제315003호)·전국·집계. 제주만 있던 외국인 부동산 데이터를 전국화. statblId=A_2024_00533(크롬 확인=easyStat 페이지 id). REB_API_KEY(또는 data.go.kr 부동산통계 조회 서비스 활용신청)만 있으면 활성."
   },
   {
     id: "reb_foreign_building_transactions_monthly",
@@ -911,12 +911,12 @@ export const publicDataSources = [
     targetTable: "foreign_real_estate",
     outputBaseName: "reb_foreign_building_transactions_monthly",
     sourceUrl: "https://www.data.go.kr/data/15068093/fileData.do",
-    params: { statblId: null, cycle: "MM" },
+    params: { statblId: "A_2024_00543", cycle: "MM" },
     updateCycle: "월",
     license: "공공데이터 이용허락(제1유형)",
     personalDataSafe: true,
     verified: false,
-    notes: "외국인 주택·건물 매입 규모(자산·모기지 잠재수요)의 직접 신호. statblId·REB_API_KEY 확정 후 활성."
+    notes: "외국인 주택·건물 매입 규모(자산·모기지 잠재수요)의 직접 신호. statblId=A_2024_00543(크롬 확인). REB_API_KEY(또는 data.go.kr 활용신청)만 있으면 활성."
   }
 ];
 
