@@ -8,6 +8,103 @@ const processedDir = join(root, "data", "processed");
 const catalogDir = join(root, "data", "catalog");
 const generatedDir = join(root, "lib", "data", "generated");
 
+// ── SURFACED 자동 계산 ────────────────────────────────────────────────────────
+// 소스 id → realData.ts 에서 내보내는 TypeScript export 이름들.
+// build_real_data.mjs가 각 소스 raw를 어떤 export로 변환하는지 명시.
+// 소스 id → 해당 소스에서 파생되는 식별자 이름 목록.
+// realData.ts export 이름 + lib/data/mockData.ts 재수출 별칭 포함
+// (mockData를 통해 간접 사용되는 경우도 추적하기 위함).
+const SOURCE_TO_EXPORTS = {
+  moj_foreign_resident_status_2024:        ["realForeignResidentStatus", "realNationalityDistribution", "realStayVisaTypes", "nationalityDistributionData"],
+  moj_foreign_stay_data_2024:              ["realRegionData", "stayVisaTypes"],
+  moj_foreign_student_stay_2024:           ["realForeignStudentByYear", "realForeignStudentByVisa", "studentByYear"],
+  moj_immigration_monthly_2024:            ["realForeignStudentByYear", "studentByYear"],
+  academyinfo_foreign_student_count:       ["realUniversityRanking", "realUniversitySummary", "universityRanking", "hasRealUniversityData"],
+  academyinfo_university_stats:            ["realUniversityStats", "universityStats", "hasUniversityStats"],
+  mois_foreign_resident_region_file:       ["realApiRegionData", "realSigunguResidents"],
+  mois_foreign_residents:                  ["realApiRegionData"],
+  nhis_foreigner_coverage_2022:            ["realHealthInsurance", "healthInsuranceData"],
+  nhis_foreigner_premium_2023:             ["realHealthInsurance", "healthInsuranceData"],
+  mogef_multicultural_family_2024:         ["realMulticulturalFamily", "realMulticulturalFamilySummary", "multiculturalFamilyData"],
+  jdc_dutyfree_sales_by_nationality:       ["realDutyFreeSales"],
+  jeju_foreign_land_acquisition:           ["realForeignLandAcquisition"],
+  kosis_foreigner_economic_activity:       ["realEconActivity", "econActivityData"],
+  kosis_registered_foreigner_by_region:    ["realApiRegionData"],
+  kosis_registered_foreigner_sigungu_visa: ["realApiRegionData"],
+  kosis_foreign_student_nationality_visa:  ["realForeignStudentNationality"],
+  kosis_kedi_higher_edu_foreign_students:  ["realKediStudentRegion"],
+  kosis_eps_introduction_by_country:       ["realEpsIntroduction"],
+  kosis_eps_introduction_by_industry:      ["realEpsIntroduction"],
+  kosis_immigrant_wage_distribution:       ["realForeignWage"],
+  kosis_immigrant_contract_period:         ["realForeignContract"],
+  kosis_immigrant_employment_status:       ["realForeignEmploymentStatus"],
+  kosis_immigrant_employment_by_industry:  ["realForeignIndustry"],
+  kosis_immigrant_econ_activity_by_age:    ["realForeignAgeActivity"],
+  ecos_bop_transfer_income:                ["realBopTransferIncome"],
+  ecos_exchange_rate_daily:                ["realExchangeRate"],
+  ecos_bop_transfer_monthly:               ["realBopTransferIncome"],
+};
+
+// 스캔 대상 파일 → 대시보드 페이지 라벨.
+// 각 페이지 파일이 어떤 식별자(realData export 또는 mockData 재수출 별칭)를 참조하는지 스캔한다.
+// mockData.ts는 실데이터를 re-export 하므로 별칭(econActivityData 등)도 SOURCE_TO_EXPORTS에 등록해두면
+// 페이지 스캔만으로 원 소스까지 역추적된다.
+// lib/data 파일은 해당 파일이 데이터를 공급하는 페이지 라벨을 사용.
+const SCAN_TARGETS = [
+  ["app/page.tsx",                    "홈"],
+  ["app/nationalities/page.tsx",      "국적 분석"],
+  ["app/regions/page.tsx",            "지역 분석"],
+  ["app/opportunity-scores/page.tsx", "기회 점수"],
+  ["app/universities/page.tsx",       "유학생"],
+  ["app/economy/page.tsx",            "경제활동·소득"],
+  ["app/consumption/page.tsx",        "소비·금융거래"],
+  ["app/visa-segments/page.tsx",      "비자 세그먼트"],
+  ["lib/data/opportunityReal.ts",     "기회 점수"],
+  ["lib/data/regionAggregates.ts",    "지역 분석"],
+];
+
+// 페이지 파일을 스캔해 export name → 페이지 라벨 역인덱스를 만들고,
+// SOURCE_TO_EXPORTS와 교차해 sourceId → 표시 중인 페이지 문자열을 반환한다.
+async function computeSurfaced() {
+  // SOURCE_TO_EXPORTS의 모든 식별자를 화이트리스트로 구성 → 정확한 단어 경계 매칭.
+  const allKnownNames = new Set(Object.values(SOURCE_TO_EXPORTS).flat());
+  // 단어 경계 정규식 빌드 (한 번만 컴파일).
+  const pattern = new RegExp(
+    `\\b(${[...allKnownNames].map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})\\b`,
+    "g"
+  );
+
+  const exportToPages = new Map(); // exportName → Set<label>
+
+  // 중복 파일·라벨 조합을 피하기 위해 Set으로 관리.
+  const seen = new Set();
+  for (const [relPath, label] of SCAN_TARGETS) {
+    const key = `${relPath}::${label}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+
+    let text = "";
+    try { text = await readFile(join(root, relPath), "utf8"); } catch { continue; }
+    pattern.lastIndex = 0;
+    let m;
+    while ((m = pattern.exec(text)) !== null) {
+      const name = m[1];
+      if (!exportToPages.has(name)) exportToPages.set(name, new Set());
+      exportToPages.get(name).add(label);
+    }
+  }
+
+  const surfaced = {};
+  for (const [sourceId, exportNames] of Object.entries(SOURCE_TO_EXPORTS)) {
+    const pages = new Set();
+    for (const exp of exportNames) {
+      for (const label of (exportToPages.get(exp) ?? [])) pages.add(label);
+    }
+    if (pages.size > 0) surfaced[sourceId] = [...pages].join(" · ");
+  }
+  return surfaced;
+}
+
 async function ensureDir(path) {
   await mkdir(path, { recursive: true });
 }
@@ -1180,12 +1277,15 @@ async function buildLineage() {
   const buckets = { downloaded: 0, cached: 0, skippedNoKey: 0, failed: 0 };
   for (const e of entries) buckets[classify(e.status)] += 1;
 
+  const surfaced = await computeSurfaced();
+
   const lineage = {
     generatedAt: catalog?.generatedAt ?? new Date().toISOString(),
     keysPresent: catalog?.keysPresent ?? { DATA_GO_KR_SERVICE_KEY: false, KOSIS_API_KEY: false },
     totals: { sources: entries.length, ...buckets },
     sources: entries,
-    discovery
+    discovery,
+    surfaced,
   };
 
   const content =
@@ -1207,7 +1307,9 @@ async function buildLineage() {
     `  generatedAt: string;\n` +
     `  keysPresent: Record<string, boolean>;\n` +
     `  totals: { sources: number; downloaded: number; cached: number; skippedNoKey: number; failed: number };\n` +
-    `  sources: DataLineageSource[];\n  discovery: DataLineageDiscovery[];\n};\n\n` +
+    `  sources: DataLineageSource[];\n  discovery: DataLineageDiscovery[];\n` +
+    `  /** 소스 id → 현재 표시 중인 페이지 (빌드 시 자동 계산, 수동 편집 불필요) */\n` +
+    `  surfaced: Record<string, string>;\n};\n\n` +
     `export const dataLineage: DataLineage = ${JSON.stringify(lineage, null, 2)};\n`;
 
   await writeFile(join(generatedDir, "dataLineage.ts"), content, "utf8");
@@ -1517,7 +1619,7 @@ async function main() {
         mois: moisRaw?.path ?? null,
         monthly: monthlyRaw?.path ?? null
       }
-    }, null, 2)} as const;\n`;
+    }, null, 2)};\n`;
 
   await writeFile(
     join(processedDir, "foreign_resident_status.real.json"),

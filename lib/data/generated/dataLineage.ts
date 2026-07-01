@@ -44,6 +44,8 @@ export type DataLineage = {
   totals: { sources: number; downloaded: number; cached: number; skippedNoKey: number; failed: number };
   sources: DataLineageSource[];
   discovery: DataLineageDiscovery[];
+  /** 소스 id → 현재 표시 중인 페이지 (빌드 시 자동 계산, 수동 편집 불필요) */
+  surfaced: Record<string, string>;
 };
 
 export const dataLineage: DataLineage = {
@@ -1743,5 +1745,31 @@ export const dataLineage: DataLineage = {
       "foundCount": 0,
       "links": []
     }
-  ]
+  ],
+  "surfaced": {
+    "moj_foreign_resident_status_2024": "국적 분석 · 비자 세그먼트 · 홈",
+    "moj_foreign_stay_data_2024": "홈 · 비자 세그먼트",
+    "academyinfo_foreign_student_count": "유학생 · 홈",
+    "mois_foreign_resident_region_file": "지역 분석",
+    "mois_foreign_residents": "지역 분석",
+    "nhis_foreigner_coverage_2022": "홈 · 경제활동·소득",
+    "nhis_foreigner_premium_2023": "홈 · 경제활동·소득",
+    "mogef_multicultural_family_2024": "홈 · 경제활동·소득",
+    "jdc_dutyfree_sales_by_nationality": "홈 · 소비·금융거래",
+    "jeju_foreign_land_acquisition": "소비·금융거래",
+    "kosis_foreigner_economic_activity": "홈 · 경제활동·소득",
+    "kosis_registered_foreigner_by_region": "지역 분석",
+    "kosis_registered_foreigner_sigungu_visa": "지역 분석",
+    "kosis_foreign_student_nationality_visa": "홈 · 유학생",
+    "kosis_kedi_higher_edu_foreign_students": "유학생 · 기회 점수",
+    "kosis_eps_introduction_by_country": "홈 · 경제활동·소득",
+    "kosis_eps_introduction_by_industry": "홈 · 경제활동·소득",
+    "kosis_immigrant_wage_distribution": "홈 · 경제활동·소득",
+    "kosis_immigrant_employment_status": "홈 · 경제활동·소득",
+    "kosis_immigrant_employment_by_industry": "경제활동·소득",
+    "kosis_immigrant_econ_activity_by_age": "경제활동·소득",
+    "ecos_bop_transfer_income": "홈 · 기회 점수 · 소비·금융거래",
+    "ecos_exchange_rate_daily": "홈 · 소비·금융거래",
+    "ecos_bop_transfer_monthly": "홈 · 기회 점수 · 소비·금융거래"
+  }
 };

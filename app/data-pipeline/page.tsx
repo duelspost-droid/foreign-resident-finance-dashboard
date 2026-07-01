@@ -415,8 +415,9 @@ export default function DataPipelinePage() {
           <DataTable columns={lineageColumns} rowKey={(row) => row.id} rows={allSources} />
         </div>
         <p className="px-3 pt-1 text-xs leading-6 text-muted">
-          ※ &lsquo;미연동&rsquo;은 자동 수집은 되지만 아직 화면에 반영되지 않은 출처입니다.
-          대학알리미(대학별 유학생)·시군구 외국인주민 등 대용량 파일은 컬럼 구조 검증 후 단계적으로 연동됩니다.
+          ※ &lsquo;대시보드 반영&rsquo; 열은 빌드 시 페이지 소스코드를 스캔해 <strong>자동 계산</strong>됩니다
+          (build_real_data.mjs). 각 출처가 어느 페이지에 실제 표시되는지 코드 기준으로 판정하므로 수동 관리가 불필요합니다.
+          &lsquo;미연동&rsquo;은 자동 수집은 되지만 아직 화면에서 참조하지 않는 출처입니다.
         </p>
       </section>
 
