@@ -1417,7 +1417,11 @@ async function main() {
   const universityStats = uniStatsRaw ? transformUniversityStats(parseCsv(uniStatsRaw.text)) : [];
 
   // API(KOSIS/openapi) 보조 데이터. 키 없으면 빈 배열. MOJ 1차 데이터와 분리 유지.
-  const { apiStatus, apiRegion, apiEconActivity, parsedFiles } = await buildApiSources();
+  // apiRegion/apiEconActivity는 gitignore된 KOSIS JSON raw에 의존 → raw가 없는 환경(로컬 체크아웃 등)에서
+  // 재빌드 시 빈 배열이 되므로 아래 last-good 블록에서 직전 커밋값을 보존한다(let 선언 필요).
+  const apiSources = await buildApiSources();
+  const { apiStatus, parsedFiles } = apiSources;
+  let { apiRegion, apiEconActivity } = apiSources;
 
   // KOSIS 외국인 금융/소득·EPS 도입·유학생 국적/학위 (신규, JSON 직접 전용 파싱).
   const wageRaw = await readLatestRawJson("kosis_immigrant_wage_distribution");
@@ -1465,6 +1469,11 @@ async function main() {
   };
   const emptyDist = (o) => !(o && o.distribution && o.distribution.length);
   const emptyKey = (k) => (o) => !(o && Array.isArray(o[k]) && o[k].length);
+  const emptyArr = (a) => !(Array.isArray(a) && a.length);
+  // KOSIS 지역/경제활동: JSON raw 부재로 이번 빌드가 비면 직전 커밋값 보존
+  // (realApiRegionData는 지역 분석·지도·기회점수의 근간이라 유실 시 화면이 붕괴됨).
+  apiRegion = lastGood("realApiRegionData", apiRegion, emptyArr);
+  apiEconActivity = lastGood("realEconActivity", apiEconActivity, emptyArr);
   foreignWage = lastGood("realForeignWage", foreignWage, emptyDist);
   foreignContract = lastGood("realForeignContract", foreignContract, emptyDist);
   epsIntroduction = lastGood("realEpsIntroduction", epsIntroduction, emptyKey("byCountry"));
