@@ -5,6 +5,34 @@
   "model": "claude-opus-4-8",
   "leads": [
     {
+      "title": "한국부동산원 전국 외국인 부동산 거래현황 — 토지 거래(월별)",
+      "provider": "한국부동산원",
+      "url": "https://www.data.go.kr/data/15068462/fileData.do",
+      "scope": "국내",
+      "domain": "금융이용",
+      "dataType": "파일(CSV/XLSX)",
+      "accessMethod": "웹/대시보드",
+      "cadence": "월간",
+      "relevance": "전국 외국인 토지 거래(필지수·면적) 국가승인통계(제315003호). 현재 제주만 보유한 외국인 부동산 자산 데이터를 전국으로 확장하는 핵심 소스(정주형 금융수요·자산 신호). 단 제공형태가 기관자체(REB) 외부 URL이라 일반 파일수집기로는 자동수집 불가 → 전용 수집기/수동 필요. 시리즈: 토지·순수토지·건축물 × 월별/연도별.",
+      "suggestedTarget": "지역/부동산 자산(외국인 거래)",
+      "piiRisk": "낮음",
+      "confidence": "high"
+    },
+    {
+      "title": "한국부동산원 전국 외국인 부동산 거래현황 — 건축물(주택) 거래(월별)",
+      "provider": "한국부동산원",
+      "url": "https://www.data.go.kr/data/15068093/fileData.do",
+      "scope": "국내",
+      "domain": "금융이용",
+      "dataType": "파일(CSV/XLSX)",
+      "accessMethod": "웹/대시보드",
+      "cadence": "월간",
+      "relevance": "전국 외국인 건축물(주택 포함) 거래 국가승인통계 — 외국인 주택·건물 매입 규모(자산·모기지 잠재수요)의 가장 직접적 신호. REB 외부 URL 제공이라 자동수집 불가 → 전용 수집기/수동 검토 필요.",
+      "suggestedTarget": "부동산·주택 자산(외국인 거래)",
+      "piiRisk": "낮음",
+      "confidence": "high"
+    },
+    {
       "title": "출입국·외국인정책 통계연보 (체류외국인 국적·자격·시도·연령·성별 집계표)",
       "provider": "법무부 출입국·외국인정책본부",
       "url": "https://www.immigration.go.kr/immigration/1570/subview.do",
@@ -831,6 +859,10 @@
       "count": 8
     },
     {
+      "domain": "금융이용",
+      "count": 7
+    },
+    {
       "domain": "거시·정책",
       "count": 6
     },
@@ -843,10 +875,6 @@
       "count": 5
     },
     {
-      "domain": "금융이용",
-      "count": 5
-    },
-    {
       "domain": "지역·지자체",
       "count": 5
     },
@@ -854,5 +882,6 @@
       "domain": "다문화·가족",
       "count": 4
     }
-  ]
+  ],
+  "note": "크롬 웹발굴(2026-06-30) 수동 보강분 포함 — 한국부동산원 전국 외국인 부동산 거래(외부 REB URL, 자동수집 불가·수동검토)."
 }
