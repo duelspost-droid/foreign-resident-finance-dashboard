@@ -27,6 +27,7 @@ export function SourceApprovalQueue({ compact = false }: { compact?: boolean }) 
   const [connected, setConnected] = useState<boolean | null>(null);
   const [loading, setLoading] = useState(true);
   const [busyId, setBusyId] = useState<number | null>(null);
+  const [err, setErr] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -42,8 +43,13 @@ export function SourceApprovalQueue({ compact = false }: { compact?: boolean }) 
 
   async function decide(id: number, status: "approved" | "rejected" | "pending", targetTable?: string) {
     setBusyId(id);
+    setErr(null);
     const ok = await updateCandidateStatus(id, status, { targetTable });
     if (ok) await load();
+    else
+      setErr(
+        "승인 처리에 실패했습니다. 운영 콘솔(/admin/console) 로그인 후 다시 시도하거나, Supabase 보안함수(마이그레이션 010) 적용 여부를 확인하세요."
+      );
     setBusyId(null);
   }
 
@@ -73,6 +79,13 @@ export function SourceApprovalQueue({ compact = false }: { compact?: boolean }) 
           <RefreshCw aria-hidden size={14} className={loading ? "animate-spin" : ""} /> 새로고침
         </button>
       </section>
+
+      {err && (
+        <div className="mt-2 flex items-start gap-2 rounded-md bg-rose-50 px-3 py-2 text-xs text-rose-800">
+          <AlertCircle aria-hidden size={14} className="mt-0.5 shrink-0" />
+          <span>{err}</span>
+        </div>
+      )}
 
       {/* 미연결 안내 */}
       {connected === false && (

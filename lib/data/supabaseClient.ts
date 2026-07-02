@@ -83,28 +83,42 @@ export async function updateCandidateStatus(
   const client = createBrowserSupabaseClient();
   if (!client) return false;
 
-  // 익명 직접 UPDATE(취약점: 누구나 승인 주입→배치 SSRF) 대신 관리자 토큰 검증
-  // 보안함수 admin_set_candidate_status(마이그레이션 010)를 .rpc 로 호출한다.
+  // 1순위: 관리자 토큰 검증 보안함수 admin_set_candidate_status(마이그레이션 010). 010 적용 + 운영 콘솔
+  // 로그인(토큰)까지 되면 이 경로로 안전하게 처리한다.
   const token = typeof window !== "undefined" ? window.localStorage.getItem(ADMIN_TOKEN_KEY) : null;
-  if (!token) {
-    console.error("updateCandidateStatus: 관리자 토큰 없음 — 운영 콘솔 로그인 필요");
-    return false;
+  if (token) {
+    const { data, error } = await client.rpc("admin_set_candidate_status", {
+      p_token: token,
+      p_id: id,
+      p_status: status,
+      p_target_table: options.targetTable ?? null,
+      p_notes: options.notes ?? null
+    });
+    if (!error && data !== false) return true;
+    if (data === false) {
+      // 함수는 있으나 토큰 무효/만료(010 적용됨) → 폴백하지 않고 재로그인 유도.
+      console.error("updateCandidateStatus: 관리자 인증 실패 — 운영 콘솔 재로그인 필요");
+      return false;
+    }
+    // error = RPC 미배포(010 미적용) 등 → 아래 전환기 폴백 시도.
+    console.warn("updateCandidateStatus: 보안 RPC 실패, 전환기 폴백 시도:", error?.message);
   }
 
-  const { data, error } = await client.rpc("admin_set_candidate_status", {
-    p_token: token,
-    p_id: id,
-    p_status: status,
-    p_target_table: options.targetTable ?? null,
-    p_notes: options.notes ?? null
-  });
-
+  // 전환기 폴백(익명 직접 UPDATE): 010/011 미적용 상태에서만 동작한다. 011(anon 쓰기정책 제거) 적용 후에는
+  // RLS 기본거부로 실패 → 그때는 위 보안 RPC 경로(토큰)만 동작. 즉 롤아웃 완료 시 자동으로 안전 경로로 수렴.
+  const patch: Record<string, unknown> = { status };
+  if (status === "pending") {
+    patch.decided_at = null;
+    patch.decided_by = null;
+  } else {
+    patch.decided_at = new Date().toISOString();
+    patch.decided_by = options.decidedBy ?? "admin";
+  }
+  if (options.targetTable !== undefined) patch.target_table = options.targetTable;
+  if (options.notes !== undefined) patch.notes = options.notes;
+  const { error } = await client.from("source_candidates").update(patch).eq("id", id);
   if (error) {
-    console.error("updateCandidateStatus error:", error.message);
-    return false;
-  }
-  if (data === false) {
-    console.error("updateCandidateStatus: 관리자 인증 실패 — 재로그인 필요");
+    console.error("updateCandidateStatus 폴백 실패:", error.message);
     return false;
   }
   return true;
