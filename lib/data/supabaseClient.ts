@@ -116,9 +116,15 @@ export async function updateCandidateStatus(
   }
   if (options.targetTable !== undefined) patch.target_table = options.targetTable;
   if (options.notes !== undefined) patch.notes = options.notes;
-  const { error } = await client.from("source_candidates").update(patch).eq("id", id);
+  const { data, error } = await client.from("source_candidates").update(patch).eq("id", id).select("id");
   if (error) {
     console.error("updateCandidateStatus 폴백 실패:", error.message);
+    return false;
+  }
+  // 011(anon 쓰기정책 DROP) 적용 후엔 RLS 필터로 0행 매칭 + 204 성공(error 없음)이 된다.
+  // 실제 갱신 행 수를 확인해야 '조용한 성공'을 실패로 처리해 재로그인 배너가 정상 노출된다.
+  if (!data || data.length === 0) {
+    console.error("updateCandidateStatus 폴백: 0행 갱신(RLS 거부 추정) — 운영 콘솔 로그인 필요");
     return false;
   }
   return true;

@@ -896,14 +896,26 @@ async function loadApprovedCandidateSources() {
     return [];
   }
   const kindToType = { fileData: "file", openapi: "openapi", kosis: "kosis", ecos: "ecos" };
-  // SSRF 방지: 지원하는 kind 만, 그리고 id 형식이 맞는 후보만 수집한다. AI 웹 발굴이 임의 URL
-  // 후보(kind='web' 등)를 승인 큐에 넣더라도 자동 fetch 되지 않게 미지원/비정상은 여기서 제외.
+  // openapi 후보는 endpoint=c.url 을 실제로 fetch 하며 serviceKey 를 부착하므로, 임의 URL 이면
+  // 내부망 SSRF + 정부 서비스키 유출이 된다. data.go.kr 계열 호스트 + https 만 허용한다.
+  const OPENAPI_HOST_ALLOW = new Set(["apis.data.go.kr", "api.odcloud.kr", "www.data.go.kr", "data.go.kr"]);
+  const isAllowedOpenApiUrl = (u) => {
+    try {
+      const url = new URL(String(u ?? ""));
+      return url.protocol === "https:" && OPENAPI_HOST_ALLOW.has(url.hostname.toLowerCase());
+    } catch {
+      return false;
+    }
+  };
+  // SSRF 방지: 지원 kind + id 형식 + (openapi는) endpoint 호스트 화이트리스트를 통과한 후보만 수집.
   return (payload.approved ?? [])
     .filter((c) => {
       const type = kindToType[c.kind];
       if (!type) return false; // 미지원 kind(web 등) → 자동수집 제외
       const id = String(c.dataset_id ?? "");
-      return type === "kosis" ? /^[A-Za-z0-9_]+$/.test(id) : /^\d+$/.test(id); // data.go.kr=숫자, KOSIS=코드
+      if (type === "kosis") return /^[A-Za-z0-9_]+$/.test(id); // KOSIS=코드(orgId는 별도 필요)
+      if (type === "openapi") return /^\d+$/.test(id) && isAllowedOpenApiUrl(c.url); // 임의 endpoint 차단(SSRF)
+      return /^\d+$/.test(id); // file: 숫자 datasetId (임의 URL fetch 아님)
     })
     .map((c) => {
     const type = kindToType[c.kind];

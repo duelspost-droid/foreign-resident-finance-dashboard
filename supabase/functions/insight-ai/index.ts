@@ -54,7 +54,10 @@ Deno.serve(async (req: Request): Promise<Response> => {
   // @ts-ignore Deno global
   const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
   if (supaUrl && serviceKey) {
-    const ip = (req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || "unknown";
+    // XFF leftmost 는 클라이언트가 스푸핑 가능(CWE-348)하므로, 신뢰 프록시가 세팅/append 한
+    // x-real-ip → XFF rightmost 를 우선한다. (완전차단은 어려워 아래 rate 함수의 전역 상한이 실질 방어)
+    const xff = (req.headers.get("x-forwarded-for") ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+    const ip = (req.headers.get("x-real-ip") ?? "").trim() || xff[xff.length - 1] || "unknown";
     try {
       const rl = await fetch(`${supaUrl}/rest/v1/rpc/insight_ai_rate_check`, {
         method: "POST",

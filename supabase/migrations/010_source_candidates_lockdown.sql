@@ -91,7 +91,8 @@ ALTER TABLE insight_ai_rate ENABLE ROW LEVEL SECURITY;
 CREATE OR REPLACE FUNCTION insight_ai_rate_check(
   p_ip          TEXT,
   p_max         INT DEFAULT 20,
-  p_window_secs INT DEFAULT 3600
+  p_window_secs INT DEFAULT 3600,
+  p_global_max  INT DEFAULT 600
 )
 RETURNS BOOLEAN
 LANGUAGE plpgsql
@@ -102,12 +103,18 @@ AS $$
 DECLARE
   v_ip    TEXT := COALESCE(NULLIF(btrim(p_ip), ''), 'unknown');
   v_count INT;
+  v_total INT;
 BEGIN
-  -- 이 IP 의 만료분 정리(테이블 비대화 방지) 후 윈도우 내 호출 수 집계.
-  DELETE FROM insight_ai_rate
-   WHERE ip = v_ip AND created_at < now() - make_interval(secs => p_window_secs);
-  SELECT count(*) INTO v_count
-    FROM insight_ai_rate
+  -- 만료분 전체 정리: IP 스푸핑(랜덤 XFF)으로 타 IP 행이 안 지워져 테이블이 무한증가하는 것을 방지.
+  DELETE FROM insight_ai_rate WHERE created_at < now() - make_interval(secs => p_window_secs);
+  -- 전역 상한(backstop): XFF 스푸핑으로 per-IP 한도를 우회해도 윈도우 내 총 호출을 캡해 금전적 DoS 차단.
+  SELECT count(*) INTO v_total FROM insight_ai_rate
+   WHERE created_at > now() - make_interval(secs => p_window_secs);
+  IF v_total >= p_global_max THEN
+    RETURN FALSE;
+  END IF;
+  -- per-IP 한도.
+  SELECT count(*) INTO v_count FROM insight_ai_rate
    WHERE ip = v_ip AND created_at > now() - make_interval(secs => p_window_secs);
   IF v_count >= p_max THEN
     RETURN FALSE;
@@ -117,5 +124,5 @@ BEGIN
 END;
 $$;
 
-REVOKE ALL ON FUNCTION insight_ai_rate_check(TEXT, INT, INT) FROM PUBLIC;
-GRANT EXECUTE ON FUNCTION insight_ai_rate_check(TEXT, INT, INT) TO anon, authenticated, service_role;
+REVOKE ALL ON FUNCTION insight_ai_rate_check(TEXT, INT, INT, INT) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION insight_ai_rate_check(TEXT, INT, INT, INT) TO anon, authenticated, service_role;
