@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { AlertTriangle, Database, Cpu } from "lucide-react";
+import { AlertTriangle, Database, Cpu, Download } from "lucide-react";
 import {
   generateMockResidents,
   MOCK_TOTAL,
@@ -9,7 +9,74 @@ import {
   SIDO_OPTIONS,
   type MockResident
 } from "@/lib/data/mockResidents";
-import { fetchMockResidentsPage } from "@/lib/data/mockResidentsDb";
+import { fetchAllMockResidents, fetchMockResidentsPage } from "@/lib/data/mockResidentsDb";
+import { downloadFile, EXPORT_FILENAME, openPrintable, toCsv, toJson } from "@/lib/data/mockResidentsExport";
+
+type ExportFormat = "csv" | "json" | "pdf";
+
+// 내보내기 도구모음(자체 진행상태 관리). collectRows로 현재 필터의 전체 행을 모아 파일로.
+function ExportBar({
+  total,
+  collectRows
+}: {
+  total: number;
+  collectRows: (onProgress?: (done: number, total: number) => void) => Promise<MockResident[] | null>;
+}) {
+  const [busy, setBusy] = useState<{ fmt: ExportFormat; done: number; total: number } | null>(null);
+  const [err, setErr] = useState("");
+
+  async function run(fmt: ExportFormat) {
+    if (busy || total === 0) return;
+    setErr("");
+    setBusy({ fmt, done: 0, total });
+    try {
+      const rows = await collectRows((done, t) => setBusy({ fmt, done, total: t || total }));
+      if (!rows || rows.length === 0) {
+        setErr("내보낼 데이터가 없습니다.");
+        return;
+      }
+      if (fmt === "csv") {
+        downloadFile(EXPORT_FILENAME("csv", rows.length), toCsv(rows), "text/csv;charset=utf-8");
+      } else if (fmt === "json") {
+        downloadFile(EXPORT_FILENAME("json", rows.length), toJson(rows), "application/json");
+      } else if (!openPrintable(rows)) {
+        setErr("팝업이 차단되어 인쇄 창을 열 수 없습니다. 팝업을 허용해 주세요.");
+      }
+    } catch {
+      setErr("내보내기 중 오류가 발생했습니다.");
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  const label = (fmt: ExportFormat, text: string) => {
+    if (busy?.fmt === fmt) {
+      const pct = busy.total ? Math.round((busy.done / busy.total) * 100) : 0;
+      return `내보내는 중… ${pct}%`;
+    }
+    return text;
+  };
+  const btn =
+    "inline-flex items-center gap-1 rounded-md border border-slate-300 px-2.5 py-1 text-xs font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-40";
+
+  return (
+    <div className="flex flex-wrap items-center gap-1.5">
+      <span className="mr-0.5 inline-flex items-center gap-1 text-xs text-muted">
+        <Download size={13} aria-hidden /> 내보내기
+      </span>
+      <button type="button" className={btn} disabled={!!busy || total === 0} onClick={() => run("csv")}>
+        {label("csv", "CSV")}
+      </button>
+      <button type="button" className={btn} disabled={!!busy || total === 0} onClick={() => run("json")}>
+        {label("json", "JSON")}
+      </button>
+      <button type="button" className={btn} disabled={!!busy || total === 0} onClick={() => run("pdf")}>
+        {label("pdf", "PDF(인쇄)")}
+      </button>
+      {err && <span className="text-xs text-rose-700">{err}</span>}
+    </div>
+  );
+}
 
 const PAGE_SIZE = 50;
 const inputCls =
@@ -41,6 +108,7 @@ type ViewProps = {
   onGender: (v: string) => void;
   sido: string;
   onSido: (v: string) => void;
+  collectRows: (onProgress?: (done: number, total: number) => void) => Promise<MockResident[] | null>;
 };
 
 // 공통 프레젠테이션(배너·필터·표·페이지네이션). 데이터는 DB/클라 컴포넌트가 주입.
@@ -113,20 +181,23 @@ function MockResidentsView(props: ViewProps) {
             ))}
           </select>
         </div>
-        <p className="mt-2 px-1 text-xs text-muted">
-          {errored ? (
-            <span className="text-rose-700">
-              전용 DB 조회에 실패했습니다. 연결 설정(NEXT_PUBLIC_MOCK_SUPABASE_*)을 확인하세요.
-            </span>
-          ) : loading && total === 0 ? (
-            dbMode ? "불러오는 중…" : "합성 데이터 생성 중…"
-          ) : (
-            <>
-              조회 결과 <strong className="text-ink">{total.toLocaleString()}</strong>건 / 전체{" "}
-              {MOCK_TOTAL.toLocaleString()}건
-            </>
-          )}
-        </p>
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-2 px-1">
+          <p className="text-xs text-muted">
+            {errored ? (
+              <span className="text-rose-700">
+                전용 DB 조회에 실패했습니다. 연결 설정(NEXT_PUBLIC_MOCK_SUPABASE_*)을 확인하세요.
+              </span>
+            ) : loading && total === 0 ? (
+              dbMode ? "불러오는 중…" : "합성 데이터 생성 중…"
+            ) : (
+              <>
+                조회 결과 <strong className="text-ink">{total.toLocaleString()}</strong>건 / 전체{" "}
+                {MOCK_TOTAL.toLocaleString()}건
+              </>
+            )}
+          </p>
+          <ExportBar total={total} collectRows={props.collectRows} />
+        </div>
       </section>
 
       {/* 테이블 */}
@@ -255,6 +326,7 @@ function ClientMock() {
       onGender={setGender}
       sido={sido}
       onSido={setSido}
+      collectRows={async () => filtered}
     />
   );
 }
@@ -319,6 +391,9 @@ function DbMock() {
       onGender={setGender}
       sido={sido}
       onSido={setSido}
+      collectRows={(onProgress) =>
+        fetchAllMockResidents({ name: debouncedName, nationality: nat, gender, sido, onProgress })
+      }
     />
   );
 }
@@ -359,6 +434,7 @@ export default function MockResidentsPage() {
         onGender={() => {}}
         sido=""
         onSido={() => {}}
+        collectRows={async () => []}
       />
     );
   }

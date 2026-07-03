@@ -72,3 +72,34 @@ export async function fetchMockResidentsPage(opts: {
   if (error || !data) return null;
   return { rows: (data as Record<string, unknown>[]).map(mapRow), total: count ?? 0 };
 }
+
+// 필터에 맞는 '전체' 행을 청크(1000건씩)로 모아 반환(내보내기용). PostgREST 요청당
+// 최대 행수(기본 1000) 때문에 페이지를 돌며 누적한다. cap으로 상한을 둔다.
+export async function fetchAllMockResidents(opts: {
+  name?: string;
+  nationality?: string;
+  gender?: string;
+  sido?: string;
+  cap?: number;
+  onProgress?: (done: number, total: number) => void;
+}): Promise<MockResident[] | null> {
+  const cap = opts.cap ?? 100000;
+  const PAGE = 1000;
+  const filters = { name: opts.name, nationality: opts.nationality, gender: opts.gender, sido: opts.sido };
+
+  const first = await fetchMockResidentsPage({ page: 0, pageSize: PAGE, ...filters });
+  if (!first) return null;
+  const total = Math.min(first.total, cap);
+  const out: MockResident[] = [...first.rows];
+  opts.onProgress?.(Math.min(out.length, total), total);
+
+  let page = 1;
+  while (out.length < total) {
+    const res = await fetchMockResidentsPage({ page, pageSize: PAGE, ...filters });
+    if (!res || res.rows.length === 0) break;
+    out.push(...res.rows);
+    opts.onProgress?.(Math.min(out.length, total), total);
+    page += 1;
+  }
+  return out.slice(0, cap);
+}
