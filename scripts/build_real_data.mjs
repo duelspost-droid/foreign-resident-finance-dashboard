@@ -1327,15 +1327,19 @@ async function main() {
 
   // 국민건강보험공단 외국인 건강보험 적용인구.
   const nhisRaw = await readLatestRaw("nhis_foreigner_coverage_2022");
-  const healthInsurance = nhisRaw ? transformHealthInsurance(parseCsv(nhisRaw.text)) : [];
+  const healthInsurance = safe("건강보험", () => (nhisRaw ? transformHealthInsurance(parseCsv(nhisRaw.text)) : []), []);
 
   // 여성가족부 다문화가족 현황.
   const mogefRaw = await readLatestRaw("mogef_multicultural_family_2024");
-  const multiculturalFamily = mogefRaw ? transformMulticulturalFamily(parseCsv(mogefRaw.text)) : { items: [], totalCount: 0, latestYear: null };
+  const multiculturalFamily = safe(
+    "다문화가족",
+    () => (mogefRaw ? transformMulticulturalFamily(parseCsv(mogefRaw.text)) : { items: [], totalCount: 0, latestYear: null }),
+    { items: [], totalCount: 0, latestYear: null }
+  );
 
   // 대학알리미 고등교육기관 기본현황 (위치·유형 보조).
   const uniStatsRaw = await readLatestRaw("academyinfo_university_stats");
-  const universityStats = uniStatsRaw ? transformUniversityStats(parseCsv(uniStatsRaw.text)) : [];
+  const universityStats = safe("대학알리미 기본현황", () => (uniStatsRaw ? transformUniversityStats(parseCsv(uniStatsRaw.text)) : []), []);
 
   // API(KOSIS/openapi) 보조 데이터. 키 없으면 빈 배열. MOJ 1차 데이터와 분리 유지.
   let apiBundle = { apiStatus: [], apiRegion: [], apiEconActivity: [], parsedFiles: [] };

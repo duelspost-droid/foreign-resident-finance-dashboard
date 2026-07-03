@@ -10,6 +10,8 @@ import {
   isWideFormat,
   readKosisDimRows,
   detectTrendAnomalies,
+  detectVisaActivityAnomalies,
+  cleanItm,
   periodToMonth
 } from "../scripts/build_real_data.mjs";
 
@@ -72,4 +74,25 @@ test("periodToMonth: YYYYMM/YYYY 변환", () => {
   assert.equal(periodToMonth("202403"), "2024-03-01");
   assert.equal(periodToMonth("2024"), "2024-12-01");
   assert.equal(periodToMonth("xx"), "2024-12-01");
+});
+
+test("cleanItm: 들여쓰기·기호 제거 + 공백 정규화", () => {
+  assert.equal(cleanItm("- 상용근로자"), "상용근로자");
+  assert.equal(cleanItm("· 취업자"), "취업자");
+  assert.equal(cleanItm("  임금  근로자 "), "임금 근로자");
+  assert.equal(cleanItm(null), "");
+});
+
+test("detectVisaActivityAnomalies: 체류자격별 30%↑ 급락만, 합계·타소스 제외", () => {
+  const rows = [
+    { sourceId: "kosis_foreigner_economic_activity", category: "E-9", period: "2020", value: 100 },
+    { sourceId: "kosis_foreigner_economic_activity", category: "E-9", period: "2021", value: 60 }, // -40% → 플래그
+    { sourceId: "kosis_foreigner_economic_activity", category: "계", period: "2020", value: 100 },
+    { sourceId: "kosis_foreigner_economic_activity", category: "계", period: "2021", value: 40 }, // 합계행 → 제외
+    { sourceId: "other_source", category: "X", period: "2020", value: 100 },
+    { sourceId: "other_source", category: "X", period: "2021", value: 10 } // 타 소스 → 제외
+  ];
+  const out = detectVisaActivityAnomalies(rows);
+  assert.equal(out.length, 1);
+  assert.equal(out[0].period, 2021);
 });
