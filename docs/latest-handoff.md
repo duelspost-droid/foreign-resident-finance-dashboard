@@ -1,32 +1,138 @@
 # Latest Handoff
 
-## Status — 2026-06-22 (세션: 제안위젯·미연동 트리아지·홈 자동차트·SURFACED 감사·모바일·Supabase 활성화)
+## 📌 현재 상태 스냅샷 — 2026-07-03
 
-다른 PC에서 이어서 작업하기 위한 현재 상태 스냅샷. 로컬 경로 `C:\Users\duels\Projects\foreign-resident-finance-dashboard` 또는 임의 클론.
+다른 PC에서 **git clone 후 이 문서 하나로 이어서 작업**할 수 있게 정리한 최신 상태.
+전체 백로그·소유자 잔여 스텝은 `docs/next-tasks.md`, 깊은 이력은 `git log`.
 
-### 라이브/인프라 상태 (전부 활성)
-- 사이트: https://data.jbax.co.kr/ (GitHub Pages 정적 export, 매일 01:00 KST 자동 수집·배포). CI: `.github/workflows/pages.yml`.
-- Supabase project `nrdapzgtibbusvoaceuh`. **마이그레이션 002~007 전부 적용 완료**:
-  - 002 ai_insight_chat(AI 질의 이력) · 003 metric_snapshots · 004 feature_requests/page_views(제안·접속통계) · 005 admin_config(관리자 인증) · 006/007 surface_config + disposition(트리아지·홈표시).
-- Edge Functions **배포됨**: `admin`(운영콘솔 인증·답변·재빌드), `insight-ai`(생성형 AI). `ANTHROPIC_API_KEY` 설정됨 — AI 실호출 검증 완료(컨텍스트 기반 답변 정상).
-- GitHub Secrets: SUPABASE_URL/ANON_KEY/SERVICE_ROLE_KEY, DATA_GO_KR_SERVICE_KEY, KOSIS_API_KEY, ECOS_API_KEY 등록됨(SEOUL은 미발급).
-- 검증: `npm install`→`npm run typecheck`→`npm run build`→`npm run dev -- --port 3000` 모두 통과(2026-06-22).
-- ⚠️ Supabase RLS 포스처: source_candidates·feature_requests·surface_config·ai_insight_chat·page_views 모두 **anon write 허용**(USING(true)/WITH CHECK(true)). 내부도구 가정. 운영 강화 시 admin Edge Function 경유 쓰기로 이전 권장(feature_requests의 adminRespond가 그 패턴).
+- **GitHub**: `https://github.com/duelspost-droid/foreign-resident-finance-dashboard` (브랜치 `main`)
+- **라이브**: https://data.jbax.co.kr/ (GitHub Pages 정적 export, 매일 01:00 KST 자동 수집·배포)
+- **최신 커밋**: `6dc9a5b` (mock-residents Postgres 스토어) — 배포 성공, 라이브 반영
+- **스택**: Next.js 16 App Router · TypeScript · Tailwind · Recharts · Supabase(옵션) · 정적 export(GitHub Pages)
+- **목적**: 개인 단위가 아닌 **집계 통계**로 국내거주 외국인 금융시장 기회를 분석하는 B2B 대시보드
 
-### 이 세션에서 한 일 (커밋 기준)
-- **제안 위젯**(`components/feedback/FeedbackButton.tsx`): '내 제안'(세션필터)→'과거 제안 이력'(공개, `fetchPublicFeatureRequests` session_id 미반환). 모바일 모달 = `createPortal`로 body 렌더(헤더 backdrop-blur containing-block 탈출) + 중앙정렬 + a11y(role/aria·Esc·바디스크롤락·포커스). 안내문 공개고지.
-- **Tailwind 팔레트 버그**: `tailwind.config.ts`가 teal/amber를 단일색으로 정의→`teal-600`등 음영 전부 무효(투명) → DEFAULT+전체 스케일로 정의(투명 배지/버튼 수정).
-- **데이터 카탈로그**(`app/catalog/page.tsx`): 운영성 수집상태(성공/실패칩·전체수집표) 제거→메타데이터 관리로 일원화. CollectedSourcesTable 삭제.
-- **승인 큐 일원화**: 메타관리=요약+링크(`components/admin/ApprovalSummaryLink.tsx`), 실제 승인은 `/admin` 한 곳. `SourceApprovalQueue` 상태바 이중라벨 정리.
-- **사이드바**: '데이터 현황'→'대시보드' 최상단(`components/layout/Sidebar.tsx`).
-- **미연동 1클릭 트리아지** + **'홈에 표시' 범용 자동차트** (핵심 신규):
-  - `lib/data/sourceMeta.ts` `SURFACED` 맵 = 소스→화면 연동 라벨(정적, 개발이 차트 연결 시 갱신).
-  - `surface_config.disposition`(none/shown/planned/archived/excluded) — 관리자가 메타관리 카드에서 1클릭. `lib/data/supabaseClient.ts`: `fetchSurfaceDispositions`/`setSourceDisposition`/`setSourceChartConfig`.
-  - `components/data/CoverageSection.tsx`(client): 커버리지+트리아지 카드형. 'shown' 카드엔 차트설정(ShowConfig: 막대/선/표·범주/수치 컬럼·제목).
-  - `scripts/build_generic_data.mjs`→`lib/data/generated/genericData.ts`: data/raw CSV를 범용 {columns,rows(40행),numericCols}로 파싱(인코딩 자동). `data:build`/`data:ci`/pages.yml 자동커밋에 연결.
-  - `components/data/GenericSourceChart.tsx`(client): config(`note` JSON) 기반 막대/선/표 자동 렌더, 없으면 자동추론.
-  - `components/data/HomeExtraData.tsx`: 홈 하단 '추가 데이터' — disposition='shown' 소스만 genericData 지연import해 렌더(없으면 섹션 숨김). `app/page.tsx` 하단 배치.
-- **SURFACED 정확도 감사**: 실제 화면 렌더 추적·검증해 17개 등록 → 미연동 27→10. (moj_immigration_monthly은 raw가 status소스와 byte-identical이라 미연동 유지.)
-- **정리**: 죽은 export 제거(fetchSurfaceConfig/upsertSurfaceConfig/SurfaceConfigRow/mapSurface/adminTriggerRebuild). 조사노트 표→카드. 9페이지 모바일 감사 → `app/globals.css`(.chip/.tag/.eyebrow `white-space:nowrap`, .surface-header `flex-wrap`), `components/ui/Panel.tsx`(헤더 모바일 세로스택), economy/consumption/financial-insights/nationalities 인라인 헤더 flex-wrap.
+---
 
-### 다음 작업: `docs/next-tasks.md` 참조 (이 세션 기준 최신)
+## 🚀 빌드·검증 (다른 PC = 일반 node/npm 환경 기준)
+
+```bash
+git clone https://github.com/duelspost-droid/foreign-resident-finance-dashboard
+cd foreign-resident-finance-dashboard
+npm install
+npm run typecheck        # tsc --noEmit — 반드시 통과(=0)해야 커밋/푸시
+npm test                 # node --test test/*.test.mjs — 27건 통과
+npm run build            # vinext build (정적 export)
+npm run dev -- -p 3000   # http://localhost:3000
+```
+
+> ⚠️ **이 Mac 로컬 특이사항**(다른 PC엔 해당 없음): 이 개발 머신엔 node/npm이 PATH에 없어
+> 번들 노드(`/Users/hk/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node`, v24)를
+> 직접 쓰고, `vinext build`는 rolldown 네이티브 바인딩 부재로 로컬 실행 불가 → **`tsc`+`node --test`로만 검증**.
+> 일반 PC(node/npm 정상)에선 위 표준 명령이 전부 동작한다. 상세: `docs/`의 빌드 노트 및 자동메모리.
+
+**작업 규칙(이 프로젝트 합의사항)**:
+- 수정 → `tsc` 통과 확인 → **묻지 말고 바로 커밋·푸시**(`main`).
+- 푸시 전 `git pull --rebase origin main`(매일 01:00 CI 자동 데이터 커밋과 충돌 방지).
+- **소유자 전용**(claude 불가): Supabase 마이그레이션 실행·Edge Function 배포·시크릿/환경변수 설정·계정/프로젝트 생성·PAT/2FA. 이런 항목은 "⏳ 소유자"로 표기.
+
+---
+
+## 🖥 인프라 상태 (적용됨 vs 소유자 대기)
+
+- **Supabase 프로젝트** `nrdapzgtibbusvoaceuh`
+  - ✅ 마이그레이션 **002~007 적용됨**(ai_insight_chat·metric_snapshots·feature_requests/page_views·admin_config·surface_config/disposition).
+  - ⏳ **008~011 미적용**(잠금 마이그레이션). 프론트는 **전환기 폴백**으로 이미 동작:
+    RPC(admin_set_*) 있으면 그걸, 없으면 anon 직접 쓰기(009/011이 anon 정책을 DROP하기 전까진 동작). → 지금 승인/트리아지 버튼 **정상 작동**. 008~011 적용 시 폴백은 자동으로 RPC 경로만 남음.
+- **Edge Functions** ✅ 배포됨: `admin`(운영콘솔 인증·답변·재빌드), `insight-ai`(생성형 AI 채팅).
+  - `insight-ai`용 `ANTHROPIC_API_KEY`는 **Supabase Function 시크릿에 설정됨**(라이브 AI 채팅 동작 확인).
+- **GitHub Actions 시크릿**: ✅ SUPABASE_URL/ANON_KEY/SERVICE_ROLE_KEY, DATA_GO_KR_SERVICE_KEY, KOSIS_API_KEY, ECOS_API_KEY.
+  - ⏳ **미등록**: `ANTHROPIC_API_KEY`(CI용 — 있어야 매일 웹발굴·인사이트 자동생성), `REB_API_KEY`, SEOUL 키.
+- **CI**: `.github/workflows/pages.yml` — push + cron(01:00 KST). `build`(npm ci→data:ci→auto-commit→정적빌드→artifact) + `deploy`(Pages). `data:ci`는 timeout 15분·continue-on-error.
+
+---
+
+## 🗂 최근 세션 작업 이력 (2026-06-25 → 07-03, 최신순)
+
+| 날짜 | 커밋 | 내용 |
+|---|---|---|
+| 07-03 | `6dc9a5b` | **가상 외국인정보 전용 Postgres 스토어** — `db/mock_residents/`(schema.sql·schema.supabase.sql·README) + `scripts/build_mock_residents_sql.mjs`(mockResidents.ts 단일출처 → COPY 시드) + `mock:sql` 스크립트. 프로덕션 분석 Supabase와 분리. |
+| 07-03 | `fdc0934` | **외국인 정보 관리(가상) 조회 화면** — `/mock-residents`(10만 건 클라 생성·이름검색·국적/성별/지역 필터·페이지네이션·"가상 데이터" 경고배너·noindex) + 사이드바 '데이터 탐색' 메뉴. |
+| 07-03 | `f161325` | 메타관리 '미연동 연동'(surface_config 트리아지) 버튼 수정 — 008 미적용 전환기 폴백. |
+| 07-03 | `7c7a4bd` | CSV 파서 강화 — RFC 4180(따옴표 안 개행) 공유 모듈 `scripts/lib/csv.mjs` + 테스트 8건. |
+| 07-03 | `83dc0d0` | 감사 마무리 — build_real_data per-source 가드 누락 3건(health/multicultural/uniStats) 보강. |
+| 07-03 | `1796bce` | 감사 후속 — 죽은 코드 정리(고아 컴포넌트 4 + 죽은 함수 1). |
+| 07-03 | `7514954` | **감사 확정 3건 수정** — ① SSRF(승인 openapi endpoint 미검증 allowlist) ② insight-ai XFF 스푸핑+무한테이블 ③ 승인 폴백 011-조용한성공. |
+| 07-02 | `cad8e5e` | 승인 버튼 수정 — 010 미적용 전환기 폴백 + 실패 메시지 배너. |
+| 07-01 | `20949fe`·`69dbe32`·`5fa660a` | **REB(한국부동산원) 수집기** — 크롬 발굴로 전국 외국인 부동산거래 발견 → R-ONE OpenAPI `type:"reb"` 컬렉터 + 소스 2종(statblId A_2024_00533/00543). |
+| 06-30 | `3499327` | AI 웹 발굴 리드를 '데이터 에이전트 승인'(/admin)으로 일원화(이동+큐 통합). |
+| 06-30 | `c28d7c0` | 보안 HIGH — source_candidates 익명쓰기 차단 + insight-ai 레이트리밋(010/011 마이그레이션). |
+| 06-30 | `22665a4` | 발굴 리드 7종 정식 소스 등록 + build_generic_data HTML 가드. |
+| 06-30 | `47528ab` | score.ts 테스트(vitest 스캐폴드). |
+| 06-30 | `a10d6fc` | SEO/a11y — 라우트 metadata·sitemap/robots·error/not-found·차트 alt(27개). |
+| 06-25 | `adb71d6` | 신뢰성(node:test 17건)·데이터(per-source safe 가드·HTML감지)·코드품질(죽은코드) + **AI 웹 발굴 에이전트**(discover_web_sources.mjs). |
+
+---
+
+## 🔨 진행 중 작업 — 가상 외국인정보 화면 ↔ Postgres 연동 (미완, 다음 세션 이어서)
+
+**요구**: `/mock-residents` 화면이 지금은 클라이언트에서 10만 건을 생성한다. 이걸 **Postgres(전용 DB)에서 읽어오도록** 연동한다. Postgres 스토어는 **가상 데이터 관리 전용**(집계 분석 Supabase와 분리).
+
+**✅ 이미 완료(커밋됨)**:
+- `db/mock_residents/schema.sql` — 이식성 DDL(테이블·인덱스·pg_trgm 이름검색·합성/마스킹 주석).
+- `db/mock_residents/schema.supabase.sql` — (선택) 별도 Supabase 프로젝트용 anon 읽기 RLS.
+- `scripts/build_mock_residents_sql.mjs` — `lib/data/mockResidents.ts`를 단일출처로 import → COPY 시드 생성(`npm run mock:sql`, 10만 건 0.3s/13MB, `seed.sql`은 gitignore).
+- `db/mock_residents/README.md` — 적재·조회·연동 가이드.
+- `app/mock-residents/page.tsx`(클라 생성) · `layout.tsx`(noindex) · 사이드바 메뉴.
+
+**⬜ 남은 코드 작업(claude 가능, 다음에 바로 착수)**:
+1. `lib/data/mockResidentsDb.ts` — **별도** env(`NEXT_PUBLIC_MOCK_SUPABASE_URL`/`_ANON_KEY`)로 전용 supabase 클라이언트 생성 + `isMockDbConfigured()` + `fetchMockResidentsPage({page,pageSize,name,nationality,gender,sido})`(서버 페이지네이션 `.range()` + `count:'exact'` + `.ilike/.eq` 필터, 실패/미설정 시 null).
+2. `app/mock-residents/page.tsx` 리팩터 — **DB 모드**(설정 시: 페이지/필터 변경마다 DB 조회, 이름검색 디바운스) / **클라 생성 모드**(미설정 시: 현행 유지) 이원화. 미설정이 기본이라 배포에 영향 없음(inert).
+3. `scripts/load_mock_residents.mjs` — (선택) PostgREST 배치 적재기(`load_supabase.mjs` 패턴). service_role 필요 → 소유자 실행용.
+
+**⏳ 소유자 인프라(claude 불가 = 크롬으로도 규칙상 못 하는 부분)**:
+- 정적 export라 런타임 DB 접근은 **클라 supabase-js + anon 키**만 가능 → **별도 Supabase 프로젝트**(프로덕션 분석과 분리) 필요.
+- 그 프로젝트 생성(=**DB 비밀번호 설정**=자격증명 입력, claude 금지) → `schema.sql`→`schema.supabase.sql`→(psql로)`seed.sql` 적재 → `NEXT_PUBLIC_MOCK_SUPABASE_URL/_ANON_KEY`를 GitHub 시크릿+`pages.yml`에 등록.
+- **10만 행 벌크 적재는 웹 SQL 편집기로 불가**(13MB) → `psql -f seed.sql` 또는 load_mock_residents.mjs(service_role) 필요.
+> 즉 화면-DB 연동은 **코드는 claude가 붙이고(inert), 인프라 3개(별도 프로젝트·시크릿·벌크적재)는 소유자**가 마무리하는 구조.
+
+---
+
+## 🧭 소유자 잔여 활성화 체크리스트 (요약 — 상세는 next-tasks.md)
+
+1. **마이그레이션 008→011 실행**(순서·사이): 008 실행 → 배포·캐시만료 후 009 → 010 실행 → insight-ai 재배포 → 배포·캐시만료 후 011. (미실행이어도 프론트는 폴백으로 동작.)
+2. **매일 AI 웹발굴·인사이트 켜기**: GitHub 시크릿 `ANTHROPIC_API_KEY` 추가 + `pages.yml` 잡 env에 `ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}` 1줄 + auto-commit `file_pattern`에 `webDiscoveredSources.json`·`insightDigest.json` 2줄.
+3. **REB 전국 외국인 부동산거래 켜기**: 무료 R-ONE 키 발급 → 시크릿 `REB_API_KEY` + `pages.yml` env 1줄. (statblId는 이미 확정.)
+4. **CI 품질 게이트**: `pages.yml`에 `npm run typecheck`/`npm test` 단계 추가. `npm i -D vitest`(test:unit 활성).
+5. **(선택) 가상 데이터 화면 DB 연동**: 위 '진행 중 작업'의 소유자 인프라 3개.
+
+---
+
+## 🔒 제약 (보안·개인정보 — 절대 준수)
+
+- 개인 단위 외국인 데이터 결합 금지. **외국인등록번호·여권번호·국내거소신고번호·이름·전화번호·상세주소·계좌번호 사용 금지.**
+- 내부 금융 데이터는 **지역·월·국적·세그먼트 단위 집계값만** 허용. 소수 셀(1~4)은 마스킹(`maskSmallCell`→'<5') 또는 상위 분류 병합.
+- `/compliance` 페이지가 이 원칙을 공표. → **가상(합성) 데이터는 반드시 별도 스토어**로 분리, 프로덕션 분석 Supabase에 적재 금지.
+- 가상 화면의 주민등록번호·외국인등록번호는 **뒷자리 마스킹 합성 포맷**(`YYMMDD-N●●●●●●`)만, 실제 유효번호 생성 금지.
+
+---
+
+## 🗺 핵심 파일 지도 (이번 mock 기능 + 파이프라인)
+
+```
+app/mock-residents/page.tsx        ← 가상 정보 조회 화면(현재 클라 생성)
+app/mock-residents/layout.tsx      ← noindex
+lib/data/mockResidents.ts          ← 결정적(mulberry32) 합성 생성기(단일출처)
+db/mock_residents/                  ← 전용 Postgres: schema.sql·schema.supabase.sql·README(·seed.sql=gitignore)
+scripts/build_mock_residents_sql.mjs ← 시드 SQL 생성기(mockResidents.ts import)
+
+scripts/data_sources.mjs           ← 소스 카탈로그(수정 시 이 파일)
+scripts/fetch_public_data.mjs      ← 수집기(file/kosis/openapi/ecos/seoul/reb + 승인 후보)
+scripts/build_real_data.mjs        ← CSV/JSON → realData.ts(per-source safe 가드)
+scripts/build_generic_data.mjs     ← 미연동 소스 → 범용 뷰어 데이터(PII 컬럼 제외)
+scripts/discover_web_sources.mjs   ← AI 웹발굴(ANTHROPIC_API_KEY)
+lib/data/supabaseClient.ts         ← Supabase 조회/쓰기(RPC + 전환기 폴백)
+components/layout/Sidebar.tsx       ← 좌측 메뉴
+supabase/migrations/               ← 001~011(008~011 소유자 대기)
+.github/workflows/pages.yml         ← CI/CD(01:00 KST cron)
+docs/next-tasks.md                  ← 전체 백로그·소유자 스텝
+```

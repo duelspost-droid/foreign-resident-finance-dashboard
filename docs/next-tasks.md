@@ -1,6 +1,8 @@
-# 다음 작업 (백로그) — 2026-06-22 기준
+# 다음 작업 (백로그) — 2026-06-22 기준 (헤더 하단 최신 섹션은 2026-07-03)
 
 전체 현재 상태는 `docs/latest-handoff.md` 참조. 이전 06-16 백로그 항목(ECOS 키·KOSIS objL·DNS/HTTPS·유학생 데이터 감사·data.go.kr file 소스 2종 등)은 대부분 완료됨.
+
+> **📅 2026-07-03 최신 세션 요약은 이 문서 맨 아래 `## 🆕 2026-07-03` 섹션 참조.**
 
 ## 🔑 소유자/자격증명 (코드로 해결 불가)
 1. **일부 공공데이터 수집 실패** — 예 `nhis_foreigner_premium_2023`. data.go.kr 파일 다운로드가 실제 파일 대신 **HTML 반환**(`data/catalog/latest_fetch_catalog.json` headerLine="<!DOCTYPE html>") → **활용신청(구독)** 필요. 일부는 **.xlsx 저장**(빌드는 CSV만 파싱 → 아래 3번).
@@ -110,3 +112,26 @@
 - **[신뢰성]** `build_real_data` 순수함수 `node:test` 17건(maskSmallCell·normalize·숫자파싱·비자분류·wide감지·KOSIS중복제거·급락감지) + `npm test`(node --test, 추가의존 0). ※ `score.ts`(확장자없는 상대 import)는 TS 로더 필요 → 후속(vitest). CI에 테스트/typecheck 단계 추가는 소유자(pages.yml).
 - **[데이터]** `build_real_data` per-source 변환 가드(`safe`) — 단일 소스 변환 예외가 배치 전면중단시키던 문제 해소(last-good/기본값 격리). HTML→CSV 오저장 감지(거짓 성공 차단). `realDataSummary.transformErrors` 노출.
 - **[코드품질]** 죽은 export 2종(sampleFinanceAggregates·sampleRegionInsights)+연쇄 미사용 import 제거, 고아 .ts 5종 삭제(ingest_* 3·calculate_scores·utils/region).
+
+---
+
+## 🆕 2026-07-03 — 감사 마무리·CSV 강화·가상 외국인정보(가상) 기능
+
+### ✅ 완료 (커밋·푸시)
+- **승인/트리아지 버튼 무동작 수정** (`cad8e5e` 승인·`f161325` 미연동연동) — 010/008 미적용 상태에서 프론트가 존재하지 않는 SECURITY DEFINER RPC를 호출해 조용히 실패하던 문제. supabaseClient에 **전환기 폴백**(RPC 시도→없으면 anon 직접 쓰기, `.select()` 행수로 성공판정) + 실패 시 빨간 배너. 3개 `.rpc` 호출(admin_set_candidate_status·admin_set_surface_config×2) 전부 폴백 적용.
+- **감사 확정 3건 수정** (`7514954`, 5렌즈 적대검증) — ① **SSRF**: 승인된 openapi 후보 endpoint가 미검증이라 임의 호스트로 키 유출 가능 → `isAllowedOpenApiUrl` allowlist(https + {apis.data.go.kr, api.odcloud.kr, www.data.go.kr, data.go.kr}). ② **insight-ai DoS**: IP를 XFF 최좌측(스푸핑 가능)에서 읽고 rate 테이블 무한증가 → XFF 최우측 + p_global_max(600) GC. ③ **승인 폴백 011-조용한성공**: 011 적용(anon DROP) 후 폴백이 0행 성공처럼 보이던 버그.
+- **죽은코드 정리** (`1796bce`) — 고아 컴포넌트 4 + 죽은 함수 1(transformMoeStudentsBySchool).
+- **per-source 가드 누락 보강** (`83dc0d0`) — health/multicultural/uniStats transform이 `safe()` 미포함이던 것 보강(배치 정합).
+- **CSV 파서 강화** (`7c7a4bd`) — split-by-newline이 따옴표 안 개행을 깨던 문제 → `scripts/lib/csv.mjs`의 RFC 4180 char-scanner(`parseCsvRows`)로 통합(build_real_data·build_generic_data 공유), 테스트 8건. 회귀 0.
+- **외국인 정보 관리(가상) 화면** (`fdc0934`) — 사이드바 '데이터 탐색'에 `/mock-residents` 추가. `lib/data/mockResidents.ts`(mulberry32 결정적, 이름/성별/생년월일/주민등록번호[마스킹]/외국인등록번호[마스킹]/국적/체류자격/지역/등록일) 10만 건을 클라 생성. 이름검색·국적/성별/지역 필터·50/페이지·"가상 데이터" 경고배너·noindex. **전부 합성**, 식별번호는 뒷자리 마스킹.
+- **가상 외국인정보 전용 Postgres 스토어** (`6dc9a5b`) — `db/mock_residents/schema.sql`(이식성 DDL·pg_trgm 이름검색·마스킹 주석) + `schema.supabase.sql`(선택 RLS) + `scripts/build_mock_residents_sql.mjs`(mockResidents.ts 단일출처 → COPY 시드, `npm run mock:sql`) + README. **프로덕션 분석 Supabase와 분리**(집계 전용 원칙). `seed.sql`(13MB) gitignore.
+
+### ⬜ 진행 중 — 가상정보 화면 ↔ Postgres 연동 (다음 세션 착수)
+- **claude 코드**: `lib/data/mockResidentsDb.ts`(별도 env `NEXT_PUBLIC_MOCK_SUPABASE_URL/_ANON_KEY` 전용 클라이언트 + `.range()` 서버 페이지네이션 + `count:'exact'` + `.ilike/.eq` 필터) → `app/mock-residents/page.tsx` DB/클라 이원화(디바운스) → `scripts/load_mock_residents.mjs`(PostgREST 배치 적재, 소유자용).
+- **⏳ 소유자 인프라**: 정적 export라 런타임 DB=클라 anon만 → **별도 Supabase 프로젝트**(프로덕션과 분리) 생성(DB 비번=자격증명, claude 금지) → schema/seed 적재(10만 행은 psql 필요, 웹 편집기 불가) → `NEXT_PUBLIC_MOCK_SUPABASE_*` 시크릿+pages.yml. **코드는 inert(미설정 시 클라 생성 폴백)라 붙여도 배포 무영향.**
+
+### ⏳ 소유자 활성화 (미해결, 우선순위)
+1. **마이그레이션 008→011 실행** — 008 실행→배포/캐시만료 후 009 / 010 실행→insight-ai 재배포→배포/캐시만료 후 011. (미실행이어도 프론트 폴백 동작.) 검증: `SELECT polname FROM pg_policies WHERE tablename IN('surface_config','source_candidates');`
+2. **매일 AI 웹발굴·인사이트 켜기** — 시크릿 `ANTHROPIC_API_KEY` + pages.yml 잡 env 1줄 + auto-commit file_pattern 2줄(webDiscoveredSources.json·insightDigest.json).
+3. **REB 전국 외국인 부동산거래** — 무료 R-ONE 키 → 시크릿 `REB_API_KEY` + pages.yml env 1줄(statblId A_2024_00533/00543 확정됨).
+4. **CI 품질 게이트** — pages.yml에 `npm run typecheck`/`npm test` 단계. `npm i -D vitest`로 test:unit 활성.
