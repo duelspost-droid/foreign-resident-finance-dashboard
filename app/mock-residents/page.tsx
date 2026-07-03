@@ -9,7 +9,7 @@ import {
   SIDO_OPTIONS,
   type MockResident
 } from "@/lib/data/mockResidents";
-import { fetchMockResidentsPage, isMockDbConfigured } from "@/lib/data/mockResidentsDb";
+import { fetchMockResidentsPage } from "@/lib/data/mockResidentsDb";
 
 const PAGE_SIZE = 50;
 const inputCls =
@@ -324,6 +324,43 @@ function DbMock() {
 }
 
 export default function MockResidentsPage() {
-  // 전용 DB 설정 여부는 빌드시 고정(NEXT_PUBLIC_*) → 컴포넌트 선택은 렌더 간 불변(훅 순서 안전).
-  return isMockDbConfigured() ? <DbMock /> : <ClientMock />;
+  // 마운트 시 mock_residents 테이블을 프로브 → 데이터가 있으면 DB 모드, 없거나(테이블
+  // 부재) 오류면 클라이언트 생성 모드. 테이블 준비 여부와 무관하게 항상 동작(배포 무영향).
+  const [mode, setMode] = useState<"probe" | "db" | "client">("probe");
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchMockResidentsPage({ page: 0, pageSize: 1 })
+      .then((res) => {
+        if (!cancelled) setMode(res && res.total > 0 ? "db" : "client");
+      })
+      .catch(() => {
+        if (!cancelled) setMode("client");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (mode === "probe") {
+    return (
+      <MockResidentsView
+        dbMode
+        loading
+        total={0}
+        pageRows={[]}
+        page={0}
+        onPage={() => {}}
+        name=""
+        onName={() => {}}
+        nat=""
+        onNat={() => {}}
+        gender=""
+        onGender={() => {}}
+        sido=""
+        onSido={() => {}}
+      />
+    );
+  }
+  return mode === "db" ? <DbMock /> : <ClientMock />;
 }

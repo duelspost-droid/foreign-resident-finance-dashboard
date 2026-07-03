@@ -126,7 +126,11 @@
 - **외국인 정보 관리(가상) 화면** (`fdc0934`) — 사이드바 '데이터 탐색'에 `/mock-residents` 추가. `lib/data/mockResidents.ts`(mulberry32 결정적, 이름/성별/생년월일/주민등록번호[마스킹]/외국인등록번호[마스킹]/국적/체류자격/지역/등록일) 10만 건을 클라 생성. 이름검색·국적/성별/지역 필터·50/페이지·"가상 데이터" 경고배너·noindex. **전부 합성**, 식별번호는 뒷자리 마스킹.
 - **가상 외국인정보 전용 Postgres 스토어** (`6dc9a5b`) — `db/mock_residents/schema.sql`(이식성 DDL·pg_trgm 이름검색·마스킹 주석) + `schema.supabase.sql`(선택 RLS) + `scripts/build_mock_residents_sql.mjs`(mockResidents.ts 단일출처 → COPY 시드, `npm run mock:sql`) + README. **프로덕션 분석 Supabase와 분리**(집계 전용 원칙). `seed.sql`(13MB) gitignore.
 
-### ✅ 가상정보 화면 ↔ Postgres 연동 — 코드 완료(커밋, env-gated inert)
+### ✅ 가상정보 화면 ↔ Postgres 연동 — **라이브 완료**(2026-07-03, 비용 0)
+- 크롬으로 기존 대시보드 Supabase(`nrdapzgtibbusvoaceuh`)에 `mock_residents` 테이블+RLS(anon read)+서버측 `generate_series` 10만 행 적재. 프론트는 마운트 시 테이블 프로브 → 데이터 있으면 "DB 연동", 없으면 "로컬 생성" 폴백. 기존 anon 키 재사용 → 시크릿/pages.yml 변경 불필요.
+- (Free 조직 프로젝트 한도 → 별도 Pro 프로젝트는 $10/월. 사용자가 '기존 프로젝트에 테이블(비용 0)' 선택.)
+
+#### (참고) 초기 env-gated 배선
 - `lib/data/mockResidentsDb.ts` — 별도 env(`NEXT_PUBLIC_MOCK_SUPABASE_URL/_ANON_KEY`) 전용 클라이언트 + `isMockDbConfigured()` + `fetchMockResidentsPage()`(`.range()` 서버 페이지네이션 + `count:'exact'` + `.ilike/.eq` 필터, 실패/미설정 시 null).
 - `app/mock-residents/page.tsx` — DB/클라 이원화(공통 뷰 `MockResidentsView`, 이름검색 250ms 디바운스, "DB 연동"/"로컬 생성" 배지). 미설정이 기본이라 배포 무영향.
 - `scripts/load_mock_residents.mjs`(`npm run mock:load`) — PostgREST 배치 업서트 적재기(소유자, service_role, `--dry-run`/`--count`). 검증: tsc=0, dry-run OK, 테스트 27/27.

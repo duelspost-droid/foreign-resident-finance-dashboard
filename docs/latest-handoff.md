@@ -73,7 +73,20 @@ npm run dev -- -p 3000   # http://localhost:3000
 
 ---
 
-## 🔨 가상 외국인정보 화면 ↔ Postgres 연동 (코드 완료 · 소유자 인프라만 남음)
+## 🔨 가상 외국인정보 화면 ↔ Postgres 연동 (✅ 라이브 완료 — 2026-07-03)
+
+**최종 구성(비용 0)**: 크롬으로 기존 대시보드 Supabase 프로젝트(`nrdapzgtibbusvoaceuh`)에 `mock_residents`
+테이블 생성 + 읽기전용 RLS + anon SELECT 권한 + 서버측 `generate_series`로 **10만 행** 적재.
+프론트는 마운트 시 이 테이블을 **프로브** → 데이터 있으면 "DB 연동" 모드(서버 페이지네이션), 없으면
+"로컬 생성" 폴백. 기존 anon 키 재사용이라 **시크릿/pages.yml 변경 불필요**. (Supabase Free 조직이
+프로젝트 한도라 별도 Pro 프로젝트는 $10/월 → 사용자가 비용 0인 '기존 프로젝트에 테이블' 방식 선택.)
+
+> 완전 별도 프로젝트로 옮기려면 `NEXT_PUBLIC_MOCK_SUPABASE_URL/_ANON_KEY`로 오버라이드 + seed 적재.
+> 상세: `db/mock_residents/README.md`.
+
+---
+
+## (이력) 초기 계획: 화면 ↔ Postgres 연동 (코드 완료 · 소유자 인프라)
 
 **요구**: `/mock-residents` 화면이 지금은 클라이언트에서 10만 건을 생성한다. 이걸 **Postgres(전용 DB)에서 읽어오도록** 연동한다. Postgres 스토어는 **가상 데이터 관리 전용**(집계 분석 Supabase와 분리).
 

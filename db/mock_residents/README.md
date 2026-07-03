@@ -61,25 +61,31 @@ GROUP BY nationality
 ORDER BY n DESC;
 ```
 
-## 대시보드를 이 DB와 연동(코드는 이미 배선됨 — env만 설정하면 켜짐)
+## 대시보드 연동 (현재: 라이브 · 기존 프로젝트의 mock_residents 테이블)
 
-`/mock-residents` 화면은 **`NEXT_PUBLIC_MOCK_SUPABASE_URL`/`NEXT_PUBLIC_MOCK_SUPABASE_ANON_KEY`가
-설정돼 있으면 자동으로 DB 모드**(서버 페이지네이션 조회)로, 없으면 클라이언트 생성 모드로 동작합니다
-(`lib/data/mockResidentsDb.ts` + `app/mock-residents/page.tsx`). 즉 아래 인프라만 소유자가 준비하면 됩니다.
+`/mock-residents` 화면은 마운트 시 `mock_residents` 테이블을 **프로브**한다
+(`lib/data/mockResidentsDb.ts` + `app/mock-residents/page.tsx`):
+- 데이터가 있으면 → **DB 모드**(서버 페이지네이션 조회, 상단 "DB 연동" 배지).
+- 없거나(테이블 부재) 오류면 → **클라이언트 생성 모드**(브라우저에서 10만 건 생성, "로컬 생성" 배지).
 
-정적 export(GitHub Pages)라 런타임 DB 접근은 **클라이언트 `supabase-js` + anon 키**만 가능 →
-**반드시 별도 Supabase 프로젝트**(프로덕션 분석과 분리)를 씁니다.
+즉 **테이블 준비 여부와 무관하게 항상 동작**하고, 테이블에 데이터가 들어오면 코드 배포 없이 자동으로 DB 모드로 전환된다.
 
-1. **별도** Supabase 프로젝트 생성(프로덕션 분석 프로젝트와 분리).
-2. 그 프로젝트에 `schema.sql` → `schema.supabase.sql`(anon 읽기 RLS) → 데이터 적재:
-   - psql: `psql "$MOCK_DATABASE_URL" -f db/mock_residents/seed.sql` (권장, 10만 행 빠름)
-   - 또는 REST: `MOCK_SUPABASE_URL=… MOCK_SUPABASE_SERVICE_ROLE_KEY=sb_secret_… npm run mock:load`
-     (`--dry-run`으로 먼저 확인 가능. service_role 키는 CLI 전용, 커밋/프론트 금지.)
-3. GitHub Actions 시크릿 + `.github/workflows/pages.yml` build 잡 env에 아래 2줄 추가(빌드시 프론트에 주입):
+### 현재 구성(2026-07-03, 크롬으로 셋업 완료)
+**비용 0** 경로 — 기존 대시보드 Supabase 프로젝트(`nrdapzgtibbusvoaceuh`)에 `mock_residents`
+테이블만 추가했다(별도 테이블 + 읽기전용 RLS + 전부 합성 데이터라 실제 집계 데이터와 격리).
+데이터는 서버측 `generate_series`로 10만 행 생성. 프론트는 기존 프로젝트의 공개 anon 키를
+그대로 쓰므로 **시크릿/pages.yml 변경이 필요 없다**.
+
+- 대상 DB 오버라이드가 필요하면 `NEXT_PUBLIC_MOCK_SUPABASE_URL/_ANON_KEY`로 별도 프로젝트를
+  가리킬 수 있다(설정 시 그 프로젝트를, 없으면 기존 대시보드 프로젝트를 사용).
+
+### (선택) 완전 별도 프로젝트로 옮기려면
+1. 별도 Supabase 프로젝트 생성 → `schema.sql` → `schema.supabase.sql`(anon 읽기 RLS).
+2. 데이터: `psql "$MOCK_DATABASE_URL" -f db/mock_residents/seed.sql`(권장) 또는
+   `MOCK_SUPABASE_URL=… MOCK_SUPABASE_SERVICE_ROLE_KEY=sb_secret_… npm run mock:load`
+   (service_role 키는 CLI 전용, 커밋/프론트 금지).
+3. GitHub Actions 시크릿 + `pages.yml` build env에 2줄:
    ```yaml
    NEXT_PUBLIC_MOCK_SUPABASE_URL: ${{ secrets.MOCK_SUPABASE_URL }}
    NEXT_PUBLIC_MOCK_SUPABASE_ANON_KEY: ${{ secrets.MOCK_SUPABASE_ANON_KEY }}
    ```
-4. 배포되면 화면 상단 배지가 **"DB 연동"**으로 바뀌고, 필터/페이지 변경마다 전용 DB를 서버 페이지네이션으로 조회합니다.
-
-> env 미설정 시엔 지금처럼 **"로컬 생성"** 배지로 브라우저에서 10만 건을 만들어 보여줍니다(배포 무영향).
