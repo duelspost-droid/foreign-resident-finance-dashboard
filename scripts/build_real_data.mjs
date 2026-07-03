@@ -573,48 +573,6 @@ function transformRegionResidents(rows) {
   };
 }
 
-// 교육부 외국인 유학생 현황(최신) CSV: 시도,설립구분,학교명,연도,남,여,계
-function transformMoeStudentsBySchool(rows) {
-  if (!rows.length) return { latestYear: null, universities: [], universityCount: 0, totalForeignStudents: 0 };
-
-  const yearOf = (r) => toNumber(firstValue(r, ["연도", "학년도", "기준연도", "년도"]));
-  const years = rows.map(yearOf).filter((y) => y >= 2000 && y <= 2100);
-  const latestYear = years.length ? Math.max(...years) : null;
-
-  const agg = new Map();
-  for (const r of rows) {
-    const yr = yearOf(r);
-    if (latestYear && yr && yr !== latestYear) continue;
-    const uni = String(firstValue(r, ["학교명", "대학명", "기관명"])).trim();
-    if (!uni || /합계|소계|총계|전체/.test(uni)) continue;
-    const sido = String(firstValue(r, ["시도", "지역", "시·도"])).trim();
-    const total = toNumber(firstValue(r, ["계", "합계", "총계"]));
-    const male = toNumber(firstValue(r, ["남", "남자", "남학생"]));
-    const female = toNumber(firstValue(r, ["여", "여자", "여학생"]));
-    const count = total || male + female;
-
-    const cur = agg.get(uni) ?? { university: uni, sido, foreignStudents: 0 };
-    cur.foreignStudents += count;
-    agg.set(uni, cur);
-  }
-
-  const list = [...agg.values()].filter((u) => u.foreignStudents > 0);
-  list.sort((a, b) => b.foreignStudents - a.foreignStudents);
-  return {
-    latestYear,
-    universities: list.slice(0, 30).map((u, i) => ({
-      rank: i + 1,
-      university: u.university,
-      campus: null,
-      sido: u.sido || null,
-      foreignStudents: u.foreignStudents,
-      foreignShare: null
-    })),
-    universityCount: list.length,
-    totalForeignStudents: list.reduce((s, u) => s + u.foreignStudents, 0)
-  };
-}
-
 // 행안부 국적×연령대 현황 CSV: 국적,연령대,값,데이터기준일자
 function transformNationalityByAge(rows) {
   if (!rows.length) return { ageGroups: [], nationalities: [], items: [] };
