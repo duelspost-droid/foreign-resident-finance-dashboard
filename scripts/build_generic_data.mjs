@@ -4,32 +4,12 @@
 // 소스를 이 데이터로 자동 차트/표 렌더한다. (변환 로직 없이 어떤 소스든 노출 가능)
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
+import { parseCsvRows } from "./lib/csv.mjs";
 
 const RAW_DIR = "data/raw";
 const OUT = "lib/data/generated/genericData.ts";
 const MAX_ROWS = 40; // 미리보기 상한(번들 크기 보호)
 const MAX_COLS = 14;
-
-function parseCsvLine(line) {
-  const result = [];
-  let current = "";
-  let quoted = false;
-  for (let i = 0; i < line.length; i += 1) {
-    const char = line[i];
-    const next = line[i + 1];
-    if (char === '"' && quoted && next === '"') { current += '"'; i += 1; }
-    else if (char === '"') quoted = !quoted;
-    else if (char === "," && !quoted) { result.push(current); current = ""; }
-    else current += char;
-  }
-  result.push(current);
-  return result;
-}
-
-function parseCsvRows(text) {
-  const clean = text.replace(/^﻿/, "").replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-  return clean.split("\n").filter((l) => l.trim().length > 0).map(parseCsvLine);
-}
 
 function decodeCsv(buffer) {
   const decoders = ["utf-8", "euc-kr", "windows-949"];

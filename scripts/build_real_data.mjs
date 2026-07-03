@@ -1,6 +1,7 @@
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
+import { parseCsvRows } from "./lib/csv.mjs";
 import { publicDataSources } from "./data_sources.mjs";
 
 const root = process.cwd();
@@ -13,37 +14,13 @@ async function ensureDir(path) {
   await mkdir(path, { recursive: true });
 }
 
-function parseCsvLine(line) {
-  const result = [];
-  let current = "";
-  let quoted = false;
-
-  for (let i = 0; i < line.length; i += 1) {
-    const char = line[i];
-    const next = line[i + 1];
-    if (char === '"' && quoted && next === '"') {
-      current += '"';
-      i += 1;
-    } else if (char === '"') {
-      quoted = !quoted;
-    } else if (char === "," && !quoted) {
-      result.push(current);
-      current = "";
-    } else {
-      current += char;
-    }
-  }
-  result.push(current);
-  return result;
-}
-
+// \uD5E4\uB354 \uC788\uB294 CSV \u2192 \uD589 \uAC1D\uCCB4 \uBC30\uC5F4({__rowNumber, [header]: cell}). \uC140\uC740 trim.
+// \uD30C\uC2F1\uC740 \uACF5\uC6A9 parseCsvRows(\uB530\uC634\uD45C \uC548 \uAC1C\uD589\u00B7\uCF64\uB9C8\u00B7\uC774\uC2A4\uCF00\uC774\uD504 \uCC98\uB9AC)\uC5D0 \uC704\uC784.
 function parseCsv(text) {
-  const clean = text.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-  const lines = clean.split("\n").filter((line) => line.trim().length > 0);
-  if (lines.length === 0) return [];
-  const headers = parseCsvLine(lines[0]).map((header) => header.trim());
-  return lines.slice(1).map((line, index) => {
-    const cells = parseCsvLine(line);
+  const rows = parseCsvRows(text);
+  if (rows.length === 0) return [];
+  const headers = rows[0].map((header) => header.trim());
+  return rows.slice(1).map((cells, index) => {
     const row = { __rowNumber: index + 2 };
     headers.forEach((header, cellIndex) => {
       row[header || `column_${cellIndex + 1}`] = cells[cellIndex]?.trim() ?? "";
