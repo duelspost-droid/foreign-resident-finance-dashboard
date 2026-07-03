@@ -61,16 +61,25 @@ GROUP BY nationality
 ORDER BY n DESC;
 ```
 
-## (선택) 대시보드를 이 DB와 연동하려면
+## 대시보드를 이 DB와 연동(코드는 이미 배선됨 — env만 설정하면 켜짐)
 
-정적 export 사이트(GitHub Pages)에는 서버가 없어, 런타임 DB 접근은 **클라이언트 `supabase-js` +
-anon 키**만 가능합니다. 따라서 대시보드에서 이 데이터를 **실제 DB에서 읽게** 하려면:
+`/mock-residents` 화면은 **`NEXT_PUBLIC_MOCK_SUPABASE_URL`/`NEXT_PUBLIC_MOCK_SUPABASE_ANON_KEY`가
+설정돼 있으면 자동으로 DB 모드**(서버 페이지네이션 조회)로, 없으면 클라이언트 생성 모드로 동작합니다
+(`lib/data/mockResidentsDb.ts` + `app/mock-residents/page.tsx`). 즉 아래 인프라만 소유자가 준비하면 됩니다.
 
-1. **별도** Supabase 프로젝트를 하나 만든다(프로덕션 분석 프로젝트와 분리).
-2. 그 프로젝트에 `schema.sql` → `schema.supabase.sql`(RLS) → `seed.sql` 순으로 적재한다.
-3. `app/mock-residents/page.tsx`가 `generateMockResidents()` 대신 그 프로젝트의 anon 키로
-   `.from('mock_residents').select('*', { count: 'exact' }).range(offset, offset+49)`(서버 페이지네이션)를
-   호출하도록 연동한다.
+정적 export(GitHub Pages)라 런타임 DB 접근은 **클라이언트 `supabase-js` + anon 키**만 가능 →
+**반드시 별도 Supabase 프로젝트**(프로덕션 분석과 분리)를 씁니다.
 
-> 이 연동은 **오너가 별도 프로젝트/시크릿을 준비**해야 하는 단계라 현재는 문서로만 남깁니다.
-> 준비되면 페이지 연동 코드는 바로 붙일 수 있습니다.
+1. **별도** Supabase 프로젝트 생성(프로덕션 분석 프로젝트와 분리).
+2. 그 프로젝트에 `schema.sql` → `schema.supabase.sql`(anon 읽기 RLS) → 데이터 적재:
+   - psql: `psql "$MOCK_DATABASE_URL" -f db/mock_residents/seed.sql` (권장, 10만 행 빠름)
+   - 또는 REST: `MOCK_SUPABASE_URL=… MOCK_SUPABASE_SERVICE_ROLE_KEY=sb_secret_… npm run mock:load`
+     (`--dry-run`으로 먼저 확인 가능. service_role 키는 CLI 전용, 커밋/프론트 금지.)
+3. GitHub Actions 시크릿 + `.github/workflows/pages.yml` build 잡 env에 아래 2줄 추가(빌드시 프론트에 주입):
+   ```yaml
+   NEXT_PUBLIC_MOCK_SUPABASE_URL: ${{ secrets.MOCK_SUPABASE_URL }}
+   NEXT_PUBLIC_MOCK_SUPABASE_ANON_KEY: ${{ secrets.MOCK_SUPABASE_ANON_KEY }}
+   ```
+4. 배포되면 화면 상단 배지가 **"DB 연동"**으로 바뀌고, 필터/페이지 변경마다 전용 DB를 서버 페이지네이션으로 조회합니다.
+
+> env 미설정 시엔 지금처럼 **"로컬 생성"** 배지로 브라우저에서 10만 건을 만들어 보여줍니다(배포 무영향).

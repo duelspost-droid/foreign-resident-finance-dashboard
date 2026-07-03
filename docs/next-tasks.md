@@ -126,9 +126,11 @@
 - **외국인 정보 관리(가상) 화면** (`fdc0934`) — 사이드바 '데이터 탐색'에 `/mock-residents` 추가. `lib/data/mockResidents.ts`(mulberry32 결정적, 이름/성별/생년월일/주민등록번호[마스킹]/외국인등록번호[마스킹]/국적/체류자격/지역/등록일) 10만 건을 클라 생성. 이름검색·국적/성별/지역 필터·50/페이지·"가상 데이터" 경고배너·noindex. **전부 합성**, 식별번호는 뒷자리 마스킹.
 - **가상 외국인정보 전용 Postgres 스토어** (`6dc9a5b`) — `db/mock_residents/schema.sql`(이식성 DDL·pg_trgm 이름검색·마스킹 주석) + `schema.supabase.sql`(선택 RLS) + `scripts/build_mock_residents_sql.mjs`(mockResidents.ts 단일출처 → COPY 시드, `npm run mock:sql`) + README. **프로덕션 분석 Supabase와 분리**(집계 전용 원칙). `seed.sql`(13MB) gitignore.
 
-### ⬜ 진행 중 — 가상정보 화면 ↔ Postgres 연동 (다음 세션 착수)
-- **claude 코드**: `lib/data/mockResidentsDb.ts`(별도 env `NEXT_PUBLIC_MOCK_SUPABASE_URL/_ANON_KEY` 전용 클라이언트 + `.range()` 서버 페이지네이션 + `count:'exact'` + `.ilike/.eq` 필터) → `app/mock-residents/page.tsx` DB/클라 이원화(디바운스) → `scripts/load_mock_residents.mjs`(PostgREST 배치 적재, 소유자용).
-- **⏳ 소유자 인프라**: 정적 export라 런타임 DB=클라 anon만 → **별도 Supabase 프로젝트**(프로덕션과 분리) 생성(DB 비번=자격증명, claude 금지) → schema/seed 적재(10만 행은 psql 필요, 웹 편집기 불가) → `NEXT_PUBLIC_MOCK_SUPABASE_*` 시크릿+pages.yml. **코드는 inert(미설정 시 클라 생성 폴백)라 붙여도 배포 무영향.**
+### ✅ 가상정보 화면 ↔ Postgres 연동 — 코드 완료(커밋, env-gated inert)
+- `lib/data/mockResidentsDb.ts` — 별도 env(`NEXT_PUBLIC_MOCK_SUPABASE_URL/_ANON_KEY`) 전용 클라이언트 + `isMockDbConfigured()` + `fetchMockResidentsPage()`(`.range()` 서버 페이지네이션 + `count:'exact'` + `.ilike/.eq` 필터, 실패/미설정 시 null).
+- `app/mock-residents/page.tsx` — DB/클라 이원화(공통 뷰 `MockResidentsView`, 이름검색 250ms 디바운스, "DB 연동"/"로컬 생성" 배지). 미설정이 기본이라 배포 무영향.
+- `scripts/load_mock_residents.mjs`(`npm run mock:load`) — PostgREST 배치 업서트 적재기(소유자, service_role, `--dry-run`/`--count`). 검증: tsc=0, dry-run OK, 테스트 27/27.
+- **⏳ 남은 것 = 소유자 인프라만**: **별도 Supabase 프로젝트**(프로덕션과 분리) 생성(DB 비번=자격증명, claude 금지) → `schema.sql`→`schema.supabase.sql`→ 데이터 적재(`psql -f seed.sql` 권장, 웹 편집기 13MB 불가 / 또는 `mock:load`) → 시크릿 `MOCK_SUPABASE_URL/ANON_KEY` + `pages.yml` build env에 `NEXT_PUBLIC_MOCK_SUPABASE_URL/_ANON_KEY` 2줄. 셋 다 되면 화면 자동 "DB 연동" 전환(`db/mock_residents/README.md`).
 
 ### ⏳ 소유자 활성화 (미해결, 우선순위)
 1. **마이그레이션 008→011 실행** — 008 실행→배포/캐시만료 후 009 / 010 실행→insight-ai 재배포→배포/캐시만료 후 011. (미실행이어도 프론트 폴백 동작.) 검증: `SELECT polname FROM pg_policies WHERE tablename IN('surface_config','source_candidates');`

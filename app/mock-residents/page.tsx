@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, Database, Cpu } from "lucide-react";
 import {
   generateMockResidents,
   MOCK_TOTAL,
@@ -9,46 +9,61 @@ import {
   SIDO_OPTIONS,
   type MockResident
 } from "@/lib/data/mockResidents";
+import { fetchMockResidentsPage, isMockDbConfigured } from "@/lib/data/mockResidentsDb";
 
 const PAGE_SIZE = 50;
-const inputCls = "rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none";
+const inputCls =
+  "rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-teal-500 focus:outline-none";
 
-export default function MockResidentsPage() {
-  const [rows, setRows] = useState<MockResident[] | null>(null);
-  const [name, setName] = useState("");
-  const [nat, setNat] = useState("");
-  const [gender, setGender] = useState("");
-  const [sido, setSido] = useState("");
-  const [page, setPage] = useState(0);
-
-  // 10만 건 합성 데이터는 마운트 후 1회 생성(첫 페인트 블로킹 방지). 실제 개인정보 아님.
+// 값 변경 후 ms 지연 뒤 반영(DB 모드 이름검색이 매 키 입력마다 쿼리하지 않도록).
+function useDebounced<T>(value: T, ms: number): T {
+  const [v, setV] = useState(value);
   useEffect(() => {
-    const id = setTimeout(() => setRows(generateMockResidents(MOCK_TOTAL)), 0);
+    const id = setTimeout(() => setV(value), ms);
     return () => clearTimeout(id);
-  }, []);
+  }, [value, ms]);
+  return v;
+}
 
-  const filtered = useMemo(() => {
-    if (!rows) return [];
-    const q = name.trim().toLowerCase();
-    return rows.filter(
-      (r) =>
-        (!q || r.name.toLowerCase().includes(q)) &&
-        (!nat || r.nationality === nat) &&
-        (!gender || r.gender === gender) &&
-        (!sido || r.sido === sido)
-    );
-  }, [rows, name, nat, gender, sido]);
+type ViewProps = {
+  dbMode: boolean;
+  loading: boolean;
+  errored?: boolean;
+  total: number;
+  pageRows: MockResident[];
+  page: number;
+  onPage: (updater: (p: number) => number) => void;
+  name: string;
+  onName: (v: string) => void;
+  nat: string;
+  onNat: (v: string) => void;
+  gender: string;
+  onGender: (v: string) => void;
+  sido: string;
+  onSido: (v: string) => void;
+};
 
-  useEffect(() => setPage(0), [name, nat, gender, sido]);
-
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-  const pageRows = filtered.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
+// 공통 프레젠테이션(배너·필터·표·페이지네이션). 데이터는 DB/클라 컴포넌트가 주입.
+function MockResidentsView(props: ViewProps) {
+  const { dbMode, loading, errored, total, pageRows, page, onPage } = props;
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   return (
     <>
       <section className="page-header">
         <p className="page-kicker">데이터 탐색 · 데모</p>
-        <h2 className="page-title">외국인 정보 관리 (가상)</h2>
+        <div className="flex flex-wrap items-center gap-2">
+          <h2 className="page-title">외국인 정보 관리 (가상)</h2>
+          <span
+            className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${
+              dbMode ? "bg-teal-50 text-teal-700" : "bg-slate-100 text-slate-600"
+            }`}
+            title={dbMode ? "전용 Postgres에서 조회" : "브라우저에서 합성 생성"}
+          >
+            {dbMode ? <Database size={12} aria-hidden /> : <Cpu size={12} aria-hidden />}
+            {dbMode ? "DB 연동" : "로컬 생성"}
+          </span>
+        </div>
         <p className="page-description">
           합성(가상) 개인정보 {MOCK_TOTAL.toLocaleString()}건을 조회하는 데모 화면입니다.
         </p>
@@ -70,13 +85,13 @@ export default function MockResidentsPage() {
       <section className="surface mt-4 p-3">
         <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
           <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={props.name}
+            onChange={(e) => props.onName(e.target.value)}
             placeholder="이름 검색"
             className={inputCls}
             aria-label="이름 검색"
           />
-          <select value={nat} onChange={(e) => setNat(e.target.value)} className={inputCls} aria-label="국적 필터">
+          <select value={props.nat} onChange={(e) => props.onNat(e.target.value)} className={inputCls} aria-label="국적 필터">
             <option value="">국적 전체</option>
             {NATIONALITY_OPTIONS.map((n) => (
               <option key={n} value={n}>
@@ -84,12 +99,12 @@ export default function MockResidentsPage() {
               </option>
             ))}
           </select>
-          <select value={gender} onChange={(e) => setGender(e.target.value)} className={inputCls} aria-label="성별 필터">
+          <select value={props.gender} onChange={(e) => props.onGender(e.target.value)} className={inputCls} aria-label="성별 필터">
             <option value="">성별 전체</option>
             <option value="남">남</option>
             <option value="여">여</option>
           </select>
-          <select value={sido} onChange={(e) => setSido(e.target.value)} className={inputCls} aria-label="지역 필터">
+          <select value={props.sido} onChange={(e) => props.onSido(e.target.value)} className={inputCls} aria-label="지역 필터">
             <option value="">지역 전체</option>
             {SIDO_OPTIONS.map((s) => (
               <option key={s} value={s}>
@@ -99,13 +114,17 @@ export default function MockResidentsPage() {
           </select>
         </div>
         <p className="mt-2 px-1 text-xs text-muted">
-          {rows ? (
+          {errored ? (
+            <span className="text-rose-700">
+              전용 DB 조회에 실패했습니다. 연결 설정(NEXT_PUBLIC_MOCK_SUPABASE_*)을 확인하세요.
+            </span>
+          ) : loading && total === 0 ? (
+            dbMode ? "불러오는 중…" : "합성 데이터 생성 중…"
+          ) : (
             <>
-              조회 결과 <strong className="text-ink">{filtered.length.toLocaleString()}</strong>건 / 전체{" "}
+              조회 결과 <strong className="text-ink">{total.toLocaleString()}</strong>건 / 전체{" "}
               {MOCK_TOTAL.toLocaleString()}건
             </>
-          ) : (
-            "합성 데이터 생성 중…"
           )}
         </p>
       </section>
@@ -128,10 +147,10 @@ export default function MockResidentsPage() {
             </tr>
           </thead>
           <tbody>
-            {!rows ? (
+            {loading && pageRows.length === 0 ? (
               <tr>
                 <td colSpan={10} className="px-3 py-12 text-center text-muted">
-                  합성 데이터 생성 중… (10만 건)
+                  {dbMode ? "불러오는 중…" : "합성 데이터 생성 중… (10만 건)"}
                 </td>
               </tr>
             ) : pageRows.length === 0 ? (
@@ -163,12 +182,12 @@ export default function MockResidentsPage() {
       </section>
 
       {/* 페이지네이션 */}
-      {rows && filtered.length > 0 && (
+      {total > 0 && (
         <div className="mt-3 flex items-center justify-center gap-3 text-sm">
           <button
             type="button"
             disabled={page === 0}
-            onClick={() => setPage((p) => Math.max(0, p - 1))}
+            onClick={() => onPage((p) => Math.max(0, p - 1))}
             className="rounded-md border border-slate-300 px-3 py-1.5 text-slate-700 hover:bg-slate-50 disabled:opacity-40"
           >
             이전
@@ -179,7 +198,7 @@ export default function MockResidentsPage() {
           <button
             type="button"
             disabled={page >= totalPages - 1}
-            onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
+            onClick={() => onPage((p) => Math.min(totalPages - 1, p + 1))}
             className="rounded-md border border-slate-300 px-3 py-1.5 text-slate-700 hover:bg-slate-50 disabled:opacity-40"
           >
             다음
@@ -188,4 +207,123 @@ export default function MockResidentsPage() {
       )}
     </>
   );
+}
+
+// ── 클라이언트 생성 모드(전용 DB 미설정 시): 10만 건 브라우저 생성 후 메모리 필터 ──
+function ClientMock() {
+  const [rows, setRows] = useState<MockResident[] | null>(null);
+  const [name, setName] = useState("");
+  const [nat, setNat] = useState("");
+  const [gender, setGender] = useState("");
+  const [sido, setSido] = useState("");
+  const [page, setPage] = useState(0);
+
+  useEffect(() => {
+    const id = setTimeout(() => setRows(generateMockResidents(MOCK_TOTAL)), 0);
+    return () => clearTimeout(id);
+  }, []);
+
+  const filtered = useMemo(() => {
+    if (!rows) return [];
+    const q = name.trim().toLowerCase();
+    return rows.filter(
+      (r) =>
+        (!q || r.name.toLowerCase().includes(q)) &&
+        (!nat || r.nationality === nat) &&
+        (!gender || r.gender === gender) &&
+        (!sido || r.sido === sido)
+    );
+  }, [rows, name, nat, gender, sido]);
+
+  useEffect(() => setPage(0), [name, nat, gender, sido]);
+
+  const pageRows = filtered.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
+
+  return (
+    <MockResidentsView
+      dbMode={false}
+      loading={rows === null}
+      total={filtered.length}
+      pageRows={pageRows}
+      page={page}
+      onPage={setPage}
+      name={name}
+      onName={setName}
+      nat={nat}
+      onNat={setNat}
+      gender={gender}
+      onGender={setGender}
+      sido={sido}
+      onSido={setSido}
+    />
+  );
+}
+
+// ── DB 모드(전용 Postgres 설정 시): 필터·페이지 변경마다 서버 페이지네이션 조회 ──
+function DbMock() {
+  const [name, setName] = useState("");
+  const debouncedName = useDebounced(name, 250);
+  const [nat, setNat] = useState("");
+  const [gender, setGender] = useState("");
+  const [sido, setSido] = useState("");
+  const [page, setPage] = useState(0);
+  const [pageRows, setPageRows] = useState<MockResident[]>([]);
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [errored, setErrored] = useState(false);
+
+  // 필터가 바뀌면 첫 페이지로.
+  useEffect(() => setPage(0), [debouncedName, nat, gender, sido]);
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    fetchMockResidentsPage({ page, pageSize: PAGE_SIZE, name: debouncedName, nationality: nat, gender, sido })
+      .then((res) => {
+        if (cancelled) return;
+        if (!res) {
+          setErrored(true);
+          setPageRows([]);
+          setTotal(0);
+        } else {
+          setErrored(false);
+          setPageRows(res.rows);
+          setTotal(res.total);
+        }
+        setLoading(false);
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setErrored(true);
+        setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [page, debouncedName, nat, gender, sido]);
+
+  return (
+    <MockResidentsView
+      dbMode
+      loading={loading}
+      errored={errored}
+      total={total}
+      pageRows={pageRows}
+      page={page}
+      onPage={setPage}
+      name={name}
+      onName={setName}
+      nat={nat}
+      onNat={setNat}
+      gender={gender}
+      onGender={setGender}
+      sido={sido}
+      onSido={setSido}
+    />
+  );
+}
+
+export default function MockResidentsPage() {
+  // 전용 DB 설정 여부는 빌드시 고정(NEXT_PUBLIC_*) → 컴포넌트 선택은 렌더 간 불변(훅 순서 안전).
+  return isMockDbConfigured() ? <DbMock /> : <ClientMock />;
 }

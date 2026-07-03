@@ -73,7 +73,7 @@ npm run dev -- -p 3000   # http://localhost:3000
 
 ---
 
-## 🔨 진행 중 작업 — 가상 외국인정보 화면 ↔ Postgres 연동 (미완, 다음 세션 이어서)
+## 🔨 가상 외국인정보 화면 ↔ Postgres 연동 (코드 완료 · 소유자 인프라만 남음)
 
 **요구**: `/mock-residents` 화면이 지금은 클라이언트에서 10만 건을 생성한다. 이걸 **Postgres(전용 DB)에서 읽어오도록** 연동한다. Postgres 스토어는 **가상 데이터 관리 전용**(집계 분석 Supabase와 분리).
 
@@ -84,16 +84,16 @@ npm run dev -- -p 3000   # http://localhost:3000
 - `db/mock_residents/README.md` — 적재·조회·연동 가이드.
 - `app/mock-residents/page.tsx`(클라 생성) · `layout.tsx`(noindex) · 사이드바 메뉴.
 
-**⬜ 남은 코드 작업(claude 가능, 다음에 바로 착수)**:
-1. `lib/data/mockResidentsDb.ts` — **별도** env(`NEXT_PUBLIC_MOCK_SUPABASE_URL`/`_ANON_KEY`)로 전용 supabase 클라이언트 생성 + `isMockDbConfigured()` + `fetchMockResidentsPage({page,pageSize,name,nationality,gender,sido})`(서버 페이지네이션 `.range()` + `count:'exact'` + `.ilike/.eq` 필터, 실패/미설정 시 null).
-2. `app/mock-residents/page.tsx` 리팩터 — **DB 모드**(설정 시: 페이지/필터 변경마다 DB 조회, 이름검색 디바운스) / **클라 생성 모드**(미설정 시: 현행 유지) 이원화. 미설정이 기본이라 배포에 영향 없음(inert).
-3. `scripts/load_mock_residents.mjs` — (선택) PostgREST 배치 적재기(`load_supabase.mjs` 패턴). service_role 필요 → 소유자 실행용.
+**✅ 연동 코드 완료(커밋 예정/됨, env-gated inert)**:
+1. `lib/data/mockResidentsDb.ts` — **별도** env(`NEXT_PUBLIC_MOCK_SUPABASE_URL`/`_ANON_KEY`)로 전용 supabase 클라이언트 + `isMockDbConfigured()` + `fetchMockResidentsPage()`(서버 페이지네이션 `.range()` + `count:'exact'` + `.ilike/.eq` 필터, 실패/미설정 시 null).
+2. `app/mock-residents/page.tsx` — **DB 모드**(설정 시: 필터/페이지 변경마다 조회, 이름검색 250ms 디바운스, "DB 연동" 배지) / **클라 생성 모드**(미설정 시 폴백, "로컬 생성" 배지) 이원화. 공통 뷰(`MockResidentsView`) 공유. 미설정이 기본이라 배포 무영향.
+3. `scripts/load_mock_residents.mjs`(`npm run mock:load`) — PostgREST 배치 업서트 적재기(소유자용, service_role). `--dry-run`/`--count` 지원.
 
-**⏳ 소유자 인프라(claude 불가 = 크롬으로도 규칙상 못 하는 부분)**:
-- 정적 export라 런타임 DB 접근은 **클라 supabase-js + anon 키**만 가능 → **별도 Supabase 프로젝트**(프로덕션 분석과 분리) 필요.
-- 그 프로젝트 생성(=**DB 비밀번호 설정**=자격증명 입력, claude 금지) → `schema.sql`→`schema.supabase.sql`→(psql로)`seed.sql` 적재 → `NEXT_PUBLIC_MOCK_SUPABASE_URL/_ANON_KEY`를 GitHub 시크릿+`pages.yml`에 등록.
-- **10만 행 벌크 적재는 웹 SQL 편집기로 불가**(13MB) → `psql -f seed.sql` 또는 load_mock_residents.mjs(service_role) 필요.
-> 즉 화면-DB 연동은 **코드는 claude가 붙이고(inert), 인프라 3개(별도 프로젝트·시크릿·벌크적재)는 소유자**가 마무리하는 구조.
+**⏳ 남은 것 = 소유자 인프라만(claude 불가 = 크롬으로도 규칙상 못 함)**:
+- 정적 export라 런타임 DB=**클라 anon**만 → **별도 Supabase 프로젝트**(프로덕션 분석과 분리) 생성(=**DB 비밀번호 설정**=자격증명, claude 금지).
+- 적재: `schema.sql`→`schema.supabase.sql`→ 데이터(`psql -f seed.sql` 권장, 웹 SQL편집기는 13MB 불가 / 또는 `mock:load`).
+- 시크릿 `MOCK_SUPABASE_URL`·`MOCK_SUPABASE_ANON_KEY` + `pages.yml` build 잡 env에 `NEXT_PUBLIC_MOCK_SUPABASE_URL/_ANON_KEY` 2줄.
+> 셋 다 되면 화면이 자동으로 "DB 연동" 모드로 전환. 상세 절차: `db/mock_residents/README.md`.
 
 ---
 
@@ -119,11 +119,13 @@ npm run dev -- -p 3000   # http://localhost:3000
 ## 🗺 핵심 파일 지도 (이번 mock 기능 + 파이프라인)
 
 ```
-app/mock-residents/page.tsx        ← 가상 정보 조회 화면(현재 클라 생성)
+app/mock-residents/page.tsx        ← 가상 정보 조회 화면(DB/클라 이원화)
 app/mock-residents/layout.tsx      ← noindex
 lib/data/mockResidents.ts          ← 결정적(mulberry32) 합성 생성기(단일출처)
+lib/data/mockResidentsDb.ts        ← 전용 Postgres 읽기(env-gated, 서버 페이지네이션)
 db/mock_residents/                  ← 전용 Postgres: schema.sql·schema.supabase.sql·README(·seed.sql=gitignore)
 scripts/build_mock_residents_sql.mjs ← 시드 SQL 생성기(mockResidents.ts import)
+scripts/load_mock_residents.mjs    ← 전용 DB REST 적재기(소유자, service_role)
 
 scripts/data_sources.mjs           ← 소스 카탈로그(수정 시 이 파일)
 scripts/fetch_public_data.mjs      ← 수집기(file/kosis/openapi/ecos/seoul/reb + 승인 후보)
