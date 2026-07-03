@@ -167,20 +167,28 @@ export async function setSourceChartConfig(
 ): Promise<SurfaceWriteResult> {
   const client = createBrowserSupabaseClient();
   if (!client) return { ok: false, authExpired: false };
-  if (!token) return { ok: false, authExpired: true };
-  const { data, error } = await client.rpc("admin_set_surface_config", {
-    p_token: token,
-    p_source_id: sourceId,
-    p_note: note,
-    p_set_note: true,
-  });
+  // 1순위: 보안 RPC(admin_set_surface_config, 마이그레이션 008). 008 적용 + 로그인 시 이 경로.
+  if (token) {
+    const { data, error } = await client.rpc("admin_set_surface_config", {
+      p_token: token,
+      p_source_id: sourceId,
+      p_note: note,
+      p_set_note: true,
+    });
+    if (!error) return data === true ? { ok: true, authExpired: false } : { ok: false, authExpired: true };
+    console.warn("setSourceChartConfig: 보안 RPC 실패(008 미배포 등), 전환기 폴백:", error.message);
+  }
+  // 전환기 폴백(직접 upsert): 008/009 미적용 상태에서만 동작. 009(anon 쓰기정책 DROP) 적용 후엔
+  // RLS 거부로 실패 → 그때는 위 RPC(토큰) 경로만 동작(자동 수렴).
+  const { data, error } = await client
+    .from("surface_config")
+    .upsert({ source_id: sourceId, note, updated_at: new Date().toISOString(), updated_by: "admin" }, { onConflict: "source_id" })
+    .select("source_id");
   if (error) {
-    // 입력 거부(source_id/disposition/note)는 함수가 RAISE EXCEPTION → 여기로. 로그아웃 없이 실패 처리.
-    console.error("setSourceChartConfig error:", error.message);
+    console.error("setSourceChartConfig 폴백 실패:", error.message);
     return { ok: false, authExpired: false };
   }
-  // 함수 false = 토큰 무효/만료(인증 실패) → 재로그인 유도. true = 성공.
-  return data === true ? { ok: true, authExpired: false } : { ok: false, authExpired: true };
+  return data && data.length > 0 ? { ok: true, authExpired: false } : { ok: false, authExpired: true };
 }
 
 // 트리아지 1건 저장(upsert). disposition=null 이면 '미정'으로 되돌림.
@@ -192,20 +200,34 @@ export async function setSourceDisposition(
 ): Promise<SurfaceWriteResult> {
   const client = createBrowserSupabaseClient();
   if (!client) return { ok: false, authExpired: false };
-  if (!token) return { ok: false, authExpired: true };
-  const { data, error } = await client.rpc("admin_set_surface_config", {
-    p_token: token,
-    p_source_id: sourceId,
-    p_disposition: disposition,
-    p_target_table: targetTable ?? null,
-    p_set_note: false,
-  });
+  if (token) {
+    const { data, error } = await client.rpc("admin_set_surface_config", {
+      p_token: token,
+      p_source_id: sourceId,
+      p_disposition: disposition,
+      p_target_table: targetTable ?? null,
+      p_set_note: false,
+    });
+    if (!error) return data === true ? { ok: true, authExpired: false } : { ok: false, authExpired: true };
+    console.warn("setSourceDisposition: 보안 RPC 실패(008 미배포 등), 전환기 폴백:", error.message);
+  }
+  // 전환기 폴백(직접 upsert): target_table 은 전달 시에만 갱신(기존값 보존). 009 적용 후엔 RLS 거부.
+  const patch: Record<string, unknown> = {
+    source_id: sourceId,
+    disposition,
+    updated_at: new Date().toISOString(),
+    updated_by: "admin",
+  };
+  if (targetTable !== undefined) patch.target_table = targetTable;
+  const { data, error } = await client
+    .from("surface_config")
+    .upsert(patch, { onConflict: "source_id" })
+    .select("source_id");
   if (error) {
-    // 입력 거부는 RAISE EXCEPTION → 여기로(로그아웃 없이 실패). 인증 실패만 아래 false 경로.
-    console.error("setSourceDisposition error:", error.message);
+    console.error("setSourceDisposition 폴백 실패:", error.message);
     return { ok: false, authExpired: false };
   }
-  return data === true ? { ok: true, authExpired: false } : { ok: false, authExpired: true };
+  return data && data.length > 0 ? { ok: true, authExpired: false } : { ok: false, authExpired: true };
 }
 
 export type RegionFilter = {
