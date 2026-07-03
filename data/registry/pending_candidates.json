@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-03T08:08:45.168Z",
+  "generatedAt": "2026-07-03T10:55:27.347Z",
   "candidates": [
     {
       "dataset_id": "15046410",
@@ -374,24 +374,24 @@
       "discovered_at": "2026-06-18T09:26:03.138446+00:00"
     },
     {
-      "dataset_id": "15002150",
-      "kind": "fileData",
-      "provider": "근로복지공단",
-      "title": "근로복지공단_고용 산재보험 가입 현황",
-      "keyword": "외국인근로자 산재 보험급여 처리현황",
-      "url": "https://www.data.go.kr/data/15002150/fileData.do",
-      "priority": "mid",
-      "rationale": "외국인 산재·보험 청구(보험 행태 보조지표)",
-      "status": "pending",
-      "discovered_at": "2026-06-18T09:26:03.138446+00:00"
-    },
-    {
       "dataset_id": "15057864",
       "kind": "openapi",
       "provider": "근로복지공단",
       "title": "경기도_근로복지공단(지사) 현황",
       "keyword": "외국인근로자 산재 보험급여 처리현황",
       "url": "https://www.data.go.kr/data/15057864/openapi.do",
+      "priority": "mid",
+      "rationale": "외국인 산재·보험 청구(보험 행태 보조지표)",
+      "status": "pending",
+      "discovered_at": "2026-06-18T09:26:03.138446+00:00"
+    },
+    {
+      "dataset_id": "15002150",
+      "kind": "fileData",
+      "provider": "근로복지공단",
+      "title": "근로복지공단_고용 산재보험 가입 현황",
+      "keyword": "외국인근로자 산재 보험급여 처리현황",
+      "url": "https://www.data.go.kr/data/15002150/fileData.do",
       "priority": "mid",
       "rationale": "외국인 산재·보험 청구(보험 행태 보조지표)",
       "status": "pending",
@@ -422,12 +422,12 @@
       "discovered_at": "2026-06-23T05:40:35.170128+00:00"
     },
     {
-      "dataset_id": "15061304",
+      "dataset_id": "15059638",
       "kind": "openapi",
       "provider": "금융위원회",
-      "title": "금융위원회_금융통계국내은행정보",
+      "title": "한국은행_통화금융통계",
       "keyword": "금융통계 국내은행",
-      "url": "https://www.data.go.kr/data/15061304/openapi.do",
+      "url": "https://www.data.go.kr/data/15059638/openapi.do",
       "priority": "mid",
       "rationale": "지역 은행 인프라·금융 접근성 보조 지표",
       "status": "pending",
@@ -554,12 +554,12 @@
       "discovered_at": "2026-06-23T05:40:35.170128+00:00"
     },
     {
-      "dataset_id": "15059638",
+      "dataset_id": "15061304",
       "kind": "openapi",
       "provider": "금융위원회",
-      "title": "한국은행_통화금융통계",
+      "title": "금융위원회_금융통계국내은행정보",
       "keyword": "금융통계 국내은행",
-      "url": "https://www.data.go.kr/data/15059638/openapi.do",
+      "url": "https://www.data.go.kr/data/15061304/openapi.do",
       "priority": "mid",
       "rationale": "지역 은행 인프라·금융 접근성 보조 지표",
       "status": "pending",
@@ -586,18 +586,6 @@
       "url": "https://www.data.go.kr/data/15074265/openapi.do",
       "priority": "mid",
       "rationale": "대학별 외국인 유학생 총량 검증",
-      "status": "pending",
-      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
-    },
-    {
-      "dataset_id": "15100028",
-      "kind": "fileData",
-      "provider": "법무부",
-      "title": "법무부_36(취업자격 체류외국인) 월별 취업자격 체류외국인 업무유형별 현황",
-      "keyword": "체류외국인 월별 통계",
-      "url": "https://www.data.go.kr/data/15100028/fileData.do",
-      "priority": "mid",
-      "rationale": "월별 체류외국인 총계·국적별 추이(시장 규모 월 단위 모니터링)",
       "status": "pending",
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
@@ -674,6 +662,18 @@
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
+      "dataset_id": "15100028",
+      "kind": "fileData",
+      "provider": "법무부",
+      "title": "법무부_36(취업자격 체류외국인) 월별 취업자격 체류외국인 업무유형별 현황",
+      "keyword": "체류외국인 월별 통계",
+      "url": "https://www.data.go.kr/data/15100028/fileData.do",
+      "priority": "mid",
+      "rationale": "월별 체류외국인 총계·국적별 추이(시장 규모 월 단위 모니터링)",
+      "status": "pending",
+      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
+    },
+    {
       "dataset_id": "15100031",
       "kind": "fileData",
       "provider": "법무부",
@@ -722,16 +722,16 @@
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
-      "dataset_id": "15054400",
+      "dataset_id": "15065098",
       "kind": "fileData",
       "provider": "산업통상자원부",
-      "title": ",XLS JSON + XML 산업통상부_외국인직접투자동향_국가별 산업별 대한 외국인직접투자 통계",
+      "title": "울산광역시_업종별외국인직접투자현황",
       "keyword": "외국인직접투자 FDI 동향 통계",
-      "url": "https://www.data.go.kr/data/15054400/fileData.do",
+      "url": "https://www.data.go.kr/data/15065098/fileData.do",
       "priority": "mid",
       "rationale": "외국인 자본 유입(법인 중심·약연관, 거시 맥락)",
       "status": "pending",
-      "discovered_at": "2026-06-18T09:26:03.138446+00:00"
+      "discovered_at": "2026-06-23T05:40:35.170128+00:00"
     },
     {
       "dataset_id": "15054399",
@@ -744,18 +744,6 @@
       "rationale": "외국인 자본 유입(법인 중심·약연관, 거시 맥락)",
       "status": "pending",
       "discovered_at": "2026-06-18T09:26:03.138446+00:00"
-    },
-    {
-      "dataset_id": "15065098",
-      "kind": "fileData",
-      "provider": "산업통상자원부",
-      "title": "울산광역시_업종별외국인직접투자현황",
-      "keyword": "외국인직접투자 FDI 동향 통계",
-      "url": "https://www.data.go.kr/data/15065098/fileData.do",
-      "priority": "mid",
-      "rationale": "외국인 자본 유입(법인 중심·약연관, 거시 맥락)",
-      "status": "pending",
-      "discovered_at": "2026-06-23T05:40:35.170128+00:00"
     },
     {
       "dataset_id": "15054395",
@@ -788,6 +776,18 @@
       "title": ",HWPX,XLS 한국수출입은행_해외직접투자 통계",
       "keyword": "외국인직접투자 FDI 동향 통계",
       "url": "https://www.data.go.kr/data/3040164/fileData.do",
+      "priority": "mid",
+      "rationale": "외국인 자본 유입(법인 중심·약연관, 거시 맥락)",
+      "status": "pending",
+      "discovered_at": "2026-06-18T09:26:03.138446+00:00"
+    },
+    {
+      "dataset_id": "15054400",
+      "kind": "fileData",
+      "provider": "산업통상자원부",
+      "title": ",XLS JSON + XML 산업통상부_외국인직접투자동향_국가별 산업별 대한 외국인직접투자 통계",
+      "keyword": "외국인직접투자 FDI 동향 통계",
+      "url": "https://www.data.go.kr/data/15054400/fileData.do",
       "priority": "mid",
       "rationale": "외국인 자본 유입(법인 중심·약연관, 거시 맥락)",
       "status": "pending",
@@ -902,18 +902,6 @@
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
-      "dataset_id": "15158678",
-      "kind": "openapi",
-      "provider": "한국교육개발원",
-      "title": "한국대학교육협의회_대학알리미 교원·연구 현황_GW",
-      "keyword": "외국인유학생 대학알리미",
-      "url": "https://www.data.go.kr/data/15158678/openapi.do",
-      "priority": "mid",
-      "rationale": "대학별 외국인 유학생 수·국적·학위과정(캠퍼스 전략)",
-      "status": "pending",
-      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
-    },
-    {
       "dataset_id": "15060430",
       "kind": "fileData",
       "provider": "한국교육개발원",
@@ -938,12 +926,24 @@
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
-      "dataset_id": "15130174",
+      "dataset_id": "15158678",
+      "kind": "openapi",
+      "provider": "한국교육개발원",
+      "title": "한국대학교육협의회_대학알리미 교원·연구 현황_GW",
+      "keyword": "외국인유학생 대학알리미",
+      "url": "https://www.data.go.kr/data/15158678/openapi.do",
+      "priority": "mid",
+      "rationale": "대학별 외국인 유학생 수·국적·학위과정(캠퍼스 전략)",
+      "status": "pending",
+      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
+    },
+    {
+      "dataset_id": "15105540",
       "kind": "fileData",
       "provider": "한국은행",
-      "title": "한국무역보험공사_일별 환율수신내역",
+      "title": "재정경제부_환율",
       "keyword": "환율 원화 일별",
-      "url": "https://www.data.go.kr/data/15130174/fileData.do",
+      "url": "https://www.data.go.kr/data/15105540/fileData.do",
       "priority": "mid",
       "rationale": "원/달러·위안·동 일별 환율(외국인 송금·환전 타이밍)",
       "status": "pending",
@@ -974,38 +974,26 @@
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
-      "dataset_id": "15105540",
+      "dataset_id": "15130174",
       "kind": "fileData",
       "provider": "한국은행",
-      "title": "재정경제부_환율",
+      "title": "한국무역보험공사_일별 환율수신내역",
       "keyword": "환율 원화 일별",
-      "url": "https://www.data.go.kr/data/15105540/fileData.do",
+      "url": "https://www.data.go.kr/data/15130174/fileData.do",
       "priority": "mid",
       "rationale": "원/달러·위안·동 일별 환율(외국인 송금·환전 타이밍)",
       "status": "pending",
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
-      "dataset_id": "15108065",
+      "dataset_id": "15057877",
       "kind": "openapi",
       "provider": "행정안전부",
-      "title": "행정안전부_행정동별(통반단위) 주민등록 인구 및 세대현황",
+      "title": "경기도_외국인 주민(복지)센터 현황",
       "keyword": "외국인주민 현황",
-      "url": "https://www.data.go.kr/data/15108065/openapi.do",
+      "url": "https://www.data.go.kr/data/15057877/openapi.do",
       "priority": "mid",
       "rationale": "시군구 단위 장기거주 외국인주민 규모",
-      "status": "pending",
-      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
-    },
-    {
-      "dataset_id": "15055033",
-      "kind": "fileData",
-      "provider": "행정안전부",
-      "title": "울산광역시_외국인지원기관현황",
-      "keyword": "외국인 정착 지원 사회통합",
-      "url": "https://www.data.go.kr/data/15055033/fileData.do",
-      "priority": "mid",
-      "rationale": "사회통합프로그램 외국인 참여자(장기거주 의향·정주 금융 수요)",
       "status": "pending",
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
@@ -1022,26 +1010,26 @@
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
-      "dataset_id": "15151656",
-      "kind": "fileData",
+      "dataset_id": "15086893",
+      "kind": "openapi",
       "provider": "행정안전부",
-      "title": "한국산업인력공단_외국인고용 교육과목 및 공개문항 정보",
+      "title": "전남광주통합특별시_전남 성별인구비율 요약정보",
       "keyword": "외국인 정착 지원 사회통합",
-      "url": "https://www.data.go.kr/data/15151656/fileData.do",
+      "url": "https://www.data.go.kr/data/15086893/openapi.do",
       "priority": "mid",
       "rationale": "사회통합프로그램 외국인 참여자(장기거주 의향·정주 금융 수요)",
       "status": "pending",
-      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
+      "discovered_at": "2026-07-03T06:04:55.435335+00:00"
     },
     {
-      "dataset_id": "15057877",
-      "kind": "openapi",
+      "dataset_id": "15055033",
+      "kind": "fileData",
       "provider": "행정안전부",
-      "title": "경기도_외국인 주민(복지)센터 현황",
-      "keyword": "외국인주민 현황",
-      "url": "https://www.data.go.kr/data/15057877/openapi.do",
+      "title": "울산광역시_외국인지원기관현황",
+      "keyword": "외국인 정착 지원 사회통합",
+      "url": "https://www.data.go.kr/data/15055033/fileData.do",
       "priority": "mid",
-      "rationale": "시군구 단위 장기거주 외국인주민 규모",
+      "rationale": "사회통합프로그램 외국인 참여자(장기거주 의향·정주 금융 수요)",
       "status": "pending",
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
@@ -1106,6 +1094,18 @@
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
+      "dataset_id": "15151656",
+      "kind": "fileData",
+      "provider": "행정안전부",
+      "title": "한국산업인력공단_외국인고용 교육과목 및 공개문항 정보",
+      "keyword": "외국인 정착 지원 사회통합",
+      "url": "https://www.data.go.kr/data/15151656/fileData.do",
+      "priority": "mid",
+      "rationale": "사회통합프로그램 외국인 참여자(장기거주 의향·정주 금융 수요)",
+      "status": "pending",
+      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
+    },
+    {
       "dataset_id": "15057553",
       "kind": "openapi",
       "provider": "행정안전부",
@@ -1118,16 +1118,16 @@
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
-      "dataset_id": "15086893",
+      "dataset_id": "15108065",
       "kind": "openapi",
       "provider": "행정안전부",
-      "title": "전남광주통합특별시_전남 성별인구비율 요약정보",
-      "keyword": "외국인 정착 지원 사회통합",
-      "url": "https://www.data.go.kr/data/15086893/openapi.do",
+      "title": "행정안전부_행정동별(통반단위) 주민등록 인구 및 세대현황",
+      "keyword": "외국인주민 현황",
+      "url": "https://www.data.go.kr/data/15108065/openapi.do",
       "priority": "mid",
-      "rationale": "사회통합프로그램 외국인 참여자(장기거주 의향·정주 금융 수요)",
+      "rationale": "시군구 단위 장기거주 외국인주민 규모",
       "status": "pending",
-      "discovered_at": "2026-07-03T06:04:55.435335+00:00"
+      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
       "dataset_id": "15106245",
