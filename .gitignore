@@ -23,3 +23,5 @@ data/catalog/*
 !data/catalog/
 !data/catalog/latest_fetch_catalog.json
 data/logs
+# 가상 데이터 시드(13M, npm run mock:sql 로 재생성) — 스키마/생성기만 커밋.
+db/mock_residents/seed.sql

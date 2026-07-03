@@ -25,6 +25,7 @@
     "data:monthly": "node scripts/build_monthly_residents.mjs",
     "data:digest": "node scripts/build_insight_digest.mjs",
     "data:discover": "node scripts/discover_web_sources.mjs",
+    "mock:sql": "node scripts/build_mock_residents_sql.mjs",
     "batch:daily": "node scripts/daily_data_batch.mjs",
     "supabase:load": "node scripts/load_supabase.mjs",
     "supabase:check": "node scripts/check_supabase.mjs",
