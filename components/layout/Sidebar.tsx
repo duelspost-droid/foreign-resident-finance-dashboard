@@ -19,6 +19,7 @@ import {
   ShoppingBag,
   Target,
   TrendingUp,
+  Users,
   X,
 } from "lucide-react";
 import clsx from "clsx";
@@ -44,6 +45,7 @@ const analysisNav = [
   { href: "/economy", label: "경제활동·소득", icon: BarChart3 },
   { href: "/universities", label: "유학생", icon: GraduationCap },
   { href: "/consumption", label: "소비·금융거래", icon: ShoppingBag },
+  { href: "/mock-residents", label: "외국인 정보 관리 (가상)", icon: Users },
 ];
 
 const system = [
