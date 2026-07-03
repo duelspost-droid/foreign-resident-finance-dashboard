@@ -81,6 +81,9 @@ npm run dev -- -p 3000   # http://localhost:3000
 "로컬 생성" 폴백. 기존 anon 키 재사용이라 **시크릿/pages.yml 변경 불필요**. (Supabase Free 조직이
 프로젝트 한도라 별도 Pro 프로젝트는 $10/월 → 사용자가 비용 0인 '기존 프로젝트에 테이블' 방식 선택.)
 
+**✅ 라이브 검증(2026-07-03, 배포 `29fde26` 성공)**: https://data.jbax.co.kr/mock-residents 배지 **"DB 연동"**,
+카운트 **"조회 100,000건 / 전체 100,000건"**, 표에 실제 DB 행(id1 Rahman Nodira·카자흐스탄·경기도 수원시 등) 표시 확인.
+
 > 완전 별도 프로젝트로 옮기려면 `NEXT_PUBLIC_MOCK_SUPABASE_URL/_ANON_KEY`로 오버라이드 + seed 적재.
 > 상세: `db/mock_residents/README.md`.
 

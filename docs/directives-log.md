@@ -61,6 +61,6 @@
 
 ## D. 현재 상태 & 다음
 
-- **현재**: 가상 외국인정보 화면 ↔ Postgres **라이브 연동 완료**(기존 프로젝트 `mock_residents`, 10만 행, anon 읽기 검증). 코드 `1ca9f25` 배포 진행 중 → 배포되면 라이브 화면이 "DB 연동"으로 전환.
+- **현재**: 가상 외국인정보 화면 ↔ Postgres **라이브 연동 완료·검증됨**. 배포 `29fde26` 성공 후 https://data.jbax.co.kr/mock-residents 에서 배지 "DB 연동" + "조회 100,000건" + 실제 DB 행 표시 확인(2026-07-03).
 - **다음/소유자 잔여**: `docs/next-tasks.md`의 소유자 활성화 목록(마이그레이션 008~011, CI용 ANTHROPIC_API_KEY, REB 키, CI 품질 게이트).
 - **배포 확인 방법**: `curl -s https://api.github.com/repos/duelspost-droid/foreign-resident-finance-dashboard/actions/runs?per_page=1` 로 최신 run status/conclusion, 라이브 화면은 https://data.jbax.co.kr/mock-residents (상단 배지 "DB 연동" 확인).
