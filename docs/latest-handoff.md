@@ -3,7 +3,7 @@
 ## 📌 현재 상태 스냅샷 — 2026-07-03
 
 다른 PC에서 **git clone 후 이 문서 하나로 이어서 작업**할 수 있게 정리한 최신 상태.
-전체 백로그·소유자 잔여 스텝은 `docs/next-tasks.md`, 깊은 이력은 `git log`.
+전체 백로그·소유자 잔여 스텝은 `docs/next-tasks.md`, **사용자 지시·결정 로그는 `docs/directives-log.md`**, 깊은 이력은 `git log`.
 
 - **GitHub**: `https://github.com/duelspost-droid/foreign-resident-finance-dashboard` (브랜치 `main`)
 - **라이브**: https://data.jbax.co.kr/ (GitHub Pages 정적 export, 매일 01:00 KST 자동 수집·배포)
