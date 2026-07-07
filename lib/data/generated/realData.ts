@@ -339980,7 +339980,7 @@ export const realUniversityRanking: readonly RealUniversity[] = [
     "university": "한양대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 7724,
+    "foreignStudents": 7436,
     "foreignShare": null
   },
   {
@@ -339988,7 +339988,7 @@ export const realUniversityRanking: readonly RealUniversity[] = [
     "university": "가천대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 5102,
+    "foreignStudents": 5179,
     "foreignShare": null
   },
   {
@@ -339996,7 +339996,7 @@ export const realUniversityRanking: readonly RealUniversity[] = [
     "university": "중앙대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 4740,
+    "foreignStudents": 4863,
     "foreignShare": null
   },
   {
@@ -340004,7 +340004,7 @@ export const realUniversityRanking: readonly RealUniversity[] = [
     "university": "서정대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 4707,
+    "foreignStudents": 4552,
     "foreignShare": null
   },
   {
@@ -340012,111 +340012,111 @@ export const realUniversityRanking: readonly RealUniversity[] = [
     "university": "고려대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 4677,
+    "foreignStudents": 4480,
     "foreignShare": null
   },
   {
     "rank": 6,
-    "university": "(학)연세대학교",
+    "university": "세종대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 4409,
+    "foreignStudents": 4265,
     "foreignShare": null
   },
   {
     "rank": 7,
-    "university": "세종대학교",
+    "university": "성균관대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 4345,
+    "foreignStudents": 4063,
     "foreignShare": null
   },
   {
     "rank": 8,
-    "university": "동국대학교",
+    "university": "(학)연세대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 4138,
+    "foreignStudents": 3912,
     "foreignShare": null
   },
   {
     "rank": 9,
-    "university": "성균관대학교",
+    "university": "동국대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 4104,
+    "foreignStudents": 3825,
     "foreignShare": null
   },
   {
     "rank": 10,
-    "university": "청주대학교",
+    "university": "계명대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 3806,
+    "foreignStudents": 3698,
     "foreignShare": null
   },
   {
     "rank": 11,
-    "university": "계명대학교",
+    "university": "청주대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 3746,
+    "foreignStudents": 3610,
     "foreignShare": null
   },
   {
     "rank": 12,
-    "university": "경희대학교",
+    "university": "건국대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 3365,
+    "foreignStudents": 3217,
     "foreignShare": null
   },
   {
     "rank": 13,
-    "university": "한국외국어대학교",
+    "university": "선문대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 3171,
+    "foreignStudents": 3086,
     "foreignShare": null
   },
   {
     "rank": 14,
-    "university": "건국대학교",
+    "university": "경희대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 3036,
+    "foreignStudents": 3052,
     "foreignShare": null
   },
   {
     "rank": 15,
-    "university": "영남대학교",
+    "university": "한국외국어대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 2767,
+    "foreignStudents": 2852,
     "foreignShare": null
   },
   {
     "rank": 16,
-    "university": "우송대학교",
+    "university": "대신대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 2729,
+    "foreignStudents": 2845,
     "foreignShare": null
   },
   {
     "rank": 17,
-    "university": "선문대학교",
+    "university": "전북대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 2727,
+    "foreignStudents": 2840,
     "foreignShare": null
   },
   {
     "rank": 18,
-    "university": "이화여자대학교",
+    "university": "영남대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 2705,
+    "foreignStudents": 2766,
     "foreignShare": null
   },
   {
@@ -340124,87 +340124,87 @@ export const realUniversityRanking: readonly RealUniversity[] = [
     "university": "신한대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 2515,
+    "foreignStudents": 2713,
     "foreignShare": null
   },
   {
     "rank": 20,
-    "university": "대구대학교",
+    "university": "우송대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 2433,
+    "foreignStudents": 2594,
     "foreignShare": null
   },
   {
     "rank": 21,
-    "university": "인하대학교",
+    "university": "이화여자대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 2393,
+    "foreignStudents": 2475,
     "foreignShare": null
   },
   {
     "rank": 22,
-    "university": "대구가톨릭대학교",
+    "university": "대구대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 2281,
+    "foreignStudents": 2392,
     "foreignShare": null
   },
   {
     "rank": 23,
-    "university": "서강대학교",
+    "university": "대구가톨릭대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 2261,
+    "foreignStudents": 2340,
     "foreignShare": null
   },
   {
     "rank": 24,
-    "university": "명지대학교",
+    "university": "가톨릭대학교(성심교정)",
     "campus": null,
     "sido": null,
-    "foreignStudents": 2250,
+    "foreignStudents": 2302,
     "foreignShare": null
   },
   {
     "rank": 25,
-    "university": "경북대학교",
+    "university": "인하대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 2248,
+    "foreignStudents": 2252,
     "foreignShare": null
   },
   {
     "rank": 26,
-    "university": "국민대학교",
+    "university": "서강대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 2244,
+    "foreignStudents": 2240,
     "foreignShare": null
   },
   {
     "rank": 27,
-    "university": "대신대학교",
+    "university": "경북대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 2243,
+    "foreignStudents": 2193,
     "foreignShare": null
   },
   {
     "rank": 28,
-    "university": "국립대학법인 서울대학교",
+    "university": "대구한의대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 2137,
+    "foreignStudents": 2168,
     "foreignShare": null
   },
   {
     "rank": 29,
-    "university": "우석대학교",
+    "university": "경성대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 2109,
+    "foreignStudents": 2124,
     "foreignShare": null
   },
   {
@@ -340212,15 +340212,15 @@ export const realUniversityRanking: readonly RealUniversity[] = [
     "university": "아주대학교",
     "campus": null,
     "sido": null,
-    "foreignStudents": 2090,
+    "foreignStudents": 2123,
     "foreignShare": null
   }
 ];
 
 export const realUniversitySummary = {
   "latestYear": 2025,
-  "universityCount": 578,
-  "totalForeignStudents": 249824
+  "universityCount": 584,
+  "totalForeignStudents": 256933
 } as const;
 
 // 행안부 시군구 외국인주민 현황 — 지역 분석 페이지가 사용.
@@ -345641,20 +345641,20 @@ export const realBopTransferIncome = {
 export const realExchangeRate = {
   "latest": {
     "usd": {
-      "date": "20260706",
-      "value": 1539.7
+      "date": "20260707",
+      "value": 1531.8
     },
     "cny": {
-      "date": "20260706",
-      "value": 227.41
+      "date": "20260707",
+      "value": 225.86
     },
     "jpy": {
-      "date": "20260706",
-      "value": 953.61
+      "date": "20260707",
+      "value": 945.41
     },
     "eur": {
-      "date": "20260706",
-      "value": 1760.49
+      "date": "20260707",
+      "value": 1753.3
     }
   },
   "monthly": [
@@ -345821,10 +345821,10 @@ export const realExchangeRate = {
     },
     {
       "month": "2026-07",
-      "usd": 1539.7,
-      "cny": 227.41,
-      "jpy": 953.61,
-      "eur": 1760.49
+      "usd": 1531.8,
+      "cny": 225.86,
+      "jpy": 945.41,
+      "eur": 1753.3
     }
   ]
 } as const;
@@ -345971,7 +345971,7 @@ export type RealDataQualityWarning = { series: string; field: string; period: nu
 export const realDataQualityWarnings: readonly RealDataQualityWarning[] = [];
 
 export const realDataSummary = {
-  "generatedAt": "2026-07-06T18:16:13.870Z",
+  "generatedAt": "2026-07-07T18:06:20.045Z",
   "dataQualityWarningCount": 0,
   "transformErrorCount": 0,
   "transformErrors": [],
@@ -345986,7 +345986,7 @@ export const realDataSummary = {
   "apiRegionRowCount": 23477,
   "apiEconActivityCount": 492,
   "studentYearCount": 5,
-  "universityCount": 578,
+  "universityCount": 584,
   "regionResidentCount": 0,
   "nationalityByAgeCount": 585,
   "healthInsuranceCount": 17,
@@ -345995,71 +345995,71 @@ export const realDataSummary = {
   "apiParsedFiles": [
     {
       "source": "kosis_registered_foreigner_by_region",
-      "file": "kosis_registered_foreigner_by_region_2026-07-06.json",
+      "file": "kosis_registered_foreigner_by_region_2026-07-07.json",
       "produced": 5579
     },
     {
       "source": "kosis_registered_foreigner_sigungu_visa",
-      "file": "kosis_registered_foreigner_sigungu_visa_2026-07-06.json",
+      "file": "kosis_registered_foreigner_sigungu_visa_2026-07-07.json",
       "produced": 16674
     },
     {
       "source": "kosis_foreigner_economic_activity",
-      "file": "kosis_foreigner_economic_activity_2026-07-06.json",
+      "file": "kosis_foreigner_economic_activity_2026-07-07.json",
       "produced": 428
     },
     {
       "source": "kosis_foreign_student_nationality_visa",
-      "file": "kosis_foreign_student_nationality_visa_2026-07-06.json",
+      "file": "kosis_foreign_student_nationality_visa_2026-07-07.json",
       "produced": 0
     },
     {
       "source": "kosis_kedi_higher_edu_foreign_students",
-      "file": "kosis_kedi_higher_edu_foreign_students_2026-07-06.json",
+      "file": "kosis_kedi_higher_edu_foreign_students_2026-07-07.json",
       "produced": 1224
     },
     {
       "source": "kosis_eps_introduction_by_country",
-      "file": "kosis_eps_introduction_by_country_2026-07-06.json",
+      "file": "kosis_eps_introduction_by_country_2026-07-07.json",
       "produced": 0
     },
     {
       "source": "kosis_eps_introduction_by_industry",
-      "file": "kosis_eps_introduction_by_industry_2026-07-06.json",
+      "file": "kosis_eps_introduction_by_industry_2026-07-07.json",
       "produced": 64
     },
     {
       "source": "kosis_immigrant_wage_distribution",
-      "file": "kosis_immigrant_wage_distribution_2026-07-06.json",
+      "file": "kosis_immigrant_wage_distribution_2026-07-07.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_contract_period",
-      "file": "kosis_immigrant_contract_period_2026-07-06.json",
+      "file": "kosis_immigrant_contract_period_2026-07-07.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_employment_status",
-      "file": "kosis_immigrant_employment_status_2026-07-06.json",
+      "file": "kosis_immigrant_employment_status_2026-07-07.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_employment_by_industry",
-      "file": "kosis_immigrant_employment_by_industry_2026-07-06.json",
+      "file": "kosis_immigrant_employment_by_industry_2026-07-07.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_econ_activity_by_age",
-      "file": "kosis_immigrant_econ_activity_by_age_2026-07-06.json",
+      "file": "kosis_immigrant_econ_activity_by_age_2026-07-07.json",
       "produced": 0
     }
   ],
   "sourceFiles": {
-    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-07-06.csv",
-    "stay": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-07-06.csv",
-    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-07-06.csv",
-    "moeStudent": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moe_foreign_student_latest_2026-07-06.csv",
-    "mois": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/mois_foreign_resident_region_file_2026-07-06.csv",
-    "monthly": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_immigration_monthly_2024_2026-07-06.csv"
+    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-07-07.csv",
+    "stay": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-07-07.csv",
+    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-07-07.csv",
+    "moeStudent": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moe_foreign_student_latest_2026-07-07.csv",
+    "mois": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/mois_foreign_resident_region_file_2026-07-07.csv",
+    "monthly": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_immigration_monthly_2024_2026-07-07.csv"
   }
 } as const;
