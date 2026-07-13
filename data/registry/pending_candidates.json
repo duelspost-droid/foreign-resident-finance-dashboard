@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-10T17:52:12.228Z",
+  "generatedAt": "2026-07-13T06:32:26.637Z",
   "candidates": [
     {
       "dataset_id": "15046410",
@@ -14,12 +14,12 @@
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
-      "dataset_id": "3035864",
+      "dataset_id": "15137198",
       "kind": "fileData",
       "provider": "고용노동부",
-      "title": "경기도 안산시_외국인주민 직업능력개발교육 현황",
+      "title": "한국산업인력공단_외국인고용_외국인 노동자 구직자 정보",
       "keyword": "외국인 고용 취업",
-      "url": "https://www.data.go.kr/data/3035864/fileData.do",
+      "url": "https://www.data.go.kr/data/15137198/fileData.do",
       "priority": "mid",
       "rationale": "E-9/E-7 등 취업 외국인 규모(급여계좌 수요)",
       "status": "pending",
@@ -50,12 +50,12 @@
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
-      "dataset_id": "15137198",
+      "dataset_id": "3035864",
       "kind": "fileData",
       "provider": "고용노동부",
-      "title": "한국산업인력공단_외국인고용_외국인 노동자 구직자 정보",
+      "title": "경기도 안산시_외국인주민 직업능력개발교육 현황",
       "keyword": "외국인 고용 취업",
-      "url": "https://www.data.go.kr/data/15137198/fileData.do",
+      "url": "https://www.data.go.kr/data/3035864/fileData.do",
       "priority": "mid",
       "rationale": "E-9/E-7 등 취업 외국인 규모(급여계좌 수요)",
       "status": "pending",
@@ -194,18 +194,6 @@
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
-      "dataset_id": "15033729",
-      "kind": "fileData",
-      "provider": "교육부",
-      "title": "교육부 국립국제교육원_한국유학종합시스템 입학 지원자 현황",
-      "keyword": "외국인 학위과정 유학생",
-      "url": "https://www.data.go.kr/data/15033729/fileData.do",
-      "priority": "mid",
-      "rationale": "학위/비학위 구분 외국인 학생 금융 체류 기간 추정",
-      "status": "pending",
-      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
-    },
-    {
       "dataset_id": "15100006",
       "kind": "fileData",
       "provider": "교육부",
@@ -224,6 +212,18 @@
       "title": "교육부 국립국제교육원_한국유학종합시스템 입학 지원자 대학별 현황",
       "keyword": "외국인 학위과정 유학생",
       "url": "https://www.data.go.kr/data/15070981/fileData.do",
+      "priority": "mid",
+      "rationale": "학위/비학위 구분 외국인 학생 금융 체류 기간 추정",
+      "status": "pending",
+      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
+    },
+    {
+      "dataset_id": "15033729",
+      "kind": "fileData",
+      "provider": "교육부",
+      "title": "교육부 국립국제교육원_한국유학종합시스템 입학 지원자 현황",
+      "keyword": "외국인 학위과정 유학생",
+      "url": "https://www.data.go.kr/data/15033729/fileData.do",
       "priority": "mid",
       "rationale": "학위/비학위 구분 외국인 학생 금융 체류 기간 추정",
       "status": "pending",
@@ -266,24 +266,24 @@
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
-      "dataset_id": "15052084",
-      "kind": "fileData",
-      "provider": "국민연금공단",
-      "title": "국민연금공단_급여_수급권기본",
-      "keyword": "외국인 국민연금 가입",
-      "url": "https://www.data.go.kr/data/15052084/fileData.do",
-      "priority": "mid",
-      "rationale": "사업장 가입 외국인 규모(정규 취업·급여계좌 수요)",
-      "status": "pending",
-      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
-    },
-    {
       "dataset_id": "15071645",
       "kind": "fileData",
       "provider": "국민연금공단",
       "title": "국민연금공단_자격 외국인 국적별 현황",
       "keyword": "외국인 국민연금 가입",
       "url": "https://www.data.go.kr/data/15071645/fileData.do",
+      "priority": "mid",
+      "rationale": "사업장 가입 외국인 규모(정규 취업·급여계좌 수요)",
+      "status": "pending",
+      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
+    },
+    {
+      "dataset_id": "15052084",
+      "kind": "fileData",
+      "provider": "국민연금공단",
+      "title": "국민연금공단_급여_수급권기본",
+      "keyword": "외국인 국민연금 가입",
+      "url": "https://www.data.go.kr/data/15052084/fileData.do",
       "priority": "mid",
       "rationale": "사업장 가입 외국인 규모(정규 취업·급여계좌 수요)",
       "status": "pending",
@@ -926,18 +926,6 @@
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
-      "dataset_id": "15105540",
-      "kind": "fileData",
-      "provider": "한국은행",
-      "title": "재정경제부_환율",
-      "keyword": "환율 원화 일별",
-      "url": "https://www.data.go.kr/data/15105540/fileData.do",
-      "priority": "mid",
-      "rationale": "원/달러·위안·동 일별 환율(외국인 송금·환전 타이밍)",
-      "status": "pending",
-      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
-    },
-    {
       "dataset_id": "15130174",
       "kind": "fileData",
       "provider": "한국은행",
@@ -968,6 +956,18 @@
       "title": "한국무역보험공사_환율",
       "keyword": "환율 원화 일별",
       "url": "https://www.data.go.kr/data/15117590/fileData.do",
+      "priority": "mid",
+      "rationale": "원/달러·위안·동 일별 환율(외국인 송금·환전 타이밍)",
+      "status": "pending",
+      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
+    },
+    {
+      "dataset_id": "15105540",
+      "kind": "fileData",
+      "provider": "한국은행",
+      "title": "재정경제부_환율",
+      "keyword": "환율 원화 일별",
+      "url": "https://www.data.go.kr/data/15105540/fileData.do",
       "priority": "mid",
       "rationale": "원/달러·위안·동 일별 환율(외국인 송금·환전 타이밍)",
       "status": "pending",
