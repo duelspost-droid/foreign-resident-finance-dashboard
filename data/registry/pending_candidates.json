@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-13T06:32:26.637Z",
+  "generatedAt": "2026-07-13T17:59:57.676Z",
   "candidates": [
     {
       "dataset_id": "15046410",
@@ -98,16 +98,16 @@
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
-      "dataset_id": "15047027",
+      "dataset_id": "15070981",
       "kind": "fileData",
       "provider": "교육부",
-      "title": "서울특별시_외국인근로자(국적별) 통계",
-      "keyword": "어학연수 외국인 D-4",
-      "url": "https://www.data.go.kr/data/15047027/fileData.do",
+      "title": "교육부 국립국제교육원_한국유학종합시스템 입학 지원자 대학별 현황",
+      "keyword": "외국인 학위과정 유학생",
+      "url": "https://www.data.go.kr/data/15070981/fileData.do",
       "priority": "mid",
-      "rationale": "어학연수(D-4) 비자 외국인 규모(단기 금융 수요)",
+      "rationale": "학위/비학위 구분 외국인 학생 금융 체류 기간 추정",
       "status": "pending",
-      "discovered_at": "2026-06-23T05:40:35.170128+00:00"
+      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
       "dataset_id": "15058233",
@@ -158,16 +158,16 @@
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
-      "dataset_id": "15057888",
-      "kind": "openapi",
+      "dataset_id": "15047027",
+      "kind": "fileData",
       "provider": "교육부",
-      "title": "경기도_졸업생의 취업현황(대학,전문대학)",
-      "keyword": "외국인 유학생 현황",
-      "url": "https://www.data.go.kr/data/15057888/openapi.do",
+      "title": "서울특별시_외국인근로자(국적별) 통계",
+      "keyword": "어학연수 외국인 D-4",
+      "url": "https://www.data.go.kr/data/15047027/fileData.do",
       "priority": "mid",
-      "rationale": "대학·국적·과정별 유학생 금융 수요",
+      "rationale": "어학연수(D-4) 비자 외국인 규모(단기 금융 수요)",
       "status": "pending",
-      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
+      "discovered_at": "2026-06-23T05:40:35.170128+00:00"
     },
     {
       "dataset_id": "15045325",
@@ -206,18 +206,6 @@
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
-      "dataset_id": "15070981",
-      "kind": "fileData",
-      "provider": "교육부",
-      "title": "교육부 국립국제교육원_한국유학종합시스템 입학 지원자 대학별 현황",
-      "keyword": "외국인 학위과정 유학생",
-      "url": "https://www.data.go.kr/data/15070981/fileData.do",
-      "priority": "mid",
-      "rationale": "학위/비학위 구분 외국인 학생 금융 체류 기간 추정",
-      "status": "pending",
-      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
-    },
-    {
       "dataset_id": "15033729",
       "kind": "fileData",
       "provider": "교육부",
@@ -226,6 +214,18 @@
       "url": "https://www.data.go.kr/data/15033729/fileData.do",
       "priority": "mid",
       "rationale": "학위/비학위 구분 외국인 학생 금융 체류 기간 추정",
+      "status": "pending",
+      "discovered_at": "2026-06-18T08:09:00.89898+00:00"
+    },
+    {
+      "dataset_id": "15057888",
+      "kind": "openapi",
+      "provider": "교육부",
+      "title": "경기도_졸업생의 취업현황(대학,전문대학)",
+      "keyword": "외국인 유학생 현황",
+      "url": "https://www.data.go.kr/data/15057888/openapi.do",
+      "priority": "mid",
+      "rationale": "대학·국적·과정별 유학생 금융 수요",
       "status": "pending",
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
@@ -422,12 +422,12 @@
       "discovered_at": "2026-06-18T09:26:03.138446+00:00"
     },
     {
-      "dataset_id": "15109103",
+      "dataset_id": "15059638",
       "kind": "openapi",
       "provider": "금융위원회",
-      "title": "한국농수산식품유통공사_국내 식품시장규모",
+      "title": "한국은행_통화금융통계",
       "keyword": "금융통계 국내은행",
-      "url": "https://www.data.go.kr/data/15109103/openapi.do",
+      "url": "https://www.data.go.kr/data/15059638/openapi.do",
       "priority": "mid",
       "rationale": "지역 은행 인프라·금융 접근성 보조 지표",
       "status": "pending",
@@ -554,24 +554,24 @@
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
-      "dataset_id": "15061304",
+      "dataset_id": "15109103",
       "kind": "openapi",
       "provider": "금융위원회",
-      "title": "금융위원회_금융통계국내은행정보",
+      "title": "한국농수산식품유통공사_국내 식품시장규모",
       "keyword": "금융통계 국내은행",
-      "url": "https://www.data.go.kr/data/15061304/openapi.do",
+      "url": "https://www.data.go.kr/data/15109103/openapi.do",
       "priority": "mid",
       "rationale": "지역 은행 인프라·금융 접근성 보조 지표",
       "status": "pending",
       "discovered_at": "2026-06-18T08:09:00.89898+00:00"
     },
     {
-      "dataset_id": "15059638",
+      "dataset_id": "15061304",
       "kind": "openapi",
       "provider": "금융위원회",
-      "title": "한국은행_통화금융통계",
+      "title": "금융위원회_금융통계국내은행정보",
       "keyword": "금융통계 국내은행",
-      "url": "https://www.data.go.kr/data/15059638/openapi.do",
+      "url": "https://www.data.go.kr/data/15061304/openapi.do",
       "priority": "mid",
       "rationale": "지역 은행 인프라·금융 접근성 보조 지표",
       "status": "pending",
