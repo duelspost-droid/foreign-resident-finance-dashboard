@@ -343769,1004 +343769,1004 @@ export const realMulticulturalFamilySummary = {
 export type RealUniversityStat = { name: string; type: string; region: string };
 export const realUniversityStats: readonly RealUniversityStat[] = [
   {
-    "name": "스타팍스(주)",
-    "type": "",
-    "region": "경기"
+    "name": "제이케이성형외과의원",
+    "type": "의원",
+    "region": "서울"
   },
   {
-    "name": "삼성플러스관광주식회사 ㈜",
-    "type": "",
+    "name": "자생한방병원",
+    "type": "한방병원",
+    "region": "서울"
+  },
+  {
+    "name": "경북대학교병원",
+    "type": "상급종합병원",
     "region": "대구"
   },
   {
-    "name": "㈜유에스여행",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "(주)프라자이십일",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "한나라관광(주)",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 아시안메이트",
-    "type": "",
-    "region": "경기"
-  },
-  {
-    "name": "㈜ 이부커스코리아",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "㈜한몽파트너스",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사고려의료관광개발",
-    "type": "",
+    "name": "좋은문화병원",
+    "type": "종합병원",
     "region": "부산"
   },
   {
-    "name": "하베스트에듀주식회사",
-    "type": "",
+    "name": "드림성형외과의원",
+    "type": "의원",
     "region": "서울"
   },
   {
-    "name": "민가",
-    "type": "",
+    "name": "건국대학교병원",
+    "type": "상급종합병원",
     "region": "서울"
   },
   {
-    "name": "㈜엠디마케팅",
-    "type": "",
+    "name": "씨엠병원",
+    "type": "종합병원",
     "region": "서울"
   },
   {
-    "name": "(주)달라이몽골투어",
-    "type": "",
-    "region": "경기"
-  },
-  {
-    "name": "주식회사비에이치인터내셔널",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사포르튜나",
-    "type": "",
+    "name": "좋은강안병원",
+    "type": "종합병원",
     "region": "부산"
   },
   {
-    "name": "비엠케이",
-    "type": "",
-    "region": "부산"
-  },
-  {
-    "name": "주식회사 엠제이루스코",
-    "type": "",
+    "name": "조선대학교병원",
+    "type": "상급종합병원",
     "region": "광주"
   },
   {
-    "name": "폴리테스트코리아 ㈜",
-    "type": "",
+    "name": "대영성형외과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "예송이비인후과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "에이치제이매그놀리아요양병원",
+    "type": "기타",
+    "region": "경기"
+  },
+  {
+    "name": "삼성서울병원",
+    "type": "상급종합병원",
+    "region": "서울"
+  },
+  {
+    "name": "유씨강남치과의원",
+    "type": "치과의원",
+    "region": "서울"
+  },
+  {
+    "name": "오킴스피부과의원",
+    "type": "의원",
+    "region": "경기"
+  },
+  {
+    "name": "지에스안과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "에이치제이매그놀리아국제병원",
+    "type": "병원",
+    "region": "경기"
+  },
+  {
+    "name": "동아대학교병원",
+    "type": "상급종합병원",
     "region": "부산"
   },
   {
-    "name": "주식회사 오픈베이",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 아메디스",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "메디엔인터내셔날",
-    "type": "",
-    "region": "인천"
-  },
-  {
-    "name": "㈜글로벌그룹",
-    "type": "",
-    "region": "경남"
-  },
-  {
-    "name": "주식회사 비티메디",
-    "type": "",
+    "name": "의료법인 명지의료재단 명지병원",
+    "type": "종합병원",
     "region": "경기"
   },
   {
-    "name": "㈜ 한진관광",
-    "type": "",
+    "name": "이화여자대학교의과대학부속목동병원",
+    "type": "상급종합병원",
     "region": "서울"
   },
   {
-    "name": "주식회사 비에프생명과학",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 리싼",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "(주)뷰츠고",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 리브어게인",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 와납스",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "마운틴코리아㈜",
-    "type": "",
+    "name": "(재)한국의학연구소 부산분사무소",
+    "type": "의원",
     "region": "부산"
   },
   {
-    "name": "주식회사 아이에이치피",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "코비",
-    "type": "",
-    "region": "경기"
-  },
-  {
-    "name": "메디오루스",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "리타루스(LITARUS)",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "씨유코리아(C U KOREA)",
-    "type": "",
-    "region": "경기"
-  },
-  {
-    "name": "이디비 ㈜",
-    "type": "",
-    "region": "경기"
-  },
-  {
-    "name": "주식회사 메디호스피탈컨설팅",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 인테여행사",
-    "type": "",
+    "name": "(재)한국의학연구소 대구분사무소",
+    "type": "의원",
     "region": "대구"
   },
   {
-    "name": "㈜ 엠아이지2013(MIG2013 Co., Ltd)",
-    "type": "",
-    "region": "서울"
+    "name": "(재)한국의학연구소 광주분사무소",
+    "type": "의원",
+    "region": "광주"
   },
   {
-    "name": "글로리 메디컬 앤 투어",
-    "type": "",
+    "name": "(재)한국의학연구소 KMI경기의원",
+    "type": "의원",
     "region": "경기"
   },
   {
-    "name": "세윤 메디컬 투어",
-    "type": "",
+    "name": "재단법인 한국의학연구소 강남의원",
+    "type": "의원",
     "region": "서울"
   },
   {
-    "name": "아리마 트레이딩(Irma trading)",
-    "type": "",
+    "name": "(재)한국의학연구소 케이엠아이여의도의원",
+    "type": "의원",
     "region": "서울"
   },
   {
-    "name": "(주)겔리온에스에이치",
-    "type": "",
-    "region": "부산"
-  },
-  {
-    "name": "(주)제이피인터내쇼날",
-    "type": "",
+    "name": "강남삼성성형외과의원",
+    "type": "의원",
     "region": "서울"
   },
   {
-    "name": "주식회사 테무",
-    "type": "",
+    "name": "허쉬성형외과의원",
+    "type": "의원",
     "region": "서울"
   },
   {
-    "name": "주식회사 골든투어코리아디엠씨",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "탑 코리아",
-    "type": "",
-    "region": "경기"
-  },
-  {
-    "name": "아리스타쉬핑 주식회사",
-    "type": "",
-    "region": "부산"
-  },
-  {
-    "name": "조이풀(JOYFUL)",
-    "type": "",
-    "region": "인천"
-  },
-  {
-    "name": "휴람",
-    "type": "",
-    "region": "경기"
-  },
-  {
-    "name": "주식회사 메디컬애비뉴",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "롯데관광 주식회사",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "드림무역",
-    "type": "",
-    "region": "부산"
-  },
-  {
-    "name": "주식회사 메디컬코리아서비스",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 유로이스트",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "신아투어",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 우리원헬스케어",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "㈜ 이에이치엘바이오",
-    "type": "",
-    "region": "경기"
-  },
-  {
-    "name": "글러벌 엠엔케이",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "비씨커뮤니케이션즈",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "(주) 365mc",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "비앤에이치케어",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "건인약품㈜",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "㈜인큐밸류",
-    "type": "",
-    "region": "제주"
-  },
-  {
-    "name": "트리퍼스트글로벌주식회사",
-    "type": "",
-    "region": "경남"
-  },
-  {
-    "name": "아이니",
-    "type": "",
-    "region": "경기"
-  },
-  {
-    "name": "㈜ 미스터케어(Mr. Care. Co.,Ltd)",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "유니메디코리아",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "메디케어",
-    "type": "",
-    "region": "부산"
-  },
-  {
-    "name": "주식회사큐어스빅토리아",
-    "type": "",
-    "region": "경기"
-  },
-  {
-    "name": "서울유니",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "㈜ 뷰파트너스",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "메디버스",
-    "type": "",
-    "region": "경기"
-  },
-  {
-    "name": "소비코리아",
-    "type": "",
-    "region": "경기"
-  },
-  {
-    "name": "㈜코리아링스",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 리나스 트래블",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "케이지엘",
-    "type": "",
-    "region": "경기"
-  },
-  {
-    "name": "메디원(Medione)",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 케이이엔에스",
-    "type": "",
-    "region": "부산"
-  },
-  {
-    "name": "주식회사 나이스메디",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 디암홀딩스",
-    "type": "",
-    "region": "경기"
-  },
-  {
-    "name": "메디칸 ㈜",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "(주)클린업네트워크",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "리진",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "베라코(VERAKO)컴퍼니",
-    "type": "",
+    "name": "의료법인경동의료재단효성병원",
+    "type": "병원",
     "region": "대구"
   },
   {
-    "name": "주식회사 엑스와이글로벌(XY GLOBAL CO., LTD)",
-    "type": "",
+    "name": "아이디병원",
+    "type": "병원",
     "region": "서울"
   },
   {
-    "name": "누오바 비타(Nuova Vita)",
-    "type": "",
+    "name": "서울대학교병원",
+    "type": "상급종합병원",
+    "region": "서울"
+  },
+  {
+    "name": "순천향대학교 부속 서울병원",
+    "type": "종합병원",
+    "region": "서울"
+  },
+  {
+    "name": "순천향대학교 부속 부천병원",
+    "type": "상급종합병원",
     "region": "경기"
   },
   {
-    "name": "주식회사 에버케어에스앤씨",
-    "type": "",
+    "name": "삼육서울병원",
+    "type": "종합병원",
     "region": "서울"
   },
   {
-    "name": "㈜ 모바일이 지배하는 세상",
-    "type": "",
+    "name": "차의과학대학교 강남차병원",
+    "type": "종합병원",
     "region": "서울"
   },
   {
-    "name": "샤이코리아 ㈜",
-    "type": "",
+    "name": "에스플란트치과병원",
+    "type": "치과병원",
     "region": "서울"
   },
   {
-    "name": "㈜ 에스에이엠투어",
-    "type": "",
+    "name": "글로벌성형외과의원",
+    "type": "의원",
     "region": "서울"
   },
   {
-    "name": "비케이 한중 컨설팅",
-    "type": "",
+    "name": "온누리수의원",
+    "type": "의원",
+    "region": "대전"
+  },
+  {
+    "name": "초이스피부과의원",
+    "type": "의원",
     "region": "서울"
   },
   {
-    "name": "카디오메드 주식회사",
-    "type": "",
-    "region": "서울"
+    "name": "의료법인 토마스의료재단(윌스기념병원)",
+    "type": "종합병원",
+    "region": "경기"
   },
   {
-    "name": "나타샤메디컬트래블",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 베컨",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "합자회사 케이월드투어",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 하이메디",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 케이바이오",
-    "type": "",
+    "name": "한길안과병원",
+    "type": "병원",
     "region": "인천"
   },
   {
-    "name": "리나메드",
-    "type": "",
-    "region": "인천"
-  },
-  {
-    "name": "캐치메이뉘(Catch Meinv)",
-    "type": "",
+    "name": "서울대학교병원 강남의원",
+    "type": "의원",
     "region": "서울"
   },
   {
-    "name": "주식회사 코리아뷰티나비",
-    "type": "",
+    "name": "경희대학교병원",
+    "type": "상급종합병원",
     "region": "서울"
   },
   {
-    "name": "㈜ 옴니허브",
-    "type": "",
+    "name": "경희대학교 치과병원",
+    "type": "치과병원",
+    "region": "서울"
+  },
+  {
+    "name": "경희대학교 한방병원",
+    "type": "한방병원",
+    "region": "서울"
+  },
+  {
+    "name": "한양대학교병원",
+    "type": "상급종합병원",
+    "region": "서울"
+  },
+  {
+    "name": "뷰성형외과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "대경영상의학과의원",
+    "type": "의원",
     "region": "대구"
   },
   {
-    "name": "㈜부산티엔씨",
-    "type": "",
-    "region": "부산"
-  },
-  {
-    "name": "주식회사 포에버앤제이",
-    "type": "",
+    "name": "연세대학교 의과대학 세브란스병원",
+    "type": "상급종합병원",
     "region": "서울"
   },
   {
-    "name": "코리아 메디칼 투어리즘",
-    "type": "",
-    "region": "경기"
-  },
-  {
-    "name": "하킴트래블코리아",
-    "type": "",
+    "name": "서울아산병원",
+    "type": "상급종합병원",
     "region": "서울"
   },
   {
-    "name": "(주) 큐큐국제여행사",
-    "type": "",
-    "region": "서울"
+    "name": "충남대학교병원",
+    "type": "상급종합병원",
+    "region": "대전"
   },
   {
-    "name": "GMS(지엠에스)",
-    "type": "",
-    "region": "경기"
-  },
-  {
-    "name": "㈜썬웨이엠앤티",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "매드앤프로",
-    "type": "",
+    "name": "의료법인 길의료재단 길병원",
+    "type": "상급종합병원",
     "region": "인천"
   },
   {
-    "name": "코리아메디치(Korea Medici)",
-    "type": "",
+    "name": "부민병원",
+    "type": "종합병원",
+    "region": "부산"
+  },
+  {
+    "name": "가톨릭대학교 서울성모병원",
+    "type": "상급종합병원",
     "region": "서울"
   },
   {
-    "name": "뷰티게이트㈜",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "네오 미래(NEO MIRAE)",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "스마트 메디 코리아",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 와조아",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "웨이메이주식회사(WEIMEI INC.)",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "에스피에스투어(주)",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "신세기앤컴퍼니 주식회사",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "안심국제 주식회사",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 도도인터내셔널",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 상준메디컬투어",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "㈜ 금룡여행사",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "얄라코리아",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 플라잉닥터스",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 닥파인더코리아",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 헤드코리아",
-    "type": "",
-    "region": "충북"
-  },
-  {
-    "name": "(주)마이스구루",
-    "type": "",
+    "name": "구미강동병원",
+    "type": "종합병원",
     "region": "경북"
   },
   {
-    "name": "(주)신백수",
-    "type": "",
+    "name": "화순전남대학교병원",
+    "type": "상급종합병원",
+    "region": "전남"
+  },
+  {
+    "name": "국립암센터",
+    "type": "종합병원",
+    "region": "경기"
+  },
+  {
+    "name": "의료법인 아인의료재단 아인병원",
+    "type": "병원",
+    "region": "인천"
+  },
+  {
+    "name": "강남베드로병원",
+    "type": "종합병원",
+    "region": "서울"
+  },
+  {
+    "name": "덕영치과병원",
+    "type": "치과병원",
+    "region": "대구"
+  },
+  {
+    "name": "호산여성병원",
+    "type": "병원",
+    "region": "서울"
+  },
+  {
+    "name": "우리들병원",
+    "type": "병원",
+    "region": "서울"
+  },
+  {
+    "name": "제이앤성형외과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "하늘성형외과의원",
+    "type": "의원",
+    "region": "부산"
+  },
+  {
+    "name": "우리들병원",
+    "type": "종합병원",
+    "region": "서울"
+  },
+  {
+    "name": "인하대학교의과대학부속병원 (인하대병원)",
+    "type": "상급종합병원",
+    "region": "인천"
+  },
+  {
+    "name": "원진성형외과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "서울밝은세상안과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "밝은세상안과",
+    "type": "의원",
+    "region": "부산"
+  },
+  {
+    "name": "고운세상 김양제장봉석피부과의원",
+    "type": "의원",
+    "region": "부산"
+  },
+  {
+    "name": "청담고운세상닥터지피부과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "365mc의원 일산점",
+    "type": "의원",
+    "region": "경기"
+  },
+  {
+    "name": "서울대학교치과병원",
+    "type": "치과병원",
+    "region": "서울"
+  },
+  {
+    "name": "양산부산대학교병원",
+    "type": "상급종합병원",
+    "region": "경남"
+  },
+  {
+    "name": "전남대학교병원",
+    "type": "상급종합병원",
+    "region": "광주"
+  },
+  {
+    "name": "계명대학교 동산병원",
+    "type": "상급종합병원",
+    "region": "대구"
+  },
+  {
+    "name": "조선대학교 치과병원",
+    "type": "치과병원",
+    "region": "광주"
+  },
+  {
+    "name": "아름다운나라피부과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "아름다운나라 피부과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "비에비스나무병원",
+    "type": "병원",
+    "region": "서울"
+  },
+  {
+    "name": "부천세종병원",
+    "type": "종합병원",
+    "region": "경기"
+  },
+  {
+    "name": "의료법인 목포구암의료재단 목포중앙병원",
+    "type": "종합병원",
+    "region": "전남"
+  },
+  {
+    "name": "미즈메디병원",
+    "type": "종합병원",
+    "region": "서울"
+  },
+  {
+    "name": "강동경희대학교병원",
+    "type": "종합병원",
+    "region": "서울"
+  },
+  {
+    "name": "아주대학교 병원",
+    "type": "상급종합병원",
+    "region": "경기"
+  },
+  {
+    "name": "강동경희대학교 한방병원",
+    "type": "한방병원",
+    "region": "서울"
+  },
+  {
+    "name": "강동경희대학교 치과병원",
+    "type": "치과병원",
+    "region": "서울"
+  },
+  {
+    "name": "연세대학교 의과대학 강남세브란스병원",
+    "type": "상급종합병원",
+    "region": "서울"
+  },
+  {
+    "name": "대전선병원",
+    "type": "종합병원",
+    "region": "대전"
+  },
+  {
+    "name": "더블랙성형외과의원",
+    "type": "의원",
+    "region": "대구"
+  },
+  {
+    "name": "(사) 한국건강관리협회 서울특별시 동부지부",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "고려대학교 의과대학 부속 안암병원",
+    "type": "상급종합병원",
+    "region": "서울"
+  },
+  {
+    "name": "연세스타피부과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "안동병원",
+    "type": "종합병원",
+    "region": "경북"
+  },
+  {
+    "name": "중앙대학교병원",
+    "type": "상급종합병원",
+    "region": "서울"
+  },
+  {
+    "name": "올포스킨피부과의원",
+    "type": "의원",
+    "region": "대구"
+  },
+  {
+    "name": "면혁한의원",
+    "type": "한의원",
+    "region": "대구"
+  },
+  {
+    "name": "국립중앙의료원",
+    "type": "종합병원",
+    "region": "서울"
+  },
+  {
+    "name": "한도병원",
+    "type": "종합병원",
+    "region": "경기"
+  },
+  {
+    "name": "(사)한국건강관리협회부산광역시동부지부",
+    "type": "의원",
+    "region": "부산"
+  },
+  {
+    "name": "마리아병원",
+    "type": "병원",
+    "region": "서울"
+  },
+  {
+    "name": "메디힐의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "비앤빛안과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "보라안과병원",
+    "type": "병원",
+    "region": "광주"
+  },
+  {
+    "name": "대항병원",
+    "type": "병원",
+    "region": "서울"
+  },
+  {
+    "name": "대구파티마병원",
+    "type": "종합병원",
+    "region": "대구"
+  },
+  {
+    "name": "삼육부산병원",
+    "type": "종합병원",
+    "region": "부산"
+  },
+  {
+    "name": "국제나은병원",
+    "type": "병원",
+    "region": "경기"
+  },
+  {
+    "name": "대구한의대한방병원",
+    "type": "한방병원",
+    "region": "대구"
+  },
+  {
+    "name": "건양대학교병원",
+    "type": "상급종합병원",
+    "region": "대전"
+  },
+  {
+    "name": "재단법인예수병원유지재단예수병원",
+    "type": "종합병원",
+    "region": "전북"
+  },
+  {
+    "name": "충북대학교병원",
+    "type": "상급종합병원",
     "region": "충북"
   },
   {
-    "name": "하이수아이(Hisuay)",
-    "type": "",
+    "name": "국민건강보험공단 일산병원",
+    "type": "종합병원",
+    "region": "경기"
+  },
+  {
+    "name": "강동성심병원",
+    "type": "종합병원",
     "region": "서울"
   },
   {
-    "name": "중천코리아",
-    "type": "",
+    "name": "한국병원",
+    "type": "종합병원",
+    "region": "충북"
+  },
+  {
+    "name": "아름다운피부과",
+    "type": "의원",
+    "region": "제주"
+  },
+  {
+    "name": "제주한라병원",
+    "type": "종합병원",
+    "region": "제주"
+  },
+  {
+    "name": "서울21세기병원",
+    "type": "병원",
     "region": "서울"
   },
   {
-    "name": "주식회사 보보월드",
-    "type": "",
+    "name": "미사랑성형외과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "더성형외과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "한림대학교춘천성심병원",
+    "type": "종합병원",
+    "region": "강원"
+  },
+  {
+    "name": "한림대학교강남성심병원",
+    "type": "종합병원",
+    "region": "서울"
+  },
+  {
+    "name": "전라북도 군산의료원",
+    "type": "종합병원",
+    "region": "전북"
+  },
+  {
+    "name": "유성선병원",
+    "type": "종합병원",
+    "region": "대전"
+  },
+  {
+    "name": "한림대학교한강성심병원",
+    "type": "종합병원",
+    "region": "서울"
+  },
+  {
+    "name": "분당서울대학교병원",
+    "type": "상급종합병원",
+    "region": "경기"
+  },
+  {
+    "name": "부산대학교병원",
+    "type": "상급종합병원",
+    "region": "부산"
+  },
+  {
+    "name": "고신대학교 복음병원",
+    "type": "상급종합병원",
+    "region": "부산"
+  },
+  {
+    "name": "4월31일성형외과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "강릉아산병원",
+    "type": "상급종합병원",
+    "region": "강원"
+  },
+  {
+    "name": "글로비성형외과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "아이오유성형외과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "밝은안과21병원",
+    "type": "병원",
     "region": "광주"
   },
   {
-    "name": "아이엔네트웍스",
-    "type": "",
+    "name": "차의과학대학교 분당차병원",
+    "type": "종합병원",
     "region": "경기"
   },
   {
-    "name": "리리",
-    "type": "",
+    "name": "충청북도 청주의료원",
+    "type": "상급종합병원",
+    "region": "충북"
+  },
+  {
+    "name": "고려대학교의과대학부속 구로병원",
+    "type": "상급종합병원",
     "region": "서울"
   },
   {
-    "name": "주식회사 서울리거",
-    "type": "",
+    "name": "울산대학교 병원",
+    "type": "상급종합병원",
+    "region": "울산"
+  },
+  {
+    "name": "페이스라인성형외과의원",
+    "type": "의원",
     "region": "서울"
   },
   {
-    "name": "주식회사 케이에스에스티",
-    "type": "",
+    "name": "강북삼성병원",
+    "type": "상급종합병원",
     "region": "서울"
   },
   {
-    "name": "사단법인 한국국제의료협회",
-    "type": "",
+    "name": "모제림성형외과의원",
+    "type": "의원",
     "region": "서울"
   },
   {
-    "name": "메디카",
-    "type": "",
+    "name": "의료법인삼성의료재단 강북삼성태평로의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "손정형외과의원",
+    "type": "의원",
+    "region": "대전"
+  },
+  {
+    "name": "연세대학교 세브란스헬스체크업의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "실로암한의원",
+    "type": "한의원",
+    "region": "서울"
+  },
+  {
+    "name": "허리나은병원",
+    "type": "병원",
+    "region": "서울"
+  },
+  {
+    "name": "인제대학교 해운대백병원",
+    "type": "종합병원",
+    "region": "부산"
+  },
+  {
+    "name": "가톨릭대학교 부천성모병원",
+    "type": "종합병원",
     "region": "경기"
   },
   {
-    "name": "주식회사 유비메디",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "골든나비스",
-    "type": "",
-    "region": "부산"
-  },
-  {
-    "name": "주식회사 국제의료문화교류협의회",
-    "type": "",
-    "region": "대구"
-  },
-  {
-    "name": "㈜광림컨설팅",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 서울가이드코리아",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "HPS (에이치피에스)",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "㈜ 리인터내셔날",
-    "type": "",
-    "region": "부산"
-  },
-  {
-    "name": "㈜ 비엠모스트 (BM Most)",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "닥터투어 주식회사",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 산비타(Sanvita CO.,LTD)",
-    "type": "",
-    "region": "부산"
-  },
-  {
-    "name": "주식회사 삼하",
-    "type": "",
-    "region": "강원"
-  },
-  {
-    "name": "메디코퍼",
-    "type": "",
+    "name": "가톨릭대학교 인천성모병원",
+    "type": "상급종합병원",
     "region": "인천"
   },
   {
-    "name": "센스메디컬",
-    "type": "",
+    "name": "소리이비인후과",
+    "type": "의원",
     "region": "서울"
   },
   {
-    "name": "㈜메디에베뉴",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 비앤에이치코리아 (B&H KOREA)",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "아리나의료관광",
-    "type": "",
-    "region": "부산"
-  },
-  {
-    "name": "주식회사 한세로",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "다성VIP여행사",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 굿메디코리아(GOOD MEDI KOREA INC.)",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "㈜ 와이케이비에이치",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 케이지에이치",
-    "type": "",
-    "region": "광주"
-  },
-  {
-    "name": "디자인 레모",
-    "type": "",
-    "region": "경기"
-  },
-  {
-    "name": "㈜명학국제여행사",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "YN-와이엔",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 엔케이",
-    "type": "",
-    "region": "부산"
-  },
-  {
-    "name": "주식회사 동하",
-    "type": "",
-    "region": "부산"
-  },
-  {
-    "name": "㈜ 디지털브랜딩",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 글로벌닥터스",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "(주)유앤알컴퍼니",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "한중건강관리협회",
-    "type": "",
-    "region": "부산"
-  },
-  {
-    "name": "아랑",
-    "type": "",
+    "name": "구병원",
+    "type": "종합병원",
     "region": "대구"
   },
   {
-    "name": "메디안",
-    "type": "",
-    "region": "부산"
-  },
-  {
-    "name": "주식회사 뉴평화관광여행사",
-    "type": "",
-    "region": "대구"
-  },
-  {
-    "name": "메디타 투어 앤 트레이드(MEDITA TOUR & TRADE)",
-    "type": "",
-    "region": "경기"
-  },
-  {
-    "name": "주식회사 글로벌엠이엠",
-    "type": "",
+    "name": "밝은성모안과의원",
+    "type": "의원",
     "region": "서울"
   },
   {
-    "name": "코에코테크트레이딩㈜",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 엘에이치브리지",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "비비코리아써저리 주식회사",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "디엑스앤브이엑스 주식회사",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "㈜코리아마린서비스",
-    "type": "",
-    "region": "부산"
-  },
-  {
-    "name": "주식회사 에이에이치코리아",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 지아난",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 중국미업",
-    "type": "",
-    "region": "강원"
-  },
-  {
-    "name": "주식회사 제이제트그룹",
-    "type": "",
+    "name": "부평힘찬병원",
+    "type": "병원",
     "region": "인천"
   },
   {
-    "name": "인터코리아팔공신휴",
-    "type": "",
+    "name": "여성메디파크병원",
+    "type": "병원",
     "region": "대구"
   },
   {
-    "name": "티엠글로벌",
-    "type": "",
+    "name": "유캔비성형외과의원",
+    "type": "의원",
     "region": "서울"
   },
   {
-    "name": "㈜잠언코리아",
-    "type": "",
+    "name": "스마일정경우비뇨기과의원",
+    "type": "의원",
     "region": "부산"
   },
   {
-    "name": "주식회사 이후엘티에스",
-    "type": "",
+    "name": "차움의원",
+    "type": "의원",
     "region": "서울"
   },
   {
-    "name": "주식회사 나모",
-    "type": "",
+    "name": "쥬얼리성형외과의원",
+    "type": "의원",
     "region": "서울"
   },
   {
-    "name": "㈜파마존",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 코리",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "(주)에이치플러스건축사사무소",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 글로벌국제",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "주식회사 야베스케이",
-    "type": "",
+    "name": "남양주 한양병원",
+    "type": "종합병원",
     "region": "경기"
   },
   {
-    "name": "주식회사 아이메이그룹",
-    "type": "",
+    "name": "에비타흉부외과의원",
+    "type": "의원",
     "region": "서울"
   },
   {
-    "name": "주식회사 케이지문화교류센터",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "로메디 주식회사",
-    "type": "",
-    "region": "서울"
-  },
-  {
-    "name": "메디칼라인",
-    "type": "",
+    "name": "필립의원",
+    "type": "의원",
     "region": "경기"
   },
   {
-    "name": "주식회사 신라투어",
-    "type": "",
+    "name": "램브란트치과의원",
+    "type": "치과의원",
+    "region": "대전"
+  },
+  {
+    "name": "전북대학교병원",
+    "type": "상급종합병원",
+    "region": "전북"
+  },
+  {
+    "name": "제주특별자치도 서귀포 의료원",
+    "type": "종합병원",
+    "region": "제주"
+  },
+  {
+    "name": "브이성형외과의원",
+    "type": "의원",
+    "region": "대구"
+  },
+  {
+    "name": "참튼튼병원",
+    "type": "병원",
+    "region": "서울"
+  },
+  {
+    "name": "마리아의원",
+    "type": "의원",
     "region": "부산"
   },
   {
-    "name": "주식회사 담비",
-    "type": "",
+    "name": "서울여성병원",
+    "type": "병원",
+    "region": "경기"
+  },
+  {
+    "name": "가톨릭대학교 의정부 성모병원",
+    "type": "종합병원",
+    "region": "경기"
+  },
+  {
+    "name": "누네안과병원",
+    "type": "병원",
     "region": "대구"
   },
   {
-    "name": "하나뷰티 코리아(Hana Beauty Korea)",
-    "type": "",
-    "region": "강원"
-  },
-  {
-    "name": "코리아헬스케어서비스 주식회사",
-    "type": "",
+    "name": "의료법인 명경의료재단 꽃마을한의원",
+    "type": "한의원",
     "region": "서울"
   },
   {
-    "name": "에스제이씨엔씨(SJ C&C)",
-    "type": "",
+    "name": "의료법인백송의료재단 굿모닝병원",
+    "type": "종합병원",
+    "region": "경기"
+  },
+  {
+    "name": "부산성모병원",
+    "type": "종합병원",
+    "region": "부산"
+  },
+  {
+    "name": "이샘병원",
+    "type": "병원",
+    "region": "부산"
+  },
+  {
+    "name": "순천향대학교 부속 천안병원",
+    "type": "종합병원",
+    "region": "충남"
+  },
+  {
+    "name": "센텀소중한눈안과의원",
+    "type": "의원",
+    "region": "부산"
+  },
+  {
+    "name": "연수김안과의원",
+    "type": "의원",
+    "region": "인천"
+  },
+  {
+    "name": "칠곡경북대학교병원",
+    "type": "상급종합병원",
     "region": "대구"
+  },
+  {
+    "name": "김병준 레다스 흉부외과의원",
+    "type": "의원",
+    "region": "부산"
+  },
+  {
+    "name": "건양의료재단 김안과병원",
+    "type": "병원",
+    "region": "서울"
+  },
+  {
+    "name": "의료법인 토마스의료재단 안양윌스기념병원",
+    "type": "병원",
+    "region": "경기"
+  },
+  {
+    "name": "현대미학성형외과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "미래와희망산부인과",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "동남권원자력의학원원자력병원",
+    "type": "종합병원",
+    "region": "부산"
+  },
+  {
+    "name": "누네빛안과의원",
+    "type": "의원",
+    "region": "부산"
+  },
+  {
+    "name": "광혜병원",
+    "type": "병원",
+    "region": "서울"
+  },
+  {
+    "name": "고려대학교 의과대학 부속 안산병원",
+    "type": "상급종합병원",
+    "region": "경기"
+  },
+  {
+    "name": "워너비성형외과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "주앤의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "비엘에스의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "부민한의원",
+    "type": "한의원",
+    "region": "대구"
+  },
+  {
+    "name": "시너지성형외과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "포헤어의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "대진의료재단 분당제생병원",
+    "type": "종합병원",
+    "region": "경기"
+  },
+  {
+    "name": "나누리병원",
+    "type": "병원",
+    "region": "인천"
+  },
+  {
+    "name": "인천백병원",
+    "type": "종합병원",
+    "region": "인천"
+  },
+  {
+    "name": "오늘성형외과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "대명앰알씨티의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "인정병원",
+    "type": "병원",
+    "region": "서울"
+  },
+  {
+    "name": "노종훈성형외과의원",
+    "type": "의원",
+    "region": "서울"
+  },
+  {
+    "name": "서울제일병원",
+    "type": "병원",
+    "region": "경기"
   }
 ];
 
@@ -345648,20 +345648,20 @@ export const realBopTransferIncome = {
 export const realExchangeRate = {
   "latest": {
     "usd": {
-      "date": "20260716",
-      "value": 1488.8
+      "date": "20260722",
+      "value": 1475.6
     },
     "cny": {
-      "date": "20260716",
-      "value": 220.23
+      "date": "20260722",
+      "value": 218.31
     },
     "jpy": {
-      "date": "20260716",
-      "value": 918.36
+      "date": "20260722",
+      "value": 904.11
     },
     "eur": {
-      "date": "20260716",
-      "value": 1707.36
+      "date": "20260722",
+      "value": 1682.11
     }
   },
   "monthly": [
@@ -345828,10 +345828,10 @@ export const realExchangeRate = {
     },
     {
       "month": "2026-07",
-      "usd": 1488.8,
-      "cny": 220.23,
-      "jpy": 918.36,
-      "eur": 1707.36
+      "usd": 1475.6,
+      "cny": 218.31,
+      "jpy": 904.11,
+      "eur": 1682.11
     }
   ]
 } as const;
@@ -345978,7 +345978,7 @@ export type RealDataQualityWarning = { series: string; field: string; period: nu
 export const realDataQualityWarnings: readonly RealDataQualityWarning[] = [];
 
 export const realDataSummary = {
-  "generatedAt": "2026-07-19T17:04:01.557Z",
+  "generatedAt": "2026-07-22T17:26:30.884Z",
   "dataQualityWarningCount": 0,
   "transformErrorCount": 0,
   "transformErrors": [],
@@ -345998,75 +345998,75 @@ export const realDataSummary = {
   "nationalityByAgeCount": 588,
   "healthInsuranceCount": 17,
   "multiculturalFamilyCount": 16,
-  "universityStatsCount": 6363,
+  "universityStatsCount": 6921,
   "apiParsedFiles": [
     {
       "source": "kosis_registered_foreigner_by_region",
-      "file": "kosis_registered_foreigner_by_region_2026-07-19.json",
+      "file": "kosis_registered_foreigner_by_region_2026-07-22.json",
       "produced": 5579
     },
     {
       "source": "kosis_registered_foreigner_sigungu_visa",
-      "file": "kosis_registered_foreigner_sigungu_visa_2026-07-19.json",
+      "file": "kosis_registered_foreigner_sigungu_visa_2026-07-22.json",
       "produced": 16674
     },
     {
       "source": "kosis_foreigner_economic_activity",
-      "file": "kosis_foreigner_economic_activity_2026-07-19.json",
+      "file": "kosis_foreigner_economic_activity_2026-07-22.json",
       "produced": 428
     },
     {
       "source": "kosis_foreign_student_nationality_visa",
-      "file": "kosis_foreign_student_nationality_visa_2026-07-19.json",
+      "file": "kosis_foreign_student_nationality_visa_2026-07-22.json",
       "produced": 0
     },
     {
       "source": "kosis_kedi_higher_edu_foreign_students",
-      "file": "kosis_kedi_higher_edu_foreign_students_2026-07-19.json",
+      "file": "kosis_kedi_higher_edu_foreign_students_2026-07-22.json",
       "produced": 1224
     },
     {
       "source": "kosis_eps_introduction_by_country",
-      "file": "kosis_eps_introduction_by_country_2026-07-19.json",
+      "file": "kosis_eps_introduction_by_country_2026-07-22.json",
       "produced": 0
     },
     {
       "source": "kosis_eps_introduction_by_industry",
-      "file": "kosis_eps_introduction_by_industry_2026-07-19.json",
+      "file": "kosis_eps_introduction_by_industry_2026-07-22.json",
       "produced": 64
     },
     {
       "source": "kosis_immigrant_wage_distribution",
-      "file": "kosis_immigrant_wage_distribution_2026-07-19.json",
+      "file": "kosis_immigrant_wage_distribution_2026-07-22.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_contract_period",
-      "file": "kosis_immigrant_contract_period_2026-07-19.json",
+      "file": "kosis_immigrant_contract_period_2026-07-22.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_employment_status",
-      "file": "kosis_immigrant_employment_status_2026-07-19.json",
+      "file": "kosis_immigrant_employment_status_2026-07-22.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_employment_by_industry",
-      "file": "kosis_immigrant_employment_by_industry_2026-07-19.json",
+      "file": "kosis_immigrant_employment_by_industry_2026-07-22.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_econ_activity_by_age",
-      "file": "kosis_immigrant_econ_activity_by_age_2026-07-19.json",
+      "file": "kosis_immigrant_econ_activity_by_age_2026-07-22.json",
       "produced": 0
     }
   ],
   "sourceFiles": {
-    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-07-19.csv",
-    "stay": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-07-19.csv",
-    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-07-19.csv",
-    "moeStudent": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moe_foreign_student_latest_2026-07-19.csv",
-    "mois": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/mois_foreign_resident_region_file_2026-07-19.csv",
-    "monthly": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_immigration_monthly_2024_2026-07-19.csv"
+    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-07-22.csv",
+    "stay": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-07-22.csv",
+    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-07-22.csv",
+    "moeStudent": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moe_foreign_student_latest_2026-07-22.csv",
+    "mois": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/mois_foreign_resident_region_file_2026-07-22.csv",
+    "monthly": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_immigration_monthly_2024_2026-07-22.csv"
   }
 } as const;
