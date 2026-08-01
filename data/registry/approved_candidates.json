@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-30T17:42:06.897Z",
+  "generatedAt": "2026-08-01T17:06:44.273Z",
   "approved": [
     {
       "id": 2124,
@@ -74,7 +74,7 @@
       "dataset_id": "15100016",
       "kind": "fileData",
       "provider": "법무부",
-      "title": "법무부_24(장단기체류외국인) 월별 체류자격별 체류외국인 현황 Update",
+      "title": "법무부_24(장단기체류외국인) 월별 체류자격별 체류외국인 현황",
       "keyword": "체류외국인 월별 통계",
       "url": "https://www.data.go.kr/data/15100016/fileData.do",
       "target_table": "foreign_resident_status",
