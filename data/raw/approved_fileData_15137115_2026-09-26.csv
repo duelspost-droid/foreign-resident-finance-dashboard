@@ -1,0 +1,28 @@
+구분번호(BANNER_SEQ),기관명(TITLE),웹페이지주소(TARGET_URL),사용여부(OPEN_YN)
+1,주한러시아대사관,http://www.russian-embassy.org/,Y
+28,Embassy of MONGOLIA to Republic of Korea(주한몽골대사관),http://www.mongolembassy.com/,Y
+3,주우즈베키스탄대사관,http://uzb.mofat.go.kr,Y
+4,주키르기스스탄대사관,http://kgz.mofat.go.kr,Y
+5,주카자흐스탄대사관,http://kaz.mofat.go.kr,Y
+6,고용노동부,http://www.moel.go.kr,Y
+7,내일을 위한 JOB CENTER 고용센터(고용노동부),http://www.work.go.kr/jobcenter,Y
+8,외국인력상담센터 HUG Korea(안산외국인력상담센터),http://www.hugkorea.or.kr/,Y
+9,KOREA MIGRANT'S CENTER K.M.C한국외국인력지원센터,http://www.migrantok.org/,Y
+10,INCHEON SUPPORT CENTER FOR FOREIGN WORKERS I.F.C인천외국인력지원센터,http://www.infc.or.kr/,Y
+11,DAEGU SUPPORT CENTER FOR FOREIGN WORKERS D.F.C 대구외국인력지원센터,http://www.dfwc.or.kr/,Y
+12,CHEONAN SUPPORT CENTER FOR FOREIGN WORKERS  천안외국인력지원센터,http://www.cfwc.or.kr/,Y
+13,Gimhae Support Center For Foreign Workers G.F.C 김해외국인력지원센터,http://www.gimhaekorea.or.kr/,Y
+14,의정부외국인력지원센터 Uijeongbu Support Center For Foreign Workers,http://www.ufc.or.kr/,Y
+15,사회복지법인 도사자비원 CHANGWON SUPPORT CENTER FOR FOREIGN WORKERS C.F.C 창원외국인력지원센터,http://www.mfwc.or.kr/,Y
+16,WORKNET,http://www.work.go.kr/,Y
+17,한국산업인력공단,http://www.hrdkorea.or.kr,Y
+18,출입국&middot;외국인 정책본부,http://www.immigration.go.kr,Y
+19,주중국한국대사관,http://www.koreanembassy.cn/,Y
+20,주홍콩 총영사관,http://hkg.mofat.go.kr,Y
+21,주상하이 총영사관,http://shanghai.mofat.go.kr/,Y
+22,주칭다오대한민국 총영사관,http://www.qdcon.org.cn/,Y
+23,주심양 총영사관,http://chn-shenyang.mofat.go.kr,Y
+24,주광주 총영사관,http://chn-guangzhou.mofat.go.kr,Y
+25,주성도 총영사관,http://chn-chengdu.mofat.go.kr,Y
+26,주서안 총영사관,http://chn-xian.mofat.go.kr,Y
+27,주한 중국대사관,http://www.chinaemb.or.kr/kor/,Y
