@@ -347925,20 +347925,20 @@ export const realBopTransferIncome = {
 export const realExchangeRate = {
   "latest": {
     "usd": {
-      "date": "20261016",
-      "value": 1348.5
+      "date": "20261019",
+      "value": 1342.4
     },
     "cny": {
-      "date": "20261016",
-      "value": 201.61
+      "date": "20261019",
+      "value": 201.03
     },
     "jpy": {
-      "date": "20261016",
-      "value": 853.02
+      "date": "20261019",
+      "value": 850.24
     },
     "eur": {
-      "date": "20261016",
-      "value": 1512.14
+      "date": "20261019",
+      "value": 1505.17
     }
   },
   "monthly": [
@@ -348105,10 +348105,10 @@ export const realExchangeRate = {
     },
     {
       "month": "2026-10",
-      "usd": 1348.5,
-      "cny": 201.61,
-      "jpy": 853.02,
-      "eur": 1512.14
+      "usd": 1342.4,
+      "cny": 201.03,
+      "jpy": 850.24,
+      "eur": 1505.17
     }
   ]
 } as const;
@@ -348255,7 +348255,7 @@ export type RealDataQualityWarning = { series: string; field: string; period: nu
 export const realDataQualityWarnings: readonly RealDataQualityWarning[] = [];
 
 export const realDataSummary = {
-  "generatedAt": "2026-10-18T18:33:03.503Z",
+  "generatedAt": "2026-10-19T20:57:47.759Z",
   "dataQualityWarningCount": 0,
   "transformErrorCount": 0,
   "transformErrors": [],
@@ -348279,71 +348279,71 @@ export const realDataSummary = {
   "apiParsedFiles": [
     {
       "source": "kosis_registered_foreigner_by_region",
-      "file": "kosis_registered_foreigner_by_region_2026-10-18.json",
+      "file": "kosis_registered_foreigner_by_region_2026-10-19.json",
       "produced": 5579
     },
     {
       "source": "kosis_registered_foreigner_sigungu_visa",
-      "file": "kosis_registered_foreigner_sigungu_visa_2026-10-18.json",
+      "file": "kosis_registered_foreigner_sigungu_visa_2026-10-19.json",
       "produced": 16832
     },
     {
       "source": "kosis_foreigner_economic_activity",
-      "file": "kosis_foreigner_economic_activity_2026-10-18.json",
+      "file": "kosis_foreigner_economic_activity_2026-10-19.json",
       "produced": 428
     },
     {
       "source": "kosis_foreign_student_nationality_visa",
-      "file": "kosis_foreign_student_nationality_visa_2026-10-18.json",
+      "file": "kosis_foreign_student_nationality_visa_2026-10-19.json",
       "produced": 0
     },
     {
       "source": "kosis_kedi_higher_edu_foreign_students",
-      "file": "kosis_kedi_higher_edu_foreign_students_2026-10-18.json",
+      "file": "kosis_kedi_higher_edu_foreign_students_2026-10-19.json",
       "produced": 1224
     },
     {
       "source": "kosis_eps_introduction_by_country",
-      "file": "kosis_eps_introduction_by_country_2026-10-18.json",
+      "file": "kosis_eps_introduction_by_country_2026-10-19.json",
       "produced": 0
     },
     {
       "source": "kosis_eps_introduction_by_industry",
-      "file": "kosis_eps_introduction_by_industry_2026-10-18.json",
+      "file": "kosis_eps_introduction_by_industry_2026-10-19.json",
       "produced": 64
     },
     {
       "source": "kosis_immigrant_wage_distribution",
-      "file": "kosis_immigrant_wage_distribution_2026-10-18.json",
+      "file": "kosis_immigrant_wage_distribution_2026-10-19.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_contract_period",
-      "file": "kosis_immigrant_contract_period_2026-10-18.json",
+      "file": "kosis_immigrant_contract_period_2026-10-19.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_employment_status",
-      "file": "kosis_immigrant_employment_status_2026-10-18.json",
+      "file": "kosis_immigrant_employment_status_2026-10-19.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_employment_by_industry",
-      "file": "kosis_immigrant_employment_by_industry_2026-10-18.json",
+      "file": "kosis_immigrant_employment_by_industry_2026-10-19.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_econ_activity_by_age",
-      "file": "kosis_immigrant_econ_activity_by_age_2026-10-18.json",
+      "file": "kosis_immigrant_econ_activity_by_age_2026-10-19.json",
       "produced": 0
     }
   ],
   "sourceFiles": {
-    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-10-18.csv",
-    "stay": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-10-18.csv",
-    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-10-18.csv",
-    "moeStudent": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moe_foreign_student_latest_2026-10-18.csv",
-    "mois": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/mois_foreign_resident_region_file_2026-10-18.csv",
-    "monthly": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_immigration_monthly_2024_2026-10-18.csv"
+    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-10-19.csv",
+    "stay": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-10-19.csv",
+    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-10-19.csv",
+    "moeStudent": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moe_foreign_student_latest_2026-10-19.csv",
+    "mois": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/mois_foreign_resident_region_file_2026-10-19.csv",
+    "monthly": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_immigration_monthly_2024_2026-10-19.csv"
   }
 } as const;
