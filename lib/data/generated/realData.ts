@@ -342149,10 +342149,10 @@ export const realForeignStudentByYear: readonly RealStudentYear[] = [
   },
   {
     "year": 2026,
-    "total": 353527,
-    "degree": 279077,
-    "language": 74450,
-    "asOfMonth": "08"
+    "total": 367660,
+    "degree": 287589,
+    "language": 80071,
+    "asOfMonth": "09"
   }
 ];
 
@@ -342160,28 +342160,28 @@ export const realForeignStudentByVisa: readonly RealStudentVisa[] = [
   {
     "visaRaw": "유학D2",
     "course": "학위과정(D-2)",
-    "count": 279077
+    "count": 287589
   },
   {
     "visaRaw": "한국어연수D41",
     "course": "어학연수(D-4)",
-    "count": 73250
+    "count": 78754
   },
   {
     "visaRaw": "외국어연수D47",
     "course": "어학연수(D-4)",
-    "count": 1200
+    "count": 1317
   }
 ];
 
 export const realStudentSummary = {
   "hasData": true,
   "latestYear": 2026,
-  "asOfMonth": "08",
-  "total": 353527,
-  "degree": 279077,
-  "language": 74450,
-  "yoy": 15.8
+  "asOfMonth": "09",
+  "total": 367660,
+  "degree": 287589,
+  "language": 80071,
+  "yoy": 16.3
 } as const;
 
 // 대학별 외국인유학생수 — 대학/유학생 페이지가 사용 (교육부 1차, 대학알리미 폴백).
@@ -347925,20 +347925,20 @@ export const realBopTransferIncome = {
 export const realExchangeRate = {
   "latest": {
     "usd": {
-      "date": "20261026",
+      "date": "20261028",
       "value": 1324.3
     },
     "cny": {
-      "date": "20261026",
-      "value": 198.29
+      "date": "20261028",
+      "value": 198.69
     },
     "jpy": {
-      "date": "20261026",
-      "value": 843.83
+      "date": "20261028",
+      "value": 838.3
     },
     "eur": {
-      "date": "20261026",
-      "value": 1483.81
+      "date": "20261028",
+      "value": 1473.81
     }
   },
   "monthly": [
@@ -348106,9 +348106,9 @@ export const realExchangeRate = {
     {
       "month": "2026-10",
       "usd": 1324.3,
-      "cny": 198.29,
-      "jpy": 843.83,
-      "eur": 1483.81
+      "cny": 198.69,
+      "jpy": 838.3,
+      "eur": 1473.81
     }
   ]
 } as const;
@@ -348255,15 +348255,12 @@ export type RealDataQualityWarning = { series: string; field: string; period: nu
 export const realDataQualityWarnings: readonly RealDataQualityWarning[] = [];
 
 export const realDataSummary = {
-  "generatedAt": "2026-10-27T20:32:45.239Z",
+  "generatedAt": "2026-10-28T20:53:45.528Z",
   "dataQualityWarningCount": 0,
   "transformErrorCount": 0,
   "transformErrors": [],
-  "retainedExportCount": 2,
-  "retainedExports": [
-    "realBopTransferIncome",
-    "realExchangeRate"
-  ],
+  "retainedExportCount": 0,
+  "retainedExports": [],
   "statusRowCount": 205,
   "nationalityCount": 205,
   "nationalitySource": "annual",
@@ -348282,71 +348279,71 @@ export const realDataSummary = {
   "apiParsedFiles": [
     {
       "source": "kosis_registered_foreigner_by_region",
-      "file": "kosis_registered_foreigner_by_region_2026-10-27.json",
+      "file": "kosis_registered_foreigner_by_region_2026-10-28.json",
       "produced": 5579
     },
     {
       "source": "kosis_registered_foreigner_sigungu_visa",
-      "file": "kosis_registered_foreigner_sigungu_visa_2026-10-27.json",
+      "file": "kosis_registered_foreigner_sigungu_visa_2026-10-28.json",
       "produced": 16832
     },
     {
       "source": "kosis_foreigner_economic_activity",
-      "file": "kosis_foreigner_economic_activity_2026-10-27.json",
+      "file": "kosis_foreigner_economic_activity_2026-10-28.json",
       "produced": 428
     },
     {
       "source": "kosis_foreign_student_nationality_visa",
-      "file": "kosis_foreign_student_nationality_visa_2026-10-27.json",
+      "file": "kosis_foreign_student_nationality_visa_2026-10-28.json",
       "produced": 0
     },
     {
       "source": "kosis_kedi_higher_edu_foreign_students",
-      "file": "kosis_kedi_higher_edu_foreign_students_2026-10-27.json",
+      "file": "kosis_kedi_higher_edu_foreign_students_2026-10-28.json",
       "produced": 1224
     },
     {
       "source": "kosis_eps_introduction_by_country",
-      "file": "kosis_eps_introduction_by_country_2026-10-27.json",
+      "file": "kosis_eps_introduction_by_country_2026-10-28.json",
       "produced": 0
     },
     {
       "source": "kosis_eps_introduction_by_industry",
-      "file": "kosis_eps_introduction_by_industry_2026-10-27.json",
+      "file": "kosis_eps_introduction_by_industry_2026-10-28.json",
       "produced": 64
     },
     {
       "source": "kosis_immigrant_wage_distribution",
-      "file": "kosis_immigrant_wage_distribution_2026-10-27.json",
+      "file": "kosis_immigrant_wage_distribution_2026-10-28.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_contract_period",
-      "file": "kosis_immigrant_contract_period_2026-10-27.json",
+      "file": "kosis_immigrant_contract_period_2026-10-28.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_employment_status",
-      "file": "kosis_immigrant_employment_status_2026-10-27.json",
+      "file": "kosis_immigrant_employment_status_2026-10-28.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_employment_by_industry",
-      "file": "kosis_immigrant_employment_by_industry_2026-10-27.json",
+      "file": "kosis_immigrant_employment_by_industry_2026-10-28.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_econ_activity_by_age",
-      "file": "kosis_immigrant_econ_activity_by_age_2026-10-27.json",
+      "file": "kosis_immigrant_econ_activity_by_age_2026-10-28.json",
       "produced": 0
     }
   ],
   "sourceFiles": {
-    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-10-27.csv",
-    "stay": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-10-27.csv",
-    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-10-27.csv",
-    "moeStudent": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moe_foreign_student_latest_2026-10-27.csv",
-    "mois": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/mois_foreign_resident_region_file_2026-10-27.csv",
-    "monthly": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_immigration_monthly_2024_2026-10-27.csv"
+    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-10-28.csv",
+    "stay": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-10-28.csv",
+    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-10-28.csv",
+    "moeStudent": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moe_foreign_student_latest_2026-10-28.csv",
+    "mois": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/mois_foreign_resident_region_file_2026-10-28.csv",
+    "monthly": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_immigration_monthly_2024_2026-10-28.csv"
   }
 } as const;
