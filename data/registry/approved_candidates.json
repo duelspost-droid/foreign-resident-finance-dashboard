@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-30T20:37:21.895Z",
+  "generatedAt": "2026-10-31T19:49:41.851Z",
   "approved": [
     {
       "id": 2,
@@ -19,23 +19,6 @@
       "notes": null
     },
     {
-      "id": 2124,
-      "dataset_id": "15067439",
-      "kind": "fileData",
-      "provider": "고용노동부",
-      "title": "고용노동부_한권으로 통하는 고용노동정책",
-      "keyword": "외국인 고용 취업",
-      "url": "https://www.data.go.kr/data/15067439/fileData.do",
-      "target_table": "unclassified",
-      "status": "approved",
-      "priority": "mid",
-      "rationale": "E-9/E-7 등 취업 외국인 규모(급여계좌 수요)",
-      "discovered_at": "2026-06-23T05:40:35.170128+00:00",
-      "decided_at": "2026-06-25T05:39:23.724+00:00",
-      "decided_by": "admin",
-      "notes": null
-    },
-    {
       "id": 2101,
       "dataset_id": "15046960",
       "kind": "fileData",
@@ -49,6 +32,23 @@
       "rationale": "시군구 단위 장기거주 외국인주민 규모",
       "discovered_at": "2026-06-23T05:40:35.170128+00:00",
       "decided_at": "2026-06-25T06:33:19.758+00:00",
+      "decided_by": "admin",
+      "notes": null
+    },
+    {
+      "id": 2124,
+      "dataset_id": "15067439",
+      "kind": "fileData",
+      "provider": "고용노동부",
+      "title": "고용노동부_한권으로 통하는 고용노동정책",
+      "keyword": "외국인 고용 취업",
+      "url": "https://www.data.go.kr/data/15067439/fileData.do",
+      "target_table": "unclassified",
+      "status": "approved",
+      "priority": "mid",
+      "rationale": "E-9/E-7 등 취업 외국인 규모(급여계좌 수요)",
+      "discovered_at": "2026-06-23T05:40:35.170128+00:00",
+      "decided_at": "2026-06-25T05:39:23.724+00:00",
       "decided_by": "admin",
       "notes": null
     },
