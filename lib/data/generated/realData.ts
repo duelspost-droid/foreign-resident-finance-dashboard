@@ -340932,317 +340932,342 @@ export type RealVisaType = { visaCode: string; visaName: string; count: number; 
 export const realNationalityDistribution: readonly RealNationalityDist[] = [
   {
     "nationality": "한국계중국인",
-    "residents": 643277,
-    "share": 24.3
+    "residents": 643403,
+    "share": 23.1
   },
   {
     "nationality": "중국",
-    "residents": 315682,
-    "share": 11.9
+    "residents": 337267,
+    "share": 12.1
   },
   {
     "nationality": "베트남",
-    "residents": 305936,
-    "share": 11.5
-  },
-  {
-    "nationality": "타이",
-    "residents": 188770,
-    "share": 7.1
+    "residents": 337183,
+    "share": 12.1
   },
   {
     "nationality": "미국",
-    "residents": 170251,
-    "share": 6.4
+    "residents": 180230,
+    "share": 6.5
+  },
+  {
+    "nationality": "타이",
+    "residents": 169848,
+    "share": 6.1
   },
   {
     "nationality": "우즈베키스탄",
-    "residents": 94893,
-    "share": 3.6
+    "residents": 102804,
+    "share": 3.7
   },
   {
     "nationality": "네팔",
-    "residents": 74641,
-    "share": 2.8
+    "residents": 91895,
+    "share": 3.3
   },
   {
     "nationality": "인도네시아",
-    "residents": 73180,
+    "residents": 77015,
     "share": 2.8
   },
   {
     "nationality": "필리핀",
-    "residents": 70392,
+    "residents": 74125,
     "share": 2.7
   },
   {
     "nationality": "일본",
-    "residents": 65216,
+    "residents": 70375,
     "share": 2.5
   },
   {
     "nationality": "캄보디아",
-    "residents": 63681,
+    "residents": 67985,
     "share": 2.4
   },
   {
     "nationality": "몽골",
-    "residents": 57093,
+    "residents": 60008,
     "share": 2.2
   },
   {
     "nationality": "미얀마",
-    "residents": 53914,
-    "share": 2
+    "residents": 59999,
+    "share": 2.2
   },
   {
     "nationality": "카자흐스탄",
-    "residents": 44549,
-    "share": 1.7
-  },
-  {
-    "nationality": "한국계러시아인",
-    "residents": 35984,
-    "share": 1.4
+    "residents": 43026,
+    "share": 1.5
   },
   {
     "nationality": "타이완",
-    "residents": 35838,
-    "share": 1.4
+    "residents": 41651,
+    "share": 1.5
   },
   {
     "nationality": "스리랑카",
-    "residents": 35792,
+    "residents": 38697,
     "share": 1.4
   },
   {
-    "nationality": "러시아(연방)",
-    "residents": 33268,
+    "nationality": "방글라데시",
+    "residents": 35913,
     "share": 1.3
   },
   {
-    "nationality": "방글라데시",
-    "residents": 31220,
-    "share": 1.2
+    "nationality": "한국계러시아인",
+    "residents": 35704,
+    "share": 1.3
+  },
+  {
+    "nationality": "러시아(연방)",
+    "residents": 31001,
+    "share": 1.1
   },
   {
     "nationality": "캐나다",
-    "residents": 28604,
+    "residents": 29354,
     "share": 1.1
   },
   {
     "nationality": "오스트레일리아",
-    "residents": 19430,
+    "residents": 20441,
     "share": 0.7
   },
   {
     "nationality": "파키스탄",
-    "residents": 18355,
+    "residents": 19841,
     "share": 0.7
   },
   {
     "nationality": "인도",
-    "residents": 16851,
-    "share": 0.6
+    "residents": 18593,
+    "share": 0.7
   },
   {
     "nationality": "말레이시아",
-    "residents": 12951,
-    "share": 0.5
+    "residents": 18224,
+    "share": 0.7
   },
   {
     "nationality": "홍콩",
-    "residents": 12786,
+    "residents": 14572,
     "share": 0.5
   },
   {
     "nationality": "싱가포르",
-    "residents": 12003,
+    "residents": 13566,
+    "share": 0.5
+  },
+  {
+    "nationality": "라오스",
+    "residents": 13427,
     "share": 0.5
   },
   {
     "nationality": "키르기즈",
-    "residents": 11784,
-    "share": 0.4
+    "residents": 12959,
+    "share": 0.5
   },
   {
     "nationality": "프랑스",
-    "residents": 8867,
+    "residents": 9351,
     "share": 0.3
   },
   {
     "nationality": "영국",
-    "residents": 8697,
-    "share": 0.3
-  },
-  {
-    "nationality": "라오스",
-    "residents": 8485,
+    "residents": 9045,
     "share": 0.3
   },
   {
     "nationality": "독일",
-    "residents": 6544,
-    "share": 0.2
+    "residents": 7134,
+    "share": 0.3
   },
   {
     "nationality": "뉴질랜드",
-    "residents": 5738,
-    "share": 0.2
-  },
-  {
-    "nationality": "우크라이나",
-    "residents": 5267,
+    "residents": 5731,
     "share": 0.2
   },
   {
     "nationality": "남아프리카공화국",
-    "residents": 5164,
+    "residents": 5552,
+    "share": 0.2
+  },
+  {
+    "nationality": "우크라이나",
+    "residents": 5214,
     "share": 0.2
   },
   {
     "nationality": "티모르민주공화국",
-    "residents": 4611,
+    "residents": 5004,
     "share": 0.2
   },
   {
     "nationality": "튀르키예",
-    "residents": 4475,
+    "residents": 4503,
     "share": 0.2
   },
   {
+    "nationality": "이탈리아",
+    "residents": 3768,
+    "share": 0.1
+  },
+  {
     "nationality": "이집트",
-    "residents": 3198,
+    "residents": 3383,
     "share": 0.1
   },
   {
     "nationality": "타지키스탄",
-    "residents": 3123,
+    "residents": 3230,
     "share": 0.1
   },
   {
     "nationality": "브라질",
-    "residents": 3089,
+    "residents": 3181,
     "share": 0.1
   },
   {
     "nationality": "나이지리아",
-    "residents": 2941,
-    "share": 0.1
-  },
-  {
-    "nationality": "이탈리아",
-    "residents": 2841,
-    "share": 0.1
-  },
-  {
-    "nationality": "멕시코",
-    "residents": 2108,
-    "share": 0.1
-  },
-  {
-    "nationality": "이란",
-    "residents": 2054,
+    "residents": 3013,
     "share": 0.1
   },
   {
     "nationality": "스페인",
-    "residents": 1999,
+    "residents": 2419,
+    "share": 0.1
+  },
+  {
+    "nationality": "멕시코",
+    "residents": 2177,
+    "share": 0.1
+  },
+  {
+    "nationality": "이란",
+    "residents": 2137,
     "share": 0.1
   },
   {
     "nationality": "시리아",
-    "residents": 1946,
+    "residents": 2003,
     "share": 0.1
   },
   {
     "nationality": "모로코",
-    "residents": 1916,
+    "residents": 1966,
     "share": 0.1
   },
   {
     "nationality": "네덜란드",
-    "residents": 1663,
+    "residents": 1817,
     "share": 0.1
   },
   {
     "nationality": "가나",
-    "residents": 1612,
+    "residents": 1691,
     "share": 0.1
   },
   {
     "nationality": "에티오피아",
-    "residents": 1498,
+    "residents": 1677,
     "share": 0.1
-  },
-  {
-    "nationality": "사우디아라비아",
-    "residents": 1448,
-    "share": 0.1
-  },
-  {
-    "nationality": "예멘공화국",
-    "residents": 1235,
-    "share": 0
   },
   {
     "nationality": "투르크메니스탄",
-    "residents": 1204,
-    "share": 0
+    "residents": 1481,
+    "share": 0.1
   },
   {
     "nationality": "스웨덴",
-    "residents": 1106,
+    "residents": 1352,
     "share": 0
   },
   {
-    "nationality": "리비아",
-    "residents": 1038,
+    "nationality": "예멘공화국",
+    "residents": 1268,
     "share": 0
   },
   {
     "nationality": "폴란드",
-    "residents": 1021,
+    "residents": 1257,
     "share": 0
   },
   {
-    "nationality": "페루",
-    "residents": 988,
+    "nationality": "사우디아라비아",
+    "residents": 1210,
     "share": 0
   },
   {
     "nationality": "스위스",
-    "residents": 978,
+    "residents": 1116,
     "share": 0
   },
   {
-    "nationality": "아프가니스탄",
-    "residents": 951,
+    "nationality": "리비아",
+    "residents": 1115,
+    "share": 0
+  },
+  {
+    "nationality": "페루",
+    "residents": 993,
     "share": 0
   },
   {
     "nationality": "콜롬비아",
-    "residents": 866,
+    "residents": 975,
     "share": 0
   },
   {
-    "nationality": "카메룬",
-    "residents": 829,
-    "share": 0
-  },
-  {
-    "nationality": "튀니지",
-    "residents": 800,
+    "nationality": "아프가니스탄",
+    "residents": 974,
     "share": 0
   },
   {
     "nationality": "벨기에",
-    "residents": 797,
+    "residents": 851,
+    "share": 0
+  },
+  {
+    "nationality": "튀니지",
+    "residents": 832,
     "share": 0
   },
   {
     "nationality": "아일랜드",
-    "residents": 778,
+    "residents": 823,
+    "share": 0
+  },
+  {
+    "nationality": "카메룬",
+    "residents": 816,
+    "share": 0
+  },
+  {
+    "nationality": "르완다",
+    "residents": 807,
+    "share": 0
+  },
+  {
+    "nationality": "마카오",
+    "residents": 773,
+    "share": 0
+  },
+  {
+    "nationality": "요르단",
+    "residents": 758,
+    "share": 0
+  },
+  {
+    "nationality": "케냐",
+    "residents": 754,
+    "share": 0
+  },
+  {
+    "nationality": "이라크",
+    "residents": 753,
     "share": 0
   },
   {
@@ -341251,523 +341276,513 @@ export const realNationalityDistribution: readonly RealNationalityDist[] = [
     "share": 0
   },
   {
-    "nationality": "마카오",
-    "residents": 706,
-    "share": 0
-  },
-  {
-    "nationality": "요르단",
-    "residents": 692,
-    "share": 0
-  },
-  {
-    "nationality": "이라크",
-    "residents": 686,
-    "share": 0
-  },
-  {
-    "nationality": "케냐",
-    "residents": 676,
-    "share": 0
-  },
-  {
-    "nationality": "아르헨티나",
-    "residents": 675,
-    "share": 0
-  },
-  {
-    "nationality": "덴마크",
-    "residents": 649,
-    "share": 0
-  },
-  {
-    "nationality": "우간다",
-    "residents": 626,
-    "share": 0
-  },
-  {
-    "nationality": "오스트리아",
-    "residents": 592,
-    "share": 0
-  },
-  {
-    "nationality": "르완다",
-    "residents": 574,
+    "nationality": "탄자니아",
+    "residents": 720,
     "share": 0
   },
   {
     "nationality": "부룬디",
-    "residents": 571,
+    "residents": 711,
+    "share": 0
+  },
+  {
+    "nationality": "아르헨티나",
+    "residents": 708,
+    "share": 0
+  },
+  {
+    "nationality": "덴마크",
+    "residents": 661,
+    "share": 0
+  },
+  {
+    "nationality": "우간다",
+    "residents": 658,
     "share": 0
   },
   {
     "nationality": "노르웨이",
-    "residents": 565,
-    "share": 0
-  },
-  {
-    "nationality": "탄자니아",
-    "residents": 554,
-    "share": 0
-  },
-  {
-    "nationality": "알제리",
-    "residents": 523,
-    "share": 0
-  },
-  {
-    "nationality": "라이베리아",
-    "residents": 523,
-    "share": 0
-  },
-  {
-    "nationality": "루마니아",
-    "residents": 521,
-    "share": 0
-  },
-  {
-    "nationality": "칠레",
-    "residents": 492,
-    "share": 0
-  },
-  {
-    "nationality": "아제르바이잔",
-    "residents": 490,
-    "share": 0
-  },
-  {
-    "nationality": "벨라루스",
-    "residents": 446,
+    "residents": 655,
     "share": 0
   },
   {
     "nationality": "핀란드",
-    "residents": 433,
+    "residents": 633,
     "share": 0
   },
   {
-    "nationality": "에콰도르",
-    "residents": 410,
+    "nationality": "오스트리아",
+    "residents": 627,
     "share": 0
   },
   {
-    "nationality": "포르투갈",
-    "residents": 388,
+    "nationality": "알제리",
+    "residents": 625,
     "share": 0
   },
   {
-    "nationality": "수단",
-    "residents": 382,
+    "nationality": "루마니아",
+    "residents": 575,
+    "share": 0
+  },
+  {
+    "nationality": "아제르바이잔",
+    "residents": 573,
+    "share": 0
+  },
+  {
+    "nationality": "라이베리아",
+    "residents": 549,
+    "share": 0
+  },
+  {
+    "nationality": "칠레",
+    "residents": 534,
     "share": 0
   },
   {
     "nationality": "이스라엘",
-    "residents": 379,
+    "residents": 481,
     "share": 0
   },
   {
     "nationality": "콩고민주공화국",
-    "residents": 378,
-    "share": 0
-  },
-  {
-    "nationality": "헝가리",
-    "residents": 375,
-    "share": 0
-  },
-  {
-    "nationality": "브루나이",
-    "residents": 356,
+    "residents": 475,
     "share": 0
   },
   {
     "nationality": "그리스",
-    "residents": 344,
+    "residents": 470,
     "share": 0
   },
   {
-    "nationality": "세네갈",
-    "residents": 317,
+    "nationality": "포르투갈",
+    "residents": 467,
+    "share": 0
+  },
+  {
+    "nationality": "에콰도르",
+    "residents": 413,
+    "share": 0
+  },
+  {
+    "nationality": "헝가리",
+    "residents": 407,
+    "share": 0
+  },
+  {
+    "nationality": "수단",
+    "residents": 405,
+    "share": 0
+  },
+  {
+    "nationality": "벨라루스",
+    "residents": 402,
+    "share": 0
+  },
+  {
+    "nationality": "브루나이",
+    "residents": 377,
     "share": 0
   },
   {
     "nationality": "체코",
-    "residents": 310,
+    "residents": 356,
+    "share": 0
+  },
+  {
+    "nationality": "세네갈",
+    "residents": 311,
     "share": 0
   },
   {
     "nationality": "기타",
-    "residents": 259,
+    "residents": 283,
     "share": 0
   },
   {
     "nationality": "코트디부아르",
-    "residents": 257,
-    "share": 0
-  },
-  {
-    "nationality": "말리",
-    "residents": 256,
+    "residents": 273,
     "share": 0
   },
   {
     "nationality": "기니",
-    "residents": 249,
+    "residents": 254,
+    "share": 0
+  },
+  {
+    "nationality": "말리",
+    "residents": 253,
     "share": 0
   },
   {
     "nationality": "파라과이",
-    "residents": 239,
+    "residents": 250,
     "share": 0
   },
   {
     "nationality": "베네수엘라",
-    "residents": 239,
-    "share": 0
-  },
-  {
-    "nationality": "불가리아",
-    "residents": 210,
+    "residents": 250,
     "share": 0
   },
   {
     "nationality": "리투아니아",
-    "residents": 203,
+    "residents": 249,
     "share": 0
   },
   {
-    "nationality": "카타르",
+    "nationality": "불가리아",
+    "residents": 239,
+    "share": 0
+  },
+  {
+    "nationality": "크로아티아",
+    "residents": 187,
+    "share": 0
+  },
+  {
+    "nationality": "코스타리카",
     "residents": 185,
     "share": 0
   },
   {
     "nationality": "영국외지민",
-    "residents": 183,
-    "share": 0
-  },
-  {
-    "nationality": "크로아티아",
-    "residents": 158,
-    "share": 0
-  },
-  {
-    "nationality": "조지아",
-    "residents": 156,
-    "share": 0
-  },
-  {
-    "nationality": "아이티",
-    "residents": 155,
-    "share": 0
-  },
-  {
-    "nationality": "코스타리카",
-    "residents": 148,
-    "share": 0
-  },
-  {
-    "nationality": "과테말라",
-    "residents": 144,
+    "residents": 177,
     "share": 0
   },
   {
     "nationality": "쿠웨이트",
-    "residents": 143,
+    "residents": 165,
     "share": 0
   },
   {
-    "nationality": "도미니카공화국",
-    "residents": 143,
+    "nationality": "아이티",
+    "residents": 159,
     "share": 0
   },
   {
-    "nationality": "짐바브웨",
-    "residents": 140,
+    "nationality": "조지아",
+    "residents": 159,
     "share": 0
   },
   {
-    "nationality": "앙골라",
-    "residents": 136,
-    "share": 0
-  },
-  {
-    "nationality": "라트비아",
-    "residents": 132,
-    "share": 0
-  },
-  {
-    "nationality": "세르비아",
-    "residents": 128,
-    "share": 0
-  },
-  {
-    "nationality": "감비아",
-    "residents": 123,
-    "share": 0
-  },
-  {
-    "nationality": "볼리비아",
-    "residents": 122,
-    "share": 0
-  },
-  {
-    "nationality": "가봉",
-    "residents": 120,
-    "share": 0
-  },
-  {
-    "nationality": "시에라리온",
-    "residents": 117,
+    "nationality": "카타르",
+    "residents": 155,
     "share": 0
   },
   {
     "nationality": "슬로바크",
-    "residents": 114,
+    "residents": 154,
+    "share": 0
+  },
+  {
+    "nationality": "과테말라",
+    "residents": 151,
+    "share": 0
+  },
+  {
+    "nationality": "도미니카공화국",
+    "residents": 147,
+    "share": 0
+  },
+  {
+    "nationality": "짐바브웨",
+    "residents": 144,
+    "share": 0
+  },
+  {
+    "nationality": "라트비아",
+    "residents": 139,
     "share": 0
   },
   {
     "nationality": "팔레스타인",
-    "residents": 112,
+    "residents": 130,
     "share": 0
   },
   {
-    "nationality": "잠비아",
-    "residents": 107,
+    "nationality": "가봉",
+    "residents": 129,
     "share": 0
   },
   {
-    "nationality": "오만",
-    "residents": 101,
+    "nationality": "시에라리온",
+    "residents": 122,
     "share": 0
   },
   {
-    "nationality": "아르메니아",
-    "residents": 93,
+    "nationality": "감비아",
+    "residents": 122,
+    "share": 0
+  },
+  {
+    "nationality": "세르비아",
+    "residents": 117,
     "share": 0
   },
   {
     "nationality": "파나마",
-    "residents": 92,
+    "residents": 115,
     "share": 0
   },
   {
-    "nationality": "온두라스",
-    "residents": 92,
+    "nationality": "잠비아",
+    "residents": 114,
     "share": 0
   },
   {
     "nationality": "피지",
-    "residents": 91,
+    "residents": 113,
     "share": 0
   },
   {
-    "nationality": "에스토니아",
-    "residents": 89,
+    "nationality": "앙골라",
+    "residents": 111,
     "share": 0
   },
   {
-    "nationality": "슬로베니아",
-    "residents": 84,
+    "nationality": "볼리비아",
+    "residents": 105,
     "share": 0
   },
   {
-    "nationality": "엘살바도르",
-    "residents": 79,
+    "nationality": "아르메니아",
+    "residents": 98,
     "share": 0
   },
   {
-    "nationality": "몰도바",
-    "residents": 79,
+    "nationality": "온두라스",
+    "residents": 97,
     "share": 0
   },
   {
     "nationality": "룩셈부르크",
-    "residents": 76,
+    "residents": 95,
+    "share": 0
+  },
+  {
+    "nationality": "오만",
+    "residents": 90,
+    "share": 0
+  },
+  {
+    "nationality": "에스토니아",
+    "residents": 81,
+    "share": 0
+  },
+  {
+    "nationality": "엘살바도르",
+    "residents": 80,
     "share": 0
   },
   {
     "nationality": "레바논",
-    "residents": 68,
+    "residents": 77,
     "share": 0
   },
   {
-    "nationality": "말라위",
-    "residents": 67,
+    "nationality": "몰도바",
+    "residents": 77,
     "share": 0
   },
   {
     "nationality": "부르키나파소",
-    "residents": 66,
+    "residents": 77,
+    "share": 0
+  },
+  {
+    "nationality": "슬로베니아",
+    "residents": 75,
+    "share": 0
+  },
+  {
+    "nationality": "말라위",
+    "residents": 75,
     "share": 0
   },
   {
     "nationality": "마다가스카르",
-    "residents": 65,
-    "share": 0
-  },
-  {
-    "nationality": "자메이카",
-    "residents": 63,
-    "share": 0
-  },
-  {
-    "nationality": "우루과이",
-    "residents": 62,
+    "residents": 70,
     "share": 0
   },
   {
     "nationality": "모잠비크",
-    "residents": 59,
-    "share": 0
-  },
-  {
-    "nationality": "알바니아",
-    "residents": 58,
-    "share": 0
-  },
-  {
-    "nationality": "니카라과",
-    "residents": 56,
+    "residents": 68,
     "share": 0
   },
   {
     "nationality": "쿠바",
-    "residents": 55,
-    "share": 0
-  },
-  {
-    "nationality": "토고",
-    "residents": 49,
-    "share": 0
-  },
-  {
-    "nationality": "부탄",
-    "residents": 43,
-    "share": 0
-  },
-  {
-    "nationality": "키프로스",
-    "residents": 42,
-    "share": 0
-  },
-  {
-    "nationality": "도미니카연방",
-    "residents": 42,
-    "share": 0
-  },
-  {
-    "nationality": "콩고",
-    "residents": 39,
-    "share": 0
-  },
-  {
-    "nationality": "보츠와나",
-    "residents": 39,
-    "share": 0
-  },
-  {
-    "nationality": "트리니다드토바고",
-    "residents": 37,
-    "share": 0
-  },
-  {
-    "nationality": "몰타",
-    "residents": 37,
-    "share": 0
-  },
-  {
-    "nationality": "바누아투",
-    "residents": 37,
-    "share": 0
-  },
-  {
-    "nationality": "남수단공화국",
-    "residents": 34,
-    "share": 0
-  },
-  {
-    "nationality": "바레인",
-    "residents": 33,
-    "share": 0
-  },
-  {
-    "nationality": "파푸아뉴기니",
-    "residents": 32,
-    "share": 0
-  },
-  {
-    "nationality": "마샬군도",
-    "residents": 32,
+    "residents": 65,
     "share": 0
   },
   {
     "nationality": "모리셔스",
-    "residents": 30,
+    "residents": 64,
     "share": 0
   },
   {
-    "nationality": "세인트크리스토퍼네비스",
-    "residents": 27,
+    "nationality": "우루과이",
+    "residents": 63,
     "share": 0
   },
   {
-    "nationality": "소말리아",
-    "residents": 27,
+    "nationality": "알바니아",
+    "residents": 60,
     "share": 0
   },
   {
-    "nationality": "베냉",
-    "residents": 25,
+    "nationality": "자메이카",
+    "residents": 57,
     "share": 0
   },
   {
-    "nationality": "아이슬란드",
-    "residents": 23,
+    "nationality": "니카라과",
+    "residents": 54,
+    "share": 0
+  },
+  {
+    "nationality": "토고",
+    "residents": 53,
+    "share": 0
+  },
+  {
+    "nationality": "바레인",
+    "residents": 52,
+    "share": 0
+  },
+  {
+    "nationality": "콩고",
+    "residents": 50,
+    "share": 0
+  },
+  {
+    "nationality": "키프로스",
+    "residents": 46,
+    "share": 0
+  },
+  {
+    "nationality": "트리니다드토바고",
+    "residents": 45,
+    "share": 0
+  },
+  {
+    "nationality": "바누아투",
+    "residents": 44,
+    "share": 0
+  },
+  {
+    "nationality": "도미니카연방",
+    "residents": 41,
+    "share": 0
+  },
+  {
+    "nationality": "부탄",
+    "residents": 38,
+    "share": 0
+  },
+  {
+    "nationality": "몰타",
+    "residents": 38,
+    "share": 0
+  },
+  {
+    "nationality": "파푸아뉴기니",
+    "residents": 38,
+    "share": 0
+  },
+  {
+    "nationality": "남수단공화국",
+    "residents": 36,
     "share": 0
   },
   {
     "nationality": "보스니아-헤르체고비나",
-    "residents": 23,
+    "residents": 35,
     "share": 0
   },
   {
-    "nationality": "몬테네그로",
-    "residents": 22,
+    "nationality": "베냉",
+    "residents": 32,
+    "share": 0
+  },
+  {
+    "nationality": "세인트크리스토퍼네비스",
+    "residents": 31,
     "share": 0
   },
   {
     "nationality": "미이크로네시아",
-    "residents": 21,
+    "residents": 29,
+    "share": 0
+  },
+  {
+    "nationality": "보츠와나",
+    "residents": 29,
+    "share": 0
+  },
+  {
+    "nationality": "마샬군도",
+    "residents": 27,
+    "share": 0
+  },
+  {
+    "nationality": "아이슬란드",
+    "residents": 25,
+    "share": 0
+  },
+  {
+    "nationality": "몬테네그로",
+    "residents": 25,
+    "share": 0
+  },
+  {
+    "nationality": "소말리아",
+    "residents": 25,
     "share": 0
   },
   {
     "nationality": "모리타니",
-    "residents": 19,
+    "residents": 25,
+    "share": 0
+  },
+  {
+    "nationality": "에스와티니",
+    "residents": 23,
     "share": 0
   },
   {
     "nationality": "중앙아프리카공화국",
+    "residents": 21,
+    "share": 0
+  },
+  {
+    "nationality": "가이아나",
+    "residents": 19,
+    "share": 0
+  },
+  {
+    "nationality": "솔로몬군도",
     "residents": 18,
     "share": 0
   },
   {
     "nationality": "레소토",
-    "residents": 17,
+    "residents": 18,
     "share": 0
   },
   {
-    "nationality": "가이아나",
+    "nationality": "니제르",
+    "residents": 18,
+    "share": 0
+  },
+  {
+    "nationality": "바하마",
     "residents": 16,
     "share": 0
   },
   {
-    "nationality": "북마케도니아",
-    "residents": 16,
-    "share": 0
-  },
-  {
-    "nationality": "에스와티니",
-    "residents": 16,
+    "nationality": "기니비사우",
+    "residents": 15,
     "share": 0
   },
   {
@@ -341776,72 +341791,77 @@ export const realNationalityDistribution: readonly RealNationalityDist[] = [
     "share": 0
   },
   {
-    "nationality": "팔라우",
-    "residents": 14,
-    "share": 0
-  },
-  {
-    "nationality": "솔로몬군도",
-    "residents": 14,
-    "share": 0
-  },
-  {
-    "nationality": "니제르",
-    "residents": 14,
-    "share": 0
-  },
-  {
-    "nationality": "기니비사우",
-    "residents": 14,
-    "share": 0
-  },
-  {
-    "nationality": "바하마",
-    "residents": 13,
-    "share": 0
-  },
-  {
-    "nationality": "에리트레아",
-    "residents": 13,
-    "share": 0
-  },
-  {
-    "nationality": "몰디브",
-    "residents": 11,
-    "share": 0
-  },
-  {
     "nationality": "통가",
-    "residents": 11,
+    "residents": 14,
+    "share": 0
+  },
+  {
+    "nationality": "세인트루시아",
+    "residents": 13,
+    "share": 0
+  },
+  {
+    "nationality": "그레나다",
+    "residents": 13,
     "share": 0
   },
   {
     "nationality": "적도기니",
+    "residents": 13,
+    "share": 0
+  },
+  {
+    "nationality": "북마케도니아",
+    "residents": 12,
+    "share": 0
+  },
+  {
+    "nationality": "에리트레아",
+    "residents": 10,
+    "share": 0
+  },
+  {
+    "nationality": "몰디브",
     "residents": 9,
     "share": 0
   },
   {
-    "nationality": "차드",
+    "nationality": "벨리즈",
+    "residents": 9,
+    "share": 0
+  },
+  {
+    "nationality": "코소보",
+    "residents": 9,
+    "share": 0
+  },
+  {
+    "nationality": "팔라우",
+    "residents": 9,
+    "share": 0
+  },
+  {
+    "nationality": "앤티카바부다",
     "residents": 8,
     "share": 0
   },
   {
     "nationality": "바베이도스",
-    "residents": 7,
+    "residents": 8,
     "share": 0
   },
   {
-    "nationality": "코소보",
-    "residents": 7,
+    "nationality": "안도라",
+    "residents": 8,
+    "share": 0
+  },
+  {
+    "nationality": "리히텐슈타인",
+    "residents": 8,
     "share": 0
   },
   {
     "nationality": "사모아",
-    "residents": 7,
-    "share": 0
-  },
-  {
-    "nationality": "지부티",
     "residents": 7,
     "share": 0
   },
@@ -341851,27 +341871,22 @@ export const realNationalityDistribution: readonly RealNationalityDist[] = [
     "share": 0
   },
   {
-    "nationality": "앤티카바부다",
+    "nationality": "지부티",
     "residents": 6,
     "share": 0
   },
   {
     "nationality": "수리남",
-    "residents": 6,
+    "residents": 5,
     "share": 0
   },
   {
-    "nationality": "세인트루시아",
-    "residents": 6,
+    "nationality": "모나코",
+    "residents": 5,
     "share": 0
   },
   {
-    "nationality": "벨리즈",
-    "residents": 6,
-    "share": 0
-  },
-  {
-    "nationality": "그레나다",
+    "nationality": "키리바시",
     "residents": 5,
     "share": 0
   },
@@ -341881,7 +341896,12 @@ export const realNationalityDistribution: readonly RealNationalityDist[] = [
     "share": 0
   },
   {
-    "nationality": "영국외지시민",
+    "nationality": "차드",
+    "residents": 5,
+    "share": 0
+  },
+  {
+    "nationality": "세이셸",
     "residents": 4,
     "share": 0
   },
@@ -341891,12 +341911,12 @@ export const realNationalityDistribution: readonly RealNationalityDist[] = [
     "share": 0
   },
   {
-    "nationality": "리히텐슈타인",
+    "nationality": "산마리노",
     "residents": 3,
     "share": 0
   },
   {
-    "nationality": "키리바시",
+    "nationality": "코모로",
     "residents": 3,
     "share": 0
   },
@@ -341906,12 +341926,7 @@ export const realNationalityDistribution: readonly RealNationalityDist[] = [
     "share": 0
   },
   {
-    "nationality": "세인트빈센트그레나딘",
-    "residents": 2,
-    "share": 0
-  },
-  {
-    "nationality": "산마리노",
+    "nationality": "영국외지시민",
     "residents": 2,
     "share": 0
   },
@@ -341921,23 +341936,18 @@ export const realNationalityDistribution: readonly RealNationalityDist[] = [
     "share": 0
   },
   {
-    "nationality": "코모로",
-    "residents": 2,
-    "share": 0
-  },
-  {
-    "nationality": "카보베르데",
-    "residents": 2,
-    "share": 0
-  },
-  {
-    "nationality": "세이셸",
-    "residents": 2,
-    "share": 0
-  },
-  {
     "nationality": "상투메프린시페",
     "residents": 2,
+    "share": 0
+  },
+  {
+    "nationality": "세인트빈센트그레나딘",
+    "residents": 1,
+    "share": 0
+  },
+  {
+    "nationality": "미국인근섬",
+    "residents": 1,
     "share": 0
   },
   {
@@ -341952,6 +341962,11 @@ export const realNationalityDistribution: readonly RealNationalityDist[] = [
   },
   {
     "nationality": "세르비아몬테네그로",
+    "residents": 1,
+    "share": 0
+  },
+  {
+    "nationality": "투발루",
     "residents": 1,
     "share": 0
   }
@@ -347925,20 +347940,20 @@ export const realBopTransferIncome = {
 export const realExchangeRate = {
   "latest": {
     "usd": {
-      "date": "20261109",
-      "value": 1357.9
+      "date": "20261110",
+      "value": 1355.7
     },
     "cny": {
-      "date": "20261109",
-      "value": 203.43
+      "date": "20261110",
+      "value": 203.67
     },
     "jpy": {
-      "date": "20261109",
-      "value": 856.72
+      "date": "20261110",
+      "value": 858.42
     },
     "eur": {
-      "date": "20261109",
-      "value": 1513.65
+      "date": "20261110",
+      "value": 1521.43
     }
   },
   "monthly": [
@@ -348105,10 +348120,10 @@ export const realExchangeRate = {
     },
     {
       "month": "2026-11",
-      "usd": 1357.9,
-      "cny": 203.43,
-      "jpy": 856.72,
-      "eur": 1513.65
+      "usd": 1355.7,
+      "cny": 203.67,
+      "jpy": 858.42,
+      "eur": 1521.43
     }
   ]
 } as const;
@@ -348255,15 +348270,15 @@ export type RealDataQualityWarning = { series: string; field: string; period: nu
 export const realDataQualityWarnings: readonly RealDataQualityWarning[] = [];
 
 export const realDataSummary = {
-  "generatedAt": "2026-11-10T00:04:32.699Z",
+  "generatedAt": "2026-11-10T21:44:37.381Z",
   "dataQualityWarningCount": 0,
   "transformErrorCount": 0,
   "transformErrors": [],
   "retainedExportCount": 0,
   "retainedExports": [],
   "statusRowCount": 205,
-  "nationalityCount": 205,
-  "nationalitySource": "annual",
+  "nationalityCount": 208,
+  "nationalitySource": "monthly",
   "visaSegmentCount": 8,
   "regionRowCount": 200,
   "apiStatusRowCount": 0,
