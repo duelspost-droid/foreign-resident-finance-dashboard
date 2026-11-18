@@ -342581,7 +342581,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "남아프리카공화국",
     "ageGroup": "40-44세",
-    "count": 7
+    "count": 6
   },
   {
     "nationality": "남아프리카공화국",
@@ -342636,7 +342636,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "네팔",
     "ageGroup": "05-09세",
-    "count": 2
+    "count": 3
   },
   {
     "nationality": "네팔",
@@ -342646,12 +342646,12 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "네팔",
     "ageGroup": "20-24세",
-    "count": 147
+    "count": 152
   },
   {
     "nationality": "네팔",
     "ageGroup": "25-29세",
-    "count": 295
+    "count": 296
   },
   {
     "nationality": "네팔",
@@ -342661,17 +342661,17 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "네팔",
     "ageGroup": "35-39세",
-    "count": 463
+    "count": 458
   },
   {
     "nationality": "네팔",
     "ageGroup": "40-44세",
-    "count": 168
+    "count": 167
   },
   {
     "nationality": "네팔",
     "ageGroup": "45-49세",
-    "count": 22
+    "count": 23
   },
   {
     "nationality": "네팔",
@@ -342702,6 +342702,11 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
     "nationality": "노르웨이",
     "ageGroup": "60-64세",
     "count": 4
+  },
+  {
+    "nationality": "노르웨이",
+    "ageGroup": "65-69세",
+    "count": 1
   },
   {
     "nationality": "노르웨이",
@@ -342771,7 +342776,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "라오스",
     "ageGroup": "20-24세",
-    "count": 1
+    "count": 2
   },
   {
     "nationality": "라오스",
@@ -342826,12 +342831,12 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "러시아(연방)",
     "ageGroup": "0-4세",
-    "count": 13
+    "count": 14
   },
   {
     "nationality": "러시아(연방)",
     "ageGroup": "05-09세",
-    "count": 11
+    "count": 9
   },
   {
     "nationality": "러시아(연방)",
@@ -342846,37 +342851,37 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "러시아(연방)",
     "ageGroup": "20-24세",
-    "count": 34
+    "count": 35
   },
   {
     "nationality": "러시아(연방)",
     "ageGroup": "25-29세",
-    "count": 56
+    "count": 60
   },
   {
     "nationality": "러시아(연방)",
     "ageGroup": "30-34세",
-    "count": 49
+    "count": 52
   },
   {
     "nationality": "러시아(연방)",
     "ageGroup": "35-39세",
-    "count": 42
+    "count": 48
   },
   {
     "nationality": "러시아(연방)",
     "ageGroup": "40-44세",
-    "count": 47
+    "count": 46
   },
   {
     "nationality": "러시아(연방)",
     "ageGroup": "45-49세",
-    "count": 25
+    "count": 26
   },
   {
     "nationality": "러시아(연방)",
     "ageGroup": "50-54세",
-    "count": 15
+    "count": 16
   },
   {
     "nationality": "러시아(연방)",
@@ -342931,22 +342936,22 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "르완다",
     "ageGroup": "25-29세",
-    "count": 12
+    "count": 13
   },
   {
     "nationality": "르완다",
     "ageGroup": "30-34세",
-    "count": 19
+    "count": 22
   },
   {
     "nationality": "르완다",
     "ageGroup": "35-39세",
-    "count": 27
+    "count": 28
   },
   {
     "nationality": "르완다",
     "ageGroup": "40-44세",
-    "count": 19
+    "count": 21
   },
   {
     "nationality": "르완다",
@@ -342956,7 +342961,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "르완다",
     "ageGroup": "50-54세",
-    "count": 4
+    "count": 5
   },
   {
     "nationality": "르완다",
@@ -342966,7 +342971,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "리비아",
     "ageGroup": "25-29세",
-    "count": 2
+    "count": 3
   },
   {
     "nationality": "리비아",
@@ -342976,7 +342981,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "리비아",
     "ageGroup": "35-39세",
-    "count": 1
+    "count": 2
   },
   {
     "nationality": "리비아",
@@ -342996,7 +343001,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "말레이시아",
     "ageGroup": "10-14세",
-    "count": 25
+    "count": 24
   },
   {
     "nationality": "말레이시아",
@@ -343016,7 +343021,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "말레이시아",
     "ageGroup": "35-39세",
-    "count": 50
+    "count": 49
   },
   {
     "nationality": "말레이시아",
@@ -343026,7 +343031,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "말레이시아",
     "ageGroup": "45-49세",
-    "count": 29
+    "count": 28
   },
   {
     "nationality": "말레이시아",
@@ -343081,22 +343086,22 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "모로코",
     "ageGroup": "20-24세",
-    "count": 1
+    "count": 2
   },
   {
     "nationality": "모로코",
     "ageGroup": "25-29세",
-    "count": 9
+    "count": 8
   },
   {
     "nationality": "모로코",
     "ageGroup": "30-34세",
-    "count": 11
+    "count": 12
   },
   {
     "nationality": "모로코",
     "ageGroup": "35-39세",
-    "count": 4
+    "count": 5
   },
   {
     "nationality": "모로코",
@@ -343156,7 +343161,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "몽골",
     "ageGroup": "15-19세",
-    "count": 1
+    "count": 2
   },
   {
     "nationality": "몽골",
@@ -343221,7 +343226,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "미국",
     "ageGroup": "20-24세",
-    "count": 3
+    "count": 2
   },
   {
     "nationality": "미국",
@@ -343231,7 +343236,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "미국",
     "ageGroup": "30-34세",
-    "count": 5
+    "count": 6
   },
   {
     "nationality": "미국",
@@ -343241,7 +343246,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "미국",
     "ageGroup": "40-44세",
-    "count": 12
+    "count": 14
   },
   {
     "nationality": "미국",
@@ -343256,7 +343261,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "미국",
     "ageGroup": "55-59세",
-    "count": 10
+    "count": 11
   },
   {
     "nationality": "미국",
@@ -343296,7 +343301,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "미얀마",
     "ageGroup": "20-24세",
-    "count": 30
+    "count": 31
   },
   {
     "nationality": "미얀마",
@@ -343306,17 +343311,17 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "미얀마",
     "ageGroup": "30-34세",
-    "count": 265
+    "count": 267
   },
   {
     "nationality": "미얀마",
     "ageGroup": "35-39세",
-    "count": 292
+    "count": 290
   },
   {
     "nationality": "미얀마",
     "ageGroup": "40-44세",
-    "count": 133
+    "count": 129
   },
   {
     "nationality": "미얀마",
@@ -343336,7 +343341,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "방글라데시",
     "ageGroup": "0-4세",
-    "count": 10
+    "count": 11
   },
   {
     "nationality": "방글라데시",
@@ -343356,17 +343361,17 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "방글라데시",
     "ageGroup": "20-24세",
-    "count": 71
+    "count": 75
   },
   {
     "nationality": "방글라데시",
     "ageGroup": "25-29세",
-    "count": 91
+    "count": 93
   },
   {
     "nationality": "방글라데시",
     "ageGroup": "30-34세",
-    "count": 65
+    "count": 69
   },
   {
     "nationality": "방글라데시",
@@ -343376,7 +343381,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "방글라데시",
     "ageGroup": "40-44세",
-    "count": 35
+    "count": 32
   },
   {
     "nationality": "방글라데시",
@@ -343391,67 +343396,67 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "베트남",
     "ageGroup": "0-4세",
-    "count": 41
-  },
-  {
-    "nationality": "베트남",
-    "ageGroup": "05-09세",
     "count": 46
   },
   {
     "nationality": "베트남",
+    "ageGroup": "05-09세",
+    "count": 44
+  },
+  {
+    "nationality": "베트남",
     "ageGroup": "10-14세",
-    "count": 26
+    "count": 24
   },
   {
     "nationality": "베트남",
     "ageGroup": "15-19세",
-    "count": 59
+    "count": 71
   },
   {
     "nationality": "베트남",
     "ageGroup": "20-24세",
-    "count": 442
+    "count": 475
   },
   {
     "nationality": "베트남",
     "ageGroup": "25-29세",
-    "count": 661
+    "count": 683
   },
   {
     "nationality": "베트남",
     "ageGroup": "30-34세",
-    "count": 1015
+    "count": 1055
   },
   {
     "nationality": "베트남",
     "ageGroup": "35-39세",
-    "count": 1072
+    "count": 1119
   },
   {
     "nationality": "베트남",
     "ageGroup": "40-44세",
-    "count": 510
+    "count": 549
   },
   {
     "nationality": "베트남",
     "ageGroup": "45-49세",
-    "count": 115
+    "count": 134
   },
   {
     "nationality": "베트남",
     "ageGroup": "50-54세",
-    "count": 43
+    "count": 53
   },
   {
     "nationality": "베트남",
     "ageGroup": "55-59세",
-    "count": 54
+    "count": 57
   },
   {
     "nationality": "베트남",
     "ageGroup": "60-64세",
-    "count": 29
+    "count": 30
   },
   {
     "nationality": "베트남",
@@ -343541,7 +343546,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "스리랑카",
     "ageGroup": "0-4세",
-    "count": 22
+    "count": 24
   },
   {
     "nationality": "스리랑카",
@@ -343561,27 +343566,27 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "스리랑카",
     "ageGroup": "20-24세",
-    "count": 49
+    "count": 50
   },
   {
     "nationality": "스리랑카",
     "ageGroup": "25-29세",
-    "count": 148
+    "count": 155
   },
   {
     "nationality": "스리랑카",
     "ageGroup": "30-34세",
-    "count": 229
+    "count": 234
   },
   {
     "nationality": "스리랑카",
     "ageGroup": "35-39세",
-    "count": 263
+    "count": 259
   },
   {
     "nationality": "스리랑카",
     "ageGroup": "40-44세",
-    "count": 243
+    "count": 240
   },
   {
     "nationality": "스리랑카",
@@ -343597,6 +343602,11 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
     "nationality": "스리랑카",
     "ageGroup": "55-59세",
     "count": 2
+  },
+  {
+    "nationality": "스웨덴",
+    "ageGroup": "40-44세",
+    "count": 1
   },
   {
     "nationality": "스웨덴",
@@ -343656,7 +343666,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "아이티",
     "ageGroup": "45-49세",
-    "count": 2
+    "count": 3
   },
   {
     "nationality": "아이티",
@@ -343681,6 +343691,11 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "아일랜드",
     "ageGroup": "50-54세",
+    "count": 1
+  },
+  {
+    "nationality": "알제리",
+    "ageGroup": "30-34세",
     "count": 1
   },
   {
@@ -343726,7 +343741,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "영국",
     "ageGroup": "30-34세",
-    "count": 6
+    "count": 5
   },
   {
     "nationality": "영국",
@@ -343795,13 +343810,8 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   },
   {
     "nationality": "예멘공화국",
-    "ageGroup": "30-34세",
-    "count": 1
-  },
-  {
-    "nationality": "예멘공화국",
     "ageGroup": "35-39세",
-    "count": 5
+    "count": 3
   },
   {
     "nationality": "예멘공화국",
@@ -343866,17 +343876,17 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "우즈베키스탄",
     "ageGroup": "0-4세",
-    "count": 176
+    "count": 180
   },
   {
     "nationality": "우즈베키스탄",
     "ageGroup": "05-09세",
-    "count": 92
+    "count": 90
   },
   {
     "nationality": "우즈베키스탄",
     "ageGroup": "10-14세",
-    "count": 14
+    "count": 13
   },
   {
     "nationality": "우즈베키스탄",
@@ -343886,27 +343896,27 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "우즈베키스탄",
     "ageGroup": "20-24세",
-    "count": 121
+    "count": 127
   },
   {
     "nationality": "우즈베키스탄",
     "ageGroup": "25-29세",
-    "count": 277
-  },
-  {
-    "nationality": "우즈베키스탄",
-    "ageGroup": "30-34세",
-    "count": 412
-  },
-  {
-    "nationality": "우즈베키스탄",
-    "ageGroup": "35-39세",
     "count": 289
   },
   {
     "nationality": "우즈베키스탄",
+    "ageGroup": "30-34세",
+    "count": 408
+  },
+  {
+    "nationality": "우즈베키스탄",
+    "ageGroup": "35-39세",
+    "count": 286
+  },
+  {
+    "nationality": "우즈베키스탄",
     "ageGroup": "40-44세",
-    "count": 197
+    "count": 195
   },
   {
     "nationality": "우즈베키스탄",
@@ -343980,11 +343990,6 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   },
   {
     "nationality": "이라크",
-    "ageGroup": "25-29세",
-    "count": 1
-  },
-  {
-    "nationality": "이라크",
     "ageGroup": "30-34세",
     "count": 1
   },
@@ -344056,7 +344061,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "이집트",
     "ageGroup": "35-39세",
-    "count": 4
+    "count": 5
   },
   {
     "nationality": "이집트",
@@ -344066,12 +344071,12 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "이집트",
     "ageGroup": "45-49세",
-    "count": 2
+    "count": 4
   },
   {
     "nationality": "이집트",
     "ageGroup": "50-54세",
-    "count": 2
+    "count": 3
   },
   {
     "nationality": "이집트",
@@ -344096,7 +344101,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "이탈리아",
     "ageGroup": "30-34세",
-    "count": 3
+    "count": 4
   },
   {
     "nationality": "이탈리아",
@@ -344156,7 +344161,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "인도",
     "ageGroup": "25-29세",
-    "count": 48
+    "count": 54
   },
   {
     "nationality": "인도",
@@ -344166,17 +344171,17 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "인도",
     "ageGroup": "35-39세",
-    "count": 54
+    "count": 57
   },
   {
     "nationality": "인도",
     "ageGroup": "40-44세",
-    "count": 51
+    "count": 50
   },
   {
     "nationality": "인도",
     "ageGroup": "45-49세",
-    "count": 43
+    "count": 42
   },
   {
     "nationality": "인도",
@@ -344201,7 +344206,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "인도네시아",
     "ageGroup": "0-4세",
-    "count": 15
+    "count": 17
   },
   {
     "nationality": "인도네시아",
@@ -344221,27 +344226,27 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "인도네시아",
     "ageGroup": "20-24세",
-    "count": 299
+    "count": 303
   },
   {
     "nationality": "인도네시아",
     "ageGroup": "25-29세",
-    "count": 704
+    "count": 707
   },
   {
     "nationality": "인도네시아",
     "ageGroup": "30-34세",
-    "count": 593
+    "count": 599
   },
   {
     "nationality": "인도네시아",
     "ageGroup": "35-39세",
-    "count": 464
+    "count": 465
   },
   {
     "nationality": "인도네시아",
     "ageGroup": "40-44세",
-    "count": 200
+    "count": 196
   },
   {
     "nationality": "인도네시아",
@@ -344256,7 +344261,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "인도네시아",
     "ageGroup": "55-59세",
-    "count": 4
+    "count": 5
   },
   {
     "nationality": "인도네시아",
@@ -344281,22 +344286,22 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "일본",
     "ageGroup": "20-24세",
-    "count": 6
+    "count": 7
   },
   {
     "nationality": "일본",
     "ageGroup": "25-29세",
-    "count": 36
+    "count": 34
   },
   {
     "nationality": "일본",
     "ageGroup": "30-34세",
-    "count": 24
+    "count": 22
   },
   {
     "nationality": "일본",
     "ageGroup": "35-39세",
-    "count": 14
+    "count": 15
   },
   {
     "nationality": "일본",
@@ -344381,22 +344386,22 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "중국",
     "ageGroup": "40-44세",
-    "count": 55
-  },
-  {
-    "nationality": "중국",
-    "ageGroup": "45-49세",
     "count": 56
   },
   {
     "nationality": "중국",
+    "ageGroup": "45-49세",
+    "count": 57
+  },
+  {
+    "nationality": "중국",
     "ageGroup": "50-54세",
-    "count": 52
+    "count": 51
   },
   {
     "nationality": "중국",
     "ageGroup": "55-59세",
-    "count": 45
+    "count": 46
   },
   {
     "nationality": "중국",
@@ -344406,12 +344411,12 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "중국",
     "ageGroup": "65-69세",
-    "count": 4
+    "count": 3
   },
   {
     "nationality": "중국",
     "ageGroup": "70-74세",
-    "count": 3
+    "count": 2
   },
   {
     "nationality": "중국",
@@ -344446,7 +344451,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "카자흐스탄",
     "ageGroup": "05-09세",
-    "count": 13
+    "count": 12
   },
   {
     "nationality": "카자흐스탄",
@@ -344456,12 +344461,12 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "카자흐스탄",
     "ageGroup": "15-19세",
-    "count": 9
+    "count": 8
   },
   {
     "nationality": "카자흐스탄",
     "ageGroup": "20-24세",
-    "count": 14
+    "count": 17
   },
   {
     "nationality": "카자흐스탄",
@@ -344471,22 +344476,22 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "카자흐스탄",
     "ageGroup": "30-34세",
-    "count": 27
+    "count": 26
   },
   {
     "nationality": "카자흐스탄",
     "ageGroup": "35-39세",
-    "count": 11
+    "count": 12
   },
   {
     "nationality": "카자흐스탄",
     "ageGroup": "40-44세",
-    "count": 13
+    "count": 14
   },
   {
     "nationality": "카자흐스탄",
     "ageGroup": "45-49세",
-    "count": 5
+    "count": 6
   },
   {
     "nationality": "카자흐스탄",
@@ -344506,22 +344511,22 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "캄보디아",
     "ageGroup": "20-24세",
-    "count": 66
+    "count": 67
   },
   {
     "nationality": "캄보디아",
     "ageGroup": "25-29세",
-    "count": 84
+    "count": 83
   },
   {
     "nationality": "캄보디아",
     "ageGroup": "30-34세",
-    "count": 88
+    "count": 91
   },
   {
     "nationality": "캄보디아",
     "ageGroup": "35-39세",
-    "count": 80
+    "count": 81
   },
   {
     "nationality": "캄보디아",
@@ -344552,11 +344557,6 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
     "nationality": "캐나다",
     "ageGroup": "10-14세",
     "count": 2
-  },
-  {
-    "nationality": "캐나다",
-    "ageGroup": "15-19세",
-    "count": 1
   },
   {
     "nationality": "캐나다",
@@ -344596,7 +344596,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "캐나다",
     "ageGroup": "65-69세",
-    "count": 3
+    "count": 2
   },
   {
     "nationality": "캐나다",
@@ -344606,7 +344606,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "케냐",
     "ageGroup": "30-34세",
-    "count": 2
+    "count": 1
   },
   {
     "nationality": "코트디부아르",
@@ -344676,17 +344676,17 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "키르기즈",
     "ageGroup": "20-24세",
-    "count": 3
+    "count": 2
   },
   {
     "nationality": "키르기즈",
     "ageGroup": "25-29세",
-    "count": 5
+    "count": 6
   },
   {
     "nationality": "키르기즈",
     "ageGroup": "30-34세",
-    "count": 7
+    "count": 6
   },
   {
     "nationality": "키르기즈",
@@ -344716,17 +344716,17 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "타이",
     "ageGroup": "20-24세",
-    "count": 11
+    "count": 12
   },
   {
     "nationality": "타이",
     "ageGroup": "25-29세",
-    "count": 84
+    "count": 90
   },
   {
     "nationality": "타이",
     "ageGroup": "30-34세",
-    "count": 153
+    "count": 157
   },
   {
     "nationality": "타이",
@@ -344736,17 +344736,17 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "타이",
     "ageGroup": "40-44세",
-    "count": 134
+    "count": 136
   },
   {
     "nationality": "타이",
     "ageGroup": "45-49세",
-    "count": 95
+    "count": 94
   },
   {
     "nationality": "타이",
     "ageGroup": "50-54세",
-    "count": 67
+    "count": 68
   },
   {
     "nationality": "타이",
@@ -344781,7 +344781,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "타이완",
     "ageGroup": "30-34세",
-    "count": 5
+    "count": 6
   },
   {
     "nationality": "타이완",
@@ -344826,7 +344826,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "타지키스탄",
     "ageGroup": "0-4세",
-    "count": 4
+    "count": 5
   },
   {
     "nationality": "타지키스탄",
@@ -344836,7 +344836,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "타지키스탄",
     "ageGroup": "20-24세",
-    "count": 3
+    "count": 4
   },
   {
     "nationality": "타지키스탄",
@@ -344856,7 +344856,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "타지키스탄",
     "ageGroup": "40-44세",
-    "count": 3
+    "count": 1
   },
   {
     "nationality": "탄자니아",
@@ -344871,7 +344871,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "탄자니아",
     "ageGroup": "25-29세",
-    "count": 14
+    "count": 13
   },
   {
     "nationality": "탄자니아",
@@ -344886,7 +344886,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "탄자니아",
     "ageGroup": "40-44세",
-    "count": 20
+    "count": 21
   },
   {
     "nationality": "탄자니아",
@@ -344956,22 +344956,22 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "튀니지",
     "ageGroup": "20-24세",
-    "count": 2
+    "count": 3
   },
   {
     "nationality": "튀니지",
     "ageGroup": "25-29세",
-    "count": 14
+    "count": 21
   },
   {
     "nationality": "튀니지",
     "ageGroup": "30-34세",
-    "count": 9
+    "count": 12
   },
   {
     "nationality": "튀니지",
     "ageGroup": "35-39세",
-    "count": 4
+    "count": 5
   },
   {
     "nationality": "튀니지",
@@ -344981,11 +344981,16 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "튀니지",
     "ageGroup": "45-49세",
-    "count": 2
+    "count": 3
   },
   {
     "nationality": "튀니지",
     "ageGroup": "55-59세",
+    "count": 1
+  },
+  {
+    "nationality": "튀르키예",
+    "ageGroup": "0-4세",
     "count": 1
   },
   {
@@ -345001,7 +345006,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "튀르키예",
     "ageGroup": "20-24세",
-    "count": 10
+    "count": 11
   },
   {
     "nationality": "튀르키예",
@@ -345011,12 +345016,12 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "튀르키예",
     "ageGroup": "30-34세",
-    "count": 14
+    "count": 16
   },
   {
     "nationality": "튀르키예",
     "ageGroup": "35-39세",
-    "count": 7
+    "count": 8
   },
   {
     "nationality": "튀르키예",
@@ -345026,7 +345031,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "튀르키예",
     "ageGroup": "45-49세",
-    "count": 9
+    "count": 8
   },
   {
     "nationality": "튀르키예",
@@ -345041,12 +345046,12 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "티모르민주공화국",
     "ageGroup": "20-24세",
-    "count": 10
+    "count": 11
   },
   {
     "nationality": "티모르민주공화국",
     "ageGroup": "25-29세",
-    "count": 46
+    "count": 47
   },
   {
     "nationality": "티모르민주공화국",
@@ -345066,7 +345071,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "티모르민주공화국",
     "ageGroup": "45-49세",
-    "count": 2
+    "count": 1
   },
   {
     "nationality": "티모르민주공화국",
@@ -345076,12 +345081,12 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "파키스탄",
     "ageGroup": "0-4세",
-    "count": 14
+    "count": 18
   },
   {
     "nationality": "파키스탄",
     "ageGroup": "05-09세",
-    "count": 7
+    "count": 9
   },
   {
     "nationality": "파키스탄",
@@ -345096,12 +345101,12 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "파키스탄",
     "ageGroup": "25-29세",
-    "count": 12
+    "count": 11
   },
   {
     "nationality": "파키스탄",
     "ageGroup": "30-34세",
-    "count": 20
+    "count": 21
   },
   {
     "nationality": "파키스탄",
@@ -345175,23 +345180,28 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   },
   {
     "nationality": "프랑스",
+    "ageGroup": "20-24세",
+    "count": 3
+  },
+  {
+    "nationality": "프랑스",
     "ageGroup": "25-29세",
-    "count": 17
+    "count": 23
   },
   {
     "nationality": "프랑스",
     "ageGroup": "30-34세",
-    "count": 19
+    "count": 20
   },
   {
     "nationality": "프랑스",
     "ageGroup": "35-39세",
-    "count": 26
+    "count": 27
   },
   {
     "nationality": "프랑스",
     "ageGroup": "40-44세",
-    "count": 20
+    "count": 21
   },
   {
     "nationality": "프랑스",
@@ -345201,7 +345211,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "프랑스",
     "ageGroup": "50-54세",
-    "count": 5
+    "count": 6
   },
   {
     "nationality": "프랑스",
@@ -345261,12 +345271,12 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "필리핀",
     "ageGroup": "30-34세",
-    "count": 82
+    "count": 83
   },
   {
     "nationality": "필리핀",
     "ageGroup": "35-39세",
-    "count": 100
+    "count": 97
   },
   {
     "nationality": "필리핀",
@@ -345306,7 +345316,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "한국계러시아인",
     "ageGroup": "10-14세",
-    "count": 2
+    "count": 1
   },
   {
     "nationality": "한국계러시아인",
@@ -345322,11 +345332,6 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
     "nationality": "한국계러시아인",
     "ageGroup": "30-34세",
     "count": 2
-  },
-  {
-    "nationality": "한국계러시아인",
-    "ageGroup": "35-39세",
-    "count": 1
   },
   {
     "nationality": "한국계러시아인",
@@ -345380,18 +345385,13 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   },
   {
     "nationality": "한국계중국인",
-    "ageGroup": "25-29세",
-    "count": 2
-  },
-  {
-    "nationality": "한국계중국인",
     "ageGroup": "30-34세",
     "count": 9
   },
   {
     "nationality": "한국계중국인",
     "ageGroup": "35-39세",
-    "count": 30
+    "count": 29
   },
   {
     "nationality": "한국계중국인",
@@ -345401,7 +345401,7 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "한국계중국인",
     "ageGroup": "45-49세",
-    "count": 45
+    "count": 46
   },
   {
     "nationality": "한국계중국인",
@@ -345411,12 +345411,12 @@ export const realNationalityByAge: readonly RealNationalityAge[] = [
   {
     "nationality": "한국계중국인",
     "ageGroup": "55-59세",
-    "count": 94
+    "count": 93
   },
   {
     "nationality": "한국계중국인",
     "ageGroup": "60-64세",
-    "count": 67
+    "count": 66
   },
   {
     "nationality": "한국계중국인",
@@ -345476,39 +345476,39 @@ export const realNationalityAgeGroups: readonly string[] = [
 export const realNationalityAgeTotals: readonly { nationality: string; total: number }[] = [
   {
     "nationality": "베트남",
-    "total": 4126
+    "total": 4353
   },
   {
     "nationality": "인도네시아",
-    "total": 2374
+    "total": 2387
   },
   {
     "nationality": "우즈베키스탄",
-    "total": 1689
+    "total": 1699
   },
   {
     "nationality": "네팔",
-    "total": 1511
+    "total": 1513
   },
   {
     "nationality": "스리랑카",
-    "total": 1146
+    "total": 1154
   },
   {
     "nationality": "미얀마",
-    "total": 861
+    "total": 858
   },
   {
     "nationality": "타이",
-    "total": 703
+    "total": 716
   },
   {
     "nationality": "한국계중국인",
-    "total": 401
+    "total": 397
   },
   {
     "nationality": "필리핀",
-    "total": 372
+    "total": 370
   },
   {
     "nationality": "중국",
@@ -345516,43 +345516,43 @@ export const realNationalityAgeTotals: readonly { nationality: string; total: nu
   },
   {
     "nationality": "캄보디아",
-    "total": 352
+    "total": 356
   },
   {
     "nationality": "인도",
-    "total": 345
+    "total": 352
   },
   {
     "nationality": "방글라데시",
-    "total": 327
+    "total": 335
   },
   {
     "nationality": "러시아(연방)",
-    "total": 320
+    "total": 334
   },
   {
     "nationality": "말레이시아",
-    "total": 251
+    "total": 248
   },
   {
     "nationality": "일본",
-    "total": 163
-  },
-  {
-    "nationality": "티모르민주공화국",
-    "total": 146
-  },
-  {
-    "nationality": "카자흐스탄",
-    "total": 145
+    "total": 161
   },
   {
     "nationality": "프랑스",
-    "total": 143
+    "total": 156
+  },
+  {
+    "nationality": "카자흐스탄",
+    "total": 148
+  },
+  {
+    "nationality": "티모르민주공화국",
+    "total": 147
   },
   {
     "nationality": "미국",
-    "total": 113
+    "total": 116
   },
   {
     "nationality": "탄자니아",
@@ -345560,19 +345560,23 @@ export const realNationalityAgeTotals: readonly { nationality: string; total: nu
   },
   {
     "nationality": "르완다",
-    "total": 93
+    "total": 101
   },
   {
     "nationality": "파키스탄",
-    "total": 88
+    "total": 94
   },
   {
     "nationality": "튀르키예",
-    "total": 77
+    "total": 81
   },
   {
     "nationality": "영국",
-    "total": 76
+    "total": 75
+  },
+  {
+    "nationality": "튀니지",
+    "total": 49
   },
   {
     "nationality": "그리스",
@@ -345580,43 +345584,39 @@ export const realNationalityAgeTotals: readonly { nationality: string; total: nu
   },
   {
     "nationality": "남아프리카공화국",
-    "total": 47
+    "total": 46
   },
   {
     "nationality": "몽골",
-    "total": 41
+    "total": 42
   },
   {
     "nationality": "아이티",
-    "total": 41
+    "total": 42
   },
   {
     "nationality": "타이완",
-    "total": 38
-  },
-  {
-    "nationality": "튀니지",
-    "total": 36
+    "total": 39
   },
   {
     "nationality": "이탈리아",
-    "total": 33
-  },
-  {
-    "nationality": "키르기즈",
-    "total": 31
+    "total": 34
   },
   {
     "nationality": "모로코",
-    "total": 29
+    "total": 31
   },
   {
-    "nationality": "캐나다",
-    "total": 28
+    "nationality": "키르기즈",
+    "total": 30
   },
   {
     "nationality": "이집트",
-    "total": 24
+    "total": 28
+  },
+  {
+    "nationality": "캐나다",
+    "total": 26
   },
   {
     "nationality": "타지키스탄",
@@ -345624,14 +345624,10 @@ export const realNationalityAgeTotals: readonly { nationality: string; total: nu
   },
   {
     "nationality": "한국계러시아인",
-    "total": 21
+    "total": 19
   },
   {
     "nationality": "말리",
-    "total": 16
-  },
-  {
-    "nationality": "예멘공화국",
     "total": 16
   },
   {
@@ -345655,16 +345651,24 @@ export const realNationalityAgeTotals: readonly { nationality: string; total: nu
     "total": 14
   },
   {
+    "nationality": "예멘공화국",
+    "total": 13
+  },
+  {
+    "nationality": "노르웨이",
+    "total": 12
+  },
+  {
     "nationality": "루마니아",
     "total": 12
   },
   {
-    "nationality": "노르웨이",
+    "nationality": "크로아티아",
     "total": 11
   },
   {
-    "nationality": "크로아티아",
-    "total": 11
+    "nationality": "리비아",
+    "total": 10
   },
   {
     "nationality": "폴란드",
@@ -345672,10 +345676,6 @@ export const realNationalityAgeTotals: readonly { nationality: string; total: nu
   },
   {
     "nationality": "네덜란드",
-    "total": 8
-  },
-  {
-    "nationality": "리비아",
     "total": 8
   },
   {
@@ -345691,6 +345691,10 @@ export const realNationalityAgeTotals: readonly { nationality: string; total: nu
     "total": 7
   },
   {
+    "nationality": "라오스",
+    "total": 6
+  },
+  {
     "nationality": "싱가포르",
     "total": 6
   },
@@ -345701,10 +345705,6 @@ export const realNationalityAgeTotals: readonly { nationality: string; total: nu
   {
     "nationality": "이스라엘",
     "total": 6
-  },
-  {
-    "nationality": "라오스",
-    "total": 5
   },
   {
     "nationality": "브라질",
@@ -345739,6 +345739,10 @@ export const realNationalityAgeTotals: readonly { nationality: string; total: nu
     "total": 3
   },
   {
+    "nationality": "알제리",
+    "total": 3
+  },
+  {
     "nationality": "지부티",
     "total": 3
   },
@@ -345747,15 +345751,11 @@ export const realNationalityAgeTotals: readonly { nationality: string; total: nu
     "total": 3
   },
   {
-    "nationality": "알제리",
+    "nationality": "스웨덴",
     "total": 2
   },
   {
     "nationality": "에티오피아",
-    "total": 2
-  },
-  {
-    "nationality": "이라크",
     "total": 2
   },
   {
@@ -345764,10 +345764,6 @@ export const realNationalityAgeTotals: readonly { nationality: string; total: nu
   },
   {
     "nationality": "카타르",
-    "total": 2
-  },
-  {
-    "nationality": "케냐",
     "total": 2
   },
   {
@@ -345795,10 +345791,6 @@ export const realNationalityAgeTotals: readonly { nationality: string; total: nu
     "total": 1
   },
   {
-    "nationality": "스웨덴",
-    "total": 1
-  },
-  {
     "nationality": "스위스",
     "total": 1
   },
@@ -345816,6 +345808,14 @@ export const realNationalityAgeTotals: readonly { nationality: string; total: nu
   },
   {
     "nationality": "우간다",
+    "total": 1
+  },
+  {
+    "nationality": "이라크",
+    "total": 1
+  },
+  {
+    "nationality": "케냐",
     "total": 1
   },
   {
@@ -347940,20 +347940,20 @@ export const realBopTransferIncome = {
 export const realExchangeRate = {
   "latest": {
     "usd": {
-      "date": "20261116",
-      "value": 1333.7
+      "date": "20261118",
+      "value": 1338.8
     },
     "cny": {
-      "date": "20261116",
-      "value": 199.78
+      "date": "20261118",
+      "value": 200.79
     },
     "jpy": {
-      "date": "20261116",
-      "value": 834.37
+      "date": "20261118",
+      "value": 839.45
     },
     "eur": {
-      "date": "20261116",
-      "value": 1470.14
+      "date": "20261118",
+      "value": 1471.94
     }
   },
   "monthly": [
@@ -348120,10 +348120,10 @@ export const realExchangeRate = {
     },
     {
       "month": "2026-11",
-      "usd": 1333.7,
-      "cny": 199.78,
-      "jpy": 834.37,
-      "eur": 1470.14
+      "usd": 1338.8,
+      "cny": 200.79,
+      "jpy": 839.45,
+      "eur": 1471.94
     }
   ]
 } as const;
@@ -348270,7 +348270,7 @@ export type RealDataQualityWarning = { series: string; field: string; period: nu
 export const realDataQualityWarnings: readonly RealDataQualityWarning[] = [];
 
 export const realDataSummary = {
-  "generatedAt": "2026-11-17T00:06:32.794Z",
+  "generatedAt": "2026-11-18T22:55:39.772Z",
   "dataQualityWarningCount": 0,
   "transformErrorCount": 0,
   "transformErrors": [],
@@ -348294,71 +348294,71 @@ export const realDataSummary = {
   "apiParsedFiles": [
     {
       "source": "kosis_registered_foreigner_by_region",
-      "file": "kosis_registered_foreigner_by_region_2026-11-17.json",
+      "file": "kosis_registered_foreigner_by_region_2026-11-18.json",
       "produced": 5579
     },
     {
       "source": "kosis_registered_foreigner_sigungu_visa",
-      "file": "kosis_registered_foreigner_sigungu_visa_2026-11-17.json",
+      "file": "kosis_registered_foreigner_sigungu_visa_2026-11-18.json",
       "produced": 16832
     },
     {
       "source": "kosis_foreigner_economic_activity",
-      "file": "kosis_foreigner_economic_activity_2026-11-17.json",
+      "file": "kosis_foreigner_economic_activity_2026-11-18.json",
       "produced": 428
     },
     {
       "source": "kosis_foreign_student_nationality_visa",
-      "file": "kosis_foreign_student_nationality_visa_2026-11-17.json",
+      "file": "kosis_foreign_student_nationality_visa_2026-11-18.json",
       "produced": 0
     },
     {
       "source": "kosis_kedi_higher_edu_foreign_students",
-      "file": "kosis_kedi_higher_edu_foreign_students_2026-11-17.json",
+      "file": "kosis_kedi_higher_edu_foreign_students_2026-11-18.json",
       "produced": 1224
     },
     {
       "source": "kosis_eps_introduction_by_country",
-      "file": "kosis_eps_introduction_by_country_2026-11-17.json",
+      "file": "kosis_eps_introduction_by_country_2026-11-18.json",
       "produced": 0
     },
     {
       "source": "kosis_eps_introduction_by_industry",
-      "file": "kosis_eps_introduction_by_industry_2026-11-17.json",
+      "file": "kosis_eps_introduction_by_industry_2026-11-18.json",
       "produced": 64
     },
     {
       "source": "kosis_immigrant_wage_distribution",
-      "file": "kosis_immigrant_wage_distribution_2026-11-17.json",
+      "file": "kosis_immigrant_wage_distribution_2026-11-18.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_contract_period",
-      "file": "kosis_immigrant_contract_period_2026-11-17.json",
+      "file": "kosis_immigrant_contract_period_2026-11-18.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_employment_status",
-      "file": "kosis_immigrant_employment_status_2026-11-17.json",
+      "file": "kosis_immigrant_employment_status_2026-11-18.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_employment_by_industry",
-      "file": "kosis_immigrant_employment_by_industry_2026-11-17.json",
+      "file": "kosis_immigrant_employment_by_industry_2026-11-18.json",
       "produced": 0
     },
     {
       "source": "kosis_immigrant_econ_activity_by_age",
-      "file": "kosis_immigrant_econ_activity_by_age_2026-11-17.json",
+      "file": "kosis_immigrant_econ_activity_by_age_2026-11-18.json",
       "produced": 0
     }
   ],
   "sourceFiles": {
-    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-11-17.csv",
-    "stay": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-11-17.csv",
-    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-11-17.csv",
-    "moeStudent": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moe_foreign_student_latest_2026-11-17.csv",
-    "mois": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/mois_foreign_resident_region_file_2026-11-17.csv",
-    "monthly": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_immigration_monthly_2024_2026-11-17.csv"
+    "status": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_resident_status_2024_2026-11-18.csv",
+    "stay": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_stay_data_2024_2026-11-18.csv",
+    "student": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_foreign_student_stay_2024_2026-11-18.csv",
+    "moeStudent": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moe_foreign_student_latest_2026-11-18.csv",
+    "mois": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/mois_foreign_resident_region_file_2026-11-18.csv",
+    "monthly": "/home/runner/work/foreign-resident-finance-dashboard/foreign-resident-finance-dashboard/data/raw/moj_immigration_monthly_2024_2026-11-18.csv"
   }
 } as const;
