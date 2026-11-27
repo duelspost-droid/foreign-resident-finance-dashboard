@@ -347940,20 +347940,20 @@ export const realBopTransferIncome = {
 export const realExchangeRate = {
   "latest": {
     "usd": {
-      "date": "20261126",
-      "value": 1343.9
+      "date": "20261127",
+      "value": 1342.7
     },
     "cny": {
-      "date": "20261126",
-      "value": 201.57
+      "date": "20261127",
+      "value": 201.43
     },
     "jpy": {
-      "date": "20261126",
-      "value": 844.37
+      "date": "20261127",
+      "value": 842.95
     },
     "eur": {
-      "date": "20261126",
-      "value": 1475.06
+      "date": "20261127",
+      "value": 1472.94
     }
   },
   "monthly": [
@@ -348120,10 +348120,10 @@ export const realExchangeRate = {
     },
     {
       "month": "2026-11",
-      "usd": 1343.9,
-      "cny": 201.57,
-      "jpy": 844.37,
-      "eur": 1475.06
+      "usd": 1342.7,
+      "cny": 201.43,
+      "jpy": 842.95,
+      "eur": 1472.94
     }
   ]
 } as const;
@@ -348270,7 +348270,7 @@ export type RealDataQualityWarning = { series: string; field: string; period: nu
 export const realDataQualityWarnings: readonly RealDataQualityWarning[] = [];
 
 export const realDataSummary = {
-  "generatedAt": "2026-11-27T00:27:25.909Z",
+  "generatedAt": "2026-11-27T23:59:28.413Z",
   "dataQualityWarningCount": 0,
   "transformErrorCount": 0,
   "transformErrors": [],
